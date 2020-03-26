@@ -14161,18 +14161,22 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- while ((long)(num3) < (long)(this.iterationsPerTask)) {
                         -- 	uint num4;
+                        -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                        -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                         -- 	uint num5;
+                        -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                        -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 		num2 = (uint)((long)(num2) + 1L);
@@ -14191,18 +14195,22 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	uint num4;
+                            -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                             -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                            -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                             -- 	uint num5;
+                            -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                             -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                            -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                             -- 		num2 = (uint)((long)(num2) + 1L);
@@ -14212,6 +14220,7 @@ begin
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- uint num4;
+                            -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
@@ -14251,6 +14260,7 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
                         -- return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                        -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
@@ -14259,6 +14269,7 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
+                        -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
@@ -14291,6 +14302,7 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
                         -- return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                        -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
@@ -14491,18 +14503,22 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- while ((long)(num3) < (long)(this.iterationsPerTask)) {
                         -- 	uint num4;
+                        -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                        -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                         -- 	uint num5;
+                        -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                        -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 		num2 = (uint)((long)(num2) + 1L);
@@ -14521,18 +14537,22 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	uint num4;
+                            -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                             -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                            -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                             -- 	uint num5;
+                            -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                             -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                            -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                             -- 		num2 = (uint)((long)(num2) + 1L);
@@ -14542,6 +14562,7 @@ begin
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- uint num4;
+                            -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
@@ -14581,6 +14602,7 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
                         -- return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                        -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
@@ -14589,6 +14611,7 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
+                        -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
@@ -14621,6 +14644,7 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
                         -- return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                        -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
@@ -14821,18 +14845,22 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- while ((long)(num3) < (long)(this.iterationsPerTask)) {
                         -- 	uint num4;
+                        -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                        -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                         -- 	uint num5;
+                        -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                        -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 		num2 = (uint)((long)(num2) + 1L);
@@ -14851,18 +14879,22 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	uint num4;
+                            -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                             -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                            -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
                             -- 	uint num5;
+                            -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                             -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                            -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                             -- 		num2 = (uint)((long)(num2) + 1L);
@@ -14872,6 +14904,7 @@ begin
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- uint num4;
+                            -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
@@ -14911,6 +14944,7 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
                         -- return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                        -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
@@ -14919,6 +14953,7 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
+                        -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
@@ -14951,6 +14986,7 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
                         -- return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                        -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
@@ -16556,6 +16592,7 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- number = memory.ReadUInt32 (0);
+                        -- // Starting inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                         -- 
                         -- Begin SimpleMemory read.
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
@@ -16613,6 +16650,7 @@ begin
                         -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- return_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 = (long)(num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393) == (long)(num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393) + 1L;
+                        -- // Ending inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                         -- 
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.8\ := signed(SmartResize((\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\), 64)) + to_signed(1, 64);
                         \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.9\ := signed(SmartResize((\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\), 64)) = \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.8\;
@@ -16848,6 +16886,7 @@ begin
                             -- while ((long)(num2) < (long)(num)) {
                             -- 	uint number;
                             -- 	number = memory.ReadUInt32 (1 + num2);
+                            -- 	// Starting inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                             -- 	uint number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
                             -- 	number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = number;
                             -- 	bool return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
@@ -16859,6 +16898,7 @@ begin
                             -- 		num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (uint)((long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L);
                             -- 	}
                             -- 	return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) == (long)(num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L;
+                            -- 	// Ending inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                             -- 	memory.WriteBoolean (1 + num2, return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10);
                             -- 	num2 = num2 + 1;
                             -- }
@@ -16876,6 +16916,7 @@ begin
                             -- {
                             -- 	uint number;
                             -- 	number = memory.ReadUInt32 (1 + num2);
+                            -- 	// Starting inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                             -- 	uint number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
                             -- 	number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = number;
                             -- 	bool return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
@@ -16887,6 +16928,7 @@ begin
                             -- 		num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (uint)((long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L);
                             -- 	}
                             -- 	return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) == (long)(num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L;
+                            -- 	// Ending inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                             -- 	memory.WriteBoolean (1 + num2, return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10);
                             -- 	num2 = num2 + 1;
                             -- }
@@ -16896,6 +16938,7 @@ begin
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- number = memory.ReadUInt32 (1 + num2);
+                            -- // Starting inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                             -- 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_6\;
                         else 
@@ -16965,6 +17008,7 @@ begin
                         -- State after the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) == (long)(num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L;
+                        -- // Ending inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                         -- 
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\ := signed(SmartResize((\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\), 64)) + to_signed(1, 64);
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\ := signed(SmartResize((\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\), 64)) = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\;
@@ -17470,6 +17514,10 @@ begin
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0._State_2\ => 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.numberObject\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.numberObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
+                        -- ;
+                        -- // Starting inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- uint number_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893;
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -17512,6 +17560,7 @@ begin
                         -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- return_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893 = (long)(num2_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893) == (long)(num_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893) + 1L;
+                        -- // Ending inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                         -- 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.binaryOperationResult.8\ := signed(SmartResize((\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.num_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893\), 64)) + to_signed(1, 64);
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.binaryOperationResult.9\ := signed(SmartResize((\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.num2_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893\), 64)) = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.binaryOperationResult.8\;
@@ -17636,6 +17685,10 @@ begin
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1._State_2\ => 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.numberObject\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.numberObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
+                        -- ;
+                        -- // Starting inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- uint number_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893;
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -17678,6 +17731,7 @@ begin
                         -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- return_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893 = (long)(num2_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893) == (long)(num_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893) + 1L;
+                        -- // Ending inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                         -- 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.binaryOperationResult.8\ := signed(SmartResize((\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.num_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893\), 64)) + to_signed(1, 64);
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.binaryOperationResult.9\ := signed(SmartResize((\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.num2_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893\), 64)) = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).1.binaryOperationResult.8\;
@@ -17802,6 +17856,10 @@ begin
                     when \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2._State_2\ => 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.numberObject\ := \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.numberObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
+                        -- ;
+                        -- // Starting inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- uint number_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893;
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -17844,6 +17902,7 @@ begin
                         -- State after the while loop which was started in state \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- return_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893 = (long)(num2_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893) == (long)(num_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893) + 1L;
+                        -- // Ending inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                         -- 
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.binaryOperationResult.8\ := signed(SmartResize((\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.num_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893\), 64)) + to_signed(1, 64);
                         \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.binaryOperationResult.9\ := signed(SmartResize((\PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.num2_8b287aa690232679281c158d2c66f713a281a6926ef9ca245a3e83aa99c72893\), 64)) = \PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).2.binaryOperationResult.8\;

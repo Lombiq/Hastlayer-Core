@@ -15,6 +15,8 @@ namespace Hast.DynamicTests.Tests
                 {
                     g.InlinedMultiReturn(3);
                     g.InlinedMultiReturn(-3);
+                    g.NestedInlinedMultiReturn(3);
+                    g.NestedInlinedMultiReturn(-3);
                 });
     }
 }

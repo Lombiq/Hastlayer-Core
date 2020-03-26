@@ -378,6 +378,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 scope.CurrentBlock.Add(stateMachine.CreateStateChange(labelStateIndex));
                 currentBlock.ChangeBlockToDifferentState(stateMachine.States[labelStateIndex].Body, labelStateIndex);
             }
+            else if (statement is EmptyStatement)
+            {
+                // Nothing to do.
+            }
             else throw new NotSupportedException(
                 "Statements of type " + statement.GetType() + " are not supported.".AddParentEntityName(statement));
         }
