@@ -328,7 +328,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     clockCyclesNeededForOperation += Math.Max(
                         deviceDriver.GetClockCyclesNeededForBinaryOperation(bitwiseAndBinary, maxOperandSize, true),
                         deviceDriver.GetClockCyclesNeededForBinaryOperation(
-                            (BinaryOperatorExpression)bitwiseAndBinary.Clone(), maxOperandSize, false));
+                            bitwiseAndBinary.Clone<BinaryOperatorExpression>(), maxOperandSize, false));
                 }
 
                 binaryElement = new Invocation
@@ -386,15 +386,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
-            if (operationIsMultiCycle && 
+            if (operationIsMultiCycle &&
                 context.TransformationContext.DeviceDriver.DeviceManifest.ToolChainName == CommonToolChainNames.Vivado)
             {
                 // We need to add an attribute like the one below so Vivado won't merge this variable/signal with
                 // others, thus allowing us to create XDC timing constraints for it.
                 // attribute dont_touch of \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ : variable is "true";
 
-                var attributes = operationResultDataObjectIsVariable ? 
-                    stateMachine.LocalAttributeSpecifications : 
+                var attributes = operationResultDataObjectIsVariable ?
+                    stateMachine.LocalAttributeSpecifications :
                     stateMachine.GlobalAttributeSpecifications;
                 attributes.Add(new AttributeSpecification
                 {

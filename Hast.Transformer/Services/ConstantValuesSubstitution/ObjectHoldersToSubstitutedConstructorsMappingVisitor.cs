@@ -37,7 +37,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 if (constructorDeclaration == null) return;
 
-                var constructorDeclarationClone = (MethodDeclaration)constructorDeclaration.Clone();
+                var constructorDeclarationClone = constructorDeclaration.Clone<MethodDeclaration>();
 
                 var subConstantValuesTable = _constantValuesSubstitutingAstProcessor.ConstantValuesTable.Clone();
 

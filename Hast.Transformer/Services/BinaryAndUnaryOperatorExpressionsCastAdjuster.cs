@@ -195,7 +195,7 @@ namespace Hast.Transformer.Services
 
                 // First handling shifts which are different from other affected binary operators because only the 
                 // left operand is promoted, and only everything below int to int.
-                if (binaryOperatorExpression.Operator == BinaryOperatorType.ShiftLeft || 
+                if (binaryOperatorExpression.Operator == BinaryOperatorType.ShiftLeft ||
                     binaryOperatorExpression.Operator == BinaryOperatorType.ShiftRight)
                 {
 
@@ -241,7 +241,7 @@ namespace Hast.Transformer.Services
                         var intType = _knownTypeLookupTable.Lookup(KnownTypeCode.Int32);
                         replaceLeft(intType);
                         replaceRight(intType);
-                    } 
+                    }
                 }
             }
 
@@ -286,7 +286,7 @@ namespace Hast.Transformer.Services
             {
                 var castExpression = new CastExpression { Type = TypeHelper.CreateAstType(toType) };
 
-                clonedExpression = (T)expression.Clone();
+                clonedExpression = expression.Clone<T>();
                 castExpression.Expression = new ParenthesizedExpression(clonedExpression);
                 castExpression.Expression.AddAnnotation(expression.CreateResolveResultFromActualType());
                 castExpression.AddAnnotation(toType.ToResolveResult());
