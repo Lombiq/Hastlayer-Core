@@ -20,7 +20,7 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
         public IntegrationTestFixtureBase()
         {
             _hostConfiguration.Extensions = new List<Assembly>();
-            _host = new Lazy<Hastlayer>(() => (Hastlayer)Hastlayer.Create(_hostConfiguration).Result);
+            _host = new Lazy<Hastlayer>(() => (Hastlayer)Hastlayer.Create(_hostConfiguration));
         }
 
         public void Dispose()

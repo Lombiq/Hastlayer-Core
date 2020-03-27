@@ -75,7 +75,7 @@ namespace Hast.Remote.Worker
                             typeof(CatapultDriver).Assembly
                         }
                     };
-                    _hastlayer = await Hastlayer.Create(hastlayerConfiguration);
+                    _hastlayer = Hastlayer.Create(hastlayerConfiguration);
 
                     cancellationToken.ThrowIfCancellationRequested();
 

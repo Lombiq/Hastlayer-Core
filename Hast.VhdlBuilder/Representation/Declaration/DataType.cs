@@ -1,4 +1,5 @@
 ﻿using Hast.VhdlBuilder.Representation.Expression;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
@@ -65,6 +66,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return Name == otherType.Name && TypeCategory == otherType.TypeCategory;
         }
 
+        public override int GetHashCode()
+        {
+            var hashCode = -236086786;
+            hashCode = hashCode * -1521134295 + TypeCategory.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(DefaultValue.ToVhdl());
+            return hashCode;
+        }
 
         public static bool operator ==(DataType a, DataType b)
         {

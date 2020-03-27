@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
@@ -52,6 +53,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             if (otherType == null) return false;
             return base.Equals(obj) && 
                 (SizeExpression == null ? Size == otherType.Size : SizeExpression.ToVhdl() == otherType.SizeExpression.ToVhdl());
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -2044733558;
+            hashCode = hashCode * -1521134295 + Size.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(SizeExpression.ToVhdl());
+            return hashCode;
         }
     }
 

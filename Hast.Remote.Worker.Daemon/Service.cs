@@ -55,7 +55,7 @@ namespace Hast.Remote.Worker.Daemon
         {
             _workerTask = Task.Run(async () =>
             {
-                using (var host = (Hastlayer) await Hastlayer.Create())
+                using (var host = (Hastlayer)Hastlayer.Create())
                 {
                     try
                     {

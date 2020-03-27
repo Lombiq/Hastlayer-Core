@@ -35,5 +35,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             if (otherType == null) return false;
             return base.Equals(obj) && RangeMin == otherType.RangeMin && RangeMin == otherType.RangeMax;
         }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1191414666;
+            hashCode = hashCode * -1521134295 + RangeMin.GetHashCode();
+            hashCode = hashCode * -1521134295 + RangeMax.GetHashCode();
+            return hashCode;
+        }
     }
 }

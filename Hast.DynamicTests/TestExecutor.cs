@@ -16,7 +16,7 @@ namespace Hast.DynamicTests
         public static async Task ExecuteTest<T>(Action<HardwareGenerationConfiguration> configurator, Action<T> testExecutor)
             where T : class, new()
         {
-            using var hastlayer = await Hastlayer.Create();
+            using var hastlayer = Hastlayer.Create();
             var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
 
             configurator(configuration);
