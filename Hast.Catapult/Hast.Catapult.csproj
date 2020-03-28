@@ -11,9 +11,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Module.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Catapult.Abstractions\Hast.Catapult.Abstractions.csproj" />
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
@@ -23,4 +20,11 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <CopyItems Include="$(TargetDir)\*.*" />
+  </ItemGroup>
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="@(CopyItems)" DestinationFolder="$(AppData)\Hastlayer\Core" />
+  </Target>
 </Project>

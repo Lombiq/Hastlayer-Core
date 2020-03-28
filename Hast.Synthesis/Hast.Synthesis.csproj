@@ -15,13 +15,17 @@
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Module.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="CsvHelper" Version="15.0.0" />
     <PackageReference Include="ICSharpCode.Decompiler" Version="6.0.0.5559-preview2" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.4.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <CopyItems Include="$(TargetDir)\*.*" />
+  </ItemGroup>
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="@(CopyItems)" DestinationFolder="$(AppData)\Hastlayer\Core" />
+  </Target>
 </Project>

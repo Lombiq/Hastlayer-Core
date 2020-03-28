@@ -172,7 +172,6 @@ namespace Hast.Transformer
                 // transformation needs multiple assemblies those will need to be loaded like this too.
                 // So helping the decompiler find them here.
                 resolver.AddSearchDirectory(Path.GetDirectoryName(GetType().Assembly.Location));
-                // The Dependencies folder can't be mapped during certain tests.
                 var dependenciesFolderPath = _appDataFolder.MapPath("Dependencies");
                 if (dependenciesFolderPath != null) resolver.AddSearchDirectory(dependenciesFolderPath);
                 resolver.AddSearchDirectory(AppDomain.CurrentDomain.BaseDirectory);
