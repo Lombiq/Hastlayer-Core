@@ -354,6 +354,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     currentBlock.Add(createConditionalStateChangeToAfterCaseState());
                 }
 
+                // If the AST doesn't contain cases for all possible values of the type the statement switches on then
+                // the VHDL will be incorrect. By including an "others" case every time this is solved.
+                caseStatement.Whens.Add(CaseWhen.CreateOthers());
+
 
                 currentBlock.ChangeBlockToDifferentState(afterCaseStateBlock, aftercaseStateIndex);
             }

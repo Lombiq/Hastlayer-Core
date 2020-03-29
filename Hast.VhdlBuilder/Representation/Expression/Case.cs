@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Representation.Declaration;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using Hast.VhdlBuilder.Extensions;
-using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
@@ -53,8 +53,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             "when " + Expression.ToVhdl(vhdlGenerationOptions) + " => " + vhdlGenerationOptions.NewLineIfShouldFormat() +
-            (Body.Count != 0 ? 
-                Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) : 
-                Terminated.Terminate(vhdlGenerationOptions.IndentIfShouldFormat () + "null", vhdlGenerationOptions));
+            (Body.Count != 0 ?
+                Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) :
+                Terminated.Terminate(vhdlGenerationOptions.IndentIfShouldFormat() + "null", vhdlGenerationOptions));
+
+
+        public static CaseWhen CreateOthers() => new CaseWhen { Expression = "others".ToVhdlValue(KnownDataTypes.Identifier) };
     }
 }
