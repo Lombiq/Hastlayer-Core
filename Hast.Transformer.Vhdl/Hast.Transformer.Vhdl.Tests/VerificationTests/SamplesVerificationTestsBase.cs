@@ -41,6 +41,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                         configuration.AddHardwareEntryPointType<Loopback>();
 
+                        configuration.AddHardwareEntryPointType<MemoryTest>();
+
                         configuration.AddHardwareEntryPointType<MonteCarloPiEstimator>();
                         transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<MonteCarloPiEstimator>(m => m.EstimatePi(null), 0)
