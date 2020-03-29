@@ -2669,7 +2669,7 @@ begin
                         -- num = memory.ReadUInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2885,7 +2885,7 @@ begin
                             -- memory.WriteUInt32 (num3, array [num3]);
                             -- 
                             -- Begin SimpleMemory write.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num3\, 32);
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num3\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.array\(to_integer(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num3\)));
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_18\;

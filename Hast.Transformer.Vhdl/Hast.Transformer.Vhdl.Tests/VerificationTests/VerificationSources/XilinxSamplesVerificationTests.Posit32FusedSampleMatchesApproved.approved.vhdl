@@ -1230,7 +1230,7 @@ begin
                         -- num = memory.ReadUInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1543,7 +1543,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.13\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.12\ + \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\;
                         -- Begin SimpleMemory read.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.13\, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.13\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_21\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
@@ -1632,7 +1632,7 @@ begin
                             -- memory.WriteUInt32 (0, objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e.PositBits);
                             -- 
                             -- Begin SimpleMemory write.
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\.\PositBits\);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_27\;
@@ -9845,7 +9845,7 @@ begin
                         -- num = memory.ReadUInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10158,7 +10158,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.13\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.12\ + \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\;
                         -- Begin SimpleMemory read.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.13\, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.13\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_21\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
@@ -10247,7 +10247,7 @@ begin
                             -- memory.WriteUInt32 (0, objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e.PositBits);
                             -- 
                             -- Begin SimpleMemory write.
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\.\PositBits\);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_27\;

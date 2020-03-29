@@ -1163,7 +1163,7 @@ begin
                         -- memory.WriteUInt32 (2, memory.ReadUInt32 (0) + memory.ReadUInt32 (1));
                         -- 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1179,7 +1179,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_4\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1191,7 +1191,7 @@ begin
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\) + ConvertStdLogicVectorToUInt32(\KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\);
                             -- Begin SimpleMemory write.
-                            \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(2, 32), 32);
+                            \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(2, 32);
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\);
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_6\;
@@ -1285,7 +1285,7 @@ begin
                         -- @this.Random1.State = ((ulong)(((ulong)memory.ReadUInt32 (2) << 32) | (ulong)(memory.ReadUInt32 (3))));
                         -- 
                         -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(2, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(2, 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1302,7 +1302,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1626
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(3, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(3, 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1331,7 +1331,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2229
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_6\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(4, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(4, 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1348,7 +1348,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1626
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(5, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(5, 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1369,7 +1369,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2229
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1391,7 +1391,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.66
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_12\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1581,7 +1581,7 @@ begin
                         -- 
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\ := to_signed(6, 32) + \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num3\;
                         -- Begin SimpleMemory write.
-                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\, 32);
+                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\;
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this\.\_gridRaw\(to_integer(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num3\)));
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_8\;
@@ -1780,7 +1780,7 @@ begin
                         -- 
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\ := to_signed(6, 32) + \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num3\;
                         -- Begin SimpleMemory read.
-                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\, 32);
+                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\;
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
@@ -5055,7 +5055,7 @@ begin
                         -- num = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5266,7 +5266,7 @@ begin
                         -- 
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\ := to_signed(1, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num11\;
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_14\;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
@@ -5274,7 +5274,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\ := to_signed(1, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num6\;
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -5315,7 +5315,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7962
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_8\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.5\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.5\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5363,7 +5363,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\ := to_signed(1, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num9\;
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -5400,7 +5400,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7962
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_12\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.11\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.11\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5457,7 +5457,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7962
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_15\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.18\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.18\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_16\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -6353,7 +6353,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.47\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.48\;
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.49\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_36\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -6981,7 +6981,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.89\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.87\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.88\;
                         -- Begin SimpleMemory write.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.89\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.89\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_61\;
@@ -8753,7 +8753,7 @@ begin
                         -- memory.WriteUInt32 (2, memory.ReadUInt32 (0) + memory.ReadUInt32 (1));
                         -- 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8769,7 +8769,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_4\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8781,7 +8781,7 @@ begin
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\ := ConvertStdLogicVectorToUInt32(\KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.0\) + ConvertStdLogicVectorToUInt32(\KpzKernelsInterface::TestAdd(SimpleMemory).0.dataIn.1\);
                             -- Begin SimpleMemory write.
-                            \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(2, 32), 32);
+                            \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(2, 32);
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernelsInterface::TestAdd(SimpleMemory).0.binaryOperationResult.0\);
                             \KpzKernelsInterface::TestAdd(SimpleMemory).0._State\ := \KpzKernelsInterface::TestAdd(SimpleMemory).0._State_6\;
@@ -8875,7 +8875,7 @@ begin
                         -- @this.Random1.State = ((ulong)(((ulong)memory.ReadUInt32 (2) << 32) | (ulong)(memory.ReadUInt32 (3))));
                         -- 
                         -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(2, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(2, 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8892,7 +8892,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1626
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_4\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(3, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(3, 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8921,7 +8921,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2229
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_6\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(4, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(4, 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8938,7 +8938,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1626
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_8\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(5, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(5, 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8959,7 +8959,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.2229
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_10\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -8981,7 +8981,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.66
                     when \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_12\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State\ := \KpzKernels::InitializeParametersFromMemory(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9171,7 +9171,7 @@ begin
                         -- 
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\ := to_signed(6, 32) + \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num3\;
                         -- Begin SimpleMemory write.
-                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\, 32);
+                        \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.binaryOperationResult.4\;
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.this\.\_gridRaw\(to_integer(\KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0.num3\)));
                         \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyToSimpleMemoryFromRawGrid(SimpleMemory).0._State_8\;
@@ -9370,7 +9370,7 @@ begin
                         -- 
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\ := to_signed(6, 32) + \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.num3\;
                         -- Begin SimpleMemory read.
-                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\, 32);
+                        \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.binaryOperationResult.4\;
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State\ := \KpzKernels::CopyFromSimpleMemoryToRawGrid(SimpleMemory).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
@@ -13080,7 +13080,7 @@ begin
                         -- num = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -13291,7 +13291,7 @@ begin
                         -- 
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\ := to_signed(1, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num11\;
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.16\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_14\;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
@@ -13299,7 +13299,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\ := to_signed(1, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num6\;
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -13340,7 +13340,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7962
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_8\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.5\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.5\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -13388,7 +13388,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\ := to_signed(1, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num9\;
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.9\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -13425,7 +13425,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7962
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_12\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.11\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.11\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -13482,7 +13482,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7962
                     when \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_15\ => 
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.18\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.18\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_16\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14428,7 +14428,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.51\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.52\;
                         -- Begin SimpleMemory read.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.53\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_38\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -15056,7 +15056,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.93\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.91\ + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.92\;
                         -- Begin SimpleMemory write.
-                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.93\, 32);
+                        \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.CellIndex\ <= \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.93\;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.number\);
                         \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0._State_63\;
