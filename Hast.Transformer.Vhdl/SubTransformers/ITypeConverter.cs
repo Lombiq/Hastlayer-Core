@@ -15,6 +15,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             IVhdlTransformationContext context);
 
         DataType ConvertAstType(AstType type, IVhdlTransformationContext context);
+
         DataType ConvertAndDeclareAstType(
             AstType type,
             IDeclarableElement declarable,

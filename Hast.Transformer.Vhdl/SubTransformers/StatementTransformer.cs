@@ -319,6 +319,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             "."),
                         CreateConditionalStateChange(aftercaseStateIndex, context));
 
+                var switchExpressionType = _typeConverter
+                    .ConvertType(switchStatement.Expression.GetActualType(), context.TransformationContext);
 
                 foreach (var switchSection in switchStatement.SwitchSections)
                 {
@@ -327,7 +329,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     // If there are multiple labels for a switch section then those should be OR-ed together.
                     when.Expression = BinaryChainBuilder.BuildBinaryChain(
-                        switchSection.CaseLabels.Select(caseLabel => _expressionTransformer.Transform(caseLabel.Expression, context)),
+                        switchSection.CaseLabels.Select(caseLabel =>
+                        {
+                            var caseExpressionType = _typeConverter
+                                .ConvertType(caseLabel.Expression.GetActualType(), context.TransformationContext);
+
+                            return _typeConversionTransformer.ImplementTypeConversion(
+                                caseExpressionType,
+                                switchExpressionType,
+                                _expressionTransformer.Transform(caseLabel.Expression, context))
+                            .ConvertedFromExpression;
+                        }),
                         BinaryOperator.Or);
 
                     var whenBody = new InlineBlock();
