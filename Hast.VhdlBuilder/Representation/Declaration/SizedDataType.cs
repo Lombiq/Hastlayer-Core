@@ -53,6 +53,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return base.Equals(obj) && 
                 (SizeExpression == null ? Size == otherType.Size : SizeExpression.ToVhdl() == otherType.SizeExpression.ToVhdl());
         }
+
+        public override int GetHashCode() => (Name + TypeCategory.ToString() + Size).GetHashCode();
     }
 
 

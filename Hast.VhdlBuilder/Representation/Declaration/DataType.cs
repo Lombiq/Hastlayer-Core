@@ -65,6 +65,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return Name == otherType.Name && TypeCategory == otherType.TypeCategory;
         }
 
+        public override int GetHashCode() => (Name + TypeCategory.ToString()).GetHashCode();
+
 
         public static bool operator ==(DataType a, DataType b)
         {
