@@ -319,6 +319,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             "."),
                         CreateConditionalStateChange(aftercaseStateIndex, context));
 
+                var switchExpressionType = _typeConverter
+                    .ConvertType(switchStatement.Expression.GetActualType(), context.TransformationContext);
 
                 foreach (var switchSection in switchStatement.SwitchSections)
                 {
@@ -327,7 +329,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     // If there are multiple labels for a switch section then those should be OR-ed together.
                     when.Expression = BinaryChainBuilder.BuildBinaryChain(
-                        switchSection.CaseLabels.Select(caseLabel => _expressionTransformer.Transform(caseLabel.Expression, context)),
+                        switchSection.CaseLabels.Select(caseLabel =>
+                        {
+                            var caseExpressionType = _typeConverter
+                                .ConvertType(caseLabel.Expression.GetActualType(), context.TransformationContext);
+
+                            return _typeConversionTransformer.ImplementTypeConversion(
+                                caseExpressionType,
+                                switchExpressionType,
+                                _expressionTransformer.Transform(caseLabel.Expression, context))
+                            .ConvertedFromExpression;
+                        }),
                         BinaryOperator.Or);
 
                     var whenBody = new InlineBlock();
@@ -341,6 +353,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     currentBlock.Add(createConditionalStateChangeToAfterCaseState());
                 }
+
+                // If the AST doesn't contain cases for all possible values of the type the statement switches on then
+                // the VHDL will be incorrect. By including an "others" case every time this is solved.
+                caseStatement.Whens.Add(CaseWhen.CreateOthers());
 
 
                 currentBlock.ChangeBlockToDifferentState(afterCaseStateBlock, aftercaseStateIndex);
@@ -377,6 +393,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var labelStateIndex = scope.LabelsToStateIndicesMappings[labelStatement.Label];
                 scope.CurrentBlock.Add(stateMachine.CreateStateChange(labelStateIndex));
                 currentBlock.ChangeBlockToDifferentState(stateMachine.States[labelStateIndex].Body, labelStateIndex);
+            }
+            else if (statement is EmptyStatement)
+            {
+                // Nothing to do.
             }
             else throw new NotSupportedException(
                 "Statements of type " + statement.GetType() + " are not supported.".AddParentEntityName(statement));

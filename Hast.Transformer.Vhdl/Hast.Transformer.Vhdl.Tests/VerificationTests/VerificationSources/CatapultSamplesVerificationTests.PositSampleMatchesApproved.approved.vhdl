@@ -2100,7 +2100,7 @@ begin
                         -- num = memory.ReadUInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State\ := \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2238,7 +2238,7 @@ begin
                             -- memory.WriteInt32 (0, number);
                             -- 
                             -- Begin SimpleMemory write.
-                            \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                            \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                             \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.number\);
                             \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State\ := \PositCalculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_10\;

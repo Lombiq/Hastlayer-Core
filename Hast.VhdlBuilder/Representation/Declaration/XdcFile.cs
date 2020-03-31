@@ -57,8 +57,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     "set_multicycle_path " + ClockCycles + " -" + Type + " -to [get_cells " +
                     (IsHierarchical ? "-hierarchical " : string.Empty) + "{*" +
                     // The config should contain the path's name without backslashes even if the original name is an
-                    // extended identifier.
-                    PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters() +
+                    // extended identifier. Spaces need to be escaped with a slash.
+                    PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ") +
                     "*}]";
         }
     }

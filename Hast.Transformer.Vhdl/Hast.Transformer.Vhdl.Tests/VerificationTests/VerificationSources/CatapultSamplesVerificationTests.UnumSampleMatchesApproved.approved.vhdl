@@ -2410,6 +2410,78 @@ architecture Imp of Hast_IP is
     -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Unum::get_SignalingNotANumber().0 declarations end
 
 
+    -- System.UInt16 Lombiq.Arithmetics.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte).0 declarations start
+    -- State machine states:
+    type \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._States\ is (
+        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_0\, 
+        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_1\, 
+        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_2\);
+    -- Signals:
+    Signal \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Finished\: boolean := false;
+    Signal \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.return\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Started\: boolean := false;
+    Signal \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize.parameter.In\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    -- System.UInt16 Lombiq.Arithmetics.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte).0 declarations end
+
+
+    -- System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 declarations start
+    -- State machine states:
+    type \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._States\ is (
+        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_0\, 
+        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_1\, 
+        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_2\, 
+        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_3\);
+    -- Signals:
+    Signal \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Finished\: boolean := false;
+    Signal \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.return\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.Out\: \Lombiq.Arithmetics.UnumEnvironment\;
+    Signal \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Started\: boolean := false;
+    Signal \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.In\: \Lombiq.Arithmetics.UnumEnvironment\;
+    -- System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 declarations end
+
+
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.UnumHelper::LargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 declarations start
+    -- State machine states:
+    type \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._States\ is (
+        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_0\, 
+        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_1\, 
+        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_2\, 
+        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\, 
+        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_4\, 
+        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_5\, 
+        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_6\, 
+        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_7\, 
+        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_8\, 
+        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_9\);
+    -- Signals:
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Finished\: boolean := false;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return\: \Lombiq.Arithmetics.BitMask\;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.Out\: \Lombiq.Arithmetics.UnumEnvironment\;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).environment.parameter.Out.0\: \Lombiq.Arithmetics.UnumEnvironment\;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Started.0\: boolean := false;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).index.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Started.0\: boolean := false;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).right.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\: boolean := false;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\: boolean := false;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Started\: boolean := false;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.In\: \Lombiq.Arithmetics.UnumEnvironment\;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).environment.parameter.In.0\: \Lombiq.Arithmetics.UnumEnvironment\;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Finished.0\: boolean := false;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).return.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Finished.0\: boolean := false;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).return.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\: boolean := false;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).return.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Finished.0\: boolean := false;
+    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).return.0\: \Lombiq.Arithmetics.BitMask\;
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.UnumHelper::LargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 declarations end
+
+
     -- System.Void Lombiq.Arithmetics.UnumEnvironment::.ctor(System.Byte,System.Byte).0 declarations start
     -- State machine states:
     type \UnumEnvironment::.ctor(Byte,Byte).0._States\ is (
@@ -2508,78 +2580,6 @@ architecture Imp of Hast_IP is
     -- System.Void Lombiq.Arithmetics.UnumEnvironment::.ctor(System.Byte,System.Byte).0 declarations end
 
 
-    -- System.UInt16 Lombiq.Arithmetics.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte).0 declarations start
-    -- State machine states:
-    type \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._States\ is (
-        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_0\, 
-        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_1\, 
-        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_2\);
-    -- Signals:
-    Signal \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Finished\: boolean := false;
-    Signal \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.return\: unsigned(15 downto 0) := to_unsigned(0, 16);
-    Signal \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Started\: boolean := false;
-    Signal \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize.parameter.In\: unsigned(7 downto 0) := to_unsigned(0, 8);
-    -- System.UInt16 Lombiq.Arithmetics.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte).0 declarations end
-
-
-    -- System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 declarations start
-    -- State machine states:
-    type \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._States\ is (
-        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_0\, 
-        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_1\, 
-        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_2\, 
-        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_3\);
-    -- Signals:
-    Signal \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Finished\: boolean := false;
-    Signal \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.return\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.Out\: \Lombiq.Arithmetics.UnumEnvironment\;
-    Signal \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Started\: boolean := false;
-    Signal \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.In\: \Lombiq.Arithmetics.UnumEnvironment\;
-    -- System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 declarations end
-
-
-    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.UnumHelper::LargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 declarations start
-    -- State machine states:
-    type \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._States\ is (
-        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_0\, 
-        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_1\, 
-        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_2\, 
-        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\, 
-        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_4\, 
-        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_5\, 
-        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_6\, 
-        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_7\, 
-        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_8\, 
-        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_9\);
-    -- Signals:
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Finished\: boolean := false;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return\: \Lombiq.Arithmetics.BitMask\;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.Out\: \Lombiq.Arithmetics.UnumEnvironment\;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).environment.parameter.Out.0\: \Lombiq.Arithmetics.UnumEnvironment\;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Started.0\: boolean := false;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).index.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Started.0\: boolean := false;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).right.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\: boolean := false;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\: boolean := false;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Started\: boolean := false;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.In\: \Lombiq.Arithmetics.UnumEnvironment\;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).environment.parameter.In.0\: \Lombiq.Arithmetics.UnumEnvironment\;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Finished.0\: boolean := false;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).return.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Finished.0\: boolean := false;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).return.0\: \Lombiq.Arithmetics.BitMask\;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\: boolean := false;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).return.0\: \Lombiq.Arithmetics.BitMask\;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Finished.0\: boolean := false;
-    Signal \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).return.0\: \Lombiq.Arithmetics.BitMask\;
-    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.UnumHelper::LargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 declarations end
-
-
     -- System.Void Hast::ExternalInvocationProxy() declarations start
     -- Signals:
     Signal \FinishedInternal\: boolean := false;
@@ -2669,7 +2669,7 @@ begin
                         -- num = memory.ReadUInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2885,7 +2885,7 @@ begin
                             -- memory.WriteUInt32 (num3, array [num3]);
                             -- 
                             -- Begin SimpleMemory write.
-                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num3\, 32);
+                            \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.CellIndex\ <= \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num3\;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.array\(to_integer(\UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0.num3\)));
                             \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State\ := \UnumCalculator::CalculateSumOfPowersofTwo(SimpleMemory).0._State_18\;
@@ -16219,6 +16219,279 @@ begin
     -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Unum::get_SignalingNotANumber().0 state machine end
 
 
+    -- System.UInt16 Lombiq.Arithmetics.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte).0 state machine start
+    \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._StateMachine\: process (\Clock\) 
+        Variable \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\: \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._States\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_0\;
+        Variable \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Finished\ <= false;
+                \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.return\ <= to_unsigned(0, 16);
+                \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_0\;
+                \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize\ := to_unsigned(0, 8);
+                \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.binaryOperationResult.0\ := to_unsigned(0, 16);
+            else 
+                case \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\ is 
+                    when \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Started\ = true) then 
+                            \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Started\ = true) then 
+                            \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Finished\ <= true;
+                        else 
+                            \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Finished\ <= false;
+                            \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_2\ => 
+                        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return (ushort)(1 << (int)segmentSizeSize);
+                        -- 
+                        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.binaryOperationResult.0\ := SmartResize(unsigned(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize\, 32)), 5))))), 16);
+                        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.return\ <= (\UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.binaryOperationResult.0\);
+                        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.4389
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt16 Lombiq.Arithmetics.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte).0 state machine end
+
+
+    -- System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 state machine start
+    \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._StateMachine\: process (\Clock\) 
+        Variable \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\: \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._States\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_0\;
+        Variable \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment\: \Lombiq.Arithmetics.UnumEnvironment\;
+        Variable \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Finished\ <= false;
+                \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.return\ <= to_signed(0, 32);
+                \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_0\;
+                \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\ := to_signed(0, 32);
+            else 
+                case \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ is 
+                    when \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Started\ = true) then 
+                            \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Started\ = true) then 
+                            \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Finished\ <= true;
+                        else 
+                            \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Finished\ <= false;
+                            \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.Out\ <= \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_2\ => 
+                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return (1 << (int)(environment.ExponentSizeMax) - 1) + 1;
+                        -- 
+                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\ := signed(SmartResize((\UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\ExponentSizeMax\), 32)) - to_signed(1, 32);
+                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\, 5))));
+                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7953
+                    when \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\ := (\UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\) + to_signed(1, 32);
+                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.return\ <= \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\;
+                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3981
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 state machine end
+
+
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.UnumHelper::LargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 state machine start
+    \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._StateMachine\: process (\Clock\) 
+        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\: \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._States\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_0\;
+        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\: \Lombiq.Arithmetics.UnumEnvironment\;
+        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\: boolean := false;
+        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.1\: \Lombiq.Arithmetics.BitMask\;
+        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.2\: \Lombiq.Arithmetics.BitMask\;
+        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.3\: \Lombiq.Arithmetics.BitMask\;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Finished\ <= false;
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Started.0\ <= false;
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(0, 16);
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Started.0\ <= false;
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).right.parameter.Out.0\ <= to_unsigned(0, 32);
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= false;
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_0\;
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.0\ := to_signed(0, 32);
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\ := false;
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.3\ := to_signed(0, 32);
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.5\ := to_signed(0, 32);
+            else 
+                case \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ is 
+                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Started\ = true) then 
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Started\ = true) then 
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Finished\ <= true;
+                        else 
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Finished\ <= false;
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_0\;
+                        end if;
+                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.Out\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_2\ => 
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (UnumHelper.BitsRequiredByLargestExpressablePositiveInteger (environment) > (int)(environment.EmptyBitMask.SegmentCount) * 32) {
+                        -- 	return environment.EmptyBitMask;
+                        -- }
+                        -- 
+                        -- Starting state machine invocation for the following method: System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment)
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).environment.parameter.Out.0\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\;
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Started.0\ <= true;
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment)
+                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Started.0\ = \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Finished.0\) then 
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Started.0\ <= false;
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.0\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).return.0\;
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).environment.parameter.In.0\;
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\EmptyBitMask\.\SegmentCount\), 32)) * to_signed(32, 32), 32);
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.0\ > \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\;
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_5\ and ends in state \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_5\.
+                            --     * Execution after either branch will continue in the following state: \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_4\.
+
+                            if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\) then 
+                                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_5\;
+                            else 
+                                -- There was no false branch, so going directly to the state after the if-else.
+                                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_4\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6501
+                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_4\ => 
+                        -- State after the if-else which was started in state \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return BitMask.op_LeftShift (BitMask.op_Subtraction (Lombiq.Arithmetics.BitMask.SetOne (environment.EmptyBitMask, environment.FractionSizeMax), 1u), (int)((1 << (int)(environment.ExponentSizeMax) - 1)) - (int)(environment.FractionSizeMax) + 1);
+                        -- 
+                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\EmptyBitMask\;
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\FractionSizeMax\;
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_5\ => 
+                        -- True branch of the if-else started in state \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return environment.EmptyBitMask;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return environment.EmptyBitMask;
+                        -- 
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\EmptyBitMask\;
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_1\;
+                        -- Going to the state after the if-else which was started in state \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\.
+                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ = \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_5\) then 
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_6\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
+                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Started.0\ = \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Finished.0\) then 
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Started.0\ <= false;
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.1\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).return.0\;
+                            -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Subtraction(Lombiq.Arithmetics.BitMask,System.UInt32)
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).left.parameter.Out.0\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.1\;
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).right.parameter.Out.0\ <= to_unsigned(1, 32);
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= true;
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_7\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Subtraction(Lombiq.Arithmetics.BitMask,System.UInt32)
+                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ = \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\) then 
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= false;
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.2\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).return.0\;
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\ := signed(SmartResize((\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\ExponentSizeMax\), 32)) - to_signed(1, 32);
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.3\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\, 5))));
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_8\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7953
+                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_8\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.4\ := ((\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.3\)) - signed(SmartResize((\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\FractionSizeMax\), 32));
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.5\ := SmartResize(\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.4\ + to_signed(1, 32), 32);
+                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.2\;
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.5\;
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
+                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7545
+                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_9\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
+                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.3\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).return.0\;
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.3\;
+                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.UnumHelper::LargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 state machine end
+
+
     -- System.Void Lombiq.Arithmetics.UnumEnvironment::.ctor(System.Byte,System.Byte).0 state machine start
     \UnumEnvironment::.ctor(Byte,Byte).0._StateMachine\: process (\Clock\) 
         Variable \UnumEnvironment::.ctor(Byte,Byte).0._State\: \UnumEnvironment::.ctor(Byte,Byte).0._States\ := \UnumEnvironment::.ctor(Byte,Byte).0._State_0\;
@@ -16903,279 +17176,6 @@ begin
         end if;
     end process;
     -- System.Void Lombiq.Arithmetics.UnumEnvironment::.ctor(System.Byte,System.Byte).0 state machine end
-
-
-    -- System.UInt16 Lombiq.Arithmetics.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte).0 state machine start
-    \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._StateMachine\: process (\Clock\) 
-        Variable \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\: \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._States\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_0\;
-        Variable \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Finished\ <= false;
-                \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.return\ <= to_unsigned(0, 16);
-                \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_0\;
-                \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize\ := to_unsigned(0, 8);
-                \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.binaryOperationResult.0\ := to_unsigned(0, 16);
-            else 
-                case \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\ is 
-                    when \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Started\ = true) then 
-                            \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Started\ = true) then 
-                            \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Finished\ <= true;
-                        else 
-                            \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Finished\ <= false;
-                            \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_2\ => 
-                        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return (ushort)(1 << (int)segmentSizeSize);
-                        -- 
-                        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.binaryOperationResult.0\ := SmartResize(unsigned(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize\, 32)), 5))))), 16);
-                        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.return\ <= (\UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.binaryOperationResult.0\);
-                        \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State\ := \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4389
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.UInt16 Lombiq.Arithmetics.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte).0 state machine end
-
-
-    -- System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 state machine start
-    \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._StateMachine\: process (\Clock\) 
-        Variable \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\: \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._States\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_0\;
-        Variable \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment\: \Lombiq.Arithmetics.UnumEnvironment\;
-        Variable \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Finished\ <= false;
-                \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.return\ <= to_signed(0, 32);
-                \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_0\;
-                \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\ := to_signed(0, 32);
-                \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\ := to_signed(0, 32);
-            else 
-                case \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ is 
-                    when \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Started\ = true) then 
-                            \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Started\ = true) then 
-                            \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Finished\ <= true;
-                        else 
-                            \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Finished\ <= false;
-                            \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_0\;
-                        end if;
-                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
-                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.Out\ <= \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_2\ => 
-                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return (1 << (int)(environment.ExponentSizeMax) - 1) + 1;
-                        -- 
-                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\ := signed(SmartResize((\UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\ExponentSizeMax\), 32)) - to_signed(1, 32);
-                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\, 5))));
-                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7953
-                    when \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_3\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\ := (\UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\) + to_signed(1, 32);
-                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.return\ <= \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\;
-                        \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3981
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 state machine end
-
-
-    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.UnumHelper::LargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 state machine start
-    \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._StateMachine\: process (\Clock\) 
-        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\: \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._States\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_0\;
-        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\: \Lombiq.Arithmetics.UnumEnvironment\;
-        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\: boolean := false;
-        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.1\: \Lombiq.Arithmetics.BitMask\;
-        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.2\: \Lombiq.Arithmetics.BitMask\;
-        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.3\: \Lombiq.Arithmetics.BitMask\;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Finished\ <= false;
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Started.0\ <= false;
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= to_unsigned(0, 16);
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Started.0\ <= false;
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).right.parameter.Out.0\ <= to_unsigned(0, 32);
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= false;
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_0\;
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.0\ := to_signed(0, 32);
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\ := to_signed(0, 32);
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\ := false;
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.3\ := to_signed(0, 32);
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.4\ := to_signed(0, 32);
-                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.5\ := to_signed(0, 32);
-            else 
-                case \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ is 
-                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Started\ = true) then 
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Started\ = true) then 
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Finished\ <= true;
-                        else 
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._Finished\ <= false;
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_0\;
-                        end if;
-                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.Out\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_2\ => 
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (UnumHelper.BitsRequiredByLargestExpressablePositiveInteger (environment) > (int)(environment.EmptyBitMask.SegmentCount) * 32) {
-                        -- 	return environment.EmptyBitMask;
-                        -- }
-                        -- 
-                        -- Starting state machine invocation for the following method: System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment)
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).environment.parameter.Out.0\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\;
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Started.0\ <= true;
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment)
-                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Started.0\ = \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Finished.0\) then 
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Started.0\ <= false;
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.0\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).return.0\;
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).environment.parameter.In.0\;
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\EmptyBitMask\.\SegmentCount\), 32)) * to_signed(32, 32), 32);
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.0\ > \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.0\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_5\ and ends in state \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_5\.
-                            --     * Execution after either branch will continue in the following state: \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_4\.
-
-                            if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.1\) then 
-                                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_5\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_4\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6501
-                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_4\ => 
-                        -- State after the if-else which was started in state \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return BitMask.op_LeftShift (BitMask.op_Subtraction (Lombiq.Arithmetics.BitMask.SetOne (environment.EmptyBitMask, environment.FractionSizeMax), 1u), (int)((1 << (int)(environment.ExponentSizeMax) - 1)) - (int)(environment.FractionSizeMax) + 1);
-                        -- 
-                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).this.parameter.Out.0\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\EmptyBitMask\;
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).index.parameter.Out.0\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\FractionSizeMax\;
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Started.0\ <= true;
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_6\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_5\ => 
-                        -- True branch of the if-else started in state \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	return environment.EmptyBitMask;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return environment.EmptyBitMask;
-                        -- 
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\EmptyBitMask\;
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_1\;
-                        -- Going to the state after the if-else which was started in state \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_3\.
-                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ = \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_5\) then 
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::SetOne(System.UInt16)
-                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Started.0\ = \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Finished.0\) then 
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Started.0\ <= false;
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.1\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16).return.0\;
-                            -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Subtraction(Lombiq.Arithmetics.BitMask,System.UInt32)
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).left.parameter.Out.0\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.1\;
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).right.parameter.Out.0\ <= to_unsigned(1, 32);
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= true;
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_7\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Subtraction(Lombiq.Arithmetics.BitMask,System.UInt32)
-                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ = \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\) then 
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ <= false;
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.2\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).return.0\;
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\ := signed(SmartResize((\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\ExponentSizeMax\), 32)) - to_signed(1, 32);
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.3\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.2\, 5))));
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_8\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7953
-                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_8\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.4\ := ((\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.3\)) - signed(SmartResize((\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.environment\.\FractionSizeMax\), 32));
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.5\ := SmartResize(\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.4\ + to_signed(1, 32), 32);
-                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.2\;
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.binaryOperationResult.5\;
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
-                        \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7545
-                    when \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_9\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
-                        if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.3\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_LeftShift(BitMask,Int32).return.0\;
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.return.3\;
-                            \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State\ := \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0._State_1\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                end case;
-            end if;
-        end if;
-    end process;
-    -- Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.UnumHelper::LargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 state machine end
 
 
     -- System.Void Hast::ExternalInvocationProxy() start
@@ -19988,10 +19988,10 @@ begin
         Variable \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).Unum::ExponentMask().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).Unum::ExponentValueToExponentBits(Int32,UInt16).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).Unum::ExponentValueToExponentBits(Int32,UInt16).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -20004,16 +20004,16 @@ begin
                 \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).Unum::ExponentMask().0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).Unum::ExponentValueToExponentBits(Int32,UInt16).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).Unum::ExponentValueToExponentBits(Int32,UInt16).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
                 \Unum::.ctor(UnumEnvironment,UInt32[],Boolean).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= false;
                 \Unum::FractionMask().0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= false;
                 \Unum::ExponentMask().0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= false;
                 \Unum::ExponentValueToExponentBits(Int32,UInt16).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= false;
-                \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= false;
                 \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= false;
+                \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= false;
             else 
 
                 -- Invocation handler #0 out of 1 corresponding to System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.UInt32[],System.Boolean).0
@@ -20136,36 +20136,6 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Void Lombiq.Arithmetics.UnumEnvironment::.ctor(System.Byte,System.Byte).0
-                case \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\) then 
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
-                            \BitMask BitMask::op_Subtraction(BitMask,UInt32).0._Started\ <= true;
-                            \BitMask BitMask::op_Subtraction(BitMask,UInt32).0.left.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).left.parameter.Out.0\;
-                            \BitMask BitMask::op_Subtraction(BitMask,UInt32).0.right.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).right.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\BitMask BitMask::op_Subtraction(BitMask,UInt32).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := AfterFinished;
-                                    \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= true;
-                                    \BitMask BitMask::op_Subtraction(BitMask,UInt32).0._Started\ <= false;
-                                    \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).return.0\ <= \BitMask BitMask::op_Subtraction(BitMask,UInt32).0.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
                 -- Invocation handler #0 out of 1 corresponding to Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.UnumHelper::LargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0
                 case \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningState.0\ is 
                     when WaitingForStarted => 
@@ -20192,6 +20162,36 @@ begin
                         if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ = false) then 
                             \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningState.0\ := WaitingForStarted;
                             \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.Void Lombiq.Arithmetics.UnumEnvironment::.ctor(System.Byte,System.Byte).0
+                case \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\) then 
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
+                            \BitMask BitMask::op_Subtraction(BitMask,UInt32).0._Started\ <= true;
+                            \BitMask BitMask::op_Subtraction(BitMask,UInt32).0.left.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).left.parameter.Out.0\;
+                            \BitMask BitMask::op_Subtraction(BitMask,UInt32).0.right.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).right.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\BitMask BitMask::op_Subtraction(BitMask,UInt32).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := AfterFinished;
+                                    \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= true;
+                                    \BitMask BitMask::op_Subtraction(BitMask,UInt32).0._Started\ <= false;
+                                    \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32).return.0\ <= \BitMask BitMask::op_Subtraction(BitMask,UInt32).0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().BitMask BitMask::op_Subtraction(BitMask,UInt32).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask BitMask::op_Subtraction(BitMask,UInt32)._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -21938,23 +21938,23 @@ begin
     \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).Unum::FractionWithHiddenBit().0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).Unum::FractionWithHiddenBit().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).Unum::FractionWithHiddenBit().0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).Unum::FractionWithHiddenBit().0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
                 \Unum::FractionWithHiddenBit().0.BitMask::SetOne(UInt16)._Finished.0\ <= false;
-                \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\ <= false;
                 \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Finished.0\ <= false;
+                \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\ <= false;
             else 
 
                 -- Invocation handler #0 out of 1 corresponding to Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Unum::FractionWithHiddenBit().0
@@ -21987,36 +21987,6 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Void Lombiq.Arithmetics.UnumEnvironment::.ctor(System.Byte,System.Byte).0
-                case \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\) then 
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
-                            \BitMask::SetOne(UInt16).0._Started\ <= true;
-                            \BitMask::SetOne(UInt16).0.this.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\;
-                            \BitMask::SetOne(UInt16).0.index.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\BitMask::SetOne(UInt16).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := AfterFinished;
-                                    \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\ <= true;
-                                    \BitMask::SetOne(UInt16).0._Started\ <= false;
-                                    \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).return.0\ <= \BitMask::SetOne(UInt16).0.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
-                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
                 -- Invocation handler #0 out of 1 corresponding to Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.UnumHelper::LargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0
                 case \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningState.0\ is 
                     when WaitingForStarted => 
@@ -22043,6 +22013,36 @@ begin
                         if (\UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Started.0\ = false) then 
                             \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.runningState.0\ := WaitingForStarted;
                             \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.BitMask::SetOne(UInt16)._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.Void Lombiq.Arithmetics.UnumEnvironment::.ctor(System.Byte,System.Byte).0
+                case \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\) then 
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ := 0;
+                            \BitMask::SetOne(UInt16).0._Started\ <= true;
+                            \BitMask::SetOne(UInt16).0.this.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).this.parameter.Out.0\;
+                            \BitMask::SetOne(UInt16).0.index.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).index.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\BitMask::SetOne(UInt16).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := AfterFinished;
+                                    \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\ <= true;
+                                    \BitMask::SetOne(UInt16).0._Started\ <= false;
+                                    \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16).return.0\ <= \BitMask::SetOne(UInt16).0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().BitMask::SetOne(UInt16).UnumEnvironment::.ctor(Byte,Byte).0.runningState.0\ := WaitingForStarted;
+                            \UnumEnvironment::.ctor(Byte,Byte).0.BitMask::SetOne(UInt16)._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -22564,15 +22564,6 @@ begin
     -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.Unum Lombiq.Arithmetics.Unum::AddExactUnums(Lombiq.Arithmetics.Unum,Lombiq.Arithmetics.Unum) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.UInt16 Lombiq.Arithmetics.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte) start
-    -- Signal connections for System.Void Lombiq.Arithmetics.UnumEnvironment::.ctor(System.Byte,System.Byte).0 (#0):
-    \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Started\ <= \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte)._Started.0\;
-    \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).segmentSizeSize.parameter.Out.0\;
-    \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte)._Finished.0\ <= \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Finished\;
-    \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).return.0\ <= \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.UInt16 Lombiq.Arithmetics.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte) end
-
-
     -- System.Void Hast::InternalInvocationProxy().System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment) start
     -- Signal connections for Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.UnumHelper::LargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment).0 (#0):
     \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0._Started\ <= \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment)._Started.0\;
@@ -22581,6 +22572,15 @@ begin
     \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).return.0\ <= \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.return\;
     \UnumHelper::LargestExpressablePositiveInteger(UnumEnvironment).0.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).environment.parameter.In.0\ <= \UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(UnumEnvironment).0.environment.parameter.Out\;
     -- System.Void Hast::InternalInvocationProxy().System.Int32 Lombiq.Arithmetics.UnumHelper::BitsRequiredByLargestExpressablePositiveInteger(Lombiq.Arithmetics.UnumEnvironment) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.UInt16 Lombiq.Arithmetics.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte) start
+    -- Signal connections for System.Void Lombiq.Arithmetics.UnumEnvironment::.ctor(System.Byte,System.Byte).0 (#0):
+    \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Started\ <= \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte)._Started.0\;
+    \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.segmentSizeSize.parameter.In\ <= \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).segmentSizeSize.parameter.Out.0\;
+    \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte)._Finished.0\ <= \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0._Finished\;
+    \UnumEnvironment::.ctor(Byte,Byte).0.UnumHelper::SegmentSizeSizeToSegmentSize(Byte).return.0\ <= \UnumHelper::SegmentSizeSizeToSegmentSize(Byte).0.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.UInt16 Lombiq.Arithmetics.UnumHelper::SegmentSizeSizeToSegmentSize(System.Byte) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.UnumCalculator::CalculateSumOfPowersofTwo(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start

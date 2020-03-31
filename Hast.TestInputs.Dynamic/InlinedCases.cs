@@ -17,6 +17,11 @@ namespace Hast.TestInputs.Dynamic
             memory.WriteInt32(0, InlinedMultiReturnInternal(memory.ReadInt32(0)));
         }
 
+        public virtual void NestedInlinedMultiReturn(SimpleMemory memory)
+        {
+            memory.WriteInt32(0, NestedInlinedMultiReturnInternal(memory.ReadInt32(0)));
+        }
+
         public int InlinedMultiReturn(int input)
         {
             var memory = new SimpleMemory(1);
@@ -25,6 +30,20 @@ namespace Hast.TestInputs.Dynamic
             return memory.ReadInt32(0);
         }
 
+        public int NestedInlinedMultiReturn(int input)
+        {
+            var memory = new SimpleMemory(1);
+            memory.WriteInt32(0, input);
+            NestedInlinedMultiReturn(memory);
+            return memory.ReadInt32(0);
+        }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private int NestedInlinedMultiReturnInternal(int input)
+        {
+            return InlinedMultiReturnInternal(input) + InlinedMultiReturnInternal(input);
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private int InlinedMultiReturnInternal(int input)

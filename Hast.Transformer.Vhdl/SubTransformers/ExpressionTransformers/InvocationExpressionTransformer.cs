@@ -108,9 +108,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             currentBlock.Add(new Assignment
             {
                 AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
-                // Resizing the CellIndex parameter to the length of the signal, so there is no type mismatch.
                 // CellIndex is conventionally the first invocation parameter. 
-                Expression = Invocation.Resize(invocationParameters[0].Reference, SimpleMemoryTypes.CellIndexInternalSignalDataType.Size)
+                Expression = _typeConversionTransformer.ImplementTypeConversion(
+                    invocationParameters[0].DataType, 
+                    SimpleMemoryTypes.CellIndexInternalSignalDataType, invocationParameters[0].Reference)
+                    .ConvertedFromExpression
             });
 
             // Setting the write/read enable signal.
