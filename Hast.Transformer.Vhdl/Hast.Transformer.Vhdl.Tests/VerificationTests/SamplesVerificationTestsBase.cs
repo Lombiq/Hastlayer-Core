@@ -35,6 +35,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     var transformerConfiguration = configuration.TransformerConfiguration();
 
 
+                    configuration.AddHardwareEntryPointType<GenomeMatcher>();
+
                     // Not configuring MaxDegreeOfParallelism for ImageContrastModifier to also test the logic that
                     // can figure it out.
                     configuration.AddHardwareEntryPointType<ImageContrastModifier>();
