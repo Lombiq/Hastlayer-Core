@@ -35,11 +35,4 @@
   <ItemGroup>
     <Folder Include="Extensibility\Events\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <CopyItems Include="$(TargetDir)\*.*" />
-  </ItemGroup>
-  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
-    <Copy SourceFiles="@(CopyItems)" DestinationFolder="$(AppData)\Hastlayer\Core" />
-  </Target>
 </Project>
