@@ -62,6 +62,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(SizeExpression.ToVhdl());
             return hashCode;
         }
+
+        public override int GetHashCode() => (Name + TypeCategory.ToString() + Size).GetHashCode();
     }
 
 

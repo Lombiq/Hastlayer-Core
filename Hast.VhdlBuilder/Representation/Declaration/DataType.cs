@@ -66,14 +66,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return Name == otherType.Name && TypeCategory == otherType.TypeCategory;
         }
 
-        public override int GetHashCode()
-        {
-            var hashCode = -236086786;
-            hashCode = hashCode * -1521134295 + TypeCategory.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(DefaultValue.ToVhdl());
-            return hashCode;
-        }
+        public override int GetHashCode() => (Name + TypeCategory.ToString()).GetHashCode();
+
 
         public static bool operator ==(DataType a, DataType b)
         {

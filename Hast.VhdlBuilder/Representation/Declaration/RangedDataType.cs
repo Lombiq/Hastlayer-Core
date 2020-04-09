@@ -26,7 +26,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override DataType ToReference() => this;
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => 
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Name + " range " + RangeMin + " to " + RangeMax;
 
         public override bool Equals(object obj)
@@ -36,12 +36,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return base.Equals(obj) && RangeMin == otherType.RangeMin && RangeMin == otherType.RangeMax;
         }
 
-        public override int GetHashCode()
-        {
-            var hashCode = 1191414666;
-            hashCode = hashCode * -1521134295 + RangeMin.GetHashCode();
-            hashCode = hashCode * -1521134295 + RangeMax.GetHashCode();
-            return hashCode;
-        }
+        public override int GetHashCode() => (Name + TypeCategory.ToString() + RangeMin + RangeMax).GetHashCode();
     }
 }
