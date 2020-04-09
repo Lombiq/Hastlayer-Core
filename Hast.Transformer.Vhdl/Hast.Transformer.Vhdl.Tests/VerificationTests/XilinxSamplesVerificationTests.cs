@@ -41,7 +41,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             (await CreateSourceForAdvancedPosit32Sample()).ShouldMatchApprovedWithVhdlConfiguration();
         }
 
-        [Test]
+        [Fact]
         public async Task Posit32SampleWithInliningMatchesApproved()
         {
             (await CreateVhdlForPosit32SampleWithInlining()).ShouldMatchApprovedWithVhdlConfiguration();

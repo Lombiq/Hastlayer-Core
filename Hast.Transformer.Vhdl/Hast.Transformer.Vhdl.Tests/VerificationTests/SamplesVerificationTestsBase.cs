@@ -202,8 +202,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             });
 
         protected Task<VhdlHardwareDescription> CreateSourceForAdvancedPosit32Sample() =>
-            _host.RunGet(wc => TransformAssembliesToVhdl(
-                wc.Resolve<ITransformer>(),
+            Host.RunGetAsync(async provider => await TransformAssembliesToVhdl(
+                provider.GetService<ITransformer>(),
                 new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
                 configuration =>
                 {
