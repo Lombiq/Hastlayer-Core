@@ -360,8 +360,8 @@ namespace Hast.Remote.Worker
 
             _hastlayer.Dispose();
             _hastlayer = null;
-            _oldResultBlobsCleanerTimer.Stop();
-            _oldResultBlobsCleanerTimer.Dispose();
+            _oldResultBlobsCleanerTimer?.Stop();
+            _oldResultBlobsCleanerTimer?.Dispose();
             _transformationTasks.Clear();
         }
 

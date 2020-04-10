@@ -10,12 +10,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Update="ApplicationInsights.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj" />
     <ProjectReference Include="..\..\Hast.Remote.Bridge\Hast.Remote.Bridge.csproj" />
@@ -26,22 +20,10 @@
     <ProjectReference Include="..\Hast.Xilinx\Hast.Xilinx.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.ApplicationInsights.DependencyCollector">
-      <Version>2.13.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.ApplicationInsights.Log4NetAppender">
-      <Version>2.13.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.ApplicationInsights.PerfCounterCollector">
-      <Version>2.13.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel">
-      <Version>2.13.1</Version>
-    </PackageReference>
+    <PackageReference Include="Microsoft.ApplicationInsights.Log4NetAppender" Version="2.13.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.13.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="WindowsAzure.Storage">
-      <Version>9.3.3</Version>
-    </PackageReference>
+    <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
   </ItemGroup>
 </Project>
