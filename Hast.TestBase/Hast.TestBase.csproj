@@ -10,7 +10,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
+    <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj" />
+    <ProjectReference Include="..\Hast.TestInputs.ClassStructure1\Hast.TestInputs.ClassStructure1.csproj" />
+    <ProjectReference Include="..\Hast.TestInputs.ClassStructure2\Hast.TestInputs.ClassStructure2.csproj" />
+    <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj" />
+    <ProjectReference Include="..\Hast.Xilinx\Hast.Xilinx.csproj" />
   </ItemGroup>
 
 </Project>

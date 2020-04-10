@@ -14,30 +14,17 @@
     <Content Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Catapult.Abstractions\Hast.Catapult.Abstractions.csproj" />
-    <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj" />
-    <ProjectReference Include="..\..\..\Hast.Layer\Hast.Layer.csproj" />
-    <ProjectReference Include="..\..\..\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
-    <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />
-    <ProjectReference Include="..\..\..\Hast.Algorithms\Hast.Algorithms.csproj" />
     <ProjectReference Include="..\..\..\Samples\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj" />
     <ProjectReference Include="..\..\..\Samples\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj" />
+    <ProjectReference Include="..\..\..\Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />
     <ProjectReference Include="..\..\Hast.Catapult\Hast.Catapult.csproj" />
-    <ProjectReference Include="..\..\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\..\Hast.TestBase\Hast.TestBase.csproj" />
-    <ProjectReference Include="..\..\Hast.TestInputs.ClassStructure1\Hast.TestInputs.ClassStructure1.csproj" />
-    <ProjectReference Include="..\..\Hast.TestInputs.ClassStructure2\Hast.TestInputs.ClassStructure2.csproj" />
     <ProjectReference Include="..\..\Hast.TestInputs.Dynamic\Hast.TestInputs.Dynamic.csproj" />
     <ProjectReference Include="..\..\Hast.TestInputs.Invalid\Hast.TestInputs.Invalid.csproj" />
     <ProjectReference Include="..\..\Hast.TestInputs.Static\Hast.TestInputs.Static.csproj" />
-    <ProjectReference Include="..\..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj" />
-    <ProjectReference Include="..\..\..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\..\Hast.Transformer\Hast.Transformer.csproj" />
-    <ProjectReference Include="..\..\..\Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />
-    <ProjectReference Include="..\..\Hast.Xilinx\Hast.Xilinx.csproj" />
-    <ProjectReference Include="..\Hast.Transformer.Vhdl.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\SharedAssemblyInfo.cs">
