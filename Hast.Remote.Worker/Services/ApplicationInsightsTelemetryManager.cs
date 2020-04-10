@@ -1,4 +1,5 @@
 ﻿using Hast.Common.Interfaces;
+using Hast.Layer;
 using log4net;
 using log4net.Layout;
 using log4net.Repository.Hierarchy;
@@ -91,12 +92,13 @@ namespace Hast.Remote.Worker.Services
 
         public static void InitializeService(IServiceCollection services)
         {
-            var key = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY") ??
+            var key = Hastlayer.BuildConfiguration().GetSection("ApplicationInsights").GetSection("InstrumentationKey").Value ??
+                Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY") ??
                 Environment.GetEnvironmentVariable("ApplicationInsights:InstrumentationKey");
             if (string.IsNullOrEmpty(key))
             {
-                throw new Exception("Please set up the instrumentation key via environment variable, see " +
-                    "APPINSIGHTS_INSTRUMENTATIONKEY part here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core");
+                throw new Exception("Please set up the instrumentation key via appsettings.json or environment " +
+                    "variable, see APPINSIGHTS_INSTRUMENTATIONKEY part here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core");
             }
             var options = new ApplicationInsightsServiceOptions
             {
