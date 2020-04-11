@@ -12,7 +12,7 @@ namespace Hast.Remote.Worker.Console
         {
             Task.Run(async () =>
             {
-                var host = (Hastlayer)Hastlayer.Create();
+                using var host = (Hastlayer)Hastlayer.Create();
                 await host.RunAsync<ITransformationWorker>(worker =>
                 {
                     var configuration = new TransformationWorkerConfiguration
