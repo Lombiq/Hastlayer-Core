@@ -29,6 +29,7 @@ namespace Hast.Remote.Worker.Services
         private readonly ILogger<ApplicationInsightsTelemetryManager> _logger;
         private readonly TelemetryClient _telemetryClient;
 
+
         public ApplicationInsightsTelemetryManager(
             ILogger<ApplicationInsightsTelemetryManager> logger,
             TelemetryConfiguration telemetryConfiguration,
@@ -41,6 +42,7 @@ namespace Hast.Remote.Worker.Services
             _logger = logger;
             _telemetryClient = telemetryClient;
         }
+
 
         public void Setup()
         {
