@@ -15,8 +15,8 @@ using Microsoft.ApplicationInsights.WorkerService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.ApplicationInsights;
-using Microsoft.Extensions.Options;
 using System;
+using System.Linq;
 using System.Reflection;
 
 namespace Hast.Remote.Worker.Services
@@ -115,7 +115,13 @@ namespace Hast.Remote.Worker.Services
             services.AddApplicationInsightsTelemetryProcessor<QuickPulseTelemetryProcessor>();
             services.AddApplicationInsightsTelemetryProcessor<AutocollectedMetricsExtractor>();
             services.AddApplicationInsightsTelemetryProcessor<AdaptiveSamplingTelemetryProcessor>();
-            services.ConfigureTelemetryModule<QuickPulseTelemetryModule>((m, o) => { });
+            services.ConfigureTelemetryModule<QuickPulseTelemetryModule>((module, o) => { });
+
+            // Dependency tracking is disabled as it's not useful (only records blob storage operations) but causes
+            // excessive AI usage.
+            var dependencyTrackingTelemetryModule = services
+                .FirstOrDefault(t => t.ImplementationType == typeof(DependencyTrackingTelemetryModule));
+            if (dependencyTrackingTelemetryModule != null) services.Remove(dependencyTrackingTelemetryModule);
         }
     }
 }

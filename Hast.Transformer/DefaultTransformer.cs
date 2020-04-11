@@ -131,20 +131,6 @@ namespace Hast.Transformer
             _optionalParameterFiller = optionalParameterFiller;
         }
 
-
-        private void WriteSyntaxTree(SyntaxTree syntaxTree, string fileName)
-        {
-            while (true)
-            {
-                try
-                {
-                    File.WriteAllText(fileName, syntaxTree.ToString());
-                    return;
-                }
-                catch (IOException) { }
-            }
-        }
-
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
             var transformerConfiguration = configuration.TransformerConfiguration();
@@ -406,6 +392,19 @@ namespace Hast.Transformer
             }
 
             return _engine.Transform(context);
+        }
+
+        private void WriteSyntaxTree(SyntaxTree syntaxTree, string fileName)
+        {
+            while (true)
+            {
+                try
+                {
+                    File.WriteAllText(fileName, syntaxTree.ToString());
+                    return;
+                }
+                catch (IOException) { }
+            }
         }
     }
 }
