@@ -375,7 +375,7 @@ begin
                         -- input = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \FSharpParallelAlgorithmContainer+FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \FSharpParallelAlgorithmContainer+FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \FSharpParallelAlgorithmContainer+FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \FSharpParallelAlgorithmContainer+FSharpParallelAlgorithm::Run(SimpleMemory).0._State\ := \FSharpParallelAlgorithmContainer+FSharpParallelAlgorithm::Run(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -520,7 +520,7 @@ begin
                         -- memory.WriteInt32 (0, num2);
                         -- 
                         -- Begin SimpleMemory write.
-                        \FSharpParallelAlgorithmContainer+FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \FSharpParallelAlgorithmContainer+FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \FSharpParallelAlgorithmContainer+FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \FSharpParallelAlgorithmContainer+FSharpParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\FSharpParallelAlgorithmContainer+FSharpParallelAlgorithm::Run(SimpleMemory).0.num2\);
                         \FSharpParallelAlgorithmContainer+FSharpParallelAlgorithm::Run(SimpleMemory).0._State\ := \FSharpParallelAlgorithmContainer+FSharpParallelAlgorithm::Run(SimpleMemory).0._State_10\;

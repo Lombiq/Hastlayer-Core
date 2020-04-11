@@ -160,14 +160,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             void replaceIfElse(Statement branchStatement)
             {
                 // Moving all statements from the block up.
-                if (branchStatement is BlockStatement)
+                if (branchStatement is BlockStatement branchBlock)
                 {
-                    foreach (var statement in branchStatement.Children)
+                    foreach (var statement in branchBlock.Statements)
                     {
-                        var clone = statement.Clone();
+                        var clone = statement.Clone<Statement>();
                         // There should be at most a single return statement in this block.
                         if (clone is ReturnStatement returnStatement) replacingReturnStatement = returnStatement;
-                        AstInsertionHelper.InsertStatementBefore(ifElseStatement, (Statement)clone);
+                        AstInsertionHelper.InsertStatementBefore(ifElseStatement, clone);
                     }
                 }
                 else

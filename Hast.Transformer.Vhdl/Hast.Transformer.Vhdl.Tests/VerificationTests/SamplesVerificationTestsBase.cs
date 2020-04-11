@@ -26,54 +26,58 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
         protected Task<VhdlHardwareDescription> CreateSourceForBasicSamples() =>
             Host.RunGetAsync(wc => TransformAssembliesToVhdl(
-                    wc.GetService<ITransformer>(),
-                    new[] { typeof(PrimeCalculator).Assembly, typeof(RandomMwc64X).Assembly },
-                    configuration =>
-                    {
-                        // Only testing well-tested samples.
+                wc.GetService<ITransformer>(),
+                new[] { typeof(PrimeCalculator).Assembly, typeof(RandomMwc64X).Assembly },
+                configuration =>
+                {
+                    // Only testing well-tested samples.
 
-                        var transformerConfiguration = configuration.TransformerConfiguration();
+                    var transformerConfiguration = configuration.TransformerConfiguration();
 
 
-                        // Not configuring MaxDegreeOfParallelism for ImageContrastModifier to also test the logic that
-                        // can figure it out.
-                        configuration.AddHardwareEntryPointType<ImageContrastModifier>();
+                    configuration.AddHardwareEntryPointType<GenomeMatcher>();
 
-                        configuration.AddHardwareEntryPointType<Loopback>();
+                    // Not configuring MaxDegreeOfParallelism for ImageContrastModifier to also test the logic that
+                    // can figure it out.
+                    configuration.AddHardwareEntryPointType<ImageContrastModifier>();
 
-                        configuration.AddHardwareEntryPointType<MonteCarloPiEstimator>();
-                        transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<MonteCarloPiEstimator>(m => m.EstimatePi(null), 0)
-                            {
-                                MaxDegreeOfParallelism = 3 // Using a smaller degree because we don't need excess repetition.
-                            });
-                        configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomXorshiftLfsr16>(p => p.NextUInt16());
+                    configuration.AddHardwareEntryPointType<Loopback>();
 
-                        configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
+                    configuration.AddHardwareEntryPointType<MemoryTest>();
 
-                        configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
-                        transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
-                            {
-                                MaxDegreeOfParallelism = 3
-                            });
+                    configuration.AddHardwareEntryPointType<MonteCarloPiEstimator>();
+                    transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
+                        new MemberInvocationInstanceCountConfigurationForMethod<MonteCarloPiEstimator>(m => m.EstimatePi(null), 0)
+                        {
+                            MaxDegreeOfParallelism = 3 // Using a smaller degree because we don't need excess repetition.
+                        });
+                    configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomXorshiftLfsr16>(p => p.NextUInt16());
 
-                        configuration.AddHardwareEntryPointType<PrimeCalculator>();
-                        transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<PrimeCalculator>(p => p.ParallelizedArePrimeNumbers(default(Transformer.Abstractions.SimpleMemory.SimpleMemory)), 0)
-                            {
-                                MaxDegreeOfParallelism = 3
-                            });
+                    configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
 
-                        configuration.AddHardwareEntryPointType<RecursiveAlgorithms>();
-                        transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<RecursiveAlgorithms>("Recursively")
-                            {
-                                MaxRecursionDepth = 3
-                            });
+                    configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
+                    transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
+                        new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
+                        {
+                            MaxDegreeOfParallelism = 3
+                        });
 
-                        configuration.AddHardwareEntryPointType<SimdCalculator>();
-                    }));
+                    configuration.AddHardwareEntryPointType<PrimeCalculator>();
+                    transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
+                        new MemberInvocationInstanceCountConfigurationForMethod<PrimeCalculator>(p => p.ParallelizedArePrimeNumbers(default(Transformer.Abstractions.SimpleMemory.SimpleMemory)), 0)
+                        {
+                            MaxDegreeOfParallelism = 3
+                        });
+
+                    configuration.AddHardwareEntryPointType<RecursiveAlgorithms>();
+                    transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
+                        new MemberInvocationInstanceCountConfigurationForMethod<RecursiveAlgorithms>("Recursively")
+                        {
+                            MaxRecursionDepth = 3
+                        });
+
+                    configuration.AddHardwareEntryPointType<SimdCalculator>();
+                }));
 
         protected async Task<string> CreateVhdlForKpzSamples()
         {
@@ -196,6 +200,16 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                 return hardwareDescription.VhdlSource;
             });
+
+        protected Task<VhdlHardwareDescription> CreateSourceForAdvancedPosit32Sample() =>
+            Host.RunGetAsync(wc => TransformAssembliesToVhdl(
+                wc.GetService<ITransformer>(),
+                new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
+                configuration =>
+                {
+                    configuration.AddHardwareEntryPointType<Posit32AdvancedCalculator>();
+                    configuration.TransformerConfiguration().EnableMethodInlining = false;
+                }));
 
         protected async Task<string> CreateVhdlForPosit32FusedSample()
         {

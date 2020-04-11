@@ -75,11 +75,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Building the chained operation from the inside out.
 
                 // a / b
-                var dividingExpression = (BinaryOperatorExpression)binaryOperatorExpression.Clone();
+                var dividingExpression = binaryOperatorExpression.Clone<BinaryOperatorExpression>();
                 dividingExpression.Operator = BinaryOperatorType.Divide;
 
                 // a / b * b
-                var multiplyingExpression = (BinaryOperatorExpression)binaryOperatorExpression.Clone();
+                var multiplyingExpression = binaryOperatorExpression.Clone<BinaryOperatorExpression>();
                 multiplyingExpression.Operator = BinaryOperatorType.Multiply;
                 multiplyingExpression.Left = dividingExpression;
 

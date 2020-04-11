@@ -47,7 +47,7 @@ namespace Hast.Transformer.Services
                         variableDeclaration);
 
                     // Then moving the conditional expression so its result is assigned to the variable.
-                    var newConditionalExpression = (ConditionalExpression)conditionalExpression.Clone();
+                    var newConditionalExpression = conditionalExpression.Clone<ConditionalExpression>();
                     assignment = new AssignmentExpression(
                         new IdentifierExpression(variableName).WithAnnotation(CreateILVariableResolveResult()),
                         newConditionalExpression);
@@ -64,12 +64,12 @@ namespace Hast.Transformer.Services
 
                 // Enclosing the assignments into BlockStatements because this is also what normal if-else statements 
                 // are decompiled into. This is also necessary to establish a variable scope.
-                var trueAssignment = (AssignmentExpression)assignment.Clone();
+                var trueAssignment = assignment.Clone<AssignmentExpression>();
                 trueAssignment.Right = conditionalExpression.TrueExpression.Clone();
                 var trueBlock = new BlockStatement();
                 trueBlock.Statements.Add(new ExpressionStatement(trueAssignment));
 
-                var falseAssignment = (AssignmentExpression)assignment.Clone();
+                var falseAssignment = assignment.Clone<AssignmentExpression>();
                 falseAssignment.Right = conditionalExpression.FalseExpression.Clone();
                 var falseBlock = new BlockStatement();
                 falseBlock.Statements.Add(new ExpressionStatement(falseAssignment));

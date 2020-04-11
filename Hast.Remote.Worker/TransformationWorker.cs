@@ -211,6 +211,7 @@ namespace Hast.Remote.Worker
 
                                             var result = new TransformationJobResult
                                             {
+                                                RemoteHastlayerVersion = GetType().Assembly.GetName().Version.ToString(),
                                                 Token = job.Token,
                                                 AppId = job.AppId
                                             };

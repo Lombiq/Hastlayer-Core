@@ -1300,7 +1300,7 @@ begin
                         -- num = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State\ := \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1420,7 +1420,7 @@ begin
                             -- memory.WriteInt32 (0, array [0]);
                             -- 
                             -- Begin SimpleMemory write.
-                            \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                            \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                             \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.array\(to_integer(to_signed(0, 32))));
                             \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State\ := \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_9\;
@@ -1440,7 +1440,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_10\ => 
                         -- Begin SimpleMemory write.
-                        \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.array\(to_integer(to_signed(1, 32))));
                         \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State\ := \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0._State_11\;
@@ -1580,7 +1580,7 @@ begin
                             -- num2 = memory.ReadInt32 (num);
                             -- 
                             -- Begin SimpleMemory read.
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num\, 32);
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num\;
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_5\;
                         else 
@@ -1687,7 +1687,7 @@ begin
                             -- memory.WriteInt32 (num4, array2 [num3].Result.Fix64Low);
                             -- 
                             -- Begin SimpleMemory write.
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num4\, 32);
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num4\;
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array2\(to_integer(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num3\)).\Fix64Low\);
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_9\;
@@ -1714,7 +1714,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_10\ => 
                         -- Begin SimpleMemory write.
-                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.4\, 32);
+                        \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.4\;
                         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array2\(to_integer(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num3\)).\Fix64High\);
                         \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_11\;

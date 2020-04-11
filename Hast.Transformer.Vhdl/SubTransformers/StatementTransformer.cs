@@ -140,8 +140,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             else if (statement is IfElseStatement ifElse)
             {
                 // If-elses are always split up into multiple states, i.e. the true and false statements branch off
-                // into separate states. This makes it simpler to track how many clock cycles something requires, 
-                // since the latency of the two branches should be tracked separately.
+                // into separate states. This makes it simpler to track how many clock cycles something requires, since
+                // the latency of the two branches should be tracked separately.
 
                 var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context) };
                 var ifElseCommentsBlock = new LogicalBlock();
@@ -301,7 +301,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
                 // Case statements, much like if-else statements need a state added in advance where all branches will
-                // will finally return to.
+                // will finally return to. All branches have their own states too.
                 var caseStartStateIndex = currentBlock.StateMachineStateIndex;
 
                 var afterCaseStateBlock = new InlineBlock(
@@ -319,20 +319,33 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             "."),
                         CreateConditionalStateChange(aftercaseStateIndex, context));
 
+                var switchExpressionType = _typeConverter
+                    .ConvertType(switchStatement.Expression.GetActualType(), context.TransformationContext);
 
                 foreach (var switchSection in switchStatement.SwitchSections)
                 {
                     var when = new CaseWhen();
                     caseStatement.Whens.Add(when);
+                    var whenBody = new InlineBlock();
+                    when.Body.Add(whenBody);
+
+                    scope.CurrentBlock.ChangeBlock(whenBody);
+                    stateMachine.AddNewStateAndChangeCurrentBlock(scope);
 
                     // If there are multiple labels for a switch section then those should be OR-ed together.
                     when.Expression = BinaryChainBuilder.BuildBinaryChain(
-                        switchSection.CaseLabels.Select(caseLabel => _expressionTransformer.Transform(caseLabel.Expression, context)),
-                        BinaryOperator.Or);
+                        switchSection.CaseLabels.Select(caseLabel =>
+                        {
+                            var caseExpressionType = _typeConverter
+                                .ConvertType(caseLabel.Expression.GetActualType(), context.TransformationContext);
 
-                    var whenBody = new InlineBlock();
-                    when.Body.Add(whenBody);
-                    currentBlock.ChangeBlock(whenBody);
+                            return _typeConversionTransformer.ImplementTypeConversion(
+                                caseExpressionType,
+                                switchExpressionType,
+                                _expressionTransformer.Transform(caseLabel.Expression, context))
+                            .ConvertedFromExpression;
+                        }),
+                        BinaryOperator.Or);
 
                     foreach (var sectionStatement in switchSection.Statements)
                     {
@@ -341,6 +354,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     currentBlock.Add(createConditionalStateChangeToAfterCaseState());
                 }
+
+                // If the AST doesn't contain cases for all possible values of the type the statement switches on then
+                // the VHDL will be incorrect. By including an "others" case every time this is solved.
+                caseStatement.Whens.Add(CaseWhen.CreateOthers());
 
 
                 currentBlock.ChangeBlockToDifferentState(afterCaseStateBlock, aftercaseStateIndex);
@@ -378,6 +395,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 scope.CurrentBlock.Add(stateMachine.CreateStateChange(labelStateIndex));
                 currentBlock.ChangeBlockToDifferentState(stateMachine.States[labelStateIndex].Body, labelStateIndex);
             }
+            else if (statement is EmptyStatement)
+            {
+                // Nothing to do.
+            }
             else throw new NotSupportedException(
                 "Statements of type " + statement.GetType() + " are not supported.".AddParentEntityName(statement));
         }
@@ -388,8 +409,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         /// </summary>
         private IVhdlElement CreateConditionalStateChange(int destinationStateIndex, ISubTransformerContext context)
         {
-            // We need an if to check whether the state was changed in the logic. If it was then that means
-            // that the subroutine was exited so we mustn't overwrite the new state.
+            // We need an if to check whether the state was changed in the logic. If it was then that means that the
+            // subroutine was exited so we mustn't overwrite the new state.
 
             var stateMachine = context.Scope.StateMachine;
 
