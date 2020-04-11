@@ -365,6 +365,7 @@ namespace Hast.Remote.Worker
             _transformationTasks.Clear();
         }
 
+
         private async Task<List<IListBlobItem>> GetBlobs(CloudBlobContainer container, string prefix)
         {
             var segment = await container.ListBlobsSegmentedAsync(prefix, null);
