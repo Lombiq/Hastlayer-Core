@@ -7,7 +7,6 @@ using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector;
 using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
 using Microsoft.ApplicationInsights.Log4NetAppender;
 using Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel;
@@ -18,6 +17,7 @@ using Microsoft.Extensions.Logging.ApplicationInsights;
 using System;
 using System.Linq;
 using System.Reflection;
+
 
 namespace Hast.Remote.Worker.Services
 {
@@ -88,9 +88,9 @@ namespace Hast.Remote.Worker.Services
 
         public static void InitializeService(IServiceCollection services)
         {
-            var key = Hastlayer.BuildConfiguration().GetSection("ApplicationInsights").GetSection("InstrumentationKey").Value ??
-                Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY") ??
-                Environment.GetEnvironmentVariable("ApplicationInsights:InstrumentationKey");
+            var configuration = Hastlayer.BuildConfiguration();
+            var key = configuration.GetSection("ApplicationInsights").GetSection("InstrumentationKey").Value ??
+                configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY").Value;
             if (string.IsNullOrEmpty(key))
             {
                 throw new Exception("Please set up the instrumentation key via appsettings.json or environment " +
