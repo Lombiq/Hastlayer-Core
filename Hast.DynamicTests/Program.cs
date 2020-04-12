@@ -5,7 +5,7 @@ namespace Hast.DynamicTests
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static async Task MainAsync()
         {
             // Uncomment this to generate the content of BinaryAndUnaryOperatorExpressionCases. 
             //TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCasesGenerator.Generate();
@@ -16,6 +16,11 @@ namespace Hast.DynamicTests
             await new BinaryAndUnaryOperatorExpressionCasesTests().ByteBinaryOperatorExpressionVariations();
             //await new CastExpressionCasesTests().AllNumberCastingVariations();
             //await new InlinedCasesTests().InlinedMultiReturn();
+        }
+
+        static void Main()
+        {
+            MainAsync().Wait();
         }
     }
 }
