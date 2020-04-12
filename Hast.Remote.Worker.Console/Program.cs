@@ -8,21 +8,18 @@ namespace Hast.Remote.Worker.Console
 {
     class Program
     {
-        static void Main()
+        static async Task Main()
         {
-            Task.Run(async () =>
+            using var host = (Hastlayer)Hastlayer.Create();
+            await host.RunAsync<ITransformationWorker>(worker =>
             {
-                using var host = (Hastlayer)Hastlayer.Create();
-                await host.RunAsync<ITransformationWorker>(worker =>
+                var configuration = new TransformationWorkerConfiguration
                 {
-                    var configuration = new TransformationWorkerConfiguration
-                    {
-                        StorageConnectionString = "UseDevelopmentStorage=true"
-                    };
+                    StorageConnectionString = "UseDevelopmentStorage=true"
+                };
 
-                    return worker.Work(configuration, CancellationToken.None);
-                });
-            }).Wait();
+                return worker.Work(configuration, CancellationToken.None);
+            });
         }
     }
 }
