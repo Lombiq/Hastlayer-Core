@@ -36,7 +36,7 @@ namespace Hast.Transformer.Vhdl.Tests
                     });
 
 
-            _hostConfiguration.OnServiceRegistration += (o, services) =>
+            _hostConfiguration.OnServiceRegistration += (configuration, services) =>
             {
                 if (UseStubMemberSuitabilityChecker)
                 {

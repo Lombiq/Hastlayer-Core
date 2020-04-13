@@ -3,10 +3,15 @@ using Hast.Layer;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure2;
 using Hast.Transformer.Abstractions;
+using Hast.Transformer.Vhdl.Models;
+using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Testing;
-using Xunit;
+using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
@@ -15,6 +20,13 @@ namespace Hast.Transformer.Vhdl.Tests
         [Fact]
         public async Task BasicHardwareDescriptionPropertiesAreCorrect()
         {
+            VhdlManifest manifest = null;
+
+            _hostConfiguration.OnServiceRegistration += (configuration, services) =>
+            {
+                services.AddSingleton(new EventHandler<ITransformedVhdlManifest>((sender, e) => manifest = e.Manifest));
+            };
+
             await Host.RunAsync<ITransformer>(async transformer =>
             {
                 var hardwareDescription = await TransformClassStrutureExamplesToVhdl(transformer);
@@ -22,30 +34,37 @@ namespace Hast.Transformer.Vhdl.Tests
                 hardwareDescription.Language.ShouldBe("VHDL");
                 hardwareDescription.HardwareEntryPointNamesToMemberIdMappings.Count.ShouldBe(14);
                 hardwareDescription.VhdlSource.ShouldNotBeNullOrEmpty();
-                //hardwareDescription.VhdlManifestIfFresh.ShouldNotBeNull(); // Since caching is off.
+                manifest.ShouldNotBeNull(); // Since caching is off.
             });
         }
 
         [Fact]
         public async Task BasicVhdlStructureIsCorrect()
         {
-            await Task.FromResult(true);
-            //await Host.RunAsync<ITransformer>(async transformer =>
-            //{
-            //    var topModule = (Module)(await TransformClassStrutureExamplesToVhdl(transformer)).VhdlManifestIfFresh.Modules.Last();
+            VhdlManifest manifest = null;
 
-            //    var architecture = topModule.Architecture;
-            //    architecture.Name.ShouldNotBeNullOrEmpty();
-            //    architecture.Declarations.ShouldRecursivelyContain(element => element is Signal);
-            //    architecture.Body.ShouldRecursivelyContain<Process>(p => p.Name.Contains("ExternalInvocationProxy"));
+            _hostConfiguration.OnServiceRegistration += (configuration, services) =>
+            {
+                services.AddSingleton(new EventHandler<ITransformedVhdlManifest>((sender, e) => manifest = e.Manifest));
+            };
 
-            //    var entity = topModule.Entity;
-            //    entity.Name.ShouldNotBeNullOrEmpty();
-            //    entity.Ports.Count.ShouldBe(5);
-            //    entity.ShouldBe(topModule.Architecture.Entity, "The top module's entity is not referenced by the architecture.");
+            await Host.RunAsync<ITransformer>(async transformer =>
+            {
+                await TransformClassStrutureExamplesToVhdl(transformer);
+                var topModule = (Module)manifest.Modules.Last();
 
-            //    topModule.Libraries.Any().ShouldBeTrue();
-            //});
+                var architecture = topModule.Architecture;
+                architecture.Name.ShouldNotBeNullOrEmpty();
+                architecture.Declarations.ShouldRecursivelyContain(element => element is Signal);
+                architecture.Body.ShouldRecursivelyContain<Process>(p => p.Name.Contains("ExternalInvocationProxy"));
+
+                var entity = topModule.Entity;
+                entity.Name.ShouldNotBeNullOrEmpty();
+                entity.Ports.Count.ShouldBe(5);
+                entity.ShouldBe(topModule.Architecture.Entity, "The top module's entity is not referenced by the architecture.");
+
+                topModule.Libraries.Any().ShouldBeTrue();
+            });
         }
 
 
