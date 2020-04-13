@@ -1,6 +1,8 @@
 ﻿using Hast.Common.Models;
 using Shouldly;
 using Shouldly.Configuration;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
@@ -8,14 +10,25 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
     public static class ShouldMatchApprovedExtensions
     {
         /// <summary>
-        /// Match the input VHDL hardware description's source against an existing approved source file. This quickly 
-        /// tells if something changed.
+        /// Match the input VHDL hardware description's source, including the XDC constraints if available, against an
+        /// existing approved source file. This quickly tells if something changed.
         /// </summary>
         /// <remarks>
         /// Also see: http://shouldly.readthedocs.io/en/latest/assertions/shouldMatchApproved.html
         /// </remarks>
         public static void ShouldMatchApprovedWithVhdlConfiguration(this VhdlHardwareDescription hardwareDescription) =>
             (hardwareDescription.VhdlSource + hardwareDescription.XdcSource)
+                .ShouldMatchApproved(configurationBuilder => configurationBuilder.WithVhdlConfiguration().UseCallerLocation());
+
+        /// <summary>
+        /// Match the input VHDL hardware descriptions' sources, including the XDC constraints if available, against an
+        /// existing approved source file. This quickly tells if something changed.
+        /// </summary>
+        /// <remarks>
+        /// Also see: http://shouldly.readthedocs.io/en/latest/assertions/shouldMatchApproved.html
+        /// </remarks>
+        public static void ShouldMatchApprovedWithVhdlConfiguration(this IEnumerable<VhdlHardwareDescription> hardwareDescriptions) =>
+            (string.Join(string.Empty, hardwareDescriptions.Select(hardwareDescription => hardwareDescription.VhdlSource + hardwareDescription.XdcSource)))
                 .ShouldMatchApproved(configurationBuilder => configurationBuilder.WithVhdlConfiguration().UseCallerLocation());
 
         /// <summary>

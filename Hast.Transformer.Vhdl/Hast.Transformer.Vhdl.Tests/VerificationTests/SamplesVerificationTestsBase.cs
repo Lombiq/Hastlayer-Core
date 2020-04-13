@@ -79,11 +79,11 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.AddHardwareEntryPointType<SimdCalculator>();
                 }));
 
-        protected async Task<string> CreateVhdlForKpzSamples()
+        protected async Task<VhdlHardwareDescription[]> CreateVhdlForKpzSamples()
         {
-            var notInlinedSource = await Host.RunGetAsync(async provider =>
+            return new[]
             {
-                var hardwareDescription = await TransformAssembliesToVhdl(
+                await Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                     provider.GetService<ITransformer>(),
                     new[] { typeof(KpzKernelsInterface).Assembly, typeof(RandomMwc64X).Assembly },
                     configuration =>
@@ -96,14 +96,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             {
                                 MaxDegreeOfParallelism = 3
                             });
-                    });
-
-                return hardwareDescription.VhdlSource;
-            });
-
-            var inlinedSource = await Host.RunGetAsync(async provider =>
-            {
-                var hardwareDescription = await TransformAssembliesToVhdl(
+                    })),
+                await Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                     provider.GetService<ITransformer>(),
                     new[] { typeof(KpzKernelsInterface).Assembly, typeof(RandomMwc64X).Assembly },
                     configuration =>
@@ -117,89 +111,65 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                                 MaxDegreeOfParallelism = 3
                             });
                         configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomMwc64X>(r => r.NextUInt32());
-                    });
-
-                return hardwareDescription.VhdlSource;
-            });
-
-            return notInlinedSource + inlinedSource;
+                    }))
+            };
         }
 
-        protected Task<string> CreateVhdlForUnumSample() =>
-            Host.RunGetAsync(async provider =>
-            {
-                var hardwareDescription = await TransformAssembliesToVhdl(
-                    provider.GetService<ITransformer>(),
-                    new[] { typeof(PrimeCalculator).Assembly, typeof(Unum).Assembly, typeof(ImmutableArray).Assembly },
-                    configuration =>
-                    {
-                        configuration.AddHardwareEntryPointType<UnumCalculator>();
+        protected Task<VhdlHardwareDescription> CreateVhdlForUnumSample() =>
+            Host.RunGetAsync(provider => TransformAssembliesToVhdl(
+                provider.GetService<ITransformer>(),
+                new[] { typeof(PrimeCalculator).Assembly, typeof(Unum).Assembly, typeof(ImmutableArray).Assembly },
+                configuration =>
+                {
+                    configuration.AddHardwareEntryPointType<UnumCalculator>();
 
-                        configuration.TransformerConfiguration().AddLengthForMultipleArrays(
-                            UnumCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
-                            UnumCalculatorExtensions.ManuallySizedArrays);
-                    });
+                    configuration.TransformerConfiguration().AddLengthForMultipleArrays(
+                        UnumCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
+                        UnumCalculatorExtensions.ManuallySizedArrays);
+                }));
 
-                return hardwareDescription.VhdlSource;
-            });
+        protected Task<VhdlHardwareDescription> CreateVhdlForPositSample() =>
+            Host.RunGetAsync(provider => TransformAssembliesToVhdl(
+                provider.GetService<ITransformer>(),
+                new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly, typeof(ImmutableArray).Assembly },
+                configuration =>
+                {
+                    configuration.AddHardwareEntryPointType<PositCalculator>();
+                    configuration.TransformerConfiguration().AddLengthForMultipleArrays(
+                        PositCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
+                        PositCalculatorExtensions.ManuallySizedArrays);
+                }));
 
-        protected Task<string> CreateVhdlForPositSample() =>
-            Host.RunGetAsync(async provider =>
-            {
-                var hardwareDescription = await TransformAssembliesToVhdl(
-                    provider.GetService<ITransformer>(),
-                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly, typeof(ImmutableArray).Assembly },
-                    configuration =>
-                    {
-                        configuration.AddHardwareEntryPointType<PositCalculator>();
-                        configuration.TransformerConfiguration().AddLengthForMultipleArrays(
-                            PositCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
-                            PositCalculatorExtensions.ManuallySizedArrays);
-                    });
+        protected Task<VhdlHardwareDescription> CreateVhdlForPosit32Sample() =>
+            Host.RunGetAsync(provider => TransformAssembliesToVhdl(
+                provider.GetService<ITransformer>(),
+                new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
+                configuration =>
+                {
+                    configuration.AddHardwareEntryPointType<Posit32Calculator>();
+                    configuration.TransformerConfiguration().EnableMethodInlining = false;
 
-                return hardwareDescription.VhdlSource;
-            });
+                    configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                        new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
+                        {
+                            MaxDegreeOfParallelism = 3
+                        });
+                }));
 
-        protected Task<string> CreateVhdlForPosit32Sample() =>
-            Host.RunGetAsync(async provider =>
-            {
-                var hardwareDescription = await TransformAssembliesToVhdl(
-                    provider.GetService<ITransformer>(),
-                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
-                    configuration =>
-                    {
-                        configuration.AddHardwareEntryPointType<Posit32Calculator>();
-                        configuration.TransformerConfiguration().EnableMethodInlining = false;
+        protected Task<VhdlHardwareDescription> CreateVhdlForPosit32SampleWithInlining() =>
+            Host.RunGetAsync(provider => TransformAssembliesToVhdl(
+                provider.GetService<ITransformer>(),
+                new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
+                configuration =>
+                {
+                    configuration.AddHardwareEntryPointType<Posit32Calculator>();
 
-                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
-                            {
-                                MaxDegreeOfParallelism = 3
-                            });
-                    });
-
-                return hardwareDescription.VhdlSource;
-            });
-
-        protected Task<string> CreateVhdlForPosit32SampleWithInlining() =>
-            Host.RunGetAsync(async provider =>
-            {
-                var hardwareDescription = await TransformAssembliesToVhdl(
-                    provider.GetService<ITransformer>(),
-                    new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
-                    configuration =>
-                    {
-                        configuration.AddHardwareEntryPointType<Posit32Calculator>();
-
-                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
-                            {
-                                MaxDegreeOfParallelism = 3
-                            });
-                    });
-
-                return hardwareDescription.VhdlSource;
-            });
+                    configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                        new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
+                        {
+                            MaxDegreeOfParallelism = 3
+                        });
+                }));
 
         protected Task<VhdlHardwareDescription> CreateSourceForAdvancedPosit32Sample() =>
             Host.RunGetAsync(async provider => await TransformAssembliesToVhdl(
@@ -211,11 +181,11 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.TransformerConfiguration().EnableMethodInlining = false;
                 }));
 
-        protected async Task<string> CreateVhdlForPosit32FusedSample()
+        protected async Task<VhdlHardwareDescription[]> CreateVhdlForPosit32FusedSample()
         {
-            var notInlinedSource = await Host.RunGetAsync(async provider =>
+            return new[]
             {
-                var hardwareDescription = await TransformAssembliesToVhdl(
+                await Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                     provider.GetService<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
                     configuration =>
@@ -225,14 +195,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         configuration.TransformerConfiguration().AddLengthForMultipleArrays(
                             Posit32.QuireSize >> 6,
                             Posit32FusedCalculatorExtensions.ManuallySizedArrays);
-                    });
-
-                return hardwareDescription.VhdlSource;
-            });
-
-            var inlinedSource = await Host.RunGetAsync(async provider =>
-            {
-                var hardwareDescription = await TransformAssembliesToVhdl(
+                    })),
+                await Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                     provider.GetService<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
                     configuration =>
@@ -241,52 +205,38 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         configuration.TransformerConfiguration().AddLengthForMultipleArrays(
                             Posit32.QuireSize >> 6,
                             Posit32FusedCalculatorExtensions.ManuallySizedArrays);
-                    });
-
-                return hardwareDescription.VhdlSource;
-            });
-
-            return notInlinedSource + inlinedSource;
+                    }))
+            };
         }
 
-        protected Task<string> CreateVhdlForFix64Samples() =>
-            Host.RunGetAsync(async provider =>
-            {
-                var hardwareDescription = await TransformAssembliesToVhdl(
-                    provider.GetService<ITransformer>(),
-                    new[] { typeof(PrimeCalculator).Assembly, typeof(Fix64).Assembly },
-                    configuration =>
-                    {
-                        configuration.AddHardwareEntryPointType<Fix64Calculator>();
+        protected Task<VhdlHardwareDescription> CreateVhdlForFix64Samples() =>
+            Host.RunGetAsync(provider => TransformAssembliesToVhdl(
+                provider.GetService<ITransformer>(),
+                new[] { typeof(PrimeCalculator).Assembly, typeof(Fix64).Assembly },
+                configuration =>
+                {
+                    configuration.AddHardwareEntryPointType<Fix64Calculator>();
 
-                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(f => f.ParallelizedCalculateIntegerSumUpToNumbers(default(Transformer.Abstractions.SimpleMemory.SimpleMemory)), 0)
-                            {
-                                MaxDegreeOfParallelism = 3
-                            });
-                    });
+                    configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                        new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(f => f.ParallelizedCalculateIntegerSumUpToNumbers(default(Transformer.Abstractions.SimpleMemory.SimpleMemory)), 0)
+                        {
+                            MaxDegreeOfParallelism = 3
+                        });
+                }));
 
-                return hardwareDescription.VhdlSource;
-            });
+        protected Task<VhdlHardwareDescription> CreateVhdlForFSharpSamples() =>
+            Host.RunGetAsync(provider => TransformAssembliesToVhdl(
+                provider.GetService<ITransformer>(),
+                new[] { typeof(FSharpParallelAlgorithmContainer).Assembly },
+                configuration =>
+                {
+                    configuration.AddHardwareEntryPointType<FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm>();
 
-        protected Task<string> CreateVhdlForFSharpSamples() =>
-            Host.RunGetAsync(async provider =>
-            {
-                var hardwareDescription = await TransformAssembliesToVhdl(
-                    provider.GetService<ITransformer>(),
-                    new[] { typeof(FSharpParallelAlgorithmContainer).Assembly },
-                    configuration =>
-                    {
-                        configuration.AddHardwareEntryPointType<FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm>();
-
-                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm>(f => f.Run(null), 0)
-                            {
-                                MaxDegreeOfParallelism = 3
-                            });
-                    });
-
-                return hardwareDescription.VhdlSource;
-            });
+                    configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                        new MemberInvocationInstanceCountConfigurationForMethod<FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm>(f => f.Run(null), 0)
+                        {
+                            MaxDegreeOfParallelism = 3
+                        });
+                }));
     }
 }
