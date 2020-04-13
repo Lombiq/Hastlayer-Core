@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Remote.Worker
 {
-    public class TransformationWorker : ITransformationWorker, IDisposable
+    public sealed class TransformationWorker : ITransformationWorker, IDisposable
     {
         private readonly IJsonConverter _jsonConverter;
         private readonly IAppDataFolder _appDataFolder;
