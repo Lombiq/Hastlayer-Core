@@ -1,47 +1,25 @@
 ﻿using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
-using Lombiq.OrchardAppHost;
-using Lombiq.OrchardAppHost.Configuration;
 
 namespace Hast.Remote.Worker.Console
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main()
         {
-            Task.Run(async () =>
+            using var host = (Hastlayer)Hastlayer.Create();
+            await host.RunAsync<ITransformationWorker>(worker =>
             {
-                var settings = new AppHostSettings
+                var configuration = new TransformationWorkerConfiguration
                 {
-                    ImportedExtensions = new[] { typeof(Program).Assembly, typeof(ITransformationWorker).Assembly },
-                    DefaultShellFeatureStates = new[]
-                    {
-                            new DefaultShellFeatureState
-                            {
-                                EnabledFeatures = new[]
-                                {
-                                    typeof(Program).Assembly.ShortName(),
-                                    typeof(ITransformationWorker).Assembly.ShortName()
-                                }
-                            }
-                    }
+                    StorageConnectionString = "UseDevelopmentStorage=true"
                 };
 
-                using (var host = await OrchardAppHostFactory.StartTransientHost(settings, null, null))
-                {
-                    await host.Run<ITransformationWorker>(worker =>
-                    {
-                        var configuration = new TransformationWorkerConfiguration
-                        {
-                            StorageConnectionString = "UseDevelopmentStorage=true"
-                        };
-
-                        return worker.Work(configuration, CancellationToken.None);
-                    });
-                }
-            }).Wait();
+                return worker.Work(configuration, CancellationToken.None);
+            });
         }
     }
 }

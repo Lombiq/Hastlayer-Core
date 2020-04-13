@@ -1,4 +1,5 @@
 ﻿using Hast.Catapult;
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Remote.Worker.Configuration;
@@ -7,12 +8,10 @@ using Hast.Synthesis.Services;
 using Hast.Transformer;
 using Hast.Transformer.Vhdl.Services;
 using Hast.Xilinx;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
-using Orchard.Exceptions;
-using Orchard.FileSystems.AppData;
-using Orchard.Logging;
-using Orchard.Services;
+using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.Blob;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -34,7 +33,7 @@ namespace Hast.Remote.Worker
 
         private IHastlayer _hastlayer;
         private CloudBlobContainer _container;
-        private ConcurrentDictionary<string, Task> _transformationTasks = new ConcurrentDictionary<string, Task>();
+        private readonly ConcurrentDictionary<string, Task> _transformationTasks = new ConcurrentDictionary<string, Task>();
         private int _restartCount = 0;
         private System.Timers.Timer _oldResultBlobsCleanerTimer;
 
@@ -76,7 +75,7 @@ namespace Hast.Remote.Worker
                             typeof(CatapultDriver).Assembly
                         }
                     };
-                    _hastlayer = await Hastlayer.Create(hastlayerConfiguration);
+                    _hastlayer = Hastlayer.Create(hastlayerConfiguration);
 
                     cancellationToken.ThrowIfCancellationRequested();
 
@@ -94,8 +93,7 @@ namespace Hast.Remote.Worker
                         {
                             // Removing those result blobs that weren't deleted somehow (like the client exited while
                             // waiting for the result to appear, thus never requesting it hence it never getting deleted).
-                            var oldResultBlobs = _container
-                                .ListBlobs("results/")
+                            var oldResultBlobs = (await GetBlobs(_container, "results/"))
                                 .Cast<CloudBlockBlob>()
                                 .Where(blob => blob.Properties.LastModified < _clock.UtcNow.AddHours(-1));
 
@@ -107,7 +105,7 @@ namespace Hast.Remote.Worker
                         catch (Exception ex) when (!ex.IsFatal())
                         {
                             // If an exception escapes here it'll take down the whole process, so need to handle them.
-                            Logger.Error(ex, "Error during cleaning up old result blobs.");
+                            Logger.LogError(ex, "Error during cleaning up old result blobs.");
                         }
                     };
                     _oldResultBlobsCleanerTimer.Enabled = true;
@@ -119,8 +117,7 @@ namespace Hast.Remote.Worker
 
                 while (true)
                 {
-                    var jobBlobs = _container
-                        .ListBlobs("jobs/")
+                    var jobBlobs = (await GetBlobs(_container, "jobs/"))
                         .Where(blob => !blob.StorageUri.PrimaryUri.ToString().Contains("$$$ORCHARD$$$.$$$"))
                         .Cast<CloudBlockBlob>()
                         .Where(blob => blob.Properties.LeaseStatus == LeaseStatus.Unlocked && blob.Properties.Length != 0);
@@ -170,7 +167,7 @@ namespace Hast.Remote.Worker
                                     {
                                         TransformationJob job;
 
-                                        using (var stream = await blob.OpenReadAsync(cancellationToken))
+                                        using (var stream = await blob.OpenReadAsync(null, null, null, cancellationToken))
                                         using (var streamReader = new StreamReader(stream))
                                         {
                                             job = _jsonConverter
@@ -192,11 +189,9 @@ namespace Hast.Remote.Worker
 
                                                 assemblyPaths.Add(_appDataFolder.MapPath(path));
 
-                                                using (var memoryStream = new MemoryStream(assembly.FileContent))
-                                                using (var fileStream = _appDataFolder.CreateFile(path))
-                                                {
+                                                using (MemoryStream memoryStream = new MemoryStream(assembly.FileContent))
+                                                using (FileStream fileStream = _appDataFolder.CreateFile(path))
                                                     await memoryStream.CopyToAsync(fileStream);
-                                                }
                                             }
 
                                             cancellationToken.ThrowIfCancellationRequested();
@@ -254,7 +249,7 @@ namespace Hast.Remote.Worker
 
                                             var resultBlob = _container.GetBlockBlobReference("results/" + job.Token);
 
-                                            using (var blobStream = await resultBlob.OpenWriteAsync(cancellationToken))
+                                            using (var blobStream = await resultBlob.OpenWriteAsync(null, null, null, cancellationToken))
                                             using (var streamWriter = new StreamWriter(blobStream))
                                             {
                                                 await streamWriter.WriteAsync(_jsonConverter.Serialize(result));
@@ -310,7 +305,7 @@ namespace Hast.Remote.Worker
                             }
                             catch (Exception ex) when (!ex.IsFatal())
                             {
-                                Logger.Error(ex, "Processing the job blob {0} failed.", blob.Name);
+                                Logger.LogError(ex, "Processing the job blob {0} failed.", blob.Name);
                             }
 
                             telemetry.FinishTimeUtc = _clock.UtcNow;
@@ -339,7 +334,7 @@ namespace Hast.Remote.Worker
             {
                 if (_restartCount < 100)
                 {
-                    Logger.Error(ex, "Transformation Worker crashed with an unhandled exception. Restarting...");
+                    Logger.LogError(ex, "Transformation Worker crashed with an unhandled exception. Restarting...");
 
                     Dispose();
                     _restartCount++;
@@ -351,7 +346,7 @@ namespace Hast.Remote.Worker
                 }
                 else
                 {
-                    Logger.Fatal(
+                    Logger.LogCritical(
                         ex,
                         "Transformation Worker crashed with an unhandled exception and was restarted " +
                         _restartCount + " times. It won't be restarted again.");
@@ -365,9 +360,23 @@ namespace Hast.Remote.Worker
 
             _hastlayer.Dispose();
             _hastlayer = null;
-            _oldResultBlobsCleanerTimer.Stop();
-            _oldResultBlobsCleanerTimer.Dispose();
+            _oldResultBlobsCleanerTimer?.Stop();
+            _oldResultBlobsCleanerTimer?.Dispose();
             _transformationTasks.Clear();
+        }
+
+
+        private async Task<List<IListBlobItem>> GetBlobs(CloudBlobContainer container, string prefix)
+        {
+            var segment = await container.ListBlobsSegmentedAsync(prefix, null);
+            var list = new List<IListBlobItem>();
+            list.AddRange(segment.Results);
+            while (segment.ContinuationToken != null)
+            {
+                segment = await container.ListBlobsSegmentedAsync(prefix, segment.ContinuationToken);
+                list.AddRange(segment.Results);
+            }
+            return list;
         }
 
 

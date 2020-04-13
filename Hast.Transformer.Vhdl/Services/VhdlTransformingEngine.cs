@@ -1,8 +1,10 @@
 ﻿using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.Events;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Services
@@ -11,13 +13,13 @@ namespace Hast.Transformer.Vhdl.Services
     {
         private readonly IVhdlHardwareDescriptionCachingService _vhdlHardwareDescriptionCachingService;
         private readonly ITransformedVhdlManifestBuilder _transformedVhdlManifestBuilder;
-        private readonly IVhdlTransformationEventHandler _vhdlTransformationEventHandler;
+        private readonly IEnumerable<EventHandler<ITransformedVhdlManifest>> _vhdlTransformationEventHandler;
 
 
         public VhdlTransformingEngine(
             IVhdlHardwareDescriptionCachingService vhdlHardwareDescriptionCachingService,
             ITransformedVhdlManifestBuilder transformedVhdlManifestBuilder,
-            IVhdlTransformationEventHandler vhdlTransformationEventHandler)
+            IEnumerable<EventHandler<ITransformedVhdlManifest>> vhdlTransformationEventHandler)
         {
             _vhdlHardwareDescriptionCachingService = vhdlHardwareDescriptionCachingService;
             _transformedVhdlManifestBuilder = transformedVhdlManifestBuilder;
@@ -37,7 +39,10 @@ namespace Hast.Transformer.Vhdl.Services
             }
 
             var transformedVhdlManifest = await _transformedVhdlManifestBuilder.BuildManifest(transformationContext);
-            _vhdlTransformationEventHandler.TransformedVhdlManifestBuilt(transformedVhdlManifest);
+            foreach(var handler in _vhdlTransformationEventHandler)
+            {
+                handler?.Invoke(this, transformedVhdlManifest);
+            }
 
             var vhdlGenerationConfiguration = transformationContext
                 .HardwareGenerationConfiguration
@@ -54,9 +59,7 @@ namespace Hast.Transformer.Vhdl.Services
                 vhdlGenerationOptions.NameShortener = VhdlGenerationOptions.SimpleNameShortener;
             }
 
-            var xdcSource = transformedVhdlManifest.XdcFile != null ?
-                transformedVhdlManifest.XdcFile.ToVhdl(vhdlGenerationOptions) :
-                null;
+            var xdcSource = transformedVhdlManifest.XdcFile?.ToVhdl(vhdlGenerationOptions);
             var hardwareDescription = new VhdlHardwareDescription
             {
                 HardwareEntryPointNamesToMemberIdMappings = transformedVhdlManifest.MemberIdTable.Mappings,

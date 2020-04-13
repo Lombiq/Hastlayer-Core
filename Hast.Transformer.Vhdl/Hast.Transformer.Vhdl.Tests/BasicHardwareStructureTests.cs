@@ -4,20 +4,18 @@ using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure2;
 using Hast.Transformer.Abstractions;
 using Hast.VhdlBuilder.Testing;
-using Lombiq.OrchardAppHost;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
-    [TestFixture]
     public class BasicHardwareStructureTests : VhdlTransformingTestFixtureBase
     {
-        [Test]
+        [Fact]
         public async Task BasicHardwareDescriptionPropertiesAreCorrect()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await Host.RunAsync<ITransformer>(async transformer =>
             {
                 var hardwareDescription = await TransformClassStrutureExamplesToVhdl(transformer);
 
@@ -28,10 +26,11 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-        [Test]
+        [Fact]
         public async Task BasicVhdlStructureIsCorrect()
         {
-            //await _host.Run<ITransformer>(async transformer =>
+            await Task.FromResult(true);
+            //await Host.RunAsync<ITransformer>(async transformer =>
             //{
             //    var topModule = (Module)(await TransformClassStrutureExamplesToVhdl(transformer)).VhdlManifestIfFresh.Modules.Last();
 

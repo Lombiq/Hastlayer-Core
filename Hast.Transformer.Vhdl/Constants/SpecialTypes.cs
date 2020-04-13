@@ -3,6 +3,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 {
     public static class SpecialTypes
     {
-        public static DataType Task = new DataType { TypeCategory = DataTypeCategory.Identifier, Name = "Task" };
+        public static readonly DataType Task = new DataType { TypeCategory = DataTypeCategory.Identifier, Name = nameof(System.Threading.Tasks.Task) };
     }
 }

@@ -15,51 +15,47 @@ namespace Hast.DynamicTests
         public static async Task ExecuteTest<T>(Action<HardwareGenerationConfiguration> configurator, Action<T> testExecutor)
             where T : class, new()
         {
-            using (var hastlayer = await Hastlayer.Create())
+            using var hastlayer = Hastlayer.Create();
+            var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
+
+            configurator(configuration);
+
+            configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
+
+            //var folderName = configuration.HardwareEntryPointMemberFullNames.Single();
+            //var methodNameStartIndex = folderName.IndexOf("::");
+            //folderName = folderName.Substring(methodNameStartIndex + 2, folderName.IndexOf("(") - 2 - methodNameStartIndex);
+            //configuration.HardwareFrameworkPath = $@"E:\ShortPath\BinaryAndUnaryTests\{folderName}";
+
+            hastlayer.ExecutedOnHardware += (sender, e) =>
             {
-                var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
+                Console.WriteLine(
+                    "Executing on hardware took " +
+                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
+                    " milliseconds (net) " +
+                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                    " milliseconds (all together).");
+            };
 
-                configurator(configuration);
-
-                configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
-
-                //var folderName = configuration.HardwareEntryPointMemberFullNames.Single();
-                //var methodNameStartIndex = folderName.IndexOf("::");
-                //folderName = folderName.Substring(methodNameStartIndex + 2, folderName.IndexOf("(") - 2 - methodNameStartIndex);
-                //configuration.HardwareFrameworkPath = $@"E:\ShortPath\BinaryAndUnaryTests\{folderName}";
-
-                hastlayer.ExecutedOnHardware += (sender, e) =>
+            Console.WriteLine("Hardware generation starts.");
+            var hardwareRepresentation = await hastlayer.GenerateHardware(
+                new[]
                 {
-                    Console.WriteLine(
-                        "Executing on hardware took " +
-                        e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
-                        " milliseconds (net) " +
-                        e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
-                        " milliseconds (all together).");
-                };
+                    typeof(T).Assembly
+                },
+                configuration);
 
-                Console.WriteLine("Hardware generation starts.");
-                var hardwareRepresentation = await hastlayer.GenerateHardware(
-                    new[]
-                    {
-                        typeof(T).Assembly
-                    },
-                    configuration);
+            Console.WriteLine("Hardware generated, starting hardware execution.");
+            var proxyGenerationConfiguration = new ProxyGenerationConfiguration { VerifyHardwareResults = true };
+            var hardwareInstance = await hastlayer.GenerateProxy(
+                hardwareRepresentation,
+                new T(),
+                proxyGenerationConfiguration);
 
+            testExecutor(hardwareInstance);
 
-
-                Console.WriteLine("Hardware generated, starting hardware execution.");
-                var proxyGenerationConfiguration = new ProxyGenerationConfiguration { VerifyHardwareResults = true };
-                var hardwareInstance = await hastlayer.GenerateProxy(
-                    hardwareRepresentation,
-                    new T(),
-                    proxyGenerationConfiguration);
-
-                testExecutor(hardwareInstance);
-
-                Console.WriteLine("Hardware execution finished.");
-                Console.ReadKey();
-            }
+            Console.WriteLine("Hardware execution finished.");
+            Console.ReadKey();
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Hast.Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Orchard;
 
 namespace Hast.Remote.Worker.Services
 {

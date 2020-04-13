@@ -3,8 +3,7 @@ using Hast.Layer;
 using Hast.TestInputs.Invalid;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Vhdl.Models;
-using Lombiq.OrchardAppHost;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using System;
 using System.Linq.Expressions;
@@ -12,13 +11,12 @@ using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
-    [TestFixture]
     public class TransformationCheckTests : VhdlTransformingTestFixtureBase
     {
-        [Test]
+        [Fact]
         public async Task InvalidExternalVariableAssignmentIsPrevented()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await Host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidParallelCases>(transformer, c => c.InvalidExternalVariableAssignment(0)),
@@ -26,10 +24,10 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-        [Test]
+        [Fact]
         public async Task InvalidArrayUsageIsPrevented()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await Host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.InvalidArrayAssignment()),
@@ -57,10 +55,10 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-        [Test]
+        [Fact]
         public async Task InvalidHardwareEntryPointsArePrevented()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await Host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidHardwareEntryPoint>(transformer, c => c.EntryPointMethod()),
@@ -68,10 +66,10 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-        [Test]
+        [Fact]
         public async Task InvalidLanguageConstructsArePrevented()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await Host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidLanguageConstructCases>(transformer, c => c.CustomValueTypeReferenceEquals()),
@@ -83,10 +81,10 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-        [Test]
+        [Fact]
         public async Task InvalidInvalidObjectUsingCasesArePrevented()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await Host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidObjectUsingCases>(transformer, c => c.ReferenceAssignment(0)),

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using CsvHelper;
+using CsvHelper.Configuration;
 using Hast.Synthesis.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
@@ -12,10 +13,13 @@ namespace Hast.Synthesis.Services
 {
     public class TimingReportParser : ITimingReportParser
     {
+        private static readonly CsvConfiguration CsvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture);
+
         public ITimingReport Parse(TextReader reportReader)
         {
-            using (var csvReader = new CsvReader(reportReader))
+            using (var csvReader = new CsvReader(reportReader, CsvConfiguration))
             {
+
                 csvReader.Configuration.Delimiter = "	";
                 csvReader.Configuration.CultureInfo = CultureInfo.InvariantCulture;
 
@@ -121,7 +125,7 @@ namespace Hast.Synthesis.Services
                             isSignAgnosticBinaryOperatorType = true;
                             binaryOperator = BinaryOperatorType.BitwiseOr;
                             break;
-                        case var op when(op.StartsWith("dotnet_shift_left")):
+                        case var op when (op.StartsWith("dotnet_shift_left")):
                             binaryOperator = BinaryOperatorType.ShiftLeft;
                             break;
                         case var op when (op.StartsWith("dotnet_shift_right")):
@@ -149,7 +153,7 @@ namespace Hast.Synthesis.Services
                     // Data Path Delay, i.e. the propagation of signals through the operation and the nets around it.
                     var dpd = decimal.Parse(
                         dpdString.Replace(',', '.'), // Taking care of decimal commas.
-                        NumberStyles.Any, 
+                        NumberStyles.Any,
                         CultureInfo.InvariantCulture);
 
                     // Timing window difference from requirement, i.e.:
@@ -173,10 +177,10 @@ namespace Hast.Synthesis.Services
 
                         // Bitwise and/or are defined for bools too, so need to handle that above, then handling
                         // their conditional pairs here. (Unary bit not is only defined for arithmetic types.)
-                        if (operandSizeBits == 1 && 
+                        if (operandSizeBits == 1 &&
                             (binaryOperator == BinaryOperatorType.BitwiseOr || binaryOperator == BinaryOperatorType.BitwiseAnd))
                         {
-                            binaryOperator = binaryOperator == BinaryOperatorType.BitwiseOr ? 
+                            binaryOperator = binaryOperator == BinaryOperatorType.BitwiseOr ?
                                 BinaryOperatorType.ConditionalOr : BinaryOperatorType.ConditionalAnd;
 
                             timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);

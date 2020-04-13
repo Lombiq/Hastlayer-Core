@@ -8,7 +8,7 @@ using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using Lombiq.Arithmetics;
-using Lombiq.OrchardAppHost;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 
@@ -25,8 +25,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
 
         protected Task<VhdlHardwareDescription> CreateSourceForBasicSamples() =>
-            _host.RunGet(wc => TransformAssembliesToVhdl(
-                wc.Resolve<ITransformer>(),
+            Host.RunGetAsync(provider => TransformAssembliesToVhdl(
+                provider.GetService<ITransformer>(),
                 new[] { typeof(PrimeCalculator).Assembly, typeof(RandomMwc64X).Assembly },
                 configuration =>
                 {
@@ -81,10 +81,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
         protected async Task<string> CreateVhdlForKpzSamples()
         {
-            var notInlinedSource = await _host.RunGet(async wc =>
+            var notInlinedSource = await Host.RunGetAsync(async provider =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    wc.Resolve<ITransformer>(),
+                    provider.GetService<ITransformer>(),
                     new[] { typeof(KpzKernelsInterface).Assembly, typeof(RandomMwc64X).Assembly },
                     configuration =>
                     {
@@ -101,10 +101,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 return hardwareDescription.VhdlSource;
             });
 
-            var inlinedSource = await _host.RunGet(async wc =>
+            var inlinedSource = await Host.RunGetAsync(async provider =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    wc.Resolve<ITransformer>(),
+                    provider.GetService<ITransformer>(),
                     new[] { typeof(KpzKernelsInterface).Assembly, typeof(RandomMwc64X).Assembly },
                     configuration =>
                     {
@@ -126,10 +126,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         }
 
         protected Task<string> CreateVhdlForUnumSample() =>
-            _host.RunGet(async wc =>
+            Host.RunGetAsync(async provider =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    wc.Resolve<ITransformer>(),
+                    provider.GetService<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(Unum).Assembly, typeof(ImmutableArray).Assembly },
                     configuration =>
                     {
@@ -144,10 +144,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             });
 
         protected Task<string> CreateVhdlForPositSample() =>
-            _host.RunGet(async wc =>
+            Host.RunGetAsync(async provider =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    wc.Resolve<ITransformer>(),
+                    provider.GetService<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly, typeof(ImmutableArray).Assembly },
                     configuration =>
                     {
@@ -161,10 +161,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             });
 
         protected Task<string> CreateVhdlForPosit32Sample() =>
-            _host.RunGet(async wc =>
+            Host.RunGetAsync(async provider =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    wc.Resolve<ITransformer>(),
+                    provider.GetService<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
                     configuration =>
                     {
@@ -182,10 +182,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             });
 
         protected Task<string> CreateVhdlForPosit32SampleWithInlining() =>
-            _host.RunGet(async wc =>
+            Host.RunGetAsync(async provider =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    wc.Resolve<ITransformer>(),
+                    provider.GetService<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
                     configuration =>
                     {
@@ -202,8 +202,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             });
 
         protected Task<VhdlHardwareDescription> CreateSourceForAdvancedPosit32Sample() =>
-            _host.RunGet(wc => TransformAssembliesToVhdl(
-                wc.Resolve<ITransformer>(),
+            Host.RunGetAsync(async provider => await TransformAssembliesToVhdl(
+                provider.GetService<ITransformer>(),
                 new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
                 configuration =>
                 {
@@ -213,10 +213,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
         protected async Task<string> CreateVhdlForPosit32FusedSample()
         {
-            var notInlinedSource = await _host.RunGet(async wc =>
+            var notInlinedSource = await Host.RunGetAsync(async provider =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    wc.Resolve<ITransformer>(),
+                    provider.GetService<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
                     configuration =>
                     {
@@ -230,10 +230,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 return hardwareDescription.VhdlSource;
             });
 
-            var inlinedSource = await _host.RunGet(async wc =>
+            var inlinedSource = await Host.RunGetAsync(async provider =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    wc.Resolve<ITransformer>(),
+                    provider.GetService<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
                     configuration =>
                     {
@@ -250,10 +250,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         }
 
         protected Task<string> CreateVhdlForFix64Samples() =>
-            _host.RunGet(async wc =>
+            Host.RunGetAsync(async provider =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    wc.Resolve<ITransformer>(),
+                    provider.GetService<ITransformer>(),
                     new[] { typeof(PrimeCalculator).Assembly, typeof(Fix64).Assembly },
                     configuration =>
                     {
@@ -270,10 +270,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             });
 
         protected Task<string> CreateVhdlForFSharpSamples() =>
-            _host.RunGet(async wc =>
+            Host.RunGetAsync(async provider =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
-                    wc.Resolve<ITransformer>(),
+                    provider.GetService<ITransformer>(),
                     new[] { typeof(FSharpParallelAlgorithmContainer).Assembly },
                     configuration =>
                     {

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Orchard;
+using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {

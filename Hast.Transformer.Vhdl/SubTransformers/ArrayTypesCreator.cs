@@ -51,7 +51,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 base.VisitAssignmentExpression(assignmentExpression);
 
                 if (SimpleMemoryAssignmentHelper.IsRead4BytesAssignment(assignmentExpression) ||
-                    SimpleMemoryAssignmentHelper.IsBatchedReadAssignment(assignmentExpression, out var cellCount))
+                    SimpleMemoryAssignmentHelper.IsBatchedReadAssignment(assignmentExpression, out var _))
                 {
                     // ArrayType would be a clashing name so need to use GetElementType() as normal method.
                     CreateArrayDeclarationIfNew(TypeHelper

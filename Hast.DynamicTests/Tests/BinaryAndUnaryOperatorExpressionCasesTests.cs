@@ -1,12 +1,12 @@
 ﻿using Hast.TestInputs.Dynamic;
-using NUnit.Framework;
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Xunit;
+
 
 namespace Hast.DynamicTests.Tests
 {
-    [TestFixture]
     public class BinaryAndUnaryOperatorExpressionCasesTests
     {
         // MinValue would cause a division by zero when the input is cast to smaller data types that's why MiValue + 1
@@ -19,39 +19,39 @@ namespace Hast.DynamicTests.Tests
         // "index: 148, hardware result: { 255, 255, 7, 0 }, software result: { 255, 255, 255, 255 }"
         // Same with UshortBinaryOperatorExpressionVariations.
         // Most possibly overflow is not handled the same as in .NET.
-        [Test]
+        [Fact]
         public Task ByteBinaryOperatorExpressionVariations() =>
         ExecuteIntTest(
              b => b.ByteBinaryOperatorExpressionVariations(null),
              b => b.ByteBinaryOperatorExpressionVariations,
              true);
 
-        [Test]
+        [Fact]
         public Task SbyteBinaryOperatorExpressionVariations() =>
             ExecuteIntTest(
                  b => b.SbyteBinaryOperatorExpressionVariations(null),
                  b => b.SbyteBinaryOperatorExpressionVariations);
 
-        [Test]
+        [Fact]
         public Task ShortBinaryOperatorExpressionVariations() =>
             ExecuteIntTest(
                  b => b.ShortBinaryOperatorExpressionVariations(null),
                  b => b.ShortBinaryOperatorExpressionVariations);
 
-        [Test]
+        [Fact]
         public Task UshortBinaryOperatorExpressionVariations() =>
             ExecuteIntTest(
                  b => b.UshortBinaryOperatorExpressionVariations(null),
                  b => b.UshortBinaryOperatorExpressionVariations,
                  true);
 
-        [Test]
+        [Fact]
         public Task IntBinaryOperatorExpressionVariations() =>
             ExecuteIntTest(
                  b => b.IntBinaryOperatorExpressionVariations(null),
                  b => b.IntBinaryOperatorExpressionVariations);
 
-        [Test]
+        [Fact]
         public Task UintBinaryOperatorExpressionVariations() =>
             ExecuteTest(
                 b => b.UintBinaryOperatorExpressionVariations(null),
@@ -63,19 +63,19 @@ namespace Hast.DynamicTests.Tests
                     b.UintBinaryOperatorExpressionVariations(uint.MaxValue);
                 });
 
-        [Test]
+        [Fact]
         public Task LongBinaryOperatorExpressionVariationsLow() =>
             ExecuteLongTest(
                  b => b.LongBinaryOperatorExpressionVariationsLow(null),
                  b => b.LongBinaryOperatorExpressionVariationsLow);
 
-        [Test]
+        [Fact]
         public Task LongBinaryOperatorExpressionVariationsHigh() =>
             ExecuteLongTest(
                  b => b.LongBinaryOperatorExpressionVariationsHigh(null),
                  b => b.LongBinaryOperatorExpressionVariationsHigh);
 
-        [Test]
+        [Fact]
         public Task UlongBinaryOperatorExpressionVariationsLow() =>
             ExecuteTest(
                 b => b.UlongBinaryOperatorExpressionVariationsLow(null),
@@ -87,7 +87,7 @@ namespace Hast.DynamicTests.Tests
                     b.UlongBinaryOperatorExpressionVariationsLow(long.MaxValue);
                 });
 
-        [Test]
+        [Fact]
         public Task UlongBinaryOperatorExpressionVariationsHigh() =>
             ExecuteTest(
                 b => b.UlongBinaryOperatorExpressionVariationsHigh(null),
@@ -99,7 +99,7 @@ namespace Hast.DynamicTests.Tests
                     b.UlongBinaryOperatorExpressionVariationsHigh(ulong.MaxValue);
                 });
 
-        [Test]
+        [Fact]
         public Task AllUnaryOperatorExpressionVariations() =>
             ExecuteLongTest(
                  b => b.AllUnaryOperatorExpressionVariations(null),

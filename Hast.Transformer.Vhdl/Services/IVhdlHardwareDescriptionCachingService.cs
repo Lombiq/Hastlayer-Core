@@ -1,6 +1,6 @@
 ﻿using Hast.Common.Models;
 using Hast.Transformer.Models;
-using Orchard;
+using Hast.Common.Interfaces;
 using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Services
