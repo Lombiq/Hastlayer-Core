@@ -67,7 +67,7 @@ namespace Hast.Remote.Worker.Services
             };
 
             services.AddLogging(loggingBuilder => loggingBuilder
-                .AddFilter<ApplicationInsightsLoggerProvider>("Category", LogLevel.Information));
+                .AddFilter<ApplicationInsightsLoggerProvider>(string.Empty, LogLevel.Warning));
             services.AddApplicationInsightsTelemetryWorkerService(options);
 
 
