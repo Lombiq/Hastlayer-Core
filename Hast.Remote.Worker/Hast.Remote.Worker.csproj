@@ -16,6 +16,7 @@
     <ProjectReference Include="..\Hast.Xilinx\Hast.Xilinx.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.NLogTarget" Version="2.13.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.13.1" />
     <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.1.3" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
