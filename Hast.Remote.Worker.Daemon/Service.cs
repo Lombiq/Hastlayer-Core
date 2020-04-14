@@ -77,7 +77,7 @@ namespace Hast.Remote.Worker.Daemon
                     }
                     catch (Exception ex) when (!ex.IsFatal())
                     {
-                        await host.RunAsync<ILogger>(logger =>
+                        await host.RunAsync<ILogger<Service>>(logger =>
                         {
                             logger.LogError(ex, DisplayName + " crashed with an unhandled exception. Restarting...");
 

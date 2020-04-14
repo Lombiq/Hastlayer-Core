@@ -11,7 +11,6 @@ using Hast.Xilinx;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.ApplicationInsights;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -43,7 +42,7 @@ namespace Hast.Remote.Worker
             IAppDataFolder appDataFolder,
             IClock clock,
             IApplicationInsightsTelemetryManager applicationInsightsTelemetryManager,
-            ILogger logger)
+            ILogger<TransformationWorker> logger)
         {
             _jsonConverter = jsonConverter;
             _appDataFolder = appDataFolder;

@@ -25,7 +25,7 @@ namespace Hast.Transformer
     {
         // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
         // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
-        private const bool SaveSyntaxTree = 
+        private const bool SaveSyntaxTree =
 #if DEBUG
         true;
 #else
@@ -370,7 +370,7 @@ namespace Hast.Transformer
             if (deviceDriver == null)
             {
                 throw new InvalidOperationException(
-                    "No device driver with the name " + configuration.DeviceName + " was found.");
+                    "No device driver with the name \"" + configuration.DeviceName + "\" was found.");
             }
 
             var context = new TransformationContext
@@ -384,7 +384,7 @@ namespace Hast.Transformer
                 DeviceDriver = deviceDriver
             };
 
-            foreach(var eventHandler in _eventHandlers) eventHandler?.Invoke(this, context);
+            foreach (var eventHandler in _eventHandlers) eventHandler?.Invoke(this, context);
 
             if (configuration.EnableCaching)
             {
