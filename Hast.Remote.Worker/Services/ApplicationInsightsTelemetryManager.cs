@@ -1,14 +1,10 @@
 ﻿using Hast.Common.Interfaces;
 using Hast.Layer;
-using log4net;
-using log4net.Layout;
-using log4net.Repository.Hierarchy;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
-using Microsoft.ApplicationInsights.Log4NetAppender;
 using Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel;
 using Microsoft.ApplicationInsights.WorkerService;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +12,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.ApplicationInsights;
 using System;
 using System.Linq;
-using System.Reflection;
 
 
 namespace Hast.Remote.Worker.Services
@@ -24,8 +19,6 @@ namespace Hast.Remote.Worker.Services
     [IDependencyInitializer(nameof(InitializeService))]
     public class ApplicationInsightsTelemetryManager : IApplicationInsightsTelemetryManager
     {
-        private bool _wasSetup;
-
         private readonly TelemetryClient _telemetryClient;
 
 
@@ -40,32 +33,6 @@ namespace Hast.Remote.Worker.Services
             _telemetryClient = telemetryClient;
         }
 
-
-        public void Setup()
-        {
-            if (_wasSetup) return;
-
-            // The no argument version of GetRepository is missing from netstandard but it just forwards to GetCallingAssembly.
-            var hierarchyRoot = ((Hierarchy)LogManager.GetRepository(Assembly.GetCallingAssembly())).Root;
-
-            var patternLayout = new PatternLayout
-            {
-                ConversionPattern = "%message"
-            };
-            patternLayout.ActivateOptions();
-
-            var aiAppender = new ApplicationInsightsAppender
-            {
-                Name = "ai-appender",
-                InstrumentationKey = _telemetryClient.InstrumentationKey,
-                Layout = patternLayout
-            };
-            aiAppender.ActivateOptions();
-
-            hierarchyRoot.AddAppender(aiAppender);
-
-            _wasSetup = true;
-        }
 
         public void TrackTransformation(ITransformationTelemetry telemetry)
         {

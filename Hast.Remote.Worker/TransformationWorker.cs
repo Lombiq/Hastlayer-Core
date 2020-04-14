@@ -11,7 +11,6 @@ using Hast.Xilinx;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -107,8 +106,6 @@ namespace Hast.Remote.Worker
                         }
                     };
                     _oldResultBlobsCleanerTimer.Enabled = true;
-
-                    _applicationInsightsTelemetryManager.Setup();
                 }
 
                 cancellationToken.ThrowIfCancellationRequested();
