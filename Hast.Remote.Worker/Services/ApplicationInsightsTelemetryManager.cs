@@ -9,10 +9,6 @@ using Microsoft.ApplicationInsights.NLogTarget;
 using Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel;
 using Microsoft.ApplicationInsights.WorkerService;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.ApplicationInsights;
-using NLog.Config;
-using NLog.Extensions.Logging;
 using System;
 using System.Linq;
 
