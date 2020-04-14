@@ -26,12 +26,10 @@ namespace Hast.Remote.Worker.Services
     {
         private bool _wasSetup;
 
-        private readonly ILogger<ApplicationInsightsTelemetryManager> _logger;
         private readonly TelemetryClient _telemetryClient;
 
 
         public ApplicationInsightsTelemetryManager(
-            ILogger<ApplicationInsightsTelemetryManager> logger,
             TelemetryConfiguration telemetryConfiguration,
             TelemetryClient telemetryClient)
         {
@@ -39,7 +37,6 @@ namespace Hast.Remote.Worker.Services
             builder.UseAdaptiveSampling(maxTelemetryItemsPerSecond: 5, excludedTypes: "Event");
             builder.Build();
 
-            _logger = logger;
             _telemetryClient = telemetryClient;
         }
 

@@ -30,28 +30,26 @@ namespace Hast.Remote.Worker
         private readonly IAppDataFolder _appDataFolder;
         private readonly IClock _clock;
         private readonly IApplicationInsightsTelemetryManager _applicationInsightsTelemetryManager;
-
+        private readonly ILogger _logger;
         private IHastlayer _hastlayer;
         private CloudBlobContainer _container;
         private readonly ConcurrentDictionary<string, Task> _transformationTasks = new ConcurrentDictionary<string, Task>();
         private int _restartCount = 0;
         private System.Timers.Timer _oldResultBlobsCleanerTimer;
 
-        public ILogger Logger { get; set; }
-
 
         public TransformationWorker(
             IJsonConverter jsonConverter,
             IAppDataFolder appDataFolder,
             IClock clock,
-            IApplicationInsightsTelemetryManager applicationInsightsTelemetryManager)
+            IApplicationInsightsTelemetryManager applicationInsightsTelemetryManager,
+            ILogger logger)
         {
             _jsonConverter = jsonConverter;
             _appDataFolder = appDataFolder;
             _clock = clock;
             _applicationInsightsTelemetryManager = applicationInsightsTelemetryManager;
-
-            Logger = NullLogger.Instance;
+            _logger = logger;
         }
 
 
@@ -105,7 +103,7 @@ namespace Hast.Remote.Worker
                         catch (Exception ex) when (!ex.IsFatal())
                         {
                             // If an exception escapes here it'll take down the whole process, so need to handle them.
-                            Logger.LogError(ex, "Error during cleaning up old result blobs.");
+                            _logger.LogError(ex, "Error during cleaning up old result blobs.");
                         }
                     };
                     _oldResultBlobsCleanerTimer.Enabled = true;
@@ -305,7 +303,7 @@ namespace Hast.Remote.Worker
                             }
                             catch (Exception ex) when (!ex.IsFatal())
                             {
-                                Logger.LogError(ex, "Processing the job blob {0} failed.", blob.Name);
+                                _logger.LogError(ex, "Processing the job blob {0} failed.", blob.Name);
                             }
 
                             telemetry.FinishTimeUtc = _clock.UtcNow;
@@ -334,7 +332,7 @@ namespace Hast.Remote.Worker
             {
                 if (_restartCount < 100)
                 {
-                    Logger.LogError(ex, "Transformation Worker crashed with an unhandled exception. Restarting...");
+                    _logger.LogError(ex, "Transformation Worker crashed with an unhandled exception. Restarting...");
 
                     Dispose();
                     _restartCount++;
@@ -346,7 +344,7 @@ namespace Hast.Remote.Worker
                 }
                 else
                 {
-                    Logger.LogCritical(
+                    _logger.LogCritical(
                         ex,
                         "Transformation Worker crashed with an unhandled exception and was restarted " +
                         _restartCount + " times. It won't be restarted again.");
