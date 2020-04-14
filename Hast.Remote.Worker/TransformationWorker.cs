@@ -210,7 +210,8 @@ namespace Hast.Remote.Worker
                                                         CustomConfiguration = job.Configuration.CustomConfiguration,
                                                         EnableCaching = true,
                                                         HardwareEntryPointMemberFullNames = job.Configuration.HardwareEntryPointMemberFullNames,
-                                                        HardwareEntryPointMemberNamePrefixes = job.Configuration.HardwareEntryPointMemberNamePrefixes
+                                                        HardwareEntryPointMemberNamePrefixes = job.Configuration.HardwareEntryPointMemberNamePrefixes,
+                                                        EnableHardwareImplementationComposition = false
                                                     });
 
                                                 cancellationToken.ThrowIfCancellationRequested();
