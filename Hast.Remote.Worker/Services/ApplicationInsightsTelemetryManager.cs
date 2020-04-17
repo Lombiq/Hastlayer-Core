@@ -18,8 +18,6 @@ namespace Hast.Remote.Worker.Services
     [IDependencyInitializer(nameof(InitializeService))]
     public class ApplicationInsightsTelemetryManager : IApplicationInsightsTelemetryManager
     {
-        public static string InstrumentationKey;
-
         private readonly TelemetryClient _telemetryClient;
 
 
@@ -51,20 +49,26 @@ namespace Hast.Remote.Worker.Services
             _telemetryClient.TrackRequest(requestTelemetry);
         }
 
-        public static void InitializeService(IServiceCollection services)
+        public static string GetInstrumentationKey()
         {
             var configuration = Hastlayer.BuildConfiguration();
-            InstrumentationKey = configuration.GetSection("ApplicationInsights").GetSection("InstrumentationKey").Value ??
+            var key = configuration.GetSection("ApplicationInsights").GetSection("InstrumentationKey").Value ??
                 configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY").Value;
-            if (string.IsNullOrEmpty(InstrumentationKey))
+            if (string.IsNullOrEmpty(key))
             {
                 throw new Exception("Please set up the instrumentation key via appsettings.json or environment " +
                     "variable, see APPINSIGHTS_INSTRUMENTATIONKEY part here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core");
             }
+            return key;
+        }
+
+        public static void InitializeService(IServiceCollection services)
+        {
+            var key = GetInstrumentationKey();
             var options = new ApplicationInsightsServiceOptions
             {
                 EnableAdaptiveSampling = false,
-                InstrumentationKey = InstrumentationKey,
+                InstrumentationKey = key,
             };
 
             services.AddApplicationInsightsTelemetryWorkerService(options);
@@ -84,7 +88,7 @@ namespace Hast.Remote.Worker.Services
 
         public static void AddNLogTarget()
         {
-            var logTarget = new ApplicationInsightsTarget { InstrumentationKey = InstrumentationKey };
+            var logTarget = new ApplicationInsightsTarget { InstrumentationKey = GetInstrumentationKey() };
             NLog.LogManager.Configuration.AddRule(NLog.LogLevel.Trace, NLog.LogLevel.Fatal, logTarget);
         }
     }
