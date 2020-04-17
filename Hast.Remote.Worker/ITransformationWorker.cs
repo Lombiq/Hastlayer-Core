@@ -7,6 +7,6 @@ namespace Hast.Remote.Worker
 {
     public interface ITransformationWorker : ISingletonDependency
     {
-        Task Work(ITransformationWorkerConfiguration configuration, CancellationToken cancellationToken);
+        Task Work(CancellationToken cancellationToken);
     }
 }
