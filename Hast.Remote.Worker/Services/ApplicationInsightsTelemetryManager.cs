@@ -88,8 +88,8 @@ namespace Hast.Remote.Worker.Services
 
         public static void AddNLogTarget()
         {
-            var logTarget = new ApplicationInsightsTarget { InstrumentationKey = GetInstrumentationKey() };
-            NLog.LogManager.Configuration.AddRule(NLog.LogLevel.Trace, NLog.LogLevel.Fatal, logTarget);
+            var logTarget = (ApplicationInsightsTarget)NLog.LogManager.Configuration.FindTargetByName("aiTarget");
+            logTarget.InstrumentationKey = GetInstrumentationKey();
         }
     }
 }
