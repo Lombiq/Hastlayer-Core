@@ -55,7 +55,14 @@ namespace Hast.Remote.Worker.Daemon
         {
             _workerTask = Task.Run(async () =>
             {
-                using (var host = (Hastlayer)Hastlayer.Create())
+                var appSettings = Hastlayer.BuildConfiguration();
+                var configuration = new TransformationWorkerConfiguration
+                {
+                    StorageConnectionString = appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey)
+                };
+
+                using (var host = (Hastlayer) await TransformationWorker.CreateHastlayerAsync(
+                    configuration, _cancellationTokenSource.Token))
                 {
                     try
                     {
@@ -63,16 +70,11 @@ namespace Hast.Remote.Worker.Daemon
                         {
                             var worker = serviceProvider.GetService<ITransformationWorker>();
                             var configurationAccessor = serviceProvider.GetService<IConfiguration>();
-                            var configuration = new TransformationWorkerConfiguration
-                            {
-                                StorageConnectionString = configurationAccessor
-                                    .GetConnectionString(ConfigurationKeys.StorageConnectionStringKey)
-                            };
 
                             // Only counting startup crashes.
                             _restartCount = 0;
 
-                            return worker.Work(configuration, _cancellationTokenSource.Token);
+                            return worker.Work(_cancellationTokenSource.Token);
                         });
                     }
                     catch (Exception ex) when (!ex.IsFatal())
