@@ -363,7 +363,6 @@ namespace Hast.Remote.Worker
                 ConfigureLogging = builder =>
                 {
                     builder.AddNLog("NLog.config");
-                    ApplicationInsightsTelemetryManager.AddNLogTarget();
                 },
                 OnServiceRegistration = (sender, services) =>
                 {
