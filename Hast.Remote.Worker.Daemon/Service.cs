@@ -62,7 +62,7 @@ namespace Hast.Remote.Worker.Daemon
                 };
 
                 using (var host = (Hastlayer) await TransformationWorker.CreateHastlayerAsync(
-                    configuration, _cancellationTokenSource.Token))
+                    configuration, cancellationToken: _cancellationTokenSource.Token))
                 {
                     try
                     {

@@ -1,22 +1,21 @@
-﻿using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
 using Microsoft.Extensions.Logging;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Hast.Remote.Worker.Console
 {
-    class Program
+    internal class Program
     {
-        static async Task Main()
+        private static async Task Main()
         {
             var configuration = new TransformationWorkerConfiguration
             {
                 StorageConnectionString = "UseDevelopmentStorage=true"
             };
 
-            using var host = (Hastlayer) await TransformationWorker.CreateHastlayerAsync(configuration);
+            using var host = (Hastlayer)await TransformationWorker.CreateHastlayerAsync(configuration);
 
 #if DEBUG
             var logger = host.GetLogger<Program>();
@@ -27,10 +26,7 @@ namespace Hast.Remote.Worker.Console
             }
 #endif
 
-            await host.RunAsync<ITransformationWorker>(worker =>
-            {
-                return worker.Work(CancellationToken.None);
-            });
+            await host.RunAsync<ITransformationWorker>(worker => worker.Work(CancellationToken.None));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Hast.Catapult;
+using Hast.Catapult;
 using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
@@ -165,8 +165,8 @@ namespace Hast.Remote.Worker
 
                                                 assemblyPaths.Add(_appDataFolder.MapPath(path));
 
-                                                using (MemoryStream memoryStream = new MemoryStream(assembly.FileContent))
-                                                using (FileStream fileStream = _appDataFolder.CreateFile(path))
+                                                using (var memoryStream = new MemoryStream(assembly.FileContent))
+                                                using (var fileStream = _appDataFolder.CreateFile(path))
                                                     await memoryStream.CopyToAsync(fileStream);
                                             }
 
@@ -289,9 +289,7 @@ namespace Hast.Remote.Worker
                             _applicationInsightsTelemetryManager.TrackTransformation(telemetry);
                         }, jobBlob, cancellationToken)
                         .ContinueWith((task, blobNameObject) =>
-                        {
-                            _transformationTasks.TryRemove((string)blobNameObject, out Task dummy);
-                        }, jobBlob.Name);
+                            _transformationTasks.TryRemove((string)blobNameObject, out _), jobBlob.Name);
                     }
 
                     cancellationToken.ThrowIfCancellationRequested();
@@ -344,11 +342,9 @@ namespace Hast.Remote.Worker
 
         public static async Task<IHastlayer> CreateHastlayerAsync(
             ITransformationWorkerConfiguration configuration,
-            CancellationToken cancellationToken = default,
-            Action<IHastlayerConfiguration, IServiceCollection> onServiceRegistration = null)
+            Action<IHastlayerConfiguration, IServiceCollection> onServiceRegistration = null,
+            CancellationToken cancellationToken = default)
         {
-
-
             var container = CloudStorageAccount
                 .Parse(configuration.StorageConnectionString)
                 .CreateCloudBlobClient()
@@ -368,7 +364,8 @@ namespace Hast.Remote.Worker
                     typeof(TimingReportParser).Assembly,
                     typeof(CatapultDriver).Assembly
                 },
-                ConfigureLogging = builder => {
+                ConfigureLogging = builder =>
+                {
                     builder.AddNLog("NLog.config");
                     ApplicationInsightsTelemetryManager.AddNLogTarget();
                 },
