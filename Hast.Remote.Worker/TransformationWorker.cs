@@ -57,8 +57,6 @@ namespace Hast.Remote.Worker
             _hastlayer = hastlayer;
             _container = container;
 
-
-
             _oldResultBlobsCleanerTimer = new System.Timers.Timer(TimeSpan.FromHours(3).TotalMilliseconds);
             _oldResultBlobsCleanerTimer.Elapsed += async (_, e) =>
             {
@@ -96,10 +94,8 @@ namespace Hast.Remote.Worker
                         .Cast<CloudBlockBlob>()
                         .Where(blob => blob.Properties.LeaseStatus == LeaseStatus.Unlocked && blob.Properties.Length != 0);
 
-                    var jobsDone = 0;
                     foreach (var jobBlob in jobBlobs)
                     {
-                        jobsDone++;
                         cancellationToken.ThrowIfCancellationRequested();
 
                         _transformationTasks[jobBlob.Name] = Task.Factory.StartNew(async blobObject =>
@@ -354,8 +350,8 @@ namespace Hast.Remote.Worker
             var hastlayerConfiguration = new HastlayerConfiguration
             {
                 Flavor = HastlayerFlavor.Developer,
-                // These extensions need to be added explicitly because when deployed as a flat folder of
-                // binaries they won't be automatically found under the Hast.Core and Hast.Abstractions folders.
+                // These extensions need to be added explicitly because when deployed as a flat folder of binaries they
+                // won't be automatically found under the Hast.Core and Hast.Abstractions folders.
                 Extensions = new[]
                 {
                     typeof(DefaultTransformer).Assembly,
