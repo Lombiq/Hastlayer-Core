@@ -38,6 +38,7 @@ namespace Hast.Remote.Worker.Console
             };
             
             await host.RunAsync<ITransformationWorker>(worker => worker.Work(cancellationTokenSource.Token));
+            await Task.Delay(5000); // Make sure the final AI flush can go out.
         }
     }
 }

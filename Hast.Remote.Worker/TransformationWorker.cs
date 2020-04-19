@@ -304,6 +304,7 @@ namespace Hast.Remote.Worker
             }
             catch (OperationCanceledException)
             {
+                _logger.LogInformation($"Cancelling {_transformationTasks.Count} tasks.");
                 await Task.WhenAll(_transformationTasks.Values);
                 Dispose();
             }
