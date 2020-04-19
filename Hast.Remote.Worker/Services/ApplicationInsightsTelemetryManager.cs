@@ -5,12 +5,12 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
-using Microsoft.ApplicationInsights.NLogTarget;
 using Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel;
 using Microsoft.ApplicationInsights.WorkerService;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
 
 namespace Hast.Remote.Worker.Services
@@ -69,8 +69,9 @@ namespace Hast.Remote.Worker.Services
             {
                 EnableAdaptiveSampling = false,
                 InstrumentationKey = key,
+                EnableDebugLogger = true,
             };
-
+                
             services.AddApplicationInsightsTelemetryWorkerService(options);
 
             services.AddSingleton<ITelemetryInitializer, HttpDependenciesParsingTelemetryInitializer>();
@@ -84,12 +85,6 @@ namespace Hast.Remote.Worker.Services
             var dependencyTrackingTelemetryModule = services
                 .FirstOrDefault(t => t.ImplementationType == typeof(DependencyTrackingTelemetryModule));
             if (dependencyTrackingTelemetryModule != null) services.Remove(dependencyTrackingTelemetryModule);
-        }
-
-        public static void AddNLogTarget()
-        {
-            var logTarget = (ApplicationInsightsTarget)NLog.LogManager.Configuration.FindTargetByName("aiTarget");
-            logTarget.InstrumentationKey = GetInstrumentationKey();
         }
     }
 }

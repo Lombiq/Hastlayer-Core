@@ -1,8 +1,11 @@
+using System;
 using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.ApplicationInsights;
 
 namespace Hast.Remote.Worker.Console
 {
@@ -26,7 +29,15 @@ namespace Hast.Remote.Worker.Console
             }
 #endif
 
-            await host.RunAsync<ITransformationWorker>(worker => worker.Work(CancellationToken.None));
+            var cancellationTokenSource = new CancellationTokenSource();
+            System.Console.CancelKeyPress += (sender, eventArgs) =>
+            {
+                eventArgs.Cancel = true;
+                System.Console.WriteLine("Application cancelled via SIGINT, attempting graceful shutdown...");
+                cancellationTokenSource.Cancel();
+            };
+            
+            await host.RunAsync<ITransformationWorker>(worker => worker.Work(cancellationTokenSource.Token));
         }
     }
 }

@@ -22,6 +22,8 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.ApplicationInsights;
+using Microsoft.Extensions.Logging.ApplicationInsights;
 
 namespace Hast.Remote.Worker
 {
@@ -34,6 +36,7 @@ namespace Hast.Remote.Worker
         private readonly ILogger _logger;
         private readonly IHastlayer _hastlayer;
         private readonly CloudBlobContainer _container;
+        private readonly TelemetryClient _telemetryClient;
         private readonly ConcurrentDictionary<string, Task> _transformationTasks = new ConcurrentDictionary<string, Task>();
 
         private int _restartCount = 0;
@@ -47,7 +50,8 @@ namespace Hast.Remote.Worker
             IApplicationInsightsTelemetryManager applicationInsightsTelemetryManager,
             ILogger<TransformationWorker> logger,
             IHastlayer hastlayer,
-            CloudBlobContainer container)
+            CloudBlobContainer container,
+            TelemetryClient telemetryClient)
         {
             _jsonConverter = jsonConverter;
             _appDataFolder = appDataFolder;
@@ -56,6 +60,7 @@ namespace Hast.Remote.Worker
             _logger = logger;
             _hastlayer = hastlayer;
             _container = container;
+            _telemetryClient = telemetryClient;
 
             _oldResultBlobsCleanerTimer = new System.Timers.Timer(TimeSpan.FromHours(3).TotalMilliseconds);
             _oldResultBlobsCleanerTimer.Elapsed += async (_, e) =>
@@ -292,6 +297,7 @@ namespace Hast.Remote.Worker
 
                     // Waiting a bit between cycles not to have excessive Blob Storage usage due to polling (otherwise 
                     // it's not an issue, this loop barely uses any CPU).
+                    _telemetryClient.Flush();
                     await Task.Delay(1000);
                     _restartCount = 0;
                 }
@@ -321,6 +327,7 @@ namespace Hast.Remote.Worker
                         ex,
                         "Transformation Worker crashed with an unhandled exception and was restarted " +
                         _restartCount + " times. It won't be restarted again.");
+                    _telemetryClient.Flush();
                 }
             }
         }
@@ -328,6 +335,8 @@ namespace Hast.Remote.Worker
         public void Dispose()
         {
             if (_oldResultBlobsCleanerTimer == null) return;
+
+            _telemetryClient.Flush();
 
             _oldResultBlobsCleanerTimer?.Stop();
             _oldResultBlobsCleanerTimer?.Dispose();
@@ -345,7 +354,7 @@ namespace Hast.Remote.Worker
                 .Parse(configuration.StorageConnectionString)
                 .CreateCloudBlobClient()
                 .GetContainerReference("transformation");
-            await container.CreateIfNotExistsAsync(BlobContainerPublicAccessType.Off, null, null);
+            await container.CreateIfNotExistsAsync(BlobContainerPublicAccessType.Off, null, null, cancellationToken);
 
             var hastlayerConfiguration = new HastlayerConfiguration
             {
@@ -362,7 +371,10 @@ namespace Hast.Remote.Worker
                 },
                 ConfigureLogging = builder =>
                 {
-                    builder.AddNLog("NLog.config");
+                    builder
+                        .AddFilter<ApplicationInsightsLoggerProvider>("", Microsoft.Extensions.Logging.LogLevel.Trace)
+                        .AddApplicationInsights(ApplicationInsightsTelemetryManager.GetInstrumentationKey())
+                        .AddNLog("NLog.config");
                 },
                 OnServiceRegistration = (sender, services) =>
                 {
@@ -376,7 +388,6 @@ namespace Hast.Remote.Worker
             cancellationToken.ThrowIfCancellationRequested();
 
             var hastlayer = Hastlayer.Create(hastlayerConfiguration);
-            ApplicationInsightsTelemetryManager.AddNLogTarget();
             return hastlayer;
         }
 
