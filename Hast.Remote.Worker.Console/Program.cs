@@ -33,10 +33,10 @@ namespace Hast.Remote.Worker.Console
             System.Console.CancelKeyPress += (sender, eventArgs) =>
             {
                 eventArgs.Cancel = true;
-                System.Console.WriteLine("Application cancelled via SIGINT, attempting graceful shutdown...");
+                System.Console.WriteLine("Application cancelled via SIGINT, attempting graceful shutdown. Please allow at least 10 seconds for this...");
                 cancellationTokenSource.Cancel();
             };
-            System.Console.WriteLine("Press Ctrl + C to cleanly terminate the application...");
+            System.Console.WriteLine("Press Ctrl + C to cleanly terminate the application.");
 
             await host.RunAsync<ITransformationWorker>(worker => worker.Work(cancellationTokenSource.Token));
         }
