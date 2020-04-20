@@ -36,9 +36,9 @@ namespace Hast.Remote.Worker.Console
                 System.Console.WriteLine("Application cancelled via SIGINT, attempting graceful shutdown...");
                 cancellationTokenSource.Cancel();
             };
-            
+            System.Console.WriteLine("Press Ctrl + C to cleanly terminate the application...");
+
             await host.RunAsync<ITransformationWorker>(worker => worker.Work(cancellationTokenSource.Token));
-            await Task.Delay(5000); // Make sure the final AI flush can go out.
         }
     }
 }

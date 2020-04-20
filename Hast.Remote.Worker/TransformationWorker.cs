@@ -94,6 +94,7 @@ namespace Hast.Remote.Worker
             {
                 while (true)
                 {
+                    _telemetryClient.Flush();
                     var jobBlobs = (await GetBlobs(_container, "jobs/"))
                         .Where(blob => !blob.StorageUri.PrimaryUri.ToString().Contains("$$$ORCHARD$$$.$$$"))
                         .Cast<CloudBlockBlob>()
@@ -297,7 +298,6 @@ namespace Hast.Remote.Worker
 
                     // Waiting a bit between cycles not to have excessive Blob Storage usage due to polling (otherwise 
                     // it's not an issue, this loop barely uses any CPU).
-                    _telemetryClient.Flush();
                     await Task.Delay(1000);
                     _restartCount = 0;
                 }
@@ -335,14 +335,16 @@ namespace Hast.Remote.Worker
 
         public void Dispose()
         {
-            if (_oldResultBlobsCleanerTimer == null) return;
+            if (_oldResultBlobsCleanerTimer != null)
+            {
+                _oldResultBlobsCleanerTimer?.Stop();
+                _oldResultBlobsCleanerTimer?.Dispose();
+                _oldResultBlobsCleanerTimer = null;
+                _transformationTasks.Clear();
+            }
 
             _telemetryClient.Flush();
-
-            _oldResultBlobsCleanerTimer?.Stop();
-            _oldResultBlobsCleanerTimer?.Dispose();
-            _oldResultBlobsCleanerTimer = null;
-            _transformationTasks.Clear();
+            Task.Delay(10000).Wait();
         }
 
 
