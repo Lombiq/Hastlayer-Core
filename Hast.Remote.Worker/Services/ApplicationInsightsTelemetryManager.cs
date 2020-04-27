@@ -5,12 +5,12 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
-using Microsoft.ApplicationInsights.NLogTarget;
 using Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel;
 using Microsoft.ApplicationInsights.WorkerService;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
 
 namespace Hast.Remote.Worker.Services
@@ -18,8 +18,6 @@ namespace Hast.Remote.Worker.Services
     [IDependencyInitializer(nameof(InitializeService))]
     public class ApplicationInsightsTelemetryManager : IApplicationInsightsTelemetryManager
     {
-        public static string InstrumentationKey;
-
         private readonly TelemetryClient _telemetryClient;
 
 
@@ -51,22 +49,29 @@ namespace Hast.Remote.Worker.Services
             _telemetryClient.TrackRequest(requestTelemetry);
         }
 
-        public static void InitializeService(IServiceCollection services)
+        public static string GetInstrumentationKey()
         {
             var configuration = Hastlayer.BuildConfiguration();
-            InstrumentationKey = configuration.GetSection("ApplicationInsights").GetSection("InstrumentationKey").Value ??
+            var key = configuration.GetSection("ApplicationInsights").GetSection("InstrumentationKey").Value ??
                 configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY").Value;
-            if (string.IsNullOrEmpty(InstrumentationKey))
+            if (string.IsNullOrEmpty(key))
             {
                 throw new Exception("Please set up the instrumentation key via appsettings.json or environment " +
                     "variable, see APPINSIGHTS_INSTRUMENTATIONKEY part here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core");
             }
+            return key;
+        }
+
+        public static void InitializeService(IServiceCollection services)
+        {
+            var key = GetInstrumentationKey();
             var options = new ApplicationInsightsServiceOptions
             {
                 EnableAdaptiveSampling = false,
-                InstrumentationKey = InstrumentationKey,
+                InstrumentationKey = key,
+                EnableDebugLogger = true,
             };
-
+                
             services.AddApplicationInsightsTelemetryWorkerService(options);
 
             services.AddSingleton<ITelemetryInitializer, HttpDependenciesParsingTelemetryInitializer>();
@@ -80,12 +85,6 @@ namespace Hast.Remote.Worker.Services
             var dependencyTrackingTelemetryModule = services
                 .FirstOrDefault(t => t.ImplementationType == typeof(DependencyTrackingTelemetryModule));
             if (dependencyTrackingTelemetryModule != null) services.Remove(dependencyTrackingTelemetryModule);
-        }
-
-        public static void AddNLogTarget()
-        {
-            var logTarget = new ApplicationInsightsTarget { InstrumentationKey = InstrumentationKey };
-            NLog.LogManager.Configuration.AddRule(NLog.LogLevel.Trace, NLog.LogLevel.Fatal, logTarget);
         }
     }
 }

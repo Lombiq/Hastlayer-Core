@@ -1,4 +1,4 @@
-﻿using Hast.Catapult;
+using Hast.Catapult;
 using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
@@ -10,7 +10,9 @@ using Hast.Transformer.Vhdl.Services;
 using Hast.Xilinx;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -20,6 +22,8 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.ApplicationInsights;
+using Microsoft.Extensions.Logging.ApplicationInsights;
 
 namespace Hast.Remote.Worker
 {
@@ -30,9 +34,11 @@ namespace Hast.Remote.Worker
         private readonly IClock _clock;
         private readonly IApplicationInsightsTelemetryManager _applicationInsightsTelemetryManager;
         private readonly ILogger _logger;
-        private IHastlayer _hastlayer;
-        private CloudBlobContainer _container;
+        private readonly IHastlayer _hastlayer;
+        private readonly CloudBlobContainer _container;
+        private readonly TelemetryClient _telemetryClient;
         private readonly ConcurrentDictionary<string, Task> _transformationTasks = new ConcurrentDictionary<string, Task>();
+
         private int _restartCount = 0;
         private System.Timers.Timer _oldResultBlobsCleanerTimer;
 
@@ -42,78 +48,53 @@ namespace Hast.Remote.Worker
             IAppDataFolder appDataFolder,
             IClock clock,
             IApplicationInsightsTelemetryManager applicationInsightsTelemetryManager,
-            ILogger<TransformationWorker> logger)
+            ILogger<TransformationWorker> logger,
+            IHastlayer hastlayer,
+            CloudBlobContainer container,
+            TelemetryClient telemetryClient)
         {
             _jsonConverter = jsonConverter;
             _appDataFolder = appDataFolder;
             _clock = clock;
             _applicationInsightsTelemetryManager = applicationInsightsTelemetryManager;
             _logger = logger;
+            _hastlayer = hastlayer;
+            _container = container;
+            _telemetryClient = telemetryClient;
+
+            _oldResultBlobsCleanerTimer = new System.Timers.Timer(TimeSpan.FromHours(3).TotalMilliseconds);
+            _oldResultBlobsCleanerTimer.Elapsed += async (_, e) =>
+            {
+                try
+                {
+                    // Removing those result blobs that weren't deleted somehow (like the client exited while
+                    // waiting for the result to appear, thus never requesting it hence it never getting deleted).
+                    var oldResultBlobs = (await GetBlobs(container, "results/"))
+                        .Cast<CloudBlockBlob>()
+                        .Where(blob => blob.Properties.LastModified < _clock.UtcNow.AddHours(-1));
+
+                    foreach (var blob in oldResultBlobs)
+                    {
+                        await blob.DeleteAsync();
+                    }
+                }
+                catch (Exception ex) when (!ex.IsFatal())
+                {
+                    // If an exception escapes here it'll take down the whole process, so need to handle them.
+                    _logger.LogError(ex, "Error during cleaning up old result blobs.");
+                }
+            };
+            _oldResultBlobsCleanerTimer.Enabled = true;
         }
 
 
-        public async Task Work(ITransformationWorkerConfiguration configuration, CancellationToken cancellationToken)
+        public async Task Work(CancellationToken cancellationToken)
         {
             try
             {
-                if (_hastlayer == null)
-                {
-                    var hastlayerConfiguration = new HastlayerConfiguration
-                    {
-                        Flavor = HastlayerFlavor.Developer,
-                        // These extensions need to be added explicitly because when deployed as a flat folder of
-                        // binaries they won't be automatically found under the Hast.Core and Hast.Abstractions folders.
-                        Extensions = new[]
-                        {
-                            typeof(DefaultTransformer).Assembly,
-                            typeof(VhdlTransformingEngine).Assembly,
-                            typeof(NexysA7Driver).Assembly,
-                            typeof(TimingReportParser).Assembly,
-                            typeof(CatapultDriver).Assembly
-                        }
-                    };
-                    _hastlayer = Hastlayer.Create(hastlayerConfiguration);
-                    ApplicationInsightsTelemetryManager.AddNLogTarget();
-
-                    cancellationToken.ThrowIfCancellationRequested();
-
-                    _container = CloudStorageAccount
-                        .Parse(configuration.StorageConnectionString)
-                        .CreateCloudBlobClient()
-                        .GetContainerReference("transformation");
-
-                    await _container.CreateIfNotExistsAsync(BlobContainerPublicAccessType.Off, null, null);
-
-                    _oldResultBlobsCleanerTimer = new System.Timers.Timer(TimeSpan.FromHours(3).TotalMilliseconds);
-                    _oldResultBlobsCleanerTimer.Elapsed += async (sender, e) =>
-                    {
-                        try
-                        {
-                            // Removing those result blobs that weren't deleted somehow (like the client exited while
-                            // waiting for the result to appear, thus never requesting it hence it never getting deleted).
-                            var oldResultBlobs = (await GetBlobs(_container, "results/"))
-                                .Cast<CloudBlockBlob>()
-                                .Where(blob => blob.Properties.LastModified < _clock.UtcNow.AddHours(-1));
-
-                            foreach (var blob in oldResultBlobs)
-                            {
-                                await blob.DeleteAsync();
-                            }
-                        }
-                        catch (Exception ex) when (!ex.IsFatal())
-                        {
-                            // If an exception escapes here it'll take down the whole process, so need to handle them.
-                            _logger.LogError(ex, "Error during cleaning up old result blobs.");
-                        }
-                    };
-                    _oldResultBlobsCleanerTimer.Enabled = true;
-                    _logger.LogInformation("Hastlayer created.");
-                }
-
-                cancellationToken.ThrowIfCancellationRequested();
-
                 while (true)
                 {
+                    _telemetryClient.Flush();
                     var jobBlobs = (await GetBlobs(_container, "jobs/"))
                         .Where(blob => !blob.StorageUri.PrimaryUri.ToString().Contains("$$$ORCHARD$$$.$$$"))
                         .Cast<CloudBlockBlob>()
@@ -186,8 +167,8 @@ namespace Hast.Remote.Worker
 
                                                 assemblyPaths.Add(_appDataFolder.MapPath(path));
 
-                                                using (MemoryStream memoryStream = new MemoryStream(assembly.FileContent))
-                                                using (FileStream fileStream = _appDataFolder.CreateFile(path))
+                                                using (var memoryStream = new MemoryStream(assembly.FileContent))
+                                                using (var fileStream = _appDataFolder.CreateFile(path))
                                                     await memoryStream.CopyToAsync(fileStream);
                                             }
 
@@ -310,9 +291,7 @@ namespace Hast.Remote.Worker
                             _applicationInsightsTelemetryManager.TrackTransformation(telemetry);
                         }, jobBlob, cancellationToken)
                         .ContinueWith((task, blobNameObject) =>
-                        {
-                            _transformationTasks.TryRemove((string)blobNameObject, out Task dummy);
-                        }, jobBlob.Name);
+                            _transformationTasks.TryRemove((string)blobNameObject, out _), jobBlob.Name);
                     }
 
                     cancellationToken.ThrowIfCancellationRequested();
@@ -325,6 +304,7 @@ namespace Hast.Remote.Worker
             }
             catch (OperationCanceledException)
             {
+                _logger.LogInformation($"Cancelling {_transformationTasks.Count} tasks.");
                 await Task.WhenAll(_transformationTasks.Values);
                 Dispose();
             }
@@ -340,7 +320,7 @@ namespace Hast.Remote.Worker
                     // Waiting a bit for transient errors to go away.
                     await Task.Delay(10000);
 
-                    await Work(configuration, cancellationToken);
+                    await Work(cancellationToken);
                 }
                 else
                 {
@@ -348,23 +328,73 @@ namespace Hast.Remote.Worker
                         ex,
                         "Transformation Worker crashed with an unhandled exception and was restarted " +
                         _restartCount + " times. It won't be restarted again.");
+                    _telemetryClient.Flush();
                 }
             }
         }
 
         public void Dispose()
         {
-            if (_hastlayer == null) return;
+            if (_oldResultBlobsCleanerTimer != null)
+            {
+                _oldResultBlobsCleanerTimer?.Stop();
+                _oldResultBlobsCleanerTimer?.Dispose();
+                _oldResultBlobsCleanerTimer = null;
+                _transformationTasks.Clear();
+            }
 
-            _hastlayer.Dispose();
-            _hastlayer = null;
-            _oldResultBlobsCleanerTimer?.Stop();
-            _oldResultBlobsCleanerTimer?.Dispose();
-            _transformationTasks.Clear();
+            _telemetryClient.Flush();
+            Task.Delay(10000).Wait();
         }
 
 
-        private async Task<List<IListBlobItem>> GetBlobs(CloudBlobContainer container, string prefix)
+        public static async Task<IHastlayer> CreateHastlayerAsync(
+            ITransformationWorkerConfiguration configuration,
+            Action<IHastlayerConfiguration, IServiceCollection> onServiceRegistration = null,
+            CancellationToken cancellationToken = default)
+        {
+            var container = CloudStorageAccount
+                .Parse(configuration.StorageConnectionString)
+                .CreateCloudBlobClient()
+                .GetContainerReference("transformation");
+            await container.CreateIfNotExistsAsync(BlobContainerPublicAccessType.Off, null, null, cancellationToken);
+
+            var hastlayerConfiguration = new HastlayerConfiguration
+            {
+                Flavor = HastlayerFlavor.Developer,
+                // These extensions need to be added explicitly because when deployed as a flat folder of binaries they
+                // won't be automatically found under the Hast.Core and Hast.Abstractions folders.
+                Extensions = new[]
+                {
+                    typeof(DefaultTransformer).Assembly,
+                    typeof(VhdlTransformingEngine).Assembly,
+                    typeof(NexysA7Driver).Assembly,
+                    typeof(TimingReportParser).Assembly,
+                    typeof(CatapultDriver).Assembly
+                },
+                ConfigureLogging = builder =>
+                {
+                    builder
+                        .AddFilter<ApplicationInsightsLoggerProvider>("", Microsoft.Extensions.Logging.LogLevel.Trace)
+                        .AddApplicationInsights(ApplicationInsightsTelemetryManager.GetInstrumentationKey())
+                        .AddNLog("NLog.config");
+                },
+                OnServiceRegistration = (sender, services) =>
+                {
+                    services.AddSingleton(configuration);
+                    services.AddSingleton(container);
+
+                    onServiceRegistration?.Invoke(sender, services);
+                }
+            };
+
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var hastlayer = Hastlayer.Create(hastlayerConfiguration);
+            return hastlayer;
+        }
+
+        private static async Task<List<IListBlobItem>> GetBlobs(CloudBlobContainer container, string prefix)
         {
             var segment = await container.ListBlobsSegmentedAsync(prefix, null);
             var list = new List<IListBlobItem>();
@@ -376,7 +406,6 @@ namespace Hast.Remote.Worker
             }
             return list;
         }
-
 
         private static bool HasHttpStatus(StorageException exception, HttpStatusCode statusCode) =>
             ((exception.InnerException as WebException)?.Response as HttpWebResponse)?.StatusCode == statusCode;

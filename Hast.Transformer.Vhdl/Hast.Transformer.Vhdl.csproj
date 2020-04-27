@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
   </PropertyGroup>
-  <ItemGroup>
+  <ItemGroup> 
     <Compile Remove="Events\**" />
     <Compile Remove="Hast.Transformer.Vhdl.Tests\**" />
     <EmbeddedResource Remove="Events\**" />
