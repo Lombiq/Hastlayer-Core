@@ -1,11 +1,8 @@
-using System;
 using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.ApplicationInsights;
 
 namespace Hast.Remote.Worker.Console
 {
