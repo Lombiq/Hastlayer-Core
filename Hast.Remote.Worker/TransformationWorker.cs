@@ -67,8 +67,8 @@ namespace Hast.Remote.Worker
             {
                 try
                 {
-                    // Removing those result blobs that weren't deleted somehow (like the client exited while
-                    // waiting for the result to appear, thus never requesting it hence it never getting deleted).
+                    // Removing those result blobs that weren't deleted somehow (like the client exited while waiting
+                    // for the result to appear, thus never requesting it hence it never getting deleted).
                     var oldResultBlobs = (await GetBlobs(container, "results/"))
                         .Cast<CloudBlockBlob>()
                         .Where(blob => blob.Properties.LastModified < _clock.UtcNow.AddHours(-1));

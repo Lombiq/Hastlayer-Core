@@ -1,4 +1,4 @@
-﻿using Hast.Common.Models;
+using Hast.Common.Models;
 using Hast.Layer;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure2;
@@ -23,9 +23,7 @@ namespace Hast.Transformer.Vhdl.Tests
             VhdlManifest manifest = null;
 
             _hostConfiguration.OnServiceRegistration += (configuration, services) =>
-            {
                 services.AddSingleton(new EventHandler<ITransformedVhdlManifest>((sender, e) => manifest = e.Manifest));
-            };
 
             await Host.RunAsync<ITransformer>(async transformer =>
             {
@@ -44,9 +42,7 @@ namespace Hast.Transformer.Vhdl.Tests
             VhdlManifest manifest = null;
 
             _hostConfiguration.OnServiceRegistration += (configuration, services) =>
-            {
                 services.AddSingleton(new EventHandler<ITransformedVhdlManifest>((sender, e) => manifest = e.Manifest));
-            };
 
             await Host.RunAsync<ITransformer>(async transformer =>
             {
@@ -73,10 +69,7 @@ namespace Hast.Transformer.Vhdl.Tests
             return TransformAssembliesToVhdl(
                 transformer,
                 new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
-                configuration =>
-                {
-                    configuration.TransformerConfiguration().UseSimpleMemory = false;
-                });
+                configuration => configuration.TransformerConfiguration().UseSimpleMemory = false);
         }
     }
 }
