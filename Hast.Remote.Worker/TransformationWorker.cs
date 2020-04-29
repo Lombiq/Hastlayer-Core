@@ -8,10 +8,12 @@ using Hast.Synthesis.Services;
 using Hast.Transformer;
 using Hast.Transformer.Vhdl.Services;
 using Hast.Xilinx;
+using Microsoft.ApplicationInsights;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.ApplicationInsights;
 using NLog.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
@@ -22,8 +24,6 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.ApplicationInsights;
-using Microsoft.Extensions.Logging.ApplicationInsights;
 
 namespace Hast.Remote.Worker
 {
@@ -383,6 +383,7 @@ namespace Hast.Remote.Worker
                 {
                     services.AddSingleton(configuration);
                     services.AddSingleton(container);
+                    services.AddSingleton<ITransformationWorker, TransformationWorker>();
 
                     onServiceRegistration?.Invoke(sender, services);
                 }
