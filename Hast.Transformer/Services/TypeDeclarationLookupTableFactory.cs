@@ -1,7 +1,7 @@
 ﻿using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
-using Orchard;
+using Hast.Common.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 

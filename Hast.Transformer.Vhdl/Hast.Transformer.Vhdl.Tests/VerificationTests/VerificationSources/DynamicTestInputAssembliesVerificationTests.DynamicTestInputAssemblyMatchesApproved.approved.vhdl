@@ -12,6 +12,7 @@
 -- * System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.TestInputs.Dynamic.CastExpressionCases::AllNumberCastingVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+-- * System.Void Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 
 -- VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware Framework so they can be more easily updated.
 
@@ -187,6 +188,10 @@ architecture Imp of Hast_IP is
     --   than one clock cycle to produce their output.
     -- * The ExternalInvocationProxy process dispatches invocations that were started from the outside to the state machines.
     -- * The InternalInvocationProxy processes dispatch invocations between state machines.
+
+    -- When put on variables and signals this attribute instructs Vivado not to merge them, thus allowing us to define multi-cycle paths properly.
+    attribute dont_touch: string;
+
 
     -- System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
@@ -1512,6 +1517,32 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
+    -- System.Void Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
+    -- State machine states:
+    type \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._States\ is (
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_0\, 
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_1\, 
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_2\, 
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\, 
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_4\, 
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\, 
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_6\, 
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_7\, 
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_8\, 
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_9\, 
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_10\, 
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_11\, 
+        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_12\);
+    -- Signals:
+    Signal \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._Finished\: boolean := false;
+    Signal \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
+    Signal \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
+    Signal \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
+    Signal \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._Started\: boolean := false;
+    -- System.Void Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
+
+
     -- System.Void Hast::ExternalInvocationProxy() declarations start
     -- Signals:
     Signal \FinishedInternal\: boolean := false;
@@ -1528,6 +1559,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().InlinedCases::NestedInlinedMultiReturn(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
@@ -1541,6 +1573,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().InlinedCases::NestedInlinedMultiReturn(SimpleMemory)._Finished.0\: boolean := false;
     -- System.Void Hast::ExternalInvocationProxy() declarations end
 
 
@@ -1692,6 +1725,22 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.93\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.94\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.95\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.5\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.17\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.29\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.41\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.53\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.65\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.77\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.89\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1877,7 +1926,7 @@ begin
                         -- num = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2996,6 +3045,20 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\: signed(31 downto 0) := to_signed(0, 32);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.5\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.17\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.29\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.41\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.53\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.65\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.77\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -3170,7 +3233,7 @@ begin
                         -- num = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4231,6 +4294,20 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\: signed(31 downto 0) := to_signed(0, 32);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.5\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.17\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.29\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.41\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.53\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.65\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.77\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4405,7 +4482,7 @@ begin
                         -- num = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5477,6 +5554,22 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.93\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.94\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.95\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.5\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.17\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.29\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.41\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.53\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.65\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.77\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.89\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5662,7 +5755,7 @@ begin
                         -- num = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -6777,6 +6870,20 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num8\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\: signed(31 downto 0) := to_signed(0, 32);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.5\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.17\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.29\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.41\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.53\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.65\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.77\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6947,7 +7054,7 @@ begin
                         -- num = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -7989,6 +8096,22 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.93\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.94\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.95\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.5\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.17\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.29\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.41\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.53\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.65\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.77\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.89\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -8172,7 +8295,7 @@ begin
                         -- num = memory.ReadUInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9223,6 +9346,14 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.47\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.48\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.49\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.7\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.8\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.19\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.20\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.31\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.32\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.43\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.44\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -9343,7 +9474,7 @@ begin
                         -- num = ((long)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1))));
                         -- 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9360,7 +9491,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1071
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_4\ => 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9916,6 +10047,12 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.38\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.39\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.7\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.8\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.19\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.20\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.31\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.32\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -10022,7 +10159,7 @@ begin
                         -- num = ((long)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1))));
                         -- 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10039,7 +10176,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1071
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_4\ => 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10504,6 +10641,10 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.27\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.28\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.29\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.7\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.8\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.23\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.24\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -10598,7 +10739,7 @@ begin
                         -- num = (ulong)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1)));
                         -- 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -10615,7 +10756,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1071
                     when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_4\ => 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11030,6 +11171,10 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.27\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.28\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.29\: signed(63 downto 0) := to_signed(0, 64);
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.9\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.10\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.23\: Variable is "true";
+        attribute dont_touch of \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.24\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -11123,7 +11268,7 @@ begin
                         -- num = (ulong)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1)));
                         -- 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11140,7 +11285,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1071
                     when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_4\ => 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11601,7 +11746,7 @@ begin
                         -- num = ((long)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1))));
                         -- 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11618,7 +11763,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1071
                     when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0._State_4\ => 
                         -- Begin SimpleMemory read.
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12514,7 +12659,7 @@ begin
                         -- 
                         \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.binaryOperationResult.0\ := SmartResize(shift_right(\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.number\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
                         -- Begin SimpleMemory write.
-                        \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.CellIndex\ <= resize(\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.startCellIndex\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.CellIndex\ <= \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.startCellIndex\;
                         \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.binaryOperationResult.0\));
                         \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0._State_3\;
@@ -12534,7 +12679,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0._State_4\ => 
                         -- Begin SimpleMemory write.
-                        \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.CellIndex\ <= resize(\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.binaryOperationResult.1\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.CellIndex\ <= \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.binaryOperationResult.1\;
                         \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.number\, 32));
                         \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0._State_5\;
@@ -12650,7 +12795,7 @@ begin
                         -- num = memory.ReadInt32 (1);
                         -- 
                         -- Begin SimpleMemory read.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12673,7 +12818,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_4\ => 
                         -- Begin SimpleMemory read.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12690,7 +12835,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.1071
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_6\ => 
                         -- Begin SimpleMemory read.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12714,7 +12859,7 @@ begin
                             -- 
                             \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.2\ := signed(SmartResize(shift_right(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32));
                             -- Begin SimpleMemory write.
-                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                             \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.2\));
                             \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_8\;
@@ -12734,7 +12879,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_9\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(1, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_10\;
@@ -12753,7 +12898,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_11\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(2, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(2, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_12\;
@@ -12772,7 +12917,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_13\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(3, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(3, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_14\;
@@ -12791,7 +12936,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_15\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(4, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(4, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\, 16), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_16\;
@@ -12810,7 +12955,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_17\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(5, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(5, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\), 16), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_18\;
@@ -12829,7 +12974,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_19\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(6, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(6, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\, 8), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_20\;
@@ -12848,7 +12993,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_21\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(7, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(7, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\), 8), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_22\;
@@ -12875,7 +13020,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_23\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(8, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(8, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.3\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_24\;
@@ -12894,7 +13039,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_25\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(9, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(9, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_26\;
@@ -12913,7 +13058,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_27\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(10, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(10, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_28\;
@@ -12932,7 +13077,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_29\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(11, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(11, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_30\;
@@ -12951,7 +13096,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_31\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(12, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(12, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 16)), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_32\;
@@ -12970,7 +13115,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_33\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(13, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(13, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 16), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_34\;
@@ -12989,7 +13134,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_35\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(14, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(14, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 8)), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_36\;
@@ -13008,7 +13153,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_37\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(15, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(15, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 8), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_38\;
@@ -13032,7 +13177,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_39\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(16, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(16, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.4\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_40\;
@@ -13051,7 +13196,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_41\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(17, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(17, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_42\;
@@ -13075,7 +13220,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_43\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(18, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(18, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.5\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_44\;
@@ -13094,7 +13239,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_45\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(19, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(19, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_46\;
@@ -13113,7 +13258,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_47\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(20, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(20, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_48\;
@@ -13132,7 +13277,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_49\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(21, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(21, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\, 16), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_50\;
@@ -13151,7 +13296,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_51\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(22, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(22, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\), 16), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_52\;
@@ -13170,7 +13315,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_53\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(23, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(23, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\, 8), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_54\;
@@ -13189,7 +13334,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_55\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(24, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(24, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num\), 8), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_56\;
@@ -13220,7 +13365,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_57\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(25, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(25, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.6\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_58\;
@@ -13239,7 +13384,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_59\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(26, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(26, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_60\;
@@ -13263,7 +13408,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_61\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(27, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(27, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.7\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_62\;
@@ -13282,7 +13427,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_63\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(28, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(28, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_64\;
@@ -13301,7 +13446,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_65\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(29, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(29, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_66\;
@@ -13320,7 +13465,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_67\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(30, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(30, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\, 16)), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_68\;
@@ -13339,7 +13484,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_69\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(31, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(31, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\, 16), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_70\;
@@ -13358,7 +13503,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_71\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(32, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(32, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\, 8)), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_72\;
@@ -13377,7 +13522,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_73\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(33, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(33, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num5\, 8), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_74\;
@@ -13408,7 +13553,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_75\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(34, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(34, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.8\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_76\;
@@ -13427,7 +13572,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_77\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(35, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(35, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_78\;
@@ -13451,7 +13596,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_79\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(36, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(36, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.9\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_80\;
@@ -13470,7 +13615,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_81\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(37, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(37, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_82\;
@@ -13489,7 +13634,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_83\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(38, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(38, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_84\;
@@ -13508,7 +13653,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_85\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(39, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(39, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(ToUnsignedAndExpand(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_86\;
@@ -13527,7 +13672,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_87\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(40, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(40, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_88\;
@@ -13546,7 +13691,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_89\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(41, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(41, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\, 8), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_90\;
@@ -13565,7 +13710,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_91\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(42, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(42, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\), 8), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_92\;
@@ -13596,7 +13741,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_93\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(43, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(43, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.10\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_94\;
@@ -13615,7 +13760,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_95\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(44, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(44, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_96\;
@@ -13639,7 +13784,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_97\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(45, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(45, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.11\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_98\;
@@ -13658,7 +13803,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_99\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(46, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(46, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_100\;
@@ -13677,7 +13822,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_101\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(47, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(47, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\, 32)));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_102\;
@@ -13696,7 +13841,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_103\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(48, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(48, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_104\;
@@ -13715,7 +13860,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_105\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(49, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(49, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_106\;
@@ -13734,7 +13879,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_107\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(50, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(50, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\, 8)), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_108\;
@@ -13753,7 +13898,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_109\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(51, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(51, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\, 8), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_110\;
@@ -13784,7 +13929,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_111\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(52, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(52, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.12\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_112\;
@@ -13803,7 +13948,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_113\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(53, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(53, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_114\;
@@ -13827,7 +13972,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_115\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(54, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(54, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.13\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_116\;
@@ -13846,7 +13991,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_117\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(55, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(55, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_118\;
@@ -13865,7 +14010,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_119\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(56, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(56, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_120\;
@@ -13884,7 +14029,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_121\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(57, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(57, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(ToUnsignedAndExpand(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_122\;
@@ -13907,7 +14052,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_123\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(58, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(58, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_124\;
@@ -13926,7 +14071,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_125\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(59, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(59, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(ToUnsignedAndExpand(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\, 16), 32)));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_126\;
@@ -13945,7 +14090,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_127\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(60, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(60, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(unsigned(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b\), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_128\;
@@ -13976,7 +14121,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_129\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(61, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(61, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.14\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_130\;
@@ -13995,7 +14140,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_131\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(62, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(62, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num4\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_132\;
@@ -14019,7 +14164,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_133\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(63, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(63, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.15\));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_134\;
@@ -14038,7 +14183,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_135\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(64, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(64, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num3\, 32)));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_136\;
@@ -14057,7 +14202,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_137\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(65, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(65, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(signed(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\, 32)));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_138\;
@@ -14076,7 +14221,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_139\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(66, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(66, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_140\;
@@ -14099,7 +14244,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_141\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(67, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(67, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num6\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_142\;
@@ -14122,7 +14267,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_143\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(68, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(68, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num7\, 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_144\;
@@ -14141,7 +14286,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_145\ => 
                         -- Begin SimpleMemory write.
-                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(69, 32), 32);
+                        \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(69, 32);
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(SmartResize(signed(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.b2\), 32));
                         \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_146\;
@@ -14203,13 +14348,17 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_2\ => 
                         -- The following section was transformed from the .NET statement below:
+                        -- ;
+                        -- // Starting inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
                         -- int input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
-                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14219,7 +14368,7 @@ begin
                         -- memory.WriteInt32 (0, return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49);
                         -- 
                         -- Begin SimpleMemory write.
-                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= resize(to_signed(0, 32), 32);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\);
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_8\;
@@ -14262,6 +14411,7 @@ begin
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49:
+                        -- // Ending inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                         -- 
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14303,6 +14453,249 @@ begin
     -- System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
+    -- System.Void Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
+    \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._StateMachine\: process (\Clock\) 
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\: \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._States\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_0\;
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._Finished\ <= false;
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_0\;
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\ := (others => '0');
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := false;
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.1\ := false;
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
+            else 
+                case \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ is 
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._Started\ = true) then 
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._Started\ = true) then 
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._Finished\ <= true;
+                        else 
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._Finished\ <= false;
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_2\ => 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ;
+                        -- // Starting inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturnInternal(System.Int32).
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221 = memory.ReadInt32 (0);
+                        -- 
+                        -- Begin SimpleMemory read.
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\ => 
+                        -- State for the label Exit_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1.
+                        -- The following section was transformed from the .NET statement below:
+                        -- int input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa = input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221;
+                        -- 
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa > 0) {
+                        -- 	return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa = 1;
+                        -- 	goto Exit_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa;
+                        -- }
+                        -- 
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.1\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\ > to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_10\ and ends in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_11\.
+                        --     * Execution after either branch will continue in the following state: \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_9\.
+
+                        if (\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.1\) then 
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_10\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_9\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_4\ => 
+                        -- State for the label Exit_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221 = return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 + return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa;
+                        -- // Ending inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturnInternal(System.Int32).
+                        -- 
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ + \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\;
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteInt32 (0, return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221);
+                        -- 
+                        -- Begin SimpleMemory write.
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_12\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\ := ConvertStdLogicVectorToInt32(\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- int return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221;
+                            -- // Starting inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- int input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 = input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221;
+                            -- 
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- int return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 > 0) {
+                            -- 	return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 = 1;
+                            -- 	goto Exit_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1;
+                            -- }
+                            -- 
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ > to_signed(0, 32);
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_7\ and ends in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_8\.
+                            --     * Execution after either branch will continue in the following state: \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_6\.
+
+                            if (\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\) then 
+                                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_7\;
+                            else 
+                                -- There was no false branch, so going directly to the state after the if-else.
+                                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_6\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_6\ => 
+                        -- State after the if-else which was started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 = 2;
+                        -- 
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ := to_signed(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- Exit_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1:
+                        -- // Ending inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
+                        -- // Starting inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
+                        -- 
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_7\ => 
+                        -- True branch of the if-else started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 = 1;
+                        -- 	goto Exit_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 = 1;
+                        -- 
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ := to_signed(1, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- goto Exit_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1;
+                        -- 
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_8\ => 
+                        -- Going to the state after the if-else which was started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\.
+                        if (\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ = \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_8\) then 
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_9\ => 
+                        -- State after the if-else which was started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa = 2;
+                        -- 
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\ := to_signed(2, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- Exit_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa:
+                        -- // Ending inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
+                        -- 
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_10\ => 
+                        -- True branch of the if-else started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa = 1;
+                        -- 	goto Exit_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa = 1;
+                        -- 
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\ := to_signed(1, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- goto Exit_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa;
+                        -- 
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_11\ => 
+                        -- Going to the state after the if-else which was started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\.
+                        if (\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ = \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_11\) then 
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_9\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_12\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
+
+
     -- System.Void Hast::ExternalInvocationProxy() start
     \Finished\ <= \FinishedInternal\;
     \Hast::ExternalInvocationProxy()\: process (\Clock\) 
@@ -14324,6 +14717,7 @@ begin
                 \Hast::ExternalInvocationProxy().BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().CastExpressionCases::AllNumberCastingVariations(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().InlinedCases::NestedInlinedMultiReturn(SimpleMemory)._Started.0\ <= false;
             else 
                 if (\Started\ = true and \FinishedInternal\ = false) then 
                     -- Starting the state machine corresponding to the given member ID.
@@ -14417,6 +14811,13 @@ begin
                                 \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ <= true;
                             elsif (\Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Finished.0\) then 
                                 \Hast::ExternalInvocationProxy().InlinedCases::InlinedMultiReturn(SimpleMemory)._Started.0\ <= false;
+                                \FinishedInternal\ <= true;
+                            end if;
+                        when 13 => 
+                            if (\Hast::ExternalInvocationProxy().InlinedCases::NestedInlinedMultiReturn(SimpleMemory)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().InlinedCases::NestedInlinedMultiReturn(SimpleMemory)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().InlinedCases::NestedInlinedMultiReturn(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().InlinedCases::NestedInlinedMultiReturn(SimpleMemory)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().InlinedCases::NestedInlinedMultiReturn(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
                         when others => 
@@ -15369,11 +15770,18 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
+    -- Signal connections for System.Void Hast::ExternalInvocationProxy() (#0):
+    \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._Started\ <= \Hast::ExternalInvocationProxy().InlinedCases::NestedInlinedMultiReturn(SimpleMemory)._Started.0\;
+    \Hast::ExternalInvocationProxy().InlinedCases::NestedInlinedMultiReturn(SimpleMemory)._Finished.0\ <= \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
+
+
     -- System.Void Hast::SimpleMemoryOperationProxy() start
-    \CellIndex\ <= to_integer(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else to_integer(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\) when \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ or \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ else 0;
-    \DataOut\ <= \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ when \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ else (others => '0');
-    \ReadEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\;
-    \WriteEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\;
+    \CellIndex\ <= to_integer(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.CellIndex\) when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else to_integer(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.CellIndex\) when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\) when \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ or \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\) when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ or \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ else 0;
+    \DataOut\ <= \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.DataOut\ when \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ else \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.DataOut\ when \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ else \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ when \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ else \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ else (others => '0');
+    \ReadEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.ReadEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ or \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ or \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\;
+    \WriteEnable\ <= \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).0.SimpleMemory.WriteEnable\ or \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.WriteEnable\ or \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ or \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.WriteEnable\;
     -- System.Void Hast::SimpleMemoryOperationProxy() end
 
 end Imp;

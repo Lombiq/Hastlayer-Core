@@ -4,7 +4,7 @@ using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
-using Orchard;
+using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -15,6 +15,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             IVhdlTransformationContext context);
 
         DataType ConvertAstType(AstType type, IVhdlTransformationContext context);
+
         DataType ConvertAndDeclareAstType(
             AstType type,
             IDeclarableElement declarable,

@@ -1,4 +1,4 @@
-﻿using Autofac;
+﻿using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis;
 using Hast.Synthesis.Services;
@@ -10,48 +10,45 @@ using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using Hast.Xilinx;
-using Hast.Xilinx.Abstractions;
+using Hast.Xilinx.Abstractions.ManifestProviders;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Moq;
-using NUnit.Framework;
-using Orchard.Services;
-using Orchard.Tests.Utility;
+using Moq.AutoMock;
+using Xunit;
 using Shouldly;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
-    [TestFixture]
     public class TransformerTests
     {
-        private IContainer _container;
-
-        private ITransformer _transformer;
         private ITransformationContext _producedContext;
-        private Mock<ITransformingEngine> _transformingEngineMock;
+        private readonly AutoMocker _mocker;
 
+        private ITransformer GetTransformer() => _mocker.CreateInstance<DefaultTransformer>();
 
-        [SetUp]
-        public virtual void Init()
+        
+        public TransformerTests()
         {
-            var builder = new ContainerBuilder();
+            _mocker = new AutoMocker();
 
+            // The order here is important because some of the earlier services are dependencies of later ones.
+            _mocker.Use<IJsonConverter>(_mocker.CreateInstance<DefaultJsonConverter>());
+            _mocker.Use<IMemberSuitabilityChecker>(_mocker.CreateInstance<MemberSuitabilityChecker>());
+            _mocker.Use<ITypeDeclarationLookupTableFactory>(_mocker.CreateInstance<TypeDeclarationLookupTableFactory>());
+            _mocker.Use<ISyntaxTreeCleaner>(_mocker.CreateInstance<SyntaxTreeCleaner>());
+            _mocker.Use<IMemberIdentifiersFixer>(_mocker.CreateInstance<MemberIdentifiersFixer>());
 
-            builder.RegisterAutoMocking(MockBehavior.Loose);
+            // Moq has a problem with resolving IEnumerable<Tservice> in the constructor even when Tservice is already
+            // registered, so these have to be added manually. See: https://github.com/moq/Moq.AutoMocker/issues/76
+            _mocker.Use<IEnumerable<EventHandler<ITransformationContext>>>(Array.Empty<EventHandler<ITransformationContext>>());
+            _mocker.Use<IDeviceDriverSelector>(new DeviceDriverSelector(new[] { _mocker.CreateInstance<Nexys4DdrDriver>() }));
 
-            builder.RegisterType<DefaultJsonConverter>().As<IJsonConverter>();
-            builder.RegisterType<SyntaxTreeCleaner>().As<ISyntaxTreeCleaner>();
-            builder.RegisterType<TypeDeclarationLookupTableFactory>().As<ITypeDeclarationLookupTableFactory>();
-            builder.RegisterType<MemberSuitabilityChecker>().As<IMemberSuitabilityChecker>();
-            builder.RegisterType<DeviceDriverSelector>().As<IDeviceDriverSelector>();
-            builder.RegisterType<Nexys4DdrDriver>().As<IDeviceDriver>();
-            builder.RegisterType<MemberIdentifiersFixer>().As<IMemberIdentifiersFixer>();
-
-            _transformingEngineMock = new Mock<ITransformingEngine>();
-
-            _transformingEngineMock
+            _mocker
+                .GetMock<ITransformingEngine>()
                 .Setup(engine => engine.Transform(It.IsAny<ITransformationContext>()))
                 .Returns<ITransformationContext>(context =>
                     {
@@ -61,30 +58,20 @@ namespace Hast.Transformer.Vhdl.Tests
                         return Task.FromResult<IHardwareDescription>(null);
                     })
                 .Verifiable();
-            builder.RegisterInstance(_transformingEngineMock.Object).As<ITransformingEngine>();
-
-
-            builder.RegisterType<DefaultTransformer>().As<ITransformer>();
-
-            _container = builder.Build();
-
-            _transformer = _container.Resolve<ITransformer>();
-        }
-
-        [TestFixtureTearDown]
-        public void Clean()
-        {
         }
 
 
-        [Test]
+        [Fact]
         public async Task TransformEngineCallReceivesProperBasicContext()
         {
             var configuration = CreateConfig();
+            var transformer = GetTransformer();
 
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, configuration);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, configuration);
 
-            _transformingEngineMock.Verify(engine => engine.Transform(It.Is<ITransformationContext>(context => context != null)));
+            _mocker
+                .GetMock<ITransformingEngine>()
+                .Verify(engine => engine.Transform(It.Is<ITransformationContext>(context => context != null)));
 
             _producedContext.Id.ShouldNotBeNullOrEmpty();
             _producedContext.SyntaxTree.ShouldNotBeNull();
@@ -92,13 +79,15 @@ namespace Hast.Transformer.Vhdl.Tests
             _producedContext.TypeDeclarationLookupTable.ShouldNotBeNull();
         }
 
-        [Test]
+        [Fact]
         public async Task DifferentConfigurationsResultInDifferentIds()
         {
             var config = CreateConfig();
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            var transformer = GetTransformer();
+
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             var firstId = _producedContext.Id;
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of assemblies transformed being different.");
 
 
@@ -107,31 +96,32 @@ namespace Hast.Transformer.Vhdl.Tests
                 {
                     MaxDegreeOfParallelism = 5
                 });
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
             config.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Single().MaxDegreeOfParallelism = 15;
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the max degree of parallelism being different.");
 
             config.HardwareEntryPointMemberFullNames = new[] { "aaa" };
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
             config.HardwareEntryPointMemberFullNames = new[] { "bbb" };
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members being different.");
 
             config.HardwareEntryPointMemberNamePrefixes = new[] { "aaa" };
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
             config.HardwareEntryPointMemberNamePrefixes = new[] { "bbb" };
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members prefixed being different.");
         }
 
-        [Test]
+        [Fact]
         public async Task UnusedDeclarationsArentInTheSyntaxTree()
         {
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, CreateConfig());
+            var transformer = GetTransformer();
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, CreateConfig());
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(7, "Not the number of types remained in the syntax tree than there are used.");
@@ -141,7 +131,7 @@ namespace Hast.Transformer.Vhdl.Tests
                 "Unreferenced members of classes weren't removed from the syntax tree.");
         }
 
-        [Test]
+        [Fact]
         public async Task IncludedMembersAndTheirReferencesAreOnlyInTheSyntaxTree()
         {
             var configuration = CreateConfig();
@@ -150,8 +140,9 @@ namespace Hast.Transformer.Vhdl.Tests
                 "System.Void " + typeof(RootClass).FullName + "::" + nameof(RootClass.VirtualMethod) + "(System.Int32)",
                 "System.Void " + typeof(ComplexTypeHierarchy).FullName + "::" + typeof(IInterface1).FullName + "." + nameof(IInterface1.Interface1Method1) + "()"
             };
+            var transformer = GetTransformer();
 
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(3, "Not the number of types remained in the syntax tree than there are used.");
@@ -167,7 +158,7 @@ namespace Hast.Transformer.Vhdl.Tests
                 .ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public async Task IncludedMembersPrefixedAndTheirReferencesAreOnlyInTheSyntaxTree()
         {
             var configuration = CreateConfig();
@@ -176,7 +167,9 @@ namespace Hast.Transformer.Vhdl.Tests
                 typeof(RootClass).FullName + "." + nameof(RootClass.VirtualMethod),
                 typeof(ComplexTypeHierarchy).Namespace
             };
-            await _transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
+            var transformer = GetTransformer();
+
+            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(5, "Not the number of types remained in the syntax tree than there are used.");
@@ -196,7 +189,7 @@ namespace Hast.Transformer.Vhdl.Tests
 
         private static HardwareGenerationConfiguration CreateConfig()
         {
-            var configuration = new HardwareGenerationConfiguration(Nexys4DdrManifestProvider.DeviceName);
+            var configuration = new HardwareGenerationConfiguration(Nexys4DdrManifestProvider.DeviceName, null);
             configuration.TransformerConfiguration().UseSimpleMemory = false;
             return configuration;
         }

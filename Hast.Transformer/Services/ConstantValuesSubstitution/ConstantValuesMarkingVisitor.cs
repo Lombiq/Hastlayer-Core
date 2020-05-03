@@ -57,7 +57,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (primitiveExpressionParent.Is<ParenthesizedExpression>(out var parenthesizedExpression) &&
                 parenthesizedExpression.Expression == primitiveExpression)
             {
-                var newExpression = (PrimitiveExpression)primitiveExpression.Clone();
+                var newExpression = primitiveExpression.Clone<PrimitiveExpression>();
                 parenthesizedExpression.ReplaceWith(newExpression);
                 primitiveExpression = newExpression;
                 primitiveExpressionParent = newExpression.Parent;

@@ -1,118 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{02BE2213-F0E5-4107-BEA4-AE396525A644}</ProjectGuid>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hast.Xilinx</RootNamespace>
-    <AssemblyName>Hast.Xilinx</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Humanizer, Version=2.5.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\Humanizer.Core.2.5.16\lib\netstandard2.0\Humanizer.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.Decompiler, Version=6.0.0.5559, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\ICSharpCode.Decompiler.6.0.0.5559-preview2\lib\netstandard2.0\ICSharpCode.Decompiler.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Reflection.Metadata, Version=1.4.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\System.Reflection.Metadata.1.6.0\lib\netstandard2.0\System.Reflection.Metadata.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Nexys4DdrDriver.cs" />
-    <Compile Include="NexysA7Driver.cs" />
-    <Compile Include="NexysDriverBase.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-    <None Include="Readme.md" />
+    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
+    <ProjectReference Include="..\..\Hast.Communication\Hast.Communication.csproj" />
+    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
+    <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
+    <ProjectReference Include="..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj">
-      <Project>{3f637e57-95a4-4b3d-9056-ffed38f1a1f2}</Project>
-      <Name>Hast.Xilinx.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
-      <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
-      <Name>Hast.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Communication\Hast.Communication.csproj">
-      <Project>{71B55241-A31C-43F5-9B46-40B53099DF56}</Project>
-      <Name>Hast.Communication</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj">
-      <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
-      <Name>Hast.Layer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj">
-      <Project>{1D1EC796-DFF6-4EC7-B749-62B89D1DEA92}</Project>
-      <Name>Hast.Synthesis.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj">
-      <Project>{040554f7-5565-4d82-8aab-cdcd745ca822}</Project>
-      <Name>Hast.Synthesis</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj">
-      <Project>{25810814-29c8-4b60-bc96-04b72f70e6b7}</Project>
-      <Name>Hast.Transformer.Vhdl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj">
-      <Project>{2d1d92bb-4555-4cbe-8d0e-63563d6ce4c6}</Project>
-      <Name>Orchard.Framework</Name>
-    </ProjectReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Module.txt" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

@@ -69,7 +69,7 @@ namespace Hast.Transformer.Services
 
 
         private static string SuffixMethodIdentifier(string identifier, string methodIdentifierNameSuffix) =>
-            identifier + "_" + methodIdentifierNameSuffix;
+            identifier.EndsWith("_" + methodIdentifierNameSuffix) ? identifier : identifier + "_" + methodIdentifierNameSuffix;
 
 
         private class MethodCallChangingVisitor : DepthFirstAstVisitor
@@ -96,9 +96,23 @@ namespace Hast.Transformer.Services
 
                 var invocationParentStatement = invocationExpression.FindFirstParentStatement();
 
+                if (invocationParentStatement.PrevSibling == null)
+                {
+                    // The statement is in the first node of the subtree, i.e. the first statement in the block. To
+                    // make it work well we need to insert a new statement before it just for the comment (otherwise
+                    // either the comment would get lost if the parent is inlined too and these statements, and only
+                    // statements are fetched, or it would be inserted mid-statement).
+                    // We need to use a statement built into ILSpy otherwise it won't show up in the output. An
+                    // EmptyStatement is hackish but it's a noop and it works.
+                    AstInsertionHelper.InsertStatementBefore(invocationParentStatement, new EmptyStatement());
+                }
+                invocationParentStatement.PrevSibling.AddChild(
+                    new Comment($" Starting inlined block of the method {methodFullName}."), Roles.Comment);
+
                 // Creating a suffix to make all identifiers (e.g. variable names) inside the method unique once
                 // inlined. Since the same method can be inlined multiple times in another method we also need to
-                // distinguish per invocation.
+                // distinguish per invocation. Furthermore, such inlined invocations can themselves be inlined too, so
+                // identifiers need to be continued to suffixed on every level.
                 var methodIdentifierNameSuffix = Sha2456Helper.ComputeHash(methodFullName + invocationExpression.GetFullName());
 
                 // Assigning all invocation arguments to newly created local variables which then will be used in the
@@ -130,7 +144,7 @@ namespace Hast.Transformer.Services
                     invocationParentStatement);
 
                 // Preparing and adding the method's body inline.
-                var inlinedBody = (BlockStatement)method.Body.Clone();
+                var inlinedBody = method.Body.Clone<BlockStatement>();
                 // If there are multiple return statements then control flow will be mimicked with goto jumps.
                 var exitLabel = new LabelStatement { Label = SuffixMethodIdentifier("Exit", methodIdentifierNameSuffix) };
                 ReturnStatement lastReturn = null;
@@ -154,13 +168,25 @@ namespace Hast.Transformer.Services
 
                 foreach (var statement in inlinedBody.Statements)
                 {
-                    AstInsertionHelper.InsertStatementBefore(
-                        invocationParentStatement,
-                        statement.Clone());
+                    AstInsertionHelper.InsertStatementBefore(invocationParentStatement, statement.Clone());
                 }
 
                 // The invocation now can be replaced with a reference to the return variable.
                 invocationExpression.ReplaceWith(returnVariableReference);
+
+                //var endingComment = new Comment($" Ending inlined block of the method {methodFullName}.");
+                //if (invocationParentStatement.NextSibling == null)
+                //{
+                //    AstInsertionHelper.InsertStatementAfter(invocationParentStatement, new EmptyStatement());
+                //    invocationParentStatement.NextSibling.AddChild(endingComment, Roles.Comment);
+                //}
+                //else
+                //{
+                //    invocationParentStatement.AddChild(endingComment, Roles.Comment);
+                //}
+
+                invocationParentStatement.PrevSibling.AddChild(
+                    new Comment($" Ending inlined block of the method {methodFullName}."), Roles.Comment);
             }
         }
 
@@ -210,6 +236,20 @@ namespace Hast.Transformer.Services
                 base.VisitIdentifierExpression(identifierExpression);
 
                 identifierExpression.Identifier = SuffixMethodIdentifier(identifierExpression.Identifier, _methodIdentifierNameSuffix);
+            }
+
+            public override void VisitLabelStatement(LabelStatement labelStatement)
+            {
+                base.VisitLabelStatement(labelStatement);
+
+                labelStatement.Label = SuffixMethodIdentifier(labelStatement.Label, _methodIdentifierNameSuffix);
+            }
+
+            public override void VisitGotoStatement(GotoStatement gotoStatement)
+            {
+                base.VisitGotoStatement(gotoStatement);
+
+                gotoStatement.Label = SuffixMethodIdentifier(gotoStatement.Label, _methodIdentifierNameSuffix);
             }
         }
     }

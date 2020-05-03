@@ -1,4 +1,5 @@
-﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
@@ -210,12 +211,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var shouldResizeResult =
                 (
-                    // If the type of the result is the same as the type of the binary expression but the expression is a
-                    // multiplication then this means that the result of the operation wouldn't fit into the result type.
-                    // This is allowed in .NET (an explicit cast is needed in C# but that will be removed by the compiler)
-                    // but will fail in VHDL with something like "[Synth 8-690] width mismatch in assignment; target has 
-                    // 16 bits, source has 32 bits." In this cases we need to add a type conversion. Also see the block
-                    // below.
+                    // If the type of the result is the same as the type of the binary expression but the expression is
+                    // a multiplication then this means that the result of the operation wouldn't fit into the result
+                    // type. This is allowed in .NET (an explicit cast is needed in C# but that will be removed by the
+                    // compiler) but will fail in VHDL with something like "[Synth 8-690] width mismatch in assignment;
+                    // target has 16 bits, source has 32 bits." In this cases we need to add a type conversion. Also
+                    // see the block below.
                     // E.g. ushort = ushort * ushort is valid in IL but in VHDL it must have a length truncation:
                     // unsigned(15 downto 0) = resize(unsigned(15 downto 0) * unsigned(15 downto 0), 16)
                     isMultiplication &&
@@ -327,7 +328,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     clockCyclesNeededForOperation += Math.Max(
                         deviceDriver.GetClockCyclesNeededForBinaryOperation(bitwiseAndBinary, maxOperandSize, true),
                         deviceDriver.GetClockCyclesNeededForBinaryOperation(
-                            (BinaryOperatorExpression)bitwiseAndBinary.Clone(), maxOperandSize, false));
+                            bitwiseAndBinary.Clone<BinaryOperatorExpression>(), maxOperandSize, false));
                 }
 
                 binaryElement = new Invocation
@@ -385,7 +386,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
-            // If the current state takes more than one clock cycle we add a new state and follow up there.
+            if (operationIsMultiCycle &&
+                context.TransformationContext.DeviceDriver.DeviceManifest.ToolChainName == CommonToolChainNames.Vivado)
+            {
+                // We need to add an attribute like the one below so Vivado won't merge this variable/signal with
+                // others, thus allowing us to create XDC timing constraints for it.
+                // attribute dont_touch of \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ : variable is "true";
+
+                var attributes = operationResultDataObjectIsVariable ?
+                    stateMachine.LocalAttributeSpecifications :
+                    stateMachine.GlobalAttributeSpecifications;
+                attributes.Add(new AttributeSpecification
+                {
+                    Attribute = KnownDataTypes.DontTouchAttribute,
+                    Expression = new Value { DataType = KnownDataTypes.UnrangedString, Content = "true" },
+                    ItemClass = operationResultDataObjectReference.DataObjectKind.ToString(),
+                    Of = operationResultDataObjectReference
+                });
+            }
+
+            // If the current state already takes more than one clock cycle we add a new state and follow up there.
             if (isFirstOfSimdOperationsOrIsSingleOperation && !operationIsMultiCycle)
             {
                 stateMachine.AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(context, clockCyclesNeededForOperation);

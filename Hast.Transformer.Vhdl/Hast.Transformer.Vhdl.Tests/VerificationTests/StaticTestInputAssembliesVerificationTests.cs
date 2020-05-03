@@ -4,19 +4,17 @@ using Hast.TestInputs.ClassStructure2;
 using Hast.TestInputs.Static;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
-using Lombiq.OrchardAppHost;
-using NUnit.Framework;
+using Xunit;
 using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
-    [TestFixture]
     public class StaticTestInputAssembliesVerificationTests : VerificationTestFixtureBase
     {
-        [Test]
+        [Fact]
         public async Task ClassStructureAssembliesMatchApproved()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await Host.RunAsync<ITransformer>(async transformer =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,
@@ -30,10 +28,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             });
         }
 
-        [Test]
+        [Fact]
         public async Task StaticTestInputAssemblyMatchesApproved()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            await Host.RunAsync<ITransformer>(async transformer =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdl(
                     transformer,

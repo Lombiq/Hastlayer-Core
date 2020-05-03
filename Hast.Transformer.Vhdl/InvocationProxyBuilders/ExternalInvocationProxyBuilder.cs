@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
@@ -7,6 +6,7 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 {
@@ -55,21 +55,21 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     .CreateWaitForInvocationFinished(proxyComponent, memberName, 1);
 
                 waitForInvocationFinishedIfElse.True.Add(new Assignment
-                    {
-                        AssignTo = finishedSignalReference,
-                        Expression = Value.True
-                    });
+                {
+                    AssignTo = finishedSignalReference,
+                    Expression = Value.True
+                });
 
                 when.Add(new IfElse
+                {
+                    Condition = new Binary
                     {
-                        Condition = new Binary
-                        {
-                            Left = InvocationHelper.CreateStartedSignalReference(proxyComponent, memberName, 0),
-                            Operator = BinaryOperator.Equality,
-                            Right = Value.False
-                        },
-                        True = InvocationHelper.CreateInvocationStart(proxyComponent, memberName, 0),
-                        ElseIfs = new List<If<IVhdlElement>>
+                        Left = InvocationHelper.CreateStartedSignalReference(proxyComponent, memberName, 0),
+                        Operator = BinaryOperator.Equality,
+                        Right = Value.False
+                    },
+                    True = InvocationHelper.CreateInvocationStart(proxyComponent, memberName, 0),
+                    ElseIfs = new List<If<IVhdlElement>>
                         {
                             new If
                             {
@@ -77,14 +77,14 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 True = waitForInvocationFinishedIfElse.True
                             }
                         }
-                    });
+                });
                 ;
 
 
                 memberSelectingCase.Whens.Add(when);
             }
 
-            memberSelectingCase.Whens.Add(new CaseWhen { Expression = "others".ToVhdlValue(KnownDataTypes.Identifier) });
+            memberSelectingCase.Whens.Add(CaseWhen.CreateOthers());
 
             var startedPortReference = CommonPortNames.Started.ToVhdlSignalReference();
             proxyComponent.ProcessNotInReset = new IfElse

@@ -1,13 +1,12 @@
 ﻿using Hast.TestInputs.Dynamic;
-using NUnit.Framework;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Hast.DynamicTests.Tests
 {
-    [TestFixture]
     public class InlinedCasesTests
     {
-        [Test]
+        [Fact]
         public Task InlinedMultiReturn() =>
             TestExecutor.ExecuteSelectedTest<InlinedCases>(
                 g => g.InlinedMultiReturn(null),
@@ -15,6 +14,8 @@ namespace Hast.DynamicTests.Tests
                 {
                     g.InlinedMultiReturn(3);
                     g.InlinedMultiReturn(-3);
+                    g.NestedInlinedMultiReturn(3);
+                    g.NestedInlinedMultiReturn(-3);
                 });
     }
 }

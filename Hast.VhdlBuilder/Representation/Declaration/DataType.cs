@@ -1,4 +1,5 @@
 ﻿using Hast.VhdlBuilder.Representation.Expression;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
@@ -56,7 +57,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// double quotes.
         /// </summary>
         public virtual bool IsLiteralArrayType() =>
-            this == KnownDataTypes.UnrangedInt || Name == "bit_vector" || Name == "std_logic_vector";
+            this == KnownDataTypes.UnrangedInt || Name == "bit_vector" || Name == "std_logic_vector" || Name == "string";
 
         public override bool Equals(object obj)
         {
@@ -64,6 +65,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             if (otherType == null) return false;
             return Name == otherType.Name && TypeCategory == otherType.TypeCategory;
         }
+
+        public override int GetHashCode() => (Name + TypeCategory.ToString()).GetHashCode();
 
 
         public static bool operator ==(DataType a, DataType b)
@@ -76,7 +79,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             }
 
             // If one is null, but not both, return false.
-            if (((object)a == null) || ((object)b == null))
+            if ((a is null) || (b is null))
             {
                 return false;
             }

@@ -1,6 +1,7 @@
 ﻿using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;
 
@@ -31,6 +32,11 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         IList<Alias> LocalAliases { get; }
 
         /// <summary>
+        /// Attribute specifications local to the component.
+        /// </summary>
+        IList<AttributeSpecification> LocalAttributeSpecifications { get; }
+
+        /// <summary>
         /// Variables corresponding to the component that are in the global namespace.
         /// </summary>
         IList<Variable> GlobalVariables { get; }
@@ -44,6 +50,11 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         /// Global signals declared for the component that are driven from outside the component.
         /// </summary>
         IList<Signal> ExternallyDrivenSignals { get; }
+
+        /// <summary>
+        /// Attribute specifications corresponding to the component that are in the global namespace.
+        /// </summary>
+        IList<AttributeSpecification> GlobalAttributeSpecifications { get; }
 
         /// <summary>
         /// Track which other members are called from this component and in how many instances at a given time. I.e.

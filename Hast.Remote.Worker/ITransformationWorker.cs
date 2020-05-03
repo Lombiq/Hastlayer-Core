@@ -1,12 +1,12 @@
-﻿using System.Threading;
+using System.Threading;
 using System.Threading.Tasks;
-using Hast.Remote.Worker.Configuration;
-using Orchard;
 
 namespace Hast.Remote.Worker
 {
-    public interface ITransformationWorker : ISingletonDependency
+    // This shouldn't be an IDependency because then it would be auto-registered in funny ways when the app is published
+    // and all DLLs are in a single folder.
+    public interface ITransformationWorker
     {
-        Task Work(ITransformationWorkerConfiguration configuration, CancellationToken cancellationToken);
+        Task Work(CancellationToken cancellationToken);
     }
 }

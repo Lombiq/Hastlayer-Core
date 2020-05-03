@@ -1,57 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using log4net;
-using log4net.Layout;
-using log4net.Repository.Hierarchy;
+﻿using Hast.Common.Interfaces;
+using Hast.Layer;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector;
-using Microsoft.ApplicationInsights.Log4NetAppender;
-using Microsoft.ApplicationInsights.WindowsServer;
+using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
 using Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel;
-using Microsoft.Diagnostics.Tracing;
+using Microsoft.ApplicationInsights.WorkerService;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
+using Microsoft.Extensions.Logging;
+
 
 namespace Hast.Remote.Worker.Services
 {
+    [IDependencyInitializer(nameof(InitializeService))]
     public class ApplicationInsightsTelemetryManager : IApplicationInsightsTelemetryManager
     {
-        private bool _wasSetup;
+        private readonly TelemetryClient _telemetryClient;
 
-        public void Setup()
+
+        public ApplicationInsightsTelemetryManager(
+            TelemetryConfiguration telemetryConfiguration,
+            TelemetryClient telemetryClient)
         {
-            if (_wasSetup) return;
+            var builder = telemetryConfiguration.DefaultTelemetrySink.TelemetryProcessorChainBuilder;
+            builder.UseAdaptiveSampling(maxTelemetryItemsPerSecond: 5, excludedTypes: "Event");
+            builder.Build();
 
-            var hierarchyRoot = ((Hierarchy)LogManager.GetRepository()).Root;
-
-            var patternLayout = new PatternLayout
-            {
-                ConversionPattern = "%message"
-            };
-            patternLayout.ActivateOptions();
-
-            var aiAppender = new ApplicationInsightsAppender
-            {
-                Name = "ai-appender",
-                InstrumentationKey = TelemetryConfiguration.Active.InstrumentationKey,
-                Layout = patternLayout
-            };
-            aiAppender.ActivateOptions();
-
-            hierarchyRoot.AddAppender(aiAppender);
-
-            // This is a hack to use something from the referenced assemblies and thus get them included in the output 
-            // directory and be loaded. These are needed for AI.
-            _wasSetup = 
-                typeof(DependencyTrackingTelemetryModule).Assembly.FullName != null &&
-                typeof(EventAttribute).Assembly.FullName != null &&
-                typeof(PerformanceCollectorModule).Assembly.FullName != null &&
-                typeof(ServerTelemetryChannel).Assembly.FullName != null;
+            _telemetryClient = telemetryClient;
         }
+
 
         public void TrackTransformation(ITransformationTelemetry telemetry)
         {
@@ -66,7 +46,45 @@ namespace Hast.Remote.Worker.Services
 
             requestTelemetry.Context.User.AccountId = telemetry.AppId.ToString();
 
-            new TelemetryClient(TelemetryConfiguration.Active).TrackRequest(requestTelemetry);
+            _telemetryClient.TrackRequest(requestTelemetry);
+        }
+
+        public static string GetInstrumentationKey()
+        {
+            var configuration = Hastlayer.BuildConfiguration();
+            var key = configuration.GetSection("ApplicationInsights").GetSection("InstrumentationKey").Value ??
+                configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY").Value;
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new Exception("Please set up the instrumentation key via appsettings.json or environment " +
+                    "variable, see APPINSIGHTS_INSTRUMENTATIONKEY part here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core");
+            }
+            return key;
+        }
+
+        public static void InitializeService(IServiceCollection services)
+        {
+            var key = GetInstrumentationKey();
+            var options = new ApplicationInsightsServiceOptions
+            {
+                EnableAdaptiveSampling = false,
+                InstrumentationKey = key,
+                EnableDebugLogger = true,
+            };
+                
+            services.AddApplicationInsightsTelemetryWorkerService(options);
+
+            services.AddSingleton<ITelemetryInitializer, HttpDependenciesParsingTelemetryInitializer>();
+            services.AddApplicationInsightsTelemetryProcessor<QuickPulseTelemetryProcessor>();
+            services.AddApplicationInsightsTelemetryProcessor<AutocollectedMetricsExtractor>();
+            services.AddApplicationInsightsTelemetryProcessor<AdaptiveSamplingTelemetryProcessor>();
+            services.ConfigureTelemetryModule<QuickPulseTelemetryModule>((module, o) => { });
+
+            // Dependency tracking is disabled as it's not useful (only records blob storage operations) but causes
+            // excessive AI usage.
+            var dependencyTrackingTelemetryModule = services
+                .FirstOrDefault(t => t.ImplementationType == typeof(DependencyTrackingTelemetryModule));
+            if (dependencyTrackingTelemetryModule != null) services.Remove(dependencyTrackingTelemetryModule);
         }
     }
 }

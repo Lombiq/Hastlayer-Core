@@ -1,8 +1,8 @@
 ﻿using Hast.Common.Helpers;
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
-using Hast.Transformer.Extensibility.Events;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using Hast.Transformer.Services.ConstantValuesSubstitution;
@@ -12,8 +12,6 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.CSharp.Transforms;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
-using Orchard.FileSystems.AppData;
-using Orchard.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,7 +23,16 @@ namespace Hast.Transformer
 {
     public class DefaultTransformer : ITransformer
     {
-        private readonly ITransformerEventHandler _eventHandler;
+        // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
+        // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
+        private const bool SaveSyntaxTree =
+#if DEBUG
+        true;
+#else
+        false;
+#endif
+
+        private readonly IEnumerable<EventHandler<ITransformationContext>> _eventHandlers;
         private readonly IJsonConverter _jsonConverter;
         private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
         private readonly IInvocationInstanceCountAdjuster _invocationInstanceCountAdjuster;
@@ -54,10 +61,12 @@ namespace Hast.Transformer
         private readonly IKnownTypeLookupTableFactory _knownTypeLookupTableFactory;
         private readonly IMemberIdentifiersFixer _memberIdentifiersFixer;
         private readonly IUnneededReferenceVariablesRemover _unneededReferenceVariablesRemover;
+        private readonly IRefLocalVariablesRemover _refLocalVariablesRemover;
+        private readonly IOptionalParameterFiller _optionalParameterFiller;
 
 
         public DefaultTransformer(
-            ITransformerEventHandler eventHandler,
+            IEnumerable<EventHandler<ITransformationContext>> eventHandlers,
             IJsonConverter jsonConverter,
             ISyntaxTreeCleaner syntaxTreeCleaner,
             IInvocationInstanceCountAdjuster invocationInstanceCountAdjuster,
@@ -85,9 +94,11 @@ namespace Hast.Transformer
             IFSharpIdiosyncrasiesAdjuster fSharpIdiosyncrasiesAdjuster,
             IKnownTypeLookupTableFactory knownTypeLookupTableFactory,
             IMemberIdentifiersFixer memberIdentifiersFixer,
-            IUnneededReferenceVariablesRemover unneededReferenceVariablesRemover)
+            IUnneededReferenceVariablesRemover unneededReferenceVariablesRemover,
+            IRefLocalVariablesRemover refLocalVariablesRemover,
+            IOptionalParameterFiller optionalParameterFiller)
         {
-            _eventHandler = eventHandler;
+            _eventHandlers = eventHandlers;
             _jsonConverter = jsonConverter;
             _syntaxTreeCleaner = syntaxTreeCleaner;
             _invocationInstanceCountAdjuster = invocationInstanceCountAdjuster;
@@ -116,8 +127,9 @@ namespace Hast.Transformer
             _knownTypeLookupTableFactory = knownTypeLookupTableFactory;
             _memberIdentifiersFixer = memberIdentifiersFixer;
             _unneededReferenceVariablesRemover = unneededReferenceVariablesRemover;
+            _refLocalVariablesRemover = refLocalVariablesRemover;
+            _optionalParameterFiller = optionalParameterFiller;
         }
-
 
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
@@ -146,7 +158,6 @@ namespace Hast.Transformer
                 // transformation needs multiple assemblies those will need to be loaded like this too.
                 // So helping the decompiler find them here.
                 resolver.AddSearchDirectory(Path.GetDirectoryName(GetType().Assembly.Location));
-                // The Dependencies folder can't be mapped during certain tests.
                 var dependenciesFolderPath = _appDataFolder.MapPath("Dependencies");
                 if (dependenciesFolderPath != null) resolver.AddSearchDirectory(dependenciesFolderPath);
                 resolver.AddSearchDirectory(AppDomain.CurrentDomain.BaseDirectory);
@@ -179,6 +190,7 @@ namespace Hast.Transformer
                     NamedArguments = false,
                     NonTrailingNamedArguments = false,
                     NullPropagation = false,
+                    NullableReferenceTypes = false,
                     OptionalArguments = false,
                     OutVariables = false,
                     PatternBasedFixedStatement = false,
@@ -280,7 +292,7 @@ namespace Hast.Transformer
             }
 
             var decompilerTasks = decompilers
-                .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile()))
+                .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile(true)))
                 .ToArray();
 
             Task.WaitAll(decompilerTasks);
@@ -293,16 +305,8 @@ namespace Hast.Transformer
                 syntaxTree.Members.AddRange(decompilerTasks[i].Result.Members.Select(member => member.Detach()));
             }
 
-            // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
-            // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
-            var saveSyntaxTree = false;
-#if DEBUG
-            saveSyntaxTree = true;
-#endif
-            if (saveSyntaxTree)
-            {
-                File.WriteAllText("UnprocessedSyntaxTree.cs", syntaxTree.ToString());
-            }
+
+            if (SaveSyntaxTree) WriteSyntaxTree(syntaxTree, "UnprocessedSyntaxTree.cs");
 
             // Since this is about known (i.e. .NET built-in) types it doesn't matter which type system we use.
             var knownTypeLookupTable = _knownTypeLookupTableFactory.Create(decompilers.First().TypeSystem);
@@ -327,7 +331,12 @@ namespace Hast.Transformer
             _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
             _objectInitializerExpander.ExpandObjectInitializers(syntaxTree);
             _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
+            // Needs to run before method inlining but after anything that otherwise modified method signatures or
+            // invocations.
+            _optionalParameterFiller.FillOptionalParamters(syntaxTree);
             if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree, configuration);
+            // This needs to run before UnneededReferenceVariablesRemover.
+            _refLocalVariablesRemover.RemoveRefLocalVariables(syntaxTree);
             _unneededReferenceVariablesRemover.RemoveUnneededVariables(syntaxTree);
 
             var preConfiguredArrayLengths = configuration
@@ -346,10 +355,7 @@ namespace Hast.Transformer
             // If the conversions removed something let's clean them up here.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
-            if (saveSyntaxTree)
-            {
-                File.WriteAllText("ProcessedSyntaxTree.cs", syntaxTree.ToString());
-            }
+            if (SaveSyntaxTree) WriteSyntaxTree(syntaxTree, "ProcessedSyntaxTree.cs");
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
@@ -364,7 +370,7 @@ namespace Hast.Transformer
             if (deviceDriver == null)
             {
                 throw new InvalidOperationException(
-                    "No device driver with the name " + configuration.DeviceName + " was found.");
+                    "No device driver with the name \"" + configuration.DeviceName + "\" was found.");
             }
 
             var context = new TransformationContext
@@ -378,7 +384,7 @@ namespace Hast.Transformer
                 DeviceDriver = deviceDriver
             };
 
-            _eventHandler.SyntaxTreeBuilt(context);
+            foreach (var eventHandler in _eventHandlers) eventHandler?.Invoke(this, context);
 
             if (configuration.EnableCaching)
             {
@@ -386,6 +392,19 @@ namespace Hast.Transformer
             }
 
             return _engine.Transform(context);
+        }
+
+        private void WriteSyntaxTree(SyntaxTree syntaxTree, string fileName)
+        {
+            while (true)
+            {
+                try
+                {
+                    File.WriteAllText(fileName, syntaxTree.ToString());
+                    return;
+                }
+                catch (IOException) { }
+            }
         }
     }
 }

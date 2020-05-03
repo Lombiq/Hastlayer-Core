@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Orchard;
+﻿using Hast.Common.Interfaces;
+using System;
 
 namespace Hast.Remote.Worker.Services
 {
@@ -12,14 +8,13 @@ namespace Hast.Remote.Worker.Services
         string JobName { get; }
         int AppId { get; }
         DateTime StartTimeUtc { get; }
-        DateTime FinishTimeUtc { get;}
+        DateTime FinishTimeUtc { get; }
         bool IsSuccess { get; }
     }
 
 
     public interface IApplicationInsightsTelemetryManager : ISingletonDependency
     {
-        void Setup();
         void TrackTransformation(ITransformationTelemetry telemetry);
     }
 }
