@@ -1,4 +1,4 @@
-﻿# Hastlayer - Remote Worker Console readme
+﻿# Hastlayer - Remote Worker Console
 
 
 

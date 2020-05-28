@@ -1,4 +1,4 @@
-﻿# Hastlayer - Remote Worker Daemon readme
+﻿# Hastlayer - Remote Worker Daemon
 
 
 
