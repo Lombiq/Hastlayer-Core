@@ -1,4 +1,4 @@
-# Hastlayer - VHDL Readme
+# Hastlayer - VHDL
 
 
 
