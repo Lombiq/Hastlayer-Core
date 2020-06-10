@@ -4,6 +4,7 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
@@ -33,8 +34,9 @@ namespace Hast.Transformer.Services
                 }
                 else if (identifierExpression
                     .GetResolveResult<MethodGroupResolveResult>()
-                    ?.Methods
-                    .Single()
+                    ?.Methods?.ToList() is List<IMethod> methods &&
+                    methods.Count == 1 &&
+                    methods[0]
                     .GetFullName()
                     .IsInlineCompilerGeneratedMethodName() == true)
                 {
