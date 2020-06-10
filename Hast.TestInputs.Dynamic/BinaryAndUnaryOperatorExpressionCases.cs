@@ -29,12 +29,6 @@ namespace Hast.TestInputs.Dynamic
     /// </remarks>
     public class BinaryAndUnaryOperatorExpressionCases : DynamicTestInputBase
     {
-        protected BinaryAndUnaryOperatorExpressionCases(IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration) :
-            base(hastlayer, hardwareGenerationConfiguration)
-        {
-        }
-
-
 #pragma warning disable CS0675 // Bitwise-or operator used on a sign-extended operand
 
         public virtual void ByteBinaryOperatorExpressionVariations(SimpleMemory memory)

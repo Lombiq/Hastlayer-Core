@@ -13,12 +13,6 @@ namespace Hast.TestInputs.Dynamic
     /// </remarks>
     public class InlinedCases : DynamicTestInputBase
     {
-        public InlinedCases(IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration) :
-            base(hastlayer, hardwareGenerationConfiguration)
-        {
-        }
-
-
         public virtual void InlinedMultiReturn(SimpleMemory memory)
         {
             memory.WriteInt32(0, InlinedMultiReturnInternal(memory.ReadInt32(0)));

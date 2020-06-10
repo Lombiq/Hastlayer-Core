@@ -5,12 +5,6 @@ namespace Hast.TestInputs.Dynamic
 {
     public class CastExpressionCases : DynamicTestInputBase
     {
-        protected CastExpressionCases(IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration) :
-            base(hastlayer, hardwareGenerationConfiguration)
-        {
-        }
-
-
         public virtual void AllNumberCastingVariations(SimpleMemory memory)
         {
             // Separate input for int so it doesn't need to be downcast from the long one which can potentially be
