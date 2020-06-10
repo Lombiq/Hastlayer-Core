@@ -1,4 +1,6 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Layer;
+using Hast.Transformer.Abstractions.SimpleMemory;
+// ReSharper disable RedundantCast
 
 namespace Hast.TestInputs.Dynamic
 {
@@ -20,13 +22,19 @@ namespace Hast.TestInputs.Dynamic
     /// - UlongBinaryOperatorExpressionVariationsLow: 33%
     /// - UlongBinaryOperatorExpressionVariationsHigh: 33%
     /// - AllUnaryOperatorExpressionVariations: 33%
-    /// 
+    ///
     /// While using the 8-number SaveResult() method actually slightly increases resource usage synthesis time is
     /// greatly reduced (as opposed to calling the single-number SaveResult() for every number).
     /// <see cref="BinaryAndUnaryOperatorExpressionCasesGenerator"/> can be used to generate these cases.
     /// </remarks>
-    public class BinaryAndUnaryOperatorExpressionCases
+    public class BinaryAndUnaryOperatorExpressionCases : DynamicTestInputBase
     {
+        protected BinaryAndUnaryOperatorExpressionCases(IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration) :
+            base(hastlayer, hardwareGenerationConfiguration)
+        {
+        }
+
+
 #pragma warning disable CS0675 // Bitwise-or operator used on a sign-extended operand
 
         public virtual void ByteBinaryOperatorExpressionVariations(SimpleMemory memory)
@@ -1009,49 +1017,49 @@ namespace Hast.TestInputs.Dynamic
 
         public void ByteBinaryOperatorExpressionVariations(int input)
         {
-            var memory = new SimpleMemory(160);
+            var memory = CreateMemory(160);
             memory.WriteInt32(0, input);
             ByteBinaryOperatorExpressionVariations(memory);
         }
 
         public void SbyteBinaryOperatorExpressionVariations(int input)
         {
-            var memory = new SimpleMemory(144);
+            var memory = CreateMemory(144);
             memory.WriteInt32(0, input);
             SbyteBinaryOperatorExpressionVariations(memory);
         }
 
         public void ShortBinaryOperatorExpressionVariations(int input)
         {
-            var memory = new SimpleMemory(144);
+            var memory = CreateMemory(144);
             memory.WriteInt32(0, input);
             ShortBinaryOperatorExpressionVariations(memory);
         }
 
         public void UshortBinaryOperatorExpressionVariations(int input)
         {
-            var memory = new SimpleMemory(160);
+            var memory = CreateMemory(160);
             memory.WriteInt32(0, input);
             UshortBinaryOperatorExpressionVariations(memory);
         }
 
         public void IntBinaryOperatorExpressionVariations(int input)
         {
-            var memory = new SimpleMemory(144);
+            var memory = CreateMemory(144);
             memory.WriteInt32(0, input);
             IntBinaryOperatorExpressionVariations(memory);
         }
 
         public void UintBinaryOperatorExpressionVariations(uint input)
         {
-            var memory = new SimpleMemory(160);
+            var memory = CreateMemory(160);
             memory.WriteUInt32(0, input);
             UintBinaryOperatorExpressionVariations(memory);
         }
 
         public void LongBinaryOperatorExpressionVariationsLow(long input)
         {
-            var memory = new SimpleMemory(144);
+            var memory = CreateMemory(144);
             memory.WriteInt32(0, (int)(input >> 32));
             memory.WriteInt32(1, (int)input);
             LongBinaryOperatorExpressionVariationsLow(memory);
@@ -1059,7 +1067,7 @@ namespace Hast.TestInputs.Dynamic
 
         public void LongBinaryOperatorExpressionVariationsHigh(long input)
         {
-            var memory = new SimpleMemory(144);
+            var memory = CreateMemory(144);
             memory.WriteInt32(0, (int)(input >> 32));
             memory.WriteInt32(1, (int)input);
             LongBinaryOperatorExpressionVariationsHigh(memory);
@@ -1067,7 +1075,7 @@ namespace Hast.TestInputs.Dynamic
 
         public void UlongBinaryOperatorExpressionVariationsLow(ulong input)
         {
-            var memory = new SimpleMemory(96);
+            var memory = CreateMemory(96);
             memory.WriteInt32(0, (int)(input >> 32));
             memory.WriteInt32(1, (int)input);
             UlongBinaryOperatorExpressionVariationsLow(memory);
@@ -1075,7 +1083,7 @@ namespace Hast.TestInputs.Dynamic
 
         public void UlongBinaryOperatorExpressionVariationsHigh(ulong input)
         {
-            var memory = new SimpleMemory(96);
+            var memory = CreateMemory(96);
             memory.WriteInt32(0, (int)(input >> 32));
             memory.WriteInt32(1, (int)input);
             UlongBinaryOperatorExpressionVariationsHigh(memory);
@@ -1083,7 +1091,7 @@ namespace Hast.TestInputs.Dynamic
 
         public void AllUnaryOperatorExpressionVariations(long input)
         {
-            var memory = new SimpleMemory(46);
+            var memory = CreateMemory(46);
             memory.WriteInt32(0, (int)(input >> 32));
             memory.WriteInt32(1, (int)input);
             AllUnaryOperatorExpressionVariations(memory);

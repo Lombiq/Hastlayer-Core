@@ -1,9 +1,16 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Layer;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.TestInputs.Dynamic
 {
-    public class CastExpressionCases
+    public class CastExpressionCases : DynamicTestInputBase
     {
+        protected CastExpressionCases(IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration) :
+            base(hastlayer, hardwareGenerationConfiguration)
+        {
+        }
+
+
         public virtual void AllNumberCastingVariations(SimpleMemory memory)
         {
             // Separate input for int so it doesn't need to be downcast from the long one which can potentially be
@@ -126,7 +133,7 @@ namespace Hast.TestInputs.Dynamic
 
         public void AllNumberCastingVariations(long input)
         {
-            var memory = new SimpleMemory(70);
+            var memory = CreateMemory(70);
             memory.WriteInt32(0, (int)(input >> 32));
             memory.WriteInt32(1, (int)input);
             AllNumberCastingVariations(memory);

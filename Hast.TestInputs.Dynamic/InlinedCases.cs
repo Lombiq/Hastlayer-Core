@@ -1,5 +1,6 @@
 ﻿using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Runtime.CompilerServices;
+using Hast.Layer;
 
 namespace Hast.TestInputs.Dynamic
 {
@@ -7,11 +8,17 @@ namespace Hast.TestInputs.Dynamic
     /// Test cases for inlined methods.
     /// </summary>
     /// <remarks>
-    /// While inlined methods with multiple returns utilize goto statements gotos will never be produced by ILSpy 
+    /// While inlined methods with multiple returns utilize goto statements gotos will never be produced by ILSpy
     /// during decompilation. So we can't test goto handling with source including gotos originally.
     /// </remarks>
-    public class InlinedCases
+    public class InlinedCases : DynamicTestInputBase
     {
+        public InlinedCases(IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration) :
+            base(hastlayer, hardwareGenerationConfiguration)
+        {
+        }
+
+
         public virtual void InlinedMultiReturn(SimpleMemory memory)
         {
             memory.WriteInt32(0, InlinedMultiReturnInternal(memory.ReadInt32(0)));
@@ -24,7 +31,7 @@ namespace Hast.TestInputs.Dynamic
 
         public int InlinedMultiReturn(int input)
         {
-            var memory = new SimpleMemory(1);
+            var memory = CreateMemory(1);
             memory.WriteInt32(0, input);
             InlinedMultiReturn(memory);
             return memory.ReadInt32(0);
@@ -32,7 +39,7 @@ namespace Hast.TestInputs.Dynamic
 
         public int NestedInlinedMultiReturn(int input)
         {
-            var memory = new SimpleMemory(1);
+            var memory = CreateMemory(1);
             memory.WriteInt32(0, input);
             NestedInlinedMultiReturn(memory);
             return memory.ReadInt32(0);
