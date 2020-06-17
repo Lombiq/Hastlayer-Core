@@ -18619,7 +18619,7 @@ begin
     \ParallelAlgorithm::Run(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \ParallelAlgorithm::Run(SimpleMemory).0._State\: \ParallelAlgorithm::Run(SimpleMemory).0._States\ := \ParallelAlgorithm::Run(SimpleMemory).0._State_0\;
         Variable \ParallelAlgorithm::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \ParallelAlgorithm::Run(SimpleMemory).0.array\: \signed32_Array\(0 to 269) := (others => to_signed(0, 32));
+        Variable \ParallelAlgorithm::Run(SimpleMemory).0.array\: \signed32_Array\(0 to 259) := (others => to_signed(0, 32));
         Variable \ParallelAlgorithm::Run(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \ParallelAlgorithm::Run(SimpleMemory).0.ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).invocationIndex\: integer range 0 to 2 := 0;
@@ -18707,7 +18707,7 @@ begin
                             -- Task<int>[] array;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- array = new Task<int>[270];
+                            -- array = new Task<int>[260];
                             -- 
                             \ParallelAlgorithm::Run(SimpleMemory).0.array\ := (others => to_signed(0, 32));
                             -- The following section was transformed from the .NET statement below:
@@ -18718,7 +18718,7 @@ begin
                             -- 
                             \ParallelAlgorithm::Run(SimpleMemory).0.num\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- while (num < 270) {
+                            -- while (num < 260) {
                             -- 	array [num] = Task.Factory.StartNew (<>c__DisplayClass3_.<>9__0 ?? (<>c__DisplayClass3_.<>9__0 = <>c__DisplayClass3_.<Run>b__0), num);
                             -- 	num = num + 1;
                             -- }
@@ -18730,7 +18730,7 @@ begin
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_4\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm::Run(SimpleMemory).0._State_3\.
                         -- The while loop's condition:
-                        \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\ := \ParallelAlgorithm::Run(SimpleMemory).0.num\ < to_signed(270, 32);
+                        \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\ := \ParallelAlgorithm::Run(SimpleMemory).0.num\ < to_signed(260, 32);
                         if (\ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -18798,7 +18798,7 @@ begin
                             -- 
                             \ParallelAlgorithm::Run(SimpleMemory).0.num3\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- while (num3 < 270) {
+                            -- while (num3 < 260) {
                             -- 	num2 = num2 + array [num3].Result;
                             -- 	num3 = num3 + 1;
                             -- }
@@ -18810,7 +18810,7 @@ begin
                     when \ParallelAlgorithm::Run(SimpleMemory).0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \ParallelAlgorithm::Run(SimpleMemory).0._State_6\.
                         -- The while loop's condition:
-                        \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.2\ := \ParallelAlgorithm::Run(SimpleMemory).0.num3\ < to_signed(270, 32);
+                        \ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.2\ := \ParallelAlgorithm::Run(SimpleMemory).0.num3\ < to_signed(260, 32);
                         if (\ParallelAlgorithm::Run(SimpleMemory).0.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
