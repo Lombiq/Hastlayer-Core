@@ -1,5 +1,4 @@
-﻿using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Transformer.Abstractions.SimpleMemory;
 // ReSharper disable RedundantCast
 
 namespace Hast.TestInputs.Dynamic

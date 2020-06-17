@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Resolver;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
@@ -38,7 +38,7 @@ namespace Hast.Transformer.Services
                     methods.Count == 1 &&
                     methods[0]
                     .GetFullName()
-                    .IsInlineCompilerGeneratedMethodName() == true)
+                    .IsInlineCompilerGeneratedMethodName())
                 {
                     // A reference to a DisplayClass member or compiler-generated method within a Task.Factory.StartNew
                     // call.
