@@ -624,7 +624,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = true;
                         -- 
-                        \FSharpParallelAlgorithmContainer+Run@35::Invoke(Object).0.flag\ := True;
+                        \FSharpParallelAlgorithmContainer+Run@35::Invoke(Object).0.flag\ := true;
                         -- The following section was transformed from the .NET statement below:
                         -- int num3;
                         -- 
@@ -846,7 +846,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = true;
                         -- 
-                        \FSharpParallelAlgorithmContainer+Run@35::Invoke(Object).1.flag\ := True;
+                        \FSharpParallelAlgorithmContainer+Run@35::Invoke(Object).1.flag\ := true;
                         -- The following section was transformed from the .NET statement below:
                         -- int num3;
                         -- 
@@ -1068,7 +1068,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = true;
                         -- 
-                        \FSharpParallelAlgorithmContainer+Run@35::Invoke(Object).2.flag\ := True;
+                        \FSharpParallelAlgorithmContainer+Run@35::Invoke(Object).2.flag\ := true;
                         -- The following section was transformed from the .NET statement below:
                         -- int num3;
                         -- 

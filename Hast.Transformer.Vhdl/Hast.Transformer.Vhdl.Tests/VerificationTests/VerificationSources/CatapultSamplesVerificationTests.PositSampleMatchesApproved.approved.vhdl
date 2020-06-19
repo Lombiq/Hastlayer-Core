@@ -3982,7 +3982,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- return false;
                         -- 
-                        \Boolean BitMask::op_Equality(BitMask,BitMask).0.return\ <= False;
+                        \Boolean BitMask::op_Equality(BitMask,BitMask).0.return\ <= false;
                         \Boolean BitMask::op_Equality(BitMask,BitMask).0._State\ := \Boolean BitMask::op_Equality(BitMask,BitMask).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Boolean BitMask::op_Equality(BitMask,BitMask).0._State_2\.
                         if (\Boolean BitMask::op_Equality(BitMask,BitMask).0._State\ = \Boolean BitMask::op_Equality(BitMask,BitMask).0._State_4\) then 
@@ -4028,7 +4028,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- return true;
                         -- 
-                        \Boolean BitMask::op_Equality(BitMask,BitMask).0.return\ <= True;
+                        \Boolean BitMask::op_Equality(BitMask,BitMask).0.return\ <= true;
                         \Boolean BitMask::op_Equality(BitMask,BitMask).0._State\ := \Boolean BitMask::op_Equality(BitMask,BitMask).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Boolean BitMask::op_Equality(BitMask,BitMask).0._State_7\ => 
@@ -4053,7 +4053,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- return false;
                         -- 
-                        \Boolean BitMask::op_Equality(BitMask,BitMask).0.return\ <= False;
+                        \Boolean BitMask::op_Equality(BitMask,BitMask).0.return\ <= false;
                         \Boolean BitMask::op_Equality(BitMask,BitMask).0._State\ := \Boolean BitMask::op_Equality(BitMask,BitMask).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Boolean BitMask::op_Equality(BitMask,BitMask).0._State_5\.
                         if (\Boolean BitMask::op_Equality(BitMask,BitMask).0._State\ = \Boolean BitMask::op_Equality(BitMask,BitMask).0._State_8\) then 
@@ -4160,7 +4160,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- return false;
                         -- 
-                        \Boolean BitMask::op_LessThan(BitMask,BitMask).0.return\ <= False;
+                        \Boolean BitMask::op_LessThan(BitMask,BitMask).0.return\ <= false;
                         \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State\ := \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State_5\ => 
@@ -4201,7 +4201,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- return true;
                         -- 
-                        \Boolean BitMask::op_LessThan(BitMask,BitMask).0.return\ <= True;
+                        \Boolean BitMask::op_LessThan(BitMask,BitMask).0.return\ <= true;
                         \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State\ := \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State_5\.
                         if (\Boolean BitMask::op_LessThan(BitMask,BitMask).0._State\ = \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State_7\) then 
@@ -4619,7 +4619,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = false;
                         -- 
-                        \BitMask BitMask::op_Addition(BitMask,BitMask).0.flag\ := False;
+                        \BitMask BitMask::op_Addition(BitMask,BitMask).0.flag\ := false;
                         -- The following section was transformed from the .NET statement below:
                         -- ushort num;
                         -- 
@@ -5389,7 +5389,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = false;
                         -- 
-                        \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.flag\ := False;
+                        \BitMask BitMask::op_Subtraction(BitMask,BitMask).0.flag\ := false;
                         -- The following section was transformed from the .NET statement below:
                         -- ushort num;
                         -- 
@@ -6121,7 +6121,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.objectc479764f7be8213bbfa23136004470a9da89fe0839c734447114a612591c40d2\;
                         \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.left\.\Size\;
-                        \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                        \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                         \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0._State\ := \BitMask BitMask::op_BitwiseAnd(BitMask,BitMask).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -6560,7 +6560,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag = false;
                             -- 
-                            \BitMask BitMask::op_RightShift(BitMask,Int32).0.flag\ := False;
+                            \BitMask BitMask::op_RightShift(BitMask,Int32).0.flag\ := false;
                             -- The following section was transformed from the .NET statement below:
                             -- ushort num3;
                             -- 
@@ -6966,7 +6966,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag = false;
                             -- 
-                            \BitMask BitMask::op_LeftShift(BitMask,Int32).0.flag\ := False;
+                            \BitMask BitMask::op_LeftShift(BitMask,Int32).0.flag\ := false;
                             -- The following section was transformed from the .NET statement below:
                             -- ushort num4;
                             -- 
@@ -8185,7 +8185,7 @@ begin
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::AssemblePositBitsWithRounding(System.Boolean,System.Int32,Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
                             \Posit::.ctor(PositEnvironment,UInt32).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).this.parameter.Out.0\ <= \Posit::.ctor(PositEnvironment,UInt32).0.this\;
-                            \Posit::.ctor(PositEnvironment,UInt32).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).signBit.parameter.Out.0\ <= False;
+                            \Posit::.ctor(PositEnvironment,UInt32).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).signBit.parameter.Out.0\ <= false;
                             \Posit::.ctor(PositEnvironment,UInt32).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).regimeKValue.parameter.Out.0\ <= signed(SmartResize(\Posit::.ctor(PositEnvironment,UInt32).0.num2\, 32));
                             \Posit::.ctor(PositEnvironment,UInt32).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).exponentBits.parameter.Out.0\ <= \Posit::.ctor(PositEnvironment,UInt32).0.object152dcd47d28b3ee297dd1fd5de486fbdbb86a187f73283575be243d648f84366\;
                             \Posit::.ctor(PositEnvironment,UInt32).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).fractionBits.parameter.Out.0\ <= \Posit::.ctor(PositEnvironment,UInt32).0.this\.\PositBits\;
@@ -9100,7 +9100,7 @@ begin
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object374e96d370f7ab4ad360672fa7f492b1749aa143ab0821492b4ac4272ad5cc5b\;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_11\;
                         end if;
@@ -9219,7 +9219,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.objectb02e11b7e239b2355afe0875a36466469d6e0245e30278cffcdb183ae6090b22\;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.exponentBits\.\Size\;
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_16\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9582,7 +9582,7 @@ begin
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object531fa574c42dcd0d4edd050badf324da5cb81538b8a1a9309b72aeef966aeb40\;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\;
-                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                            \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                             \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_37\;
                         end if;
@@ -9683,7 +9683,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.object49da403d78e2b9ce444d44c6da4a89b4471bba9931b66cce04a374ec89c0c5a7\;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.fractionBits\.\Size\;
-                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                        \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State\ := \Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).0._State_42\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12076,7 +12076,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Posit Posit::op_Addition(Posit,Posit).0.left2\;
                         \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
-                        \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                        \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                         \Posit Posit::op_Addition(Posit,Posit).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \Posit Posit::op_Addition(Posit,Posit).0._State\ := \Posit Posit::op_Addition(Posit,Posit).0._State_38\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14427,7 +14427,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \PositEnvironment::.ctor(Byte,Byte).0.objectdccc4598c608eaada80263e09a1aff425cbfcfc502b42b2491cd0a0359575f5e\;
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
-                        \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                        \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \PositEnvironment::.ctor(Byte,Byte).0._State\ := \PositEnvironment::.ctor(Byte,Byte).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14476,7 +14476,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \PositEnvironment::.ctor(Byte,Byte).0.object6e980ec7d6b9bc5254cd0013a72fae6695d5249227113b956d37797062bb0f9d\;
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
-                        \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                        \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \PositEnvironment::.ctor(Byte,Byte).0._State\ := \PositEnvironment::.ctor(Byte,Byte).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14518,7 +14518,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \PositEnvironment::.ctor(Byte,Byte).0.this\.\EmptyBitMask\;
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
-                        \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= False;
+                        \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \PositEnvironment::.ctor(Byte,Byte).0._State\ := \PositEnvironment::.ctor(Byte,Byte).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14551,7 +14551,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \PositEnvironment::.ctor(Byte,Byte).0.object50ab355f9c2b0ca482bf465264387259a92b69cff2c9e79912278138c1c966ff\;
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
-                        \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= True;
+                        \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= true;
                         \PositEnvironment::.ctor(Byte,Byte).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
                         \PositEnvironment::.ctor(Byte,Byte).0._State\ := \PositEnvironment::.ctor(Byte,Byte).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0

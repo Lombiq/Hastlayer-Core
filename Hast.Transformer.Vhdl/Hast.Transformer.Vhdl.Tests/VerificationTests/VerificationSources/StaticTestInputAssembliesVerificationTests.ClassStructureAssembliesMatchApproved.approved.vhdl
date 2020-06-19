@@ -452,7 +452,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = true;
                         -- 
-                        \ComplexTypeHierarchy::Interface1Method2().0.flag\ := True;
+                        \ComplexTypeHierarchy::Interface1Method2().0.flag\ := true;
                         -- The following section was transformed from the .NET statement below:
                         -- this.PrivateMethod ();
                         -- 
@@ -935,7 +935,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag = true;
                             -- 
-                            \StaticReference::StaticClassUsingMethod().0.flag\ := True;
+                            \StaticReference::StaticClassUsingMethod().0.flag\ := true;
                             -- The following section was transformed from the .NET statement below:
                             -- int num;
                             -- 

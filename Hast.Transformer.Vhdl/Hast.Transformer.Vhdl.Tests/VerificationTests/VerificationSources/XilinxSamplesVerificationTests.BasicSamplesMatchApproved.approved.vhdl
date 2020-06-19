@@ -17048,7 +17048,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- @this.WasIncreased = true;
                         -- 
-                        \NumberContainer::IncreaseNumber(UInt32).0.this\.\WasIncreased\ := True;
+                        \NumberContainer::IncreaseNumber(UInt32).0.this\.\WasIncreased\ := true;
                         -- The following section was transformed from the .NET statement below:
                         -- return @this.Number = @this.Number + increaseBy;
                         -- 
@@ -18073,7 +18073,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = true;
                         -- 
-                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.flag\ := True;
+                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.flag\ := true;
                         -- The following section was transformed from the .NET statement below:
                         -- int num3;
                         -- 
@@ -18292,7 +18292,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = true;
                         -- 
-                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.flag\ := True;
+                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.flag\ := true;
                         -- The following section was transformed from the .NET statement below:
                         -- int num3;
                         -- 
@@ -18511,7 +18511,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = true;
                         -- 
-                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.flag\ := True;
+                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.flag\ := true;
                         -- The following section was transformed from the .NET statement below:
                         -- int num3;
                         -- 
