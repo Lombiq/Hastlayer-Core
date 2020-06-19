@@ -34,11 +34,8 @@ namespace Hast.Transformer.Services
                 }
                 else if (identifierExpression
                     .GetResolveResult<MethodGroupResolveResult>()
-                    ?.Methods?.ToList() is List<IMethod> methods &&
-                    methods.Count == 1 &&
-                    methods[0]
-                    .GetFullName()
-                    .IsInlineCompilerGeneratedMethodName())
+                    ?.Methods
+                    ?.Any(method => method.GetFullName().IsInlineCompilerGeneratedMethodName()) == true)
                 {
                     // A reference to a DisplayClass member or compiler-generated method within a Task.Factory.StartNew
                     // call.
