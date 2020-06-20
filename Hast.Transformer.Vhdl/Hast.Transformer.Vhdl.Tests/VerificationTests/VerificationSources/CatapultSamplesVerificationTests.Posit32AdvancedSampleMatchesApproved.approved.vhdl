@@ -1183,7 +1183,7 @@ begin
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.left\;
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.bits\;
-                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
+                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0._State_8\;
                         end if;
@@ -1215,7 +1215,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.right\;
                         \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.bits2\;
-                        \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
+                        \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                         \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
                         \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1417,7 +1417,7 @@ begin
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.posit\;
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.1\);
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_6\;
                         end if;
@@ -1495,7 +1495,7 @@ begin
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191\;
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.2\);
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_11\;
                         end if;
@@ -4970,7 +4970,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32::Abs(Posit32).0.object35ed0c255c49a48803c23c93585646a31d106116acf6bda1a4dcc5b14e310084\;
                         \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32::Abs(Posit32).0.binaryOperationResult.3\;
-                        \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
+                        \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                         \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
                         \Posit32::Abs(Posit32).0._State\ := \Posit32::Abs(Posit32).0._State_4\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -5579,7 +5579,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         \Posit32::Sqrt(Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32::Sqrt(Posit32).0.object932f0459d38ef59cf2c23a32283a70c30ad9f476eac81886ed1e7cb3bfd26919\;
                         \Posit32::Sqrt(Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= "10000000000000000000000000000000";
-                        \Posit32::Sqrt(Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
+                        \Posit32::Sqrt(Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                         \Posit32::Sqrt(Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
                         \Posit32::Sqrt(Posit32).0._State\ := \Posit32::Sqrt(Posit32).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5889,7 +5889,7 @@ begin
                         \Posit32::Sqrt(Posit32).0.object05258ea6dff217c2d7728ffc75a152cb454e65be8a8687d16f7a31fe10f569a9\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
-                        \Posit32::Sqrt(Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).signBit.parameter.Out.0\ <= False;
+                        \Posit32::Sqrt(Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).signBit.parameter.Out.0\ <= false;
                         \Posit32::Sqrt(Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).regimeKValue.parameter.Out.0\ <= \Posit32::Sqrt(Posit32).0.num7\;
                         \Posit32::Sqrt(Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).exponentBits.parameter.Out.0\ <= unsigned(\Posit32::Sqrt(Posit32).0.num8\);
                         \Posit32::Sqrt(Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).fractionBits.parameter.Out.0\ <= \Posit32::Sqrt(Posit32).0.num3\;
@@ -5927,7 +5927,7 @@ begin
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                             \Posit32::Sqrt(Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32::Sqrt(Posit32).0.object05258ea6dff217c2d7728ffc75a152cb454e65be8a8687d16f7a31fe10f569a9\;
                             \Posit32::Sqrt(Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32::Sqrt(Posit32).0.return.6\;
-                            \Posit32::Sqrt(Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
+                            \Posit32::Sqrt(Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32::Sqrt(Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
                             \Posit32::Sqrt(Posit32).0._State\ := \Posit32::Sqrt(Posit32).0._State_26\;
                         end if;
@@ -6255,7 +6255,7 @@ begin
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         \Posit32 Posit32::op_Division(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Division(Posit32,Posit32).0.object3af22518465a2c1a6c4112404e000e38990c364a91b6576c0b987aba09a1dfbe\;
                         \Posit32 Posit32::op_Division(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= "10000000000000000000000000000000";
-                        \Posit32 Posit32::op_Division(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
+                        \Posit32 Posit32::op_Division(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                         \Posit32 Posit32::op_Division(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
                         \Posit32 Posit32::op_Division(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Division(Posit32,Posit32).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -6719,7 +6719,7 @@ begin
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                             \Posit32 Posit32::op_Division(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Division(Posit32,Posit32).0.objectaafcca806de4993623986b5aed6ddbf10697a51a4974f7eefcaaa849062f239d\;
                             \Posit32 Posit32::op_Division(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32 Posit32::op_Division(Posit32,Posit32).0.return.17\;
-                            \Posit32 Posit32::op_Division(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
+                            \Posit32 Posit32::op_Division(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32 Posit32::op_Division(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
                             \Posit32 Posit32::op_Division(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Division(Posit32,Posit32).0._State_45\;
                         end if;

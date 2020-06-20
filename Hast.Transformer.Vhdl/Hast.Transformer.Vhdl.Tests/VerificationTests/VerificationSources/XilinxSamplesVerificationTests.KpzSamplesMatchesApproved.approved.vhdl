@@ -2639,7 +2639,7 @@ begin
                         -- Initializing record fields to their defaults.
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\IsNull\ := false;
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\_gridRaw\ := (others => to_unsigned(0, 32));
-                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\TestMode\ := False;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\TestMode\ := false;
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\NumberOfIterations\ := to_unsigned(1, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- Hast.Samples.Kpz.Algorithms.KpzKernels.CopyFromSimpleMemoryToRawGrid (kpzKernels, memory);
@@ -10240,7 +10240,7 @@ begin
                         -- Initializing record fields to their defaults.
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\IsNull\ := false;
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\_gridRaw\ := (others => to_unsigned(0, 32));
-                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\TestMode\ := False;
+                        \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\TestMode\ := false;
                         \KpzKernelsInterface::DoIterations(SimpleMemory).0.kpzKernels\.\NumberOfIterations\ := to_unsigned(1, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- Hast.Samples.Kpz.Algorithms.KpzKernels.CopyFromSimpleMemoryToRawGrid (kpzKernels, memory);

@@ -1556,7 +1556,7 @@ begin
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\));
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\);
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_22\;
                         end if;
@@ -1828,7 +1828,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- signBit = false;
                         -- 
-                        \Posit32::.ctor(Quire).0.signBit\ := False;
+                        \Posit32::.ctor(Quire).0.signBit\ := false;
                         -- The following section was transformed from the .NET statement below:
                         -- int num;
                         -- 
@@ -1944,7 +1944,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- signBit = true;
                             -- 
-                            \Posit32::.ctor(Quire).0.signBit\ := True;
+                            \Posit32::.ctor(Quire).0.signBit\ := true;
                             -- Going to the state after the if-else which was started in state \Posit32::.ctor(Quire).0._State_4\.
                             if (\Posit32::.ctor(Quire).0._State\ = \Posit32::.ctor(Quire).0._State_8\) then 
                                 \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_5\;
@@ -2394,7 +2394,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- return false;
                         -- 
-                        \Posit32::IsNaN().0.return\ <= False;
+                        \Posit32::IsNaN().0.return\ <= false;
                         \Posit32::IsNaN().0._State\ := \Posit32::IsNaN().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
@@ -6021,7 +6021,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = false;
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag\ := False;
+                        \Quire Quire::op_Addition(Quire,Quire).0.flag\ := false;
                         -- The following section was transformed from the .NET statement below:
                         -- ushort num;
                         -- 
@@ -6803,7 +6803,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- return false;
                         -- 
-                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= False;
+                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= false;
                         \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_2\.
                         if (\Boolean Quire::op_Equality(Quire,Quire).0._State\ = \Boolean Quire::op_Equality(Quire,Quire).0._State_4\) then 
@@ -6849,7 +6849,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- return true;
                         -- 
-                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= True;
+                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= true;
                         \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Boolean Quire::op_Equality(Quire,Quire).0._State_7\ => 
@@ -6874,7 +6874,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- return false;
                         -- 
-                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= False;
+                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= false;
                         \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_5\.
                         if (\Boolean Quire::op_Equality(Quire,Quire).0._State\ = \Boolean Quire::op_Equality(Quire,Quire).0._State_8\) then 
@@ -7062,7 +7062,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag = false;
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.flag\ := False;
+                            \Quire Quire::op_RightShift(Quire,Int32).0.flag\ := false;
                             -- The following section was transformed from the .NET statement below:
                             -- ushort num3;
                             -- 
@@ -7403,7 +7403,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag = false;
                             -- 
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.flag\ := False;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.flag\ := false;
                             -- The following section was transformed from the .NET statement below:
                             -- ushort num4;
                             -- 
@@ -10174,7 +10174,7 @@ begin
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\));
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\);
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= True;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_22\;
                         end if;
@@ -10446,7 +10446,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- signBit = false;
                         -- 
-                        \Posit32::.ctor(Quire).0.signBit\ := False;
+                        \Posit32::.ctor(Quire).0.signBit\ := false;
                         -- The following section was transformed from the .NET statement below:
                         -- int num;
                         -- 
@@ -10562,7 +10562,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- signBit = true;
                             -- 
-                            \Posit32::.ctor(Quire).0.signBit\ := True;
+                            \Posit32::.ctor(Quire).0.signBit\ := true;
                             -- Going to the state after the if-else which was started in state \Posit32::.ctor(Quire).0._State_4\.
                             if (\Posit32::.ctor(Quire).0._State\ = \Posit32::.ctor(Quire).0._State_8\) then 
                                 \Posit32::.ctor(Quire).0._State\ := \Posit32::.ctor(Quire).0._State_5\;
@@ -16722,7 +16722,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- flag = false;
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag\ := False;
+                        \Quire Quire::op_Addition(Quire,Quire).0.flag\ := false;
                         -- The following section was transformed from the .NET statement below:
                         -- ushort num;
                         -- 
@@ -17504,7 +17504,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- return false;
                         -- 
-                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= False;
+                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= false;
                         \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_2\.
                         if (\Boolean Quire::op_Equality(Quire,Quire).0._State\ = \Boolean Quire::op_Equality(Quire,Quire).0._State_4\) then 
@@ -17550,7 +17550,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- return true;
                         -- 
-                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= True;
+                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= true;
                         \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Boolean Quire::op_Equality(Quire,Quire).0._State_7\ => 
@@ -17575,7 +17575,7 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- return false;
                         -- 
-                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= False;
+                        \Boolean Quire::op_Equality(Quire,Quire).0.return\ <= false;
                         \Boolean Quire::op_Equality(Quire,Quire).0._State\ := \Boolean Quire::op_Equality(Quire,Quire).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Boolean Quire::op_Equality(Quire,Quire).0._State_5\.
                         if (\Boolean Quire::op_Equality(Quire,Quire).0._State\ = \Boolean Quire::op_Equality(Quire,Quire).0._State_8\) then 
@@ -17763,7 +17763,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag = false;
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.flag\ := False;
+                            \Quire Quire::op_RightShift(Quire,Int32).0.flag\ := false;
                             -- The following section was transformed from the .NET statement below:
                             -- ushort num3;
                             -- 
@@ -18104,7 +18104,7 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- flag = false;
                             -- 
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.flag\ := False;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.flag\ := false;
                             -- The following section was transformed from the .NET statement below:
                             -- ushort num4;
                             -- 

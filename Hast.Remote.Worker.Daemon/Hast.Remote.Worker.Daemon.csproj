@@ -16,12 +16,8 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Update="Installer.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Service.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Update="Installer.cs" />
+    <Compile Update="Service.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />

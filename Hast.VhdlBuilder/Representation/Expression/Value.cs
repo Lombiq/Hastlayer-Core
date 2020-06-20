@@ -1,8 +1,8 @@
-﻿using System;
+using Hast.VhdlBuilder.Representation.Declaration;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
@@ -49,7 +49,10 @@ namespace Hast.VhdlBuilder.Representation.Expression
             if (DataType.TypeCategory == DataTypeCategory.Scalar ||
                 DataType.TypeCategory == DataTypeCategory.Unit) return content;
 
-            if (DataType.TypeCategory == DataTypeCategory.Identifier) return vhdlGenerationOptions.ShortenName(content);
+            if (DataType.TypeCategory == DataTypeCategory.Identifier)
+            {
+                return vhdlGenerationOptions.ShortenName(DataType == KnownDataTypes.Boolean ? content.ToLowerInvariant() : content);
+            }
 
             if (DataType.TypeCategory == DataTypeCategory.Array)
             {
