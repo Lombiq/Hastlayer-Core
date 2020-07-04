@@ -687,7 +687,7 @@ begin
         Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.array\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
         Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return.1\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -830,29 +830,29 @@ begin
                             \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers().return.0\;
                             \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.array\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- TaskResult objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e;
+                            -- TaskResult objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e = new TaskResult {
+                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0 = new TaskResult {
                             -- 
                             -- };
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\IsNull\ := false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\Fix64Low\ := to_signed(0, 32);
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\Fix64High\ := to_signed(0, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\IsNull\ := false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64Low\ := to_signed(0, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64High\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e.Fix64High = array [1];
+                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0.Fix64High = array [1];
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\Fix64High\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.array\(to_integer(to_signed(1, 32)));
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64High\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.array\(to_integer(to_signed(1, 32)));
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e.Fix64Low = array [0];
+                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0.Fix64Low = array [0];
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\Fix64Low\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.array\(to_integer(to_signed(0, 32)));
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64Low\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.array\(to_integer(to_signed(0, 32)));
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e;
+                            -- return objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\;
                             \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -875,7 +875,7 @@ begin
         Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.array\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
         Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return.1\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1018,29 +1018,29 @@ begin
                             \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers().return.0\;
                             \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.array\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- TaskResult objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e;
+                            -- TaskResult objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e = new TaskResult {
+                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0 = new TaskResult {
                             -- 
                             -- };
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\IsNull\ := false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\Fix64Low\ := to_signed(0, 32);
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\Fix64High\ := to_signed(0, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\IsNull\ := false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64Low\ := to_signed(0, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64High\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e.Fix64High = array [1];
+                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0.Fix64High = array [1];
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\Fix64High\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.array\(to_integer(to_signed(1, 32)));
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64High\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.array\(to_integer(to_signed(1, 32)));
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e.Fix64Low = array [0];
+                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0.Fix64Low = array [0];
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\Fix64Low\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.array\(to_integer(to_signed(0, 32)));
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64Low\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.array\(to_integer(to_signed(0, 32)));
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e;
+                            -- return objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\;
                             \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -1063,7 +1063,7 @@ begin
         Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.array\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
         Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return.1\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1206,29 +1206,29 @@ begin
                             \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers().return.0\;
                             \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.array\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- TaskResult objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e;
+                            -- TaskResult objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e = new TaskResult {
+                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0 = new TaskResult {
                             -- 
                             -- };
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\IsNull\ := false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\Fix64Low\ := to_signed(0, 32);
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\Fix64High\ := to_signed(0, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\IsNull\ := false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64Low\ := to_signed(0, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64High\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e.Fix64High = array [1];
+                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0.Fix64High = array [1];
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\Fix64High\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.array\(to_integer(to_signed(1, 32)));
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64High\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.array\(to_integer(to_signed(1, 32)));
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e.Fix64Low = array [0];
+                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0.Fix64Low = array [0];
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\.\Fix64Low\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.array\(to_integer(to_signed(0, 32)));
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64Low\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.array\(to_integer(to_signed(0, 32)));
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e;
+                            -- return objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objecta13eacdb5df86ea7875354abde7b21460fda6039bf11c5dd17639959ecc9b29e\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\;
                             \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
