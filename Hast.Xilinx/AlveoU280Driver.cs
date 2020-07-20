@@ -1,4 +1,4 @@
-﻿using Hast.Synthesis;
+using Hast.Synthesis;
 using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
@@ -1069,10 +1069,7 @@ mul_by_0	unsigned64	unsigned64	sync	synth	0	0
         }
 
 
-        public AlveoU280Driver(ITimingReportParser timingReportParser)
-        {
-            _timingReportParser = timingReportParser;
-        }
+        public AlveoU280Driver(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
 
 
         public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
