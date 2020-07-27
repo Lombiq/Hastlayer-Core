@@ -64,12 +64,10 @@ namespace Hast.Transformer.Vhdl.Tests
         }
 
 
-        private Task<VhdlHardwareDescription> TransformClassStrutureExamplesToVhdl(ITransformer transformer)
-        {
-            return TransformAssembliesToVhdl(
+        private Task<VhdlHardwareDescription> TransformClassStrutureExamplesToVhdl(ITransformer transformer) =>
+            TransformAssembliesToVhdl(
                 transformer,
                 new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
                 configuration => configuration.TransformerConfiguration().UseSimpleMemory = false);
-        }
     }
 }

@@ -1,13 +1,13 @@
-﻿using System;
+using CsvHelper;
+using CsvHelper.Configuration;
+using Hast.Synthesis.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using CsvHelper;
-using CsvHelper.Configuration;
-using Hast.Synthesis.Models;
-using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Synthesis.Services
 {
@@ -118,8 +118,8 @@ namespace Hast.Synthesis.Services
                             break;
                         case "not":
                             isSignAgnosticUnaryOperatorType = true;
-                            if (operandSizeBits == 1) unaryOperator = UnaryOperatorType.Not;
-                            else unaryOperator = UnaryOperatorType.BitNot;
+                            unaryOperator = operandSizeBits == 1 ?
+                                (UnaryOperatorType?)UnaryOperatorType.Not : (UnaryOperatorType?)UnaryOperatorType.BitNot;
                             break;
                         case "or":
                             isSignAgnosticBinaryOperatorType = true;
@@ -213,11 +213,11 @@ namespace Hast.Synthesis.Services
 
 
             public void SetLatencyNs(
-                dynamic operatorType, 
-                int operandSizeBits, 
-                bool isSigned, 
-                string constantOperand, 
-                decimal dpd, 
+                dynamic operatorType,
+                int operandSizeBits,
+                bool isSigned,
+                string constantOperand,
+                decimal dpd,
                 decimal twdfr)
             {
                 _timings[GetKey(operatorType, operandSizeBits, isSigned, constantOperand)] = dpd;
@@ -240,20 +240,13 @@ namespace Hast.Synthesis.Services
                 GetLatencyNsInternal(unaryOperator, operandSizeBits, isSigned, string.Empty);
 
 
-            private decimal GetLatencyNsInternal(dynamic operatorType, int operandSizeBits, bool isSigned, string constantOperand)
-            {
-                if (_timings.TryGetValue(GetKey(operatorType, operandSizeBits, isSigned, constantOperand), out decimal latency))
-                {
-                    return latency;
-                }
-
-                return -1;
-            }
+            private decimal GetLatencyNsInternal(dynamic operatorType, int operandSizeBits, bool isSigned, string constantOperand) =>
+                _timings.TryGetValue(GetKey(operatorType, operandSizeBits, isSigned, constantOperand), out decimal latency) ? latency : -1;
 
             private static string GetKey(dynamic operatorType, int operandSizeBits, bool isSigned, string constantOperand) =>
-                    operatorType.ToString() + 
-                    operandSizeBits.ToString() + 
-                    isSigned.ToString() + 
+                    operatorType.ToString() +
+                    operandSizeBits.ToString() +
+                    isSigned.ToString() +
                     (string.IsNullOrEmpty(constantOperand) ? "-" : constantOperand);
         }
     }
