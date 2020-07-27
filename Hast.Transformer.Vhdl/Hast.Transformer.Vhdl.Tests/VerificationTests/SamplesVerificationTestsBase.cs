@@ -24,7 +24,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         protected override bool UseStubMemberSuitabilityChecker => false;
 
 
-        protected Task<VhdlHardwareDescription> CreateSourceForBasicSamples() =>
+        protected Task<VhdlHardwareDescription> CreateSourceForBasicSamples(string deviceName = null) =>
             Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                 provider.GetService<ITransformer>(),
                 new[] { typeof(PrimeCalculator).Assembly, typeof(RandomMwc64X).Assembly },
@@ -79,7 +79,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.AddHardwareEntryPointType<SimdCalculator>();
                 }));
 
-        protected async Task<VhdlHardwareDescription[]> CreateVhdlForKpzSamples() =>
+        protected async Task<VhdlHardwareDescription[]> CreateVhdlForKpzSamples(string deviceName = null) =>
             new[]
             {
                 await Host.RunGetAsync(provider => TransformAssembliesToVhdl(
@@ -113,7 +113,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     }))
             };
 
-        protected Task<VhdlHardwareDescription> CreateVhdlForUnumSample() =>
+        protected Task<VhdlHardwareDescription> CreateVhdlForUnumSample(string deviceName = null) =>
             Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                 provider.GetService<ITransformer>(),
                 new[] { typeof(PrimeCalculator).Assembly, typeof(Unum).Assembly, typeof(ImmutableArray).Assembly },
@@ -126,7 +126,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         UnumCalculatorExtensions.ManuallySizedArrays);
                 }));
 
-        protected Task<VhdlHardwareDescription> CreateVhdlForPositSample() =>
+        protected Task<VhdlHardwareDescription> CreateVhdlForPositSample(string deviceName = null) =>
             Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                 provider.GetService<ITransformer>(),
                 new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly, typeof(ImmutableArray).Assembly },
@@ -138,7 +138,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         PositCalculatorExtensions.ManuallySizedArrays);
                 }));
 
-        protected Task<VhdlHardwareDescription> CreateVhdlForPosit32Sample() =>
+        protected Task<VhdlHardwareDescription> CreateVhdlForPosit32Sample(string deviceName = null) =>
             Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                 provider.GetService<ITransformer>(),
                 new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
@@ -154,7 +154,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         });
                 }));
 
-        protected Task<VhdlHardwareDescription> CreateVhdlForPosit32SampleWithInlining() =>
+        protected Task<VhdlHardwareDescription> CreateVhdlForPosit32SampleWithInlining(string deviceName = null) =>
             Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                 provider.GetService<ITransformer>(),
                 new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
@@ -169,7 +169,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         });
                 }));
 
-        protected Task<VhdlHardwareDescription> CreateSourceForAdvancedPosit32Sample() =>
+        protected Task<VhdlHardwareDescription> CreateSourceForAdvancedPosit32Sample(string deviceName = null) =>
             Host.RunGetAsync(async provider => await TransformAssembliesToVhdl(
                 provider.GetService<ITransformer>(),
                 new[] { typeof(PrimeCalculator).Assembly, typeof(Posit).Assembly },
@@ -179,7 +179,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.TransformerConfiguration().EnableMethodInlining = false;
                 }));
 
-        protected async Task<VhdlHardwareDescription[]> CreateVhdlForPosit32FusedSample() =>
+        protected async Task<VhdlHardwareDescription[]> CreateVhdlForPosit32FusedSample(string deviceName = null) =>
             new[]
             {
                 await Host.RunGetAsync(provider => TransformAssembliesToVhdl(
@@ -205,7 +205,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     }))
             };
 
-        protected Task<VhdlHardwareDescription> CreateVhdlForFix64Samples() =>
+        protected Task<VhdlHardwareDescription> CreateVhdlForFix64Samples(string deviceName = null) =>
             Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                 provider.GetService<ITransformer>(),
                 new[] { typeof(PrimeCalculator).Assembly, typeof(Fix64).Assembly },
@@ -220,7 +220,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         });
                 }));
 
-        protected Task<VhdlHardwareDescription> CreateVhdlForFSharpSamples() =>
+        protected Task<VhdlHardwareDescription> CreateVhdlForFSharpSamples(string deviceName = null) =>
             Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                 provider.GetService<ITransformer>(),
                 new[] { typeof(FSharpParallelAlgorithmContainer).Assembly },
