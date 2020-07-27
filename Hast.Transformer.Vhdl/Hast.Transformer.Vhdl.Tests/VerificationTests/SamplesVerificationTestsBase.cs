@@ -1,4 +1,4 @@
-﻿using Hast.Algorithms;
+using Hast.Algorithms;
 using Hast.Algorithms.Random;
 using Hast.Common.Models;
 using Hast.Layer;
@@ -64,7 +64,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                     configuration.AddHardwareEntryPointType<PrimeCalculator>();
                     transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
-                        new MemberInvocationInstanceCountConfigurationForMethod<PrimeCalculator>(p => p.ParallelizedArePrimeNumbers(default(Transformer.Abstractions.SimpleMemory.SimpleMemory)), 0)
+                        new MemberInvocationInstanceCountConfigurationForMethod<PrimeCalculator>(p => p.ParallelizedArePrimeNumbers(default), 0)
                         {
                             MaxDegreeOfParallelism = 3
                         });
@@ -79,9 +79,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.AddHardwareEntryPointType<SimdCalculator>();
                 }));
 
-        protected async Task<VhdlHardwareDescription[]> CreateVhdlForKpzSamples()
-        {
-            return new[]
+        protected async Task<VhdlHardwareDescription[]> CreateVhdlForKpzSamples() =>
+            new[]
             {
                 await Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                     provider.GetService<ITransformer>(),
@@ -113,7 +112,6 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomMwc64X>(r => r.NextUInt32());
                     }))
             };
-        }
 
         protected Task<VhdlHardwareDescription> CreateVhdlForUnumSample() =>
             Host.RunGetAsync(provider => TransformAssembliesToVhdl(
@@ -181,9 +179,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.TransformerConfiguration().EnableMethodInlining = false;
                 }));
 
-        protected async Task<VhdlHardwareDescription[]> CreateVhdlForPosit32FusedSample()
-        {
-            return new[]
+        protected async Task<VhdlHardwareDescription[]> CreateVhdlForPosit32FusedSample() =>
+            new[]
             {
                 await Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                     provider.GetService<ITransformer>(),
@@ -207,7 +204,6 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             Posit32FusedCalculatorExtensions.ManuallySizedArrays);
                     }))
             };
-        }
 
         protected Task<VhdlHardwareDescription> CreateVhdlForFix64Samples() =>
             Host.RunGetAsync(provider => TransformAssembliesToVhdl(
@@ -218,7 +214,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.AddHardwareEntryPointType<Fix64Calculator>();
 
                     configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                        new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(f => f.ParallelizedCalculateIntegerSumUpToNumbers(default(Transformer.Abstractions.SimpleMemory.SimpleMemory)), 0)
+                        new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(f => f.ParallelizedCalculateIntegerSumUpToNumbers(default), 0)
                         {
                             MaxDegreeOfParallelism = 3
                         });

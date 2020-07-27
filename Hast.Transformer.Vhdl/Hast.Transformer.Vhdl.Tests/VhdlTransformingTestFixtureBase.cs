@@ -1,4 +1,4 @@
-﻿using Hast.Common.Models;
+using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
@@ -50,9 +50,11 @@ namespace Hast.Transformer.Vhdl.Tests
         protected virtual async Task<VhdlHardwareDescription> TransformAssembliesToVhdl(
             ITransformer transformer,
             IEnumerable<Assembly> assemblies,
-            Action<HardwareGenerationConfiguration> configurationModifier = null)
+            Action<HardwareGenerationConfiguration> configurationModifier = null,
+            string deviceName = null)
         {
-            var configuration = new HardwareGenerationConfiguration(DeviceName, null) { EnableCaching = false };
+            deviceName ??= DeviceName;
+            var configuration = new HardwareGenerationConfiguration(deviceName, null) { EnableCaching = false };
             configurationModifier?.Invoke(configuration);
             return (VhdlHardwareDescription)await transformer.Transform(assemblies, configuration);
         }
