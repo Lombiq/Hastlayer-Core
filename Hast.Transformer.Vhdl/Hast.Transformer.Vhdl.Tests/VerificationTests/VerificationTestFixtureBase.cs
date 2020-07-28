@@ -1,4 +1,4 @@
-﻿using Hast.Common.Models;
+using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
@@ -29,16 +29,16 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         protected override Task<VhdlHardwareDescription> TransformAssembliesToVhdl(
            ITransformer transformer,
            IEnumerable<Assembly> assemblies,
-           Action<HardwareGenerationConfiguration> configurationModifier = null)
-        {
-            return base.TransformAssembliesToVhdl(
+           Action<HardwareGenerationConfiguration> configurationModifier = null,
+            string deviceName = null) =>
+            base.TransformAssembliesToVhdl(
                 transformer,
                 assemblies,
                 configuration =>
                 {
                     configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
                     configurationModifier?.Invoke(configuration);
-                });
-        }
+                },
+                deviceName);
     }
 }

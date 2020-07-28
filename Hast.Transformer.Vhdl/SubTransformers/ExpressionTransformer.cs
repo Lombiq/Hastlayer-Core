@@ -1,4 +1,4 @@
-﻿using Hast.Common.Configuration;
+using Hast.Common.Configuration;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
@@ -183,18 +183,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     };
                 }
 
-                string getTaskVariableIdentifier()
-                {
+                string getTaskVariableIdentifier() =>
                     // Retrieving the variable the Task is saved to. It's either an array or a standard variable.
-                    if (assignment.Left is IndexerExpression)
-                    {
-                        return ((IdentifierExpression)((IndexerExpression)assignment.Left).Target).Identifier;
-                    }
-                    else
-                    {
-                        return ((IdentifierExpression)assignment.Left).Identifier;
-                    }
-                }
+                    assignment.Left is IndexerExpression indexerExpression
+                        ? ((IdentifierExpression)indexerExpression.Target).Identifier
+                        : ((IdentifierExpression)assignment.Left).Identifier;
 
                 int getMaxDegreeOfParallelism(EntityDeclaration entity) =>
                     context.TransformationContext
@@ -209,9 +202,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     // Finding the rightmost expression that is the actual value assignment.
                     var currentRight = assignment.Right;
-                    while (currentRight is AssignmentExpression)
+                    while (currentRight is AssignmentExpression assignmentExpression)
                     {
-                        currentRight = ((AssignmentExpression)currentRight).Right;
+                        currentRight = assignmentExpression.Right;
                     }
 
                     var actualAssignment = currentRight;
@@ -221,9 +214,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     assignmentsBlock.Add(transformSimpleAssignmentExpression(assignment.Left, actualAssignment));
 
                     currentRight = assignment.Right;
-                    while (currentRight is AssignmentExpression)
+                    while (currentRight is AssignmentExpression assignmentExpression)
                     {
-                        var currentAssignment = ((AssignmentExpression)currentRight);
+                        var currentAssignment = assignmentExpression;
 
                         assignmentsBlock.Add(transformSimpleAssignmentExpression(currentAssignment.Left, actualAssignment));
                         currentRight = currentAssignment.Right;
@@ -313,10 +306,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var reference = stateMachine.CreatePrefixedObjectName(identifierExpression.Identifier).ToVhdlVariableReference();
 
-                if (!(identifierExpression.Parent is BinaryOperatorExpression)) return reference;
-
-                return implementTypeConversionForBinaryExpressionParent(reference);
-
+                return !(identifierExpression.Parent is BinaryOperatorExpression)
+                    ? reference
+                    : implementTypeConversionForBinaryExpressionParent(reference);
             }
             else if (expression is PrimitiveExpression primitive)
             {
@@ -490,10 +482,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     // If this is not an array then it doesn't need to be explicitly awaited, just access to its
                     // Result property should await it. So doing it here.
-                    if (memberReference.Target is IdentifierExpression && !targetType.IsArray())
+                    if (memberReference.Target is IdentifierExpression targetIdentifierExpression && !targetType.IsArray())
                     {
                         var targetMethod = scope
-                            .TaskVariableNameToDisplayClassMethodMappings[((IdentifierExpression)memberReference.Target).Identifier];
+                            .TaskVariableNameToDisplayClassMethodMappings[targetIdentifierExpression.Identifier];
                         return _stateMachineInvocationBuilder
                             .BuildSingleInvocationWait(targetMethod, 0, context);
                     }
@@ -636,9 +628,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is IndexerExpression indexerExpression)
             {
-                var targetVariableReference = Transform(indexerExpression.Target, context) as IDataObject;
-
-                if (targetVariableReference == null)
+                if (!(Transform(indexerExpression.Target, context) is IDataObject targetVariableReference))
                 {
                     throw new InvalidOperationException(
                         "The target of the indexer expression " + expression.ToString() +
