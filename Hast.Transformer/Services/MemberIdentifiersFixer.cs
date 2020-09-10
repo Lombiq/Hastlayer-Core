@@ -1,9 +1,10 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Resolver;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
@@ -34,9 +35,7 @@ namespace Hast.Transformer.Services
                 else if (identifierExpression
                     .GetResolveResult<MethodGroupResolveResult>()
                     ?.Methods
-                    .Single()
-                    .GetFullName()
-                    .IsInlineCompilerGeneratedMethodName() == true)
+                    ?.Any(method => method.GetFullName().IsInlineCompilerGeneratedMethodName()) == true)
                 {
                     // A reference to a DisplayClass member or compiler-generated method within a Task.Factory.StartNew
                     // call.

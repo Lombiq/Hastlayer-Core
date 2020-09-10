@@ -1,4 +1,4 @@
-﻿using Hast.Common.Models;
+using Hast.Common.Models;
 using Shouldly;
 using Shouldly.Configuration;
 using System.Collections.Generic;
@@ -16,9 +16,15 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         /// <remarks>
         /// Also see: http://shouldly.readthedocs.io/en/latest/assertions/shouldMatchApproved.html
         /// </remarks>
-        public static void ShouldMatchApprovedWithVhdlConfiguration(this VhdlHardwareDescription hardwareDescription) =>
+        public static void ShouldMatchApprovedWithVhdlConfiguration(
+            this VhdlHardwareDescription hardwareDescription,
+            string deviceName = null) =>
             (hardwareDescription.VhdlSource + hardwareDescription.XdcSource)
-                .ShouldMatchApproved(configurationBuilder => configurationBuilder.WithVhdlConfiguration().UseCallerLocation());
+                .ShouldMatchApproved(configurationBuilder =>
+                {
+                    var configuration = configurationBuilder.WithVhdlConfiguration().UseCallerLocation();
+                    if (!string.IsNullOrEmpty(deviceName)) configuration.WithDescriminator(deviceName);
+                });
 
         /// <summary>
         /// Match the input VHDL hardware descriptions' sources, including the XDC constraints if available, against an
@@ -27,9 +33,15 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         /// <remarks>
         /// Also see: http://shouldly.readthedocs.io/en/latest/assertions/shouldMatchApproved.html
         /// </remarks>
-        public static void ShouldMatchApprovedWithVhdlConfiguration(this IEnumerable<VhdlHardwareDescription> hardwareDescriptions) =>
+        public static void ShouldMatchApprovedWithVhdlConfiguration(
+            this IEnumerable<VhdlHardwareDescription> hardwareDescriptions,
+            string deviceName = null) =>
             (string.Join(string.Empty, hardwareDescriptions.Select(hardwareDescription => hardwareDescription.VhdlSource + hardwareDescription.XdcSource)))
-                .ShouldMatchApproved(configurationBuilder => configurationBuilder.WithVhdlConfiguration().UseCallerLocation());
+                .ShouldMatchApproved(configurationBuilder =>
+                {
+                    var configuration = configurationBuilder.WithVhdlConfiguration().UseCallerLocation();
+                    if (!string.IsNullOrEmpty(deviceName)) configuration.WithDescriminator(deviceName);
+                });
 
         /// <summary>
         /// Match the input VHDL source against an existing approved source file. This quickly tells if something changed.

@@ -1,4 +1,4 @@
-﻿using Hast.Synthesis;
+using Hast.Synthesis;
 using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
@@ -28,22 +28,22 @@ and	std_logic_vector1	std_logic_vector1	sync	impl	0,341	-0,037
 and	std_logic_vector8	std_logic_vector8	sync	impl	0,469	-0,037
 and	std_logic_vector16	std_logic_vector16	sync	impl	0,469	-0,037
 and	std_logic_vector32	std_logic_vector32	sync	impl	0,641	-0,132
-and	std_logic_vector64	std_logic_vector64	sync	impl	0,495	-0,037
+and	std_logic_vector64	std_logic_vector64	sync	impl	0,474	-0,037
 nand	std_logic_vector1	std_logic_vector1	sync	impl	0,341	-0,037
 nand	std_logic_vector8	std_logic_vector8	sync	impl	0,469	-0,037
 nand	std_logic_vector16	std_logic_vector16	sync	impl	0,469	-0,037
 nand	std_logic_vector32	std_logic_vector32	sync	impl	0,641	-0,132
-nand	std_logic_vector64	std_logic_vector64	sync	impl	0,495	-0,037
+nand	std_logic_vector64	std_logic_vector64	sync	impl	0,474	-0,037
 or	std_logic_vector1	std_logic_vector1	sync	impl	0,341	-0,037
 or	std_logic_vector8	std_logic_vector8	sync	impl	0,469	-0,037
 or	std_logic_vector16	std_logic_vector16	sync	impl	0,469	-0,037
 or	std_logic_vector32	std_logic_vector32	sync	impl	0,641	-0,132
-or	std_logic_vector64	std_logic_vector64	sync	impl	0,495	-0,037
+or	std_logic_vector64	std_logic_vector64	sync	impl	0,474	-0,037
 nor	std_logic_vector1	std_logic_vector1	sync	impl	0,341	-0,037
 nor	std_logic_vector8	std_logic_vector8	sync	impl	0,469	-0,037
 nor	std_logic_vector16	std_logic_vector16	sync	impl	0,469	-0,037
 nor	std_logic_vector32	std_logic_vector32	sync	impl	0,641	-0,132
-nor	std_logic_vector64	std_logic_vector64	sync	impl	0,495	-0,037
+nor	std_logic_vector64	std_logic_vector64	sync	impl	0,474	-0,037
 xor	std_logic_vector1	std_logic_vector1	sync	impl	0,446	-0,037
 xor	std_logic_vector8	std_logic_vector8	sync	impl	0,469	-0,037
 xor	std_logic_vector16	std_logic_vector16	sync	impl	0,446	-0,037
@@ -62,48 +62,48 @@ add	unsigned16	unsigned16	sync	impl	0,854	-0,072
 add	signed16	signed16	sync	impl	0,854	-0,072
 add	unsigned32	unsigned32	sync	impl	0,960	-0,095
 add	signed32	signed32	sync	impl	0,960	-0,095
-add	unsigned64	unsigned64	sync	impl	1,069	-0,084
-add	signed64	signed64	sync	impl	1,069	-0,084
+add	unsigned64	unsigned64	sync	impl	1,071	-0,091
+add	signed64	signed64	sync	impl	1,071	-0,091
 gt	unsigned1	boolean	sync	impl	0,341	-0,037
 gt	signed1	boolean	sync	impl	0,446	-0,037
 gt	unsigned8	boolean	sync	synth	0,775	-0,155
 gt	signed8	boolean	sync	synth	0,775	-0,155
-gt	unsigned16	boolean	sync	impl	0,810	-0,096
-gt	signed16	boolean	sync	impl	0,810	-0,096
-gt	unsigned32	boolean	sync	impl	0,819	-0,097
-gt	signed32	boolean	sync	impl	0,819	-0,097
-gt	unsigned64	boolean	sync	impl	0,974	-0,092
-gt	signed64	boolean	sync	impl	0,974	-0,092
+gt	unsigned16	boolean	sync	impl	0,817	-0,096
+gt	signed16	boolean	sync	impl	0,817	-0,096
+gt	unsigned32	boolean	sync	impl	0,807	-0,097
+gt	signed32	boolean	sync	impl	0,807	-0,097
+gt	unsigned64	boolean	sync	impl	0,934	-0,093
+gt	signed64	boolean	sync	impl	0,934	-0,093
 lt	unsigned1	boolean	sync	impl	0,446	-0,037
 lt	signed1	boolean	sync	impl	0,341	-0,037
 lt	unsigned8	boolean	sync	synth	0,775	-0,155
 lt	signed8	boolean	sync	synth	0,775	-0,155
-lt	unsigned16	boolean	sync	impl	0,810	-0,096
-lt	signed16	boolean	sync	impl	0,810	-0,096
+lt	unsigned16	boolean	sync	impl	0,806	-0,089
+lt	signed16	boolean	sync	impl	0,806	-0,089
 lt	unsigned32	boolean	sync	impl	0,872	-0,092
 lt	signed32	boolean	sync	impl	0,872	-0,092
-lt	unsigned64	boolean	sync	impl	0,861	-0,085
-lt	signed64	boolean	sync	impl	0,861	-0,085
+lt	unsigned64	boolean	sync	impl	0,903	-0,088
+lt	signed64	boolean	sync	impl	0,903	-0,088
 ge	unsigned1	boolean	sync	impl	0,341	-0,037
 ge	signed1	boolean	sync	impl	0,341	-0,037
 ge	unsigned8	boolean	sync	synth	0,775	-0,155
 ge	signed8	boolean	sync	synth	0,775	-0,155
-ge	unsigned16	boolean	sync	impl	0,810	-0,096
-ge	signed16	boolean	sync	impl	0,810	-0,096
-ge	unsigned32	boolean	sync	impl	0,819	-0,097
-ge	signed32	boolean	sync	impl	0,819	-0,097
-ge	unsigned64	boolean	sync	impl	0,974	-0,092
-ge	signed64	boolean	sync	impl	0,974	-0,092
+ge	unsigned16	boolean	sync	impl	0,817	-0,096
+ge	signed16	boolean	sync	impl	0,817	-0,096
+ge	unsigned32	boolean	sync	impl	0,807	-0,097
+ge	signed32	boolean	sync	impl	0,807	-0,097
+ge	unsigned64	boolean	sync	impl	0,934	-0,093
+ge	signed64	boolean	sync	impl	0,934	-0,093
 le	unsigned1	boolean	sync	impl	0,446	-0,037
 le	signed1	boolean	sync	impl	0,446	-0,037
 le	unsigned8	boolean	sync	synth	0,775	-0,155
 le	signed8	boolean	sync	synth	0,775	-0,155
-le	unsigned16	boolean	sync	impl	0,810	-0,096
-le	signed16	boolean	sync	impl	0,810	-0,096
+le	unsigned16	boolean	sync	impl	0,806	-0,089
+le	signed16	boolean	sync	impl	0,806	-0,089
 le	unsigned32	boolean	sync	impl	0,872	-0,092
 le	signed32	boolean	sync	impl	0,872	-0,092
-le	unsigned64	boolean	sync	impl	0,861	-0,085
-le	signed64	boolean	sync	impl	0,861	-0,085
+le	unsigned64	boolean	sync	impl	0,903	-0,088
+le	signed64	boolean	sync	impl	0,903	-0,088
 eq	unsigned1	boolean	sync	impl	0,446	-0,037
 eq	signed1	boolean	sync	impl	0,446	-0,037
 eq	unsigned8	boolean	sync	impl	1,128	-0,018
@@ -112,8 +112,8 @@ eq	unsigned16	boolean	sync	impl	0,826	-0,037
 eq	signed16	boolean	sync	impl	0,826	-0,037
 eq	unsigned32	boolean	sync	impl	0,860	-0,095
 eq	signed32	boolean	sync	impl	0,860	-0,095
-eq	unsigned64	boolean	sync	impl	1,005	-0,083
-eq	signed64	boolean	sync	impl	1,005	-0,083
+eq	unsigned64	boolean	sync	impl	0,963	-0,084
+eq	signed64	boolean	sync	impl	0,963	-0,084
 neq	unsigned1	boolean	sync	impl	0,446	-0,037
 neq	signed1	boolean	sync	impl	0,446	-0,037
 neq	unsigned8	boolean	sync	impl	1,128	-0,018
@@ -122,8 +122,8 @@ neq	unsigned16	boolean	sync	impl	0,826	-0,037
 neq	signed16	boolean	sync	impl	0,826	-0,037
 neq	unsigned32	boolean	sync	impl	0,860	-0,095
 neq	signed32	boolean	sync	impl	0,860	-0,095
-neq	unsigned64	boolean	sync	impl	1,043	-0,096
-neq	signed64	boolean	sync	impl	1,043	-0,096
+neq	unsigned64	boolean	sync	impl	0,915	-0,048
+neq	signed64	boolean	sync	impl	0,915	-0,048
 sub	unsigned1	unsigned1	sync	impl	0,341	-0,037
 sub	signed1	signed1	sync	impl	0,341	-0,037
 sub	unsigned8	unsigned8	sync	impl	0,674	-0,030
@@ -132,27 +132,27 @@ sub	unsigned16	unsigned16	sync	impl	0,854	-0,072
 sub	signed16	signed16	sync	impl	0,854	-0,072
 sub	unsigned32	unsigned32	sync	impl	0,960	-0,095
 sub	signed32	signed32	sync	impl	0,960	-0,095
-sub	unsigned64	unsigned64	sync	impl	1,069	-0,084
-sub	signed64	signed64	sync	impl	1,069	-0,084
+sub	unsigned64	unsigned64	sync	impl	1,071	-0,091
+sub	signed64	signed64	sync	impl	1,071	-0,091
 mod	unsigned1	unsigned1	sync	impl	0,341	-0,037
-mod	unsigned8	unsigned8	sync	impl	4,858	0,087
+mod	unsigned8	unsigned8	sync	impl	4,690	0,119
 mod	signed8	signed8	sync	synth	7,041	-0,155
-mod	unsigned16	unsigned16	sync	impl	10,695	-0,051
+mod	unsigned16	unsigned16	sync	impl	10,612	0,078
 mod	signed16	signed16	sync	synth	14,004	-0,155
-mod	unsigned32	unsigned32	sync	impl	24,922	0,088
-mod	signed32	signed32	sync	impl	26,089	0,255
-mod	unsigned64	unsigned64	sync	impl	63,825	0,265
-mod	signed64	signed64	sync	impl	66,801	-0,099
+mod	unsigned32	unsigned32	sync	impl	24,768	0,267
+mod	signed32	signed32	sync	impl	26,340	0,232
+mod	unsigned64	unsigned64	sync	impl	62,710	0,247
+mod	signed64	signed64	sync	impl	66,016	0,080
 rem	unsigned1	unsigned1	sync	impl	0,341	-0,037
 rem	signed1	signed1	sync	impl	0,341	-0,037
-rem	unsigned8	unsigned8	sync	impl	4,858	0,087
+rem	unsigned8	unsigned8	sync	impl	4,690	0,119
 rem	signed8	signed8	sync	synth	6,642	-0,155
-rem	unsigned16	unsigned16	sync	impl	10,695	-0,051
+rem	unsigned16	unsigned16	sync	impl	10,612	0,078
 rem	signed16	signed16	sync	synth	13,357	-0,155
-rem	unsigned32	unsigned32	sync	impl	24,922	0,088
-rem	signed32	signed32	sync	impl	25,795	0,267
-rem	unsigned64	unsigned64	sync	impl	63,825	0,265
-rem	signed64	signed64	sync	impl	64,140	0,275
+rem	unsigned32	unsigned32	sync	impl	24,768	0,267
+rem	signed32	signed32	sync	impl	25,264	0,267
+rem	unsigned64	unsigned64	sync	impl	62,710	0,247
+rem	signed64	signed64	sync	impl	67,321	0,209
 not	std_logic_vector1	std_logic_vector1	sync	impl	0,329	-0,037
 not	std_logic_vector8	std_logic_vector8	sync	impl	0,372	-0,030
 not	std_logic_vector16	std_logic_vector16	sync	impl	0,361	-0,037
@@ -165,24 +165,24 @@ unary_minus	signed32	signed32	sync	impl	0,832	-0,094
 unary_minus	signed64	signed64	sync	impl	1,022	-0,100
 div	unsigned1	unsigned1	sync	impl	0,341	-0,037
 div	signed1	signed1	sync	impl	0,341	-0,037
-div	unsigned8	unsigned8	sync	impl	4,708	0,109
+div	unsigned8	unsigned8	sync	impl	4,638	0,109
 div	signed8	signed8	sync	synth	6,046	-0,155
-div	unsigned16	unsigned16	sync	impl	10,020	0,088
+div	unsigned16	unsigned16	sync	impl	9,898	0,233
 div	signed16	signed16	sync	synth	12,846	-0,155
-div	unsigned32	unsigned32	sync	impl	23,384	0,231
-div	signed32	signed32	sync	impl	24,899	0,132
-div	unsigned64	unsigned64	sync	impl	61,679	0,256
-div	signed64	signed64	sync	impl	65,960	-0,035
+div	unsigned32	unsigned32	sync	impl	23,593	0,267
+div	signed32	signed32	sync	impl	24,556	0,042
+div	unsigned64	unsigned64	sync	impl	61,803	0,307
+div	signed64	signed64	sync	impl	66,533	0,119
 mul	unsigned1	unsigned1	sync	impl	0,341	-0,037
 mul	signed1	signed1	sync	impl	0,341	-0,037
 mul	unsigned8	unsigned8	sync	impl	1,363	-0,048
-mul	signed8	signed8	sync	impl	1,514	-0,081
+mul	signed8	signed8	sync	impl	1,557	-0,084
 mul	unsigned16	unsigned16	sync	impl	1,511	-0,037
 mul	signed16	signed16	sync	impl	1,511	-0,037
-mul	unsigned32	unsigned32	sync	impl	2,172	-0,127
+mul	unsigned32	unsigned32	sync	impl	2,217	-0,068
 mul	signed32	signed32	sync	impl	2,217	-0,068
-mul	unsigned64	unsigned64	sync	impl	3,605	0,054
-mul	signed64	signed64	sync	impl	3,581	0,082
+mul	unsigned64	unsigned64	sync	impl	3,581	0,082
+mul	signed64	signed64	sync	impl	3,605	-0,086
 dotnet_shift_left_by_0	unsigned64	unsigned64	sync	impl	0,765	-0,041
 dotnet_shift_left_by_0	signed64	signed64	sync	impl	0,765	-0,041
 dotnet_shift_right_by_0	unsigned64	unsigned64	sync	impl	0,765	-0,041
@@ -207,8 +207,8 @@ div_by_1	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_1	unsigned64	unsigned64	sync	impl	0,765	-0,041
 div_by_1	signed8	signed8	sync	impl	0,407	-0,019
 div_by_1	signed16	signed16	sync	impl	0,376	-0,019
-div_by_1	signed32	signed32	sync	impl	2,171	-0,085
-div_by_1	signed64	signed64	sync	impl	2,184	-0,100
+div_by_1	signed32	signed32	sync	impl	1,952	-0,108
+div_by_1	signed64	signed64	sync	impl	2,165	-0,088
 dotnet_shift_left_by_1	unsigned64	unsigned64	sync	impl	0,547	-0,084
 dotnet_shift_left_by_1	signed64	signed64	sync	impl	0,547	-0,084
 dotnet_shift_right_by_1	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -231,8 +231,8 @@ div_by_2	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_2	unsigned64	unsigned64	sync	impl	0,388	-0,019
 div_by_2	signed8	signed8	sync	impl	1,448	-0,019
 div_by_2	signed16	signed16	sync	impl	1,130	-0,097
-div_by_2	signed32	signed32	sync	impl	1,981	-0,092
-div_by_2	signed64	signed64	sync	impl	2,121	-0,110
+div_by_2	signed32	signed32	sync	impl	1,935	-0,091
+div_by_2	signed64	signed64	sync	impl	2,174	-0,107
 dotnet_shift_left_by_2	unsigned64	unsigned64	sync	impl	0,443	-0,027
 dotnet_shift_left_by_2	signed64	signed64	sync	impl	0,443	-0,027
 dotnet_shift_right_by_2	unsigned64	unsigned64	sync	impl	0,765	-0,041
@@ -255,8 +255,8 @@ div_by_4	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_4	unsigned64	unsigned64	sync	impl	0,765	-0,041
 div_by_4	signed8	signed8	sync	impl	0,914	-0,037
 div_by_4	signed16	signed16	sync	impl	1,200	-0,105
-div_by_4	signed32	signed32	sync	impl	1,964	-0,039
-div_by_4	signed64	signed64	sync	impl	2,172	-0,091
+div_by_4	signed32	signed32	sync	impl	1,968	-0,097
+div_by_4	signed64	signed64	sync	impl	2,048	-0,093
 dotnet_shift_left_by_3	unsigned64	unsigned64	sync	impl	0,539	-0,083
 dotnet_shift_left_by_3	signed64	signed64	sync	impl	0,539	-0,083
 dotnet_shift_right_by_3	unsigned64	unsigned64	sync	impl	0,765	-0,041
@@ -278,9 +278,9 @@ div_by_8	unsigned16	unsigned16	sync	impl	0,382	-0,019
 div_by_8	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_8	unsigned64	unsigned64	sync	impl	0,765	-0,041
 div_by_8	signed8	signed8	sync	impl	0,947	-0,055
-div_by_8	signed16	signed16	sync	impl	1,344	-0,098
-div_by_8	signed32	signed32	sync	impl	1,944	-0,054
-div_by_8	signed64	signed64	sync	impl	2,363	-0,091
+div_by_8	signed16	signed16	sync	impl	1,308	-0,118
+div_by_8	signed32	signed32	sync	impl	1,904	-0,093
+div_by_8	signed64	signed64	sync	impl	2,274	-0,038
 dotnet_shift_left_by_4	unsigned64	unsigned64	sync	impl	0,329	-0,093
 dotnet_shift_left_by_4	signed64	signed64	sync	impl	0,329	-0,093
 dotnet_shift_right_by_4	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -303,8 +303,8 @@ div_by_16	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_16	unsigned64	unsigned64	sync	impl	0,388	-0,019
 div_by_16	signed8	signed8	sync	impl	0,936	-0,044
 div_by_16	signed16	signed16	sync	impl	1,517	-0,122
-div_by_16	signed32	signed32	sync	impl	2,047	-0,093
-div_by_16	signed64	signed64	sync	impl	2,128	-0,093
+div_by_16	signed32	signed32	sync	impl	2,024	-0,108
+div_by_16	signed64	signed64	sync	impl	2,264	-0,104
 dotnet_shift_left_by_5	unsigned64	unsigned64	sync	impl	0,329	-0,104
 dotnet_shift_left_by_5	signed64	signed64	sync	impl	0,329	-0,104
 dotnet_shift_right_by_5	unsigned64	unsigned64	sync	impl	0,368	-0,040
@@ -327,8 +327,8 @@ div_by_32	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_32	unsigned64	unsigned64	sync	impl	0,368	-0,040
 div_by_32	signed8	signed8	sync	impl	0,957	-0,043
 div_by_32	signed16	signed16	sync	impl	1,320	-0,109
-div_by_32	signed32	signed32	sync	impl	1,988	-0,115
-div_by_32	signed64	signed64	sync	impl	2,263	-0,047
+div_by_32	signed32	signed32	sync	impl	2,070	-0,100
+div_by_32	signed64	signed64	sync	impl	2,274	-0,080
 dotnet_shift_left_by_6	unsigned64	unsigned64	sync	impl	0,416	-0,091
 dotnet_shift_left_by_6	signed64	signed64	sync	impl	0,416	-0,091
 dotnet_shift_right_by_6	unsigned64	unsigned64	sync	impl	0,397	-0,019
@@ -351,8 +351,8 @@ div_by_64	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_64	unsigned64	unsigned64	sync	impl	0,397	-0,019
 div_by_64	signed8	signed8	sync	impl	0,915	-0,043
 div_by_64	signed16	signed16	sync	impl	1,207	-0,049
-div_by_64	signed32	signed32	sync	impl	2,120	-0,105
-div_by_64	signed64	signed64	sync	impl	2,457	-0,103
+div_by_64	signed32	signed32	sync	impl	2,003	-0,035
+div_by_64	signed64	signed64	sync	impl	2,164	-0,088
 dotnet_shift_left_by_7	unsigned64	unsigned64	sync	impl	0,514	-0,019
 dotnet_shift_left_by_7	signed64	signed64	sync	impl	0,514	-0,019
 dotnet_shift_right_by_7	unsigned64	unsigned64	sync	impl	0,397	-0,019
@@ -373,8 +373,8 @@ div_by_128	unsigned16	unsigned16	sync	impl	0,514	-0,019
 div_by_128	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_128	unsigned64	unsigned64	sync	impl	0,397	-0,019
 div_by_128	signed16	signed16	sync	impl	1,546	-0,048
-div_by_128	signed32	signed32	sync	impl	2,001	-0,065
-div_by_128	signed64	signed64	sync	impl	2,334	-0,105
+div_by_128	signed32	signed32	sync	impl	2,098	-0,095
+div_by_128	signed64	signed64	sync	impl	2,102	-0,050
 dotnet_shift_left_by_8	unsigned64	unsigned64	sync	impl	0,535	-0,151
 dotnet_shift_left_by_8	signed64	signed64	sync	impl	0,535	-0,151
 dotnet_shift_right_by_8	unsigned64	unsigned64	sync	impl	0,397	-0,019
@@ -393,8 +393,8 @@ div_by_256	unsigned16	unsigned16	sync	impl	0,388	-0,019
 div_by_256	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_256	unsigned64	unsigned64	sync	impl	0,397	-0,019
 div_by_256	signed16	signed16	sync	impl	1,442	-0,098
-div_by_256	signed32	signed32	sync	impl	2,060	-0,059
-div_by_256	signed64	signed64	sync	impl	2,216	-0,047
+div_by_256	signed32	signed32	sync	impl	2,154	-0,099
+div_by_256	signed64	signed64	sync	impl	2,205	-0,087
 dotnet_shift_left_by_9	unsigned64	unsigned64	sync	impl	0,535	-0,151
 dotnet_shift_left_by_9	signed64	signed64	sync	impl	0,535	-0,151
 dotnet_shift_right_by_9	unsigned64	unsigned64	sync	impl	0,397	-0,019
@@ -412,9 +412,9 @@ mul_by_512	signed64	signed64	sync	impl	0,535	-0,151
 div_by_512	unsigned16	unsigned16	sync	impl	0,375	-0,019
 div_by_512	unsigned32	unsigned32	sync	impl	0,514	-0,019
 div_by_512	unsigned64	unsigned64	sync	impl	0,397	-0,019
-div_by_512	signed16	signed16	sync	impl	1,397	-0,095
-div_by_512	signed32	signed32	sync	impl	2,054	-0,094
-div_by_512	signed64	signed64	sync	impl	2,311	-0,091
+div_by_512	signed16	signed16	sync	impl	1,714	-0,101
+div_by_512	signed32	signed32	sync	impl	2,228	-0,052
+div_by_512	signed64	signed64	sync	impl	2,091	-0,086
 dotnet_shift_left_by_10	unsigned64	unsigned64	sync	impl	0,521	-0,151
 dotnet_shift_left_by_10	signed64	signed64	sync	impl	0,521	-0,151
 dotnet_shift_right_by_10	unsigned64	unsigned64	sync	impl	0,397	-0,019
@@ -433,8 +433,8 @@ div_by_1024	unsigned16	unsigned16	sync	impl	0,388	-0,019
 div_by_1024	unsigned32	unsigned32	sync	impl	0,514	-0,019
 div_by_1024	unsigned64	unsigned64	sync	impl	0,397	-0,019
 div_by_1024	signed16	signed16	sync	impl	1,738	-0,104
-div_by_1024	signed32	signed32	sync	impl	2,083	-0,097
-div_by_1024	signed64	signed64	sync	impl	2,210	-0,106
+div_by_1024	signed32	signed32	sync	impl	2,074	-0,097
+div_by_1024	signed64	signed64	sync	impl	2,188	-0,044
 dotnet_shift_left_by_11	unsigned64	unsigned64	sync	impl	0,552	-0,151
 dotnet_shift_left_by_11	signed64	signed64	sync	impl	0,552	-0,151
 dotnet_shift_right_by_11	unsigned64	unsigned64	sync	impl	0,397	-0,019
@@ -452,9 +452,9 @@ mul_by_2048	signed64	signed64	sync	impl	0,552	-0,151
 div_by_2048	unsigned16	unsigned16	sync	impl	0,407	-0,019
 div_by_2048	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_2048	unsigned64	unsigned64	sync	impl	0,397	-0,019
-div_by_2048	signed16	signed16	sync	impl	1,287	-0,101
-div_by_2048	signed32	signed32	sync	impl	2,251	-0,103
-div_by_2048	signed64	signed64	sync	impl	2,316	-0,104
+div_by_2048	signed16	signed16	sync	impl	1,518	-0,092
+div_by_2048	signed32	signed32	sync	impl	2,020	-0,096
+div_by_2048	signed64	signed64	sync	impl	2,398	-0,043
 dotnet_shift_left_by_12	unsigned64	unsigned64	sync	impl	0,455	-0,041
 dotnet_shift_left_by_12	signed64	signed64	sync	impl	0,455	-0,041
 dotnet_shift_right_by_12	unsigned64	unsigned64	sync	impl	0,397	-0,019
@@ -472,9 +472,9 @@ mul_by_4096	signed64	signed64	sync	impl	0,455	-0,041
 div_by_4096	unsigned16	unsigned16	sync	impl	0,317	-0,019
 div_by_4096	unsigned32	unsigned32	sync	impl	0,376	-0,019
 div_by_4096	unsigned64	unsigned64	sync	impl	0,397	-0,019
-div_by_4096	signed16	signed16	sync	impl	1,461	-0,083
-div_by_4096	signed32	signed32	sync	impl	2,105	-0,086
-div_by_4096	signed64	signed64	sync	impl	2,263	-0,030
+div_by_4096	signed16	signed16	sync	impl	1,591	-0,092
+div_by_4096	signed32	signed32	sync	impl	2,058	-0,084
+div_by_4096	signed64	signed64	sync	impl	2,294	-0,042
 dotnet_shift_left_by_13	unsigned64	unsigned64	sync	impl	0,479	-0,038
 dotnet_shift_left_by_13	signed64	signed64	sync	impl	0,479	-0,038
 dotnet_shift_right_by_13	unsigned64	unsigned64	sync	impl	0,397	-0,019
@@ -493,8 +493,8 @@ div_by_8192	unsigned16	unsigned16	sync	impl	0,299	-0,041
 div_by_8192	unsigned32	unsigned32	sync	impl	0,376	-0,019
 div_by_8192	unsigned64	unsigned64	sync	impl	0,397	-0,019
 div_by_8192	signed16	signed16	sync	impl	1,522	-0,086
-div_by_8192	signed32	signed32	sync	impl	2,182	-0,090
-div_by_8192	signed64	signed64	sync	impl	2,480	-0,156
+div_by_8192	signed32	signed32	sync	impl	2,014	-0,103
+div_by_8192	signed64	signed64	sync	impl	2,311	-0,071
 dotnet_shift_left_by_14	unsigned64	unsigned64	sync	impl	0,450	-0,151
 dotnet_shift_left_by_14	signed64	signed64	sync	impl	0,450	-0,151
 dotnet_shift_right_by_14	unsigned64	unsigned64	sync	impl	0,397	-0,019
@@ -513,8 +513,8 @@ div_by_16384	unsigned16	unsigned16	sync	impl	0,353	-0,041
 div_by_16384	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_16384	unsigned64	unsigned64	sync	impl	0,397	-0,019
 div_by_16384	signed16	signed16	sync	impl	1,382	-0,081
-div_by_16384	signed32	signed32	sync	impl	2,150	-0,087
-div_by_16384	signed64	signed64	sync	impl	2,247	-0,040
+div_by_16384	signed32	signed32	sync	impl	2,076	-0,099
+div_by_16384	signed64	signed64	sync	impl	2,286	-0,070
 dotnet_shift_left_by_15	unsigned64	unsigned64	sync	impl	0,545	-0,030
 dotnet_shift_left_by_15	signed64	signed64	sync	impl	0,545	-0,030
 dotnet_shift_right_by_15	unsigned64	unsigned64	sync	impl	0,407	-0,019
@@ -531,8 +531,8 @@ mul_by_32768	signed64	signed64	sync	impl	0,545	-0,030
 div_by_32768	unsigned16	unsigned16	sync	impl	0,585	-0,019
 div_by_32768	unsigned32	unsigned32	sync	impl	0,382	-0,019
 div_by_32768	unsigned64	unsigned64	sync	impl	0,407	-0,019
-div_by_32768	signed32	signed32	sync	impl	2,230	-0,107
-div_by_32768	signed64	signed64	sync	impl	2,305	-0,114
+div_by_32768	signed32	signed32	sync	impl	2,291	-0,090
+div_by_32768	signed64	signed64	sync	impl	2,413	-0,151
 dotnet_shift_left_by_16	unsigned64	unsigned64	sync	impl	0,514	-0,019
 dotnet_shift_left_by_16	signed64	signed64	sync	impl	0,514	-0,019
 dotnet_shift_right_by_16	unsigned64	unsigned64	sync	impl	0,407	-0,019
@@ -547,8 +547,8 @@ mul_by_65536	signed32	signed32	sync	impl	0,388	-0,019
 mul_by_65536	signed64	signed64	sync	impl	0,514	-0,019
 div_by_65536	unsigned32	unsigned32	sync	impl	0,385	-0,019
 div_by_65536	unsigned64	unsigned64	sync	impl	0,407	-0,019
-div_by_65536	signed32	signed32	sync	impl	2,159	-0,046
-div_by_65536	signed64	signed64	sync	impl	2,217	-0,076
+div_by_65536	signed32	signed32	sync	impl	1,946	-0,092
+div_by_65536	signed64	signed64	sync	impl	2,315	-0,141
 dotnet_shift_left_by_17	unsigned64	unsigned64	sync	impl	0,521	-0,151
 dotnet_shift_left_by_17	signed64	signed64	sync	impl	0,521	-0,151
 dotnet_shift_right_by_17	unsigned64	unsigned64	sync	impl	0,407	-0,019
@@ -564,7 +564,7 @@ mul_by_131072	signed64	signed64	sync	impl	0,521	-0,151
 div_by_131072	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_131072	unsigned64	unsigned64	sync	impl	0,407	-0,019
 div_by_131072	signed32	signed32	sync	impl	1,885	-0,089
-div_by_131072	signed64	signed64	sync	impl	2,514	-0,090
+div_by_131072	signed64	signed64	sync	impl	2,380	-0,081
 dotnet_shift_left_by_18	unsigned64	unsigned64	sync	impl	0,388	-0,019
 dotnet_shift_left_by_18	signed64	signed64	sync	impl	0,388	-0,019
 dotnet_shift_right_by_18	unsigned64	unsigned64	sync	impl	0,455	-0,039
@@ -580,7 +580,7 @@ mul_by_262144	signed64	signed64	sync	impl	0,388	-0,019
 div_by_262144	unsigned32	unsigned32	sync	impl	0,382	-0,019
 div_by_262144	unsigned64	unsigned64	sync	impl	0,455	-0,039
 div_by_262144	signed32	signed32	sync	impl	1,964	-0,096
-div_by_262144	signed64	signed64	sync	impl	2,337	-0,087
+div_by_262144	signed64	signed64	sync	impl	2,420	-0,137
 dotnet_shift_left_by_19	unsigned64	unsigned64	sync	impl	0,592	-0,151
 dotnet_shift_left_by_19	signed64	signed64	sync	impl	0,592	-0,151
 dotnet_shift_right_by_19	unsigned64	unsigned64	sync	impl	0,479	-0,039
@@ -596,7 +596,7 @@ mul_by_524288	signed64	signed64	sync	impl	0,592	-0,151
 div_by_524288	unsigned32	unsigned32	sync	impl	0,514	-0,019
 div_by_524288	unsigned64	unsigned64	sync	impl	0,479	-0,039
 div_by_524288	signed32	signed32	sync	impl	2,080	-0,097
-div_by_524288	signed64	signed64	sync	impl	2,367	-0,080
+div_by_524288	signed64	signed64	sync	impl	2,445	-0,083
 dotnet_shift_left_by_20	unsigned64	unsigned64	sync	impl	0,483	-0,039
 dotnet_shift_left_by_20	signed64	signed64	sync	impl	0,483	-0,039
 dotnet_shift_right_by_20	unsigned64	unsigned64	sync	impl	0,479	-0,039
@@ -611,8 +611,8 @@ mul_by_1048576	signed32	signed32	sync	impl	0,388	-0,019
 mul_by_1048576	signed64	signed64	sync	impl	0,483	-0,039
 div_by_1048576	unsigned32	unsigned32	sync	impl	0,376	-0,019
 div_by_1048576	unsigned64	unsigned64	sync	impl	0,479	-0,039
-div_by_1048576	signed32	signed32	sync	impl	2,093	-0,104
-div_by_1048576	signed64	signed64	sync	impl	2,385	-0,123
+div_by_1048576	signed32	signed32	sync	impl	2,105	-0,059
+div_by_1048576	signed64	signed64	sync	impl	2,444	-0,074
 dotnet_shift_left_by_21	unsigned64	unsigned64	sync	impl	0,388	-0,019
 dotnet_shift_left_by_21	signed64	signed64	sync	impl	0,388	-0,019
 dotnet_shift_right_by_21	unsigned64	unsigned64	sync	impl	0,407	-0,019
@@ -627,8 +627,8 @@ mul_by_2097152	signed32	signed32	sync	impl	0,388	-0,019
 mul_by_2097152	signed64	signed64	sync	impl	0,388	-0,019
 div_by_2097152	unsigned32	unsigned32	sync	impl	0,376	-0,019
 div_by_2097152	unsigned64	unsigned64	sync	impl	0,407	-0,019
-div_by_2097152	signed32	signed32	sync	impl	1,937	-0,100
-div_by_2097152	signed64	signed64	sync	impl	2,484	-0,142
+div_by_2097152	signed32	signed32	sync	impl	2,064	-0,100
+div_by_2097152	signed64	signed64	sync	impl	2,268	-0,079
 dotnet_shift_left_by_22	unsigned64	unsigned64	sync	impl	0,514	-0,019
 dotnet_shift_left_by_22	signed64	signed64	sync	impl	0,514	-0,019
 dotnet_shift_right_by_22	unsigned64	unsigned64	sync	impl	0,407	-0,019
@@ -644,7 +644,7 @@ mul_by_4194304	signed64	signed64	sync	impl	0,514	-0,019
 div_by_4194304	unsigned32	unsigned32	sync	impl	0,376	-0,019
 div_by_4194304	unsigned64	unsigned64	sync	impl	0,407	-0,019
 div_by_4194304	signed32	signed32	sync	impl	2,139	-0,112
-div_by_4194304	signed64	signed64	sync	impl	2,438	-0,122
+div_by_4194304	signed64	signed64	sync	impl	2,488	-0,140
 dotnet_shift_left_by_23	unsigned64	unsigned64	sync	impl	0,592	-0,151
 dotnet_shift_left_by_23	signed64	signed64	sync	impl	0,592	-0,151
 dotnet_shift_right_by_23	unsigned64	unsigned64	sync	impl	0,407	-0,019
@@ -660,7 +660,7 @@ mul_by_8388608	signed64	signed64	sync	impl	0,592	-0,151
 div_by_8388608	unsigned32	unsigned32	sync	impl	0,514	-0,019
 div_by_8388608	unsigned64	unsigned64	sync	impl	0,407	-0,019
 div_by_8388608	signed32	signed32	sync	impl	2,063	-0,100
-div_by_8388608	signed64	signed64	sync	impl	2,295	-0,042
+div_by_8388608	signed64	signed64	sync	impl	2,337	-0,151
 dotnet_shift_left_by_24	unsigned64	unsigned64	sync	impl	0,388	-0,019
 dotnet_shift_left_by_24	signed64	signed64	sync	impl	0,388	-0,019
 dotnet_shift_right_by_24	unsigned64	unsigned64	sync	impl	0,514	-0,019
@@ -676,7 +676,7 @@ mul_by_16777216	signed64	signed64	sync	impl	0,388	-0,019
 div_by_16777216	unsigned32	unsigned32	sync	impl	0,407	-0,019
 div_by_16777216	unsigned64	unsigned64	sync	impl	0,514	-0,019
 div_by_16777216	signed32	signed32	sync	impl	2,155	-0,112
-div_by_16777216	signed64	signed64	sync	impl	2,412	-0,150
+div_by_16777216	signed64	signed64	sync	impl	2,317	-0,130
 dotnet_shift_left_by_25	unsigned64	unsigned64	sync	impl	0,593	-0,135
 dotnet_shift_left_by_25	signed64	signed64	sync	impl	0,593	-0,135
 dotnet_shift_right_by_25	unsigned64	unsigned64	sync	impl	0,382	-0,019
@@ -691,8 +691,8 @@ mul_by_33554432	signed32	signed32	sync	impl	0,514	-0,019
 mul_by_33554432	signed64	signed64	sync	impl	0,593	-0,135
 div_by_33554432	unsigned32	unsigned32	sync	impl	0,375	-0,019
 div_by_33554432	unsigned64	unsigned64	sync	impl	0,382	-0,019
-div_by_33554432	signed32	signed32	sync	impl	2,125	-0,100
-div_by_33554432	signed64	signed64	sync	impl	2,349	-0,126
+div_by_33554432	signed32	signed32	sync	impl	2,113	-0,117
+div_by_33554432	signed64	signed64	sync	impl	2,416	-0,043
 dotnet_shift_left_by_26	unsigned64	unsigned64	sync	impl	0,388	-0,019
 dotnet_shift_left_by_26	signed64	signed64	sync	impl	0,388	-0,019
 dotnet_shift_right_by_26	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -707,8 +707,8 @@ mul_by_67108864	signed32	signed32	sync	impl	0,407	-0,019
 mul_by_67108864	signed64	signed64	sync	impl	0,388	-0,019
 div_by_67108864	unsigned32	unsigned32	sync	impl	0,388	-0,019
 div_by_67108864	unsigned64	unsigned64	sync	impl	0,388	-0,019
-div_by_67108864	signed32	signed32	sync	impl	2,128	-0,102
-div_by_67108864	signed64	signed64	sync	impl	2,645	-0,143
+div_by_67108864	signed32	signed32	sync	impl	1,999	-0,105
+div_by_67108864	signed64	signed64	sync	impl	2,358	-0,151
 dotnet_shift_left_by_27	unsigned64	unsigned64	sync	impl	0,406	-0,135
 dotnet_shift_left_by_27	signed64	signed64	sync	impl	0,406	-0,135
 dotnet_shift_right_by_27	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -724,7 +724,7 @@ mul_by_134217728	signed64	signed64	sync	impl	0,406	-0,135
 div_by_134217728	unsigned32	unsigned32	sync	impl	0,407	-0,019
 div_by_134217728	unsigned64	unsigned64	sync	impl	0,388	-0,019
 div_by_134217728	signed32	signed32	sync	impl	2,072	-0,065
-div_by_134217728	signed64	signed64	sync	impl	2,478	-0,131
+div_by_134217728	signed64	signed64	sync	impl	2,360	-0,042
 dotnet_shift_left_by_28	unsigned64	unsigned64	sync	impl	0,388	-0,019
 dotnet_shift_left_by_28	signed64	signed64	sync	impl	0,388	-0,019
 dotnet_shift_right_by_28	unsigned64	unsigned64	sync	impl	0,396	-0,019
@@ -740,7 +740,7 @@ mul_by_268435456	signed64	signed64	sync	impl	0,388	-0,019
 div_by_268435456	unsigned32	unsigned32	sync	impl	0,317	-0,019
 div_by_268435456	unsigned64	unsigned64	sync	impl	0,396	-0,019
 div_by_268435456	signed32	signed32	sync	impl	1,961	-0,099
-div_by_268435456	signed64	signed64	sync	impl	2,309	-0,129
+div_by_268435456	signed64	signed64	sync	impl	2,553	-0,140
 dotnet_shift_left_by_29	unsigned64	unsigned64	sync	impl	0,514	-0,019
 dotnet_shift_left_by_29	signed64	signed64	sync	impl	0,514	-0,019
 dotnet_shift_right_by_29	unsigned64	unsigned64	sync	impl	0,382	-0,019
@@ -756,7 +756,7 @@ mul_by_536870912	signed64	signed64	sync	impl	0,514	-0,019
 div_by_536870912	unsigned32	unsigned32	sync	impl	0,299	-0,041
 div_by_536870912	unsigned64	unsigned64	sync	impl	0,382	-0,019
 div_by_536870912	signed32	signed32	sync	impl	2,010	-0,059
-div_by_536870912	signed64	signed64	sync	impl	2,406	-0,076
+div_by_536870912	signed64	signed64	sync	impl	2,503	-0,140
 dotnet_shift_left_by_30	unsigned64	unsigned64	sync	impl	0,483	-0,037
 dotnet_shift_left_by_30	signed64	signed64	sync	impl	0,483	-0,037
 dotnet_shift_right_by_30	unsigned64	unsigned64	sync	impl	0,376	-0,019
@@ -772,7 +772,7 @@ mul_by_1073741824	signed64	signed64	sync	impl	0,483	-0,037
 div_by_1073741824	unsigned32	unsigned32	sync	impl	0,353	-0,041
 div_by_1073741824	unsigned64	unsigned64	sync	impl	0,376	-0,019
 div_by_1073741824	signed32	signed32	sync	impl	1,946	-0,097
-div_by_1073741824	signed64	signed64	sync	impl	2,399	-0,084
+div_by_1073741824	signed64	signed64	sync	impl	2,461	-0,138
 dotnet_shift_left_by_31	unsigned64	unsigned64	sync	impl	0,406	-0,135
 dotnet_shift_left_by_31	signed64	signed64	sync	impl	0,406	-0,135
 dotnet_shift_right_by_31	unsigned64	unsigned64	sync	impl	0,382	-0,019
@@ -786,7 +786,7 @@ mul_by_2147483648	unsigned64	unsigned64	sync	impl	0,406	-0,135
 mul_by_2147483648	signed64	signed64	sync	impl	0,406	-0,135
 div_by_2147483648	unsigned32	unsigned32	sync	impl	0,585	-0,019
 div_by_2147483648	unsigned64	unsigned64	sync	impl	0,382	-0,019
-div_by_2147483648	signed64	signed64	sync	impl	2,397	-0,096
+div_by_2147483648	signed64	signed64	sync	impl	2,304	-0,143
 dotnet_shift_left_by_32	unsigned64	unsigned64	sync	impl	0,415	-0,135
 dotnet_shift_left_by_32	signed64	signed64	sync	impl	0,415	-0,135
 dotnet_shift_right_by_32	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -794,7 +794,7 @@ dotnet_shift_right_by_32	signed64	signed64	sync	impl	0,873	-0,028
 mul_by_4294967296	unsigned64	unsigned64	sync	impl	0,415	-0,135
 mul_by_4294967296	signed64	signed64	sync	impl	0,415	-0,135
 div_by_4294967296	unsigned64	unsigned64	sync	impl	0,388	-0,019
-div_by_4294967296	signed64	signed64	sync	impl	2,326	-0,142
+div_by_4294967296	signed64	signed64	sync	impl	2,311	-0,132
 dotnet_shift_left_by_33	unsigned64	unsigned64	sync	impl	0,514	-0,019
 dotnet_shift_left_by_33	signed64	signed64	sync	impl	0,514	-0,019
 dotnet_shift_right_by_33	unsigned64	unsigned64	sync	impl	0,382	-0,019
@@ -802,7 +802,7 @@ dotnet_shift_right_by_33	signed64	signed64	sync	impl	0,941	-0,068
 mul_by_8589934592	unsigned64	unsigned64	sync	impl	0,514	-0,019
 mul_by_8589934592	signed64	signed64	sync	impl	0,514	-0,019
 div_by_8589934592	unsigned64	unsigned64	sync	impl	0,382	-0,019
-div_by_8589934592	signed64	signed64	sync	impl	2,348	-0,091
+div_by_8589934592	signed64	signed64	sync	impl	2,467	-0,138
 dotnet_shift_left_by_34	unsigned64	unsigned64	sync	impl	0,593	-0,135
 dotnet_shift_left_by_34	signed64	signed64	sync	impl	0,593	-0,135
 dotnet_shift_right_by_34	unsigned64	unsigned64	sync	impl	0,414	-0,019
@@ -810,7 +810,7 @@ dotnet_shift_right_by_34	signed64	signed64	sync	impl	0,702	-0,074
 mul_by_17179869184	unsigned64	unsigned64	sync	impl	0,593	-0,135
 mul_by_17179869184	signed64	signed64	sync	impl	0,593	-0,135
 div_by_17179869184	unsigned64	unsigned64	sync	impl	0,414	-0,019
-div_by_17179869184	signed64	signed64	sync	impl	2,351	-0,131
+div_by_17179869184	signed64	signed64	sync	impl	2,463	-0,129
 dotnet_shift_left_by_35	unsigned64	unsigned64	sync	impl	0,514	-0,019
 dotnet_shift_left_by_35	signed64	signed64	sync	impl	0,514	-0,019
 dotnet_shift_right_by_35	unsigned64	unsigned64	sync	impl	0,382	-0,019
@@ -818,7 +818,7 @@ dotnet_shift_right_by_35	signed64	signed64	sync	impl	0,791	-0,079
 mul_by_34359738368	unsigned64	unsigned64	sync	impl	0,514	-0,019
 mul_by_34359738368	signed64	signed64	sync	impl	0,514	-0,019
 div_by_34359738368	unsigned64	unsigned64	sync	impl	0,382	-0,019
-div_by_34359738368	signed64	signed64	sync	impl	2,383	-0,149
+div_by_34359738368	signed64	signed64	sync	impl	2,457	-0,137
 dotnet_shift_left_by_36	unsigned64	unsigned64	sync	impl	0,388	-0,019
 dotnet_shift_left_by_36	signed64	signed64	sync	impl	0,388	-0,019
 dotnet_shift_right_by_36	unsigned64	unsigned64	sync	impl	0,378	-0,019
@@ -826,7 +826,7 @@ dotnet_shift_right_by_36	signed64	signed64	sync	impl	0,997	-0,078
 mul_by_68719476736	unsigned64	unsigned64	sync	impl	0,388	-0,019
 mul_by_68719476736	signed64	signed64	sync	impl	0,388	-0,019
 div_by_68719476736	unsigned64	unsigned64	sync	impl	0,378	-0,019
-div_by_68719476736	signed64	signed64	sync	impl	2,494	-0,139
+div_by_68719476736	signed64	signed64	sync	impl	2,478	-0,141
 dotnet_shift_left_by_37	unsigned64	unsigned64	sync	impl	0,388	-0,019
 dotnet_shift_left_by_37	signed64	signed64	sync	impl	0,388	-0,019
 dotnet_shift_right_by_37	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -834,7 +834,7 @@ dotnet_shift_right_by_37	signed64	signed64	sync	impl	0,921	-0,026
 mul_by_137438953472	unsigned64	unsigned64	sync	impl	0,388	-0,019
 mul_by_137438953472	signed64	signed64	sync	impl	0,388	-0,019
 div_by_137438953472	unsigned64	unsigned64	sync	impl	0,388	-0,019
-div_by_137438953472	signed64	signed64	sync	impl	2,556	-0,139
+div_by_137438953472	signed64	signed64	sync	impl	2,525	-0,145
 dotnet_shift_left_by_38	unsigned64	unsigned64	sync	impl	0,514	-0,019
 dotnet_shift_left_by_38	signed64	signed64	sync	impl	0,514	-0,019
 dotnet_shift_right_by_38	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -842,7 +842,7 @@ dotnet_shift_right_by_38	signed64	signed64	sync	impl	0,880	-0,082
 mul_by_274877906944	unsigned64	unsigned64	sync	impl	0,514	-0,019
 mul_by_274877906944	signed64	signed64	sync	impl	0,514	-0,019
 div_by_274877906944	unsigned64	unsigned64	sync	impl	0,388	-0,019
-div_by_274877906944	signed64	signed64	sync	impl	2,522	-0,138
+div_by_274877906944	signed64	signed64	sync	impl	2,506	-0,130
 dotnet_shift_left_by_39	unsigned64	unsigned64	sync	impl	0,382	-0,019
 dotnet_shift_left_by_39	signed64	signed64	sync	impl	0,382	-0,019
 dotnet_shift_right_by_39	unsigned64	unsigned64	sync	impl	0,382	-0,019
@@ -850,7 +850,7 @@ dotnet_shift_right_by_39	signed64	signed64	sync	impl	1,162	-0,077
 mul_by_549755813888	unsigned64	unsigned64	sync	impl	0,382	-0,019
 mul_by_549755813888	signed64	signed64	sync	impl	0,382	-0,019
 div_by_549755813888	unsigned64	unsigned64	sync	impl	0,382	-0,019
-div_by_549755813888	signed64	signed64	sync	impl	2,446	-0,130
+div_by_549755813888	signed64	signed64	sync	impl	2,394	-0,139
 dotnet_shift_left_by_40	unsigned64	unsigned64	sync	impl	0,587	-0,135
 dotnet_shift_left_by_40	signed64	signed64	sync	impl	0,587	-0,135
 dotnet_shift_right_by_40	unsigned64	unsigned64	sync	impl	0,376	-0,019
@@ -858,7 +858,7 @@ dotnet_shift_right_by_40	signed64	signed64	sync	impl	1,189	-0,078
 mul_by_1099511627776	unsigned64	unsigned64	sync	impl	0,587	-0,135
 mul_by_1099511627776	signed64	signed64	sync	impl	0,587	-0,135
 div_by_1099511627776	unsigned64	unsigned64	sync	impl	0,376	-0,019
-div_by_1099511627776	signed64	signed64	sync	impl	2,639	-0,132
+div_by_1099511627776	signed64	signed64	sync	impl	2,544	-0,132
 dotnet_shift_left_by_41	unsigned64	unsigned64	sync	impl	0,413	-0,135
 dotnet_shift_left_by_41	signed64	signed64	sync	impl	0,413	-0,135
 dotnet_shift_right_by_41	unsigned64	unsigned64	sync	impl	0,382	-0,019
@@ -866,7 +866,7 @@ dotnet_shift_right_by_41	signed64	signed64	sync	impl	1,184	-0,077
 mul_by_2199023255552	unsigned64	unsigned64	sync	impl	0,413	-0,135
 mul_by_2199023255552	signed64	signed64	sync	impl	0,413	-0,135
 div_by_2199023255552	unsigned64	unsigned64	sync	impl	0,382	-0,019
-div_by_2199023255552	signed64	signed64	sync	impl	2,348	-0,138
+div_by_2199023255552	signed64	signed64	sync	impl	2,377	-0,141
 dotnet_shift_left_by_42	unsigned64	unsigned64	sync	impl	0,483	-0,135
 dotnet_shift_left_by_42	signed64	signed64	sync	impl	0,483	-0,135
 dotnet_shift_right_by_42	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -874,7 +874,7 @@ dotnet_shift_right_by_42	signed64	signed64	sync	impl	1,218	-0,080
 mul_by_4398046511104	unsigned64	unsigned64	sync	impl	0,483	-0,135
 mul_by_4398046511104	signed64	signed64	sync	impl	0,483	-0,135
 div_by_4398046511104	unsigned64	unsigned64	sync	impl	0,388	-0,019
-div_by_4398046511104	signed64	signed64	sync	impl	2,451	-0,139
+div_by_4398046511104	signed64	signed64	sync	impl	2,433	-0,141
 dotnet_shift_left_by_43	unsigned64	unsigned64	sync	impl	0,515	-0,130
 dotnet_shift_left_by_43	signed64	signed64	sync	impl	0,515	-0,130
 dotnet_shift_right_by_43	unsigned64	unsigned64	sync	impl	0,382	-0,019
@@ -882,7 +882,7 @@ dotnet_shift_right_by_43	signed64	signed64	sync	impl	1,247	-0,080
 mul_by_8796093022208	unsigned64	unsigned64	sync	impl	0,515	-0,130
 mul_by_8796093022208	signed64	signed64	sync	impl	0,515	-0,130
 div_by_8796093022208	unsigned64	unsigned64	sync	impl	0,382	-0,019
-div_by_8796093022208	signed64	signed64	sync	impl	2,463	-0,129
+div_by_8796093022208	signed64	signed64	sync	impl	2,409	-0,138
 dotnet_shift_left_by_44	unsigned64	unsigned64	sync	impl	0,541	-0,135
 dotnet_shift_left_by_44	signed64	signed64	sync	impl	0,541	-0,135
 dotnet_shift_right_by_44	unsigned64	unsigned64	sync	impl	0,376	-0,019
@@ -890,7 +890,7 @@ dotnet_shift_right_by_44	signed64	signed64	sync	impl	0,880	-0,082
 mul_by_17592186044416	unsigned64	unsigned64	sync	impl	0,541	-0,135
 mul_by_17592186044416	signed64	signed64	sync	impl	0,541	-0,135
 div_by_17592186044416	unsigned64	unsigned64	sync	impl	0,376	-0,019
-div_by_17592186044416	signed64	signed64	sync	impl	2,552	-0,132
+div_by_17592186044416	signed64	signed64	sync	impl	2,354	-0,148
 dotnet_shift_left_by_45	unsigned64	unsigned64	sync	impl	0,479	-0,037
 dotnet_shift_left_by_45	signed64	signed64	sync	impl	0,479	-0,037
 dotnet_shift_right_by_45	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -898,7 +898,7 @@ dotnet_shift_right_by_45	signed64	signed64	sync	impl	0,879	-0,083
 mul_by_35184372088832	unsigned64	unsigned64	sync	impl	0,479	-0,037
 mul_by_35184372088832	signed64	signed64	sync	impl	0,479	-0,037
 div_by_35184372088832	unsigned64	unsigned64	sync	impl	0,388	-0,019
-div_by_35184372088832	signed64	signed64	sync	impl	2,345	-0,093
+div_by_35184372088832	signed64	signed64	sync	impl	2,439	-0,140
 dotnet_shift_left_by_46	unsigned64	unsigned64	sync	impl	0,394	-0,135
 dotnet_shift_left_by_46	signed64	signed64	sync	impl	0,394	-0,135
 dotnet_shift_right_by_46	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -906,7 +906,7 @@ dotnet_shift_right_by_46	signed64	signed64	sync	impl	0,874	-0,083
 mul_by_70368744177664	unsigned64	unsigned64	sync	impl	0,394	-0,135
 mul_by_70368744177664	signed64	signed64	sync	impl	0,394	-0,135
 div_by_70368744177664	unsigned64	unsigned64	sync	impl	0,388	-0,019
-div_by_70368744177664	signed64	signed64	sync	impl	2,502	-0,138
+div_by_70368744177664	signed64	signed64	sync	impl	2,580	-0,135
 dotnet_shift_left_by_47	unsigned64	unsigned64	sync	impl	0,388	-0,019
 dotnet_shift_left_by_47	signed64	signed64	sync	impl	0,388	-0,019
 dotnet_shift_right_by_47	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -914,7 +914,7 @@ dotnet_shift_right_by_47	signed64	signed64	sync	impl	0,901	-0,084
 mul_by_140737488355328	unsigned64	unsigned64	sync	impl	0,388	-0,019
 mul_by_140737488355328	signed64	signed64	sync	impl	0,388	-0,019
 div_by_140737488355328	unsigned64	unsigned64	sync	impl	0,388	-0,019
-div_by_140737488355328	signed64	signed64	sync	impl	2,572	-0,077
+div_by_140737488355328	signed64	signed64	sync	impl	2,506	-0,134
 dotnet_shift_left_by_48	unsigned64	unsigned64	sync	impl	0,388	-0,019
 dotnet_shift_left_by_48	signed64	signed64	sync	impl	0,388	-0,019
 dotnet_shift_right_by_48	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -922,7 +922,7 @@ dotnet_shift_right_by_48	signed64	signed64	sync	impl	0,875	-0,086
 mul_by_281474976710656	unsigned64	unsigned64	sync	impl	0,388	-0,019
 mul_by_281474976710656	signed64	signed64	sync	impl	0,388	-0,019
 div_by_281474976710656	unsigned64	unsigned64	sync	impl	0,388	-0,019
-div_by_281474976710656	signed64	signed64	sync	impl	2,247	-0,103
+div_by_281474976710656	signed64	signed64	sync	impl	2,359	-0,103
 dotnet_shift_left_by_49	unsigned64	unsigned64	sync	impl	0,595	-0,135
 dotnet_shift_left_by_49	signed64	signed64	sync	impl	0,595	-0,135
 dotnet_shift_right_by_49	unsigned64	unsigned64	sync	impl	0,376	-0,019
@@ -954,7 +954,7 @@ dotnet_shift_right_by_52	signed64	signed64	sync	impl	1,012	-0,091
 mul_by_4503599627370496	unsigned64	unsigned64	sync	impl	0,585	-0,019
 mul_by_4503599627370496	signed64	signed64	sync	impl	0,585	-0,019
 div_by_4503599627370496	unsigned64	unsigned64	sync	impl	0,376	-0,019
-div_by_4503599627370496	signed64	signed64	sync	impl	2,282	-0,141
+div_by_4503599627370496	signed64	signed64	sync	impl	2,365	-0,141
 dotnet_shift_left_by_53	unsigned64	unsigned64	sync	impl	0,404	-0,019
 dotnet_shift_left_by_53	signed64	signed64	sync	impl	0,404	-0,019
 dotnet_shift_right_by_53	unsigned64	unsigned64	sync	impl	0,376	-0,019
@@ -962,7 +962,7 @@ dotnet_shift_right_by_53	signed64	signed64	sync	impl	1,006	-0,093
 mul_by_9007199254740992	unsigned64	unsigned64	sync	impl	0,404	-0,019
 mul_by_9007199254740992	signed64	signed64	sync	impl	0,404	-0,019
 div_by_9007199254740992	unsigned64	unsigned64	sync	impl	0,376	-0,019
-div_by_9007199254740992	signed64	signed64	sync	impl	2,333	-0,140
+div_by_9007199254740992	signed64	signed64	sync	impl	2,341	-0,141
 dotnet_shift_left_by_54	unsigned64	unsigned64	sync	impl	0,585	-0,019
 dotnet_shift_left_by_54	signed64	signed64	sync	impl	0,585	-0,019
 dotnet_shift_right_by_54	unsigned64	unsigned64	sync	impl	0,376	-0,019
@@ -994,7 +994,7 @@ dotnet_shift_right_by_57	signed64	signed64	sync	impl	0,933	-0,088
 mul_by_144115188075855872	unsigned64	unsigned64	sync	impl	0,585	-0,019
 mul_by_144115188075855872	signed64	signed64	sync	impl	0,585	-0,019
 div_by_144115188075855872	unsigned64	unsigned64	sync	impl	0,375	-0,019
-div_by_144115188075855872	signed64	signed64	sync	impl	2,570	-0,143
+div_by_144115188075855872	signed64	signed64	sync	impl	2,622	-0,155
 dotnet_shift_left_by_58	unsigned64	unsigned64	sync	impl	0,552	-0,135
 dotnet_shift_left_by_58	signed64	signed64	sync	impl	0,552	-0,135
 dotnet_shift_right_by_58	unsigned64	unsigned64	sync	impl	0,388	-0,019
@@ -1002,7 +1002,7 @@ dotnet_shift_right_by_58	signed64	signed64	sync	impl	1,042	-0,095
 mul_by_288230376151711744	unsigned64	unsigned64	sync	impl	0,552	-0,135
 mul_by_288230376151711744	signed64	signed64	sync	impl	0,552	-0,135
 div_by_288230376151711744	unsigned64	unsigned64	sync	impl	0,388	-0,019
-div_by_288230376151711744	signed64	signed64	sync	impl	2,576	-0,145
+div_by_288230376151711744	signed64	signed64	sync	impl	2,275	-0,145
 dotnet_shift_left_by_59	unsigned64	unsigned64	sync	impl	0,585	-0,019
 dotnet_shift_left_by_59	signed64	signed64	sync	impl	0,585	-0,019
 dotnet_shift_right_by_59	unsigned64	unsigned64	sync	impl	0,407	-0,019
@@ -1041,14 +1041,14 @@ dotnet_shift_right_by_63	unsigned64	unsigned64	sync	impl	0,585	-0,019
 dotnet_shift_right_by_63	signed64	signed64	sync	impl	1,002	-0,099
 mul_by_9223372036854775808	unsigned64	unsigned64	sync	impl	0,308	-0,039
 div_by_9223372036854775808	unsigned64	unsigned64	sync	impl	0,585	-0,019
-dotnet_shift_left	unsigned32	unsigned32	sync	impl	1,594	-0,091
-dotnet_shift_left	signed32	signed32	sync	impl	1,594	-0,091
-dotnet_shift_right	unsigned32	unsigned32	sync	impl	1,464	-0,050
-dotnet_shift_right	signed32	signed32	sync	impl	1,481	-0,091
-dotnet_shift_left	unsigned64	unsigned64	sync	impl	1,841	-0,082
-dotnet_shift_left	signed64	signed64	sync	impl	1,841	-0,082
-dotnet_shift_right	unsigned64	unsigned64	sync	impl	1,535	-0,088
-dotnet_shift_right	signed64	signed64	sync	impl	1,815	-0,082
+dotnet_shift_left	unsigned32	unsigned32	sync	impl	1,647	-0,090
+dotnet_shift_left	signed32	signed32	sync	impl	1,647	-0,090
+dotnet_shift_right	unsigned32	unsigned32	sync	impl	1,490	0,002
+dotnet_shift_right	signed32	signed32	sync	impl	1,649	-0,132
+dotnet_shift_left	unsigned64	unsigned64	sync	impl	2,001	-0,040
+dotnet_shift_left	signed64	signed64	sync	impl	2,001	-0,040
+dotnet_shift_right	unsigned64	unsigned64	sync	impl	2,205	-0,077
+dotnet_shift_right	signed64	signed64	sync	impl	1,950	-0,078
 mul_by_-2	signed1	signed1	sync	synth	0	0
 mul_by_-2	signed8	signed8	sync	impl	1,131	-0,037
 mul_by_-2	signed16	signed16	sync	impl	0,930	-0,044
@@ -1069,10 +1069,7 @@ mul_by_0	unsigned64	unsigned64	sync	synth	0	0
         }
 
 
-        public AlveoU250Driver(ITimingReportParser timingReportParser)
-        {
-            _timingReportParser = timingReportParser;
-        }
+        public AlveoU250Driver(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
 
 
         public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>

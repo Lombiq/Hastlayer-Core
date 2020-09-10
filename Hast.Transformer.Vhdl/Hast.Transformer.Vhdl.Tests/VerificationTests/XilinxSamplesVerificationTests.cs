@@ -1,68 +1,70 @@
-﻿using Xunit;
+using Hast.Xilinx.Abstractions.ManifestProviders;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
     public class XilinxSamplesVerificationTests : SamplesVerificationTestsBase
     {
-        [Fact]
-        public async Task BasicSamplesMatchApproved()
-        {
-            (await CreateSourceForBasicSamples()).ShouldMatchApprovedWithVhdlConfiguration();
-        }
+        public static IEnumerable<object[]> AllDevices =>
+            new[]
+            {
+                new object[] { Nexys4DdrManifestProvider.DeviceName },
+                new object[] { AlveoU50ManifestProvider.DeviceName },
+                new object[] { AlveoU200ManifestProvider.DeviceName },
+                new object[] { AlveoU250ManifestProvider.DeviceName },
+                new object[] { AlveoU280ManifestProvider.DeviceName },
+                new object[] { AwsF1ManifestProvider.DeviceName }
+            };
 
-        [Fact]
-        public async Task KpzSamplesMatchesApproved()
-        {
-            (await CreateVhdlForKpzSamples()).ShouldMatchApprovedWithVhdlConfiguration();
-        }
+        [Theory, MemberData(nameof(AllDevices))]
+        public async Task BasicSamplesMatchApproved(string deviceName) =>
+            (await CreateSourceForBasicSamples(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
-        [Fact]
-        public async Task UnumSampleMatchesApproved()
-        {
-            (await CreateVhdlForUnumSample()).ShouldMatchApprovedWithVhdlConfiguration();
-        }
+        [Theory, MemberData(nameof(AllDevices))]
+        [InlineData(Nexys4DdrManifestProvider.DeviceName)]
+        public async Task KpzSamplesMatchesApproved(string deviceName) =>
+            (await CreateVhdlForKpzSamples(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
-        [Fact]
-        public async Task PositSampleMatchesApproved()
-        {
-            (await CreateVhdlForPositSample()).ShouldMatchApprovedWithVhdlConfiguration();
-        }
+        [Theory, MemberData(nameof(AllDevices))]
+        [InlineData(Nexys4DdrManifestProvider.DeviceName)]
+        public async Task UnumSampleMatchesApproved(string deviceName) =>
+            (await CreateVhdlForUnumSample(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
-        [Fact]
-        public async Task Posit32SampleMatchesApproved()
-        {
-            (await CreateVhdlForPosit32Sample()).ShouldMatchApprovedWithVhdlConfiguration();
-        }
+        [Theory, MemberData(nameof(AllDevices))]
+        [InlineData(Nexys4DdrManifestProvider.DeviceName)]
+        public async Task PositSampleMatchesApproved(string deviceName) =>
+            (await CreateVhdlForPositSample(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
-        [Fact]
-        public async Task Posit32AdvancedSampleMatchesApproved()
-        {
-            (await CreateSourceForAdvancedPosit32Sample()).ShouldMatchApprovedWithVhdlConfiguration();
-        }
+        [Theory, MemberData(nameof(AllDevices))]
+        [InlineData(Nexys4DdrManifestProvider.DeviceName)]
+        public async Task Posit32SampleMatchesApproved(string deviceName) =>
+            (await CreateVhdlForPosit32Sample(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
-        [Fact]
-        public async Task Posit32SampleWithInliningMatchesApproved()
-        {
-            (await CreateVhdlForPosit32SampleWithInlining()).ShouldMatchApprovedWithVhdlConfiguration();
-        }
+        [Theory, MemberData(nameof(AllDevices))]
+        [InlineData(Nexys4DdrManifestProvider.DeviceName)]
+        public async Task Posit32AdvancedSampleMatchesApproved(string deviceName) =>
+            (await CreateSourceForAdvancedPosit32Sample(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
-        [Fact]
-        public async Task Posit32FusedSampleMatchesApproved()
-        {
-            (await CreateVhdlForPosit32FusedSample()).ShouldMatchApprovedWithVhdlConfiguration();
-        }
+        [Theory, MemberData(nameof(AllDevices))]
+        [InlineData(Nexys4DdrManifestProvider.DeviceName)]
+        public async Task Posit32SampleWithInliningMatchesApproved(string deviceName) =>
+            (await CreateVhdlForPosit32SampleWithInlining(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
-        [Fact]
-        public async Task Fix64SamplesMatchesApproved()
-        {
-            (await CreateVhdlForFix64Samples()).ShouldMatchApprovedWithVhdlConfiguration();
-        }
+        [Theory, MemberData(nameof(AllDevices))]
+        [InlineData(Nexys4DdrManifestProvider.DeviceName)]
+        public async Task Posit32FusedSampleMatchesApproved(string deviceName) =>
+            (await CreateVhdlForPosit32FusedSample(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
-        [Fact]
-        public async Task FSharpSamplesMatchesApproved()
-        {
-            (await CreateVhdlForFSharpSamples()).ShouldMatchApprovedWithVhdlConfiguration();
-        }
+        [Theory, MemberData(nameof(AllDevices))]
+        [InlineData(Nexys4DdrManifestProvider.DeviceName)]
+        public async Task Fix64SamplesMatchesApproved(string deviceName) =>
+            (await CreateVhdlForFix64Samples(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+
+        [Theory, MemberData(nameof(AllDevices))]
+        [InlineData(Nexys4DdrManifestProvider.DeviceName)]
+        public async Task FSharpSamplesMatchesApproved(string deviceName) =>
+            (await CreateVhdlForFSharpSamples(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
     }
 }
