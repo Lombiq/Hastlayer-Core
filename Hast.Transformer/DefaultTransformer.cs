@@ -138,14 +138,14 @@ namespace Hast.Transformer
             // Need to use assembly names instead of paths for the ID, because paths can change (as in the random ones
             // with Remote Worker). Just file names wouldn't be enough because two assemblies can have the same simple
             // name while their full names being different.
-            var rawTransformationId = string.Empty;
+            var transformationIdComponents = new List<string>();
 
             var decompilers = new List<CSharpDecompiler>();
 
             foreach (var assemblyPath in assemblyPaths)
             {
                 var module = new PEFile(assemblyPath, PEStreamOptions.PrefetchEntireImage);
-                rawTransformationId += "-" + module.FullName;
+                transformationIdComponents.Add(module.FullName);
 
                 var resolver = new UniversalAssemblyResolver(
                     Path.GetFullPath(assemblyPath),
@@ -154,7 +154,7 @@ namespace Hast.Transformer
                     PEStreamOptions.PrefetchMetadata);
 
                 // When executed as a Windows service not all Hastlayer assemblies references' from transformed assemblies
-                // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. Also, if a remote 
+                // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. Also, if a remote
                 // transformation needs multiple assemblies those will need to be loaded like this too.
                 // So helping the decompiler find them here.
                 resolver.AddSearchDirectory(Path.GetDirectoryName(GetType().Assembly.Location));
@@ -232,7 +232,7 @@ namespace Hast.Transformer
                     //      <> c__DisplayClass3_.input = memory.ReadUInt32(0);
                     //
                     // ...we'd get:
-                    // 
+                    //
                     //      uint input;
                     //      input = memory.ReadUInt32(0);
                     //      Func<object, uint> func = default(Func<object, uint>);
@@ -273,15 +273,14 @@ namespace Hast.Transformer
                 decompilers.Add(decompiler);
             }
 
-            rawTransformationId +=
-                string.Join("-", configuration.HardwareEntryPointMemberFullNames) +
-                string.Join("-", configuration.HardwareEntryPointMemberNamePrefixes) +
-                _jsonConverter.Serialize(configuration.CustomConfiguration) +
-                // Adding the assembly name so the Hastlayer version is included too, to prevent stale caches after a 
-                // Hastlayer update.
-                GetType().Assembly.FullName;
+            transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberFullNames);
+            transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberNamePrefixes);
+            transformationIdComponents.Add(_jsonConverter.Serialize(configuration.CustomConfiguration));
+            // Adding the assembly name so the Hastlayer version is included too, to prevent stale caches after a
+            // Hastlayer update.
+            transformationIdComponents.Add(GetType().Assembly.FullName);
 
-            var transformationId = Sha2456Helper.ComputeHash(rawTransformationId);
+            var transformationId = Sha2456Helper.ComputeHash(string.Join("\n", transformationIdComponents));
 
             if (configuration.EnableCaching)
             {

@@ -62,6 +62,7 @@ namespace Hast.Transformer.Vhdl.Services
             var xdcSource = transformedVhdlManifest.XdcFile?.ToVhdl(vhdlGenerationOptions);
             var hardwareDescription = new VhdlHardwareDescription
             {
+                TransformationId = transformationContext.Id,
                 HardwareEntryPointNamesToMemberIdMappings = transformedVhdlManifest.MemberIdTable.Mappings,
                 VhdlSource = transformedVhdlManifest.Manifest.ToVhdl(vhdlGenerationOptions),
                 Warnings = transformedVhdlManifest.Warnings,
