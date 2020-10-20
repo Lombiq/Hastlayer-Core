@@ -280,6 +280,10 @@ namespace Hast.Transformer
             // Hastlayer update.
             transformationIdComponents.Add(GetType().Assembly.FullName);
 
+#if DEBUG
+            File.WriteAllLines("HashSource.txt", transformationIdComponents);
+#endif
+
             var transformationId = Sha2456Helper.ComputeHash(string.Join("\n", transformationIdComponents));
 
             if (configuration.EnableCaching)
