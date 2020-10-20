@@ -276,9 +276,13 @@ namespace Hast.Transformer
             transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberFullNames);
             transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberNamePrefixes);
             transformationIdComponents.Add(_jsonConverter.Serialize(configuration.CustomConfiguration));
+
             // Adding the assembly name so the Hastlayer version is included too, to prevent stale caches after a
             // Hastlayer update.
             transformationIdComponents.Add(GetType().Assembly.FullName);
+
+            // Adding the device name to ensure different a cached program for a different hardware doesn't get used.
+            transformationIdComponents.Add(configuration.DeviceName);
 
 #if DEBUG
             File.WriteAllLines("HashSource.txt", transformationIdComponents);
