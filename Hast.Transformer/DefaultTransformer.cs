@@ -63,6 +63,7 @@ namespace Hast.Transformer
         private readonly IUnneededReferenceVariablesRemover _unneededReferenceVariablesRemover;
         private readonly IRefLocalVariablesRemover _refLocalVariablesRemover;
         private readonly IOptionalParameterFiller _optionalParameterFiller;
+        private readonly IReadonlyToConstConverter _readonlyToConstConverter;
 
 
         public DefaultTransformer(
@@ -96,7 +97,8 @@ namespace Hast.Transformer
             IMemberIdentifiersFixer memberIdentifiersFixer,
             IUnneededReferenceVariablesRemover unneededReferenceVariablesRemover,
             IRefLocalVariablesRemover refLocalVariablesRemover,
-            IOptionalParameterFiller optionalParameterFiller)
+            IOptionalParameterFiller optionalParameterFiller,
+            IReadonlyToConstConverter readonlyToConstConverter)
         {
             _eventHandlers = eventHandlers;
             _jsonConverter = jsonConverter;
@@ -129,6 +131,7 @@ namespace Hast.Transformer
             _unneededReferenceVariablesRemover = unneededReferenceVariablesRemover;
             _refLocalVariablesRemover = refLocalVariablesRemover;
             _optionalParameterFiller = optionalParameterFiller;
+            _readonlyToConstConverter = readonlyToConstConverter;
         }
 
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
@@ -323,6 +326,8 @@ namespace Hast.Transformer
 
             // Removing the unnecessary bits.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
+
+            _readonlyToConstConverter.ConvertReadonlyPrimitives(syntaxTree, configuration);
 
             // Conversions making the syntax tree easier to process. Note that the order is NOT arbitrary but these
             // services sometimes depend on each other.
