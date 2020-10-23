@@ -12,6 +12,7 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.CSharp.Transforms;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -64,6 +65,7 @@ namespace Hast.Transformer
         private readonly IRefLocalVariablesRemover _refLocalVariablesRemover;
         private readonly IOptionalParameterFiller _optionalParameterFiller;
         private readonly IReadonlyToConstConverter _readonlyToConstConverter;
+        private readonly ILogger<DefaultTransformer> _logger;
 
 
         public DefaultTransformer(
@@ -98,7 +100,8 @@ namespace Hast.Transformer
             IUnneededReferenceVariablesRemover unneededReferenceVariablesRemover,
             IRefLocalVariablesRemover refLocalVariablesRemover,
             IOptionalParameterFiller optionalParameterFiller,
-            IReadonlyToConstConverter readonlyToConstConverter)
+            IReadonlyToConstConverter readonlyToConstConverter,
+            ILogger<DefaultTransformer> logger)
         {
             _eventHandlers = eventHandlers;
             _jsonConverter = jsonConverter;
@@ -132,6 +135,7 @@ namespace Hast.Transformer
             _refLocalVariablesRemover = refLocalVariablesRemover;
             _optionalParameterFiller = optionalParameterFiller;
             _readonlyToConstConverter = readonlyToConstConverter;
+            _logger = logger;
         }
 
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
@@ -287,9 +291,10 @@ namespace Hast.Transformer
             // Adding the device name to ensure different a cached program for a different hardware doesn't get used.
             transformationIdComponents.Add(configuration.DeviceName);
 
-#if DEBUG
-            File.WriteAllLines("HashSource.txt", transformationIdComponents);
-#endif
+            foreach (var transformationIdComponent in transformationIdComponents)
+            {
+                _logger.LogTrace("Transformation ID component: {0}", transformationIdComponent);
+            }
 
             var transformationId = Sha2456Helper.ComputeHash(string.Join("\n", transformationIdComponents));
 
