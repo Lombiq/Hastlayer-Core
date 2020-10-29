@@ -6,8 +6,8 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 namespace Hast.Transformer.Services
 {
     /// <summary>
-    /// Replaces <see langword="public"/> <see langword="static"/> <see langword="readonly"/> fields with literal value
-    /// substitution. Only applies to fields that have the <see cref="ReplaceableAttribute"/>.
+    /// Replaces <see langword="static"/> <see langword="readonly"/> fields with literal value  substitution. Only
+    /// applies to fields that have the <see cref="ReplaceableAttribute"/>.
     /// </summary>
     /// <example>
     /// If you have this code:
@@ -15,7 +15,7 @@ namespace Hast.Transformer.Services
     ///     public class ParallelAlgorithm
     ///     {
     ///         [Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))]
-    ///         public readonly int MaxDegreeOfParallelism = 260;
+    ///         private static readonly int MaxDegreeOfParallelism = 260;
     ///         // ..
     ///         public virtual void Run(SimpleMemory memory)
     ///         {

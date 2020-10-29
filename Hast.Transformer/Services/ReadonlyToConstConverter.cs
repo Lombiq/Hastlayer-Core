@@ -30,8 +30,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitFieldDeclaration(fieldDeclaration);
 
-                if (!fieldDeclaration.HasModifier(Modifiers.Public) ||
-                    !fieldDeclaration.HasModifier(Modifiers.Readonly)) return;
+                if (!fieldDeclaration.HasModifier(Modifiers.Readonly)) return;
 
                 // We only work with field declarations that are also assignments and the value is of a primitive type,
                 // like int or string.
