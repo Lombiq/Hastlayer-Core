@@ -29,7 +29,11 @@ namespace Hast.Transformer.Services
             {
                 base.VisitFieldDeclaration(fieldDeclaration);
 
-                if (!fieldDeclaration.HasModifier(Modifiers.Readonly)) return;
+                if (!fieldDeclaration.HasModifier(Modifiers.Static) ||
+                    !fieldDeclaration.HasModifier(Modifiers.Readonly))
+                {
+                    return;
+                }
 
                 // We only work with field declarations that are also assignments and the value is of a primitive type,
                 // like int or string.
@@ -45,30 +49,29 @@ namespace Hast.Transformer.Services
                     .SelectMany(x => x.Descendants.OfType<Attribute>())
                     .SingleOrDefault(x => x.Type.ToString() == ReplaceableAttribute.Name);
 
-                if (replaceable != null)
-                {
-                    var key = replaceable.Descendants.OfType<PrimitiveExpression>().Single().Value.ToString();
-                    if (_replacements.TryGetValue(key, out var result))
-                    {
-                        if (result is string resultString)
-                        {
-                            result = value.Value switch
-                            {
-                                string _ => resultString,
-                                int _ => int.Parse(resultString, CultureInfo.InvariantCulture),
-                                uint _ => uint.Parse(resultString, CultureInfo.InvariantCulture),
-                                long _ => long.Parse(resultString, CultureInfo.InvariantCulture),
-                                ulong _ => ulong.Parse(resultString, CultureInfo.InvariantCulture),
-                                short _ => short.Parse(resultString, CultureInfo.InvariantCulture),
-                                ushort _ => ushort.Parse(resultString, CultureInfo.InvariantCulture),
-                                byte _ => byte.Parse(resultString, CultureInfo.InvariantCulture),
-                                bool _ => resultString.ToLowerInvariant() == "true",
-                                _ => value.Value,
-                            };
-                        }
+                if (replaceable == null) return;
 
-                        value = new PrimitiveExpression(result);
+                var key = replaceable.Descendants.OfType<PrimitiveExpression>().Single().Value.ToString();
+                if (_replacements.TryGetValue(key, out var result))
+                {
+                    if (result is string resultString)
+                    {
+                        result = value.Value switch
+                        {
+                            string _ => resultString,
+                            int _ => int.Parse(resultString, CultureInfo.InvariantCulture),
+                            uint _ => uint.Parse(resultString, CultureInfo.InvariantCulture),
+                            long _ => long.Parse(resultString, CultureInfo.InvariantCulture),
+                            ulong _ => ulong.Parse(resultString, CultureInfo.InvariantCulture),
+                            short _ => short.Parse(resultString, CultureInfo.InvariantCulture),
+                            ushort _ => ushort.Parse(resultString, CultureInfo.InvariantCulture),
+                            byte _ => byte.Parse(resultString, CultureInfo.InvariantCulture),
+                            bool _ => resultString.ToLowerInvariant() == "true",
+                            _ => value.Value,
+                        };
                     }
+
+                    value = new PrimitiveExpression(result);
                 }
 
                 _syntaxTree.AcceptVisitor(new ReplaceReadonlyVisitor(initializer.Name, value.Value));
