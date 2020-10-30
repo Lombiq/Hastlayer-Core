@@ -1,4 +1,5 @@
-﻿using Hast.Synthesis.Abstractions;
+﻿using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
@@ -157,7 +158,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 //case BinaryOperatorType.NullCoalescing:
                 //    break;
                 // Left and right shift for numerical types is a function call in VHDL, so handled separately. See
-                // below. The sll/srl or sra/sla operators shouldn't be used, see: 
+                // below. The sll/srl or sra/sla operators shouldn't be used, see:
                 // https://www.nandland.com/vhdl/examples/example-shifts.html and https://stackoverflow.com/questions/9018087/shift-a-std-logic-vector-of-n-bit-to-right-or-left
                 case BinaryOperatorType.ShiftLeft:
                 case BinaryOperatorType.ShiftRight:
@@ -253,7 +254,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     )
                     ||
                     (
-                        // If the operation is an addition and the types of the result and the operands differ then we 
+                        // If the operation is an addition and the types of the result and the operands differ then we
                         // also have to resize.
                         expression.Operator == BinaryOperatorType.Add &&
                         !(resultType == leftType && resultType == rightType)
@@ -298,7 +299,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // So we need to truncate.
                 // Furthermore both shifts will also do a bitwise AND with just 1s on the count, see:
                 // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/right-shift-operator
-                // How the vacated bits are filled on shifting in either direction is the same (see: 
+                // How the vacated bits are filled on shifting in either direction is the same (see:
                 // https://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl).
 
                 var countSize = leftTypeSize <= 32 ? 5 : 6;
@@ -337,7 +338,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     Parameters = new List<IVhdlElement>
                     {
                         binary.Left,
-                        // The result will be like to_integer(unsigned(SmartResize(..))). The cast to unsigned is 
+                        // The result will be like to_integer(unsigned(SmartResize(..))). The cast to unsigned is
                         // necessary because in .NET the input of the shift is always treated as unsigned. Right shifts
                         // will also have a bitwise AND inside unsigned().
                         Invocation.ToInteger(new Invocation("unsigned", resize))
@@ -387,7 +388,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
             if (operationIsMultiCycle &&
-                context.TransformationContext.DeviceDriver.DeviceManifest.ToolChainName == CommonToolChainNames.Vivado)
+                context.TransformationContext.DeviceDriver.DeviceManifest.UsesVivadoInToolChain())
             {
                 // We need to add an attribute like the one below so Vivado won't merge this variable/signal with
                 // others, thus allowing us to create XDC timing constraints for it.
