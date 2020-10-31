@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -6,7 +6,7 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 namespace Hast.Transformer.Services
 {
     /// <summary>
-    /// Replaces <see langword="static"/> <see langword="readonly"/> fields with literal value  substitution. Only
+    /// Replaces <see langword="static"/> <see langword="readonly"/> fields with literal value substitution. Only
     /// applies to fields that have the <see cref="ReplaceableAttribute"/>.
     /// </summary>
     /// <example>

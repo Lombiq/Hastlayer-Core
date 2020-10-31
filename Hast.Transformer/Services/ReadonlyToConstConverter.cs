@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -19,11 +19,13 @@ namespace Hast.Transformer.Services
             private readonly Dictionary<string, object> _replacements;
             private readonly SyntaxTree _syntaxTree;
 
+
             public ReadonlyToConstVisitor(IHardwareGenerationConfiguration configuration, SyntaxTree syntaxTree)
             {
                 _replacements = configuration.GotOrAddReplacements();
                 _syntaxTree = syntaxTree;
             }
+
 
             public override void VisitFieldDeclaration(FieldDeclaration fieldDeclaration)
             {
@@ -46,8 +48,8 @@ namespace Hast.Transformer.Services
 
                 var replaceable = fieldDeclaration
                     .Attributes
-                    .SelectMany(x => x.Descendants.OfType<Attribute>())
-                    .SingleOrDefault(x => x.Type.ToString() == ReplaceableAttribute.Name);
+                    .SelectMany(attributeSection => attributeSection.Descendants.OfType<Attribute>())
+                    .SingleOrDefault(attribute => attribute.Type.ToString() == ReplaceableAttribute.Name);
 
                 if (replaceable == null) return;
 
@@ -78,16 +80,19 @@ namespace Hast.Transformer.Services
             }
         }
 
+
         private class ReplaceReadonlyVisitor : DepthFirstAstVisitor
         {
             private readonly string _name;
             private readonly object _value;
+
 
             public ReplaceReadonlyVisitor(string name, object value)
             {
                 _name = name;
                 _value = value;
             }
+
 
             public override void VisitIdentifier(Identifier identifier)
             {
