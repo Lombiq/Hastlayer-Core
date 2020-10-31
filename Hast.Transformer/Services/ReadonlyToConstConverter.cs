@@ -54,6 +54,7 @@ namespace Hast.Transformer.Services
                 if (replaceable == null) return;
 
                 var key = replaceable.Descendants.OfType<PrimitiveExpression>().Single().Value.ToString();
+                // If a replacement value is set, override the result.
                 if (_replacements.TryGetValue(key, out var result))
                 {
                     if (result is string resultString)
@@ -76,6 +77,8 @@ namespace Hast.Transformer.Services
                     value = new PrimitiveExpression(result);
                 }
 
+                // This is not optional. Even if there is no custom replacement found, the literal substitution must be
+                // performed to restore the the const-like behavior.
                 _syntaxTree.AcceptVisitor(new ReplaceReadonlyVisitor(initializer.Name, value.Value));
             }
         }
