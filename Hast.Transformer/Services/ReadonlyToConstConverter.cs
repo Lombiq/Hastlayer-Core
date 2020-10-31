@@ -50,11 +50,7 @@ namespace Hast.Transformer.Services
                 var replaceable = fieldDeclaration
                     .Attributes
                     .SelectMany(attributeSection => attributeSection.Descendants.OfType<Attribute>())
-<<<<<<< HEAD
-                    .SingleOrDefault(attribute => attribute.Type.ToString() == ReplaceableAttribute.Name);
-=======
                     .SingleOrDefault(attribute => attribute.Type.GetFullName() == targetAttributeName);
->>>>>>> 14f8041c... Code cleanup.
 
                 if (replaceable == null) return;
 
@@ -88,19 +84,16 @@ namespace Hast.Transformer.Services
             }
         }
 
-
         private class ReplaceReadonlyVisitor : DepthFirstAstVisitor
         {
             private readonly string _name;
             private readonly object _value;
-
 
             public ReplaceReadonlyVisitor(string name, object value)
             {
                 _name = name;
                 _value = value;
             }
-
 
             public override void VisitIdentifier(Identifier identifier)
             {
