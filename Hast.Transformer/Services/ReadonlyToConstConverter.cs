@@ -46,10 +46,15 @@ namespace Hast.Transformer.Services
                 var value = initializer?.Descendants.OfType<PrimitiveExpression>().FirstOrDefault();
                 if (initializer == null || value == null) return;
 
+                var targetAttributeName = typeof(ReplaceableAttribute).FullName;
                 var replaceable = fieldDeclaration
                     .Attributes
                     .SelectMany(attributeSection => attributeSection.Descendants.OfType<Attribute>())
+<<<<<<< HEAD
                     .SingleOrDefault(attribute => attribute.Type.ToString() == ReplaceableAttribute.Name);
+=======
+                    .SingleOrDefault(attribute => attribute.Type.GetFullName() == targetAttributeName);
+>>>>>>> 14f8041c... Code cleanup.
 
                 if (replaceable == null) return;
 
