@@ -113,12 +113,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         parentBlock);
                 }
             }
-            else if (primitiveExpressionParent is UnaryOperatorExpression expression)
+            else if (primitiveExpressionParent is UnaryOperatorExpression unaryOperatorExpression)
             {
                 // This is a unary expression where the target expression was already substituted with a const value.
-                // So we can also substitute the whole expression too.
+                // So we can also substitute the whole expression.
                 var newExpression = new PrimitiveExpression(
-                    _astExpressionEvaluator.EvaluateUnaryOperatorExpression(expression))
+                    _astExpressionEvaluator.EvaluateUnaryOperatorExpression(unaryOperatorExpression))
                     .WithAnnotation(primitiveExpressionParent.CreateResolveResultFromActualType());
 
                 _constantValuesSubstitutingAstProcessor.ConstantValuesTable

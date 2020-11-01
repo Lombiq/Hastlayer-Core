@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Models;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 
@@ -93,10 +93,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             // If a primitive value is assigned then re-mark it so if there are multiple different such assignments
             // then the member will be unmarked.
-            if (parentAssignment.Right is PrimitiveExpression)
+            if (parentAssignment.Right is PrimitiveExpression expression)
             {
                 _constantValuesTable
-                    .MarkAsPotentiallyConstant(memberEntity, (PrimitiveExpression)parentAssignment.Right, _rootNode, true);
+                    .MarkAsPotentiallyConstant(memberEntity, expression, _rootNode, true);
             }
             else
             {
