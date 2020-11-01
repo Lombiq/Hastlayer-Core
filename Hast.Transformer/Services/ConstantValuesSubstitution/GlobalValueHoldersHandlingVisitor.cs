@@ -1,6 +1,7 @@
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
+using System.Linq;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -38,9 +39,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 var parameter = ConstantValueSubstitutionHelper
                     .FindConstructorParameterForPassedExpression(objectCreateExpression, argument, _typeDeclarationLookupTable);
 
-                if (argument is PrimitiveExpression)
+                if (argument is PrimitiveExpression primitiveExpression)
                 {
-                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, (PrimitiveExpression)argument, _rootNode, true);
+                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, primitiveExpression, _rootNode, true);
                 }
                 else
                 {
@@ -59,9 +60,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 var parameter = ConstantValueSubstitutionHelper
                     .FindMethodParameterForPassedExpression(invocationExpression, argument, _typeDeclarationLookupTable);
 
-                if (argument is PrimitiveExpression)
+                if (argument is PrimitiveExpression expression)
                 {
-                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, (PrimitiveExpression)argument, _rootNode, true);
+                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, expression, _rootNode, true);
                 }
                 else
                 {
@@ -110,11 +111,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             // Method substitution is only valid if there is only one return statement in the method (or multiple
             // ones but returning the same constant value).
-            if (returnStatement.Expression is PrimitiveExpression)
+            if (returnStatement.Expression is PrimitiveExpression primitiveExpression)
             {
                 _constantValuesTable.MarkAsPotentiallyConstant(
                     returnStatement.FindFirstParentEntityDeclaration(),
-                    (PrimitiveExpression)returnStatement.Expression,
+                    primitiveExpression,
                     _rootNode,
                     true);
             }

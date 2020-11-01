@@ -326,7 +326,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             // First checking if there is a substitution for the expression; if not then if it's a member reference
             // then check whether there is a global substitution for the member.
-            if (_constantValuesTable.RetrieveAndDeleteConstantValue(expression, out PrimitiveExpression valueExpression) ||
+            if (_constantValuesTable.RetrieveAndDeleteConstantValue(expression, out var valueExpression) ||
                 expression.Is<MemberReferenceExpression>(memberReferenceExpression =>
                 {
                     var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
