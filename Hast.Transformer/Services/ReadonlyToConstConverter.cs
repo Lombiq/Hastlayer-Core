@@ -103,6 +103,7 @@ namespace Hast.Transformer.Services
             public override void VisitIdentifier(Identifier identifier)
             {
                 base.VisitIdentifier(identifier);
+
                 if (!(identifier.Parent is MemberReferenceExpression member) ||
                     identifier.Name != _name ||
                     !GetTypeOfStaticIdentifier(identifier).Equals(_typeDeclaration.GetActualType()))
