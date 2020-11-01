@@ -41,23 +41,21 @@ namespace Hast.Transformer.Services
                 // We only work with field declarations that are also assignments and the value is of a primitive type,
                 // like int or string.
                 var initializer = fieldDeclaration
-                    .Children
-                    .OfType<VariableInitializer>()
-                    .FirstOrDefault();
-                var value = initializer?.Descendants.OfType<PrimitiveExpression>().FirstOrDefault();
+                    .FindFirstChildOfType<VariableInitializer>();
+                var value = initializer?.FindFirstChildOfType<PrimitiveExpression>();
                 if (initializer == null || value == null) return;
 
                 var targetAttributeName = typeof(ReplaceableAttribute).FullName;
                 var replaceable = fieldDeclaration
                     .Attributes
-                    .SelectMany(attributeSection => attributeSection.Descendants.OfType<Attribute>())
+                    .SelectMany(attributeSection => attributeSection.FindAllChildrenOfType<Attribute>())
                     .SingleOrDefault(attribute => attribute.Type.GetFullName() == targetAttributeName);
 
                 if (replaceable == null) return;
 
-                var typeDeclaration = initializer.Ancestors.OfType<TypeDeclaration>().First();
+                var typeDeclaration = initializer.FindFirstParentOfType<TypeDeclaration>();
 
-                var key = replaceable.Descendants.OfType<PrimitiveExpression>().Single().Value.ToString();
+                var key = replaceable.FindFirstChildOfType<PrimitiveExpression>().Value.ToString();
                 // If a replacement value is set, override the result.
                 if (_replacements.TryGetValue(key, out var result))
                 {
@@ -118,9 +116,7 @@ namespace Hast.Transformer.Services
 
             private IType GetTypeOfStaticIdentifier(Identifier identifier) =>
                 (identifier.Parent as MemberReferenceExpression)?
-                .Children
-                .OfType<TypeReferenceExpression>()
-                .FirstOrDefault()?
+                .FindFirstChildOfType<TypeReferenceExpression>()?
                 .Type
                 .GetActualType();
         }
