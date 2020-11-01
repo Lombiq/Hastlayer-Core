@@ -1,4 +1,4 @@
-﻿using Hast.Common.Helpers;
+using Hast.Common.Helpers;
 using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis.Services;
@@ -332,10 +332,9 @@ namespace Hast.Transformer
             // Removing the unnecessary bits.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
-            _readonlyToConstConverter.ConvertReadonlyPrimitives(syntaxTree, configuration);
-
             // Conversions making the syntax tree easier to process. Note that the order is NOT arbitrary but these
             // services sometimes depend on each other.
+            _readonlyToConstConverter.ConvertReadonlyPrimitives(syntaxTree, configuration);
             _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree, knownTypeLookupTable);
             _binaryAndUnaryOperatorExpressionsCastAdjuster.AdjustBinaryAndUnaryOperatorExpressions(syntaxTree, knownTypeLookupTable);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
