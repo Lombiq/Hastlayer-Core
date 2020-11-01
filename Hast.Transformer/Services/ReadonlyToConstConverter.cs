@@ -2,6 +2,7 @@ using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -54,6 +55,8 @@ namespace Hast.Transformer.Services
 
                 if (replaceable == null) return;
 
+                var typeDeclaration = initializer.Ancestors.OfType<TypeDeclaration>().First();
+
                 var key = replaceable.Descendants.OfType<PrimitiveExpression>().Single().Value.ToString();
                 // If a replacement value is set, override the result.
                 if (_replacements.TryGetValue(key, out var result))
@@ -80,7 +83,7 @@ namespace Hast.Transformer.Services
 
                 // This is not optional. Even if there is no custom replacement found, the literal substitution must be
                 // performed to restore the the const-like behavior.
-                _syntaxTree.AcceptVisitor(new ReplaceReadonlyVisitor(initializer.Name, value.Value));
+                _syntaxTree.AcceptVisitor(new ReplaceReadonlyVisitor(initializer.Name, value.Value, typeDeclaration));
             }
         }
 
@@ -88,24 +91,37 @@ namespace Hast.Transformer.Services
         {
             private readonly string _name;
             private readonly object _value;
+            private readonly TypeDeclaration _typeDeclaration;
 
-            public ReplaceReadonlyVisitor(string name, object value)
+            public ReplaceReadonlyVisitor(string name, object value, TypeDeclaration typeDeclaration)
             {
                 _name = name;
                 _value = value;
+                _typeDeclaration = typeDeclaration;
             }
 
             public override void VisitIdentifier(Identifier identifier)
             {
                 base.VisitIdentifier(identifier);
-
-                if (identifier.Parent is MemberReferenceExpression member && identifier.Name == _name)
+                if (!(identifier.Parent is MemberReferenceExpression member) ||
+                    identifier.Name != _name ||
+                    !GetTypeOfStaticIdentifier(identifier).Equals(_typeDeclaration.GetActualType()))
                 {
-                    var primitive = new PrimitiveExpression(_value);
-                    primitive.AddAnnotation(member.GetResolveResult());
-                    member.ReplaceWith(primitive);
+                    return;
                 }
+
+                var primitive = new PrimitiveExpression(_value);
+                primitive.AddAnnotation(member.GetResolveResult());
+                member.ReplaceWith(primitive);
             }
+
+            private IType GetTypeOfStaticIdentifier(Identifier identifier) =>
+                (identifier.Parent as MemberReferenceExpression)?
+                .Children
+                .OfType<TypeReferenceExpression>()
+                .FirstOrDefault()?
+                .Type
+                .GetActualType();
         }
     }
 }
