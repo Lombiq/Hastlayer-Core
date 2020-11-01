@@ -141,6 +141,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 _constantValuesTable.MarkAsNonConstant(propertyDeclaration, _rootNode);
             }
+            else if (propertyDeclaration.Initializer is PrimitiveExpression primitiveExpression)
+            {
+                _constantValuesTable.MarkAsPotentiallyConstant(propertyDeclaration, primitiveExpression, _rootNode, true);
+            }
         }
 
         public override void VisitFieldDeclaration(FieldDeclaration fieldDeclaration)
@@ -150,6 +154,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (!fieldDeclaration.IsReadOnlyMember())
             {
                 _constantValuesTable.MarkAsNonConstant(fieldDeclaration, _rootNode);
+            }
+            else
+            {
+                // The AST should be processed in a way at this stage that there aren't multiple variables.
+                var variable = fieldDeclaration.Variables.SingleOrDefault();
+                if (variable?.Initializer is PrimitiveExpression primitiveExpression)
+                {
+                    _constantValuesTable.MarkAsPotentiallyConstant(fieldDeclaration, primitiveExpression, _rootNode, true);
+                }
             }
         }
     }
