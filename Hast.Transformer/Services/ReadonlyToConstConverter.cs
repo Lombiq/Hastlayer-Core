@@ -56,31 +56,28 @@ namespace Hast.Transformer.Services
                 var typeDeclaration = initializer.FindFirstParentOfType<TypeDeclaration>();
 
                 var key = replaceable.FindFirstChildOfType<PrimitiveExpression>().Value.ToString();
-                // If a replacement value is set, override the result.
-                if (_replacements.TryGetValue(key, out var result))
-                {
-                    if (result is string resultString)
-                    {
-                        result = value.Value switch
-                        {
-                            string _ => resultString,
-                            int _ => int.Parse(resultString, CultureInfo.InvariantCulture),
-                            uint _ => uint.Parse(resultString, CultureInfo.InvariantCulture),
-                            long _ => long.Parse(resultString, CultureInfo.InvariantCulture),
-                            ulong _ => ulong.Parse(resultString, CultureInfo.InvariantCulture),
-                            short _ => short.Parse(resultString, CultureInfo.InvariantCulture),
-                            ushort _ => ushort.Parse(resultString, CultureInfo.InvariantCulture),
-                            byte _ => byte.Parse(resultString, CultureInfo.InvariantCulture),
-                            bool _ => resultString.ToLowerInvariant() == "true",
-                            _ => value.Value,
-                        };
-                    }
+                // If a replacement value is not set then there is nothing to do.
+                if (key == null || !_replacements.TryGetValue(key, out var result)) return;
 
-                    value = new PrimitiveExpression(result);
+                if (result is string resultString)
+                {
+                    result = value.Value switch
+                    {
+                        string _ => resultString,
+                        int _ => int.Parse(resultString, CultureInfo.InvariantCulture),
+                        uint _ => uint.Parse(resultString, CultureInfo.InvariantCulture),
+                        long _ => long.Parse(resultString, CultureInfo.InvariantCulture),
+                        ulong _ => ulong.Parse(resultString, CultureInfo.InvariantCulture),
+                        short _ => short.Parse(resultString, CultureInfo.InvariantCulture),
+                        ushort _ => ushort.Parse(resultString, CultureInfo.InvariantCulture),
+                        byte _ => byte.Parse(resultString, CultureInfo.InvariantCulture),
+                        bool _ => resultString.ToLowerInvariant() == "true",
+                        _ => value.Value,
+                    };
                 }
 
-                // This is not optional. Even if there is no custom replacement found, the literal substitution must be
-                // performed to restore the the const-like behavior.
+                value = new PrimitiveExpression(result);
+
                 _syntaxTree.AcceptVisitor(new ReplaceReadonlyVisitor(initializer.Name, value.Value, typeDeclaration));
             }
         }
