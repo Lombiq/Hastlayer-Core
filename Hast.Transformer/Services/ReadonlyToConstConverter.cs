@@ -56,6 +56,7 @@ namespace Hast.Transformer.Services
                 var typeDeclaration = initializer.FindFirstParentOfType<TypeDeclaration>();
 
                 var key = replaceable.FindFirstChildOfType<PrimitiveExpression>().Value.ToString();
+
                 // If a replacement value is not set then there is nothing to do.
                 if (key == null || !_replacements.TryGetValue(key, out var result)) return;
 
