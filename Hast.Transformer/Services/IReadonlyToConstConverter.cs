@@ -1,4 +1,4 @@
-using Hast.Common.Interfaces;
+﻿using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -37,7 +37,7 @@ namespace Hast.Transformer.Services
         /// Finds and replaces any <see langword="public"/> <see langword="static"/> <see langword="readonly"/> fields
         /// in <paramref name="syntaxTree"/> that have <see cref="ReplaceableAttribute"/> with their assigned literal
         /// value. If <see cref="IHardwareGenerationConfiguration.CustomConfiguration"/> in
-        /// <paramref name="configuration"/> has a <c>Replaceable</c> of type <c>IDictionary&lt;string, string&gt;</c>
+        /// <paramref name="configuration"/> has a <c>ReplaceableDynamicConstants</c> of type <c>IDictionary&lt;string, string&gt;</c>
         /// with the matching value identified by the attribute, then it is used instead of the assigned value. Read
         /// "Using dynamic constants" in <c>Docs/DevelopingHastlayer.md</c> for usage information.
         /// </summary>
