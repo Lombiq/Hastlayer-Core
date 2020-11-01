@@ -16615,7 +16615,7 @@ begin
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\: \unsigned32_Array\(0 to 77) := (others => to_unsigned(0, 32));
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\: \unsigned32_Array\(0 to 122) := (others => to_unsigned(0, 32));
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).invocationIndex\: integer range 0 to 2 := 0;
@@ -16727,7 +16727,7 @@ begin
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::randomSeed\ := SmartResize(ConvertStdLogicVectorToUInt32(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- <>c__DisplayClass4_.iterationsPerTask = (long)num / 78L;
+                            -- <>c__DisplayClass4_.iterationsPerTask = (long)num / 123L;
                             -- 
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_6\;
                         end if;
@@ -16741,7 +16741,7 @@ begin
                         else 
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ := signed(SmartResize(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\, 64)) / to_signed(78, 64);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ := signed(SmartResize(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\, 64)) / to_signed(123, 64);
                         -- Clock cycles needed to complete this state (approximation): 21
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\ => 
                         \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\;
@@ -16749,7 +16749,7 @@ begin
                         -- Task<uint>[] array;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new Task<uint>[78];
+                        -- array = new Task<uint>[123];
                         -- 
                         \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
@@ -16760,7 +16760,7 @@ begin
                         -- 
                         \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((long)(num2) < 78L) {
+                        -- while ((long)(num2) < 123L) {
                         -- 	array [num2] = Task.Factory.StartNew (<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<EstimatePi>b__0), num2);
                         -- 	num2 = (uint)((long)(num2) + 1L);
                         -- }
@@ -16771,7 +16771,7 @@ begin
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_8\ => 
                         -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\.
                         -- The while loop's condition:
-                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\ := signed(SmartResize((\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\), 64)) < to_signed(78, 64);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\ := signed(SmartResize((\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\), 64)) < to_signed(123, 64);
                         if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -16847,7 +16847,7 @@ begin
                             -- 
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num4\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- while (num4 < 78) {
+                            -- while (num4 < 123) {
                             -- 	num3 = num3 + array [num4].Result;
                             -- 	num4 = num4 + 1;
                             -- }
@@ -16859,7 +16859,7 @@ begin
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_12\ => 
                         -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_11\.
                         -- The while loop's condition:
-                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num4\ < to_signed(78, 32);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num4\ < to_signed(123, 32);
                         if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {

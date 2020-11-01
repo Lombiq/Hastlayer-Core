@@ -37,6 +37,11 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                     configuration.AddHardwareEntryPointType<GenomeMatcher>();
 
+                    // Verify that [Replaceable] works.
+                    var replacementName = nameof(MonteCarloPiEstimator) + "." +
+                                          nameof(MonteCarloPiEstimator.MaxDegreeOfParallelism);
+                    configuration.GetOrAddReplacements()[replacementName] = 123;
+
                     // Not configuring MaxDegreeOfParallelism for ImageContrastModifier to also test the logic that
                     // can figure it out.
                     configuration.AddHardwareEntryPointType<ImageContrastModifier>();

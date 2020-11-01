@@ -23,7 +23,7 @@ namespace Hast.Transformer.Services
 
             public ReadonlyToConstVisitor(IHardwareGenerationConfiguration configuration, SyntaxTree syntaxTree)
             {
-                _replacements = configuration.GotOrAddReplacements();
+                _replacements = configuration.GetOrAddReplacements();
                 _syntaxTree = syntaxTree;
             }
 
