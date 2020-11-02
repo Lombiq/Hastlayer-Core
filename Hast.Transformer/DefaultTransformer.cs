@@ -278,6 +278,12 @@ namespace Hast.Transformer
                 decompilers.Add(decompiler);
             }
 
+            // Decompiling and adding the syntax tree ensures that a change of code means a change of hash even if there
+            // was no version change in the assembly.
+            var syntaxTree = await DecompileTogetherAsync(decompilers);
+            await WriteSyntaxTreeAsync(syntaxTree, "UnprocessedSyntaxTree.cs");
+            transformationIdComponents.Add($"source code: {syntaxTree}");
+
             transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberFullNames);
             transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberNamePrefixes);
             transformationIdComponents.Add(_jsonConverter.Serialize(configuration.CustomConfiguration));
@@ -291,7 +297,11 @@ namespace Hast.Transformer
 
             foreach (var transformationIdComponent in transformationIdComponents)
             {
-                _logger.LogTrace("Transformation ID component: {0}", transformationIdComponent);
+                _logger.LogTrace(
+                    "Transformation ID component: {0}",
+                    transformationIdComponent.StartsWith("source code: ")
+                        ? "[whole source code]"
+                        : transformationIdComponent);
             }
 
             var transformationId = Sha2456Helper.ComputeHash(string.Join("\n", transformationIdComponents));
@@ -301,23 +311,6 @@ namespace Hast.Transformer
             {
                 return await _engine.Transform(cachedTransformationContext);
             }
-
-            var decompilerTasks = decompilers
-                .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile(true)))
-                .ToArray();
-
-            await Task.WhenAll(decompilerTasks);
-
-            // Unlike with the ILSpy v2 libraries multiple unrelated assemblies can't be decompiled into a single AST
-            // so we need to decompile them separately and merge them like this.
-            var syntaxTree = decompilerTasks[0].Result;
-            for (int i = 1; i < decompilerTasks.Length; i++)
-            {
-                syntaxTree.Members.AddRange(decompilerTasks[i].Result.Members.Select(member => member.Detach()));
-            }
-
-
-            if (SaveSyntaxTree) await WriteSyntaxTreeAsync(syntaxTree, "UnprocessedSyntaxTree.cs");
 
             // Since this is about known (i.e. .NET built-in) types it doesn't matter which type system we use.
             var knownTypeLookupTable = _knownTypeLookupTableFactory.Create(decompilers.First().TypeSystem);
@@ -418,6 +411,22 @@ namespace Hast.Transformer
                 }
                 catch (IOException) { }
             }
+        }
+
+        private static async Task<SyntaxTree> DecompileTogetherAsync(IEnumerable<CSharpDecompiler> decompilers)
+        {
+            var decompilerTasks = await Task.WhenAll(decompilers
+                .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile(true))));
+
+            // Unlike with the ILSpy v2 libraries multiple unrelated assemblies can't be decompiled into a single AST
+            // so we need to decompile them separately and merge them like this.
+            var syntaxTree = decompilerTasks[0];
+            for (int i = 1; i < decompilerTasks.Length; i++)
+            {
+                syntaxTree.Members.AddRange(decompilerTasks[i].Members.Select(member => member.Detach()));
+            }
+
+            return syntaxTree;
         }
     }
 }
