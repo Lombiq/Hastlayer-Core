@@ -28,7 +28,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
         protected override Task<VhdlHardwareDescription> TransformAssembliesToVhdl(
            ITransformer transformer,
-           IEnumerable<Assembly> assemblies,
+           IList<Assembly> assemblies,
            Action<HardwareGenerationConfiguration> configurationModifier = null,
             string deviceName = null) =>
             base.TransformAssembliesToVhdl(
