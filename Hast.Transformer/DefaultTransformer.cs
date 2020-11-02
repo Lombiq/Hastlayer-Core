@@ -273,8 +273,7 @@ namespace Hast.Transformer
 
                     // These two deal with LINQ elements that we don't support yet any way.
                     .Remove<IntroduceQueryExpressions>()
-                    .Remove<CombineQueryExpressions>()
-                    ;
+                    .Remove<CombineQueryExpressions>();
 
                 decompilers.Add(decompiler);
             }
@@ -297,12 +296,10 @@ namespace Hast.Transformer
 
             var transformationId = Sha2456Helper.ComputeHash(string.Join("\n", transformationIdComponents));
 
-            if (configuration.EnableCaching)
+            if (configuration.EnableCaching && _transformationContextCacheService
+                .GetTransformationContext(assemblyPaths, transformationId) is { } cachedTransformationContext)
             {
-                var cachedTransformationContext = _transformationContextCacheService
-                    .GetTransformationContext(assemblyPaths, transformationId);
-
-                if (cachedTransformationContext != null) return await _engine.Transform(cachedTransformationContext);
+                return await _engine.Transform(cachedTransformationContext);
             }
 
             var decompilerTasks = decompilers
@@ -370,7 +367,7 @@ namespace Hast.Transformer
             // If the conversions removed something let's clean them up here.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
-            if (SaveSyntaxTree) await WriteSyntaxTreeAsync(syntaxTree, "ProcessedSyntaxTree.cs");
+            await WriteSyntaxTreeAsync(syntaxTree, "ProcessedSyntaxTree.cs");
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
@@ -409,9 +406,10 @@ namespace Hast.Transformer
             return await _engine.Transform(context);
         }
 
+
         private static async Task WriteSyntaxTreeAsync(SyntaxTree syntaxTree, string fileName)
         {
-            while (true)
+            while (SaveSyntaxTree)
             {
                 try
                 {
