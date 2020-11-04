@@ -1,4 +1,4 @@
-﻿using Hast.Common.Helpers;
+using Hast.Common.Helpers;
 using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis.Services;
@@ -12,6 +12,7 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.CSharp.Transforms;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,6 +32,48 @@ namespace Hast.Transformer
 #else
         false;
 #endif
+
+        // Used for turning off language features to make processing easier.
+        private static DecompilerSettings DecompilerSettings = new DecompilerSettings
+        {
+            AlwaysShowEnumMemberValues = false,
+            AnonymousMethods = false,
+            AnonymousTypes = false,
+            ArrayInitializers = false,
+            Discards = false,
+            DoWhileStatement = false,
+            Dynamic = false,
+            ExpressionTrees = false,
+            // Instead of extension methods there are simple static methods.
+            ExtensionMethods = false,
+            ForStatement = false,
+            IntroduceReadonlyAndInModifiers = true,
+            IntroduceRefModifiersOnStructs = true,
+            // Turn off shorthand form of increment assignments. With this true e.g. x = x * 2 would be x *= 2.
+            // The former is easier to transform. Works in conjunction with the disabling of
+            // ReplaceMethodCallsWithOperators, see below.
+            IntroduceIncrementAndDecrement = false,
+            LocalFunctions = false,
+            NamedArguments = false,
+            NonTrailingNamedArguments = false,
+            NullPropagation = false,
+            NullableReferenceTypes = false,
+            OptionalArguments = false,
+            OutVariables = false,
+            PatternBasedFixedStatement = false,
+            ReadOnlyMethods = true, // Can help const substitution.
+            RefExtensionMethods = false,
+            SeparateLocalVariableDeclarations = true,
+            ShowXmlDocumentation = false,
+            StringInterpolation = false,
+            TupleComparisons = false,
+            TupleConversions = false,
+            TupleTypes = false,
+            ThrowExpressions = false,
+            UseExpressionBodyForCalculatedGetterOnlyProperties = false,
+            UseLambdaSyntax = false,
+            YieldReturn = false,
+        };
 
         private readonly IEnumerable<EventHandler<ITransformationContext>> _eventHandlers;
         private readonly IJsonConverter _jsonConverter;
@@ -63,6 +106,8 @@ namespace Hast.Transformer
         private readonly IUnneededReferenceVariablesRemover _unneededReferenceVariablesRemover;
         private readonly IRefLocalVariablesRemover _refLocalVariablesRemover;
         private readonly IOptionalParameterFiller _optionalParameterFiller;
+        private readonly IReadonlyToConstConverter _readonlyToConstConverter;
+        private readonly ILogger<DefaultTransformer> _logger;
 
 
         public DefaultTransformer(
@@ -96,7 +141,9 @@ namespace Hast.Transformer
             IMemberIdentifiersFixer memberIdentifiersFixer,
             IUnneededReferenceVariablesRemover unneededReferenceVariablesRemover,
             IRefLocalVariablesRemover refLocalVariablesRemover,
-            IOptionalParameterFiller optionalParameterFiller)
+            IOptionalParameterFiller optionalParameterFiller,
+            IReadonlyToConstConverter readonlyToConstConverter,
+            ILogger<DefaultTransformer> logger)
         {
             _eventHandlers = eventHandlers;
             _jsonConverter = jsonConverter;
@@ -129,23 +176,25 @@ namespace Hast.Transformer
             _unneededReferenceVariablesRemover = unneededReferenceVariablesRemover;
             _refLocalVariablesRemover = refLocalVariablesRemover;
             _optionalParameterFiller = optionalParameterFiller;
+            _readonlyToConstConverter = readonlyToConstConverter;
+            _logger = logger;
         }
 
-        public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
+        public async Task<IHardwareDescription> Transform(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
             var transformerConfiguration = configuration.TransformerConfiguration();
 
             // Need to use assembly names instead of paths for the ID, because paths can change (as in the random ones
             // with Remote Worker). Just file names wouldn't be enough because two assemblies can have the same simple
             // name while their full names being different.
-            var rawTransformationId = string.Empty;
+            var transformationIdComponents = new List<string>();
 
             var decompilers = new List<CSharpDecompiler>();
 
             foreach (var assemblyPath in assemblyPaths)
             {
                 var module = new PEFile(assemblyPath, PEStreamOptions.PrefetchEntireImage);
-                rawTransformationId += "-" + module.FullName;
+                transformationIdComponents.Add(module.FullName);
 
                 var resolver = new UniversalAssemblyResolver(
                     Path.GetFullPath(assemblyPath),
@@ -154,7 +203,7 @@ namespace Hast.Transformer
                     PEStreamOptions.PrefetchMetadata);
 
                 // When executed as a Windows service not all Hastlayer assemblies references' from transformed assemblies
-                // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. Also, if a remote 
+                // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. Also, if a remote
                 // transformation needs multiple assemblies those will need to be loaded like this too.
                 // So helping the decompiler find them here.
                 resolver.AddSearchDirectory(Path.GetDirectoryName(GetType().Assembly.Location));
@@ -166,50 +215,8 @@ namespace Hast.Transformer
                     resolver.AddSearchDirectory(searchPath);
                 }
 
-                // Turning off language features to make processing easier.
-                var decompilerSettings = new DecompilerSettings
-                {
-                    AlwaysShowEnumMemberValues = false,
-                    AnonymousMethods = false,
-                    AnonymousTypes = false,
-                    ArrayInitializers = false,
-                    Discards = false,
-                    DoWhileStatement = false,
-                    Dynamic = false,
-                    ExpressionTrees = false,
-                    // Instead of extension methods there are simple static methods.
-                    ExtensionMethods = false,
-                    ForStatement = false,
-                    IntroduceReadonlyAndInModifiers = true,
-                    IntroduceRefModifiersOnStructs = true,
-                    // Turn off shorthand form of increment assignments. With this true e.g. x = x * 2 would be x *= 2.
-                    // The former is easier to transform. Works in conjunction with the disabling of
-                    // ReplaceMethodCallsWithOperators, see below.
-                    IntroduceIncrementAndDecrement = false,
-                    LocalFunctions = false,
-                    NamedArguments = false,
-                    NonTrailingNamedArguments = false,
-                    NullPropagation = false,
-                    NullableReferenceTypes = false,
-                    OptionalArguments = false,
-                    OutVariables = false,
-                    PatternBasedFixedStatement = false,
-                    ReadOnlyMethods = true, // Can help const substitution.
-                    RefExtensionMethods = false,
-                    SeparateLocalVariableDeclarations = true,
-                    ShowXmlDocumentation = false,
-                    StringInterpolation = false,
-                    TupleComparisons = false,
-                    TupleConversions = false,
-                    TupleTypes = false,
-                    ThrowExpressions = false,
-                    UseExpressionBodyForCalculatedGetterOnlyProperties = false,
-                    UseLambdaSyntax = false,
-                    YieldReturn = false
-                };
-
-                var typeSystem = new DecompilerTypeSystem(module, resolver, decompilerSettings);
-                var decompiler = new CSharpDecompiler(typeSystem, decompilerSettings);
+                var typeSystem = new DecompilerTypeSystem(module, resolver, DecompilerSettings);
+                var decompiler = new CSharpDecompiler(typeSystem, DecompilerSettings);
 
                 // We don't want to run all transforms since they would also transform some low-level constructs that are
                 // useful to have as simple as possible (e.g. it's OK if we only have while statements in the AST, not for
@@ -232,15 +239,14 @@ namespace Hast.Transformer
                     //      <> c__DisplayClass3_.input = memory.ReadUInt32(0);
                     //
                     // ...we'd get:
-                    // 
+                    //
                     //      uint input;
                     //      input = memory.ReadUInt32(0);
                     //      Func<object, uint> func = default(Func<object, uint>);
                     //      <> c__DisplayClass3_0 @object;
                     //
                     // Note that the DisplayClass is not instantiated either.
-                    .Remove("TransformDisplayClassUsage")
-                    ;
+                    .Remove("TransformDisplayClassUsage");
 
                 decompiler.AstTransforms
                     // Replaces op_* methods with operators but these methods are simpler to transform. Works in
@@ -267,46 +273,44 @@ namespace Hast.Transformer
 
                     // These two deal with LINQ elements that we don't support yet any way.
                     .Remove<IntroduceQueryExpressions>()
-                    .Remove<CombineQueryExpressions>()
-                    ;
+                    .Remove<CombineQueryExpressions>();
 
                 decompilers.Add(decompiler);
             }
 
-            rawTransformationId +=
-                string.Join("-", configuration.HardwareEntryPointMemberFullNames) +
-                string.Join("-", configuration.HardwareEntryPointMemberNamePrefixes) +
-                _jsonConverter.Serialize(configuration.CustomConfiguration) +
-                // Adding the assembly name so the Hastlayer version is included too, to prevent stale caches after a 
-                // Hastlayer update.
-                GetType().Assembly.FullName;
+            // Decompiling and adding the syntax tree ensures that a change of code means a change of hash even if there
+            // was no version change in the assembly.
+            var syntaxTree = await DecompileTogetherAsync(decompilers);
+            await WriteSyntaxTreeAsync(syntaxTree, "UnprocessedSyntaxTree.cs");
+            transformationIdComponents.Add($"source code: {syntaxTree}");
 
-            var transformationId = Sha2456Helper.ComputeHash(rawTransformationId);
+            transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberFullNames);
+            transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberNamePrefixes);
+            transformationIdComponents.Add(_jsonConverter.Serialize(configuration.CustomConfiguration));
 
-            if (configuration.EnableCaching)
+            // Adding the assembly name so the Hastlayer version is included too, to prevent stale caches after a
+            // Hastlayer update.
+            transformationIdComponents.Add(GetType().Assembly.FullName);
+
+            // Adding the device name to ensure different a cached program for a different hardware doesn't get used.
+            transformationIdComponents.Add(configuration.DeviceName);
+
+            foreach (var transformationIdComponent in transformationIdComponents)
             {
-                var cachedTransformationContext = _transformationContextCacheService
-                    .GetTransformationContext(assemblyPaths, transformationId);
-
-                if (cachedTransformationContext != null) return _engine.Transform(cachedTransformationContext);
+                _logger.LogTrace(
+                    "Transformation ID component: {0}",
+                    transformationIdComponent.StartsWith("source code: ")
+                        ? "[whole source code]"
+                        : transformationIdComponent);
             }
 
-            var decompilerTasks = decompilers
-                .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile(true)))
-                .ToArray();
+            var transformationId = Sha2456Helper.ComputeHash(string.Join("\n", transformationIdComponents));
 
-            Task.WaitAll(decompilerTasks);
-
-            // Unlike with the ILSpy v2 libraries multiple unrelated assemblies can't be decompiled into a single AST
-            // so we need to decompile them separately and merge them like this.
-            var syntaxTree = decompilerTasks[0].Result;
-            for (int i = 1; i < decompilerTasks.Length; i++)
+            if (configuration.EnableCaching && _transformationContextCacheService
+                .GetTransformationContext(assemblyPaths, transformationId) is { } cachedTransformationContext)
             {
-                syntaxTree.Members.AddRange(decompilerTasks[i].Result.Members.Select(member => member.Detach()));
+                return await _engine.Transform(cachedTransformationContext);
             }
-
-
-            if (SaveSyntaxTree) WriteSyntaxTree(syntaxTree, "UnprocessedSyntaxTree.cs");
 
             // Since this is about known (i.e. .NET built-in) types it doesn't matter which type system we use.
             var knownTypeLookupTable = _knownTypeLookupTableFactory.Create(decompilers.First().TypeSystem);
@@ -319,6 +323,7 @@ namespace Hast.Transformer
 
             // Conversions making the syntax tree easier to process. Note that the order is NOT arbitrary but these
             // services sometimes depend on each other.
+            _readonlyToConstConverter.ConvertReadonlyPrimitives(syntaxTree, configuration);
             _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree, knownTypeLookupTable);
             _binaryAndUnaryOperatorExpressionsCastAdjuster.AdjustBinaryAndUnaryOperatorExpressions(syntaxTree, knownTypeLookupTable);
             _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
@@ -355,7 +360,7 @@ namespace Hast.Transformer
             // If the conversions removed something let's clean them up here.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
-            if (SaveSyntaxTree) WriteSyntaxTree(syntaxTree, "ProcessedSyntaxTree.cs");
+            await WriteSyntaxTreeAsync(syntaxTree, "ProcessedSyntaxTree.cs");
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
@@ -370,7 +375,7 @@ namespace Hast.Transformer
             if (deviceDriver == null)
             {
                 throw new InvalidOperationException(
-                    "No device driver with the name \"" + configuration.DeviceName + "\" was found.");
+                    $"No device driver with the name \"{configuration.DeviceName}\" was found.");
             }
 
             var context = new TransformationContext
@@ -391,20 +396,37 @@ namespace Hast.Transformer
                 _transformationContextCacheService.SetTransformationContext(context, assemblyPaths);
             }
 
-            return _engine.Transform(context);
+            return await _engine.Transform(context);
         }
 
-        private void WriteSyntaxTree(SyntaxTree syntaxTree, string fileName)
+
+        private static async Task WriteSyntaxTreeAsync(SyntaxTree syntaxTree, string fileName)
         {
-            while (true)
+            while (SaveSyntaxTree)
             {
                 try
                 {
-                    File.WriteAllText(fileName, syntaxTree.ToString());
+                    await File.WriteAllTextAsync(fileName, syntaxTree.ToString());
                     return;
                 }
                 catch (IOException) { }
             }
+        }
+
+        private static async Task<SyntaxTree> DecompileTogetherAsync(IEnumerable<CSharpDecompiler> decompilers)
+        {
+            var decompilerTasks = await Task.WhenAll(decompilers
+                .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile(true))));
+
+            // Unlike with the ILSpy v2 libraries multiple unrelated assemblies can't be decompiled into a single AST
+            // so we need to decompile them separately and merge them like this.
+            var syntaxTree = decompilerTasks[0];
+            for (int i = 1; i < decompilerTasks.Length; i++)
+            {
+                syntaxTree.Members.AddRange(decompilerTasks[i].Members.Select(member => member.Detach()));
+            }
+
+            return syntaxTree;
         }
     }
 }

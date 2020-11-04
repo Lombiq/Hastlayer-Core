@@ -963,8 +963,7 @@ architecture Imp of Hast_IP is
         \Posit::.ctor(PositEnvironment,UInt32).0._State_7\, 
         \Posit::.ctor(PositEnvironment,UInt32).0._State_8\, 
         \Posit::.ctor(PositEnvironment,UInt32).0._State_9\, 
-        \Posit::.ctor(PositEnvironment,UInt32).0._State_10\, 
-        \Posit::.ctor(PositEnvironment,UInt32).0._State_11\);
+        \Posit::.ctor(PositEnvironment,UInt32).0._State_10\);
     -- Signals:
     Signal \Posit::.ctor(PositEnvironment,UInt32).0._Finished\: boolean := false;
     Signal \Posit::.ctor(PositEnvironment,UInt32).0.this.parameter.Out\: \Lombiq.Arithmetics.Posit\;
@@ -2906,7 +2905,7 @@ begin
                         -- if (allOne) {
                         -- 	ushort num2;
                         -- 	num2 = 0;
-                        -- 	while ((int)(num2) < (int)((int)(@this.SegmentCount) - 1)) {
+                        -- 	while ((int)(num2) < (int)(1 - 1)) {
                         -- 		array [num2] = 4294967295;
                         -- 		num2 = (ushort)((int)(num2) + 1);
                         -- 	}
@@ -2977,7 +2976,7 @@ begin
                         -- {
                         -- 	ushort num2;
                         -- 	num2 = 0;
-                        -- 	while ((int)(num2) < (int)((int)(@this.SegmentCount) - 1)) {
+                        -- 	while ((int)(num2) < (int)(1 - 1)) {
                         -- 		array [num2] = 4294967295;
                         -- 		num2 = (ushort)((int)(num2) + 1);
                         -- 	}
@@ -2998,7 +2997,7 @@ begin
                         -- 
                         \BitMask::.ctor(UInt16,Boolean).0.num2\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num2) < (int)((int)(@this.SegmentCount) - 1)) {
+                        -- while ((int)(num2) < (int)(1 - 1)) {
                         -- 	array [num2] = 4294967295;
                         -- 	num2 = (ushort)((int)(num2) + 1);
                         -- }
@@ -3009,7 +3008,7 @@ begin
                     when \BitMask::.ctor(UInt16,Boolean).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::.ctor(UInt16,Boolean).0._State_8\.
                         -- The while loop's condition:
-                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.6\ := signed(SmartResize((\BitMask::.ctor(UInt16,Boolean).0.this\.\SegmentCount\), 32)) - to_signed(1, 32);
+                        \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.6\ := to_signed(1, 32) - to_signed(1, 32);
                         \BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.7\ := signed(SmartResize((\BitMask::.ctor(UInt16,Boolean).0.num2\), 32)) < (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.6\);
                         if (\BitMask::.ctor(UInt16,Boolean).0.binaryOperationResult.7\) then 
                             -- The following section was transformed from the .NET statement below:
@@ -3942,7 +3941,7 @@ begin
                         -- 
                         \Boolean BitMask::op_Equality(BitMask,BitMask).0.num\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num) < (int)(left.SegmentCount)) {
+                        -- while ((int)(num) < 1) {
                         -- 	if (left.Segments [num] != right.Segments [num]) {
                         -- 		return false;
                         -- 	}
@@ -3972,7 +3971,7 @@ begin
                     when \Boolean BitMask::op_Equality(BitMask,BitMask).0._State_5\ => 
                         -- Repeated state of the while loop which was started in state \Boolean BitMask::op_Equality(BitMask,BitMask).0._State_3\.
                         -- The while loop's condition:
-                        \Boolean BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.1\ := signed(SmartResize((\Boolean BitMask::op_Equality(BitMask,BitMask).0.num\), 32)) < signed(SmartResize((\Boolean BitMask::op_Equality(BitMask,BitMask).0.left\.\SegmentCount\), 32));
+                        \Boolean BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.1\ := signed(SmartResize((\Boolean BitMask::op_Equality(BitMask,BitMask).0.num\), 32)) < to_signed(1, 32);
                         if (\Boolean BitMask::op_Equality(BitMask,BitMask).0.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -4101,8 +4100,8 @@ begin
                         -- 
                         \Boolean BitMask::op_LessThan(BitMask,BitMask).0.num\ := SmartResize(unsigned(to_signed(1, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num) <= (int)(left.SegmentCount)) {
-                        -- 	if (left.Segments [(int)((int)(left.SegmentCount) - (int)(num))] < right.Segments [(int)((int)(left.SegmentCount) - (int)(num))]) {
+                        -- while ((int)(num) <= 1) {
+                        -- 	if (left.Segments [(int)(1 - (int)(num))] < right.Segments [(int)(1 - (int)(num))]) {
                         -- 		return true;
                         -- 	}
                         -- 	num = (ushort)((int)(num) + 1);
@@ -4114,23 +4113,23 @@ begin
                     when \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State_2\.
                         -- The while loop's condition:
-                        \Boolean BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.0\ := signed(SmartResize((\Boolean BitMask::op_LessThan(BitMask,BitMask).0.num\), 32)) <= signed(SmartResize((\Boolean BitMask::op_LessThan(BitMask,BitMask).0.left\.\SegmentCount\), 32));
+                        \Boolean BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.0\ := signed(SmartResize((\Boolean BitMask::op_LessThan(BitMask,BitMask).0.num\), 32)) <= to_signed(1, 32);
                         if (\Boolean BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	if (left.Segments [(int)((int)(left.SegmentCount) - (int)(num))] < right.Segments [(int)((int)(left.SegmentCount) - (int)(num))]) {
+                            -- 	if (left.Segments [(int)(1 - (int)(num))] < right.Segments [(int)(1 - (int)(num))]) {
                             -- 		return true;
                             -- 	}
                             -- 	num = (ushort)((int)(num) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if (left.Segments [(int)((int)(left.SegmentCount) - (int)(num))] < right.Segments [(int)((int)(left.SegmentCount) - (int)(num))]) {
+                            -- if (left.Segments [(int)(1 - (int)(num))] < right.Segments [(int)(1 - (int)(num))]) {
                             -- 	return true;
                             -- }
                             -- 
-                            \Boolean BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\ := signed(SmartResize((\Boolean BitMask::op_LessThan(BitMask,BitMask).0.left\.\SegmentCount\), 32)) - signed(SmartResize((\Boolean BitMask::op_LessThan(BitMask,BitMask).0.num\), 32));
-                            \Boolean BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.2\ := signed(SmartResize((\Boolean BitMask::op_LessThan(BitMask,BitMask).0.left\.\SegmentCount\), 32)) - signed(SmartResize((\Boolean BitMask::op_LessThan(BitMask,BitMask).0.num\), 32));
+                            \Boolean BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.1\ := to_signed(1, 32) - signed(SmartResize((\Boolean BitMask::op_LessThan(BitMask,BitMask).0.num\), 32));
+                            \Boolean BitMask::op_LessThan(BitMask,BitMask).0.binaryOperationResult.2\ := to_signed(1, 32) - signed(SmartResize((\Boolean BitMask::op_LessThan(BitMask,BitMask).0.num\), 32));
                             \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State\ := \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State_5\;
                         else 
                             \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State\ := \Boolean BitMask::op_LessThan(BitMask,BitMask).0._State_4\;
@@ -7154,14 +7153,14 @@ begin
                         -- 
                         \BitMask::GetMostSignificantOnePosition().0.num2\ := SmartResize(unsigned(to_signed(1, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num2) <= (int)(@this.SegmentCount)) {
+                        -- while ((int)(num2) <= 1) {
                         -- 	uint num3;
-                        -- 	num3 = @this.Segments [(int)((int)(@this.SegmentCount) - (int)(num2))];
+                        -- 	num3 = @this.Segments [(int)(1 - (int)(num2))];
                         -- 	while ((long)(num3) != 0L) {
                         -- 		num3 = num3 >> 1;
                         -- 		num = (ushort)((int)(num) + 1);
                         -- 		if ((long)(num3) == 0L) {
-                        -- 			return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
+                        -- 			return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
                         -- 		}
                         -- 	}
                         -- 	num2 = (ushort)((int)(num2) + 1);
@@ -7173,17 +7172,17 @@ begin
                     when \BitMask::GetMostSignificantOnePosition().0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::GetMostSignificantOnePosition().0._State_2\.
                         -- The while loop's condition:
-                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.0\ := signed(SmartResize((\BitMask::GetMostSignificantOnePosition().0.num2\), 32)) <= signed(SmartResize((\BitMask::GetMostSignificantOnePosition().0.this\.\SegmentCount\), 32));
+                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.0\ := signed(SmartResize((\BitMask::GetMostSignificantOnePosition().0.num2\), 32)) <= to_signed(1, 32);
                         if (\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	uint num3;
-                            -- 	num3 = @this.Segments [(int)((int)(@this.SegmentCount) - (int)(num2))];
+                            -- 	num3 = @this.Segments [(int)(1 - (int)(num2))];
                             -- 	while ((long)(num3) != 0L) {
                             -- 		num3 = num3 >> 1;
                             -- 		num = (ushort)((int)(num) + 1);
                             -- 		if ((long)(num3) == 0L) {
-                            -- 			return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
+                            -- 			return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
                             -- 		}
                             -- 	}
                             -- 	num2 = (ushort)((int)(num2) + 1);
@@ -7193,16 +7192,16 @@ begin
                             -- uint num3;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num3 = @this.Segments [(int)((int)(@this.SegmentCount) - (int)(num2))];
+                            -- num3 = @this.Segments [(int)(1 - (int)(num2))];
                             -- 
-                            \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.1\ := signed(SmartResize((\BitMask::GetMostSignificantOnePosition().0.this\.\SegmentCount\), 32)) - signed(SmartResize((\BitMask::GetMostSignificantOnePosition().0.num2\), 32));
+                            \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.1\ := to_signed(1, 32) - signed(SmartResize((\BitMask::GetMostSignificantOnePosition().0.num2\), 32));
                             \BitMask::GetMostSignificantOnePosition().0.num3\ := \BitMask::GetMostSignificantOnePosition().0.this\.\Segments\(to_integer((\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.1\)));
                             -- The following section was transformed from the .NET statement below:
                             -- while ((long)(num3) != 0L) {
                             -- 	num3 = num3 >> 1;
                             -- 	num = (ushort)((int)(num) + 1);
                             -- 	if ((long)(num3) == 0L) {
-                            -- 		return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
+                            -- 		return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
                             -- 	}
                             -- }
                             -- 
@@ -7230,7 +7229,7 @@ begin
                             -- 	num3 = num3 >> 1;
                             -- 	num = (ushort)((int)(num) + 1);
                             -- 	if ((long)(num3) == 0L) {
-                            -- 		return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
+                            -- 		return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
                             -- 	}
                             -- }
                             -- 
@@ -7246,7 +7245,7 @@ begin
                             \BitMask::GetMostSignificantOnePosition().0.num\ := (\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.4\);
                             -- The following section was transformed from the .NET statement below:
                             -- if ((long)(num3) == 0L) {
-                            -- 	return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
+                            -- 	return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
                             -- }
                             -- 
                             \BitMask::GetMostSignificantOnePosition().0._State\ := \BitMask::GetMostSignificantOnePosition().0._State_7\;
@@ -7292,13 +7291,13 @@ begin
                         -- True branch of the if-else started in state \BitMask::GetMostSignificantOnePosition().0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
+                        -- 	return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
+                        -- return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
                         -- 
-                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.6\ := signed(SmartResize((\BitMask::GetMostSignificantOnePosition().0.this\.\SegmentCount\), 32)) - signed(SmartResize((\BitMask::GetMostSignificantOnePosition().0.num2\), 32));
+                        \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.6\ := to_signed(1, 32) - signed(SmartResize((\BitMask::GetMostSignificantOnePosition().0.num2\), 32));
                         \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.7\ := SmartResize((\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.6\) * to_signed(32, 32), 32);
                         \BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.8\ := SmartResize(unsigned((\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.7\) + signed(SmartResize((\BitMask::GetMostSignificantOnePosition().0.num\), 32))), 16);
                         \BitMask::GetMostSignificantOnePosition().0.return\ <= (\BitMask::GetMostSignificantOnePosition().0.binaryOperationResult.8\);
@@ -8043,8 +8042,8 @@ begin
                             -- 
                             \Posit::.ctor(PositEnvironment,UInt32).0.num2\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- while ((long)(num) >= (long)(1 << (int)environment.MaximumExponentSize) && (int)(num2) < (int)((int)(@this._environment.Size) - 1)) {
-                            -- 	num = (uint)((int)num - (1 << (int)environment.MaximumExponentSize));
+                            -- while ((long)(num) >= (long)(1 << 3) && (int)(num2) < (int)(32 - 1)) {
+                            -- 	num = (uint)((int)num - (1 << 3));
                             -- 	num2 = (ushort)((int)(num2) + 1);
                             -- }
                             -- 
@@ -8055,10 +8054,11 @@ begin
                     when \Posit::.ctor(PositEnvironment,UInt32).0._State_5\ => 
                         -- Repeated state of the while loop which was started in state \Posit::.ctor(PositEnvironment,UInt32).0._State_4\.
                         -- The while loop's condition:
-                        \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.1\ := SmartResize(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit::.ctor(PositEnvironment,UInt32).0.environment\.\MaximumExponentSize\, 32)), 5)))), 64);
+                        \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.1\ := SmartResize(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(to_signed(3, 32), 5)))), 64);
                         \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.2\ := signed(SmartResize((\Posit::.ctor(PositEnvironment,UInt32).0.num\), 64)) >= (\Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.1\);
+                        \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.3\ := to_signed(32, 32) - to_signed(1, 32);
                         \Posit::.ctor(PositEnvironment,UInt32).0._State\ := \Posit::.ctor(PositEnvironment,UInt32).0._State_7\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8243
+                        -- Clock cycles needed to complete this state (approximation): 0.7483
                     when \Posit::.ctor(PositEnvironment,UInt32).0._State_6\ => 
                         -- State after the while loop which was started in state \Posit::.ctor(PositEnvironment,UInt32).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
@@ -8078,48 +8078,43 @@ begin
                         \Posit::.ctor(PositEnvironment,UInt32).0.BitMask::.ctor(UInt32,UInt16).segment.parameter.Out.0\ <= \Posit::.ctor(PositEnvironment,UInt32).0.num\;
                         \Posit::.ctor(PositEnvironment,UInt32).0.BitMask::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
                         \Posit::.ctor(PositEnvironment,UInt32).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= true;
-                        \Posit::.ctor(PositEnvironment,UInt32).0._State\ := \Posit::.ctor(PositEnvironment,UInt32).0._State_10\;
+                        \Posit::.ctor(PositEnvironment,UInt32).0._State\ := \Posit::.ctor(PositEnvironment,UInt32).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::.ctor(PositEnvironment,UInt32).0._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.3\ := signed(SmartResize((\Posit::.ctor(PositEnvironment,UInt32).0.this\.\_environment\.\Size\), 32)) - to_signed(1, 32);
                         \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.4\ := signed(SmartResize((\Posit::.ctor(PositEnvironment,UInt32).0.num2\), 32)) < (\Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.3\);
                         \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.5\ := \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.2\ and \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.4\;
                         if (\Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.5\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num = (uint)((int)num - (1 << (int)environment.MaximumExponentSize));
+                            -- 	num = (uint)((int)num - (1 << 3));
                             -- 	num2 = (ushort)((int)(num2) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num = (uint)((int)num - (1 << (int)environment.MaximumExponentSize));
+                            -- num = (uint)((int)num - (1 << 3));
+                            -- 
+                            \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.6\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(to_signed(3, 32), 5))));
+                            \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.7\ := unsigned(signed(\Posit::.ctor(PositEnvironment,UInt32).0.num\) - (\Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.6\));
+                            \Posit::.ctor(PositEnvironment,UInt32).0.num\ := (\Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.7\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = (ushort)((int)(num2) + 1);
                             -- 
                             \Posit::.ctor(PositEnvironment,UInt32).0._State\ := \Posit::.ctor(PositEnvironment,UInt32).0._State_8\;
                         else 
                             \Posit::.ctor(PositEnvironment,UInt32).0._State\ := \Posit::.ctor(PositEnvironment,UInt32).0._State_6\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7254
+                        -- Clock cycles needed to complete this state (approximation): 0.8475
                     when \Posit::.ctor(PositEnvironment,UInt32).0._State_8\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.6\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit::.ctor(PositEnvironment,UInt32).0.environment\.\MaximumExponentSize\, 32)), 5))));
-                        \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.7\ := unsigned(signed(\Posit::.ctor(PositEnvironment,UInt32).0.num\) - (\Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.6\));
-                        \Posit::.ctor(PositEnvironment,UInt32).0.num\ := (\Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.7\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2 = (ushort)((int)(num2) + 1);
-                        -- 
-                        \Posit::.ctor(PositEnvironment,UInt32).0._State\ := \Posit::.ctor(PositEnvironment,UInt32).0._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8507
-                    when \Posit::.ctor(PositEnvironment,UInt32).0._State_9\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.8\ := SmartResize(unsigned(signed(SmartResize((\Posit::.ctor(PositEnvironment,UInt32).0.num2\), 32)) + to_signed(1, 32)), 16);
                         \Posit::.ctor(PositEnvironment,UInt32).0.num2\ := (\Posit::.ctor(PositEnvironment,UInt32).0.binaryOperationResult.8\);
                         -- Returning to the repeated state of the while loop which was started in state \Posit::.ctor(PositEnvironment,UInt32).0._State_4\ if the loop wasn't exited with a state change.
-                        if (\Posit::.ctor(PositEnvironment,UInt32).0._State\ = \Posit::.ctor(PositEnvironment,UInt32).0._State_9\) then 
+                        if (\Posit::.ctor(PositEnvironment,UInt32).0._State\ = \Posit::.ctor(PositEnvironment,UInt32).0._State_8\) then 
                             \Posit::.ctor(PositEnvironment,UInt32).0._State\ := \Posit::.ctor(PositEnvironment,UInt32).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit::.ctor(PositEnvironment,UInt32).0._State_10\ => 
+                    when \Posit::.ctor(PositEnvironment,UInt32).0._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32,System.UInt16)
                         if (\Posit::.ctor(PositEnvironment,UInt32).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ = \Posit::.ctor(PositEnvironment,UInt32).0.BitMask::.ctor(UInt32,UInt16)._Finished.0\) then 
                             \Posit::.ctor(PositEnvironment,UInt32).0.BitMask::.ctor(UInt32,UInt16)._Started.0\ <= false;
@@ -8134,10 +8129,10 @@ begin
                             \Posit::.ctor(PositEnvironment,UInt32).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).exponentBits.parameter.Out.0\ <= \Posit::.ctor(PositEnvironment,UInt32).0.object152dcd47d28b3ee297dd1fd5de486fbdbb86a187f73283575be243d648f84366\;
                             \Posit::.ctor(PositEnvironment,UInt32).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask).fractionBits.parameter.Out.0\ <= \Posit::.ctor(PositEnvironment,UInt32).0.this\.\PositBits\;
                             \Posit::.ctor(PositEnvironment,UInt32).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask)._Started.0\ <= true;
-                            \Posit::.ctor(PositEnvironment,UInt32).0._State\ := \Posit::.ctor(PositEnvironment,UInt32).0._State_11\;
+                            \Posit::.ctor(PositEnvironment,UInt32).0._State\ := \Posit::.ctor(PositEnvironment,UInt32).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit::.ctor(PositEnvironment,UInt32).0._State_11\ => 
+                    when \Posit::.ctor(PositEnvironment,UInt32).0._State_10\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.Posit::AssemblePositBitsWithRounding(System.Boolean,System.Int32,Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
                         if (\Posit::.ctor(PositEnvironment,UInt32).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask)._Started.0\ = \Posit::.ctor(PositEnvironment,UInt32).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask)._Finished.0\) then 
                             \Posit::.ctor(PositEnvironment,UInt32).0.Posit::AssemblePositBitsWithRounding(Boolean,Int32,BitMask,BitMask)._Started.0\ <= false;

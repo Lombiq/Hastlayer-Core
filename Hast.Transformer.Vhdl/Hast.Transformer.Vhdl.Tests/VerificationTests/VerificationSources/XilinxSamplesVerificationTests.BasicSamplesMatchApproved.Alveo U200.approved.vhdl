@@ -1939,10 +1939,10 @@ architecture Imp of Hast_IP is
     -- System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::randomSeed declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask declarations start
+    -- System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask declarations start
     -- Shared (global) variables:
-    shared Variable \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask declarations end
+    shared Variable \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\: signed(63 downto 0) := to_signed(0, 64);
+    -- System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask declarations end
 
 
     -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).0 declarations start
@@ -5104,7 +5104,7 @@ begin
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).invocationIndex\: integer range 0 to 24 := 0;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.0\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
@@ -5497,13 +5497,13 @@ begin
                         -- 	while (num7 < 25) {
                         -- 		byte[] pixelBytes;
                         -- 		pixelBytes = memory.Read4Bytes (num6 * 25 + num7 + 3);
-                        -- 		PixelProcessingTaskInput object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408;
-                        -- 		object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408 = new PixelProcessingTaskInput {
+                        -- 		PixelProcessingTaskInput objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8;
+                        -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput {
                         -- 
                         -- 		};
-                        -- 		object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408.ContrastValue = num3;
-                        -- 		object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408.PixelBytes = pixelBytes;
-                        -- 		array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408);
+                        -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.ContrastValue = num3;
+                        -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.PixelBytes = pixelBytes;
+                        -- 		array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8);
                         -- 		num7 = num7 + 1;
                         -- 	}
                         -- 	Task.WhenAll (array).Wait ();
@@ -5555,13 +5555,13 @@ begin
                             -- 	while (num7 < 25) {
                             -- 		byte[] pixelBytes;
                             -- 		pixelBytes = memory.Read4Bytes (num6 * 25 + num7 + 3);
-                            -- 		PixelProcessingTaskInput object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408;
-                            -- 		object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408 = new PixelProcessingTaskInput {
+                            -- 		PixelProcessingTaskInput objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8;
+                            -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput {
                             -- 
                             -- 		};
-                            -- 		object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408.ContrastValue = num3;
-                            -- 		object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408.PixelBytes = pixelBytes;
-                            -- 		array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408);
+                            -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.ContrastValue = num3;
+                            -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.PixelBytes = pixelBytes;
+                            -- 		array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8);
                             -- 		num7 = num7 + 1;
                             -- 	}
                             -- 	Task.WhenAll (array).Wait ();
@@ -5592,13 +5592,13 @@ begin
                             -- while (num7 < 25) {
                             -- 	byte[] pixelBytes;
                             -- 	pixelBytes = memory.Read4Bytes (num6 * 25 + num7 + 3);
-                            -- 	PixelProcessingTaskInput object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408;
-                            -- 	object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408 = new PixelProcessingTaskInput {
+                            -- 	PixelProcessingTaskInput objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8;
+                            -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput {
                             -- 
                             -- 	};
-                            -- 	object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408.ContrastValue = num3;
-                            -- 	object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408.PixelBytes = pixelBytes;
-                            -- 	array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408);
+                            -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.ContrastValue = num3;
+                            -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.PixelBytes = pixelBytes;
+                            -- 	array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8);
                             -- 	num7 = num7 + 1;
                             -- }
                             -- 
@@ -5621,13 +5621,13 @@ begin
                             -- {
                             -- 	byte[] pixelBytes;
                             -- 	pixelBytes = memory.Read4Bytes (num6 * 25 + num7 + 3);
-                            -- 	PixelProcessingTaskInput object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408;
-                            -- 	object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408 = new PixelProcessingTaskInput {
+                            -- 	PixelProcessingTaskInput objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8;
+                            -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput {
                             -- 
                             -- 	};
-                            -- 	object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408.ContrastValue = num3;
-                            -- 	object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408.PixelBytes = pixelBytes;
-                            -- 	array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408);
+                            -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.ContrastValue = num3;
+                            -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.PixelBytes = pixelBytes;
+                            -- 	array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8);
                             -- 	num7 = num7 + 1;
                             -- }
                             -- 
@@ -5667,104 +5667,104 @@ begin
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\ := \DataIn\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\ := (unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(7 downto 0)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(15 downto 8)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(23 downto 16)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(31 downto 24)));
                             -- The following section was transformed from the .NET statement below:
-                            -- PixelProcessingTaskInput object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408;
+                            -- PixelProcessingTaskInput objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408 = new PixelProcessingTaskInput {
+                            -- objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput {
                             -- 
                             -- };
                             -- 
                             -- Initializing record fields to their defaults.
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\.\IsNull\ := false;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\.\PixelBytes\ := (others => to_unsigned(0, 8));
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\.\ContrastValue\ := to_signed(0, 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\.\IsNull\ := false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\.\PixelBytes\ := (others => to_unsigned(0, 8));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\.\ContrastValue\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408.ContrastValue = num3;
+                            -- objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.ContrastValue = num3;
                             -- 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\.\ContrastValue\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\.\ContrastValue\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\;
                             -- The following section was transformed from the .NET statement below:
-                            -- object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408.PixelBytes = pixelBytes;
+                            -- objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.PixelBytes = pixelBytes;
                             -- 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\.\PixelBytes\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\.\PixelBytes\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\;
                             -- The following section was transformed from the .NET statement below:
-                            -- array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408);
+                            -- array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8);
                             -- 
                             -- Starting state machine invocation for the following method: Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(System.Object)
                             case \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).invocationIndex\ is 
                                 when 0 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.0\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.0\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.0\ <= true;
                                 when 1 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.1\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.1\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.1\ <= true;
                                 when 2 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.2\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.2\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.2\ <= true;
                                 when 3 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.3\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.3\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.3\ <= true;
                                 when 4 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.4\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.4\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.4\ <= true;
                                 when 5 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.5\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.5\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.5\ <= true;
                                 when 6 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.6\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.6\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.6\ <= true;
                                 when 7 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.7\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.7\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.7\ <= true;
                                 when 8 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.8\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.8\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.8\ <= true;
                                 when 9 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.9\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.9\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.9\ <= true;
                                 when 10 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.10\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.10\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.10\ <= true;
                                 when 11 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.11\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.11\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.11\ <= true;
                                 when 12 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.12\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.12\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.12\ <= true;
                                 when 13 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.13\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.13\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.13\ <= true;
                                 when 14 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.14\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.14\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.14\ <= true;
                                 when 15 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.15\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.15\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.15\ <= true;
                                 when 16 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.16\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.16\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.16\ <= true;
                                 when 17 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.17\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.17\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.17\ <= true;
                                 when 18 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.18\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.18\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.18\ <= true;
                                 when 19 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.19\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.19\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.19\ <= true;
                                 when 20 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.20\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.20\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.20\ <= true;
                                 when 21 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.21\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.21\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.21\ <= true;
                                 when 22 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.22\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.22\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.22\ <= true;
                                 when 23 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.23\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.23\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.23\ <= true;
                                 when 24 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.24\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object0e74978d0814506ff4d6311ff361056d538ec9dfe5338ae63d72cc05f0e1f408\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).inputObject.parameter.Out.24\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.24\ <= true;
                             end case;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).invocationIndex\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object).invocationIndex\ + 1;
@@ -15776,7 +15776,7 @@ begin
                         -- 
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num3\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((long)(num3) < (long)(this.iterationsPerTask)) {
+                        -- while ((long)(num3) < this.iterationsPerTask) {
                         -- 	uint num4;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
@@ -15807,7 +15807,7 @@ begin
                     when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_2\.
                         -- The while loop's condition:
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\ := SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num3\), 64) < signed(SmartResize((\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\), 64));
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\ := SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num3\), 64) < \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\;
                         if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -16114,7 +16114,7 @@ begin
                         -- 
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num3\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((long)(num3) < (long)(this.iterationsPerTask)) {
+                        -- while ((long)(num3) < this.iterationsPerTask) {
                         -- 	uint num4;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
@@ -16145,7 +16145,7 @@ begin
                     when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_3\ => 
                         -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_2\.
                         -- The while loop's condition:
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\ := SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num3\), 64) < signed(SmartResize((\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\), 64));
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\ := SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num3\), 64) < \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\;
                         if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -16452,7 +16452,7 @@ begin
                         -- 
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num3\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((long)(num3) < (long)(this.iterationsPerTask)) {
+                        -- while ((long)(num3) < this.iterationsPerTask) {
                         -- 	uint num4;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
@@ -16483,7 +16483,7 @@ begin
                     when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_3\ => 
                         -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_2\.
                         -- The while loop's condition:
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\ := SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num3\), 64) < signed(SmartResize((\System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\), 64));
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\ := SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num3\), 64) < \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\;
                         if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -16670,9 +16670,9 @@ begin
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\: \unsigned32_Array\(0 to 77) := (others => to_unsigned(0, 32));
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\: \unsigned32_Array\(0 to 122) := (others => to_unsigned(0, 32));
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).invocationIndex\: integer range 0 to 2 := 0;
@@ -16705,7 +16705,7 @@ begin
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\ := to_unsigned(0, 32);
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\ := (others => '0');
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\ := (others => '0');
-                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ := to_signed(0, 64);
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\ := (others => to_unsigned(0, 32));
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ := to_unsigned(0, 32);
@@ -16785,29 +16785,29 @@ begin
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::randomSeed\ := SmartResize(ConvertStdLogicVectorToUInt32(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- <>c__DisplayClass4_.iterationsPerTask = num / 78u;
+                            -- <>c__DisplayClass4_.iterationsPerTask = (long)num / 123L;
                             -- 
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_6\ => 
-                        -- Waiting for the result to appear in \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ (have to wait 9 clock cycles in this state).
+                        -- Waiting for the result to appear in \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ (have to wait 27 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
+                        if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(27, 32)) then 
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\;
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\ / to_unsigned(78, 32);
-                        -- Clock cycles needed to complete this state (approximation): 9
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ := signed(SmartResize(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\, 64)) / to_signed(123, 64);
+                        -- Clock cycles needed to complete this state (approximation): 27
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\ => 
-                        \System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\;
+                        \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- Task<uint>[] array;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new Task<uint>[78];
+                        -- array = new Task<uint>[123];
                         -- 
                         \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\ := (others => to_unsigned(0, 32));
                         -- The following section was transformed from the .NET statement below:
@@ -16818,7 +16818,7 @@ begin
                         -- 
                         \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((long)(num2) < 78L) {
+                        -- while ((long)(num2) < 123L) {
                         -- 	array [num2] = Task.Factory.StartNew (<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<EstimatePi>b__0), num2);
                         -- 	num2 = (uint)((long)(num2) + 1L);
                         -- }
@@ -16829,7 +16829,7 @@ begin
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_8\ => 
                         -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\.
                         -- The while loop's condition:
-                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\ := signed(SmartResize((\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\), 64)) < to_signed(78, 64);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\ := signed(SmartResize((\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\), 64)) < to_signed(123, 64);
                         if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -16897,7 +16897,7 @@ begin
                             -- 
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num4\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- while (num4 < 78) {
+                            -- while (num4 < 123) {
                             -- 	num3 = num3 + array [num4].Result;
                             -- 	num4 = num4 + 1;
                             -- }
@@ -16909,7 +16909,7 @@ begin
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_11\ => 
                         -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_10\.
                         -- The while loop's condition:
-                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num4\ < to_signed(78, 32);
+                        \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num4\ < to_signed(123, 32);
                         if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.3\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -24031,8 +24031,8 @@ set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifi
 set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.4*}]
 set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.7*}]
 set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.7*}]
-set_multicycle_path 9 -setup -to [get_cells -hierarchical {*MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0*}]
-set_multicycle_path 8 -hold -to [get_cells -hierarchical {*MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0*}]
+set_multicycle_path 27 -setup -to [get_cells -hierarchical {*MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0*}]
+set_multicycle_path 26 -hold -to [get_cells -hierarchical {*MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0*}]
 set_multicycle_path 9 -setup -to [get_cells -hierarchical {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]
 set_multicycle_path 8 -hold -to [get_cells -hierarchical {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]
 set_multicycle_path 9 -setup -to [get_cells -hierarchical {*PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4*}]

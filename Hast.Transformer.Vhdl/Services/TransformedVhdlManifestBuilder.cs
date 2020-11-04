@@ -212,7 +212,7 @@ namespace Hast.Transformer.Vhdl.Services
                         }));
                 }
             }
-            else if (transformationContext.DeviceDriver.DeviceManifest.ToolChainName == CommonToolChainNames.Vivado)
+            else if (transformationContext.DeviceDriver.DeviceManifest.UsesVivadoInToolChain())
             {
                 // Adding multi-cycle path constraints for Vivado.
 
@@ -377,7 +377,7 @@ namespace Hast.Transformer.Vhdl.Services
 
             var traverseTo = node.Children;
 
-            // If for debugging you want to make the below processing serial instead of it running in parallel then 
+            // If for debugging you want to make the below processing serial instead of it running in parallel then
             // add .Result to every transformation call and wrap them into Task.FromResult() methods.
             switch (node.NodeType)
             {
@@ -422,7 +422,7 @@ namespace Hast.Transformer.Vhdl.Services
                             }
 
                             // Records need to be created only for those types that are neither display classes, nor
-                            // hardware entry point types or static types 
+                            // hardware entry point types or static types
                             if (!typeDeclaration.GetFullName().IsDisplayOrClosureClassName() &&
                                 !typeDeclaration.Members.Any(member => member.IsHardwareEntryPointMember()) &&
                                 !typeDeclaration.Modifiers.HasFlag(Modifiers.Static))

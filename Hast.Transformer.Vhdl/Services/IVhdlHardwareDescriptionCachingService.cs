@@ -9,6 +9,5 @@ namespace Hast.Transformer.Vhdl.Services
     {
         Task<VhdlHardwareDescription> GetHardwareDescription(string cacheKey);
         Task SetHardwareDescription(string cacheKey, VhdlHardwareDescription hardwareDescription);
-        string GetCacheKey(ITransformationContext transformationContext);
     }
 }

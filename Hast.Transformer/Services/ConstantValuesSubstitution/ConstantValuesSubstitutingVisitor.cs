@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -300,16 +300,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         private bool TrySubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
-            // If this is a value holder on the left side of an assignment then nothing to do. If it's in a while
-            // statement then it can't be safely substituted (due to e.g. loop variables). Code with goto is hard to
-            // follow so we're not trying to do const substitution for those yet (except for constants that are handled
-            // separately in VisitChildren()).
-            if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression) ||
-                ConstantValueSubstitutionHelper.IsInWhile(expression) ||
-                expression.FindFirstParentOfType<MethodDeclaration>()?.FindFirstChildOfType<GotoStatement>() != null)
-            {
-                return false;
-            }
+            // If this is a value holder on the left side of an assignment then nothing to do.
+            if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression)) return false;
 
             // If the value holder is inside a unary operator that can mutate its state then it can't be substituted.
             var mutatingUnaryOperators = new[]
@@ -324,16 +316,26 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return false;
             }
 
+            // If the expression is in a while statement then most of the time it can't be safely substituted (due to
+            // e.g. loop variables). Code with goto is hard to follow so we're not trying to do const substitution for
+            // those yet (except for constants that are handled separately in VisitChildren()) most of the time either.
+            var isHardToFollow =
+                ConstantValueSubstitutionHelper.IsInWhile(expression) ||
+                expression.FindFirstParentOfType<MethodDeclaration>()?.FindFirstChildOfType<GotoStatement>() != null;
+
+            PrimitiveExpression valueExpression = null;
+
             // First checking if there is a substitution for the expression; if not then if it's a member reference
             // then check whether there is a global substitution for the member.
-            if (_constantValuesTable.RetrieveAndDeleteConstantValue(expression, out PrimitiveExpression valueExpression) ||
+            if ((!isHardToFollow && _constantValuesTable.RetrieveAndDeleteConstantValue(expression, out valueExpression)) ||
                 expression.Is<MemberReferenceExpression>(memberReferenceExpression =>
                 {
                     var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
 
                     if (member == null) return false;
 
-                    if (_constantValuesTable.RetrieveAndDeleteConstantValue(member, out valueExpression))
+                    if ((!isHardToFollow || member.IsReadOnlyMember()) &&
+                        _constantValuesTable.RetrieveAndDeleteConstantValue(member, out valueExpression))
                     {
                         return true;
                     }
@@ -347,9 +349,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         while (
                             !_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
                                 .TryGetValue(currentMemberReference.Target.GetFullName(), out constructorReference) &&
-                            currentMemberReference.Target is MemberReferenceExpression)
+                            currentMemberReference.Target is MemberReferenceExpression currentMemberReferenceTarget)
                         {
-                            currentMemberReference = (MemberReferenceExpression)currentMemberReference.Target;
+                            currentMemberReference = currentMemberReferenceTarget;
                         }
 
                         if (constructorReference == null) return false;

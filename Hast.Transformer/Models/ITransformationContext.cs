@@ -10,7 +10,7 @@ namespace Hast.Transformer.Models
     public interface ITransformationContext
     {
         /// <summary>
-        /// A string suitable to identify the given transformation.
+        /// A hash string suitable to identify the given transformation.
         /// </summary>
         string Id { get; }
 
@@ -35,7 +35,7 @@ namespace Hast.Transformer.Models
         IKnownTypeLookupTable KnownTypeLookupTable { get; }
 
         /// <summary>
-        /// Container for the sizes of statically sized arrays. 
+        /// Container for the sizes of statically sized arrays.
         /// </summary>
         IArraySizeHolder ArraySizeHolder { get; }
 

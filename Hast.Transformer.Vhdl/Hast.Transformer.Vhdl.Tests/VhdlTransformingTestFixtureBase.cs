@@ -49,7 +49,7 @@ namespace Hast.Transformer.Vhdl.Tests
 
         protected virtual async Task<VhdlHardwareDescription> TransformAssembliesToVhdl(
             ITransformer transformer,
-            IEnumerable<Assembly> assemblies,
+            IList<Assembly> assemblies,
             Action<HardwareGenerationConfiguration> configurationModifier = null,
             string deviceName = null)
         {

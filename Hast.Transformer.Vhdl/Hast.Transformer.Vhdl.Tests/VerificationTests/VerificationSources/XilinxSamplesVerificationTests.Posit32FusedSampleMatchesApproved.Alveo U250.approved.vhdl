@@ -5632,7 +5632,7 @@ begin
                         -- 
                         \Quire::.ctor(UInt64[],UInt16).0.num\ := to_signed(8, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num) < (int)(@this.SegmentCount)) {
+                        -- while ((int)(num) < 8) {
                         -- 	@this.Segments [num] = 0uL;
                         -- 	num = num + 1;
                         -- }
@@ -5643,7 +5643,7 @@ begin
                     when \Quire::.ctor(UInt64[],UInt16).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \Quire::.ctor(UInt64[],UInt16).0._State_2\.
                         -- The while loop's condition:
-                        \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.0\ := (\Quire::.ctor(UInt64[],UInt16).0.num\) < signed(SmartResize((\Quire::.ctor(UInt64[],UInt16).0.this\.\SegmentCount\), 32));
+                        \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.0\ := (\Quire::.ctor(UInt64[],UInt16).0.num\) < to_signed(8, 32);
                         if (\Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
@@ -16333,7 +16333,7 @@ begin
                         -- 
                         \Quire::.ctor(UInt64[],UInt16).0.num\ := to_signed(8, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num) < (int)(@this.SegmentCount)) {
+                        -- while ((int)(num) < 8) {
                         -- 	@this.Segments [num] = 0uL;
                         -- 	num = num + 1;
                         -- }
@@ -16344,7 +16344,7 @@ begin
                     when \Quire::.ctor(UInt64[],UInt16).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \Quire::.ctor(UInt64[],UInt16).0._State_2\.
                         -- The while loop's condition:
-                        \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.0\ := (\Quire::.ctor(UInt64[],UInt16).0.num\) < signed(SmartResize((\Quire::.ctor(UInt64[],UInt16).0.this\.\SegmentCount\), 32));
+                        \Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.0\ := (\Quire::.ctor(UInt64[],UInt16).0.num\) < to_signed(8, 32);
                         if (\Quire::.ctor(UInt64[],UInt16).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
