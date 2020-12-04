@@ -47,8 +47,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         /// Match the input VHDL source against an existing approved source file. This quickly tells if something changed.
         /// </summary>
         /// <remarks>
-        /// Note that the two methods here can't be DRY because even with UseCallerLocation() Shouldly would loose
-        /// track of where the verification file is.
+        /// <para>Note that the two methods here can't be DRY because even with UseCallerLocation() Shouldly would loose
+        /// track of where the verification file is.</para>
         /// </remarks>
         public static void ShouldMatchApprovedWithVhdlConfiguration(this string vhdlSource) =>
             vhdlSource.ShouldMatchApproved(configurationBuilder =>

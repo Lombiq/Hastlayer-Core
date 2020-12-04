@@ -40,9 +40,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// Generates VHDL code that can be used when the data type is referenced e.g. in a variable declaration.
         /// </summary>
         /// <remarks>
-        /// This is necessary because enums are declared and used in variables differently. Note that this is a different
+        /// <para>This is necessary because enums are declared and used in variables differently. Note that this is a different
         /// concept from <see cref="DataObjectReference"/> which is about referencing data objects (e.g. signals), not
-        /// data types.
+        /// data types.</para>
         /// </remarks>
         public virtual DataType ToReference() =>
             new DataTypeReference(this, vhdlGenerationOptions => vhdlGenerationOptions.NameShortener(Name));

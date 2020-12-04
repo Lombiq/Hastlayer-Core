@@ -5,7 +5,7 @@ namespace Hast.VhdlBuilder.Representation
     /// Represents an entity in a VHDL source.
     /// </summary>
     /// <remarks>
-    /// It's basically anything in VHDL.
+    /// <para>It's basically anything in VHDL.</para>
     /// </remarks>
     public interface IVhdlElement
     {

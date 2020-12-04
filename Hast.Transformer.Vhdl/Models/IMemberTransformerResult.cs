@@ -7,8 +7,8 @@ namespace Hast.Transformer.Vhdl.Models
     /// The result that member transformers return.
     /// </summary>
     /// <remarks>
-    /// Declarations and Body wouldn't be needed, since they can be generated from the state machine. However by
-    /// requiring transformers to build them the process can be parallelized better.
+    /// <para>Declarations and Body wouldn't be needed, since they can be generated from the state machine. However by
+    /// requiring transformers to build them the process can be parallelized better.</para>
     /// </remarks>
     public interface IMemberTransformerResult
     {

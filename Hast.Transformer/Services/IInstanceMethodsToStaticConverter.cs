@@ -8,7 +8,7 @@ namespace Hast.Transformer.Services
     /// needed so instance methods are easier to transform.
     /// </summary>
     /// <remarks>
-    /// The conversion is as following:
+    /// <para>The conversion is as following:
     /// 
     /// Original method for example:
     /// <c>
@@ -27,7 +27,7 @@ namespace Hast.Transformer.Services
     /// }
     /// </c>
     /// 
-    /// Consumer code will also be altered accordingly.
+    /// Consumer code will also be altered accordingly.</para>
     /// </remarks>
     public interface IInstanceMethodsToStaticConverter : IDependency
     {
