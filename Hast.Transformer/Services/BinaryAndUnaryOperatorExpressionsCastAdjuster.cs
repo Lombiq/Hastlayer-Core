@@ -192,7 +192,6 @@ namespace Hast.Transformer.Services
                 if (binaryOperatorExpression.Operator == BinaryOperatorType.ShiftLeft ||
                     binaryOperatorExpression.Operator == BinaryOperatorType.ShiftRight)
                 {
-
                     if (!new[] { longFullName, ulongFullName, intFullName, uintFullName }.Contains(leftTypeFullName))
                     {
                         replaceLeft(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32));

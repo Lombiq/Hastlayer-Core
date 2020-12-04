@@ -424,7 +424,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is MemberReferenceExpression memberReference)
             {
-
                 // Handling array.Length with the VHDL length attribute.
                 if (memberReference.IsArrayLengthAccess())
                 {

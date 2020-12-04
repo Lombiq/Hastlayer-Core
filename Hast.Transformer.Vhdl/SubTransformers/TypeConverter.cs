@@ -86,7 +86,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (type is PrimitiveType) return ConvertPrimitive(((PrimitiveType)type).KnownTypeCode);
             else if (type is ComposedType composedType)
             {
-
                 // For inner classes (member types) the BaseType will contain the actual type (in a strange way the 
                 // actual type will be the BaseType of itself...).
                 if (type.GetFullName() == composedType.BaseType.GetFullName())

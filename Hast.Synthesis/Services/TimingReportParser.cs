@@ -19,7 +19,6 @@ namespace Hast.Synthesis.Services
         {
             using (var csvReader = new CsvReader(reportReader, CsvConfiguration))
             {
-
                 csvReader.Configuration.Delimiter = "	";
                 csvReader.Configuration.CultureInfo = CultureInfo.InvariantCulture;
 
