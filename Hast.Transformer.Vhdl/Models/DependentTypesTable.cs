@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Hast.VhdlBuilder.Representation.Declaration;
 
@@ -37,13 +37,9 @@ namespace Hast.Transformer.Vhdl.Models
         }
 
         /// <summary>
-        /// Fetch all types stored in this table.
+        /// Gets all types stored in this table.
         /// </summary>
-        /// <returns></returns>
-        public IEnumerable<DataType> GetTypes()
-        {
-            return _dependencies.Keys;
-        }
+        public IEnumerable<DataType> Types => _dependencies.Keys;
 
         /// <summary>
         /// Fetch the dependencies of the given type.

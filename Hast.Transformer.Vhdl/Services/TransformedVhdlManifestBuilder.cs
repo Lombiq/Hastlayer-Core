@@ -1,4 +1,4 @@
-﻿using Hast.Common.Extensions;
+using Hast.Common.Extensions;
 using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
@@ -160,7 +160,7 @@ namespace Hast.Transformer.Vhdl.Services
             var architectureComponentResults = transformerResults.SelectMany(transformerResult => transformerResult.ArchitectureComponentResults);
             foreach (var architectureComponentResult in architectureComponentResults)
             {
-                if (architectureComponentResult.ArchitectureComponent.DependentTypesTable.GetTypes().Any())
+                if (architectureComponentResult.ArchitectureComponent.DependentTypesTable.Types.Any())
                 {
                     dependentTypesTables.Add(architectureComponentResult.ArchitectureComponent.DependentTypesTable);
                 }
@@ -243,7 +243,7 @@ namespace Hast.Transformer.Vhdl.Services
             // of a record type) than the type depending on the other one should come after the other one in the code
             // file.
             var allDependentTypes = dependentTypesTables
-                .SelectMany(table => table.GetTypes())
+                .SelectMany(table => table.Types)
                 .GroupBy(type => type.Name) // A dependency relation can be present multiple times, so need to group first.
                 .ToDictionary(group => group.Key, group => group.First());
             var sortedDependentTypes = TopologicalSortHelper.Sort(
