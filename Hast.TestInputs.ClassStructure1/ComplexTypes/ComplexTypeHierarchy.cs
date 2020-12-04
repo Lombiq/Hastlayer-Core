@@ -1,10 +1,10 @@
-﻿namespace Hast.TestInputs.ClassStructure1.ComplexTypes
+namespace Hast.TestInputs.ClassStructure1.ComplexTypes
 {
     /// <summary>
     /// A type demonstrating a "complex" type hierarchy with base classes and interfaces.
     /// </summary>
     // Class inheritance is not yet supported.
-    public class ComplexTypeHierarchy : /*BaseClass,*/ IInterface1, IInterface2
+    public sealed class ComplexTypeHierarchy : /*BaseClass,*/ IInterface1, IInterface2
     {
         // Explicit interface implementation.
         void IInterface1.Interface1Method1()
