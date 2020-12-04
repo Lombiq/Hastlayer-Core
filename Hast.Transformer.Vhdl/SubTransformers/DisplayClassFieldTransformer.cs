@@ -40,7 +40,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // Nothing to do with "__this" fields of DisplayClasses that reference the parent class's object
                     // like: public PrimeCalculator <>4__this;
                     !field.Variables.Any(variable => variable.Name.EndsWith("__this", StringComparison.Ordinal)) &&
-                    // Roslyn adds a field like public Func<object, bool> <>9__0; with the same argument and return types 
+                    // Roslyn adds a field like public Func<object, bool> <>9__0; with the same argument and return types
                     // as the original lambda. Nothing needs to be done with this.
                     !(field.ReturnType.Is<SimpleType>(simple => simple.GetActualType().IsFunc())) &&
                     // Sometimes the compiler adds a static field containing an object of the parent class as below:

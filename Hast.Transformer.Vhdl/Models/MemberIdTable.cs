@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Hast.Transformer.Vhdl.Models
 {
     /// <summary>
-    /// Maps class members to generated IDs that the hardware-implemented logic uses. A member access in .NET is thus 
+    /// Maps class members to generated IDs that the hardware-implemented logic uses. A member access in .NET is thus
     /// transferred as a call to a member ID and this member will determine which part of the logic will execute.
     /// </summary>
     public class MemberIdTable

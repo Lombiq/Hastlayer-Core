@@ -228,8 +228,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 var expression = fromExpression;
 
-                // Resizing needs to happen before signed() otherwise casting an unsigned to signed can result in data 
-                // loss due to the range change. 
+                // Resizing needs to happen before signed() otherwise casting an unsigned to signed can result in data
+                // loss due to the range change.
                 if (fromSize != toSize)
                 {
                     expression = CreateResizeExpression(fromExpression);

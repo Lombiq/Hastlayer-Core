@@ -19,11 +19,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         }
 
         public UnconstrainedArrayInstantiation CreateArrayInstantiation(
-            ArrayCreateExpression expression, 
+            ArrayCreateExpression expression,
             IVhdlTransformationContext context)
         {
             return ArrayHelper.CreateArrayInstantiation(
-                _typeConverter.ConvertAstType(expression.Type, context), 
+                _typeConverter.ConvertAstType(expression.Type, context),
                 expression.GetStaticLength());
         }
 
@@ -32,8 +32,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (expression.Arguments.Any() && expression.Arguments.Count != 1)
             {
                 // For the sake of maximal compatibility with synthesis tools we don't allow multi-dimensional
-                // arrays, see: http://vhdl.renerta.com/mobile/source/vhd00006.htm "Synthesis tools do generally not 
-                // support multidimensional arrays. The only exceptions to this are two-dimensional "vectors of 
+                // arrays, see: http://vhdl.renerta.com/mobile/source/vhd00006.htm "Synthesis tools do generally not
+                // support multidimensional arrays. The only exceptions to this are two-dimensional "vectors of
                 // vectors". Some synthesis tools allow two-dimensional arrays."
                 ExceptionHelper.ThrowOnlySingleDimensionalArraysSupporterException(expression);
             }
@@ -54,7 +54,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 context.Scope.Warnings.AddWarning(
                     "NonPrimitiveArrayTooLarge",
                     "You've created a large array (length: " +
-                        length + 
+                        length +
                         ") with non-primitive items (type: " +
                         elementType.GetFullName() +
                         "). The resulting hardware implementation might not fit on the FPGA and/or will take a very long time to complete. Consider using a smaller array (below 500 items)."

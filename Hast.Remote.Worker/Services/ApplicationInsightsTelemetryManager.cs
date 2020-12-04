@@ -70,7 +70,7 @@ namespace Hast.Remote.Worker.Services
                 InstrumentationKey = key,
                 EnableDebugLogger = true,
             };
-                
+
             services.AddApplicationInsightsTelemetryWorkerService(options);
 
             services.AddSingleton<ITelemetryInitializer, HttpDependenciesParsingTelemetryInitializer>();

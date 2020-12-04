@@ -13,7 +13,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public List<CaseWhen> Whens { get; set; } = new List<CaseWhen>();
 
         /// <summary>
-        /// Gets or sets a value indicating whether the case expression is a matching case (case?) new to VHDL 2008. 
+        /// Gets or sets a value indicating whether the case expression is a matching case (case?) new to VHDL 2008.
         /// </summary>
         public bool IsMatching { get; set; }
 

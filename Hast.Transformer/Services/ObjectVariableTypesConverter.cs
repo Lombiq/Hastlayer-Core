@@ -32,8 +32,8 @@ namespace Hast.Transformer.Services
                     // added to the lambda's calling method:
                     // Task.Factory.StartNew ((Func<object, bool>)this.<ParallelizedArePrimeNumbers>b__9_0, num4)
                     // This will remain, despite the Func's type now correctly being e.g. Func<uint, bool>.
-                    // Note that the method's full name will contain the original object parameter since the 
-                    // MemberResolveResult will still the have original parameters. This will be an aesthetic issue 
+                    // Note that the method's full name will contain the original object parameter since the
+                    // MemberResolveResult will still the have original parameters. This will be an aesthetic issue
                     // only though: Nothing else depends on the parameters being correct here. If we'd change these
                     // then the whole MemberResolveResult would need to be recreated (since parameter types, as well as
                     // the list of parameters is read-only), not just here but in all the references to this method too.

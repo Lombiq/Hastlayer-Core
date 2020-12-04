@@ -38,7 +38,7 @@ namespace Hast.Transformer.Services
                 {
                     // Changing an expression like
                     //      ArrayModule.ZeroCreate<Task<uint>> (280)
-                    // into 
+                    // into
                     //      new Task<uint>[280]
 
                     var arrayCreateExpression = new ArrayCreateExpression();
@@ -63,7 +63,7 @@ namespace Hast.Transformer.Services
                     {
                         // Changing an expression like
                         //      ArrayModule.Get<Task<uint>> (array, i)
-                        // into 
+                        // into
                         //      array[i]
 
                         invocationExpression.ReplaceWith(indexerExpression);
@@ -72,7 +72,7 @@ namespace Hast.Transformer.Services
                     {
                         // Changing an expression like
                         //      Array.set myArray i 5
-                        // into 
+                        // into
                         //      array[i] = 5
 
                         var assignment = new AssignmentExpression(indexerExpression, arguments[2].Clone());

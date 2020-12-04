@@ -117,10 +117,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 .TransformParallelBinaryOperatorExpressions(binaryOperations, context);
 
             // If no new states were added, i.e. the operation wasn't a multi-cycle one with wait states, then we add
-            // a new state here: this is needed because accessing the results (since they are assigned to signals) 
+            // a new state here: this is needed because accessing the results (since they are assigned to signals)
             // should always happen in a separate state.
             // A state may have been added already because the state before the SIMD operations would otherwise go over
-            // a clock cycle, but in that case we still need to add another one, so the fact alone that there is a new 
+            // a clock cycle, but in that case we still need to add another one, so the fact alone that there is a new
             // state is not enough; checking if this is an empty state instead.
             var currentBlock = context.Scope.CurrentBlock;
             if (stateMachine.States[currentBlock.StateMachineStateIndex].Body.Body.Any())

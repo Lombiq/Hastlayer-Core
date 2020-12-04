@@ -8,7 +8,7 @@ namespace Hast.Transformer.Services
 {
     // Maybe this would be better suitable in Hast.Transformer.Vhdl since it might not be interesting for every hardware
     // description language. But then we'd need to run IInstanceMethodsToStaticConverter again to make constructor
-    // methods static too. 
+    // methods static too.
     public class ConstructorsToMethodsConverter : IConstructorsToMethodsConverter
     {
         public void ConvertConstructorsToMethods(SyntaxTree syntaxTree)
@@ -38,7 +38,7 @@ namespace Hast.Transformer.Services
                     body: constructorDeclaration.Body,
                     returnType: new PrimitiveType("void"));
 
-                // If the type has no base type then remove the automatically added base.ctor() call from the 
+                // If the type has no base type then remove the automatically added base.ctor() call from the
                 // constructor as it won't reference anything transformable.
                 if (!constructorDeclaration.FindFirstParentTypeDeclaration().BaseTypes.Any())
                 {

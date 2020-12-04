@@ -60,7 +60,7 @@ namespace Hast.Transformer.Services
                     conditionalExpression = newConditionalExpression;
                 }
 
-                // Enclosing the assignments into BlockStatements because this is also what normal if-else statements 
+                // Enclosing the assignments into BlockStatements because this is also what normal if-else statements
                 // are decompiled into. This is also necessary to establish a variable scope.
                 var trueAssignment = assignment.Clone<AssignmentExpression>();
                 trueAssignment.Right = conditionalExpression.TrueExpression.Clone();

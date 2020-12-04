@@ -209,7 +209,7 @@ namespace Hast.Remote.Worker
                                             }
                                             catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
                                             {
-                                                // We don't want to show the stack trace to the user, just exception 
+                                                // We don't want to show the stack trace to the user, just exception
                                                 // message, so building one by iterating all the nested exceptions.
 
                                                 var currentException = ex;
@@ -296,7 +296,7 @@ namespace Hast.Remote.Worker
 
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    // Waiting a bit between cycles not to have excessive Blob Storage usage due to polling (otherwise 
+                    // Waiting a bit between cycles not to have excessive Blob Storage usage due to polling (otherwise
                     // it's not an issue, this loop barely uses any CPU).
                     await Task.Delay(1000);
                     _restartCount = 0;

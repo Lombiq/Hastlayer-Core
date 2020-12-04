@@ -51,7 +51,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             vhdlGenerationOptions.NameShortener(Name);
 
         /// <summary>
-        /// Indicated whether this data type is among the types that can be assigned to an array as a literal inside 
+        /// Indicated whether this data type is among the types that can be assigned to an array as a literal inside
         /// double quotes.
         /// </summary>
         public virtual bool IsLiteralArrayType() =>

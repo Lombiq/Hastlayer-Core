@@ -26,7 +26,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public NullableRecord CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
         {
-            // Using transient caching because when processing an assembly all references to a class or struct will 
+            // Using transient caching because when processing an assembly all references to a class or struct will
             // result in the record being composed.
             var typeFullName = typeDeclaration.GetFullName();
 
@@ -34,7 +34,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var recordName = typeFullName.ToExtendedVhdlId();
 
-                // Process only those fields that aren't backing fields of auto-properties (since those properties are 
+                // Process only those fields that aren't backing fields of auto-properties (since those properties are
                 // handled as properties).
                 var recordFields = typeDeclaration.Members
                     .Where(member =>

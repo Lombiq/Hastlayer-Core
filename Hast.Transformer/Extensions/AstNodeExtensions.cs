@@ -11,7 +11,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
     public static class AstNodeExtensions
     {
         /// <summary>
-        /// Retrieves the node's full name, including (if applicable) information about return type, type parameters, 
+        /// Retrieves the node's full name, including (if applicable) information about return type, type parameters,
         /// arguments...
         /// </summary>
         public static string GetFullName(this AstNode node)
@@ -137,7 +137,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         }
 
         /// <summary>
-        /// Retrieves the simple dot-delimited name of a type, including the parent types' and the wrapping namespace's 
+        /// Retrieves the simple dot-delimited name of a type, including the parent types' and the wrapping namespace's
         /// name.
         /// </summary>
         public static string GetSimpleName(this AstNode node) =>

@@ -9,7 +9,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     public interface IArrayCreateExpressionTransformer : IDependency
     {
         UnconstrainedArrayInstantiation CreateArrayInstantiation(
-            ArrayCreateExpression expression, 
+            ArrayCreateExpression expression,
             IVhdlTransformationContext context);
 
         IVhdlElement Transform(ArrayCreateExpression expression, ISubTransformerContext context);

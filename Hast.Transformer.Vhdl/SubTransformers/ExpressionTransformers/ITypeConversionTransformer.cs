@@ -22,7 +22,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     public interface ITypeConversionTransformer : IDependency
     {
         /// <summary>
-        /// In VHDL the operands of binary operations should have the same type, so we need to do a type conversion if 
+        /// In VHDL the operands of binary operations should have the same type, so we need to do a type conversion if
         /// necessary.
         /// </summary>
         IVhdlElement ImplementTypeConversionForBinaryExpression(
@@ -32,9 +32,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             ISubTransformerContext contex);
 
         IAssignmentTypeConversionResult ImplementTypeConversionForAssignment(
-            DataType fromType, 
-            DataType toType, 
-            IVhdlElement fromExpression, 
+            DataType fromType,
+            DataType toType,
+            IVhdlElement fromExpression,
             IDataObject toDataObject);
 
         ITypeConversionResult ImplementTypeConversion(DataType fromType, DataType toType, IVhdlElement fromExpression);

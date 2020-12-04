@@ -20,9 +20,9 @@ namespace Hast.Transformer
     public static class TransformerExtensions
     {
         public static Task<IHardwareDescription> Transform(
-            this ITransformer transformer, 
+            this ITransformer transformer,
             string sourceCode,
-            Language language, 
+            Language language,
             IHardwareGenerationConfiguration configuration)
         {
             CompilerResults result;

@@ -140,7 +140,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // the best option is to use aliases (instead of assigning back variables after every change).
                         // This is not perfect though since if the now alias variable is assigned to then that won't
                         // work, see the exception above.
-                        // This might not be needed because of UnneededReferenceVariablesRemover. 
+                        // This might not be needed because of UnneededReferenceVariablesRemover.
 
                         // Switching the left variable out with an alias so it'll have reference-like behavior.
 
@@ -223,7 +223,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
                 else
                 {
-                    // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will 
+                    // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will
                     // be like following: <>c__DisplayClass4_ = new <>c__DisplayClass4_0();
                     string rightObjectFullName;
                     if (assignment.Right is ObjectCreateExpression rightObjectCreateExpression &&
@@ -318,15 +318,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // Replacing decimal comma to decimal dot.
                 if (vhdlType.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
 
-                // If a constant value of type real doesn't contain a decimal separator then it will be detected as 
+                // If a constant value of type real doesn't contain a decimal separator then it will be detected as
                 // integer and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
                 if (vhdlType == KnownDataTypes.Real && !valueString.Contains('.', StringComparison.Ordinal))
                 {
                     valueString += ".0";
                 }
 
-                // The to_signed() and to_unsigned() functions expect signed integer arguments (range: -2147483648 
-                // to +2147483647). Thus if the literal is larger than an integer we need to use the binary notation 
+                // The to_signed() and to_unsigned() functions expect signed integer arguments (range: -2147483648
+                // to +2147483647). Thus if the literal is larger than an integer we need to use the binary notation
                 // without these functions.
                 if (vhdlType.Name == KnownDataTypes.Int8.Name || vhdlType.Name == KnownDataTypes.UInt8.Name)
                 {
@@ -489,7 +489,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
                     else
                     {
-                        // We know that we've already handled the target so it stores the result objects, so just need 
+                        // We know that we've already handled the target so it stores the result objects, so just need
                         // to use them directly.
                         return Transform(memberReference.Target, context);
                     }
@@ -504,10 +504,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is UnaryOperatorExpression unary)
             {
-                // Increment/decrement unary operators that are in their own statements are compiled into binary operators 
+                // Increment/decrement unary operators that are in their own statements are compiled into binary operators
                 // (e.g. i++ will be i = i + 1) so we don't have to care about those.
 
-                // Since unary operations can also take significant time (but they can't be multi-cycle) to complete 
+                // Since unary operations can also take significant time (but they can't be multi-cycle) to complete
                 // they're also assigned to result variables as with binary operator expressions.
 
                 var expressionType = _typeConverter
@@ -535,7 +535,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     case UnaryOperatorType.Not:
                     case UnaryOperatorType.BitNot:
                         // In VHDL there is no boolean negation operator, just the not() function. This will bitwise
-                        // negate the value, so for bools it will work as the .NET NOT operator, for other types as a 
+                        // negate the value, so for bools it will work as the .NET NOT operator, for other types as a
                         // bitwise NOT.
                         transformedOperation = new Invocation("not", transformedExpression);
 
@@ -720,7 +720,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is DirectionExpression directionExpression)
             {
-                // DirectionExpressions like ref and out modifiers on method invocation arguments don't need to be 
+                // DirectionExpressions like ref and out modifiers on method invocation arguments don't need to be
                 // handled specially: these are just out-flowing parameters.
                 return Transform(directionExpression.Expression, context);
             }

@@ -20,7 +20,7 @@ namespace Hast.VhdlBuilder.Representation
         }
 
         /// <summary>
-        /// The raw VHDL source code to add to the syntax tree. Can contain lazily evaluated parameters with the 
+        /// The raw VHDL source code to add to the syntax tree. Can contain lazily evaluated parameters with the
         /// <c>string.Format()</c> syntax.
         /// </summary>
         /// <param name="source"></param>

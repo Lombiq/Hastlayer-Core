@@ -27,7 +27,7 @@ namespace Hast.TestInputs.Invalid
             var array2 = new int[5];
             Array.Copy(array1, array2, input);
         }
-        
+
         public void UnsupportedImmutableArrayCreateRangeUsage()
         {
             var immutableArray1 = ImmutableArray.CreateRange(new[] { 1 });

@@ -23,10 +23,10 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public static IEnumerable<Variable> GetAllVariables(this IArchitectureComponent component) =>
             component.GlobalVariables.Union(component.LocalVariables);
 
-        public static IEnumerable<ParameterSignal> GetInParameterSignals(this IArchitectureComponent component) => 
+        public static IEnumerable<ParameterSignal> GetInParameterSignals(this IArchitectureComponent component) =>
             FilterParameterSignals(component.ExternallyDrivenSignals);
 
-        public static IEnumerable<ParameterSignal> GetOutParameterSignals(this IArchitectureComponent component) => 
+        public static IEnumerable<ParameterSignal> GetOutParameterSignals(this IArchitectureComponent component) =>
             FilterParameterSignals(component.InternallyDrivenSignals);
 
         public static Variable CreateVariableWithNextUnusedIndexedName(
@@ -64,12 +64,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public static DataObjectReference CreateParameterSignalReference(
             this IArchitectureComponent component,
             string parameterName,
-            ParameterFlowDirection direction) => 
+            ParameterFlowDirection direction) =>
             ArchitectureComponentNameHelper
                 .CreateParameterSignalName(component.Name, parameterName, direction)
                 .ToVhdlSignalReference();
 
-        public static DataObjectReference CreateReturnSignalReference(this IArchitectureComponent component) => 
+        public static DataObjectReference CreateReturnSignalReference(this IArchitectureComponent component) =>
             ArchitectureComponentNameHelper
                 .CreateReturnSignalName(component.Name)
                 .ToVhdlSignalReference();
@@ -77,12 +77,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public static DataObjectReference CreateReturnSignalReferenceForTargetComponent(
             this IArchitectureComponent component,
             string targetMemberName,
-            int index) => 
+            int index) =>
             component
                 .CreatePrefixedSegmentedObjectName(targetMemberName, NameSuffixes.Return, index.ToString(CultureInfo.InvariantCulture))
                 .ToVhdlSignalReference();
 
-        private static IEnumerable<ParameterSignal> FilterParameterSignals(IEnumerable<Signal> signals) => 
+        private static IEnumerable<ParameterSignal> FilterParameterSignals(IEnumerable<Signal> signals) =>
             signals.Where(signal => signal is ParameterSignal).Cast<ParameterSignal>();
     }
 }

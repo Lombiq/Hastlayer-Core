@@ -23,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            // There are no block comments in VHDL prior to VHDL 2008 so if the code is not formatted there can't be 
+            // There are no block comments in VHDL prior to VHDL 2008 so if the code is not formatted there can't be
             // any comments.
             if (!vhdlGenerationOptions.FormatCode || (vhdlGenerationOptions.OmitComments && !CantBeOmitted))
             {

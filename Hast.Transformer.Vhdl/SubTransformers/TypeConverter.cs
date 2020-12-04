@@ -86,7 +86,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (type is PrimitiveType) return ConvertPrimitive(((PrimitiveType)type).KnownTypeCode);
             else if (type is ComposedType composedType)
             {
-                // For inner classes (member types) the BaseType will contain the actual type (in a strange way the 
+                // For inner classes (member types) the BaseType will contain the actual type (in a strange way the
                 // actual type will be the BaseType of itself...).
                 if (type.GetFullName() == composedType.BaseType.GetFullName())
                 {
@@ -254,7 +254,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return CreateArrayType(ConvertAstType(type.BaseType, context));
             }
 
-            // If the type is used in an array initialization and is a non-primitive type then the actual type will be 
+            // If the type is used in an array initialization and is a non-primitive type then the actual type will be
             // the only child.
             if (type.Children.SingleOrDefault() is SimpleType)
             {

@@ -15,7 +15,7 @@ namespace Hast.Transformer.Services
 
         private class BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor : DepthFirstAstVisitor
         {
-            // Note that while shifts are missing from the list under 
+            // Note that while shifts are missing from the list under
             // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions they still get
             // kind of a numeric promotion. See the page about bitwise and shift operators
             // (https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators)
@@ -67,7 +67,7 @@ namespace Hast.Transformer.Services
                 typeof(ulong).FullName
             };
 
-            // Those types that have arithmetic, relational and bitwise operations defined for them, see: 
+            // Those types that have arithmetic, relational and bitwise operations defined for them, see:
             // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#arithmetic-operators
             private static readonly string[] _numericTypesSupportingNumericPromotionOperations = new[]
             {
@@ -100,9 +100,9 @@ namespace Hast.Transformer.Services
                 _knownTypeLookupTable = knownTypeLookupTable;
             }
 
-            // Adding implicit casts as explained here: 
+            // Adding implicit casts as explained here:
             // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions
-            // Also handling shifts where the left operand needs to be u/int or u/long, see: 
+            // Also handling shifts where the left operand needs to be u/int or u/long, see:
             // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators
 
             public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
@@ -164,7 +164,7 @@ namespace Hast.Transformer.Services
                     }
 
                     // We should also put a cast around it if necessary so it produces the same type as before. But only
-                    // if this binary operator expression is not also in another binary operator expression, when it 
+                    // if this binary operator expression is not also in another binary operator expression, when it
                     // will be cast again.
                     var firstNonParenthesizedExpressionParent = binaryOperatorExpression.FindFirstNonParenthesizedExpressionParent();
                     if (!(firstNonParenthesizedExpressionParent is CastExpression) &&
@@ -187,7 +187,7 @@ namespace Hast.Transformer.Services
                 var uintFullName = typeof(uint).FullName;
                 var typesConvertedToLongForUint = new[] { typeof(sbyte).FullName, typeof(short).FullName, intFullName };
 
-                // First handling shifts which are different from other affected binary operators because only the 
+                // First handling shifts which are different from other affected binary operators because only the
                 // left operand is promoted, and only everything below int to int.
                 if (binaryOperatorExpression.Operator == BinaryOperatorType.ShiftLeft ||
                     binaryOperatorExpression.Operator == BinaryOperatorType.ShiftRight)
@@ -226,8 +226,8 @@ namespace Hast.Transformer.Services
                         else CastLeftToRight();
                     }
 
-                    // While not specified under the numeric promotions language reference section, this condition cares 
-                    // about types that define all operators in questions. E.g. an equality check between two uints 
+                    // While not specified under the numeric promotions language reference section, this condition cares
+                    // about types that define all operators in questions. E.g. an equality check between two uints
                     // shouldn't force an int cast.
                     else if (leftTypeFullName != rightTypeFullName ||
                         !_numericTypesSupportingNumericPromotionOperations.Contains(leftTypeFullName))

@@ -107,9 +107,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             currentBlock.Add(new Assignment
             {
                 AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
-                // CellIndex is conventionally the first invocation parameter. 
+                // CellIndex is conventionally the first invocation parameter.
                 Expression = _typeConversionTransformer.ImplementTypeConversion(
-                    invocationParameters[0].DataType, 
+                    invocationParameters[0].DataType,
                     SimpleMemoryTypes.CellIndexInternalSignalDataType, invocationParameters[0].Reference)
                     .ConvertedFromExpression
             });
@@ -327,7 +327,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         var taskArrayIdentifier =
                             ((IdentifierExpression)((InvocationExpression)waitTarget).Arguments.Single()).Identifier;
 
-                        // This array originally stored the Task<T> objects but now is just for the results, so we have 
+                        // This array originally stored the Task<T> objects but now is just for the results, so we have
                         // to move the results to its elements.
                         if (!context.Scope.TaskVariableNameToDisplayClassMethodMappings.TryGetValue(taskArrayIdentifier, out var targetMethod))
                         {

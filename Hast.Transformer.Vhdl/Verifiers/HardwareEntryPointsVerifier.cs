@@ -34,7 +34,7 @@ namespace Hast.Transformer.Vhdl.Verifiers
                 {
                     throw new NotSupportedException(
                         "Fields, properties and constructors are not supported in hardware entry point types. The type " +
-                        type.GetFullName() + " contains the following unsupported members: " + 
+                        type.GetFullName() + " contains the following unsupported members: " +
                         string.Join(", ", unsupportedMembers.Select(member => member.GetFullName())));
                 }
             }

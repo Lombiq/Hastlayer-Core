@@ -32,7 +32,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         public void SubstituteConstantValuesInSubTree(AstNode rootNode, bool reUseOriginalConstantValuesTable)
         {
-            // Gradually propagating the constant values through the syntax tree so this needs multiple passes. So 
+            // Gradually propagating the constant values through the syntax tree so this needs multiple passes. So
             // running them until nothing changes.
 
             ConstantValuesTable originalConstantValuesTable = null;

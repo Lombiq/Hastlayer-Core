@@ -7,7 +7,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
     internal class ConstantValuesTable
     {
-        // The outer dictionary is keyed by value holder names. In the inner dictionary the scope is the key and 
+        // The outer dictionary is keyed by value holder names. In the inner dictionary the scope is the key and
         // the value is the primitive value.
         private Dictionary<string, Dictionary<AstNode, PrimitiveExpression>> _valueHoldersAndValueDescriptors =
             new Dictionary<string, Dictionary<AstNode, PrimitiveExpression>>();

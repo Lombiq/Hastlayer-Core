@@ -15,7 +15,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// The <see cref="ITypeDeclarationLookupTable"/> instance corresponding to the current scope.
         /// </param>
         /// <param name="findLeftmostMemberIfRecursive">
-        /// If the member reference references another member (like <c>this.Property1.Property2.Property3</c>) then if 
+        /// If the member reference references another member (like <c>this.Property1.Property2.Property3</c>) then if
         /// set to <c>true</c> the member corresponding to the leftmost member (<c>this.Property1</c> in this case) will
         /// be looked up.
         /// </param>

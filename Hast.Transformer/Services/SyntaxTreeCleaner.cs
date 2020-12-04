@@ -26,7 +26,7 @@ namespace Hast.Transformer.Services
             var noIncludedMembers = !configuration.HardwareEntryPointMemberFullNames.Any() && !configuration.HardwareEntryPointMemberNamePrefixes.Any();
             var referencedNodesFlaggingVisitor = new ReferencedNodesFlaggingVisitor(typeDeclarationLookupTable, configuration);
 
-            // Starting with hardware entry point members we walk through the references to see which declarations are 
+            // Starting with hardware entry point members we walk through the references to see which declarations are
             // used (e.g. which methods are called at least once).
             foreach (var type in syntaxTree.GetAllTypeDeclarations())
             {
@@ -238,7 +238,7 @@ namespace Hast.Transformer.Services
 
                 var unreferencedMembers = typeDeclaration.Members.Where(member => !member.IsReferenced());
 
-                // Removing the type if it's empty but leaving if it was referenced as a type (which is with an 
+                // Removing the type if it's empty but leaving if it was referenced as a type (which is with an
                 // object create expression or a default value expression).
                 if (typeDeclaration.Members.Count == unreferencedMembers.Count() && !typeDeclaration.IsReferenced())
                 {

@@ -11,7 +11,7 @@ namespace Hast.DynamicTests.Tests
         // MinValue would cause a division by zero when the input is cast to smaller data types that's why MiValue + 1
         // is tested everywhere.
         // Testing at least an odd and even number too.
-        // Since there are no generic constraints for numeric types unfortunately the non-int ones need to be copied 
+        // Since there are no generic constraints for numeric types unfortunately the non-int ones need to be copied
         // (see: https://stackoverflow.com/questions/32664/is-there-a-constraint-that-restricts-my-generic-method-to-numeric-types).
 
         // ByteBinaryOperatorExpressionVariations(int.MinValue + 1) fails on ulong multiplication with:

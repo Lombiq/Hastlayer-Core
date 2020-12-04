@@ -4,7 +4,7 @@ using Hast.Common.Interfaces;
 namespace Hast.Transformer.Services
 {
     /// <summary>
-    /// If a newly created object's members are accessed directly instead of assigning the object to a variable for 
+    /// If a newly created object's members are accessed directly instead of assigning the object to a variable for
     /// example, then this service will add an intermediary variable for easier later processing.
     /// </summary>
     /// <example>

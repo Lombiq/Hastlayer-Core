@@ -107,7 +107,7 @@ namespace Hast.TestInputs.Dynamic
                     codeBuilder.AppendLine(AddSaveResult($"{left} << {shiftRightOperandCast}{right}"));
                     codeBuilder.AppendLine(AddSaveResult($"{left} >> {shiftRightOperandCast}{right}"));
 
-                    // These variations can't be applied to the operands directly except for shift (which has a cast). 
+                    // These variations can't be applied to the operands directly except for shift (which has a cast).
                     if (!(
                         leftType == "sbyte" && rightType == "ulong" ||
                         leftType == "short" && rightType == "ulong" ||

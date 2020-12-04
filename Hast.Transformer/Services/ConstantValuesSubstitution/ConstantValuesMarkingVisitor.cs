@@ -249,7 +249,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     (Expression)node,
                     _typeDeclarationLookupTable);
 
-                // There will be no parameter if the affected node is the invoked member itself. Also, the parameter 
+                // There will be no parameter if the affected node is the invoked member itself. Also, the parameter
                 // can be null for special invocations like Task.WhenAll().
                 if (parameter == null)
                 {

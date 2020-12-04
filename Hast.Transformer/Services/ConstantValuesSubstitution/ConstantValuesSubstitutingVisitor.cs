@@ -31,8 +31,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         {
             base.VisitAssignmentExpression(assignmentExpression);
 
-            // Assignments should be handled here because those should only take effect "after this line" ("after this" 
-            // works because the visitor visits nodes in topological order and thus possible substitutions will come 
+            // Assignments should be handled here because those should only take effect "after this line" ("after this"
+            // works because the visitor visits nodes in topological order and thus possible substitutions will come
             // after this method).
 
             var parentBlock = assignmentExpression.FindFirstParentBlockStatement();
@@ -51,8 +51,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 }
             }
 
-            // If this is assignment is in a while or an if-else then every assignment to it shouldn't affect anything 
-            // in the outer scope after this. Neither if this is assigning a non-constant value. Note that the 
+            // If this is assignment is in a while or an if-else then every assignment to it shouldn't affect anything
+            // in the outer scope after this. Neither if this is assigning a non-constant value. Note that the
             // expression can be both in a while or if (in which case it can't affect the parent scopes) or have a non-
             // constant assignment (and thus can't have a const value for the current scope).
 
@@ -363,8 +363,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                         if (memberReferenceExpressionInConstructor == null) return false;
 
-                        // Using the substitution also used in the constructor. This should be safe to do even if in 
-                        // the ctor there are multiple assignments because an unretrieved constant will only remain in 
+                        // Using the substitution also used in the constructor. This should be safe to do even if in
+                        // the ctor there are multiple assignments because an unretrieved constant will only remain in
                         // the ConstantValuesTable if there are no more substitutions needed in the ctor.
                         // But for this we need to rebuild a ConstantValuesTable just for this ctor. At this point the
                         // ctor should be fully substituted so we only need to care about primitive expressions.
@@ -405,7 +405,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 var right = assignmentExpression.Right as PrimitiveExpression;
 
                 // We need to keep track of the last assignment in the root scope of the method. If after that there is
-                // another assignment with a non-constant value or in an if-else or while then that makes the value 
+                // another assignment with a non-constant value or in an if-else or while then that makes the value
                 // holder's constant value unusable.
 
                 if (right == null || ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))

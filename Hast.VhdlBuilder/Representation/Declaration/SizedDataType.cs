@@ -50,7 +50,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             var otherType = obj as SizedDataType;
             if (otherType == null) return false;
-            return base.Equals(obj) && 
+            return base.Equals(obj) &&
                 (SizeExpression == null ? Size == otherType.Size : SizeExpression.ToVhdl() == otherType.SizeExpression.ToVhdl());
         }
 

@@ -9,7 +9,7 @@ namespace Hast.Transformer.Services
     /// <example>
     /// The following expression:
     /// numberOfStepsInIteration = testMode ? 1 : KpzKernels.GridWidth * KpzKernels.GridHeight;
-    /// 
+    ///
     /// ...will be converted into the below form:
     /// if (testMode) numberOfStepsInIteration = 1;
     /// else numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;.

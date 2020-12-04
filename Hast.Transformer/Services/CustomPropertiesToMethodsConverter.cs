@@ -28,7 +28,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitPropertyDeclaration(propertyDeclaration);
 
-                // We only care about properties with custom implemented getters and/or setters. If the getter and 
+                // We only care about properties with custom implemented getters and/or setters. If the getter and
                 // the setter is empty then it's an auto-property. If the getter is compiler-generated then it's also
                 // an auto-property (a read-only one).
                 if (!propertyDeclaration.Getter.Body.Any() && !propertyDeclaration.Setter.Body.Any() ||

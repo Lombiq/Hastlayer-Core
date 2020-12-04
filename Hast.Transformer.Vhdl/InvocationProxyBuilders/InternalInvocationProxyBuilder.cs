@@ -60,7 +60,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             }
 
             var proxyComponents = new List<IArchitectureComponent>(invokedMembers.Count);
-            // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would 
+            // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would
             // look from a generated state machine.
             var namePrefix = "System.Void Hast::InternalInvocationProxy().";
 
@@ -122,7 +122,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         var targetParameters =
                             componentsByName[targetComponentName]
                             .GetInParameterSignals()
-                            .Where(parameter => 
+                            .Where(parameter =>
                                 parameter.TargetMemberFullName == targetMemberName &&
                                 parameter.IsOwn);
 
@@ -187,8 +187,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         });
                     };
 
-                // Is this member's component only invoked from a single other component? Because then we don't need a 
-                // full invocation proxy: local Start and Finished signals can be directly connected to the target 
+                // Is this member's component only invoked from a single other component? Because then we don't need a
+                // full invocation proxy: local Start and Finished signals can be directly connected to the target
                 // component's signals.
                 // (Every member at this point is invoked at least once.)
                 var invokedFromSingleComponent = invokedFromComponents.Take(2).Count() == 1;
@@ -321,7 +321,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 });
                             }
 
-                            // Assignments to the boolean array where each element will indicate whether the 
+                            // Assignments to the boolean array where each element will indicate whether the
                             // component with the given index can be started.
                             bodyBlock.Add(
                                 new Assignment
@@ -440,7 +440,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 {
                                     // If there is only a single target component then the implementation can be simpler.
                                     // Also having a case targetAvailableIndicator is (true) when =>... isn't syntactically
-                                    // correct, single-element arrays can't be matched like this. "[Synth 8-2778] type 
+                                    // correct, single-element arrays can't be matched like this. "[Synth 8-2778] type
                                     // error near true ; expected type internalinvocationproxy_boolean_array".
 
                                     waitingForStartedInnnerBlock.Add(createComponentAvailableBody(0));

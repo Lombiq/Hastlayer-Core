@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 namespace Hast.Transformer
 {
     /// <summary>
-    /// Describes the concrete engine that does the .NET to hardware description transformation. Implementation could 
-    /// include ones generating e.g. VHDL or Verilog code. 
+    /// Describes the concrete engine that does the .NET to hardware description transformation. Implementation could
+    /// include ones generating e.g. VHDL or Verilog code.
     /// </summary>
     public interface ITransformingEngine : IDependency
     {

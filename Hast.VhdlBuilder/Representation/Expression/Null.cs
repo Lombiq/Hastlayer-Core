@@ -12,7 +12,7 @@
         {
         }
 
-        // It shouldn't be always terminated, so not terminating it here. See: 
+        // It shouldn't be always terminated, so not terminating it here. See:
         // http://www.vhdl.renerta.com/mobile/source/vhd00045.htm
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => "null";
     }

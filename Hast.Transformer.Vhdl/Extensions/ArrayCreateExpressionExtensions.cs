@@ -20,7 +20,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                         expression.ToString() + ".".AddParentEntityName(expression));
                 }
 
-                return int.Parse(((PrimitiveExpression)lengthArgument).Value.ToString(), CultureInfo.InvariantCulture); 
+                return int.Parse(((PrimitiveExpression)lengthArgument).Value.ToString(), CultureInfo.InvariantCulture);
             }
 
             // The array is initialized in-place, i.e. new[] { 1, 2, 3 }-style.
@@ -34,9 +34,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         public static AstType GetElementType(this ArrayCreateExpression expression)
         {
-            // Sometimes instead of 
+            // Sometimes instead of
             // new Task<uint>[2]
-            // an array instantiation will be in form of 
+            // an array instantiation will be in form of
             // new Task<bool>[2][] {}
             // even if the task is still one-dimensional. In this case its type will be a ComposedType.
             return expression.Type is ComposedType ? ((ComposedType)expression.Type).BaseType : expression.Type;

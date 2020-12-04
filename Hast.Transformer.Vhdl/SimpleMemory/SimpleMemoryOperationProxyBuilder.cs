@@ -45,7 +45,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 SimpleMemoryPortNames.WriteEnable,
                 simpleMemoryUsingComponents));
 
-            // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would look 
+            // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would look
             // from a generated state machine.
             return new BasicComponent(proxyComponentName)
             {

@@ -65,7 +65,7 @@ namespace Hast.Transformer.Services
 
                     if (condition.Right.Is<BinaryOperatorExpression>(out var innerCondition))
                     {
-                        // In code decopmiled from F# it can happen that the expression will be decompiled into 
+                        // In code decopmiled from F# it can happen that the expression will be decompiled into
                         // "1 + actual number"... Taking care of that here.
                         primitiveExpression = innerCondition.Right as PrimitiveExpression ?? innerCondition.Right.FindFirstChildOfType<PrimitiveExpression>();
                     }

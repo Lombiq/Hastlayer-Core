@@ -12,7 +12,7 @@ namespace Hast.Transformer.Vhdl.Helpers
     {
         public const string SmartResizeName = "SmartResize";
 
-        public static Invocation SmartResize(IVhdlElement value, int size) => 
+        public static Invocation SmartResize(IVhdlElement value, int size) =>
             Invocation.InvokeSizingFunction(SmartResizeName, value, size);
     }
 }
