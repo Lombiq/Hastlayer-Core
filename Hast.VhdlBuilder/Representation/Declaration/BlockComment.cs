@@ -21,7 +21,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// </summary>
         public bool CantBeOmitted { get; set; }
 
-
         /// <summary>
         /// Creates a new <see cref="BlockComment"/> object, initialized with a string that contains a newline character-
         /// delimited block of text, corresponding to lines of the block comment.
@@ -40,7 +39,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             Lines = new List<string>();
         }
-
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {

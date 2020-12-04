@@ -10,7 +10,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string Name { get; set; }
         public List<Port> Ports { get; set; } = new List<Port>();
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             var name = vhdlGenerationOptions.ShortenName(Name);

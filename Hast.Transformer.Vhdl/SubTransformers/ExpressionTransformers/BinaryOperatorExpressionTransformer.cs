@@ -20,7 +20,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         private readonly ITypeConverter _typeConverter;
         private readonly ITypeConversionTransformer _typeConversionTransformer;
 
-
         public BinaryOperatorExpressionTransformer(
             ITypeConverter typeConverter,
             ITypeConversionTransformer typeConversionTransformer)
@@ -28,7 +27,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             _typeConverter = typeConverter;
             _typeConversionTransformer = typeConversionTransformer;
         }
-
 
         public IEnumerable<IVhdlElement> TransformParallelBinaryOperatorExpressions(
               IEnumerable<IPartiallyTransformedBinaryOperatorExpression> partiallyTransformedExpressions,
@@ -74,7 +72,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 true,
                 true,
                 context);
-
 
         private IVhdlElement TransformBinaryOperatorExpressionInner(
             IPartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
@@ -170,14 +167,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     throw new NotImplementedException("Binary operator " + expression.Operator + " is not supported.");
             }
 
-
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
 
             var firstNonParenthesizedExpressionParent = expression.FindFirstNonParenthesizedExpressionParent();
             var resultType = expression.GetResultType();
             var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
-
 
             IType preCastType = null;
             // If the parent is an explicit cast then we need to follow that, otherwise there could be a resize
@@ -191,8 +186,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var resultVhdlType = _typeConverter.ConvertType(resultType, context.TransformationContext);
             var resultTypeSize = resultVhdlType.GetSize();
-
-
 
             IDataObject operationResultDataObjectReference;
             if (operationResultDataObjectIsVariable)
@@ -377,13 +370,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 };
             }
 
-
             var operationResultAssignment = new Assignment
             {
                 AssignTo = operationResultDataObjectReference,
                 Expression = binaryElement
             };
-
 
             var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
@@ -478,10 +469,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     };
                 }
 
-
                 currentBlock.Add(operationResultAssignment);
                 stateMachine.RecordMultiCycleOperation(operationResultDataObjectReference, clockCyclesToWait);
-
 
                 // Changing the current block to the one in the state after the wait state, just when this is the last
                 // transform of multiple SIMD operations (or is a single operation).

@@ -13,13 +13,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IRecordComposer _recordComposer;
         private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
 
-
         public PocoTransformer(IRecordComposer recordComposer, IDisplayClassFieldTransformer displayClassFieldTransformer)
         {
             _recordComposer = recordComposer;
             _displayClassFieldTransformer = displayClassFieldTransformer;
         }
-
 
         public bool IsSupportedMember(AstNode node) =>
             _recordComposer.IsSupportedRecordMember(node) ||

@@ -9,12 +9,10 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
     {
         private readonly ISimpleMemoryOperationProxyBuilder _simpleMemoryOperationProxyBuilder;
 
-
         public SimpleMemoryComponentBuilder(ISimpleMemoryOperationProxyBuilder simpleMemoryOperationProxyBuilder)
         {
             _simpleMemoryOperationProxyBuilder = simpleMemoryOperationProxyBuilder;
         }
-
 
         public void AddSimpleMemoryComponentsToArchitecture(
             IEnumerable<IArchitectureComponent> invokingComponents,
@@ -24,7 +22,6 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             var simpleMemoryProxyComponent = _simpleMemoryOperationProxyBuilder.BuildProxy(invokingComponents);
             architecture.Declarations.Add(simpleMemoryProxyComponent.BuildDeclarations());
             architecture.Add(simpleMemoryProxyComponent.BuildBody());
-
 
             // Adding common ports
             var ports = architecture.Entity.Ports;

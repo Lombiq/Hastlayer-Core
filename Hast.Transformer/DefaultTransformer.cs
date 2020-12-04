@@ -109,7 +109,6 @@ namespace Hast.Transformer
         private readonly IReadonlyToConstConverter _readonlyToConstConverter;
         private readonly ILogger<DefaultTransformer> _logger;
 
-
         public DefaultTransformer(
             IEnumerable<EventHandler<ITransformationContext>> eventHandlers,
             IJsonConverter jsonConverter,
@@ -364,7 +363,6 @@ namespace Hast.Transformer
 
             _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
 
-
             if (transformerConfiguration.UseSimpleMemory)
             {
                 _simpleMemoryUsageVerifier.VerifySimpleMemoryUsage(syntaxTree);
@@ -398,7 +396,6 @@ namespace Hast.Transformer
 
             return await _engine.Transform(context);
         }
-
 
         private static async Task WriteSyntaxTreeAsync(SyntaxTree syntaxTree, string fileName)
         {

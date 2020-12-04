@@ -12,7 +12,6 @@ namespace Hast.Transformer.Services
         ITypeDeclarationLookupTable Create(SyntaxTree syntaxTree);
     }
 
-
     public class TypeDeclarationLookupTableFactory : ITypeDeclarationLookupTableFactory
     {
         public ITypeDeclarationLookupTable Create(SyntaxTree syntaxTree)
@@ -27,17 +26,14 @@ namespace Hast.Transformer.Services
             return new TypeDeclarationLookupTable(typeDeclarations);
         }
 
-
         private class TypeDeclarationLookupTable : ITypeDeclarationLookupTable
         {
             private readonly Dictionary<string, TypeDeclaration> _typeDeclarations;
-
 
             public TypeDeclarationLookupTable(Dictionary<string, TypeDeclaration> typeDeclarations)
             {
                 _typeDeclarations = typeDeclarations;
             }
-
 
             public TypeDeclaration Lookup(string fullName)
             {

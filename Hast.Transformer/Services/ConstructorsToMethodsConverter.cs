@@ -16,7 +16,6 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new ConstructorConvertingVisitor());
         }
 
-
         private class ConstructorConvertingVisitor : DepthFirstAstVisitor
         {
             public override void VisitConstructorDeclaration(ConstructorDeclaration constructorDeclaration)

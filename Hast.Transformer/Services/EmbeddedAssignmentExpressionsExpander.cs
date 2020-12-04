@@ -11,7 +11,6 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new EmbeddedAssignmentExpressionsExpandingVisitor());
         }
 
-
         private class EmbeddedAssignmentExpressionsExpandingVisitor : DepthFirstAstVisitor
         {
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
@@ -48,7 +47,6 @@ namespace Hast.Transformer.Services
                     .WithAnnotation(resolveResult);
 
                 AstInsertionHelper.InsertStatementBefore(firstParentStatement, new ExpressionStatement(leftAssignment));
-
 
                 assignmentExpression.ReplaceWith(variableIdentifier.Clone());
             }

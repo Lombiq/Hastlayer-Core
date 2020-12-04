@@ -12,18 +12,15 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new TaskBodyInvocationInstanceCountsSetterVisitor(configuration.TransformerConfiguration()));
         }
 
-
         private class TaskBodyInvocationInstanceCountsSetterVisitor : DepthFirstAstVisitor
         {
             private readonly Dictionary<string, int> _taskStartsCountInMembers = new Dictionary<string, int>();
             private readonly TransformerConfiguration _configuration;
 
-
             public TaskBodyInvocationInstanceCountsSetterVisitor(TransformerConfiguration configuration)
             {
                 _configuration = configuration;
             }
-
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {

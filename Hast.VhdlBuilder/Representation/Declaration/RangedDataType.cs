@@ -8,7 +8,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public int RangeMin { get; set; }
         public int RangeMax { get; set; }
 
-
         public RangedDataType(DataType baseType) : base(baseType)
         {
         }
@@ -22,7 +21,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public RangedDataType()
         {
         }
-
 
         public override DataType ToReference() => this;
 

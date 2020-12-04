@@ -48,7 +48,6 @@ namespace Hast.TestInputs.Invalid
             var y = -x;
         }
 
-
         private int GetItemValuePlusOne(int[] array, int itemIndex) => array[itemIndex] + 1;
     }
 }

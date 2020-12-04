@@ -15,17 +15,14 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new CustomPropertiesConvertingVisitor(syntaxTree));
         }
 
-
         private class CustomPropertiesConvertingVisitor : DepthFirstAstVisitor
         {
             private readonly SyntaxTree _syntaxTree;
-
 
             public CustomPropertiesConvertingVisitor(SyntaxTree syntaxTree)
             {
                 _syntaxTree = syntaxTree;
             }
-
 
             public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
             {
@@ -39,7 +36,6 @@ namespace Hast.Transformer.Services
                 {
                     return;
                 }
-
 
                 var parentType = propertyDeclaration.FindFirstParentTypeDeclaration();
 
@@ -79,19 +75,16 @@ namespace Hast.Transformer.Services
                 propertyDeclaration.Remove();
             }
 
-
             private class PropertyAccessChangingVisitor : DepthFirstAstVisitor
             {
                 private readonly string _getterName;
                 private readonly string _setterName;
-
 
                 public PropertyAccessChangingVisitor(string getterName, string setterName)
                 {
                     _getterName = getterName;
                     _setterName = setterName;
                 }
-
 
                 public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
                 {

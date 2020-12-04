@@ -9,14 +9,12 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Condition { get; set; }
         public T True { get; set; }
 
-
         public virtual string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
                 "if (" + Condition.ToVhdl(vhdlGenerationOptions) + ") then " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     True.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "end if", vhdlGenerationOptions);
     }
-
 
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class If : If<IVhdlElement>

@@ -11,7 +11,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Condition { get; set; }
         public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
                 "while " + Condition.ToVhdl(vhdlGenerationOptions) + " loop " + vhdlGenerationOptions.NewLineIfShouldFormat() +

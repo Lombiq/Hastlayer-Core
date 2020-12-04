@@ -81,7 +81,6 @@ namespace Hast.Transformer.Vhdl.Tests
                     typeof(NotSupportedException));
             });
 
-
         private Task<VhdlHardwareDescription> TransformInvalidTestInputs<T>(
             ITransformer transformer,
             Expression<Action<T>> expression,

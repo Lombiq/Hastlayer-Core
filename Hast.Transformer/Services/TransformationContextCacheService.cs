@@ -30,7 +30,6 @@ namespace Hast.Transformer.Services
                 });
         }
 
-
         private static string GetCacheKey(IEnumerable<string> assemblyPaths, string transformationId)
         {
             var fileHashes = string.Empty;

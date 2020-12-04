@@ -1069,12 +1069,10 @@ mul_by_0	unsigned64	unsigned64	sync	impl	0	0
             }
         }
 
-
         public CatapultDriver(ITimingReportParser timingReportParser)
         {
             _timingReportParser = timingReportParser;
         }
-
 
         public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
             DeviceDriverHelper.ComputeClockCyclesForBinaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);

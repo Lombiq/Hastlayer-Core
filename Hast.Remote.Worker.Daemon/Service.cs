@@ -21,7 +21,6 @@ namespace Hast.Remote.Worker.Daemon
         private Task _workerTask;
         private int _restartCount = 0;
 
-
         public Service()
         {
             _eventLog = new EventLog
@@ -37,7 +36,6 @@ namespace Hast.Remote.Worker.Daemon
             AutoLog = true;
         }
 
-
         protected override void OnStart(string[] args)
         {
             if (!EventLog.Exists(_eventLog.Log))
@@ -49,7 +47,6 @@ namespace Hast.Remote.Worker.Daemon
         }
 
         protected override void OnStop() => RunStopTasks();
-
 
         private void RunStartTasks()
         {

@@ -14,7 +14,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         IMemberStateMachine CreateStateMachine(string name);
     }
 
-
     public class MemberStateMachineFactory : IMemberStateMachineFactory
     {
 

@@ -13,7 +13,6 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor(knownTypeLookupTable));
         }
 
-
         private class BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor : DepthFirstAstVisitor
         {
             // Note that while shifts are missing from the list under 
@@ -96,12 +95,10 @@ namespace Hast.Transformer.Services
 
             private readonly IKnownTypeLookupTable _knownTypeLookupTable;
 
-
             public BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor(IKnownTypeLookupTable knownTypeLookupTable)
             {
                 _knownTypeLookupTable = knownTypeLookupTable;
             }
-
 
             // Adding implicit casts as explained here: 
             // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions
@@ -126,7 +123,6 @@ namespace Hast.Transformer.Services
                     rightType = binaryOperatorExpression.Right.GetActualType();
                 }
 
-
                 // If no type can be determined then nothing to do.
                 if (leftType == null && rightType == null) return;
 
@@ -135,7 +131,6 @@ namespace Hast.Transformer.Services
 
                 var leftTypeFullName = leftType.GetFullName();
                 var rightTypeFullName = rightType.GetFullName();
-
 
                 if (!_numericTypes.Contains(leftTypeFullName) || !_numericTypes.Contains(rightTypeFullName)) return;
 
@@ -185,7 +180,6 @@ namespace Hast.Transformer.Services
 
                     binaryOperatorExpression.ReplaceAnnotations(type.ToResolveResult());
                 }
-
 
                 var longFullName = typeof(long).FullName;
                 var ulongFullName = typeof(ulong).FullName;
@@ -279,7 +273,6 @@ namespace Hast.Transformer.Services
                     unaryOperatorExpression.Expression.ReplaceWith(((CastExpression)unaryOperatorExpression.Expression).Expression);
                 }
             }
-
 
             private static CastExpression CreateCast<T>(IType toType, T expression, out T clonedExpression)
                 where T : Expression

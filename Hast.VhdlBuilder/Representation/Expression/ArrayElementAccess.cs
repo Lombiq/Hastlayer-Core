@@ -10,7 +10,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
     {
         public IVhdlElement IndexExpression { get; set; }
 
-
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             ArrayReference.ToReference().ToVhdl(vhdlGenerationOptions) + "(" + IndexExpression.ToVhdl(vhdlGenerationOptions) + ")";
     }

@@ -8,7 +8,6 @@ namespace Hast.Transformer.Models
     {
         public int Length { get; set; }
 
-
         public override string ToString() => "Length: " + Length.ToString();
     }
 }

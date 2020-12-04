@@ -7,12 +7,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public bool Shared { get; set; }
 
-
         public Variable()
         {
             DataObjectKind = DataObjectKind.Variable;
         }
-
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             (Shared ? "shared " : string.Empty) + base.ToVhdl(vhdlGenerationOptions);

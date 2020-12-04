@@ -300,7 +300,6 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         public static bool IsMarkedAsRemoved(this AstNode node) => node.Annotation<WasRemoved>() != null;
 
-
         internal static string GetReferencedMemberFullName(this AstNode node)
         {
             var memberResolveResult = node.GetMemberResolveResult();
@@ -364,7 +363,6 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         private static string CreateParentEntityBasedName(AstNode node, string name) =>
             node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
-
 
         private class WasRemoved
         {

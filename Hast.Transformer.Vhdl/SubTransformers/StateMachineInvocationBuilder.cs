@@ -19,7 +19,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly ITypeConversionTransformer _typeConversionTransformer;
         private readonly IDeclarableTypeCreator _declarableTypeCreator;
 
-
         public StateMachineInvocationBuilder(
             ITypeConversionTransformer typeConversionTransformer,
             IDeclarableTypeCreator declarableTypeCreator)
@@ -27,7 +26,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _typeConversionTransformer = typeConversionTransformer;
             _declarableTypeCreator = declarableTypeCreator;
         }
-
 
         public IBuildInvocationResult BuildInvocation(
             MethodDeclaration targetDeclaration,
@@ -39,11 +37,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var currentBlock = context.Scope.CurrentBlock;
             var targetMethodName = targetDeclaration.GetFullName();
 
-
             void addInvocationStartComment() =>
                 currentBlock
                 .Add(new LineComment("Starting state machine invocation for the following method: " + targetMethodName));
-
 
             var maxDegreeOfParallelism = context.TransformationContext.GetTransformerConfiguration()
                 .GetMaxInvocationInstanceCountConfigurationForMember(targetDeclaration).MaxDegreeOfParallelism;
@@ -62,7 +58,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 stateMachine.OtherMemberMaxInvocationInstanceCounts[targetDeclaration] = instanceCount;
             }
-
 
             if (instanceCount == 1)
             {
@@ -156,7 +151,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return BuildInvocationWait(targetDeclaration, 1, targetIndex, true, context).Single();
         }
 
-
         /// <summary>
         /// Be aware that the method can change the current block!
         /// </summary>
@@ -171,7 +165,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = scope.StateMachine;
 
             var indexedStateMachineName = ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, index);
-
 
             // Due to the time needed for the invocation proxy to register that the invoked state machine is not started
             // any more the same state machine can be restarted in the second state counted from the await state at 
@@ -204,7 +197,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     "The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state."));
                 stateMachine.AddNewStateAndChangeCurrentBlock(scope);
             }
-
 
             var invocationBlock = new InlineBlock();
             var outParameterBackAssignments = new List<Assignment>();
@@ -246,7 +238,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         Name = parameterSignalName
                     });
 
-
                     // Assign local variables to/from the intermediary parameter signal.
                     // If the parameter is of direction In then the parameter element should contain an IDataObject.
                     var assignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameterReference;
@@ -286,7 +277,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     };
                 }
 
-
                 invocationBlock.Add(createParameterAssignment(ParameterFlowDirection.Out));
                 if (targetParameter.IsOutFlowing())
                 {
@@ -296,7 +286,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 methodParametersEnumerator.MoveNext();
             }
-
 
             invocationBlock.Add(InvocationHelper.CreateInvocationStart(stateMachine, targetMethodName, index));
 
@@ -317,7 +306,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
             var targetMethodName = targetDeclaration.GetFullName();
-
 
             var waitForInvocationFinishedIfElse = InvocationHelper
                 .CreateWaitForInvocationFinished(stateMachine, targetMethodName, instanceCount, waitForAll);
@@ -342,7 +330,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             currentBlock.ChangeBlockToDifferentState(waitForInvocationFinishedIfElse.True, waitForInvokedStateMachineToFinishStateIndex);
-
 
             var returnType = _declarableTypeCreator
                 .CreateDeclarableType(targetDeclaration, targetDeclaration.ReturnType, context.TransformationContext);
@@ -378,7 +365,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     returnVariableReferences.Add(returnVariableReference);
                 }
 
-
                 // Noting that this component was finished in this state.
                 var finishedInvokedComponentsForStates = context.Scope.FinishedInvokedStateMachinesForStates;
                 ISet<string> finishedComponents;
@@ -412,7 +398,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return returnVariableReferences;
             }
         }
-
 
         private class BuildInvocationResult : IBuildInvocationResult
         {

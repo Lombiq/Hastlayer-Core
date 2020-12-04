@@ -13,12 +13,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     {
         private readonly ITypeConverter _typeConverter;
 
-
         public ArrayCreateExpressionTransformer(ITypeConverter typeConverter)
         {
             _typeConverter = typeConverter;
         }
-
 
         public UnconstrainedArrayInstantiation CreateArrayInstantiation(
             ArrayCreateExpression expression, 
@@ -62,7 +60,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         "). The resulting hardware implementation might not fit on the FPGA and/or will take a very long time to complete. Consider using a smaller array (below 500 items)."
                         .AddParentEntityName(expression));
             }
-
 
             if (elementAstType.DefaultValue != null)
             {

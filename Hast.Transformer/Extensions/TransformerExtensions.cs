@@ -17,7 +17,6 @@ namespace Hast.Transformer
         VisualBasic
     }
 
-
     public static class TransformerExtensions
     {
         public static Task<IHardwareDescription> Transform(

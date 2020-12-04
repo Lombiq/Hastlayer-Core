@@ -12,7 +12,6 @@ namespace Hast.VhdlBuilder.Representation
         string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions);
     }
 
-
     public static class VhdlElementExtensions
     {
         public static string ToVhdl(this IVhdlElement vhdlElement)

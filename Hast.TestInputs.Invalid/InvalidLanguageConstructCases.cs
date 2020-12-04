@@ -14,7 +14,6 @@
             var y = -x;
         }
 
-
         private struct CustomValueType
         {
             public int MyProperty { get; set; }

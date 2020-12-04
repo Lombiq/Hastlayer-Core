@@ -42,7 +42,6 @@ namespace Hast.Transformer.Vhdl.Services
         private readonly IRemainderOperatorExpressionsExpander _remainderOperatorExpressionsExpander;
         private readonly IUnsupportedConstructsVerifier _unsupportedConstructsVerifier;
 
-
         public TransformedVhdlManifestBuilder(
             ICompilerGeneratedClassesVerifier compilerGeneratedClassesVerifier,
             IHardwareEntryPointsVerifier hardwareEntryPointsVerifier,
@@ -73,7 +72,6 @@ namespace Hast.Transformer.Vhdl.Services
             _unsupportedConstructsVerifier = unsupportedConstructsVerifier;
         }
 
-
         public async Task<ITransformedVhdlManifest> BuildManifest(ITransformationContext transformationContext)
         {
             var syntaxTree = transformationContext.SyntaxTree;
@@ -92,14 +90,12 @@ namespace Hast.Transformer.Vhdl.Services
             var hastIpArchitecture = new Architecture { Name = "Imp" };
             var hastIpModule = new VhdlBuilder.Representation.Declaration.Module { Architecture = hastIpArchitecture };
 
-
             // Adding libraries
             hastIpModule.Libraries.Add(new Library
             {
                 Name = "ieee",
                 Uses = new List<string> { "std_logic_1164.all", "numeric_std.all" }
             });
-
 
             // Creating the Hast_IP entity. Its name can't be an extended identifier.
             var hastIpEntity = hastIpModule.Entity = new Entity { Name = Entity.ToSafeEntityName("Hast_IP") };
@@ -132,7 +128,6 @@ namespace Hast.Transformer.Vhdl.Services
                 dependentTypesTables.Add(arrayTypeDependentTypes);
             }
 
-
             // Adding enum types.
             var enumDeclarations = _enumTypesCreator.CreateEnumTypes(syntaxTree);
             if (enumDeclarations.Any())
@@ -142,7 +137,6 @@ namespace Hast.Transformer.Vhdl.Services
                 enumDeclarationsBlock.Add(new LineComment("Enum declarations end"));
                 hastIpArchitecture.Declarations.Add(enumDeclarationsBlock);
             }
-
 
             // Doing transformations.
             var transformerResults = await Task.WhenAll(TransformMembers(transformationContext.SyntaxTree, vhdlTransformationContext));
@@ -165,7 +159,6 @@ namespace Hast.Transformer.Vhdl.Services
                     dependentTypesTables.Add(architectureComponentResult.ArchitectureComponent.DependentTypesTable);
                 }
             }
-
 
             XdcFile xdcFile = null;
             if (transformationContext.DeviceDriver.DeviceManifest.ToolChainName == CommonToolChainNames.QuartusPrime)
@@ -238,7 +231,6 @@ namespace Hast.Transformer.Vhdl.Services
                 }
             }
 
-
             // Processing inter-dependent types. In VHDL if a type depends another type (e.g. an array stores elements
             // of a record type) than the type depending on the other one should come after the other one in the code
             // file.
@@ -260,14 +252,12 @@ namespace Hast.Transformer.Vhdl.Services
                 hastIpArchitecture.Declarations.Add(dependentTypesDeclarationsBlock);
             }
 
-
             // Adding architecture component declarations. These should come after custom inter-dependent type declarations.
             foreach (var architectureComponentResult in architectureComponentResults)
             {
                 hastIpArchitecture.Declarations.Add(architectureComponentResult.Declarations);
                 hastIpArchitecture.Add(architectureComponentResult.Body);
             }
-
 
             // Proxying external invocations.
             var hardwareEntryPointMemberResults = transformerResults.Where(result => result.IsHardwareEntryPointMember);
@@ -282,7 +272,6 @@ namespace Hast.Transformer.Vhdl.Services
             hastIpArchitecture.Declarations.Add(externalInvocationProxy.BuildDeclarations());
             hastIpArchitecture.Add(externalInvocationProxy.BuildBody());
 
-
             // Proxying internal invocations.
             var internaInvocationProxies = _internalInvocationProxyBuilder.BuildProxy(
                 potentiallyInvokingArchitectureComponents,
@@ -293,7 +282,6 @@ namespace Hast.Transformer.Vhdl.Services
                 hastIpArchitecture.Add(proxy.BuildBody());
             }
 
-
             // Proxying SimpleMemory operations.
             if (useSimpleMemory)
             {
@@ -301,7 +289,6 @@ namespace Hast.Transformer.Vhdl.Services
                     potentiallyInvokingArchitectureComponents,
                     hastIpArchitecture);
             }
-
 
             // Adding common ports.
             var ports = hastIpEntity.Ports;
@@ -330,9 +317,7 @@ namespace Hast.Transformer.Vhdl.Services
                 DataType = KnownDataTypes.Boolean
             });
 
-
             ProcessUtility.AddClockToProcesses(hastIpModule, CommonPortNames.Clock);
-
 
             var manifest = new VhdlManifest();
 
@@ -363,7 +348,6 @@ namespace Hast.Transformer.Vhdl.Services
                 XdcFile = xdcFile
             };
         }
-
 
         private IEnumerable<Task<IMemberTransformerResult>> TransformMembers(
             AstNode node,
@@ -454,7 +438,6 @@ namespace Hast.Transformer.Vhdl.Services
             return memberTransformerTasks;
         }
 
-
         private static MemberIdTable BuildMemberIdTable(IEnumerable<IMemberTransformerResult> hardwareEntryPointMemberResults)
         {
             var memberIdTable = new MemberIdTable();
@@ -471,7 +454,6 @@ namespace Hast.Transformer.Vhdl.Services
 
                 memberId++;
             }
-
 
             return memberIdTable;
         }

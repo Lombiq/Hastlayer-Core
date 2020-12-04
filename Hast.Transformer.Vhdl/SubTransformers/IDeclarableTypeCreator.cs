@@ -14,7 +14,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         DataType CreateDeclarableType(AstNode valueHolder, IType type, IVhdlTransformationContext context);
     }
 
-
     public static class DeclarableTypeCreatorExtensions
     {
         public static DataType CreateDeclarableType(

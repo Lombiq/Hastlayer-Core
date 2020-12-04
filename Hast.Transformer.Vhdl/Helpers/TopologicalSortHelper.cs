@@ -19,7 +19,6 @@ namespace Hast.Transformer.Vhdl.Helpers
             return sorted;
         }
 
-
         private static void Visit<T>(T item, Func<T, IEnumerable<T>> getDependencies, List<T> sorted, Dictionary<T, bool> visited)
         {
             var alreadyVisited = visited.TryGetValue(item, out var inProcess);

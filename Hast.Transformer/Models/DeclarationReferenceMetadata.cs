@@ -10,7 +10,6 @@ namespace Hast.Transformer.Models
         public bool IsReferenced { get { return ReferenceCount > 0; } }
         public bool WasVisited { get; set; }
 
-
         public DeclarationReferenceMetadata()
         {
             ReferencedFrom = new HashSet<AstNode>();

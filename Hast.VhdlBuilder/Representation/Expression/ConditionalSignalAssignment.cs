@@ -24,7 +24,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public List<SignalAssignmentWhen> Whens { get; set; } = new List<SignalAssignmentWhen>();
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             if (Whens == null && Whens.Count < 2)
@@ -40,13 +39,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
     }
 
-
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class SignalAssignmentWhen : IVhdlElement
     {
         public IVhdlElement Value { get; set; }
         public IVhdlElement Expression { get; set; }
-
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Value.ToVhdl(vhdlGenerationOptions) +

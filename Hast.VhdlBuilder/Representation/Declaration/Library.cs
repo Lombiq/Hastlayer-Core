@@ -10,7 +10,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string Name { get; set; }
         public List<string> Uses { get; set; } = new List<string>();
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             if (string.IsNullOrEmpty(Name)) return string.Empty;

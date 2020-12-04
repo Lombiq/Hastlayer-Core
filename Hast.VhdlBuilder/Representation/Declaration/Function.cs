@@ -14,7 +14,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
         public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             var name = vhdlGenerationOptions.ShortenName(Name);
@@ -29,7 +28,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 "end " + name, vhdlGenerationOptions);
         }
     }
-
 
     public class FunctionArgument : TypedDataObjectBase
     {

@@ -8,7 +8,6 @@ namespace Hast.VhdlBuilder.Representation
     {
         public IVhdlElement Element { get; set; }
 
-
         public Terminated()
         {
         }
@@ -18,10 +17,8 @@ namespace Hast.VhdlBuilder.Representation
             Element = element;
         }
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminate(Element.ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);
-
 
         public static string Terminator(IVhdlGenerationOptions vhdlGenerationOptions) =>
             ";" + vhdlGenerationOptions.NewLineIfShouldFormat();
@@ -35,7 +32,6 @@ namespace Hast.VhdlBuilder.Representation
                 vhdl + Terminator(vhdlGenerationOptions);
         }
     }
-
 
     public static class TerminatedExtensions
     {

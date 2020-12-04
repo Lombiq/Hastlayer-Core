@@ -9,7 +9,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         File
     }
 
-
     public interface IDataObject : INamedElement, IReferenceableDeclaration<IDataObject>
     {
         DataObjectKind DataObjectKind { get; set; }

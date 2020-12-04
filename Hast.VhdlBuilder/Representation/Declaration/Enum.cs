@@ -11,12 +11,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public List<Value> Values { get; set; } = new List<Value>();
 
-
         public Enum()
         {
             TypeCategory = DataTypeCategory.Composite;
         }
-
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(

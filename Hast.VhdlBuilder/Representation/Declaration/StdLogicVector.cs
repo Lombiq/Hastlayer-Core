@@ -15,7 +15,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             set => _defaultValue = value;
         }
 
-
         public StdLogicVector(DataType baseType) : base(baseType)
         {
         }

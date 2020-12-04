@@ -17,13 +17,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// </summary>
         public bool CantBeOmitted { get; set; }
 
-
         public LineComment(string text)
         {
             Text = text;
         }
-        
-        
+
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             // There are no block comments in VHDL prior to VHDL 2008 so if the code is not formatted there can't be 

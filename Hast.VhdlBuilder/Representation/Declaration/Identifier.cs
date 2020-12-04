@@ -8,7 +8,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             TypeCategory = DataTypeCategory.Identifier;
         }
 
-
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => string.Empty;
     }
 }

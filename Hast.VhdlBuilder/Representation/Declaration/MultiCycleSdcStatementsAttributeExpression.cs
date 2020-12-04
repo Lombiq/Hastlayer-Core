@@ -20,7 +20,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         private readonly List<SdcStatement> _paths = new List<SdcStatement>();
 
-
         public void AddPath(string parentName, IDataObject pathReference, int clockCycles)
         {
             _paths.Add(new SdcStatement
@@ -46,14 +45,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 string.Join(";", _paths.Select(statement => statement.ToVhdl(vhdlGenerationOptions))) +
                 "\"", vhdlGenerationOptions);
 
-
         private class SdcStatement : IVhdlElement
         {
             public string ParentName { get; set; }
             public IDataObject PathReference { get; set; }
             public int ClockCycles { get; set; }
             public string Type { get; set; }
-
 
             public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
                     "-name SDC_STATEMENT \"\"set_multicycle_path " + ClockCycles + " -" + Type + " -to {*" +

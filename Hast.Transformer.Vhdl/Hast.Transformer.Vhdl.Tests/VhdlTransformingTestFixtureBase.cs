@@ -23,7 +23,6 @@ namespace Hast.Transformer.Vhdl.Tests
         protected virtual bool UseStubMemberSuitabilityChecker => true;
         protected virtual string DeviceName => Nexys4DdrManifestProvider.DeviceName;
 
-
         protected VhdlTransformingTestFixtureBase()
         {
             _hostConfiguration.Extensions = _hostConfiguration.Extensions
@@ -35,7 +34,6 @@ namespace Hast.Transformer.Vhdl.Tests
                         typeof(Nexys4DdrDriver).Assembly
                     });
 
-
             _hostConfiguration.OnServiceRegistration += (configuration, services) =>
             {
                 if (UseStubMemberSuitabilityChecker)
@@ -45,7 +43,6 @@ namespace Hast.Transformer.Vhdl.Tests
                 }
             };
         }
-
 
         protected virtual async Task<VhdlHardwareDescription> TransformAssembliesToVhdl(
             ITransformer transformer,
@@ -58,7 +55,6 @@ namespace Hast.Transformer.Vhdl.Tests
             configurationModifier?.Invoke(configuration);
             return (VhdlHardwareDescription)await transformer.Transform(assemblies, configuration);
         }
-
 
         private class StubMemberSuitabilityChecker : IMemberSuitabilityChecker
         {

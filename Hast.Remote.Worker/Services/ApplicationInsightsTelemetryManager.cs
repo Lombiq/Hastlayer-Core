@@ -12,14 +12,12 @@ using System;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 
-
 namespace Hast.Remote.Worker.Services
 {
     [IDependencyInitializer(nameof(InitializeService))]
     public class ApplicationInsightsTelemetryManager : IApplicationInsightsTelemetryManager
     {
         private readonly TelemetryClient _telemetryClient;
-
 
         public ApplicationInsightsTelemetryManager(
             TelemetryConfiguration telemetryConfiguration,
@@ -31,7 +29,6 @@ namespace Hast.Remote.Worker.Services
 
             _telemetryClient = telemetryClient;
         }
-
 
         public void TrackTransformation(ITransformationTelemetry telemetry)
         {

@@ -14,7 +14,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         public IAstExpressionEvaluator AstExpressionEvaluator { get; }
         public IKnownTypeLookupTable KnownTypeLookupTable { get; }
 
-
         public ConstantValuesSubstitutingAstProcessor(
             ConstantValuesTable constantValuesTable,
             ITypeDeclarationLookupTable typeDeclarationLookupTable,
@@ -30,7 +29,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             AstExpressionEvaluator = astExpressionEvaluator;
             KnownTypeLookupTable = knownTypeLookupTable;
         }
-
 
         public void SubstituteConstantValuesInSubTree(AstNode rootNode, bool reUseOriginalConstantValuesTable)
         {
@@ -78,7 +76,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     ". This most possibly indicates some error or the assembly being processed is exceptionally big.");
             }
         }
-
 
         public class ConstructorReference
         {

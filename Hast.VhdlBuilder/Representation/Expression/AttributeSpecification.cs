@@ -11,7 +11,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public string ItemClass { get; set; }
         public IVhdlElement Expression { get; set; }
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
                 "attribute " + Attribute.ToReference().ToVhdl(vhdlGenerationOptions) + " of " + Of.ToVhdl(vhdlGenerationOptions) + ": " +

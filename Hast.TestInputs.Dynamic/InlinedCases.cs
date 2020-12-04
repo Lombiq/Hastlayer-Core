@@ -39,7 +39,6 @@ namespace Hast.TestInputs.Dynamic
             return memory.ReadInt32(0);
         }
 
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private int NestedInlinedMultiReturnInternal(int input)
         {

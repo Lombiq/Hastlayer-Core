@@ -13,12 +13,10 @@ namespace Hast.Transformer.Services
     {
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
 
-
         public InvocationInstanceCountAdjuster(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory)
         {
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
         }
-
 
         public void AdjustInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
@@ -27,14 +25,12 @@ namespace Hast.Transformer.Services
                 configuration));
         }
 
-
         private class InvocationInstanceCountAdjustingVisitor : DepthFirstAstVisitor
         {
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
             private readonly TransformerConfiguration _transformerConfiguration;
             private readonly HashSet<EntityDeclaration> _membersInvokedFromNonParallel = new HashSet<EntityDeclaration>();
             private readonly HashSet<EntityDeclaration> _membersInvokedFromNonRecursive = new HashSet<EntityDeclaration>();
-
 
             public InvocationInstanceCountAdjustingVisitor(
                 ITypeDeclarationLookupTable typeDeclarationLookupTable,
@@ -43,7 +39,6 @@ namespace Hast.Transformer.Services
                 _typeDeclarationLookupTable = typeDeclarationLookupTable;
                 _transformerConfiguration = hardwareGenerationConfiguration.TransformerConfiguration();
             }
-
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {
@@ -74,7 +69,6 @@ namespace Hast.Transformer.Services
                     objectCreateExpression.FindConstructorDeclaration(_typeDeclarationLookupTable));
             }
 
-
             private void AdjustInstanceCount(Expression referencingExpression, EntityDeclaration referencedMember)
             {
                 if (referencedMember == null) return;
@@ -86,7 +80,6 @@ namespace Hast.Transformer.Services
                     .GetMaxInvocationInstanceCountConfigurationForMember(referencingExpression.FindFirstParentOfType<EntityDeclaration>());
 
                 var referencedMemberFullName = referencedMember.GetFullName();
-
 
                 if (invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism > referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism)
                 {
@@ -112,7 +105,6 @@ namespace Hast.Transformer.Services
                         referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism++;
                     }
                 }
-
 
                 if (invokingMemberMaxInvocationConfiguration.MaxRecursionDepth > referencedMemberMaxInvocationConfiguration.MaxRecursionDepth)
                 {

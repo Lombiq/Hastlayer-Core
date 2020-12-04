@@ -27,7 +27,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             ISubTransformerContext context);
     }
 
-
     public interface IBuildInvocationResult
     {
         IEnumerable<Assignment> OutParameterBackAssignments { get; }

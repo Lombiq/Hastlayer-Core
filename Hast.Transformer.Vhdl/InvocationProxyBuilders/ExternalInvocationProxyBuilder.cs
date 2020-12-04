@@ -20,7 +20,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             // from a generated state machine.
             var proxyComponent = new ConfigurableComponent("System.Void Hast::ExternalInvocationProxy()");
 
-
             // Since the Finished port is an out port, it can't be read. Adding an internal proxy signal so we can also 
             // read it.
             var finishedSignal = new Signal
@@ -37,7 +36,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 Expression = finishedSignalReference
             };
 
-
             var memberSelectingCase = new Case { Expression = CommonPortNames.MemberId.ToVhdlIdValue() };
 
             foreach (var hardwareEntryPointMemberResult in hardwareEntryPointMemberResults)
@@ -49,7 +47,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 {
                     Expression = memberId.ToVhdlValue(KnownDataTypes.UnrangedInt)
                 };
-
 
                 var waitForInvocationFinishedIfElse = InvocationHelper
                     .CreateWaitForInvocationFinished(proxyComponent, memberName, 1);
@@ -79,7 +76,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         }
                 });
                 ;
-
 
                 memberSelectingCase.Whens.Add(when);
             }
@@ -137,7 +133,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         }
                     })
             };
-
 
             return proxyComponent;
         }

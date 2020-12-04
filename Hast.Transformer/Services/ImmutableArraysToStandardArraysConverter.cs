@@ -25,17 +25,14 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new ImmutableArraysToStandardArraysConvertingVisitor(knownTypeLookupTable));
         }
 
-
         private class ImmutableArraysToStandardArraysConvertingVisitor : DepthFirstAstVisitor
         {
             private readonly IKnownTypeLookupTable _knownTypeLookupTable;
-
 
             public ImmutableArraysToStandardArraysConvertingVisitor(IKnownTypeLookupTable knownTypeLookupTable)
             {
                 _knownTypeLookupTable = knownTypeLookupTable;
             }
-
 
             public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
             {
@@ -273,7 +270,6 @@ namespace Hast.Transformer.Services
                         variable.Name));
                 });
             }
-
 
             private static void ProcessIfIsImmutableArray<T>(T node, Action<ArrayType> processor) where T : AstNode
             {

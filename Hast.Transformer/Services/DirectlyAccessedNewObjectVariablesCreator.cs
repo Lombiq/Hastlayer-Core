@@ -14,7 +14,6 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new DirectlyAccessedNewObjectVariableCreatingVisitor());
         }
 
-
         private class DirectlyAccessedNewObjectVariableCreatingVisitor : DepthFirstAstVisitor
         {
             public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
@@ -34,7 +33,6 @@ namespace Hast.Transformer.Services
                 HandleExpression(defaultValueExpression, defaultValueExpression.Type);
             }
 
-
             private static void HandleExpression(Expression expression, AstType astType)
             {
                 var resolveResult = expression.GetResolveResult();
@@ -46,7 +44,6 @@ namespace Hast.Transformer.Services
                 {
                     return;
                 }
-
 
                 var variableIdentifier = VariableHelper.DeclareAndReferenceVariable("object", expression, astType);
                 var assignment = new AssignmentExpression(variableIdentifier, expression.Clone())

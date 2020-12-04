@@ -17,7 +17,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         public HashSet<string> HiddenlyUpdatedNodesUpdated { get; } = new HashSet<string>();
 
-
         public ConstantValuesMarkingVisitor(
             ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor,
             IAstExpressionEvaluator astExpressionEvaluator)
@@ -27,7 +26,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             _arraySizeHolder = constantValuesSubstitutingAstProcessor.ArraySizeHolder;
             _typeDeclarationLookupTable = constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable;
         }
-
 
         public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
         {
@@ -52,7 +50,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (primitiveExpression.FindFirstParentOfType<ICSharpCode.Decompiler.CSharp.Syntax.Attribute>() != null) return;
 
             var primitiveExpressionParent = primitiveExpression.Parent;
-
 
             if (primitiveExpressionParent.Is<ParenthesizedExpression>(out var parenthesizedExpression) &&
                 parenthesizedExpression.Expression == primitiveExpression)
@@ -193,7 +190,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             }
         }
 
-
         private void PassLengthOfArrayHolderToParent(AstNode arrayHolder, int arrayLength)
         {
             void processParent(AstNode parent) => _arraySizeHolder.SetSize(parent, arrayLength);
@@ -218,7 +214,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     .SetSize(returnStatement.FindFirstParentEntityDeclaration(), arrayLength),
                 namedExpressionHandler: processParent);
         }
-
 
         private void ProcessParent(
             AstNode node,

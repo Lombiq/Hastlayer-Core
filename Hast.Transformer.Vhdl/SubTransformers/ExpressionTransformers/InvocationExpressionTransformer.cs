@@ -30,7 +30,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         private readonly ISpecialOperationInvocationTransformer _specialOperationInvocationTransformer;
         private readonly ITypeConversionTransformer _typeConversionTransformer;
 
-
         public InvocationExpressionTransformer(
             IStateMachineInvocationBuilder stateMachineInvocationBuilder,
             ITypeConverter typeConverter,
@@ -42,7 +41,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             _specialOperationInvocationTransformer = specialOperationInvocationTransformer;
             _typeConversionTransformer = typeConversionTransformer;
         }
-
 
         public IVhdlElement TransformInvocationExpression(
             InvocationExpression expression,
@@ -62,7 +60,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 return TransformMemberInvocation(expression, transformedParameters, targetMemberReference, context);
             }
         }
-
 
         private IVhdlElement TransformSimpleMemoryInvocation(
             InvocationExpression expression,
@@ -441,7 +438,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     Expression = sourceArrayReference
                 };
             }
-
 
             EntityDeclaration targetDeclaration = null;
 

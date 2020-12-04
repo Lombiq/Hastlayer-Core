@@ -17,7 +17,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         private readonly IArraySizeHolder _arraySizeHolder;
         private readonly IKnownTypeLookupTable _knownTypeLookupTable;
 
-
         public ConstantValuesSubstitutingVisitor(
             ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor)
         {
@@ -27,7 +26,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             _arraySizeHolder = constantValuesSubstitutingAstProcessor.ArraySizeHolder;
             _knownTypeLookupTable = constantValuesSubstitutingAstProcessor.KnownTypeLookupTable;
         }
-
 
         public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
         {
@@ -257,7 +255,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // var x = new MyClass(); // OK
             // x = GetValue(); // Starting with this line no more ctor mapping.
 
-
             if ((node is IdentifierExpression || node is MemberReferenceExpression) &&
                 node.GetActualType()?.IsArray() == false)
             {
@@ -296,7 +293,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 base.VisitChildren(node);
             }
         }
-
 
         private bool TrySubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
@@ -391,19 +387,16 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             return false;
         }
 
-
         private class ConstructorConstantValuesTableBuildingVisitor : DepthFirstAstVisitor
         {
             public ConstantValuesTable ConstantValuesTable { get; } = new ConstantValuesTable();
 
             private readonly MethodDeclaration _constructor;
 
-
             public ConstructorConstantValuesTableBuildingVisitor(MethodDeclaration constructor)
             {
                 _constructor = constructor;
             }
-
 
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
             {

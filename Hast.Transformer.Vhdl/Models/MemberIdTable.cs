@@ -25,7 +25,6 @@ namespace Hast.Transformer.Vhdl.Models
 
         public int MaxId { get; private set; }
 
-
         public void SetMapping(string memberFullName, int id)
         {
             if (id > MaxId) MaxId = id;

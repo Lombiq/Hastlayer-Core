@@ -9,7 +9,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         decimal RequiredClockCycles { get; set; }
     }
 
-
     /// <summary>
     /// A state machine generated from a .NET member.
     /// </summary>

@@ -15,7 +15,6 @@
         {
         }
 
-
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             vhdlGenerationOptions.NewLineIfShouldFormat() +
             base.ToVhdl(vhdlGenerationOptions) +

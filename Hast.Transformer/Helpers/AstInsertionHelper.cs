@@ -14,7 +14,6 @@ namespace Hast.Transformer.Helpers
             InsertStatement(previousSibling, statement, false);
         }
 
-
         private static void InsertStatement<T>(Statement adjacentSibling, T statement, bool before) where T : Statement
         {
             var enclosingNode = adjacentSibling.Parent;

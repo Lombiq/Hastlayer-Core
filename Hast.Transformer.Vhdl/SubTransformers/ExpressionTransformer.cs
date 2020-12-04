@@ -29,7 +29,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IRecordComposer _recordComposer;
         private readonly IDeclarableTypeCreator _declarableTypeCreator;
 
-
         public ExpressionTransformer(
             ITypeConverter typeConverter,
             ITypeConversionTransformer typeConversionTransformer,
@@ -50,12 +49,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _declarableTypeCreator = declarableTypeCreator;
         }
 
-
         public IVhdlElement Transform(Expression expression, ISubTransformerContext context)
         {
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
-
 
             IVhdlElement implementTypeConversionForBinaryExpressionParent(DataObjectReference reference)
             {
@@ -67,7 +64,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         binaryExpression.Left == expression,
                         context);
             }
-
 
             if (expression is AssignmentExpression assignment)
             {
@@ -735,7 +731,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
         }
 
-
         private RecordInitializationResult InitializeRecord(Expression expression, AstType recordAstType, ISubTransformerContext context)
         {
             // Objects are mimicked with records and those don't need instantiation. However it's useful to initialize
@@ -826,7 +821,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             return result;
         }
-
 
         private class RecordInitializationResult
         {

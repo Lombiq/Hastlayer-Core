@@ -13,7 +13,6 @@ namespace Hast.Synthesis.Services
         ITimingReport Parse(TextReader reportReader);
     }
 
-
     public static class TimingReportReaderExtensions
     {
         public static ITimingReport Parse(this ITimingReportParser reportParser, string reportContent)

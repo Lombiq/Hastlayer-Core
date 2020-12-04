@@ -15,17 +15,14 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new InstanceMethodsToStaticConvertingVisitor(syntaxTree));
         }
 
-
         private class InstanceMethodsToStaticConvertingVisitor : DepthFirstAstVisitor
         {
             private readonly SyntaxTree _syntaxTree;
-
 
             public InstanceMethodsToStaticConvertingVisitor(SyntaxTree syntaxTree)
             {
                 _syntaxTree = syntaxTree;
             }
-
 
             public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
             {
@@ -73,7 +70,6 @@ namespace Hast.Transformer.Services
                     methodDeclaration.GetFullName()));
             }
 
-
             private class ThisReferenceChangingVisitor : DepthFirstAstVisitor
             {
                 public override void VisitThisReferenceExpression(ThisReferenceExpression thisReferenceExpression)
@@ -93,14 +89,12 @@ namespace Hast.Transformer.Services
                 private readonly string _methodParentFullName;
                 private readonly string _methodFullName;
 
-
                 public MethodCallChangingVisitor(AstType parentAstType, string methodParentFullName, string methodFullName)
                 {
                     _parentAstType = parentAstType;
                     _methodParentFullName = methodParentFullName;
                     _methodFullName = methodFullName;
                 }
-
 
                 public override void VisitInvocationExpression(InvocationExpression invocationExpression)
                 {

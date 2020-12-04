@@ -13,7 +13,6 @@ namespace Hast.Transformer.Vhdl.Models
         ISubTransformerScope Scope { get; }
     }
 
-
     public interface ISubTransformerScope
     {
         MethodDeclaration Method { get; }
@@ -55,7 +54,6 @@ namespace Hast.Transformer.Vhdl.Models
         IList<ITransformationWarning> Warnings { get; }
     }
 
-
     public interface ICurrentBlock
     {
         int StateMachineStateIndex { get; }
@@ -66,13 +64,11 @@ namespace Hast.Transformer.Vhdl.Models
         void ChangeBlock(IBlockElement newBlock);
     }
 
-
     public class SubTransformerContext : ISubTransformerContext
     {
         public IVhdlTransformationContext TransformationContext { get; set; }
         public ISubTransformerScope Scope { get; set; }
     }
-
 
     public class SubTransformerScope : ISubTransformerScope
     {
@@ -86,7 +82,6 @@ namespace Hast.Transformer.Vhdl.Models
         public IDictionary<string, dynamic> CustomProperties { get; } = new Dictionary<string, dynamic>();
         public IList<ITransformationWarning> Warnings { get; set; } = new List<ITransformationWarning>();
     }
-
 
     public class CurrentBlock : ICurrentBlock
     {
@@ -107,7 +102,6 @@ namespace Hast.Transformer.Vhdl.Models
                 _stateMachine.States[StateMachineStateIndex].RequiredClockCycles = value;
             }
         }
-
 
         public CurrentBlock(IMemberStateMachine stateMachine, IBlockElement currentBlock, int stateMachineStateIndex)
             : this(stateMachine)

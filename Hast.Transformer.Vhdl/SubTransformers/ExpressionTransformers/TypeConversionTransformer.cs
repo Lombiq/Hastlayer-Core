@@ -15,12 +15,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     {
         private readonly ITypeConverter _typeConverter;
 
-
         public TypeConversionTransformer(ITypeConverter typeConverter)
         {
             _typeConverter = typeConverter;
         }
-
 
         public IVhdlElement ImplementTypeConversionForBinaryExpression(
             BinaryOperatorExpression binaryOperatorExpression,
@@ -180,7 +178,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var fromSize = fromType.GetSize();
             var toSize = toType.GetSize();
 
-
             Func<string, Invocation> createCastInvocationForFromExpression = target =>
                 new Invocation(target, fromExpression);
 
@@ -192,7 +189,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // won't be the same as in .NET due to type handling.
                 return ResizeHelper.SmartResize(parameter, toSize);
             }
-
 
             // Trying supported cast scenarios:
 
@@ -284,7 +280,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 result.IsLossy = fromSize > 32;
             }
 
-
             if (result.ConvertedFromExpression == null)
             {
                 throw new NotSupportedException(
@@ -292,10 +287,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     " is not supported. Transformed expression to be cast: " + fromExpression.ToVhdl());
             }
 
-
             return result;
         }
-
 
         private class TypeConversionResult : ITypeConversionResult
         {

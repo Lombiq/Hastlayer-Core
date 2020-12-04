@@ -70,7 +70,6 @@ namespace Hast.Common.Configuration
             return configuration.GetMaxInvocationInstanceCountConfigurationForMember(indexedNameHolder.IndexedName);
         }
 
-
         private class LambdaExpressionIndexedNameHolder
         {
             public string IndexedName { get; set; }
@@ -81,12 +80,10 @@ namespace Hast.Common.Configuration
             private readonly Dictionary<string, EntityDeclaration> _compilerGeneratedMembers;
             private readonly Dictionary<EntityDeclaration, int> _lambdaCounts = new Dictionary<EntityDeclaration, int>();
 
-
             public IndexedNameHolderSettingVisitor(Dictionary<string, EntityDeclaration> compilerGeneratedMembers)
             {
                 _compilerGeneratedMembers = compilerGeneratedMembers;
             }
-
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {

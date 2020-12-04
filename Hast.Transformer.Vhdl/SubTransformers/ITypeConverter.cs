@@ -22,7 +22,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             IVhdlTransformationContext context);
     }
 
-
     public static class TypeConvertedExtensions
     {
         public static DataType ConvertParameterType(

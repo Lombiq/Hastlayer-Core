@@ -1090,7 +1090,6 @@ namespace Hast.TestInputs.Dynamic
             AllUnaryOperatorExpressionVariations(memory);
         }
 
-
         private void SaveResult(
             SimpleMemory memory,
             int startCellIndex,

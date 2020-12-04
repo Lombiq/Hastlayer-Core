@@ -11,7 +11,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string Label { get; set; }
         public List<PortMapping> PortMappings { get; set; } = new List<PortMapping>();
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             return Terminated.Terminate(
@@ -27,12 +26,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
     }
 
-
     public class PortMapping : IVhdlElement
     {
         public string From { get; set; }
         public string To { get; set; }
-
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             vhdlGenerationOptions.ShortenName(From) + " => " + vhdlGenerationOptions.ShortenName(To);

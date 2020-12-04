@@ -14,7 +14,6 @@
             var array = ArrayProducingMethod(5);
         }
 
-
         private int[] ArrayProducingMethod(int arrayLength)
         {
             var array = new int[arrayLength];
@@ -22,11 +21,9 @@
             return array;
         }
 
-
         private class ArrayHolder
         {
             public int[] Array { get; }
-
 
             public ArrayHolder(int[] array)
             {

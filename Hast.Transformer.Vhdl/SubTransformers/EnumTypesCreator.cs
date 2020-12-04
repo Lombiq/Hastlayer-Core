@@ -18,17 +18,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return enumDeclarations;
         }
 
-
         private class EnumCheckingVisitor : DepthFirstAstVisitor
         {
             private readonly List<IVhdlElement> _enumDeclarations;
-
 
             public EnumCheckingVisitor(List<IVhdlElement> enumDeclarations)
             {
                 _enumDeclarations = enumDeclarations;
             }
-
 
             public override void VisitTypeDeclaration(TypeDeclaration typeDeclaration)
             {

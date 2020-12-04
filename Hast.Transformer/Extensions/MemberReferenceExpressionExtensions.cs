@@ -135,7 +135,6 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         public static bool IsPropertyReference(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IProperty;
 
-
         private static IMember GetMemberDirectlyOrFromParentInvocation(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.GetMemberResolveResult()?.Member ??
                 memberReferenceExpression.Parent.GetResolveResult<InvocationResolveResult>()?.Member;

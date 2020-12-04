@@ -10,7 +10,6 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new AssignmentsDiscoveringVisitor());
         }
 
-
         private class AssignmentsDiscoveringVisitor : DepthFirstAstVisitor
         {
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
@@ -56,12 +55,10 @@ namespace Hast.Transformer.Services
 
             public bool? AssignedToOnce { get; private set; }
 
-
             public AssignmentsCheckingVisitor(string identifier)
             {
                 _identifier = identifier;
             }
-
 
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
             {
@@ -80,13 +77,11 @@ namespace Hast.Transformer.Services
             private readonly string _oldIdentifier;
             private readonly Expression _newExpression;
 
-
             public IdentifiersChangingVisitor(string oldIdentifier, Expression newExpression)
             {
                 _oldIdentifier = oldIdentifier;
                 _newExpression = newExpression;
             }
-
 
             public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
             {

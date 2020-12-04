@@ -13,11 +13,9 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new InlinableTaskArraysInliningVisitor(inlinableTaskArraysFindingVisitor.InlinableVariableMapping));
         }
 
-
         private class InlinableTaskArraysFindingVisitor : DepthFirstAstVisitor
         {
             public Dictionary<string, string> InlinableVariableMapping { get; set; } = new Dictionary<string, string>();
-
 
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
             {
@@ -40,12 +38,10 @@ namespace Hast.Transformer.Services
         {
             private readonly Dictionary<string, string> _inlinableVariableMappings;
 
-
             public InlinableTaskArraysInliningVisitor(Dictionary<string, string> inlinableVariableMappings)
             {
                 _inlinableVariableMappings = inlinableVariableMappings;
             }
-
 
             public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
             {
@@ -77,7 +73,6 @@ namespace Hast.Transformer.Services
                     variableDeclarationStatement.Remove();
                 }
             }
-
 
             private bool IsInlinableVariableIdentifier(IdentifierExpression identifierExpression)
             {

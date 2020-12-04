@@ -18,7 +18,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IStatementTransformer _statementTransformer;
         private readonly IDeclarableTypeCreator _declarableTypeCreator;
 
-
         public MethodTransformer(
             IMemberStateMachineFactory memberStateMachineFactory,
             IStatementTransformer statementTransformer,
@@ -28,7 +27,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _statementTransformer = statementTransformer;
             _declarableTypeCreator = declarableTypeCreator;
         }
-
 
         public Task<IMemberTransformerResult> Transform(MethodDeclaration method, IVhdlTransformationContext context)
         {
@@ -81,7 +79,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 });
         }
 
-
         private IArchitectureComponentResult BuildStateMachineFromMethod(
             MethodDeclaration method,
             IVhdlTransformationContext context,
@@ -93,7 +90,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // Adding the opening state's block.
             var openingBlock = new InlineBlock();
-
 
             // Handling the return type.
             var returnType = _declarableTypeCreator.CreateDeclarableType(method, method.ReturnType, context);
@@ -178,7 +174,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
             }
 
-
             // Processing method body.
             var bodyContext = new SubTransformerContext
             {
@@ -211,7 +206,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 bodyContext.Scope.CurrentBlock.Add(stateMachine.ChangeToFinalState());
             }
-
 
             // We need to return the declarations and body here too so their computation can be parallelized too.
             // Otherwise we'd add them directly to context.Module.Architecture but that would need that collection to

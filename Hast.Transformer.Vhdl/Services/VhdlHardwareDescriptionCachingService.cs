@@ -9,9 +9,7 @@ namespace Hast.Transformer.Vhdl.Services
     {
         private readonly IAppDataFolder _appDataFolder;
 
-
         public VhdlHardwareDescriptionCachingService(IAppDataFolder appDataFolder) => _appDataFolder = appDataFolder;
-
 
         public async Task<VhdlHardwareDescription> GetHardwareDescription(string cacheKey)
         {
@@ -28,7 +26,6 @@ namespace Hast.Transformer.Vhdl.Services
             using var fileStream = _appDataFolder.CreateFile(GetCacheFilePath(cacheKey));
             return hardwareDescription.Serialize(fileStream);
         }
-
 
         private string GetCacheFilePath(string cacheKey)
             => _appDataFolder.Combine("Hastlayer", "VhdlHardwareDescriptionCacheFiles", cacheKey);

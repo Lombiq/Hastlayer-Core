@@ -8,7 +8,6 @@ namespace Hast.Transformer.Vhdl.Models
     {
         public static readonly string IsNullFieldName = "IsNull".ToExtendedVhdlId();
 
-
         public NullableRecord()
         {
             var isNullField = new RecordField
@@ -19,7 +18,6 @@ namespace Hast.Transformer.Vhdl.Models
 
             Fields.Add(isNullField);
         }
-
 
         public static RecordFieldAccess CreateIsNullFieldAccess(IDataObject recordInstance) =>
             new RecordFieldAccess { Instance = recordInstance, FieldName = IsNullFieldName };

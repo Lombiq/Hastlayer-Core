@@ -10,7 +10,6 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new OperatorConvertingVisitor());
         }
 
-
         private class OperatorConvertingVisitor : DepthFirstAstVisitor
         {
             public override void VisitOperatorDeclaration(OperatorDeclaration operatorDeclaration)

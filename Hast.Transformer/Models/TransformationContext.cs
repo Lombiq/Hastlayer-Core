@@ -14,7 +14,6 @@ namespace Hast.Transformer.Models
         public IArraySizeHolder ArraySizeHolder { get; set; }
         public IDeviceDriver DeviceDriver { get; set; }
 
-
         public TransformationContext(ITransformationContext previousContext) : this()
         {
             Id = previousContext.Id;

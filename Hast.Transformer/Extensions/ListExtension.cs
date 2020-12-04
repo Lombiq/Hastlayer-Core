@@ -29,7 +29,6 @@ namespace ICSharpCode.Decompiler
         public static IList<IILTransform> ReplaceWith<TReplace>(this IList<IILTransform> list, IILTransform replacement) =>
             ReplaceWithInternal<IILTransform, TReplace>(list, replacement);
 
-
         private static IList<TElement> RemoveInternal<TElement, TRemove>(IList<TElement> list)
         {
             list.Remove(list.Single(item => item.GetType() == typeof(TRemove)));

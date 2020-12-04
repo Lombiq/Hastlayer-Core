@@ -8,11 +8,9 @@
         private static readonly Null _instance = new Null();
         public static Null Instance { get { return _instance; } }
 
-
         private Null()
         {
         }
-
 
         // It shouldn't be always terminated, so not terminating it here. See: 
         // http://www.vhdl.renerta.com/mobile/source/vhd00045.htm

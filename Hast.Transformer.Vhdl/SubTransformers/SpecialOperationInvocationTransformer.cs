@@ -18,7 +18,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IBinaryOperatorExpressionTransformer _binaryOperatorExpressionTransformer;
         private readonly ITypeConverter _typeConverter;
 
-
         public SpecialOperationInvocationTransformer(
             IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer,
             ITypeConverter typeConverter)
@@ -26,7 +25,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _binaryOperatorExpressionTransformer = binaryOperatorExpressionTransformer;
             _typeConverter = typeConverter;
         }
-
 
         public bool IsSpecialOperationInvocation(InvocationExpression expression) =>
             TryGetSimdOperation(expression.GetTargetMemberFullName()) != null;
@@ -111,7 +109,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 });
             }
 
-
             var stateMachine = context.Scope.StateMachine;
             var preTransformationStateCount = stateMachine.States.Count;
 
@@ -141,7 +138,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             };
         }
 
-
         private string TryGetSimdOperation(string targetMethodName)
         {
             var simdOperationsClassFullNamePrefix = typeof(SimdOperations).FullName + "::";
@@ -163,7 +159,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             return null;
         }
-
 
         private class PartiallyTransformedBinaryOperatorExpression : IPartiallyTransformedBinaryOperatorExpression
         {

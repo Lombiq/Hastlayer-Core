@@ -45,7 +45,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             DefaultValue = default(int).ToVhdlValue(_unrangedInt)
         };
 
-
         private static readonly SizedDataType _int8 = new SizedDataType
         {
             TypeCategory = DataTypeCategory.Scalar,
@@ -77,7 +76,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public static readonly SizedDataType[] SignedIntegers = new[] { Int8, Int16, Int32, Int64 };
 
-
         private static readonly SizedDataType _uint8 = new SizedDataType(_int16) { Name = "unsigned", Size = 8 };
         public static readonly SizedDataType UInt8 = new SizedDataType(_uint8)
         {
@@ -104,9 +102,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public static readonly SizedDataType[] UnsignedIntegers = new[] { UInt8, UInt16, UInt32, UInt64 };
 
-
         public static readonly SizedDataType[] Integers = SignedIntegers.Union(UnsignedIntegers).ToArray();
-
 
         private static readonly DataType _stdLogic = new DataType { TypeCategory = DataTypeCategory.Character, Name = "std_logic" };
         public static readonly DataType StdLogic = new DataType(_stdLogic)

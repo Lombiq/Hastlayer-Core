@@ -12,7 +12,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
-
         public InlineBlock(params IVhdlElement[] vhdlElements)
         {
             Body = vhdlElements.ToList();
@@ -22,7 +21,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             Body = vhdlElements.ToList();
         }
-
 
         public virtual string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => Body.ToVhdl(vhdlGenerationOptions);
     }

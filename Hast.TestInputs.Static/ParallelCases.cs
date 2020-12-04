@@ -43,11 +43,9 @@ namespace Hast.TestInputs.Static
             Task.WhenAll(tasks).Wait();
         }
 
-
         private class Calculator
         {
             public uint Number { get; set; }
-
 
             public bool IsEven() => Number % 2 == 0;
         }

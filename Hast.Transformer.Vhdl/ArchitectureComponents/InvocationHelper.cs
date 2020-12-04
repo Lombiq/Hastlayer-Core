@@ -94,7 +94,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return CreateSignalReference(componentName, targetStateMachineName, NameSuffixes.Started, index);
         }
 
-
         public static DataObjectReference CreateFinishedSignalReference(
             IArchitectureComponent component,
             string targetStateMachineName,
@@ -103,7 +102,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return CreateFinishedSignalReference(component.Name, targetStateMachineName, index);
         }
 
-
         public static DataObjectReference CreateFinishedSignalReference(
             string componentName,
             string targetStateMachineName,
@@ -111,7 +109,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         {
             return CreateSignalReference(componentName, targetStateMachineName, NameSuffixes.Finished, index);
         }
-
 
         private static DataObjectReference CreateSignalReference(
             string componentName,

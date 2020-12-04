@@ -7,12 +7,10 @@ namespace Hast.Synthesis.Services
     {
         private readonly IEnumerable<IDeviceDriver> _drivers;
 
-
         public DeviceDriverSelector(IEnumerable<IDeviceDriver> drivers)
         {
             _drivers = drivers;
         }
-
 
         public IDeviceDriver GetDriver(string deviceName) =>
             _drivers.FirstOrDefault(driver => driver.DeviceManifest?.Name == deviceName);

@@ -19,7 +19,6 @@ namespace Hast.Transformer.Models
         IArraySizeHolder Clone();
     }
 
-
     public static class ArraySizeHolderExtensions
     {
         public static IArraySize GetSizeOrThrow(this IArraySizeHolder arraySizeHolder, AstNode arrayHolder)

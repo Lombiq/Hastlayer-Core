@@ -9,7 +9,6 @@ namespace Hast.Transformer.Vhdl.Models
         DataType DataType { get; }
     }
 
-
     internal class TransformedInvocationParameter : ITransformedInvocationParameter
     {
         public IVhdlElement Reference { get; set; }

@@ -16,7 +16,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly ITypeConverter _typeConverter;
         private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;
 
-
         public DisplayClassFieldTransformer(
             ITypeConverter typeConverter,
             IArrayCreateExpressionTransformer arrayCreateExpressionTransformer)
@@ -24,7 +23,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _typeConverter = typeConverter;
             _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
         }
-
 
         public bool IsDisplayClassField(FieldDeclaration field)
         {
@@ -37,7 +35,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var fieldFullName = field.GetFullName();
                 var fieldComponent = new BasicComponent(fieldFullName);
-
 
                 var shouldTransform =
                     // Nothing to do with "__this" fields of DisplayClasses that reference the parent class's object
@@ -90,7 +87,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             });
         }
 
-
         private class ArrayCreationDataTypeRetrievingVisitor : DepthFirstAstVisitor
         {
             private readonly string _fieldFullName;
@@ -98,7 +94,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             private readonly IVhdlTransformationContext _context;
 
             public DataType ArrayDataType { get; private set; }
-
 
             public ArrayCreationDataTypeRetrievingVisitor(
                 string fieldDefinitionFullName,
@@ -109,7 +104,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
                 _context = context;
             }
-
 
             public override void VisitArrayCreateExpression(ArrayCreateExpression arrayCreateExpression)
             {

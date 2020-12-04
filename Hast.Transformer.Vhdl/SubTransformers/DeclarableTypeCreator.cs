@@ -12,12 +12,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         private readonly ITypeConverter _typeConverter;
 
-
         public DeclarableTypeCreator(ITypeConverter typeConverter)
         {
             _typeConverter = typeConverter;
         }
-
 
         public DataType CreateDeclarableType(AstNode valueHolder, IType type, IVhdlTransformationContext context)
         {

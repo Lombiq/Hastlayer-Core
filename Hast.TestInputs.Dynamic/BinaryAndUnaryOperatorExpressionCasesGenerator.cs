@@ -157,7 +157,6 @@ namespace Hast.TestInputs.Dynamic
 
             System.IO.File.WriteAllText("AllUnaryOperatorExpressionVariations.cs", codeBuilder.ToString());
 
-
         }
     }
 }

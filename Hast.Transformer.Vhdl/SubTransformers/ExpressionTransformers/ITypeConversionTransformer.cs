@@ -19,7 +19,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         IDataObject ConvertedToDataObject { get; }
     }
 
-
     public interface ITypeConversionTransformer : IDependency
     {
         /// <summary>

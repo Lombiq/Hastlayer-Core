@@ -4,7 +4,6 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xunit;
 
-
 namespace Hast.DynamicTests.Tests
 {
     public class BinaryAndUnaryOperatorExpressionCasesTests
@@ -104,7 +103,6 @@ namespace Hast.DynamicTests.Tests
             ExecuteLongTest(
                  b => b.AllUnaryOperatorExpressionVariations(null),
                  b => b.AllUnaryOperatorExpressionVariations);
-
 
         private static Task ExecuteIntTest(
             Expression<Action<BinaryAndUnaryOperatorExpressionCases>> caseSelector,

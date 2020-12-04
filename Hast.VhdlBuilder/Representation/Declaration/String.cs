@@ -7,13 +7,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public int Length { get; set; }
 
-
         public String()
         {
             Name = "string";
             TypeCategory = DataTypeCategory.Array;
         }
-
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => 
             "string" + (Length > 0 ? "(1 to " + Length + ")" : string.Empty);

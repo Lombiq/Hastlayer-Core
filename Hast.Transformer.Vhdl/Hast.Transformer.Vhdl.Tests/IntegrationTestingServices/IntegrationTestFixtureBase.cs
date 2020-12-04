@@ -13,13 +13,11 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
         private readonly Lazy<Hastlayer> _host;
         protected Hastlayer Host => _host.Value;
 
-
         protected IntegrationTestFixtureBase()
         {
             _hostConfiguration.Extensions = new List<Assembly>();
             _host = new Lazy<Hastlayer>(() => (Hastlayer)Hastlayer.Create(_hostConfiguration));
         }
-
 
         public void Dispose()
         {

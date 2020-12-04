@@ -8,7 +8,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         Out
     }
 
-
     public static class ArchitectureComponentNameHelper
     {
         public static string CreateParameterSignalName(string componentName, string parameterName, ParameterFlowDirection direction) =>

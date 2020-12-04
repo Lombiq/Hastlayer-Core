@@ -26,7 +26,6 @@ namespace Hast.TestInputs.Invalid
             var customObject2 = new MyClass2 { SelfReference = customObject1 };
         }
 
-
         private class MyClass1
         {
             public int MyProperty { get; set; }

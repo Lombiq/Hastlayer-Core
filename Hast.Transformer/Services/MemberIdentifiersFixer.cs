@@ -16,7 +16,6 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new MemberIdentifiersFixingVisitor());
         }
 
-
         private class MemberIdentifiersFixingVisitor : DepthFirstAstVisitor
         {
             public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)

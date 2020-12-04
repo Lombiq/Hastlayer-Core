@@ -206,11 +206,9 @@ namespace Hast.Synthesis.Services
             }
         }
 
-
         private class TimingReport : ITimingReport
         {
             private readonly Dictionary<string, decimal> _timings = new Dictionary<string, decimal>();
-
 
             public void SetLatencyNs(
                 dynamic operatorType,
@@ -238,7 +236,6 @@ namespace Hast.Synthesis.Services
 
             public decimal GetLatencyNs(UnaryOperatorType unaryOperator, int operandSizeBits, bool isSigned) =>
                 GetLatencyNsInternal(unaryOperator, operandSizeBits, isSigned, string.Empty);
-
 
             private decimal GetLatencyNsInternal(dynamic operatorType, int operandSizeBits, bool isSigned, string constantOperand) =>
                 _timings.TryGetValue(GetKey(operatorType, operandSizeBits, isSigned, constantOperand), out decimal latency) ? latency : -1;

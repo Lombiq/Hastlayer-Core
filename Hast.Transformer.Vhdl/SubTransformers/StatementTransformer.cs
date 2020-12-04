@@ -20,7 +20,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IDeclarableTypeCreator _declarableTypeCreator;
         private readonly ITypeConversionTransformer _typeConversionTransformer;
 
-
         public StatementTransformer(
             ITypeConverter typeConverter,
             IExpressionTransformer expressionTransformer,
@@ -33,12 +32,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _typeConversionTransformer = typeConversionTransformer;
         }
 
-
         public void Transform(Statement statement, ISubTransformerContext context)
         {
             TransformInner(statement, context);
         }
-
 
         private void TransformInner(Statement statement, ISubTransformerContext context)
         {
@@ -164,7 +161,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             "."),
                         CreateConditionalStateChange(afterIfElseStateIndex, context));
 
-
                 var trueStateBlock = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions =>
                         "True branch of the if-else started in state " +
@@ -200,7 +196,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         stateMachine.CreateStateChange(afterIfElseStateIndex));
                 }
 
-
                 ifElseCommentsBlock.Add(
                     new LineComment("This if-else was transformed from a .NET if-else. It spans across multiple states:"));
                 ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
@@ -215,7 +210,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
                     "    * Execution after either branch will continue in the following state: " +
                     stateNameGenerator(afterIfElseStateIndex, vhdlGenerationOptions) + "."));
-
 
                 currentBlock.ChangeBlockToDifferentState(afterIfElseStateBlock, afterIfElseStateIndex);
             }
@@ -299,7 +293,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 };
                 currentBlock.Add(caseStatement);
 
-
                 // Case statements, much like if-else statements need a state added in advance where all branches will
                 // will finally return to. All branches have their own states too.
                 var caseStartStateIndex = currentBlock.StateMachineStateIndex;
@@ -358,7 +351,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // If the AST doesn't contain cases for all possible values of the type the statement switches on then
                 // the VHDL will be incorrect. By including an "others" case every time this is solved.
                 caseStatement.Whens.Add(CaseWhen.CreateOthers());
-
 
                 currentBlock.ChangeBlockToDifferentState(afterCaseStateBlock, aftercaseStateIndex);
             }
@@ -425,7 +417,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 True = stateMachine.CreateStateChange(destinationStateIndex)
             };
         }
-
 
         // Keeping track of the index of the state after while statements, so this can be used to break out of the loop.
         private static Stack<int> GetOrCreateAfterWhileStateIndexStack(ISubTransformerContext context)

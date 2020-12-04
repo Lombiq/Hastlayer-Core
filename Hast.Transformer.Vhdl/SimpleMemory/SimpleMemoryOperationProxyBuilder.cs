@@ -22,7 +22,6 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
 
             var signalsAssignmentBlock = new InlineBlock();
 
-
             signalsAssignmentBlock.Add(BuildConditionalPortAssignment(
                 SimpleMemoryPortNames.CellIndex,
                 simpleMemoryUsingComponents,
@@ -46,7 +45,6 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 SimpleMemoryPortNames.WriteEnable,
                 simpleMemoryUsingComponents));
 
-
             // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would look 
             // from a generated state machine.
             return new BasicComponent(proxyComponentName)
@@ -54,7 +52,6 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 Body = signalsAssignmentBlock
             };
         }
-
 
         private static ConditionalSignalAssignment BuildConditionalPortAssignment(
             string portName,
@@ -65,7 +62,6 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             {
                 AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference()
             };
-
 
             foreach (var component in components)
             {
@@ -85,14 +81,12 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 });
             }
 
-
             assignment.Whens.Add(new SignalAssignmentWhen
             {
                 Value = portName == SimpleMemoryPortNames.CellIndex ?
                     KnownDataTypes.UnrangedInt.DefaultValue :
                     SimpleMemoryTypes.DataSignalsDataType.DefaultValue
             });
-
 
             return assignment;
         }

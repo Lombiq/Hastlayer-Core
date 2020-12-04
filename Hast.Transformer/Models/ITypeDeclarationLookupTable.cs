@@ -12,7 +12,6 @@ namespace Hast.Transformer.Models
         TypeDeclaration Lookup(string fullName);
     }
 
-
     public static class TypeDeclarationLookupTableExtensions
     {
         /// <summary>

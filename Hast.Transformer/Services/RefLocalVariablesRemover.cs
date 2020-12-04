@@ -10,11 +10,9 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new InitializersChangingVisitor());
         }
 
-
         private class InitializersChangingVisitor : DepthFirstAstVisitor
         {
             private readonly Dictionary<string, Expression> _substitutes = new Dictionary<string, Expression>();
-
 
             public override void VisitVariableDeclarationStatement(VariableDeclarationStatement variableDeclarationStatement)
             {

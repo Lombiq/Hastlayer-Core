@@ -15,7 +15,6 @@ namespace Hast.Transformer.Vhdl.Services
         private readonly ITransformedVhdlManifestBuilder _transformedVhdlManifestBuilder;
         private readonly IEnumerable<EventHandler<ITransformedVhdlManifest>> _vhdlTransformationEventHandler;
 
-
         public VhdlTransformingEngine(
             IVhdlHardwareDescriptionCachingService vhdlHardwareDescriptionCachingService,
             ITransformedVhdlManifestBuilder transformedVhdlManifestBuilder,
@@ -25,7 +24,6 @@ namespace Hast.Transformer.Vhdl.Services
             _transformedVhdlManifestBuilder = transformedVhdlManifestBuilder;
             _vhdlTransformationEventHandler = vhdlTransformationEventHandler;
         }
-
 
         public async Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
         {

@@ -11,12 +11,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         private readonly Func<IVhdlGenerationOptions, string> _generator;
 
-
         public GeneratedComment(Func<IVhdlGenerationOptions, string> generator)
         {
             _generator = generator;
         }
-        
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             new LineComment(_generator(vhdlGenerationOptions)).ToVhdl(vhdlGenerationOptions);

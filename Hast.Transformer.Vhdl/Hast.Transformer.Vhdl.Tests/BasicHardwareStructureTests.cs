@@ -63,7 +63,6 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-
         private Task<VhdlHardwareDescription> TransformClassStrutureExamplesToVhdl(ITransformer transformer) =>
             TransformAssembliesToVhdl(
                 transformer,

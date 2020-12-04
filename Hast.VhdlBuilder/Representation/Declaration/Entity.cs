@@ -36,7 +36,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public List<Port> Ports { get; set; } = new List<Port>();
         public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             var name = vhdlGenerationOptions.ShortenName(Name);
@@ -58,7 +57,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "end " + name, vhdlGenerationOptions);
         }
-
 
         /// <summary>
         /// Converts a string to be a safe Entity name, i.e. strips and substitutes everything not suited.

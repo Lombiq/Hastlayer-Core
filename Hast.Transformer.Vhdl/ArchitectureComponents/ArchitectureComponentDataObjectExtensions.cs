@@ -81,7 +81,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 .CreatePrefixedSegmentedObjectName(targetMemberName, NameSuffixes.Return, index.ToString())
                 .ToVhdlSignalReference();
 
-
         private static IEnumerable<ParameterSignal> FilterParameterSignals(IEnumerable<Signal> signals) => 
             signals.Where(signal => signal is ParameterSignal).Cast<ParameterSignal>();
     }

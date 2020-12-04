@@ -13,7 +13,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         int RequiredClockCyclesCeiling { get; }
     }
 
-
     public interface IArchitectureComponent
     {
         /// <summary>

@@ -12,11 +12,9 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public IVhdlElement BeginBodyWith { get; set; }
         public IVhdlElement EndBodyWith { get; set; }
 
-
         public ConfigurableComponent(string name) : base(name)
         {
         }
-
 
         public override IVhdlElement BuildDeclarations()
         {

@@ -10,7 +10,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public List<GenericItem> Items { get; set; } = new List<GenericItem>();
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
                 "generic (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
@@ -18,17 +17,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 ")", vhdlGenerationOptions);
     }
 
-
     public class GenericItem : DataObjectBase
     {
         public Value Value { get; set; }
-
 
         public GenericItem()
         {
             DataObjectKind = DataObjectKind.Constant;
         }
-
 
         public override IDataObject ToReference() => this;
 

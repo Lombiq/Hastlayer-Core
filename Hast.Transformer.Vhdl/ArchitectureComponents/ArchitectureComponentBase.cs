@@ -31,17 +31,14 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             get { return _multiCycleOperations; }
         }
 
-
         protected ArchitectureComponentBase(string name)
         {
             Name = name;
         }
 
-
         public abstract IVhdlElement BuildDeclarations();
 
         public abstract IVhdlElement BuildBody();
-
 
         protected IBlockElement BuildDeclarationsBlock(IVhdlElement beginWith = null, IVhdlElement endWith = null)
         {

@@ -12,7 +12,6 @@ namespace Hast.Remote.Worker.Services
         bool IsSuccess { get; }
     }
 
-
     public interface IApplicationInsightsTelemetryManager : ISingletonDependency
     {
         void TrackTransformation(ITransformationTelemetry telemetry);

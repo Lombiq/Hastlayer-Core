@@ -14,7 +14,6 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new UnnecessaryObjectCastsRemovingVisitor());
         }
 
-
         private class MethodObjectParametersTypeConvertingVisitor : DepthFirstAstVisitor
         {
             public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
@@ -60,19 +59,16 @@ namespace Hast.Transformer.Services
                 }
             }
 
-
             private class ParameterCastExpressionFindingVisitor : DepthFirstAstVisitor
             {
                 private readonly string _parameterName;
 
                 public CastExpression Expression { get; private set; }
 
-
                 public ParameterCastExpressionFindingVisitor(string parameterName)
                 {
                     _parameterName = parameterName;
                 }
-
 
                 public override void VisitCastExpression(CastExpression castExpression)
                 {
@@ -99,13 +95,11 @@ namespace Hast.Transformer.Services
                 private readonly string _parameterName;
                 private readonly ILVariableResolveResult _resolveResult;
 
-
                 public ParameterReferencesTypeChangingVisitor(string parameterName, ILVariableResolveResult resolveResult)
                 {
                     _parameterName = parameterName;
                     _resolveResult = resolveResult;
                 }
-
 
                 public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
                 {

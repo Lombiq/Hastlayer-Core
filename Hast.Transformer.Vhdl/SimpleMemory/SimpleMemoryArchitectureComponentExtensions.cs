@@ -24,7 +24,6 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
         {
             if (component.AreSimpleMemorySignalsAdded()) return;
 
-
             component.InternallyDrivenSignals.Add(new Signal
             {
                 DataType = SimpleMemoryTypes.CellIndexInternalSignalDataType,

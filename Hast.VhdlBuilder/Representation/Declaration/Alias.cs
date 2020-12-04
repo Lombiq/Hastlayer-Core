@@ -11,12 +11,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// </summary>
         public IDataObject AliasedObject { get; set; }
 
-
         public Alias()
         {
             DataObjectKind = DataObjectKind.Variable;
         }
-
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(

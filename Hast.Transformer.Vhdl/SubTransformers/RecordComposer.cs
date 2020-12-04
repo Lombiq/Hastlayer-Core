@@ -16,13 +16,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly Lazy<IDeclarableTypeCreator> _declarableTypeCreatorLazy;
         private readonly IMemoryCache _memoryCache;
 
-
         public RecordComposer(IMemoryCache memoryCache, Lazy<IDeclarableTypeCreator> declarableTypeCreatorLazy)
         {
             _memoryCache = memoryCache;
             _declarableTypeCreatorLazy = declarableTypeCreatorLazy;
         }
-
 
         public bool IsSupportedRecordMember(AstNode node) => node is PropertyDeclaration || node is FieldDeclaration;
 

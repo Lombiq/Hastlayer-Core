@@ -59,7 +59,6 @@ namespace Hast.TestInputs.ClassStructure1.ComplexTypes
         //    var y = z;
         //}
 
-
         private void PrivateMethod()
         {
             StaticMethod();
@@ -70,7 +69,6 @@ namespace Hast.TestInputs.ClassStructure1.ComplexTypes
         {
             var x = 1;
         }
-
 
         private static void StaticMethod()
         {

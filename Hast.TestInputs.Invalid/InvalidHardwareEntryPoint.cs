@@ -5,13 +5,11 @@
         public int MyProperty { get; set; }
         private int _myField = 0;
 
-
         public InvalidHardwareEntryPoint()
         {
             var x = 4;
             var y = x + 3;
         }
-
 
         public virtual void EntryPointMethod()
         {

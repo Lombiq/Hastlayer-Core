@@ -38,7 +38,6 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new SimpleMemoryAssignmentVerifyingVisitor());
         }
 
-
         private class SimpleMemoryAssignmentVerifyingVisitor : DepthFirstAstVisitor
         {
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)

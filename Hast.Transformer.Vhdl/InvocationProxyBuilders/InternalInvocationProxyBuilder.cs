@@ -25,7 +25,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             // [invoked member declaration][from component name][invocation instance count]
             var invokedMembers = new Dictionary<EntityDeclaration, List<KeyValuePair<string, int>>>();
 
-
             // Summarizing which member was invoked with how many instances from which component.
             foreach (var component in components.Where(component => component.OtherMemberMaxInvocationInstanceCounts.Any()))
             {
@@ -59,7 +58,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 }
             }
 
-
             var proxyComponents = new List<IArchitectureComponent>(invokedMembers.Count);
             // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would 
             // look from a generated state machine.
@@ -91,7 +89,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 Declarations = new InlineBlock(booleanArrayType, runningStates)
             });
 
-
             foreach (var invokedMember in invokedMembers)
             {
                 var targetMember = invokedMember.Key;
@@ -105,7 +102,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     .GetTransformerConfiguration()
                     .GetMaxInvocationInstanceCountConfigurationForMember(targetMember)
                     .MaxInvocationInstanceCount;
-
 
                 Func<int, string> getTargetMemberComponentName = index =>
                     ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, index);
@@ -190,7 +186,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         });
                     };
 
-
                 // Is this member's component only invoked from a single other component? Because then we don't need a 
                 // full invocation proxy: local Start and Finished signals can be directly connected to the target 
                 // component's signals.
@@ -264,12 +259,10 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     proxyComponent.ProcessInReset = proxyInResetBlock;
                     var bodyBlock = new InlineBlock();
 
-
                     Func<int, DataObjectReference> getTargetStartedVariableReference = index => proxyComponent
                         .CreatePrefixedSegmentedObjectName(ArchitectureComponentNameHelper
                             .CreateStartedSignalName(getTargetMemberComponentName(index)).TrimExtendedVhdlIdDelimiters())
                         .ToVhdlVariableReference();
-
 
                     DataObjectReference targetAvailableIndicatorVariableReference = null;
                     SizedDataType targetAvailableIndicatorDataType = null;
@@ -342,8 +335,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         }
                     }
 
-
-
                     // Building the invocation handlers.
                     foreach (var invocation in invokedFromComponents)
                     {
@@ -385,7 +376,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 InitialValue = waitingForStartedStateValue
                             });
 
-
                             var invocationHandlerBlock = new LogicalBlock(
                                 new LineComment(
                                     "Invocation handler #" + i.ToString() +
@@ -393,12 +383,10 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                     " corresponding to " + invokerName));
                             bodyBlock.Add(invocationHandlerBlock);
 
-
                             var runningStateCase = new Case
                             {
                                 Expression = runningStateVariableReference
                             };
-
 
                             // WaitingForStarted state
                             {
@@ -447,7 +435,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                     return componentAvailableBodyBlock;
                                 };
 
-
                                 if (targetComponentCount == 1)
                                 {
                                     // If there is only a single target component then the implementation can be simpler.
@@ -482,7 +469,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                     waitingForStartedInnnerBlock.Add(availableTargetSelectingCase);
                                 }
 
-
                                 runningStateCase.Whens.Add(new CaseWhen
                                 {
                                     Expression = waitingForStartedStateValue,
@@ -506,7 +492,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                     }
                                 });
                             }
-
 
                             // WaitingForFinished state
                             {
@@ -572,7 +557,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 });
                             }
 
-
                             // AfterFinished state
                             {
                                 runningStateCase.Whens.Add(new CaseWhen
@@ -611,7 +595,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 });
                             }
 
-
                             // Adding reset for the finished signal.
                             proxyInResetBlock.Add(new Assignment
                             {
@@ -624,15 +607,12 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         }
                     }
 
-
                     proxyComponent.ProcessNotInReset = bodyBlock;
                 }
             }
 
-
             return proxyComponents;
         }
-
 
         private static IVhdlElement CreateBooleanIndicatorValue(SizedDataType targetAvailableIndicatorDataType, int indicatedIndex)
         {

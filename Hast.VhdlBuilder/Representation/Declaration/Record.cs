@@ -9,12 +9,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public List<RecordField> Fields { get; set; } = new List<RecordField>();
 
-
         public Record()
         {
             TypeCategory = DataTypeCategory.Composite;
         }
-
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
@@ -22,7 +20,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     Fields.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "end record", vhdlGenerationOptions);
     }
-
 
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class RecordField : TypedDataObjectBase

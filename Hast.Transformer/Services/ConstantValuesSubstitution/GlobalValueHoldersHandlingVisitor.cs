@@ -17,7 +17,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
         private readonly AstNode _rootNode;
 
-
         public GlobalValueHoldersHandlingVisitor(
             ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor,
             AstNode rootNode)
@@ -27,7 +26,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             _typeDeclarationLookupTable = constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable;
             _rootNode = rootNode;
         }
-
 
         public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
         {

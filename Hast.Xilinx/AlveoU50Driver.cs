@@ -1068,9 +1068,7 @@ mul_by_0	unsigned64	unsigned64	sync	synth	0	0
             }
         }
 
-
         public AlveoU50Driver(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
-
 
         public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
             DeviceDriverHelper.ComputeClockCyclesForBinaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);

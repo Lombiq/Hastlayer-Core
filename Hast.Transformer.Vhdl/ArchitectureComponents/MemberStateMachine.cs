@@ -19,7 +19,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             get { return _states; }
         }
 
-
         public MemberStateMachine(string name) : base(name)
         {
             _statesEnum = new Enum { Name = this.CreatePrefixedObjectName("_States") };
@@ -47,7 +46,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 InitialValue = Value.False
             };
             InternallyDrivenSignals.Add(_finishedSignal);
-
 
             var startStateBlock = new InlineBlock(
                 new LineComment("Start state"),
@@ -86,7 +84,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 new MemberStateMachineState { Body = finalStateBlock }
             };
         }
-
 
         public int AddState(IBlockElement state)
         {
@@ -140,7 +137,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 process,
                 new LineComment(Name + " state machine end"));
         }
-
 
         public class MemberStateMachineState : IMemberStateMachineState
         {

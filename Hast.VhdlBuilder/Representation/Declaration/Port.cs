@@ -10,18 +10,15 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         InOut
     }
 
-
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Port : TypedDataObjectBase
     {
         public PortMode Mode { get; set; }
 
-
         public Port()
         {
             DataObjectKind = DataObjectKind.Signal;
         }
-
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             vhdlGenerationOptions.ShortenName(Name) +

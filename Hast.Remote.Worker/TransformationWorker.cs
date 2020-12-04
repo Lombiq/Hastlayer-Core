@@ -42,7 +42,6 @@ namespace Hast.Remote.Worker
         private int _restartCount = 0;
         private System.Timers.Timer _oldResultBlobsCleanerTimer;
 
-
         public TransformationWorker(
             IJsonConverter jsonConverter,
             IAppDataFolder appDataFolder,
@@ -86,7 +85,6 @@ namespace Hast.Remote.Worker
             };
             _oldResultBlobsCleanerTimer.Enabled = true;
         }
-
 
         public async Task Work(CancellationToken cancellationToken)
         {
@@ -347,7 +345,6 @@ namespace Hast.Remote.Worker
             Task.Delay(10000).Wait();
         }
 
-
         public static async Task<IHastlayer> CreateHastlayerAsync(
             ITransformationWorkerConfiguration configuration,
             Action<IHastlayerConfiguration, IServiceCollection> onServiceRegistration = null,
@@ -410,7 +407,6 @@ namespace Hast.Remote.Worker
 
         private static bool HasHttpStatus(StorageException exception, HttpStatusCode statusCode) =>
             ((exception.InnerException as WebException)?.Response as HttpWebResponse)?.StatusCode == statusCode;
-
 
         private class TransformationTelemetry : ITransformationTelemetry
         {

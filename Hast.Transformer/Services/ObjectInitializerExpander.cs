@@ -15,7 +15,6 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new ObjectInitializerExpanderVisitor());
         }
 
-
         private class ObjectInitializerExpanderVisitor : DepthFirstAstVisitor
         {
             public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)

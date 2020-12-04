@@ -14,7 +14,6 @@ namespace Hast.Transformer.Vhdl.Models
         private readonly Dictionary<DataType, HashSet<string>> _dependencies =
             new Dictionary<DataType, HashSet<string>>(new DataTypeEqualityComparer());
 
-
         /// <summary>
         /// Declare a dependency between two types.
         /// </summary>
@@ -49,7 +48,6 @@ namespace Hast.Transformer.Vhdl.Models
             if (!_dependencies.TryGetValue(type, out var dependencies)) return Enumerable.Empty<string>();
             return dependencies;
         }
-
 
         private class DataTypeEqualityComparer : IEqualityComparer<DataType>
         {

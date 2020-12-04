@@ -8,7 +8,6 @@
     {
     }
 
-
     public interface IReferenceableDeclaration<T> : IReferenceableDeclaration where T : IVhdlElement
     {
         T ToReference();

@@ -38,7 +38,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             ITypeDeclarationLookupTable typeDeclarationLookupTable) =>
             FindParameterForExpressionPassedToCall(invocationExpression, invocationExpression.Arguments, passedExpression, typeDeclarationLookupTable);
 
-
         // This could be optimized not to look up everything every time when called from VisitObjectCreateExpression()
         // and VisitInvocationExpression().
         private static ParameterDeclaration FindParameterForExpressionPassedToCall(

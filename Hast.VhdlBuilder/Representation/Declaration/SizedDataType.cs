@@ -10,7 +10,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public int Size { get; set; }
         public IVhdlElement SizeExpression { get; set; }
 
-
         public SizedDataType(DataType baseType)
             : base(baseType)
         {
@@ -26,7 +25,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public SizedDataType()
         {
         }
-
 
         public override DataType ToReference() => this;
 
@@ -57,7 +55,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override int GetHashCode() => (Name + TypeCategory.ToString() + Size).GetHashCode();
     }
-
 
     public static class SizedDataTypeExtensions
     {

@@ -55,7 +55,6 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 configurationBuilder.WithVhdlConfiguration().UseCallerLocation());
     }
 
-
     public static class ShouldMatchConfigurationBuilderExtensions
     {
         public static ShouldMatchConfigurationBuilder WithVhdlConfiguration(this ShouldMatchConfigurationBuilder configurationBuilder) =>

@@ -9,12 +9,10 @@ namespace Hast.VhdlBuilder.Representation.Expression
     {
         private readonly Func<IVhdlGenerationOptions, string> _vhdlGenerator;
 
-
         public DataTypeReference(DataType dataType, Func<IVhdlGenerationOptions, string> vhdlGenerator) : base(dataType)
         {
             _vhdlGenerator = vhdlGenerator;
         }
-
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => _vhdlGenerator(vhdlGenerationOptions);
     }

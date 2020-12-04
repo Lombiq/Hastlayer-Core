@@ -23,7 +23,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public string FieldName { get; set; }
 
-
         public override IDataObject ToReference() => this;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>

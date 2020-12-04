@@ -12,7 +12,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         private Dictionary<string, Dictionary<AstNode, PrimitiveExpression>> _valueHoldersAndValueDescriptors =
             new Dictionary<string, Dictionary<AstNode, PrimitiveExpression>>();
 
-
         public ConstantValuesTable()
         {
         }
@@ -21,7 +20,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         {
             _valueHoldersAndValueDescriptors = valueHoldersAndValueDescriptors;
         }
-
 
         /// <param name="scope">The node within which the value should valid.</param>
         public void MarkAsPotentiallyConstant(
@@ -111,7 +109,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         public void OverWrite(ConstantValuesTable source) =>
             _valueHoldersAndValueDescriptors = source._valueHoldersAndValueDescriptors;
-
 
         private Dictionary<AstNode, PrimitiveExpression> GetOrCreateValueDescriptors(string holderName)
         {

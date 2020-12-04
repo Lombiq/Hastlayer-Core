@@ -14,7 +14,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         Composite
     }
 
-
     /// <summary>
     /// VHDL object data type, e.g. std_logic or std_logic_vector.
     /// </summary>
@@ -24,7 +23,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public DataTypeCategory TypeCategory { get; set; }
         public string Name { get; set; }
         public virtual Value DefaultValue { get; set; }
-
 
         public DataType(DataType previous) : this()
         {
@@ -36,7 +34,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public DataType()
         {
         }
-
 
         /// <summary>
         /// Generates VHDL code that can be used when the data type is referenced e.g. in a variable declaration.
@@ -67,7 +64,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
         public override int GetHashCode() => (Name + TypeCategory.ToString()).GetHashCode();
-
 
         public static bool operator ==(DataType a, DataType b)
         {

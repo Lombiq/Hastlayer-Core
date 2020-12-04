@@ -8,17 +8,14 @@
             a.Method(input);
         }
 
-
         private class MyClass
         {
             private int _state;
-
 
             public MyClass(int input, int add = 10)
             {
                 _state = input + add;
             }
-
 
             public void Method(int input, int add = 11)
             {

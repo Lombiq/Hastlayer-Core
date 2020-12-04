@@ -9,29 +9,24 @@ namespace Hast.Transformer.Services
     {
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
 
-
         public OptionalParameterFiller(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory)
         {
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
         }
-
 
         public void FillOptionalParamters(SyntaxTree syntaxTree)
         {
             syntaxTree.AcceptVisitor(new OptionalParamtersFillingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
         }
 
-
         private class OptionalParamtersFillingVisitor : DepthFirstAstVisitor
         {
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
-
 
             public OptionalParamtersFillingVisitor(ITypeDeclarationLookupTable typeDeclarationLookupTable)
             {
                 _typeDeclarationLookupTable = typeDeclarationLookupTable;
             }
-
 
             public override void VisitInvocationExpression(InvocationExpression invocationExpression)
             {
@@ -61,7 +56,6 @@ namespace Hast.Transformer.Services
                 // Need to skip the first "this" parameter.
                 FillOptionalParameters(objectCreateExpression.Arguments, constructor.Parameters.Skip(1).ToList());
             }
-
 
             private static void FillOptionalParameters(
                 ICollection<Expression> arguments,

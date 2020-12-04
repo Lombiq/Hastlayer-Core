@@ -23,7 +23,6 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
     {
         protected override bool UseStubMemberSuitabilityChecker => false;
 
-
         protected Task<VhdlHardwareDescription> CreateSourceForBasicSamples(string deviceName = null) =>
             Host.RunGetAsync(provider => TransformAssembliesToVhdl(
                 provider.GetService<ITransformer>(),
@@ -33,7 +32,6 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     // Only testing well-tested samples.
 
                     var transformerConfiguration = configuration.TransformerConfiguration();
-
 
                     configuration.AddHardwareEntryPointType<GenomeMatcher>();
 

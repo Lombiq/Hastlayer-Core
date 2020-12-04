@@ -10,7 +10,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public List<If<T>> ElseIfs { get; set; } = new List<If<T>>();
         public T Else { get; set; }
 
-
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             var vhdl =
@@ -35,7 +34,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
             return Terminated.Terminate(vhdl, vhdlGenerationOptions);
         }
     }
-
 
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class IfElse : IfElse<IVhdlElement>

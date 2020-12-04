@@ -13,7 +13,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public bool IsDownTo { get; set; }
 
-
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             new VectorSlice
             {

@@ -11,7 +11,6 @@ namespace Hast.VhdlBuilder.Representation
     /// <returns>The shortened name.</returns>
     public delegate string NameShortener(string originalName);
 
-
     /// <summary>
     /// Provides some configuration options for generating VHDL code. Note that readable code should be only produced
     /// if the result should be handled manually; otherwise for machine processing code shouldn't be formatted.
@@ -33,7 +32,6 @@ namespace Hast.VhdlBuilder.Representation
         /// </summary>
         NameShortener NameShortener { get; }
     }
-
 
     public class VhdlGenerationOptions : IVhdlGenerationOptions
     {
@@ -148,7 +146,6 @@ namespace Hast.VhdlBuilder.Representation
         public bool OmitComments { get; set; } = true;
         public NameShortener NameShortener { get; set; } = name => name; // No name shortening by default.
     }
-
 
     public static class VhdlGenerationOptionsExtensions
     {

@@ -14,12 +14,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         private readonly IRecordComposer _recordComposer;
 
-
         public TypeConverter(IRecordComposer recordComposer)
         {
             _recordComposer = recordComposer;
         }
-
 
         public DataType ConvertType(
             IType type,
@@ -119,7 +117,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             return vhdlType;
         }
-
 
         private DataType ConvertPrimitive(KnownTypeCode typeCode)
         {
@@ -328,7 +325,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             throw new NotSupportedException(
                 "The type " + type.GetFullName() + " is not supported for transforming.");
         }
-
 
         private static DataType CreateArrayType(DataType elementType) =>
             new VhdlBuilder.Representation.Declaration.ArrayType

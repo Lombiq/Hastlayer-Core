@@ -10,7 +10,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
         private readonly IAstExpressionEvaluator _astExpressionEvaluator;
 
-
         public ConstantValuesSubstitutor(
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
             IAstExpressionEvaluator astExpressionEvaluator)
@@ -18,7 +17,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
             _astExpressionEvaluator = astExpressionEvaluator;
         }
-
 
         public void SubstituteConstantValues(
             SyntaxTree syntaxTree,

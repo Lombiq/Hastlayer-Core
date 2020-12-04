@@ -69,9 +69,7 @@
             var arrayHolder8 = new ArrayHolder2((uint)initialArrayLength + 8);
         }
 
-
         private int ConstantUsingMethod(int input1, int input2) => input1 * 2 + 8 - input2;
-
 
         private static int StaticConstantUsingMethod(int input) => input * 2 + 8;
 
@@ -81,7 +79,6 @@
             public uint ArrayLengthCopy { get; }
             public uint NonSubstitutableArrayLengthCopy { get; set; }
             public uint[] Array { get; }
-
 
             public ArrayHolder1(uint[] array)
             {
@@ -107,7 +104,6 @@
         private class ArrayHolder2
         {
             public uint ArrayLength { get; }
-
 
             public ArrayHolder2(uint size)
             {

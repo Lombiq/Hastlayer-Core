@@ -12,7 +12,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Target { get; set; }
         public List<IVhdlElement> Parameters { get; set; } = new List<IVhdlElement>();
 
-
         public Invocation()
         {
         }
@@ -29,11 +28,9 @@ namespace Hast.VhdlBuilder.Representation.Expression
             Parameters = parameters.ToList();
         }
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Target.ToVhdl(vhdlGenerationOptions) +
             (Parameters != null && Parameters.Any() ? "(" + Parameters.ToVhdl(vhdlGenerationOptions, ", ", string.Empty) + ")" : string.Empty);
-
 
         public static Invocation ToInteger(IVhdlElement value) => new Invocation("to_integer", value);
 
@@ -49,13 +46,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
             new Invocation(functionName.ToVhdlIdValue(), value, size.ToVhdlValue(KnownDataTypes.UnrangedInt));
     }
 
-
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class NamedInvocationParameter : IVhdlElement
     {
         public INamedElement FormalParameter { get; set; }
         public INamedElement ActualParameter { get; set; }
-
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             vhdlGenerationOptions.ShortenName(FormalParameter.Name) + " => " + vhdlGenerationOptions.ShortenName(ActualParameter.Name);

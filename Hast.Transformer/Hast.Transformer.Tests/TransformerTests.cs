@@ -30,7 +30,6 @@ namespace Hast.Transformer.Vhdl.Tests
 
         private ITransformer GetTransformer() => _mocker.CreateInstance<DefaultTransformer>();
 
-        
         public TransformerTests()
         {
             _mocker = new AutoMocker();
@@ -60,7 +59,6 @@ namespace Hast.Transformer.Vhdl.Tests
                 .Verifiable();
         }
 
-
         [Fact]
         public async Task TransformEngineCallReceivesProperBasicContext()
         {
@@ -89,7 +87,6 @@ namespace Hast.Transformer.Vhdl.Tests
             var firstId = _producedContext.Id;
             await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of assemblies transformed being different.");
-
 
             config.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                 new MemberInvocationInstanceCountConfiguration("Hast.TestInputs.ClassStructure1.RootClass.VirtualMethod")
@@ -182,10 +179,8 @@ namespace Hast.Transformer.Vhdl.Tests
                 .ShouldBeTrue();
         }
 
-
         private Dictionary<string, TypeDeclaration> BuildTypeLookup() =>
             _producedContext.SyntaxTree.GetAllTypeDeclarations().ToDictionary(type => type.Name);
-
 
         private static HardwareGenerationConfiguration CreateConfig()
         {

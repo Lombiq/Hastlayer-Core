@@ -14,7 +14,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
         public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
                 (!string.IsNullOrEmpty(Label) ? vhdlGenerationOptions.ShortenName(Label) + ": " : string.Empty) +

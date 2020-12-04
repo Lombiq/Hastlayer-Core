@@ -16,7 +16,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
             }
         }
 
-
         public override IDataObject ToReference() => this;
     }
 }

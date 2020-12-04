@@ -14,7 +14,6 @@ namespace Hast.VhdlBuilder.Representation
         public string Source { get; set; }
         public List<IVhdlElement> Parameters { get; set; } = new List<IVhdlElement>();
 
-
         public Raw()
         {
         }
@@ -29,7 +28,6 @@ namespace Hast.VhdlBuilder.Representation
             Source = source;
             Parameters = parameters.ToList();
         }
-
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Parameters == null || !Parameters.Any() ? 

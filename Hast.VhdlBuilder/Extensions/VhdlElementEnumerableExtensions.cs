@@ -23,7 +23,6 @@ namespace System.Collections.Generic
         {
             if (elements == null || !elements.Any()) return string.Empty;
 
-
             // It's efficient to run this parallelized implementation even with a low number of items (or even one)
             // because the overhead of checking whether there are more than a few elements is bigger than the below
             // ceremony.
@@ -35,7 +34,6 @@ namespace System.Collections.Generic
             {
                 resultArray[i] = elementsArray[i].ToVhdl(vhdlGenerationOptions) + elementTerminator;
             });
-
 
             var stringBuilder = new StringBuilder();
 

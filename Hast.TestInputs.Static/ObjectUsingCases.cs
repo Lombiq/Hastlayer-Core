@@ -32,7 +32,6 @@
             customObject2.MyProperty += 1;
         }
 
-
         private void VoidMethod(MyClass myClass)
         {
             // A nested if statement is needed for the return to remain in the syntax tree and not be optimized away
@@ -46,7 +45,6 @@
 
             myClass.MyProperty = 5;
         }
-
 
         private class MyClass
         {

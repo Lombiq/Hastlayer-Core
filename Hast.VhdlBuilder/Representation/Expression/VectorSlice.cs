@@ -17,7 +17,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public bool IsDownTo { get; set; }
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Vector.ToVhdl(vhdlGenerationOptions) +
             "(" + IndexFrom + " " + (IsDownTo ? "down" : string.Empty) + "to " + IndexTo + ")";

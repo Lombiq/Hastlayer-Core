@@ -11,7 +11,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             syntaxTree.AcceptVisitor(new RemainderOperatorExpressionsExpanderVisitor());
         }
 
-
         private class RemainderOperatorExpressionsExpanderVisitor : DepthFirstAstVisitor
         {
             public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)

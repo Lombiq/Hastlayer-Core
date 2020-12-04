@@ -67,21 +67,17 @@ namespace Hast.Transformer.Services
             }
         }
 
-
         private static string SuffixMethodIdentifier(string identifier, string methodIdentifierNameSuffix) =>
             identifier.EndsWith("_" + methodIdentifierNameSuffix) ? identifier : identifier + "_" + methodIdentifierNameSuffix;
-
 
         private class MethodCallChangingVisitor : DepthFirstAstVisitor
         {
             private readonly Dictionary<string, MethodDeclaration> _inlinableMethods;
 
-
             public MethodCallChangingVisitor(Dictionary<string, MethodDeclaration> inlinableMethods)
             {
                 _inlinableMethods = inlinableMethods;
             }
-
 
             public override void VisitInvocationExpression(InvocationExpression invocationExpression)
             {
@@ -121,7 +117,6 @@ namespace Hast.Transformer.Services
                 foreach (var parameter in method.Parameters)
                 {
                     argumentsEnumerator.MoveNext();
-
 
                     var variableReference = VariableHelper.DeclareAndReferenceVariable(
                         SuffixMethodIdentifier(parameter.Name, methodIdentifierNameSuffix),
@@ -196,7 +191,6 @@ namespace Hast.Transformer.Services
             private readonly IdentifierExpression _returnVariableReference;
             private readonly ReturnStatement _lastReturn;
 
-
             public MethodBodyAdaptingVisitor(
                 string methodIdentifierNameSuffix,
                 IdentifierExpression returnVariableReferenc,
@@ -206,7 +200,6 @@ namespace Hast.Transformer.Services
                 _returnVariableReference = returnVariableReferenc;
                 _lastReturn = lastReturn;
             }
-
 
             public override void VisitReturnStatement(ReturnStatement returnStatement)
             {

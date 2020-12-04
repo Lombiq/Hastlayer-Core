@@ -24,7 +24,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public string Content { get; set; }
         public IVhdlElement EvaluatedContent { get; set; }
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             var content = EvaluatedContent != null ? EvaluatedContent.ToVhdl(vhdlGenerationOptions) : Content;
@@ -76,7 +75,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
             return content;
         }
-
 
         public static IVhdlElement UnrangedInt(int value) => new Value
         {

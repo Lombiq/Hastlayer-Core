@@ -17,7 +17,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             set { _initialValue = value; }
         }
 
-
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
                 DataObjectKind.ToString() +

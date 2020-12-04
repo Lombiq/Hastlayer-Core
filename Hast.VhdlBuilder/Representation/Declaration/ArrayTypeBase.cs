@@ -27,7 +27,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             TypeCategory = DataTypeCategory.Array;
         }
 
-
         public static Value CreateDefaultInitialization(DataType arrayInstantiationType, DataType elementType) =>
             ("others => " + elementType.DefaultValue.ToVhdl()).ToVhdlValue(arrayInstantiationType);
     }

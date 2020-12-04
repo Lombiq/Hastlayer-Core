@@ -14,19 +14,16 @@ namespace Hast.Transformer.Services
         public void ConvertReadonlyPrimitives(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration) =>
             syntaxTree.AcceptVisitor(new ReadonlyToConstVisitor(configuration, syntaxTree));
 
-
         private class ReadonlyToConstVisitor : DepthFirstAstVisitor
         {
             private readonly Dictionary<string, object> _replacements;
             private readonly SyntaxTree _syntaxTree;
-
 
             public ReadonlyToConstVisitor(IHardwareGenerationConfiguration configuration, SyntaxTree syntaxTree)
             {
                 _replacements = configuration.GetOrAddReplacements();
                 _syntaxTree = syntaxTree;
             }
-
 
             public override void VisitFieldDeclaration(FieldDeclaration fieldDeclaration)
             {

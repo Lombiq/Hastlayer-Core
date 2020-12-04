@@ -13,7 +13,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
         public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             var name = vhdlGenerationOptions.ShortenName(Name);
@@ -31,7 +30,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
     }
 
-
     public enum ProcedureParameterType
     {
         In,
@@ -39,12 +37,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         Out
     }
 
-
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class ProcedureParameter : TypedDataObjectBase
     {
         public ProcedureParameterType ParameterType { get; set; }
-
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             (DataObjectKind.ToString() ?? string.Empty) +

@@ -8,7 +8,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public DataType RangeType { get; set; } = KnownDataTypes.UnrangedInt;
         public int MaxLength { get; set; }
 
-
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
                 "type " +

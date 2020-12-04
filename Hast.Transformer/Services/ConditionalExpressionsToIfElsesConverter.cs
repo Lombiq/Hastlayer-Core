@@ -14,7 +14,6 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new ConditionalExpressionsConvertingVisitor());
         }
 
-
         private class ConditionalExpressionsConvertingVisitor : DepthFirstAstVisitor
         {
             public override void VisitConditionalExpression(ConditionalExpression conditionalExpression)
@@ -51,7 +50,6 @@ namespace Hast.Transformer.Services
                     assignment = new AssignmentExpression(
                         new IdentifierExpression(variableName).WithAnnotation(CreateILVariableResolveResult()),
                         newConditionalExpression);
-
 
                     assignment.AddAnnotation(resolveResult);
 

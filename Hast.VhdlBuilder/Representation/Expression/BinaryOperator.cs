@@ -30,15 +30,12 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public static readonly JsonConverter JsonConverter = new BinaryOperatorJsonConverter();
 
-
         private BinaryOperator(string source)
         {
             _source = source;
         }
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => _source;
-
 
         private class BinaryOperatorJsonConverter : JsonConverter
         {

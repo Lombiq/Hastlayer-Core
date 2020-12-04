@@ -9,7 +9,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IDataObject AssignTo { get; set; }
         public IVhdlElement Expression { get; set; }
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
                 AssignTo.ToReference().ToVhdl(vhdlGenerationOptions) +

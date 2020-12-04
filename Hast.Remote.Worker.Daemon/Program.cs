@@ -32,11 +32,9 @@ namespace Hast.Remote.Worker.Daemon
         }
     }
 
-
     static class SelfInstaller
     {
         private static readonly string _exePath = Assembly.GetExecutingAssembly().Location;
-
 
         public static bool InstallMe()
         {
