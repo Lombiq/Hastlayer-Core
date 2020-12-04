@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
@@ -22,8 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             set { _defaultValue = value; }
         }
 
-
-        public ArrayTypeBase()
+        protected ArrayTypeBase()
         {
             TypeCategory = DataTypeCategory.Array;
         }
