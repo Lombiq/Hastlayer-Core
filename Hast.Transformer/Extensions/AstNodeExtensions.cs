@@ -220,7 +220,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         }
 
         public static bool Is<T>(this AstNode node, Predicate<T> predicate) where T : AstNode =>
-            node.Is(predicate, out T castNode);
+            node.Is(predicate, out var castNode);
 
         public static bool Is<T>(this AstNode node, out T castNode) where T : AstNode =>
             node.Is(n => true, out castNode);

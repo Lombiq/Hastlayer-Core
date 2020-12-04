@@ -103,7 +103,7 @@ namespace Hast.Common.Configuration
                     return;
                 }
 
-                if (_compilerGeneratedMembers.TryGetValue(memberFullName, out EntityDeclaration member) &&
+                if (_compilerGeneratedMembers.TryGetValue(memberFullName, out var member) &&
                     member.Annotation<LambdaExpressionIndexedNameHolder>() == null)
                 {
                     var parentMember = memberReferenceExpression.FindFirstParentOfType<EntityDeclaration>();

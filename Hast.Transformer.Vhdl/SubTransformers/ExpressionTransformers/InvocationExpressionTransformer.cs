@@ -385,7 +385,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     .GetSizeOrThrow(expression.Arguments.Skip(1).First()).Length;
                 var sourceArrayLength = 0;
 
-                if (expression.Arguments.Skip(2).Single().Is<PrimitiveExpression>(out PrimitiveExpression lengthExpression))
+                if (expression.Arguments.Skip(2).Single().Is<PrimitiveExpression>(out var lengthExpression))
                 {
                     if (lengthExpression.Value.ToString() == "0")
                     {

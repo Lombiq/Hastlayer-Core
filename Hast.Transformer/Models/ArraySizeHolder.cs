@@ -22,7 +22,7 @@ namespace Hast.Transformer.Models
 
         public IArraySize GetSize(AstNode arrayHolder)
         {
-            _arraySizes.TryGetValue(arrayHolder.GetFullName(), out IArraySize arraySize);
+            _arraySizes.TryGetValue(arrayHolder.GetFullName(), out var arraySize);
             return arraySize;
         }
 
@@ -32,7 +32,7 @@ namespace Hast.Transformer.Models
 
             var holderName = arrayHolder.GetFullName();
 
-            if (_arraySizes.TryGetValue(holderName, out IArraySize existingSize))
+            if (_arraySizes.TryGetValue(holderName, out var existingSize))
             {
                 if (existingSize.Length != length)
                 {

@@ -102,7 +102,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (returnType != KnownDataTypes.Void && returnType != SpecialTypes.Task)
                 {
                     IDataObject returnReference = stateMachine.CreateReturnSignalReference();
-                    IVhdlElement returnExpression = _expressionTransformer.Transform(returnStatement.Expression, context);
+                    var returnExpression = _expressionTransformer.Transform(returnStatement.Expression, context);
 
                     // It can happen that the type of the expression is not the same as the return type of the method.
                     // Thus a cast may be necessary.
