@@ -125,6 +125,7 @@ namespace Hast.Transformer.Vhdl.Services
                 {
                     arrayTypeDependentTypes.AddDependency(arrayDeclaration, arrayDeclaration.ElementType.Name);
                 }
+
                 dependentTypesTables.Add(arrayTypeDependentTypes);
             }
 
@@ -266,6 +267,7 @@ namespace Hast.Transformer.Vhdl.Services
                 throw new InvalidOperationException(
                     "There aren't any hardware entry point members, however at least one is needed to execute anything on hardware. Did you forget to pass all the assemblies to Hastlayer? Are there methods suitable as hardware entry points (see the documentation)?");
             }
+
             var memberIdTable = BuildMemberIdTable(hardwareEntryPointMemberResults);
             var externalInvocationProxy = _externalInvocationProxyBuilder.BuildProxy(hardwareEntryPointMemberResults, memberIdTable);
             potentiallyInvokingArchitectureComponents.Add(externalInvocationProxy);
@@ -380,6 +382,7 @@ namespace Hast.Transformer.Vhdl.Services
                     {
                         throw new NotSupportedException("The member " + node.ToString() + " is not supported for transformation.");
                     }
+
                     break;
                 case NodeType.Pattern:
                     break;
@@ -392,6 +395,7 @@ namespace Hast.Transformer.Vhdl.Services
                     {
                         var modifier = node as CSharpModifierToken;
                     }
+
                     break;
                 case NodeType.TypeDeclaration:
                     var typeDeclaration = node as TypeDeclaration;
@@ -413,6 +417,7 @@ namespace Hast.Transformer.Vhdl.Services
                             {
                                 memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext));
                             }
+
                             traverseTo = traverseTo.Where(n =>
                                 n.NodeType == NodeType.Member || n.NodeType == NodeType.TypeDeclaration);
                             break;
@@ -421,6 +426,7 @@ namespace Hast.Transformer.Vhdl.Services
                         case ClassType.Interface:
                             return memberTransformerTasks; // Interfaces are irrelevant here.
                     }
+
                     break;
                 case NodeType.TypeReference:
                     break;

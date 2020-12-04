@@ -18,6 +18,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
                 {
                     throw new ArgumentException("The target of a conditional signal assignment should be a signal.");
                 }
+
                 _assignTo = value;
             }
         }

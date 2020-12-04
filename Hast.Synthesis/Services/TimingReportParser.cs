@@ -72,6 +72,7 @@ namespace Hast.Synthesis.Services
                     {
                         throw new InvalidOperationException("The \"" + operandType + "\" operand type doesn't have a size.");
                     }
+
                     var operandSizeBits = ushort.Parse(operandSizeMatch.Groups[1].Value);
 
                     var isSignAgnosticBinaryOperatorType = false;

@@ -9,6 +9,7 @@
             {
                 customObject = new MyClass();
             }
+
             customObject = null;
 
             if (customObject != null)

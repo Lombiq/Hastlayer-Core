@@ -27,6 +27,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 {
                     return interfaceDeclaration.FindMatchingMember(member, lookupDeclaration);
                 }
+
                 return null;
             }
 

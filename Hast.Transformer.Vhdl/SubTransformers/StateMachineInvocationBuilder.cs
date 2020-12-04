@@ -187,6 +187,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 stateMachine.AddNewStateAndChangeCurrentBlock(scope);
             }
+
             // Are we one state later from the await for some other reason already? Still another state needs to be added
             // got leave time for the invocation proxy.
             else if (finishedInvokedComponentsForStates
@@ -374,6 +375,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     finishedComponents = finishedInvokedComponentsForStates[currentBlock.StateMachineStateIndex] =
                         new HashSet<string>();
                 }
+
                 finishedComponents.Add(ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, targetIndex));
             }
 

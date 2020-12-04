@@ -406,6 +406,7 @@ namespace Hast.Remote.Worker
                 segment = await container.ListBlobsSegmentedAsync(prefix, segment.ContinuationToken);
                 list.AddRange(segment.Results);
             }
+
             return list;
         }
 

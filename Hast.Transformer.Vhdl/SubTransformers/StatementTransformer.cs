@@ -207,6 +207,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         "    * The false branch starts in state " + stateNameGenerator(falseStateIndex, vhdlGenerationOptions) +
                         " and ends in state " + stateNameGenerator(falseEndStateIndex, vhdlGenerationOptions) + "."));
                 }
+
                 ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
                     "    * Execution after either branch will continue in the following state: " +
                     stateNameGenerator(afterIfElseStateIndex, vhdlGenerationOptions) + "."));
@@ -272,6 +273,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     currentBlock.Add(CreateConditionalStateChange(repeatedStateStartIndex, context));
                 }
+
                 currentBlock.ChangeBlockToDifferentState(afterWhileState, afterWhileStateIndex);
 
                 GetOrCreateAfterWhileStateIndexStack(context).Pop();

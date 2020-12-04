@@ -31,6 +31,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 metadata = new DeclarationReferenceMetadata();
                 node.AddAnnotation(metadata);
             }
+
             return metadata;
         }
 

@@ -237,6 +237,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                         return Empty.Instance;
                     }
+
                     // Handling Task starts like:
                     // array[i] = Task.Factory.StartNew(<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<NameOfTaskStartingMethod>b__0), inputArgument);
                     // array[i] = Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object) inputArgument);
@@ -260,6 +261,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                 .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
                                 .As<MethodDeclaration>();
                         }
+
                         // Or the second one?
                         else
                         {
@@ -780,6 +782,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             initializationValue = Transform(fieldInitializer, context) as Value;
                         }
                     }
+
                     // Initializing properties with their explicit defaults.
                     else if (typeDeclaration.Members
                         .SingleOrDefault(member =>

@@ -53,16 +53,19 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             {
                 declarationsBlock.Add(new LineComment("Signals:"));
             }
+
             declarationsBlock.Body.AddRange(InternallyDrivenSignals.Union(ExternallyDrivenSignals));
 
             foreach (var variable in GlobalVariables)
             {
                 variable.Shared = true;
             }
+
             if (GlobalVariables.Any())
             {
                 declarationsBlock.Add(new LineComment("Shared (global) variables:"));
             }
+
             declarationsBlock.Body.AddRange(GlobalVariables);
 
             declarationsBlock.Body.AddRange(GlobalAttributeSpecifications);
@@ -120,6 +123,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 {
                     resetIf.Else = notInReset;
                 }
+
                 process.Add(resetIf);
             }
             else if (notInReset != null)

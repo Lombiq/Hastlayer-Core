@@ -19,11 +19,13 @@ namespace Hast.Remote.Worker.Daemon
             {
                 SelfInstaller.InstallMe();
             }
+
             // Service is not starting
             else if (service.Status != ServiceControllerStatus.StartPending)
             {
                 SelfInstaller.UninstallMe();
             }
+
             // Started from the SCM
             else
             {

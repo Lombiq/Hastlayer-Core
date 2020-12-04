@@ -204,6 +204,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                             memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable),
                             arrayLength);
                     }
+
                     _arraySizeHolder.SetSize(assignmentExpression.Left, arrayLength);
                 },
                 memberReferenceHandler: parent => { }, // This would set a size for array.Length.

@@ -102,6 +102,7 @@ namespace Hast.Transformer.Services
                     // EmptyStatement is hackish but it's a noop and it works.
                     AstInsertionHelper.InsertStatementBefore(invocationParentStatement, new EmptyStatement());
                 }
+
                 invocationParentStatement.PrevSibling.AddChild(
                     new Comment($" Starting inlined block of the method {methodFullName}."), Roles.Comment);
 
@@ -159,6 +160,7 @@ namespace Hast.Transformer.Services
                     // method.
                     inlinedBody.Add(exitLabel);
                 }
+
                 inlinedBody.AcceptVisitor(new MethodBodyAdaptingVisitor(methodIdentifierNameSuffix, returnVariableReference, lastReturn));
 
                 foreach (var statement in inlinedBody.Statements)

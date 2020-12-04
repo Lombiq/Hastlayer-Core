@@ -54,6 +54,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 return TransformSimpleMemoryInvocation(expression, transformedParameters, targetMemberReference, context);
             }
+
             // This is a standard member access.
             else
             {
@@ -334,6 +335,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                 "\" but didn't actually start any tasks. Temporarily remove/comment out the array if you'll only use it in the future."
                                 .AddParentEntityName(expression));
                         }
+
                         var resultReferences = _stateMachineInvocationBuilder.BuildMultiInvocationWait(
                             targetMethod,
                             context.TransformationContext.GetTransformerConfiguration()

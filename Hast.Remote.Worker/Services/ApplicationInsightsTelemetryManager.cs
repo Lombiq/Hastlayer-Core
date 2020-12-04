@@ -56,6 +56,7 @@ namespace Hast.Remote.Worker.Services
                 throw new Exception("Please set up the instrumentation key via appsettings.json or environment " +
                     "variable, see APPINSIGHTS_INSTRUMENTATIONKEY part here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core");
             }
+
             return key;
         }
 

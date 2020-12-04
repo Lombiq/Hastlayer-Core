@@ -54,6 +54,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     rightType = leftType;
                 }
             }
+
             // If both of them are PrimitiveExpressions that's something strange (like writing e.g. "if (1 == 3) { ....").
             // Let's assume that then the correct type is that of the expression's.
             else if (binaryOperatorExpression.Left is PrimitiveExpression && binaryOperatorExpression.Right is PrimitiveExpression)
@@ -84,6 +85,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 convertToLeftType = expressionType == leftType;
             }
+
             // If the result type of the expression is something else (e.g. if the operation is inequality then for two
             // integer operands the result type will be boolean) then convert in a way that's lossless.
             else
@@ -110,6 +112,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     "The affected expression: " + binaryOperatorExpression.ToString() +
                     " in member " + binaryOperatorExpression.FindFirstParentOfType<EntityDeclaration>().GetFullName() + ".");
             }
+
             return typeConversionResult.ConvertedFromExpression;
         }
 
@@ -274,6 +277,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 result.IsLossy = toSize > 32;
             }
+
             if (toType == KnownDataTypes.StdLogicVector32)
             {
                 result.ConvertedFromExpression = createCastInvocationForFromExpression("std_logic_vector");

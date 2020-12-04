@@ -100,6 +100,7 @@ namespace Hast.Transformer.Services
                         invocation.AddAnnotation(new InvocationResolveResult(memberResolveResult.TargetResult, property.Getter));
                         memberReferenceExpression.ReplaceWith(invocation);
                     }
+
                     // The parent of a property setter should be an assignment normally but in attributes it won't be.
                     else if (memberFullName == _setterName &&
                         memberReferenceExpression.Parent is AssignmentExpression assignmentExpression)

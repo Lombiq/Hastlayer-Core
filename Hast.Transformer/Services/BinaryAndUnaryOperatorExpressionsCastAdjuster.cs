@@ -226,6 +226,7 @@ namespace Hast.Transformer.Services
                         if (leftTypeFullName == uintFullName) castRightToLeft();
                         else castLeftToRight();
                     }
+
                     // While not specified under the numeric promotions language reference section, this condition cares 
                     // about types that define all operators in questions. E.g. an equality check between two uints 
                     // shouldn't force an int cast.

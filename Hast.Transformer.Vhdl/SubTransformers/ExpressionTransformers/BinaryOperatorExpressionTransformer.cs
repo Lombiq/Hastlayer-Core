@@ -227,6 +227,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 leftVhdlType = _typeConverter.ConvertType(leftType, context.TransformationContext);
                 leftTypeSize = leftVhdlType.GetSize();
             }
+
             DataType rightVhdlType = null;
             var rightTypeSize = 0;
             if (rightType != null && rightType.Kind != TypeKind.Null)
@@ -413,6 +414,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     currentBlock.RequiredClockCycles += clockCyclesNeededForOperation;
                 }
             }
+
             // Since the operation in itself takes more than one clock cycle we need to add a new state just to wait.
             // Then we transition from that state forward to a state where the actual algorithm continues.
             else
