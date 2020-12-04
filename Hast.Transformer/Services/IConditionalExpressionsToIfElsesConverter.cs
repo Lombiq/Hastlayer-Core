@@ -12,7 +12,7 @@ namespace Hast.Transformer.Services
     /// 
     /// ...will be converted into the below form:
     /// if (testMode) numberOfStepsInIteration = 1;
-    /// else numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;
+    /// else numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;.
     /// </example>
     public interface IConditionalExpressionsToIfElsesConverter : IDependency
     {

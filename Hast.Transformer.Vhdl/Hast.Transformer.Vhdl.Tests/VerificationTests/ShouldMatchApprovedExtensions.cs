@@ -14,7 +14,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         /// existing approved source file. This quickly tells if something changed.
         /// </summary>
         /// <remarks>
-        /// Also see: http://shouldly.readthedocs.io/en/latest/assertions/shouldMatchApproved.html
+        /// <para>Also see: <c>http://shouldly.readthedocs.io/en/latest/assertions/shouldMatchApproved.html</c>.</para>
         /// </remarks>
         public static void ShouldMatchApprovedWithVhdlConfiguration(
             this VhdlHardwareDescription hardwareDescription,
@@ -31,7 +31,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         /// existing approved source file. This quickly tells if something changed.
         /// </summary>
         /// <remarks>
-        /// Also see: http://shouldly.readthedocs.io/en/latest/assertions/shouldMatchApproved.html
+        /// <para>Also see: <c>http://shouldly.readthedocs.io/en/latest/assertions/shouldMatchApproved.html</c>.</para>
         /// </remarks>
         public static void ShouldMatchApprovedWithVhdlConfiguration(
             this IEnumerable<VhdlHardwareDescription> hardwareDescriptions,

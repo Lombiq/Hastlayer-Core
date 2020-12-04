@@ -152,7 +152,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
         /// <summary>
-        /// Be aware that the method can change the current block!
+        /// Be aware that the method can change the current block.
         /// </summary>
         private BuildInvocationBlockResult BuildInvocationBlock(
             MethodDeclaration targetDeclaration,
@@ -167,7 +167,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var indexedStateMachineName = ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, index);
 
             // Due to the time needed for the invocation proxy to register that the invoked state machine is not started
-            // any more the same state machine can be restarted in the second state counted from the await state at 
+            // any more the same state machine can be restarted in the second state counted from the await state at
             // earliest. Thus adding a new state and also a wait state if necessary.
             var finishedInvokedComponentsForStates = scope.FinishedInvokedStateMachinesForStates;
 

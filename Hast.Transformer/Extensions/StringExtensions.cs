@@ -31,7 +31,7 @@ namespace System
         /// Checks whether the string looks like the name of a compiler-generated class generated from an F# closure.
         /// </summary>
         /// <example>
-        /// Such a name is like following: Run@28
+        /// Such a name is like following: <c>Run@28</c>.
         /// </example>
         // // A class name containing "@" would be invalid in standard C#, so this is a fairly safe bet.
         public static bool IsClosureClassName(this string name) => Regex.IsMatch(name, @".+\@\d+", RegexOptions.Compiled);
@@ -41,7 +41,7 @@ namespace System
         /// generated from an F# closure.
         /// </summary>
         /// <example>
-        /// Such a name is like following: 
+        /// Such a name is like following:
         /// "Hast.Samples.SampleAssembly.PrimeCalculator+<>c__DisplayClass9_0"
         /// "Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm+<>c"
         /// Run@28
@@ -55,7 +55,7 @@ namespace System
         /// Checks whether the string looks like the name of a compiler-generated DisplayClass member.
         /// </summary>
         /// <example>
-        /// Such a name is like following: 
+        /// Such a name is like following:
         /// "System.UInt32[] Hast.Samples.SampleAssembly.PrimeCalculator+<>c__DisplayClass2::numbers"
         /// "System.UInt32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer+Run@28::Invoke(System.UInt32)"
         /// </example>
@@ -69,7 +69,7 @@ namespace System
         /// <example>
         /// Such a name is like:
         /// "System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers2>b__9_0(System.Object)"
-        /// or: 
+        /// or:
         /// "Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput)"
         /// </example>
         public static bool IsInlineCompilerGeneratedMethodName(this string name) =>
@@ -89,7 +89,7 @@ namespace System
         /// name.
         /// </summary>
         /// <remarks>
-        /// Such a field's name looks like 
+        /// Such a field's name looks like
         /// "System.UInt32 Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder1::<ArrayLength>k__BackingField".
         /// It will contain the name of the property. This needs to be converted into the corresponding full property name:
         /// "System.UInt32 Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder1::ArrayLength()"
@@ -102,7 +102,7 @@ namespace System
         /// name.
         /// </summary>
         /// <remarks>
-        /// Such a field's name looks like 
+        /// Such a field's name looks like
         /// "<Number>k__BackingField".
         /// It will contain the name of the property. This needs to be converted into the corresponding simple property
         /// name: "Number".
