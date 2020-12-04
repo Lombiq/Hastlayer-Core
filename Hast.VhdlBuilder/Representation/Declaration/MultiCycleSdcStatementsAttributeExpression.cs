@@ -1,21 +1,25 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+#pragma warning disable S103 // Lines should not be too long
     /// <summary>
     /// Represents an attribute expression containing SDC_STATEMENT that define multi-cycle paths.
     /// </summary>
     /// <example>
-    /// E.g. represents the expression part of the below attribute specification.
-    /// 	attribute altera_attribute of Imp: architecture is "-name SDC_STATEMENT ""set_multicycle_path 8 -setup -to {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0._StateMachine:PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2[*]}"";-name SDC_STATEMENT ""set_multicycle_path 8 -hold  -to {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0._StateMachine:PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2[*]}""";
+    /// <para>E.g. represents the expression part of the below attribute specification.</para>
+    /// <code>
+    /// attribute altera_attribute of Imp: architecture is "-name SDC_STATEMENT ""set_multicycle_path 8 -setup -to {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0._StateMachine:PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2[*]}"";-name SDC_STATEMENT ""set_multicycle_path 8 -hold  -to {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0._StateMachine:PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2[*]}""";
+    /// </code>
     /// </example>
     /// <remarks>
-    /// See <see cref="XdcFile"/> for something similar for Xilinx.
+    /// <para>See <see cref="XdcFile"/> for something similar for Xilinx.</para>
     /// </remarks>
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+#pragma warning restore S103 // Lines should not be too long
     public class MultiCycleSdcStatementsAttributeExpression : IVhdlElement
     {
         private readonly List<SdcStatement> _paths = new List<SdcStatement>();

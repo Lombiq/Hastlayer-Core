@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
@@ -7,12 +7,14 @@ namespace Hast.Transformer.Services
     /// Removes ref locals and substitutes them with the original reference. This makes the AST simpler.
     /// </summary>
     /// <example>
-    /// The variable "reference" can be substituted by an indexer expression to the array element it refers to.
+    /// <para>The variable "reference" can be substituted by an indexer expression to the array element it refers to.</para>
+    /// <code>
     /// uint[] array;
     /// array = new uint[1];
     /// array [0] = num;
     /// ref uint reference = ref array[0];
-    /// reference = reference >> 1;
+    /// reference = reference &gt;&gt; 1;
+    /// </code>
     /// </example>
     public interface IRefLocalVariablesRemover : IDependency
     {

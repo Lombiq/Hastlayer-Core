@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Text.RegularExpressions;
 
 namespace System
@@ -41,10 +41,12 @@ namespace System
         /// generated from an F# closure.
         /// </summary>
         /// <example>
-        /// Such a name is like following:
-        /// "Hast.Samples.SampleAssembly.PrimeCalculator+<>c__DisplayClass9_0"
-        /// "Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm+<>c"
+        /// <para>Such a name is like following.</para>
+        /// <code>
+        /// "Hast.Samples.SampleAssembly.PrimeCalculator+&lt;&gt;c__DisplayClass9_0"
+        /// "Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm+&lt;&gt;c"
         /// Run@28
+        /// </code>
         /// </example>
         public static bool IsDisplayOrClosureClassName(this string name) =>
             // A class name containing "<>" would be invalid in standard C#, so this is a fairly safe bet.
@@ -55,23 +57,26 @@ namespace System
         /// Checks whether the string looks like the name of a compiler-generated DisplayClass member.
         /// </summary>
         /// <example>
-        /// Such a name is like following:
-        /// "System.UInt32[] Hast.Samples.SampleAssembly.PrimeCalculator+<>c__DisplayClass2::numbers"
+        /// <para>Such a name is like following.</para>
+        /// <code>
+        /// "System.UInt32[] Hast.Samples.SampleAssembly.PrimeCalculator+&lt;&gt;c__DisplayClass2::numbers"
         /// "System.UInt32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer+Run@28::Invoke(System.UInt32)"
+        /// </code>
         /// </example>
         public static bool IsDisplayOrClosureClassMemberName(this string name) =>
             name.IsDisplayOrClosureClassName() && name.Contains("::");
 
+#pragma warning disable S103 // Lines should not be too long
         /// <summary>
         /// Checks whether the string looks like the name of a compiler-generated method that was created in place of a
         /// lambda expression in the original class (not in a DisplayClass).
         /// </summary>
         /// <example>
-        /// Such a name is like:
-        /// "System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers2>b__9_0(System.Object)"
-        /// or:
-        /// "Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput)"
+        /// <para>Such a name is like following.</para>
+        /// <code>"System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::&lt;ParallelizedArePrimeNumbers2&gt;b__9_0(System.Object)"</code>
+        /// <code>"Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::&lt;ChangeContrast&gt;b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput)"</code>
         /// </example>
+#pragma warning restore S103 // Lines should not be too long
         public static bool IsInlineCompilerGeneratedMethodName(this string name) =>
             // A name where before the "<" there is nothing is invalid in standard C#, so this is a fairly safe bet.
             Regex.IsMatch(name, "^.+?::<.+>.+__\\d_\\d\\(", RegexOptions.Compiled);
@@ -80,7 +85,7 @@ namespace System
         /// Determines whether the string looks like the name of a compiler-generated field that backs an auto-property.
         /// </summary>
         /// <example>
-        /// Such a field's name looks like "<Number>k__BackingField". It will contain the name of the property.
+        /// Such a field's name looks like "&lt;Number&gt;k__BackingField". It will contain the name of the property.
         /// </example>
         public static bool IsBackingFieldName(this string name) => Regex.IsMatch(name, "<(.*)>.*BackingField");
 
@@ -89,10 +94,14 @@ namespace System
         /// name.
         /// </summary>
         /// <remarks>
-        /// Such a field's name looks like
-        /// "System.UInt32 Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder1::<ArrayLength>k__BackingField".
-        /// It will contain the name of the property. This needs to be converted into the corresponding full property name:
-        /// "System.UInt32 Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder1::ArrayLength()"
+        /// <para>
+        /// Such a field's name looks like.
+        /// </para>
+        /// <code>"System.UInt32 Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder1::&lt;ArrayLength&gt;k__BackingField".</code>
+        /// <para>
+        /// It will contain the name of the property. This needs to be converted into the corresponding full property name.
+        /// </para>
+        /// <code>"System.UInt32 Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder1::ArrayLength()"</code>
         /// </remarks>
         public static string ConvertFullBackingFieldNameToPropertyName(this string name) =>
              name.ConvertSimpleBackingFieldNameToPropertyName() + "()";
@@ -102,10 +111,10 @@ namespace System
         /// name.
         /// </summary>
         /// <remarks>
-        /// Such a field's name looks like
-        /// "<Number>k__BackingField".
+        /// <para>Such a field's name looks like
+        /// "&lt;Number&gt;k__BackingField".
         /// It will contain the name of the property. This needs to be converted into the corresponding simple property
-        /// name: "Number".
+        /// name: "Number".</para>
         /// </remarks>
         public static string ConvertSimpleBackingFieldNameToPropertyName(this string name) =>
              Regex.Replace(name, "<(.*)>.*BackingField", match => match.Groups[1].Value);

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Layer;
-using ICSharpCode.Decompiler.CSharp.Syntax;
 using Hast.Common.Interfaces;
+using Hast.Layer;
+using Hast.Transformer.Abstractions.Configuration;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Services
 {
@@ -15,19 +12,21 @@ namespace Hast.Transformer.Services
     /// automatically.
     /// </summary>
     /// <example>
-    /// For example in this case:
-    /// 
-    /// for (uint i = 0; i < 10; i++)
+    /// <para>For example in this case:</para>
+    ///
+    /// <code>
+    /// for (uint i = 0; i &lt; 10; i++)
     /// {
     ///     tasks[i] = Task.Factory.StartNew(
-    ///         indexObject =>
+    ///         indexObject =&gt;
     ///         {
     ///             ...
     ///         },
     ///         i);
     /// }
-    /// 
-    /// ...this service will be able to determine that the level of parallelism is 10.
+    /// </code>
+    ///
+    /// <para>...this service will be able to determine that the level of parallelism is 10.</para>
     /// </example>
     public interface ITaskBodyInvocationInstanceCountsSetter : IDependency
     {

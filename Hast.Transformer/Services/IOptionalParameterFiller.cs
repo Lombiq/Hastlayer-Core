@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
@@ -8,14 +8,22 @@ namespace Hast.Transformer.Services
     /// method calls can be easier. Note that method class include constructors as well.
     /// </summary>
     /// <example>
+    /// <para>
     /// The constructor's signature being:
+    /// </para>
+    /// <code>
     /// public BitMask(ushort size, bool allOne = false)
-    /// 
-    /// ...the following code:
+    /// </code>
+    ///
+    /// <para>...the following code:</para>
+    /// <code>
     /// var resultFractionBits = new BitMask(left._environment.Size);
-    /// 
-    /// ...will be changed into:
+    /// </code>
+    ///
+    /// <para>...will be changed into:</para>
+    /// <code>
     /// var resultFractionBits = new BitMask(left._environment.Size, false);
+    /// </code>
     /// </example>
     public interface IOptionalParameterFiller : IDependency
     {

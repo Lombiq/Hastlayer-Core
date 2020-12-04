@@ -1,5 +1,5 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 using Hast.Common.Interfaces;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
 {
@@ -9,18 +9,20 @@ namespace Hast.Transformer.Services
     /// rid of them.
     /// </summary>
     /// <example>
-    /// internal KpzKernelsTaskState <ScheduleIterations>b__9_0 (KpzKernelsTaskState rawTaskState)
-    ///	{
-    ///		KpzKernelsTaskState kpzKernelsTaskState;
+    /// <code>
+    /// internal KpzKernelsTaskState &lt;ScheduleIterations&gt;b__9_0 (KpzKernelsTaskState rawTaskState)
+    /// {
+    ///     KpzKernelsTaskState kpzKernelsTaskState;
     ///     kpzKernelsTaskState = rawTaskState;
     ///     // kpzKernelsTaskState is being used from now on everywhere so better to just use rawTaskState directly.
-    ///		return kpzKernelsTaskState;
-    ///	}
-    ///	
+    ///     return kpzKernelsTaskState;
+    /// }
+    ///
     /// // The variable "random" is unneeded here.
     /// RandomMwc64X random;
     /// random = array [num4].Random1;
-    /// random.State = (random.State | ((ulong)num8 << 32));
+    /// random.State = (random.State | ((ulong)num8 &lt;&lt; 32));
+    /// </code>
     /// </example>
     public interface IUnneededReferenceVariablesRemover : IDependency
     {

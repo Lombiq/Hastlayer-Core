@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.TypeSystem;
+using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
@@ -9,9 +9,20 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             expression.GetReferencedMemberFullName();
 
         /// <summary>
-        /// Checks whether the invocation is a Task.Factory.StartNew call like either of the following:
-        /// Task.Factory.StartNew(<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<NameOfTaskStartingMethod>b__0), inputArgument);
-        /// Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object)inputArgument);
+        /// <para>Checks whether the invocation is a Task.Factory.StartNew call like either of the following.</para>
+        /// <list type="bullet">
+        /// <item>
+        ///  <description>
+        ///   <c>Task.Factory.StartNew(&lt;&gt;c__DisplayClass4_.&lt;&gt;9__0 ??
+        ///   (&lt;&gt;c__DisplayClass4_.&lt;&gt;9__0 = &lt;&gt;c__DisplayClass4_.&lt;NameOfTaskStartingMethod&gt;b__0), inputArgument);</c>
+        ///  </description>
+        /// </item>
+        /// <item>
+        ///  <description>
+        ///   <c>Task.Factory.StartNew((Func&lt;object, OutputType&gt;)this.&lt;NameOfTaskStartingMethod&gt;b__6_0, (object)inputArgument);</c>
+        ///  </description>
+        /// </item>
+        /// </list>
         /// </summary>
         public static bool IsTaskStart(this InvocationExpression expression) =>
             expression.Target.Is<MemberReferenceExpression>(memberReference => memberReference.IsTaskStartNew()) &&

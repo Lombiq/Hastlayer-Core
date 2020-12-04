@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     /// Represents a Xilinx XDC constraints file.
     /// </summary>
     /// <remarks>
-    /// See <see cref="Expression.MultiCycleSdcStatementsAttributeExpression"/> for something similar for Quartus Prime.
+    /// <para>See <see cref="Expression.MultiCycleSdcStatementsAttributeExpression"/> for something similar for Quartus Prime.</para>
     /// </remarks>
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class XdcFile : IVhdlElement
@@ -40,8 +40,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             string.Join(Environment.NewLine, Lines.Select(line => line.ToVhdl(vhdlGenerationOptions)));
 
         /// <summary>
-        /// Represents a path constraint declarations like:
-        /// set_multicycle_path 8 -setup -to [get_cells -hierarchical {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]
+        /// <para>Represents a path constraint declarations like:</para>
+        /// <code>set_multicycle_path 8 -setup -to [get_cells -hierarchical {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]</code>
         /// </summary>
         private class XdcPath : IVhdlElement
         {

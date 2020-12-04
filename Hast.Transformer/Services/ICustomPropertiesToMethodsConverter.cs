@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Services
@@ -8,23 +8,25 @@ namespace Hast.Transformer.Services
     /// transform them.
     /// </summary>
     /// <example>
-    /// The below property:
+    /// <code>
     /// public uint NumberPlusFive
     /// {
     ///     get { return Number + 5; }
     ///     set { Number = value - 5; }
     /// }
-    /// 
-    /// ...will be converted into this:
+    /// </code>
+    /// <para>The above property will be converted as below.</para>
+    /// <code>
     /// uint uint get_NumberPlusFive()
     /// {
     ///     return Number + 5u;
     /// }
-    ///     
+    ///
     /// void void set_NumberPlusFive(uint value)
     /// {
     ///     Number = value - 5u;
     /// }
+    /// </code>
     /// </example>
     public interface ICustomPropertiesToMethodsConverter : IDependency
     {

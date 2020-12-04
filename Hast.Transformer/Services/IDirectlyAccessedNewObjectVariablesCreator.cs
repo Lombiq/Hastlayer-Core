@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Services
@@ -8,11 +8,13 @@ namespace Hast.Transformer.Services
     /// example, then this service will add an intermediary variable for easier later processing.
     /// </summary>
     /// <example>
+    /// <code>
     /// var size = new BitMask(Size).Size;
-    /// 
+    ///
     /// ...will be converted into the following form:
     /// var bitMask = new BitMask(Size);
     /// var size = bitMask.Size;
+    /// </code>
     /// </example>
     public interface IDirectlyAccessedNewObjectVariablesCreator : IDependency
     {
