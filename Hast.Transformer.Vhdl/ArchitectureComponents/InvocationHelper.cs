@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.VhdlBuilder.Extensions;
@@ -117,7 +118,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             int index)
         {
             return ArchitectureComponentNameHelper
-                .CreatePrefixedSegmentedObjectName(componentName, targetStateMachineName, signalName, index.ToString())
+                .CreatePrefixedSegmentedObjectName(componentName, targetStateMachineName, signalName, index.ToString(CultureInfo.InvariantCulture))
                 .ToVhdlSignalReference();
         }
     }

@@ -1,4 +1,4 @@
-﻿using Hast.Common.Numerics;
+using Hast.Common.Numerics;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
@@ -9,6 +9,7 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
@@ -53,7 +54,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // Transforming the operation to parallel signal-using operations.
 
             // The last argument for SIMD operations is always the max degree of parallelism.
-            var maxDegreeOfParallelism = int.Parse(((Value)transformedParameters.Last()).Content);
+            var maxDegreeOfParallelism = int.Parse(((Value)transformedParameters.Last()).Content, CultureInfo.InvariantCulture);
 
             var vector1 = (DataObjectReference)transformedParameters.First();
             var vector2 = (DataObjectReference)transformedParameters.Skip(1).First();

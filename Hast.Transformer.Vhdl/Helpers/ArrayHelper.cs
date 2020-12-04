@@ -1,8 +1,9 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
+using System.Globalization;
 
 namespace Hast.Transformer.Vhdl.Helpers
 {
@@ -14,7 +15,7 @@ namespace Hast.Transformer.Vhdl.Helpers
 
             return
                 (elementType.Name.TrimExtendedVhdlIdDelimiters() +
-                (elementSize != 0 ? elementSize.ToString() : string.Empty) +
+                (elementSize != 0 ? elementSize.ToString(CultureInfo.InvariantCulture) : string.Empty) +
                 "_Array")
                 .ToExtendedVhdlId();
         }

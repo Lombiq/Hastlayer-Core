@@ -1,4 +1,5 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
+using System.Globalization;
 using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
@@ -28,13 +29,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         };
         public static readonly SizedDataType BinaryString = new SizedDataType(_binaryString)
         {
-            DefaultValue = default(short).ToString().ToVhdlValue(_int16)
+            DefaultValue = default(short).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_int16)
         };
 
         private static readonly DataType _character = new DataType { TypeCategory = DataTypeCategory.Character, Name = "character" };
         public static readonly DataType Character = new DataType(_character)
         {
-            DefaultValue = default(char).ToString().ToVhdlValue(_character)
+            DefaultValue = default(char).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_character)
         };
 
         public static readonly Identifier Identifier = new Identifier();
@@ -53,13 +54,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         };
         public static readonly SizedDataType Int8 = new SizedDataType(_int8)
         {
-            DefaultValue = default(sbyte).ToString().ToVhdlValue(_int8)
+            DefaultValue = default(sbyte).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_int8)
         };
 
         private static readonly SizedDataType _int16 = new SizedDataType(_int8) { Size = 16 };
         public static readonly SizedDataType Int16 = new SizedDataType(_int16)
         {
-            DefaultValue = default(short).ToString().ToVhdlValue(_int16)
+            DefaultValue = default(short).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_int16)
         };
 
         private static readonly SizedDataType _int32 = new SizedDataType(_int16) { Size = 32 };
@@ -71,7 +72,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         private static readonly SizedDataType _int64 = new SizedDataType(_int16) { Size = 64 };
         public static readonly SizedDataType Int64 = new SizedDataType(_int64)
         {
-            DefaultValue = default(long).ToString().ToVhdlValue(_int64)
+            DefaultValue = default(long).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_int64)
         };
 
         public static readonly SizedDataType[] SignedIntegers = new[] { Int8, Int16, Int32, Int64 };
@@ -79,25 +80,25 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         private static readonly SizedDataType _uint8 = new SizedDataType(_int16) { Name = "unsigned", Size = 8 };
         public static readonly SizedDataType UInt8 = new SizedDataType(_uint8)
         {
-            DefaultValue = default(byte).ToString().ToVhdlValue(_uint8)
+            DefaultValue = default(byte).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_uint8)
         };
 
         private static readonly SizedDataType _uint16 = new SizedDataType(_uint8) { Size = 16 };
         public static readonly SizedDataType UInt16 = new SizedDataType(_uint16)
         {
-            DefaultValue = default(ushort).ToString().ToVhdlValue(_uint16)
+            DefaultValue = default(ushort).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_uint16)
         };
 
         private static readonly SizedDataType _uint32 = new SizedDataType(_uint16) { Size = 32 };
         public static readonly SizedDataType UInt32 = new SizedDataType(_uint32)
         {
-            DefaultValue = default(uint).ToString().ToVhdlValue(_uint32)
+            DefaultValue = default(uint).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_uint32)
         };
 
         private static readonly SizedDataType _uint64 = new SizedDataType(_uint16) { Size = 64 };
         public static readonly SizedDataType UInt64 = new SizedDataType(_uint64)
         {
-            DefaultValue = default(ulong).ToString().ToVhdlValue(_uint64)
+            DefaultValue = default(ulong).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_uint64)
         };
 
         public static readonly SizedDataType[] UnsignedIntegers = new[] { UInt8, UInt16, UInt32, UInt64 };
@@ -122,7 +123,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         private static readonly DataType _real = new DataType { TypeCategory = DataTypeCategory.Scalar, Name = "real" };
         public static readonly DataType Real = new DataType(_real)
         {
-            DefaultValue = default(double).ToString().ToVhdlValue(_real)
+            DefaultValue = default(double).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_real)
         };
 
         public static readonly DataType Void = new DataType { TypeCategory = DataTypeCategory.Identifier, Name = "void" };

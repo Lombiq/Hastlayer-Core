@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace Hast.Transformer.Models
 {
@@ -8,6 +9,6 @@ namespace Hast.Transformer.Models
     {
         public int Length { get; set; }
 
-        public override string ToString() => "Length: " + Length.ToString();
+        public override string ToString() => "Length: " + Length.ToString(CultureInfo.InvariantCulture);
     }
 }

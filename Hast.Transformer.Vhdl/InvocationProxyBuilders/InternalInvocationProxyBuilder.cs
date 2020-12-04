@@ -1,4 +1,4 @@
-﻿using Hast.Common.Configuration;
+using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -10,6 +10,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
@@ -354,7 +355,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         for (int i = 0; i < invocationInstanceCount; i++)
                         {
                             var runningIndexName = proxyComponent
-                                .CreatePrefixedSegmentedObjectName(invokerName, "runningIndex", i.ToString());
+                                .CreatePrefixedSegmentedObjectName(invokerName, "runningIndex", i.ToString(CultureInfo.InvariantCulture));
                             var runningIndexVariableReference = runningIndexName.ToVhdlVariableReference();
                             proxyComponent.LocalVariables.Add(new Variable
                             {
@@ -367,7 +368,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                             });
 
                             var runningStateVariableName = proxyComponent
-                                .CreatePrefixedSegmentedObjectName(invokerName, "runningState", i.ToString());
+                                .CreatePrefixedSegmentedObjectName(invokerName, "runningState", i.ToString(CultureInfo.InvariantCulture));
                             var runningStateVariableReference = runningStateVariableName.ToVhdlVariableReference();
                             proxyComponent.LocalVariables.Add(new Variable
                             {
@@ -378,8 +379,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                             var invocationHandlerBlock = new LogicalBlock(
                                 new LineComment(
-                                    "Invocation handler #" + i.ToString() +
-                                    " out of " + invocationInstanceCount.ToString() +
+                                    "Invocation handler #" + i.ToString(CultureInfo.InvariantCulture) +
+                                    " out of " + invocationInstanceCount.ToString(CultureInfo.InvariantCulture) +
                                     " corresponding to " + invokerName));
                             bodyBlock.Add(invocationHandlerBlock);
 

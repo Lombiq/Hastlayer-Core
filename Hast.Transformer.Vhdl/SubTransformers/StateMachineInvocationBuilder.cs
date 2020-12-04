@@ -1,4 +1,4 @@
-﻿using Hast.Common.Configuration;
+using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
@@ -10,6 +10,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
@@ -223,7 +224,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             ArchitectureComponentNameHelper
                                 .CreateParameterSignalName(targetMethodName, targetParameter.Name, flowDirection)
                                 .TrimExtendedVhdlIdDelimiters(),
-                            index.ToString());
+                            index.ToString(CultureInfo.InvariantCulture));
                     var parameterSignalReference = parameterSignalName.ToVhdlSignalReference();
 
                     var signals = flowDirection == ParameterFlowDirection.Out ?

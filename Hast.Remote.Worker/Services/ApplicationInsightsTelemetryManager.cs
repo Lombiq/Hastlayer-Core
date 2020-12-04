@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using Microsoft.Extensions.Logging;
+using System.Globalization;
 
 namespace Hast.Remote.Worker.Services
 {
@@ -41,7 +42,7 @@ namespace Hast.Remote.Worker.Services
                 Url = new Uri(telemetry.JobName, UriKind.Relative)
             };
 
-            requestTelemetry.Context.User.AccountId = telemetry.AppId.ToString();
+            requestTelemetry.Context.User.AccountId = telemetry.AppId.ToString(CultureInfo.InvariantCulture);
 
             _telemetryClient.TrackRequest(requestTelemetry);
         }

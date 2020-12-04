@@ -1,6 +1,7 @@
-﻿
+
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation
@@ -30,8 +31,11 @@ namespace Hast.VhdlBuilder.Representation
         }
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-            Parameters == null || !Parameters.Any() ? 
-                Source : 
-                string.Format(Source, Parameters.Select(element => element.ToVhdl(vhdlGenerationOptions)).ToArray());
+            Parameters == null || !Parameters.Any()
+                ? Source
+                : string.Format(
+                    CultureInfo.InvariantCulture,
+                    Source,
+                    Parameters.Select(element => element.ToVhdl(vhdlGenerationOptions)).ToArray());
     }
 }

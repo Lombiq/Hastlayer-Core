@@ -14,6 +14,7 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
@@ -333,12 +334,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     if (vhdlType.Name == KnownDataTypes.Int8.Name)
                     {
-                        var value = Convert.ToInt64(valueString);
+                        var value = Convert.ToInt64(valueString, CultureInfo.InvariantCulture);
                         if (value < -2147483648 || value > 2147483647) binaryLiteral = Convert.ToString(value, 2);
                     }
                     else
                     {
-                        var value = Convert.ToUInt64(valueString);
+                        var value = Convert.ToUInt64(valueString, CultureInfo.InvariantCulture);
                         if (value > 2147483647) binaryLiteral = Convert.ToString((long)value, 2);
                     }
 

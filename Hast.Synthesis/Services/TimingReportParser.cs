@@ -73,7 +73,7 @@ namespace Hast.Synthesis.Services
                         throw new InvalidOperationException("The \"" + operandType + "\" operand type doesn't have a size.");
                     }
 
-                    var operandSizeBits = ushort.Parse(operandSizeMatch.Groups[1].Value);
+                    var operandSizeBits = ushort.Parse(operandSizeMatch.Groups[1].Value, CultureInfo.InvariantCulture);
 
                     var isSignAgnosticBinaryOperatorType = false;
                     var isSignAgnosticUnaryOperatorType = false;
@@ -243,7 +243,7 @@ namespace Hast.Synthesis.Services
 
             private static string GetKey(dynamic operatorType, int operandSizeBits, bool isSigned, string constantOperand) =>
                     operatorType.ToString() +
-                    operandSizeBits.ToString() +
+                    operandSizeBits.ToString(CultureInfo.InvariantCulture) +
                     isSigned.ToString() +
                     (string.IsNullOrEmpty(constantOperand) ? "-" : constantOperand);
         }

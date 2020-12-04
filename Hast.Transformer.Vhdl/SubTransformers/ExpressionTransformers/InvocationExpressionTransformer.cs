@@ -1,4 +1,4 @@
-﻿using Hast.Common.Configuration;
+using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -11,6 +11,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
@@ -395,7 +396,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     }
                     else
                     {
-                        sourceArrayLength = Convert.ToInt32(lengthExpression.Value);
+                        sourceArrayLength = Convert.ToInt32(lengthExpression.Value, CultureInfo.InvariantCulture);
 
                         // Otherwise slicing the array.
                         sourceArrayReference = new ArraySlice

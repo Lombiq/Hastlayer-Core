@@ -4,6 +4,7 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
@@ -83,7 +84,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 }, out var arrayCreateExpression) &&
                 arrayCreateExpression.Arguments.Single() == primitiveExpression)
             {
-                PassLengthOfArrayHolderToParent(arrayCreateExpression, Convert.ToInt32(primitiveExpression.Value));
+                PassLengthOfArrayHolderToParent(arrayCreateExpression, Convert.ToInt32(primitiveExpression.Value, CultureInfo.InvariantCulture));
             }
             else if (primitiveExpressionParent.Is<BinaryOperatorExpression>(out var binaryOperatorExpression))
             {
@@ -100,7 +101,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     newExpression.AddAnnotation(resultType.ToResolveResult());
                     if (!(newExpression.Value is bool) && resultType.GetFullName() == typeof(bool).FullName)
                     {
-                        newExpression.Value = newExpression.Value.ToString() == 1.ToString();
+                        newExpression.Value = newExpression.Value.ToString() == "1";
                     }
 
                     var parentBlock = primitiveExpressionParent.FindFirstParentBlockStatement();

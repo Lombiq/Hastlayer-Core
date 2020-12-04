@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Globalization;
 using System.Linq;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
@@ -19,7 +20,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                         expression.ToString() + ".".AddParentEntityName(expression));
                 }
 
-                return int.Parse(((PrimitiveExpression)lengthArgument).Value.ToString()); 
+                return int.Parse(((PrimitiveExpression)lengthArgument).Value.ToString(), CultureInfo.InvariantCulture); 
             }
 
             // The array is initialized in-place, i.e. new[] { 1, 2, 3 }-style.

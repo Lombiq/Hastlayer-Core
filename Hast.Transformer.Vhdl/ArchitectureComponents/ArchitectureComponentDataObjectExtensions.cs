@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
@@ -78,7 +79,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             string targetMemberName,
             int index) => 
             component
-                .CreatePrefixedSegmentedObjectName(targetMemberName, NameSuffixes.Return, index.ToString())
+                .CreatePrefixedSegmentedObjectName(targetMemberName, NameSuffixes.Return, index.ToString(CultureInfo.InvariantCulture))
                 .ToVhdlSignalReference();
 
         private static IEnumerable<ParameterSignal> FilterParameterSignals(IEnumerable<Signal> signals) => 

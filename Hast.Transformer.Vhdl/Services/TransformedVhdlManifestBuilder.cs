@@ -19,6 +19,7 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -101,7 +102,7 @@ namespace Hast.Transformer.Vhdl.Services
             var hastIpEntity = hastIpModule.Entity = new Entity { Name = Entity.ToSafeEntityName("Hast_IP") };
             hastIpArchitecture.Entity = hastIpEntity;
 
-            var generationDateTimeUtcText = _clock.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + " UTC";
+            var generationDateTimeUtcText = _clock.UtcNow.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) + " UTC";
 
             hastIpEntity.Declarations.Add(new UnOmittableLineComment("Hast_IP ID: " + transformationContext.Id));
             hastIpEntity.Declarations.Add(new UnOmittableLineComment("Date and time: " + generationDateTimeUtcText));

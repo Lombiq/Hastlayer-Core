@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -41,7 +42,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return
                 Name +
                 "(" +
-                (Size != 0 ? (Size - 1).ToString() : SizeExpression.ToVhdl(vhdlGenerationOptions)) +
+                (Size != 0 ? (Size - 1).ToString(CultureInfo.InvariantCulture) : SizeExpression.ToVhdl(vhdlGenerationOptions)) +
                 " downto 0)";
         }
 
