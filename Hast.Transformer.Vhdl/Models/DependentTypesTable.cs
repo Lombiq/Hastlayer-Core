@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -58,7 +59,7 @@ namespace Hast.Transformer.Vhdl.Models
 
             public int GetHashCode(DataType dataType)
             {
-                return dataType.Name.GetHashCode();
+                return dataType.Name.GetHashCode(StringComparison.InvariantCulture);
             }
         }
     }

@@ -50,7 +50,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 // index, the deepest one in the call stack) from the list of invoking ones, because that won't invoke
                 // anything else.
                 var maxIndexComponents = invokedMember.Value
-                    .Where(component => component.Key.StartsWith(memberFullName))
+                    .Where(component => component.Key.StartsWith(memberFullName, StringComparison.InvariantCulture))
                     .OrderByDescending(component => component.Key);
 
                 if (maxIndexComponents.Any())

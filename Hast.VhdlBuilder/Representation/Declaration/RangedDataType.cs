@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+using System;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -34,6 +35,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return base.Equals(obj) && RangeMin == otherType.RangeMin && RangeMin == otherType.RangeMax;
         }
 
-        public override int GetHashCode() => (Name + TypeCategory.ToString() + RangeMin + RangeMax).GetHashCode();
+        public override int GetHashCode() => (Name + TypeCategory.ToString() + RangeMin + RangeMax).GetHashCode(StringComparison.InvariantCulture);
     }
 }

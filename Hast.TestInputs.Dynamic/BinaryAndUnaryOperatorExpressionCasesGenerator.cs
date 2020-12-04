@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using System;
+using System.Linq;
 using System.Text;
 
 namespace Hast.TestInputs.Dynamic
@@ -99,7 +100,7 @@ namespace Hast.TestInputs.Dynamic
                     var right = rightType + "Right";
 
                     codeBuilder.AppendLine($@"
-                        var {right} = {(rightType != "int" || leftType.Contains("long") || leftType == "uint" ? $"({rightType})" : string.Empty)}input;");
+                        var {right} = {(rightType != "int" || leftType.Contains("long", StringComparison.InvariantCulture) || leftType == "uint" ? $"({rightType})" : string.Empty)}input;");
 
                     var shiftRightOperandCast = needsShiftCastTypes.Contains(rightType) ? "(int)" : string.Empty;
 

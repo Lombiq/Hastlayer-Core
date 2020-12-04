@@ -1,6 +1,7 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem.Implementation;
+using System;
 using System.Linq;
 
 namespace ICSharpCode.Decompiler.TypeSystem
@@ -41,7 +42,7 @@ namespace ICSharpCode.Decompiler.TypeSystem
 
         public static bool IsEnum(this IType type) => type.Kind == TypeKind.Enum;
 
-        public static bool IsFunc(this IType type) => type.FullName.StartsWith("System.Func");
+        public static bool IsFunc(this IType type) => type.FullName.StartsWith("System.Func", StringComparison.Ordinal);
 
         public static bool IsSimpleMemory(this IType type) => type.GetFullName() == typeof(SimpleMemory).FullName;
 

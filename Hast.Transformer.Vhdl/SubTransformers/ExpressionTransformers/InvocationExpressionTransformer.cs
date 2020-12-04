@@ -80,7 +80,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var memberName = targetMemberReference.MemberName;
 
-            var isWrite = memberName.StartsWith("Write");
+            var isWrite = memberName.StartsWith("Write", StringComparison.Ordinal);
             var invocationParameters = transformedParameters.ToList();
 
             var operationPropertyKey = isWrite ? lastWriteFinishedKey : lastReadFinishedKey;
@@ -124,8 +124,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 Expression = Value.True
             });
 
-            var is4BytesOperation = targetMemberReference.MemberName.EndsWith("4Bytes");
-            var operationDataTypeName = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
+            var is4BytesOperation = targetMemberReference.MemberName.EndsWith("4Bytes", StringComparison.InvariantCulture);
+            var operationDataTypeName = memberName.Replace("Write", string.Empty, StringComparison.InvariantCulture).Replace("Read", string.Empty, StringComparison.InvariantCulture);
 
             IVhdlElement implementSimpleMemoryTypeConversion(IVhdlElement variableToConvert, bool directionIsLogicVectorToType)
             {

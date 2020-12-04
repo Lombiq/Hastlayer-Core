@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -13,7 +13,7 @@ namespace Hast.VhdlBuilder.Extensions
         /// </summary>
         public static string ToExtendedVhdlId(this string id)
         {
-            if (id.StartsWith(@"\") && id.EndsWith(@"\")) return id;
+            if (id.StartsWith(@"\", StringComparison.Ordinal) && id.EndsWith(@"\", StringComparison.Ordinal)) return id;
             return @"\" + id + @"\";
         }
 

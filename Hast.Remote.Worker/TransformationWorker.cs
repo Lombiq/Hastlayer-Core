@@ -98,7 +98,7 @@ namespace Hast.Remote.Worker
                 {
                     _telemetryClient.Flush();
                     var jobBlobs = (await GetBlobs(_container, "jobs/"))
-                        .Where(blob => !blob.StorageUri.PrimaryUri.ToString().Contains("$$$ORCHARD$$$.$$$"))
+                        .Where(blob => !blob.StorageUri.PrimaryUri.ToString().Contains("$$$ORCHARD$$$.$$$", StringComparison.Ordinal))
                         .Cast<CloudBlockBlob>()
                         .Where(blob => blob.Properties.LeaseStatus == LeaseStatus.Unlocked && blob.Properties.Length != 0);
 

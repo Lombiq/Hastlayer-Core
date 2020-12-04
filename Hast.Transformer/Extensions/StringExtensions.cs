@@ -14,17 +14,17 @@ namespace System
             var simpleName = fullName;
 
             // Cutting off return type name.
-            var firstSpaceIndex = simpleName.IndexOf(' ');
+            var firstSpaceIndex = simpleName.IndexOf(' ', StringComparison.Ordinal);
             if (firstSpaceIndex != -1)
             {
                 simpleName = simpleName.Substring(firstSpaceIndex + 1);
             }
 
             // Cutting off everything after an opening bracket (of a method call).
-            simpleName = simpleName.Substring(0, simpleName.IndexOf('('));
+            simpleName = simpleName.Substring(0, simpleName.IndexOf('(', StringComparison.Ordinal));
 
             // Changing the double colons that delimit a member access to a single dot.
-            return simpleName.Replace("::", ".");
+            return simpleName.Replace("::", ".", StringComparison.Ordinal);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace System
         /// </example>
         public static bool IsDisplayOrClosureClassName(this string name) =>
             // A class name containing "<>" would be invalid in standard C#, so this is a fairly safe bet.
-            name.Contains("+<>c") ||
+            name.Contains("+<>c", StringComparison.Ordinal) ||
             name.IsClosureClassName();
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace System
         /// </code>
         /// </example>
         public static bool IsDisplayOrClosureClassMemberName(this string name) =>
-            name.IsDisplayOrClosureClassName() && name.Contains("::");
+            name.IsDisplayOrClosureClassName() && name.Contains("::", StringComparison.Ordinal);
 
 #pragma warning disable S103 // Lines should not be too long
         /// <summary>
@@ -122,7 +122,7 @@ namespace System
         /// <summary>
         /// Determines whether the string looks like the name of a constructor.
         /// </summary>
-        public static bool IsConstructorName(this string name) => name.Contains(".ctor");
+        public static bool IsConstructorName(this string name) => name.Contains(".ctor", StringComparison.Ordinal);
 
         /// <summary>
         /// Adds the full name of the given node's parent entity to the message string. Useful in exception message for

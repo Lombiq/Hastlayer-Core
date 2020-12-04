@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation
@@ -27,7 +27,7 @@ namespace Hast.VhdlBuilder.Representation
         {
             if (string.IsNullOrEmpty(vhdl)) return string.Empty;
 
-            return vhdl.TrimEnd(Environment.NewLine.ToCharArray()).EndsWith(";") ?
+            return vhdl.TrimEnd(Environment.NewLine.ToCharArray()).EndsWith(";", StringComparison.Ordinal) ?
                 vhdl :
                 vhdl + Terminator(vhdlGenerationOptions);
         }

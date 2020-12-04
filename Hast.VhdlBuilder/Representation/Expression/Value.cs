@@ -56,7 +56,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
             if (DataType.TypeCategory == DataTypeCategory.Array)
             {
-                if (content.Contains("others =>"))
+                if (content.Contains("others =>", StringComparison.InvariantCulture))
                 {
                     return $"({content})";
                 }

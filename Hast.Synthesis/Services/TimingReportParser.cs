@@ -41,7 +41,7 @@ namespace Hast.Synthesis.Services
 
                     // Instead of the shift_left/right* versions we use dotnet_shift_left/right, which also takes a
                     // surrounding SmartResize() call into account.
-                    if (operatorString.StartsWith("shift_left") || operatorString.StartsWith("shift_right"))
+                    if (operatorString.StartsWith("shift_left", StringComparison.Ordinal) || operatorString.StartsWith("shift_right", StringComparison.Ordinal))
                     {
                         continue;
                     }
@@ -59,14 +59,14 @@ namespace Hast.Synthesis.Services
                     // timing value, addressing specific VHDL compiler optimizations (like with div_by_4).
 
                     var constantOperand = string.Empty;
-                    var byStartIndex = operatorString.IndexOf("_by_");
+                    var byStartIndex = operatorString.IndexOf("_by_", StringComparison.Ordinal);
                     if (byStartIndex != -1)
                     {
                         constantOperand = operatorString.Substring(byStartIndex + 4);
                     }
 
                     var operandType = csvReader.GetField<string>("InType");
-                    var isSigned = operandType.StartsWith("signed");
+                    var isSigned = operandType.StartsWith("signed", StringComparison.Ordinal);
                     var operandSizeMatch = Regex.Match(operandType, "([0-9]+)", RegexOptions.Compiled);
                     if (!operandSizeMatch.Success)
                     {
@@ -89,7 +89,7 @@ namespace Hast.Synthesis.Services
                         case "add":
                             binaryOperator = BinaryOperatorType.Add;
                             break;
-                        case var op when (op.StartsWith("div")):
+                        case var op when (op.StartsWith("div", StringComparison.Ordinal)):
                             binaryOperator = BinaryOperatorType.Divide;
                             break;
                         case "eq":
@@ -111,7 +111,7 @@ namespace Hast.Synthesis.Services
                             // BinaryOperatorType.Modulus is actually the remainder operator and corresponds to the
                             // VHDL operator rem, see below.
                             break;
-                        case var op when (op.StartsWith("mul")):
+                        case var op when (op.StartsWith("mul", StringComparison.Ordinal)):
                             binaryOperator = BinaryOperatorType.Multiply;
                             break;
                         case "neq":
@@ -126,10 +126,10 @@ namespace Hast.Synthesis.Services
                             isSignAgnosticBinaryOperatorType = true;
                             binaryOperator = BinaryOperatorType.BitwiseOr;
                             break;
-                        case var op when (op.StartsWith("dotnet_shift_left")):
+                        case var op when (op.StartsWith("dotnet_shift_left", StringComparison.Ordinal)):
                             binaryOperator = BinaryOperatorType.ShiftLeft;
                             break;
-                        case var op when (op.StartsWith("dotnet_shift_right")):
+                        case var op when (op.StartsWith("dotnet_shift_right", StringComparison.Ordinal)):
                             binaryOperator = BinaryOperatorType.ShiftRight;
                             break;
                         case "rem":

@@ -152,7 +152,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             for (int i = 0; i < simdOperations.Length; i++)
             {
-                if (targetMethodName.Contains(simdOperationsClassFullNamePrefix + simdOperations[i]))
+                if (targetMethodName.Contains(simdOperationsClassFullNamePrefix + simdOperations[i], StringComparison.InvariantCulture))
                 {
                     return simdOperations[i];
                 }

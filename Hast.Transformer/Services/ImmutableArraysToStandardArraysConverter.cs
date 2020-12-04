@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -282,7 +282,7 @@ namespace Hast.Transformer.Services
             }
 
             private static bool IsImmutableArray(IType type) =>
-                type?.GetFullName().StartsWith("System.Collections.Immutable.ImmutableArray") == true;
+                type?.GetFullName().StartsWith("System.Collections.Immutable.ImmutableArray", StringComparison.InvariantCulture) == true;
 
             private static ArrayType CreateArrayType(IType elementType, ICompilationProvider compilationProvider = null) =>
                 new ArrayType(compilationProvider?.Compilation ?? ((ICompilationProvider)elementType).Compilation, elementType, 1);

@@ -1,4 +1,4 @@
-﻿using Hast.Common.Helpers;
+using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -68,7 +68,7 @@ namespace Hast.Transformer.Services
         }
 
         private static string SuffixMethodIdentifier(string identifier, string methodIdentifierNameSuffix) =>
-            identifier.EndsWith("_" + methodIdentifierNameSuffix) ? identifier : identifier + "_" + methodIdentifierNameSuffix;
+            identifier.EndsWith("_" + methodIdentifierNameSuffix, StringComparison.InvariantCulture) ? identifier : identifier + "_" + methodIdentifierNameSuffix;
 
         private class MethodCallChangingVisitor : DepthFirstAstVisitor
         {

@@ -1,4 +1,5 @@
-﻿using Hast.VhdlBuilder.Representation.Expression;
+using Hast.VhdlBuilder.Representation.Expression;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -63,7 +64,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return Name == otherType.Name && TypeCategory == otherType.TypeCategory;
         }
 
-        public override int GetHashCode() => (Name + TypeCategory.ToString()).GetHashCode();
+        public override int GetHashCode() => (Name + TypeCategory.ToString()).GetHashCode(StringComparison.InvariantCulture);
 
         public static bool operator ==(DataType a, DataType b)
         {

@@ -66,26 +66,26 @@ namespace Hast.VhdlBuilder.Representation
                         {
                             var originalMatch = match.Groups[0].Value;
                             var shortName = originalMatch;
-                            var isOperator = shortName.Contains("::op_");
+                            var isOperator = shortName.Contains("::op_", StringComparison.Ordinal);
 
                             // Cutting off return type name, but not for operators (operators, unlike normal 
                             // methods /properties can have the same name, like op_Explicit, with a different return
                             // type).
-                            var firstSpaceIndex = shortName.IndexOf(' ');
+                            var firstSpaceIndex = shortName.IndexOf(' ', StringComparison.Ordinal);
                             if (firstSpaceIndex != -1 && !isOperator)
                             {
                                 shortName = shortName.Substring(firstSpaceIndex + 1);
                             }
 
                             // Cutting off namespace name, type name can be enough.
-                            var doubleColonIndex = shortName.IndexOf("::");
+                            var doubleColonIndex = shortName.IndexOf("::", StringComparison.Ordinal);
                             if (doubleColonIndex != -1)
                             {
                                 var namespaceAndClassName = shortName.Substring(0, doubleColonIndex);
 
                                 // Re-adding return type name for operators.
                                 var returnType = string.Empty;
-                                var spaceIndex = namespaceAndClassName.IndexOf(' ');
+                                var spaceIndex = namespaceAndClassName.IndexOf(' ', StringComparison.Ordinal);
                                 if (isOperator && spaceIndex != -1)
                                 {
                                     var returnTypeFullName = namespaceAndClassName.Substring(0, spaceIndex);
@@ -99,10 +99,10 @@ namespace Hast.VhdlBuilder.Representation
                             }
 
                             // Shortening parameter type names to just their type name.
-                            if (shortName.Contains('(') && shortName.Contains(')'))
+                            if (shortName.Contains('(', StringComparison.Ordinal) && shortName.Contains(')', StringComparison.Ordinal))
                             {
-                                var openingParenthesisIndex = shortName.IndexOf('(');
-                                var closingParenthesisIndex = shortName.IndexOf(')');
+                                var openingParenthesisIndex = shortName.IndexOf('(', StringComparison.Ordinal);
+                                var closingParenthesisIndex = shortName.IndexOf(')', StringComparison.Ordinal);
 
                                 var shortenedParameters = string.Join(",", shortName
                                     .Substring(openingParenthesisIndex + 1, closingParenthesisIndex - openingParenthesisIndex)
@@ -116,13 +116,13 @@ namespace Hast.VhdlBuilder.Representation
                             }
 
                             // Keep leading backslash for extended VHDL identifiers.
-                            if (originalMatch.StartsWith(@"\") && !shortName.StartsWith(@"\"))
+                            if (originalMatch.StartsWith(@"\", StringComparison.Ordinal) && !shortName.StartsWith(@"\", StringComparison.Ordinal))
                             {
                                 shortName = @"\" + shortName;
                             }
 
                             // Keep leading dot for concatenated names.
-                            if (originalMatch.StartsWith(".") && !shortName.StartsWith("."))
+                            if (originalMatch.StartsWith(".", StringComparison.Ordinal) && !shortName.StartsWith(".", StringComparison.Ordinal))
                             {
                                 shortName = "." + shortName;
                             }

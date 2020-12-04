@@ -1,4 +1,5 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,8 +26,8 @@ namespace Hast.Transformer.Services
 
                 var compilerGeneratedVariableName = string.Empty;
                 if (assignmentExpression.Left.Is<IdentifierExpression>(identifier =>
-                        (compilerGeneratedVariableName = identifier.Identifier).StartsWith("arg_")) &&
-                    assignmentExpression.Right.GetActualTypeFullName().StartsWith("System.Threading.Tasks.Task`1<"))
+                        (compilerGeneratedVariableName = identifier.Identifier).StartsWith("arg_", StringComparison.Ordinal)) &&
+                    assignmentExpression.Right.GetActualTypeFullName().StartsWith("System.Threading.Tasks.Task`1<", StringComparison.InvariantCulture))
                 {
                     InlinableVariableMapping[compilerGeneratedVariableName] =
                         ((IdentifierExpression)assignmentExpression.Right).Identifier;
@@ -53,7 +54,7 @@ namespace Hast.Transformer.Services
                     // If this is in an arg_9C_0 = array; kind of assignment, then remove the whole assignment's statement.
                     if (parentAssignment != null &&
                         parentAssignment.Left == identifierExpression &&
-                        parentAssignment.Right.GetActualTypeFullName().StartsWith("System.Threading.Tasks.Task`1<"))
+                        parentAssignment.Right.GetActualTypeFullName().StartsWith("System.Threading.Tasks.Task`1<", StringComparison.InvariantCulture))
                     {
                         parentAssignment.FindFirstParentOfType<ExpressionStatement>().Remove();
                     }

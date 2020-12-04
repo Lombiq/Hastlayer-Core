@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 using Hast.VhdlBuilder.Extensions;
@@ -39,7 +39,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var shouldTransform =
                     // Nothing to do with "__this" fields of DisplayClasses that reference the parent class's object
                     // like: public PrimeCalculator <>4__this;
-                    !field.Variables.Any(variable => variable.Name.EndsWith("__this")) &&
+                    !field.Variables.Any(variable => variable.Name.EndsWith("__this", StringComparison.Ordinal)) &&
                     // Roslyn adds a field like public Func<object, bool> <>9__0; with the same argument and return types 
                     // as the original lambda. Nothing needs to be done with this.
                     !(field.ReturnType.Is<SimpleType>(simple => simple.GetActualType().IsFunc())) &&

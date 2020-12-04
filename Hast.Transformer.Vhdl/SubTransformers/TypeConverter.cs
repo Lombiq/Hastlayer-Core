@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Helpers;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
@@ -73,7 +73,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             // This type is a value type but was passed as reference explicitly.
-            if (type.IsByRefLike && type.Name.EndsWith("&"))
+            if (type.IsByRefLike && type.Name.EndsWith("&", StringComparison.Ordinal))
             {
                 return ConvertType(type.GetElementType(), context);
             }
@@ -334,6 +334,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             };
 
         private static bool IsTaskType(IType type) =>
-            type != null && type.GetFullName().StartsWith(typeof(System.Threading.Tasks.Task).FullName);
+            type != null && type.GetFullName().StartsWith(typeof(System.Threading.Tasks.Task).FullName, StringComparison.Ordinal);
     }
 }

@@ -52,7 +52,7 @@ namespace Hast.Transformer.Vhdl.Tests
                 var architecture = topModule.Architecture;
                 architecture.Name.ShouldNotBeNullOrEmpty();
                 architecture.Declarations.ShouldRecursivelyContain(element => element is Signal);
-                architecture.Body.ShouldRecursivelyContain<Process>(p => p.Name.Contains("ExternalInvocationProxy"));
+                architecture.Body.ShouldRecursivelyContain<Process>(p => p.Name.Contains("ExternalInvocationProxy", StringComparison.InvariantCulture));
 
                 var entity = topModule.Entity;
                 entity.Name.ShouldNotBeNullOrEmpty();

@@ -1,4 +1,5 @@
 using Hast.VhdlBuilder.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -62,8 +63,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     // extended identifier. Spaces need to be escaped with a slash.
                     (string.IsNullOrEmpty(ParentName) ?
                         string.Empty :
-                        vhdlGenerationOptions.NameShortener(ParentName.TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ")) + ":") +
-                    PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ") +
+                        vhdlGenerationOptions.NameShortener(ParentName.TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ", StringComparison.Ordinal)) + ":") +
+                    PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ", StringComparison.Ordinal) +
                     "[*]}\"\"";
         }
     }

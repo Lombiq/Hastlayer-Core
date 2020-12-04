@@ -1,9 +1,10 @@
-﻿using Hast.Transformer.Models;
+using Hast.Transformer.Models;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Hast.Transformer.Services
 {
@@ -32,18 +33,16 @@ namespace Hast.Transformer.Services
 
         private static string GetCacheKey(IEnumerable<string> assemblyPaths, string transformationId)
         {
-            var fileHashes = string.Empty;
+            var fileHashes = new StringBuilder();
 
             foreach (var path in assemblyPaths)
             {
-                using (var stream = File.OpenRead(path))
-                using (var sha = new SHA256Managed())
-                {
-                    fileHashes += BitConverter.ToString(sha.ComputeHash(stream)).Replace("-", string.Empty);;
-                }
+                using var stream = File.OpenRead(path);
+                using var sha = new SHA256Managed();
+                fileHashes.Append(BitConverter.ToString(sha.ComputeHash(stream)).Replace("-", string.Empty, StringComparison.Ordinal));
             }
 
-            return "Hast.Transformer.TransformationContextCache." + fileHashes + " - " + transformationId.GetHashCode();
+            return "Hast.Transformer.TransformationContextCache." + fileHashes.ToString() + " - " + transformationId.GetHashCode(StringComparison.InvariantCulture);
         }
     }
 }
