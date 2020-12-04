@@ -61,7 +61,7 @@ namespace Hast.Synthesis.Services
                     var byStartIndex = operatorString.IndexOf("_by_", StringComparison.Ordinal);
                     if (byStartIndex != -1)
                     {
-                        constantOperand = operatorString.Substring(byStartIndex + 4);
+                        constantOperand = operatorString[(byStartIndex + 4)..];
                     }
 
                     var operandType = csvReader.GetField<string>("InType");

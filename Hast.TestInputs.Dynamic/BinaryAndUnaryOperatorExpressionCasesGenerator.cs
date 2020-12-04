@@ -59,7 +59,7 @@ namespace Hast.TestInputs.Dynamic
                 void AddMethodStart(string nameSuffix)
                 {
                     codeBuilder.AppendLine($@"
-                        public virtual void {leftType.ToUpper()[0]}{leftType.Substring(1)}BinaryOperatorExpressionVariations{nameSuffix}(SimpleMemory memory)
+                        public virtual void {leftType.ToUpper()[0]}{leftType[1..]}BinaryOperatorExpressionVariations{nameSuffix}(SimpleMemory memory)
                         {{");
 
                     if (leftType == "long" || leftType == "ulong")

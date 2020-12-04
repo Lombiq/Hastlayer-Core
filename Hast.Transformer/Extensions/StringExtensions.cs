@@ -17,7 +17,7 @@ namespace System
             var firstSpaceIndex = simpleName.IndexOf(' ', StringComparison.Ordinal);
             if (firstSpaceIndex != -1)
             {
-                simpleName = simpleName.Substring(firstSpaceIndex + 1);
+                simpleName = simpleName[(firstSpaceIndex + 1)..];
             }
 
             // Cutting off everything after an opening bracket (of a method call).

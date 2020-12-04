@@ -74,7 +74,7 @@ namespace Hast.VhdlBuilder.Representation
                             var firstSpaceIndex = shortName.IndexOf(' ', StringComparison.Ordinal);
                             if (firstSpaceIndex != -1 && !isOperator)
                             {
-                                shortName = shortName.Substring(firstSpaceIndex + 1);
+                                shortName = shortName[(firstSpaceIndex + 1)..];
                             }
 
                             // Cutting off namespace name, type name can be enough.
@@ -89,13 +89,13 @@ namespace Hast.VhdlBuilder.Representation
                                 if (isOperator && spaceIndex != -1)
                                 {
                                     var returnTypeFullName = namespaceAndClassName.Substring(0, spaceIndex);
-                                    returnType = returnTypeFullName.Substring(returnTypeFullName.LastIndexOf('.') + 1) + " ";
+                                    returnType = returnTypeFullName[(returnTypeFullName.LastIndexOf('.') + 1)..] + " ";
                                 }
 
                                 shortName =
                                     returnType +
-                                    namespaceAndClassName.Substring(namespaceAndClassName.LastIndexOf('.') + 1) +
-                                    shortName.Substring(doubleColonIndex);
+                                    namespaceAndClassName[(namespaceAndClassName.LastIndexOf('.') + 1)..] +
+                                    shortName[doubleColonIndex..];
                             }
 
                             // Shortening parameter type names to just their type name.
@@ -112,7 +112,7 @@ namespace Hast.VhdlBuilder.Representation
                                 shortName =
                                     shortName.Substring(0, openingParenthesisIndex + 1) +
                                     shortenedParameters +
-                                    shortName.Substring(closingParenthesisIndex + 1);
+                                    shortName[(closingParenthesisIndex + 1)..];
                             }
 
                             // Keep leading backslash for extended VHDL identifiers.
