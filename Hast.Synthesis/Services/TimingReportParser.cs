@@ -231,7 +231,7 @@ namespace Hast.Synthesis.Services
                 }
             }
 
-            public decimal GetLatencyNs(BinaryOperatorType binaryOperator, int operandSizeBits, bool isSigned, string constantOperand) =>
+            public decimal GetLatencyNs(BinaryOperatorType binaryOperator, int operandSizeBits, bool isSigned, string constantOperand = null) =>
                 GetLatencyNsInternal(binaryOperator, operandSizeBits, isSigned, constantOperand);
 
             public decimal GetLatencyNs(UnaryOperatorType unaryOperator, int operandSizeBits, bool isSigned) =>

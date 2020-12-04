@@ -1,4 +1,4 @@
-﻿namespace Hast.VhdlBuilder.Representation.Declaration
+namespace Hast.VhdlBuilder.Representation.Declaration
 {
     /// <summary>
     /// Represents a VHDL element that is a declaration which can be referenced from other places. E.g. a variable
@@ -8,7 +8,7 @@
     {
     }
 
-    public interface IReferenceableDeclaration<T> : IReferenceableDeclaration where T : IVhdlElement
+    public interface IReferenceableDeclaration<out T> : IReferenceableDeclaration where T : IVhdlElement
     {
         T ToReference();
     }

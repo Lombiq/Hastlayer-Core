@@ -62,6 +62,9 @@ namespace Hast.Remote.Worker
             _telemetryClient = telemetryClient;
 
             _oldResultBlobsCleanerTimer = new System.Timers.Timer(TimeSpan.FromHours(3).TotalMilliseconds);
+
+            // The exceptions are caught inside the async function so returning void is not a danger.
+#pragma warning disable VSTHRD101 // Avoid unsupported async delegates
             _oldResultBlobsCleanerTimer.Elapsed += async (_, e) =>
             {
                 try
@@ -83,6 +86,7 @@ namespace Hast.Remote.Worker
                     _logger.LogError(ex, "Error during cleaning up old result blobs.");
                 }
             };
+#pragma warning restore VSTHRD101 // Avoid unsupported async delegates
             _oldResultBlobsCleanerTimer.Enabled = true;
         }
 

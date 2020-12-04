@@ -1,4 +1,5 @@
-﻿using System.Configuration.Install;
+using System;
+using System.Configuration.Install;
 using System.Linq;
 using System.Reflection;
 using System.ServiceProcess;
@@ -7,6 +8,7 @@ namespace Hast.Remote.Worker.Daemon
 {
     static class Program
     {
+        [STAThread]
         static void Main()
         {
             // Below code taken mostly from http://www.codeproject.com/Articles/27112/Installing-NET-Windows-Services-the-easiest-way
