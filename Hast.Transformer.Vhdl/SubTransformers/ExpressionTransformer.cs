@@ -55,7 +55,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
 
-            IVhdlElement implementTypeConversionForBinaryExpressionParent(DataObjectReference reference)
+            IVhdlElement ImplementTypeConversionForBinaryExpressionParent(DataObjectReference reference)
             {
                 var binaryExpression = (BinaryOperatorExpression)expression.Parent;
                 return _typeConversionTransformer.
@@ -96,7 +96,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Task.WhenAll(array).Wait();
                 */
 
-                IVhdlElement transformSimpleAssignmentExpression(Expression left, Expression right)
+                IVhdlElement TransformSimpleAssignmentExpression(Expression left, Expression right)
                 {
                     var leftType = left.GetActualType();
                     if (leftType.IsSimpleMemory()) return Empty.Instance;
@@ -180,13 +180,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     };
                 }
 
-                string getTaskVariableIdentifier() =>
+                string GetTaskVariableIdentifier() =>
                     // Retrieving the variable the Task is saved to. It's either an array or a standard variable.
                     assignment.Left is IndexerExpression indexerExpression
                         ? ((IdentifierExpression)indexerExpression.Target).Identifier
                         : ((IdentifierExpression)assignment.Left).Identifier;
 
-                int getMaxDegreeOfParallelism(EntityDeclaration entity) =>
+                int GetMaxDegreeOfParallelism(EntityDeclaration entity) =>
                     context.TransformationContext
                         .GetTransformerConfiguration()
                         .GetMaxInvocationInstanceCountConfigurationForMember(entity)
@@ -208,14 +208,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     var assignmentsBlock = new InlineBlock();
 
-                    assignmentsBlock.Add(transformSimpleAssignmentExpression(assignment.Left, actualAssignment));
+                    assignmentsBlock.Add(TransformSimpleAssignmentExpression(assignment.Left, actualAssignment));
 
                     currentRight = assignment.Right;
                     while (currentRight is AssignmentExpression assignmentExpression)
                     {
                         var currentAssignment = assignmentExpression;
 
-                        assignmentsBlock.Add(transformSimpleAssignmentExpression(currentAssignment.Left, actualAssignment));
+                        assignmentsBlock.Add(TransformSimpleAssignmentExpression(currentAssignment.Left, actualAssignment));
                         currentRight = currentAssignment.Right;
                     }
 
@@ -290,16 +290,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                     DataType = _declarableTypeCreator
                                         .CreateDeclarableType(argument, argument.GetActualType(), context.TransformationContext)
                                 }),
-                            getMaxDegreeOfParallelism(targetMethod),
+                            GetMaxDegreeOfParallelism(targetMethod),
                             context);
 
-                        scope.TaskVariableNameToDisplayClassMethodMappings[getTaskVariableIdentifier()] = targetMethod;
+                        scope.TaskVariableNameToDisplayClassMethodMappings[GetTaskVariableIdentifier()] = targetMethod;
 
                         return Empty.Instance;
                     }
                 }
 
-                return transformSimpleAssignmentExpression(assignment.Left, assignment.Right);
+                return TransformSimpleAssignmentExpression(assignment.Left, assignment.Right);
             }
             else if (expression is IdentifierExpression identifierExpression)
             {
@@ -307,7 +307,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 return !(identifierExpression.Parent is BinaryOperatorExpression)
                     ? reference
-                    : implementTypeConversionForBinaryExpressionParent(reference);
+                    : ImplementTypeConversionForBinaryExpressionParent(reference);
             }
             else if (expression is PrimitiveExpression primitive)
             {

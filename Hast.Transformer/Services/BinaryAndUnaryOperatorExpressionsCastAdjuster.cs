@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
@@ -134,24 +134,24 @@ namespace Hast.Transformer.Services
 
                 if (!_numericTypes.Contains(leftTypeFullName) || !_numericTypes.Contains(rightTypeFullName)) return;
 
-                void castLeftToRight() => replaceLeft(rightType);
+                void CastLeftToRight() => ReplaceLeft(rightType);
 
-                void castRightToLeft() => replaceRight(leftType);
+                void CastRightToLeft() => ReplaceRight(leftType);
 
-                void replaceLeft(IType type)
+                void ReplaceLeft(IType type)
                 {
                     binaryOperatorExpression.Left.ReplaceWith(CreateCast(type, binaryOperatorExpression.Left, out var _));
-                    setResultTypeReference(type);
+                    SetResultTypeReference(type);
                 }
 
-                void replaceRight(IType type)
+                void ReplaceRight(IType type)
                 {
                     binaryOperatorExpression.Right.ReplaceWith(CreateCast(type, binaryOperatorExpression.Right, out var _));
-                    setResultTypeReference(type);
+                    SetResultTypeReference(type);
                 }
 
                 var resultTypeReferenceIsSet = false;
-                void setResultTypeReference(IType type)
+                void SetResultTypeReference(IType type)
                 {
                     if (resultTypeReferenceIsSet) return;
                     resultTypeReferenceIsSet = true;
@@ -194,7 +194,7 @@ namespace Hast.Transformer.Services
                 {
                     if (!new[] { longFullName, ulongFullName, intFullName, uintFullName }.Contains(leftTypeFullName))
                     {
-                        replaceLeft(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32));
+                        ReplaceLeft(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32));
                     }
                 }
                 else
@@ -203,27 +203,27 @@ namespace Hast.Transformer.Services
                     if (leftTypeFullName == ulongFullName && rightTypeFullName != ulongFullName ||
                         leftTypeFullName != ulongFullName && rightTypeFullName == ulongFullName)
                     {
-                        if (leftTypeFullName == ulongFullName) castRightToLeft();
-                        else castLeftToRight();
+                        if (leftTypeFullName == ulongFullName) CastRightToLeft();
+                        else CastLeftToRight();
                     }
                     else if (leftTypeFullName == longFullName && rightTypeFullName != longFullName ||
                         leftTypeFullName != longFullName && rightTypeFullName == longFullName)
                     {
-                        if (leftTypeFullName == longFullName) castRightToLeft();
-                        else castLeftToRight();
+                        if (leftTypeFullName == longFullName) CastRightToLeft();
+                        else CastLeftToRight();
                     }
                     else if (leftTypeFullName == uintFullName && typesConvertedToLongForUint.Contains(rightTypeFullName) ||
                         rightTypeFullName == uintFullName && typesConvertedToLongForUint.Contains(leftTypeFullName))
                     {
                         var longType = _knownTypeLookupTable.Lookup(KnownTypeCode.Int64);
-                        replaceLeft(longType);
-                        replaceRight(longType);
+                        ReplaceLeft(longType);
+                        ReplaceRight(longType);
                     }
                     else if (leftTypeFullName == uintFullName && rightTypeFullName != uintFullName ||
                         leftTypeFullName != uintFullName && rightTypeFullName == uintFullName)
                     {
-                        if (leftTypeFullName == uintFullName) castRightToLeft();
-                        else castLeftToRight();
+                        if (leftTypeFullName == uintFullName) CastRightToLeft();
+                        else CastLeftToRight();
                     }
 
                     // While not specified under the numeric promotions language reference section, this condition cares 
@@ -233,8 +233,8 @@ namespace Hast.Transformer.Services
                         !_numericTypesSupportingNumericPromotionOperations.Contains(leftTypeFullName))
                     {
                         var intType = _knownTypeLookupTable.Lookup(KnownTypeCode.Int32);
-                        replaceLeft(intType);
-                        replaceRight(intType);
+                        ReplaceLeft(intType);
+                        ReplaceRight(intType);
                     }
                 }
             }
@@ -249,7 +249,7 @@ namespace Hast.Transformer.Services
                 var isCast = unaryOperatorExpression.Expression is CastExpression;
                 var expectedType = unaryOperatorExpression.Expression.GetActualType();
 
-                void replace(IType newType)
+                void Replace(IType newType)
                 {
                     unaryOperatorExpression.Expression.ReplaceWith(CreateCast(newType, unaryOperatorExpression.Expression, out var _));
                 }
@@ -257,13 +257,13 @@ namespace Hast.Transformer.Services
                 if (_typesConvertedToIntInUnaryOperations.Contains(type.GetFullName()) &&
                     (!isCast || expectedType.GetFullName() != typeof(int).FullName))
                 {
-                    replace(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32));
+                    Replace(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32));
                 }
                 else if (unaryOperatorExpression.Operator == UnaryOperatorType.Minus &&
                     type.GetFullName() == typeof(uint).FullName &&
                     (!isCast || expectedType.GetFullName() != typeof(long).FullName))
                 {
-                    replace(_knownTypeLookupTable.Lookup(KnownTypeCode.Int64));
+                    Replace(_knownTypeLookupTable.Lookup(KnownTypeCode.Int64));
                 }
                 else if (unaryOperatorExpression.Operator == UnaryOperatorType.Minus &&
                     ((unaryOperatorExpression.Expression as CastExpression)?.Type as PrimitiveType)?.KnownTypeCode == KnownTypeCode.UInt32)

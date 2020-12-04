@@ -31,7 +31,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // First assigning the operands to new variables so if method calls, casts or anything are in there
                 // those are not duplicated.
 
-                void createVariableForOperand(Expression operand)
+                void CreateVariableForOperand(Expression operand)
                 {
                     // Don't create a variable if it's not necessary.
                     // Primitive values should be left out because operations with primitive operands can be faster on
@@ -68,8 +68,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     operand.ReplaceWith(variableIdentifier.Clone());
                 }
 
-                createVariableForOperand(binaryOperatorExpression.Left);
-                createVariableForOperand(binaryOperatorExpression.Right);
+                CreateVariableForOperand(binaryOperatorExpression.Left);
+                CreateVariableForOperand(binaryOperatorExpression.Right);
 
                 // Building the chained operation from the inside out.
 

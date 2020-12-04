@@ -127,7 +127,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var is4BytesOperation = targetMemberReference.MemberName.EndsWith("4Bytes", StringComparison.InvariantCulture);
             var operationDataTypeName = memberName.Replace("Write", string.Empty, StringComparison.InvariantCulture).Replace("Read", string.Empty, StringComparison.InvariantCulture);
 
-            IVhdlElement implementSimpleMemoryTypeConversion(IVhdlElement variableToConvert, bool directionIsLogicVectorToType)
+            IVhdlElement ImplementSimpleMemoryTypeConversion(IVhdlElement variableToConvert, bool directionIsLogicVectorToType)
             {
                 // Using the built-in conversion functions to handle known data types.
                 if (operationDataTypeName == "UInt32" ||
@@ -165,7 +165,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 }
                 else if (is4BytesOperation)
                 {
-                    Invocation createSlice(int indexFrom, int indexTo) =>
+                    Invocation CreateSlice(int indexFrom, int indexTo) =>
                         new Invocation(
                             "unsigned",
                             new ArraySlice
@@ -180,7 +180,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     {
                         DataType = ArrayHelper.CreateArrayInstantiation(KnownDataTypes.UInt8, 4),
                         EvaluatedContent = new InlineBlock(
-                            createSlice(7, 0), createSlice(15, 8), createSlice(23, 16), createSlice(31, 24))
+                            CreateSlice(7, 0), CreateSlice(15, 8), CreateSlice(23, 16), CreateSlice(31, 24))
                     };
                 }
 
@@ -194,7 +194,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     var arrayReference = (IDataObject)invocationParameters[1].Reference;
 
-                    void addSlice(int elementIndex) =>
+                    void AddSlice(int elementIndex) =>
                         currentBlock.Add(new Assignment
                         {
                             AssignTo = new ArraySlice
@@ -220,7 +220,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         .Length;
                     for (int i = 0; i < arrayLength; i++)
                     {
-                        addSlice(i);
+                        AddSlice(i);
                     }
                 }
                 else
@@ -229,7 +229,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     {
                         AssignTo = dataOutReference,
                         // The data to write is conventionally the second parameter.
-                        Expression = implementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false)
+                        Expression = ImplementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false)
                     });
                 }
             }
@@ -285,7 +285,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     Expression = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference()
                 });
 
-                return implementSimpleMemoryTypeConversion(dataInTemporaryVariableReference, true);
+                return ImplementSimpleMemoryTypeConversion(dataInTemporaryVariableReference, true);
             }
         }
 

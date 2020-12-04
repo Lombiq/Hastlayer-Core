@@ -43,7 +43,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = scope.StateMachine;
             var currentBlock = scope.CurrentBlock;
 
-            string stateNameGenerator(int index, IVhdlGenerationOptions vhdlGenerationOptions) =>
+            string StateNameGenerator(int index, IVhdlGenerationOptions vhdlGenerationOptions) =>
                 vhdlGenerationOptions.NameShortener(stateMachine.CreateStateName(index));
 
             currentBlock.Add(new LineComment("The following section was transformed from the .NET statement below:"));
@@ -149,7 +149,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var afterIfElseStateBlock = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions =>
                         "State after the if-else which was started in state " +
-                        stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
+                        StateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
                         "."));
                 var afterIfElseStateIndex = stateMachine.AddState(afterIfElseStateBlock);
 
@@ -157,14 +157,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     new InlineBlock(
                         new GeneratedComment(vhdlGenerationOptions =>
                             "Going to the state after the if-else which was started in state " +
-                            stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
+                            StateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
                             "."),
                         CreateConditionalStateChange(afterIfElseStateIndex, context));
 
                 var trueStateBlock = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions =>
                         "True branch of the if-else started in state " +
-                        stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
+                        StateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
                         "."));
                 var trueStateIndex = stateMachine.AddState(trueStateBlock);
                 ifElseElement.True = stateMachine.CreateStateChange(trueStateIndex);
@@ -180,7 +180,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var falseStateBlock = new InlineBlock(
                         new GeneratedComment(vhdlGenerationOptions =>
                             "False branch of the if-else started in state " +
-                            stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
+                            StateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
                             "."));
                     falseStateIndex = stateMachine.AddState(falseStateBlock);
                     ifElseElement.Else = stateMachine.CreateStateChange(falseStateIndex);
@@ -199,18 +199,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 ifElseCommentsBlock.Add(
                     new LineComment("This if-else was transformed from a .NET if-else. It spans across multiple states:"));
                 ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
-                    "    * The true branch starts in state " + stateNameGenerator(trueStateIndex, vhdlGenerationOptions) +
-                    " and ends in state " + stateNameGenerator(trueEndStateIndex, vhdlGenerationOptions) + "."));
+                    "    * The true branch starts in state " + StateNameGenerator(trueStateIndex, vhdlGenerationOptions) +
+                    " and ends in state " + StateNameGenerator(trueEndStateIndex, vhdlGenerationOptions) + "."));
                 if (falseStateIndex != 0)
                 {
                     ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
-                        "    * The false branch starts in state " + stateNameGenerator(falseStateIndex, vhdlGenerationOptions) +
-                        " and ends in state " + stateNameGenerator(falseEndStateIndex, vhdlGenerationOptions) + "."));
+                        "    * The false branch starts in state " + StateNameGenerator(falseStateIndex, vhdlGenerationOptions) +
+                        " and ends in state " + StateNameGenerator(falseEndStateIndex, vhdlGenerationOptions) + "."));
                 }
 
                 ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
                     "    * Execution after either branch will continue in the following state: " +
-                    stateNameGenerator(afterIfElseStateIndex, vhdlGenerationOptions) + "."));
+                    StateNameGenerator(afterIfElseStateIndex, vhdlGenerationOptions) + "."));
 
                 currentBlock.ChangeBlockToDifferentState(afterIfElseStateBlock, afterIfElseStateIndex);
             }
@@ -302,7 +302,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var afterCaseStateBlock = new InlineBlock(
                     new GeneratedComment(vhdlGenerationOptions =>
                         "State after the case statement which was started in state " +
-                        stateNameGenerator(caseStartStateIndex, vhdlGenerationOptions) +
+                        StateNameGenerator(caseStartStateIndex, vhdlGenerationOptions) +
                         "."));
                 var aftercaseStateIndex = stateMachine.AddState(afterCaseStateBlock);
 
@@ -310,7 +310,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     new InlineBlock(
                         new GeneratedComment(vhdlGenerationOptions =>
                             "Going to the state after the case statement which was started in state " +
-                            stateNameGenerator(caseStartStateIndex, vhdlGenerationOptions) +
+                            StateNameGenerator(caseStartStateIndex, vhdlGenerationOptions) +
                             "."),
                         CreateConditionalStateChange(aftercaseStateIndex, context));
 

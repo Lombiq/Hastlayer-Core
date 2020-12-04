@@ -146,13 +146,13 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     return;
                 }
 
-                void processParent(AstNode parent) =>
+                void ProcessParent(AstNode parent) =>
                     _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parent.GetFullName()] =
                     constructorReference;
 
-                ProcessParent(
+                this.ProcessParent(
                     node: node,
-                    assignmentHandler: assignment => processParent(assignment.Left),
+                    assignmentHandler: assignment => ProcessParent(assignment.Left),
                     memberReferenceHandler: memberReference =>
                     {
                         var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
@@ -162,14 +162,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                             _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
                                 .TryGetValue(memberReferenceExpressionInConstructor.GetFullName(), out constructorReference))
                         {
-                            processParent(memberReference);
+                            ProcessParent(memberReference);
                         }
                     },
-                    invocationParameterHandler: processParent,
-                    objectCreationParameterHandler: processParent,
-                    variableInitializerHandler: processParent,
-                    returnStatementHandler: returnStatement => processParent(returnStatement.FindFirstParentEntityDeclaration()),
-                    namedExpressionHandler: processParent);
+                    invocationParameterHandler: ProcessParent,
+                    objectCreationParameterHandler: ProcessParent,
+                    variableInitializerHandler: ProcessParent,
+                    returnStatementHandler: returnStatement => ProcessParent(returnStatement.FindFirstParentEntityDeclaration()),
+                    namedExpressionHandler: ProcessParent);
             }
             else
             {
@@ -193,9 +193,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         private void PassLengthOfArrayHolderToParent(AstNode arrayHolder, int arrayLength)
         {
-            void processParent(AstNode parent) => _arraySizeHolder.SetSize(parent, arrayLength);
+            void ProcessParent(AstNode parent) => _arraySizeHolder.SetSize(parent, arrayLength);
 
-            ProcessParent(
+            this.ProcessParent(
                 node: arrayHolder,
                 assignmentHandler: assignmentExpression =>
                 {
@@ -209,12 +209,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     _arraySizeHolder.SetSize(assignmentExpression.Left, arrayLength);
                 },
                 memberReferenceHandler: parent => { }, // This would set a size for array.Length.
-                invocationParameterHandler: processParent,
-                objectCreationParameterHandler: processParent,
-                variableInitializerHandler: processParent,
+                invocationParameterHandler: ProcessParent,
+                objectCreationParameterHandler: ProcessParent,
+                variableInitializerHandler: ProcessParent,
                 returnStatementHandler: returnStatement => _arraySizeHolder
                     .SetSize(returnStatement.FindFirstParentEntityDeclaration(), arrayLength),
-                namedExpressionHandler: processParent);
+                namedExpressionHandler: ProcessParent);
         }
 
         private void ProcessParent(
@@ -229,18 +229,18 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         {
             var parent = node.Parent;
 
-            void updateHiddenlyUpdatedNodesUpdated(AstNode n) => HiddenlyUpdatedNodesUpdated.Add(n.GetFullName());
+            void UpdateHiddenlyUpdatedNodesUpdated(AstNode n) => HiddenlyUpdatedNodesUpdated.Add(n.GetFullName());
 
             if (parent.Is<AssignmentExpression>(assignment => assignment.Right == node, out var assignmentExpression) ||
                 parent.Is<InvocationExpression>(invocation => invocation.Target == node && invocation.Parent.Is(out assignmentExpression)))
             {
                 assignmentHandler(assignmentExpression);
-                updateHiddenlyUpdatedNodesUpdated(assignmentExpression.Left);
+                UpdateHiddenlyUpdatedNodesUpdated(assignmentExpression.Left);
             }
             else if (parent is MemberReferenceExpression memberReferenceExpression)
             {
                 memberReferenceHandler(memberReferenceExpression);
-                updateHiddenlyUpdatedNodesUpdated(parent);
+                UpdateHiddenlyUpdatedNodesUpdated(parent);
             }
             else if (parent is InvocationExpression expression)
             {
@@ -267,7 +267,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 }
 
                 invocationParameterHandler(parameter);
-                updateHiddenlyUpdatedNodesUpdated(parameter);
+                UpdateHiddenlyUpdatedNodesUpdated(parameter);
             }
             else if (parent is ObjectCreateExpression objectCreateExpression)
             {
@@ -284,23 +284,23 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 }
 
                 objectCreationParameterHandler(parameter);
-                updateHiddenlyUpdatedNodesUpdated(parameter);
+                UpdateHiddenlyUpdatedNodesUpdated(parameter);
             }
             else if (parent is VariableInitializer initializer)
             {
                 variableInitializerHandler(initializer);
-                updateHiddenlyUpdatedNodesUpdated(parent);
+                UpdateHiddenlyUpdatedNodesUpdated(parent);
             }
             else if (parent is ReturnStatement statement)
             {
                 returnStatementHandler(statement);
-                updateHiddenlyUpdatedNodesUpdated(parent);
+                UpdateHiddenlyUpdatedNodesUpdated(parent);
             }
             else if (parent is NamedExpression namedExpression)
             {
                 // NamedExpressions are used in object initializers, e.g. new MyClass { Property = true }.
                 namedExpressionHandler(namedExpression);
-                updateHiddenlyUpdatedNodesUpdated(parent);
+                UpdateHiddenlyUpdatedNodesUpdated(parent);
             }
         }
     }

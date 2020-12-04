@@ -64,15 +64,15 @@ namespace Hast.Transformer.Services
 
                 var invocationType = invocationExpression.GetActualType();
 
-                IEnumerable<IMember> getArrayMembers() => _knownTypeLookupTable.Lookup(KnownTypeCode.Array).GetMembers();
+                IEnumerable<IMember> GetArrayMembers() => _knownTypeLookupTable.Lookup(KnownTypeCode.Array).GetMembers();
 
-                MemberReferenceExpression createArrayLengthExpression() =>
+                MemberReferenceExpression CreateArrayLengthExpression() =>
                     new MemberReferenceExpression(memberReference.Target.Clone(), "Length")
                         .WithAnnotation(new MemberResolveResult(
                             memberReference.Target.GetResolveResult(),
-                            getArrayMembers().Single(member => member.Name == "Length")));
+                            GetArrayMembers().Single(member => member.Name == "Length")));
 
-                InvocationExpression createArrayCopyExpression(Expression destinationValueHolder, MemberReferenceExpression arrayLengthExpression)
+                InvocationExpression CreateArrayCopyExpression(Expression destinationValueHolder, MemberReferenceExpression arrayLengthExpression)
                 {
                     var arrayType = _knownTypeLookupTable.Lookup(KnownTypeCode.Array);
                     return new InvocationExpression(
@@ -85,7 +85,7 @@ namespace Hast.Transformer.Services
                         arrayLengthExpression.Clone())
                     .WithAnnotation(new MemberResolveResult(
                         memberReference.Target.GetResolveResult(),
-                            getArrayMembers().Single(member =>
+                            GetArrayMembers().Single(member =>
                             {
                                 var parameters = (member as IMethod)?.Parameters;
                                 return member.Name == "Copy" &&
@@ -101,9 +101,9 @@ namespace Hast.Transformer.Services
                         IsImmutableArray(invocationResolveResult.TargetResult.Type) &&
                         invocationResolveResult.Member.Name == "CopyTo")
                     {
-                        invocationExpression.ReplaceWith(createArrayCopyExpression(
+                        invocationExpression.ReplaceWith(CreateArrayCopyExpression(
                             invocationExpression.Arguments.Single(),
-                            createArrayLengthExpression()));
+                            CreateArrayLengthExpression()));
                     }
                 }
                 else
@@ -135,7 +135,7 @@ namespace Hast.Transformer.Services
                             memberReference.Target,
                             elementAstType,
                             arrayType);
-                        var arrayLengthExpression = createArrayLengthExpression();
+                        var arrayLengthExpression = CreateArrayLengthExpression();
 
                         var arrayCreate = new ArrayCreateExpression { Type = elementAstType };
                         arrayCreate.Arguments.Add(arrayLengthExpression);
@@ -150,7 +150,7 @@ namespace Hast.Transformer.Services
 
                         AstInsertionHelper.InsertStatementBefore(
                             parentStatement,
-                            new ExpressionStatement(createArrayCopyExpression(variableIdentifier, arrayLengthExpression)));
+                            new ExpressionStatement(CreateArrayCopyExpression(variableIdentifier, arrayLengthExpression)));
 
                         var valueArgument = invocationExpression.Arguments.Skip(1).Single();
 

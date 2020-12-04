@@ -184,7 +184,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             Func<string, Invocation> createCastInvocationForFromExpression = target =>
                 new Invocation(target, fromExpression);
 
-            IVhdlElement createResizeExpression(IVhdlElement parameter)
+            IVhdlElement CreateResizeExpression(IVhdlElement parameter)
             {
                 result.IsResized = true;
 
@@ -211,7 +211,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     result.IsLossy = true;
                 }
 
-                result.ConvertedFromExpression = createResizeExpression(fromExpression);
+                result.ConvertedFromExpression = CreateResizeExpression(fromExpression);
             }
             else if (KnownDataTypes.Integers.Contains(fromType) && toType == KnownDataTypes.Real)
             {
@@ -232,7 +232,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // loss due to the range change. 
                 if (fromSize != toSize)
                 {
-                    expression = createResizeExpression(fromExpression);
+                    expression = CreateResizeExpression(fromExpression);
                 }
 
                 result.ConvertedFromExpression = new Invocation("signed", expression);
@@ -247,7 +247,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                     if (fromSize != toSize)
                     {
-                        result.ConvertedFromExpression = createResizeExpression(result.ConvertedFromExpression);
+                        result.ConvertedFromExpression = CreateResizeExpression(result.ConvertedFromExpression);
                     }
                 }
                 else

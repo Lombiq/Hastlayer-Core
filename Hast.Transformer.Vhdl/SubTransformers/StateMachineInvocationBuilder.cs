@@ -38,7 +38,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var currentBlock = context.Scope.CurrentBlock;
             var targetMethodName = targetDeclaration.GetFullName();
 
-            void addInvocationStartComment() =>
+            void AddInvocationStartComment() =>
                 currentBlock
                 .Add(new LineComment("Starting state machine invocation for the following method: " + targetMethodName));
 
@@ -69,7 +69,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     context,
                     0);
 
-                addInvocationStartComment();
+                AddInvocationStartComment();
                 currentBlock.Add(buildInvocationBlockResult.InvocationBlock);
 
                 return buildInvocationBlockResult;
@@ -118,7 +118,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     });
                 }
 
-                addInvocationStartComment();
+                AddInvocationStartComment();
                 currentBlock.Add(proxyCase);
                 currentBlock.Add(new Assignment
                 {
@@ -217,7 +217,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var parameterSignalType = _declarableTypeCreator
                     .CreateDeclarableType(targetParameter, targetParameter.Type, context.TransformationContext);
 
-                Assignment createParameterAssignment(ParameterFlowDirection flowDirection)
+                Assignment CreateParameterAssignment(ParameterFlowDirection flowDirection)
                 {
                     var parameterSignalName = stateMachine
                         .CreatePrefixedSegmentedObjectName(
@@ -279,10 +279,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     };
                 }
 
-                invocationBlock.Add(createParameterAssignment(ParameterFlowDirection.Out));
+                invocationBlock.Add(CreateParameterAssignment(ParameterFlowDirection.Out));
                 if (targetParameter.IsOutFlowing())
                 {
-                    var assignment = createParameterAssignment(ParameterFlowDirection.In);
+                    var assignment = CreateParameterAssignment(ParameterFlowDirection.In);
                     if (assignment != null) outParameterBackAssignments.Add(assignment);
                 }
 
@@ -338,7 +338,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var returnVariableReferences = new List<IDataObject>();
 
-            void buildInvocationWaitBlock(int targetIndex)
+            void BuildInvocationWaitBlock(int targetIndex)
             {
                 if (returnType != KnownDataTypes.Void)
                 {
@@ -384,12 +384,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 for (int i = 0; i < instanceCount; i++)
                 {
-                    buildInvocationWaitBlock(i);
+                    BuildInvocationWaitBlock(i);
                 }
             }
             else
             {
-                buildInvocationWaitBlock(index);
+                BuildInvocationWaitBlock(index);
             }
 
             if (returnType == KnownDataTypes.Void)
