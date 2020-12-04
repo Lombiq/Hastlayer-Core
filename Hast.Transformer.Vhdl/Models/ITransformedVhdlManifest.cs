@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.VhdlBuilder.Representation.Declaration;
 using System.Collections.Generic;
 
@@ -11,7 +11,7 @@ namespace Hast.Transformer.Vhdl.Models
         IEnumerable<ITransformationWarning> Warnings { get; }
 
         /// <summary>
-        /// Xilinx XDC file, only for Xilinx devices.
+        /// Gets the Xilinx XDC file, only for Xilinx devices.
         /// </summary>
         XdcFile XdcFile { get; }
     }

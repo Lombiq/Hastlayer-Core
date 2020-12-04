@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -18,12 +18,12 @@ namespace Hast.VhdlBuilder.Representation
     public interface IVhdlGenerationOptions
     {
         /// <summary>
-        /// Gets whether the resulting source code will be formatted in a readable way.
+        /// Gets a value indicating whether the resulting source code will be formatted in a readable way.
         /// </summary>
         bool FormatCode { get; }
 
         /// <summary>
-        /// Gets whether to omit added comments from the output or include them.
+        /// Gets a value indicating whether to omit added comments from the output or include them.
         /// </summary>
         bool OmitComments { get; }
 

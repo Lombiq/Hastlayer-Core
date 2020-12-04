@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -12,8 +12,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string Text { get; set; }
 
         /// <summary>
-        /// If set to <c>true</c>, the comment won't be omitted even if this is configured in 
-        /// <see cref="IVhdlGenerationOptions"/>.
+        /// Gets or sets a value indicating whether the comment won't be omitted even if this is configured in <see cref="IVhdlGenerationOptions"/>.
         /// </summary>
         public bool CantBeOmitted { get; set; }
 

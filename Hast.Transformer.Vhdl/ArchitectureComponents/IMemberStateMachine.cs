@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Representation.Declaration;
 using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
@@ -15,7 +15,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
     public interface IMemberStateMachine : IArchitectureComponent
     {
         /// <summary>
-        /// States of the state machine. The state with the index 0 is the start state, the one with the index 1 is the
+        /// Gets the states of the state machine. The state with the index 0 is the start state, the one with the index 1 is the
         /// final state.
         /// </summary>
         IReadOnlyList<IMemberStateMachineState> States { get; }

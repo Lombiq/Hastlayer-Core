@@ -1,9 +1,10 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Models
 {
@@ -20,36 +21,34 @@ namespace Hast.Transformer.Vhdl.Models
         ICurrentBlock CurrentBlock { get; }
 
         /// <summary>
-        /// Maps the names of variables that store object references to compiler-generated DisplayClasses (created for
+        /// Gets the names of variables that store object references to compiler-generated DisplayClasses (created for
         /// lambda expressions) to full DisplayClass names.
         /// </summary>
         IDictionary<string, string> VariableNameToDisplayClassNameMappings { get; }
 
         /// <summary>
-        /// Keeps track of the name of those variables that store references to Tasks and then later the Task results
-        /// fetched from them via Task.Result.
+        /// Gets the dictionary that keeps track of the name of those variables that store references to Tasks and then later the Task results fetched from them via <see cref="Task{T}.Result"/>.
         /// </summary>
         IDictionary<string, MethodDeclaration> TaskVariableNameToDisplayClassMethodMappings { get; }
 
         /// <summary>
-        /// Keeps track of which invoked state machines were finished in which states. This is needed not to
-        /// immediately restart a component in the state it was finished.
+        /// Gets the dictionary that Keeps track of which invoked state machines were finished in which states. This is needed not to immediately restart a component in the state it was finished.
         /// </summary>
         IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; }
 
         /// <summary>
-        /// Maps label statements to state machine state indices. This is necessary because each label should have its
+        /// Gets the label statements to state machine state indices. This is necessary because each label should have its
         /// own state (so it's possible to jump to it).
         /// </summary>
         IDictionary<string, int> LabelsToStateIndicesMappings { get; }
 
         /// <summary>
-        /// Keeps track of any other custom values for the scope.
+        /// Gets any other custom values for the scope.
         /// </summary>
         IDictionary<string, dynamic> CustomProperties { get; }
 
         /// <summary>
-        /// Warnings issued during transformation.
+        /// Gets the warnings issued during transformation.
         /// </summary>
         IList<ITransformationWarning> Warnings { get; }
     }
