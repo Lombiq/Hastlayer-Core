@@ -169,9 +169,9 @@ namespace Hast.Remote.Worker
 
                                                 assemblyPaths.Add(_appDataFolder.MapPath(path));
 
-                                                using (var memoryStream = new MemoryStream(assembly.FileContent))
-                                                using (var fileStream = _appDataFolder.CreateFile(path))
-                                                    await memoryStream.CopyToAsync(fileStream);
+                                                using var memoryStream = new MemoryStream(assembly.FileContent);
+                                                using var fileStream = _appDataFolder.CreateFile(path);
+                                                await memoryStream.CopyToAsync(fileStream);
                                             }
 
                                             cancellationToken.ThrowIfCancellationRequested();
@@ -199,15 +199,13 @@ namespace Hast.Remote.Worker
 
                                                 cancellationToken.ThrowIfCancellationRequested();
 
-                                                using (var memoryStream = new MemoryStream())
+                                                using var memoryStream = new MemoryStream();
+                                                await hardwareRepresentation.HardwareDescription.Serialize(memoryStream);
+                                                result.HardwareDescription = new HardwareDescription
                                                 {
-                                                    await hardwareRepresentation.HardwareDescription.Serialize(memoryStream);
-                                                    result.HardwareDescription = new HardwareDescription
-                                                    {
-                                                        Language = hardwareRepresentation.HardwareDescription.Language,
-                                                        SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray())
-                                                    };
-                                                }
+                                                    Language = hardwareRepresentation.HardwareDescription.Language,
+                                                    SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray())
+                                                };
                                             }
                                             catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
                                             {

@@ -58,49 +58,47 @@ namespace Hast.Remote.Worker.Daemon
                     StorageConnectionString = appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey)
                 };
 
-                using (var host = (Hastlayer) await TransformationWorker.CreateHastlayerAsync(
-                    configuration, cancellationToken: _cancellationTokenSource.Token))
+                using var host = (Hastlayer)await TransformationWorker.CreateHastlayerAsync(
+                    configuration, cancellationToken: _cancellationTokenSource.Token);
+                try
                 {
-                    try
+                    await host.RunAsync<IServiceProvider>(serviceProvider =>
                     {
-                        await host.RunAsync<IServiceProvider>(serviceProvider =>
-                        {
-                            var worker = serviceProvider.GetService<ITransformationWorker>();
-                            var configurationAccessor = serviceProvider.GetService<IConfiguration>();
+                        var worker = serviceProvider.GetService<ITransformationWorker>();
+                        var configurationAccessor = serviceProvider.GetService<IConfiguration>();
 
                             // Only counting startup crashes.
                             _restartCount = 0;
 
-                            return worker.Work(_cancellationTokenSource.Token);
-                        });
-                    }
-                    catch (Exception ex) when (!ex.IsFatal())
+                        return worker.Work(_cancellationTokenSource.Token);
+                    });
+                }
+                catch (Exception ex) when (!ex.IsFatal())
+                {
+                    await host.RunAsync<ILogger<Service>>(logger =>
                     {
-                        await host.RunAsync<ILogger<Service>>(logger =>
-                        {
-                            logger.LogError(ex, DisplayName + " crashed with an unhandled exception. Restarting...");
+                        logger.LogError(ex, DisplayName + " crashed with an unhandled exception. Restarting...");
 
-                            if (_restartCount < 10)
-                            {
-                                _restartCount++;
+                        if (_restartCount < 10)
+                        {
+                            _restartCount++;
 
                                 // Not exactly the nicest way to restart the worker, and increases memory usage with each
                                 // restart. But such restarts should be extremely rare, this should be just a last resort.
                                 _workerTask = null;
-                                RunStopTasks();
-                                RunStartTasks();
-                            }
-                            else
-                            {
-                                logger.LogCritical(
-                                    ex,
-                                    DisplayName + " crashed with an unhandled exception and was restarted " +
-                                    _restartCount + " times. It won't be restarted again.");
-                            }
+                            RunStopTasks();
+                            RunStartTasks();
+                        }
+                        else
+                        {
+                            logger.LogCritical(
+                                ex,
+                                DisplayName + " crashed with an unhandled exception and was restarted " +
+                                _restartCount + " times. It won't be restarted again.");
+                        }
 
-                            return Task.CompletedTask;
-                        });
-                    }
+                        return Task.CompletedTask;
+                    });
                 }
             });
 

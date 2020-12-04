@@ -17,193 +17,191 @@ namespace Hast.Synthesis.Services
 
         public ITimingReport Parse(TextReader reportReader)
         {
-            using (var csvReader = new CsvReader(reportReader, CsvConfiguration))
+            using var csvReader = new CsvReader(reportReader, CsvConfiguration);
+            csvReader.Configuration.Delimiter = "	";
+            csvReader.Configuration.CultureInfo = CultureInfo.InvariantCulture;
+
+            csvReader.Read();
+            csvReader.ReadHeader();
+
+            var timingReport = new TimingReport();
+
+            while (csvReader.Read())
             {
-                csvReader.Configuration.Delimiter = "	";
-                csvReader.Configuration.CultureInfo = CultureInfo.InvariantCulture;
+                var operatorString = csvReader.GetField<string>("Op");
 
-                csvReader.Read();
-                csvReader.ReadHeader();
-
-                var timingReport = new TimingReport();
-
-                while (csvReader.Read())
+                // These are not directly applicable in .NET.
+                var skippedOperators = new[] { "nand", "nor", "xnor" };
+                if (skippedOperators.Contains(operatorString))
                 {
-                    var operatorString = csvReader.GetField<string>("Op");
+                    continue;
+                }
 
-                    // These are not directly applicable in .NET.
-                    var skippedOperators = new[] { "nand", "nor", "xnor" };
-                    if (skippedOperators.Contains(operatorString))
+                // Instead of the shift_left/right* versions we use dotnet_shift_left/right, which also takes a
+                // surrounding SmartResize() call into account.
+                if (operatorString.StartsWith("shift_left", StringComparison.Ordinal) || operatorString.StartsWith("shift_right", StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                var dpdString = csvReader.GetField<string>("DPD");
+
+                // If the DPD is not specified then nothing to do.
+                if (string.IsNullOrEmpty(dpdString))
+                {
+                    continue;
+                }
+
+                // Operators can be simple ones (like and and add) or ones that can also take a constant operand
+                // (like div). This is so that if one operand is a const that's a power of two we have a different
+                // timing value, addressing specific VHDL compiler optimizations (like with div_by_4).
+
+                var constantOperand = string.Empty;
+                var byStartIndex = operatorString.IndexOf("_by_", StringComparison.Ordinal);
+                if (byStartIndex != -1)
+                {
+                    constantOperand = operatorString[(byStartIndex + 4)..];
+                }
+
+                var operandType = csvReader.GetField<string>("InType");
+                var isSigned = operandType.StartsWith("signed", StringComparison.Ordinal);
+                var operandSizeMatch = Regex.Match(operandType, "([0-9]+)", RegexOptions.Compiled);
+                if (!operandSizeMatch.Success)
+                {
+                    throw new InvalidOperationException("The \"" + operandType + "\" operand type doesn't have a size.");
+                }
+
+                var operandSizeBits = ushort.Parse(operandSizeMatch.Groups[1].Value, CultureInfo.InvariantCulture);
+
+                var isSignAgnosticBinaryOperatorType = false;
+                var isSignAgnosticUnaryOperatorType = false;
+
+                BinaryOperatorType? binaryOperator = null;
+                UnaryOperatorType? unaryOperator = null;
+                switch (operatorString)
+                {
+                    case "and":
+                        isSignAgnosticBinaryOperatorType = true;
+                        binaryOperator = BinaryOperatorType.BitwiseAnd;
+                        break;
+                    case "add":
+                        binaryOperator = BinaryOperatorType.Add;
+                        break;
+                    case var op when (op.StartsWith("div", StringComparison.Ordinal)):
+                        binaryOperator = BinaryOperatorType.Divide;
+                        break;
+                    case "eq":
+                        binaryOperator = BinaryOperatorType.Equality;
+                        break;
+                    case "ge":
+                        binaryOperator = BinaryOperatorType.GreaterThanOrEqual;
+                        break;
+                    case "gt":
+                        binaryOperator = BinaryOperatorType.GreaterThan;
+                        break;
+                    case "le":
+                        binaryOperator = BinaryOperatorType.LessThanOrEqual;
+                        break;
+                    case "lt":
+                        binaryOperator = BinaryOperatorType.LessThan;
+                        break;
+                    case "mod":
+                        // BinaryOperatorType.Modulus is actually the remainder operator and corresponds to the
+                        // VHDL operator rem, see below.
+                        break;
+                    case var op when (op.StartsWith("mul", StringComparison.Ordinal)):
+                        binaryOperator = BinaryOperatorType.Multiply;
+                        break;
+                    case "neq":
+                        binaryOperator = BinaryOperatorType.InEquality;
+                        break;
+                    case "not":
+                        isSignAgnosticUnaryOperatorType = true;
+                        unaryOperator = operandSizeBits == 1 ?
+                            (UnaryOperatorType?)UnaryOperatorType.Not : (UnaryOperatorType?)UnaryOperatorType.BitNot;
+                        break;
+                    case "or":
+                        isSignAgnosticBinaryOperatorType = true;
+                        binaryOperator = BinaryOperatorType.BitwiseOr;
+                        break;
+                    case var op when (op.StartsWith("dotnet_shift_left", StringComparison.Ordinal)):
+                        binaryOperator = BinaryOperatorType.ShiftLeft;
+                        break;
+                    case var op when (op.StartsWith("dotnet_shift_right", StringComparison.Ordinal)):
+                        binaryOperator = BinaryOperatorType.ShiftRight;
+                        break;
+                    case "rem":
+                        binaryOperator = BinaryOperatorType.Modulus;
+                        break;
+                    case "sub":
+                        binaryOperator = BinaryOperatorType.Subtract;
+                        break;
+                    case "unary_minus":
+                        unaryOperator = UnaryOperatorType.Minus;
+                        break;
+                    case "xor":
+                        // There is no separate bitwise and conditional version for XOR.
+                        isSignAgnosticBinaryOperatorType = true;
+                        binaryOperator = BinaryOperatorType.ExclusiveOr;
+                        break;
+                    default:
+                        throw new NotSupportedException("Unrecognized operator in timing report: " + operatorString + ".");
+                }
+
+                // For more info on DPD and TWDFR see the docs of Hastlayer Timing Tester.
+                // Data Path Delay, i.e. the propagation of signals through the operation and the nets around it.
+                var dpd = decimal.Parse(
+                    dpdString.Replace(',', '.'), // Taking care of decimal commas.
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture);
+
+                // Timing window difference from requirement, i.e.:
+                // For Vivado:
+                // TWDFR = Requirement plus delays - Source clock delay - Requirement for arrival (clock period)
+                // For Quartus Prime:
+                // TWDFR = Data required time -(Data Arrival Time -Data Delay) -Setup relationship(clock period)
+                var twdfr = decimal.Parse(
+                    csvReader.GetField<string>("TWDFR").Replace(',', '.'), // Taking care of decimal commas.
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture);
+
+                if (binaryOperator.HasValue)
+                {
+                    timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
+
+                    if (isSignAgnosticBinaryOperatorType)
                     {
-                        continue;
+                        timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
                     }
 
-                    // Instead of the shift_left/right* versions we use dotnet_shift_left/right, which also takes a
-                    // surrounding SmartResize() call into account.
-                    if (operatorString.StartsWith("shift_left", StringComparison.Ordinal) || operatorString.StartsWith("shift_right", StringComparison.Ordinal))
+                    // Bitwise and/or are defined for bools too, so need to handle that above, then handling
+                    // their conditional pairs here. (Unary bit not is only defined for arithmetic types.)
+                    if (operandSizeBits == 1 &&
+                        (binaryOperator == BinaryOperatorType.BitwiseOr || binaryOperator == BinaryOperatorType.BitwiseAnd))
                     {
-                        continue;
-                    }
+                        binaryOperator = binaryOperator == BinaryOperatorType.BitwiseOr ?
+                            BinaryOperatorType.ConditionalOr : BinaryOperatorType.ConditionalAnd;
 
-                    var dpdString = csvReader.GetField<string>("DPD");
-
-                    // If the DPD is not specified then nothing to do.
-                    if (string.IsNullOrEmpty(dpdString))
-                    {
-                        continue;
-                    }
-
-                    // Operators can be simple ones (like and and add) or ones that can also take a constant operand
-                    // (like div). This is so that if one operand is a const that's a power of two we have a different
-                    // timing value, addressing specific VHDL compiler optimizations (like with div_by_4).
-
-                    var constantOperand = string.Empty;
-                    var byStartIndex = operatorString.IndexOf("_by_", StringComparison.Ordinal);
-                    if (byStartIndex != -1)
-                    {
-                        constantOperand = operatorString[(byStartIndex + 4)..];
-                    }
-
-                    var operandType = csvReader.GetField<string>("InType");
-                    var isSigned = operandType.StartsWith("signed", StringComparison.Ordinal);
-                    var operandSizeMatch = Regex.Match(operandType, "([0-9]+)", RegexOptions.Compiled);
-                    if (!operandSizeMatch.Success)
-                    {
-                        throw new InvalidOperationException("The \"" + operandType + "\" operand type doesn't have a size.");
-                    }
-
-                    var operandSizeBits = ushort.Parse(operandSizeMatch.Groups[1].Value, CultureInfo.InvariantCulture);
-
-                    var isSignAgnosticBinaryOperatorType = false;
-                    var isSignAgnosticUnaryOperatorType = false;
-
-                    BinaryOperatorType? binaryOperator = null;
-                    UnaryOperatorType? unaryOperator = null;
-                    switch (operatorString)
-                    {
-                        case "and":
-                            isSignAgnosticBinaryOperatorType = true;
-                            binaryOperator = BinaryOperatorType.BitwiseAnd;
-                            break;
-                        case "add":
-                            binaryOperator = BinaryOperatorType.Add;
-                            break;
-                        case var op when (op.StartsWith("div", StringComparison.Ordinal)):
-                            binaryOperator = BinaryOperatorType.Divide;
-                            break;
-                        case "eq":
-                            binaryOperator = BinaryOperatorType.Equality;
-                            break;
-                        case "ge":
-                            binaryOperator = BinaryOperatorType.GreaterThanOrEqual;
-                            break;
-                        case "gt":
-                            binaryOperator = BinaryOperatorType.GreaterThan;
-                            break;
-                        case "le":
-                            binaryOperator = BinaryOperatorType.LessThanOrEqual;
-                            break;
-                        case "lt":
-                            binaryOperator = BinaryOperatorType.LessThan;
-                            break;
-                        case "mod":
-                            // BinaryOperatorType.Modulus is actually the remainder operator and corresponds to the
-                            // VHDL operator rem, see below.
-                            break;
-                        case var op when (op.StartsWith("mul", StringComparison.Ordinal)):
-                            binaryOperator = BinaryOperatorType.Multiply;
-                            break;
-                        case "neq":
-                            binaryOperator = BinaryOperatorType.InEquality;
-                            break;
-                        case "not":
-                            isSignAgnosticUnaryOperatorType = true;
-                            unaryOperator = operandSizeBits == 1 ?
-                                (UnaryOperatorType?)UnaryOperatorType.Not : (UnaryOperatorType?)UnaryOperatorType.BitNot;
-                            break;
-                        case "or":
-                            isSignAgnosticBinaryOperatorType = true;
-                            binaryOperator = BinaryOperatorType.BitwiseOr;
-                            break;
-                        case var op when (op.StartsWith("dotnet_shift_left", StringComparison.Ordinal)):
-                            binaryOperator = BinaryOperatorType.ShiftLeft;
-                            break;
-                        case var op when (op.StartsWith("dotnet_shift_right", StringComparison.Ordinal)):
-                            binaryOperator = BinaryOperatorType.ShiftRight;
-                            break;
-                        case "rem":
-                            binaryOperator = BinaryOperatorType.Modulus;
-                            break;
-                        case "sub":
-                            binaryOperator = BinaryOperatorType.Subtract;
-                            break;
-                        case "unary_minus":
-                            unaryOperator = UnaryOperatorType.Minus;
-                            break;
-                        case "xor":
-                            // There is no separate bitwise and conditional version for XOR.
-                            isSignAgnosticBinaryOperatorType = true;
-                            binaryOperator = BinaryOperatorType.ExclusiveOr;
-                            break;
-                        default:
-                            throw new NotSupportedException("Unrecognized operator in timing report: " + operatorString + ".");
-                    }
-
-                    // For more info on DPD and TWDFR see the docs of Hastlayer Timing Tester.
-                    // Data Path Delay, i.e. the propagation of signals through the operation and the nets around it.
-                    var dpd = decimal.Parse(
-                        dpdString.Replace(',', '.'), // Taking care of decimal commas.
-                        NumberStyles.Any,
-                        CultureInfo.InvariantCulture);
-
-                    // Timing window difference from requirement, i.e.:
-                    // For Vivado:
-                    // TWDFR = Requirement plus delays - Source clock delay - Requirement for arrival (clock period)
-                    // For Quartus Prime:
-                    // TWDFR = Data required time -(Data Arrival Time -Data Delay) -Setup relationship(clock period)
-                    var twdfr = decimal.Parse(
-                        csvReader.GetField<string>("TWDFR").Replace(',', '.'), // Taking care of decimal commas.
-                        NumberStyles.Any,
-                        CultureInfo.InvariantCulture);
-
-                    if (binaryOperator.HasValue)
-                    {
                         timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
 
                         if (isSignAgnosticBinaryOperatorType)
                         {
                             timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
                         }
-
-                        // Bitwise and/or are defined for bools too, so need to handle that above, then handling
-                        // their conditional pairs here. (Unary bit not is only defined for arithmetic types.)
-                        if (operandSizeBits == 1 &&
-                            (binaryOperator == BinaryOperatorType.BitwiseOr || binaryOperator == BinaryOperatorType.BitwiseAnd))
-                        {
-                            binaryOperator = binaryOperator == BinaryOperatorType.BitwiseOr ?
-                                BinaryOperatorType.ConditionalOr : BinaryOperatorType.ConditionalAnd;
-
-                            timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
-
-                            if (isSignAgnosticBinaryOperatorType)
-                            {
-                                timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
-                            }
-                        }
-                    }
-                    else if (unaryOperator.HasValue)
-                    {
-                        timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
-
-                        if (isSignAgnosticUnaryOperatorType)
-                        {
-                            timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
-                        }
                     }
                 }
+                else if (unaryOperator.HasValue)
+                {
+                    timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
 
-                return timingReport;
+                    if (isSignAgnosticUnaryOperatorType)
+                    {
+                        timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
+                    }
+                }
             }
+
+            return timingReport;
         }
 
         private class TimingReport : ITimingReport
