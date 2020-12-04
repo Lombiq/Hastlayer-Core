@@ -1,4 +1,4 @@
-﻿using Hast.Common.Models;
+using Hast.Common.Models;
 using Hast.Common.Services;
 using Hast.Transformer.Models;
 using System.Threading.Tasks;
@@ -23,10 +23,10 @@ namespace Hast.Transformer.Vhdl.Services
             return await VhdlHardwareDescription.Deserialize(fileStream);
         }
 
-        public async Task SetHardwareDescription(string cacheKey, VhdlHardwareDescription hardwareDescription)
+        public Task SetHardwareDescription(string cacheKey, VhdlHardwareDescription hardwareDescription)
         {
-            await using var fileStream = _appDataFolder.CreateFile(GetCacheFilePath(cacheKey));
-            await hardwareDescription.Serialize(fileStream);
+            using var fileStream = _appDataFolder.CreateFile(GetCacheFilePath(cacheKey));
+            return hardwareDescription.Serialize(fileStream);
         }
 
 
