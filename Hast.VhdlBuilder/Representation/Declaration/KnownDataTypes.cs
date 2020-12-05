@@ -128,7 +128,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public static readonly DataType Void = new DataType { TypeCategory = DataTypeCategory.Identifier, Name = "void" };
 
-        public static Attribute DontTouchAttribute = new Attribute
+        public static Attribute DontTouchAttribute { get; set; } = new Attribute
         {
             Name = "dont_touch",
             ValueType = UnrangedString,
