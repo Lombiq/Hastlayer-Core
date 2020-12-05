@@ -35,7 +35,7 @@ namespace Hast.Transformer.Vhdl.Services
             }
 
             var transformedVhdlManifest = await _transformedVhdlManifestBuilder.BuildManifest(transformationContext);
-            foreach(var handler in _vhdlTransformationEventHandler)
+            foreach (var handler in _vhdlTransformationEventHandler)
             {
                 handler?.Invoke(this, transformedVhdlManifest);
             }

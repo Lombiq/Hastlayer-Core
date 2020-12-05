@@ -24,7 +24,7 @@ namespace Hast.VhdlBuilder.Testing
             where T : class, IVhdlElement => element.Is<T>(null);
 
         public static bool Is<T>(this IVhdlElement element, Expression<Func<T, bool>> predicate)
-            where T: class, IVhdlElement
+            where T : class, IVhdlElement
         {
             var target = element as T;
             return target != null && (predicate == null || predicate.Compile()(target));

@@ -67,8 +67,8 @@ namespace Hast.Remote.Worker.Daemon
                         var worker = serviceProvider.GetService<ITransformationWorker>();
                         var configurationAccessor = serviceProvider.GetService<IConfiguration>();
 
-                            // Only counting startup crashes.
-                            _restartCount = 0;
+                        // Only counting startup crashes.
+                        _restartCount = 0;
 
                         return worker.Work(_cancellationTokenSource.Token);
                     });
@@ -83,9 +83,9 @@ namespace Hast.Remote.Worker.Daemon
                         {
                             _restartCount++;
 
-                                // Not exactly the nicest way to restart the worker, and increases memory usage with each
-                                // restart. But such restarts should be extremely rare, this should be just a last resort.
-                                _workerTask = null;
+                            // Not exactly the nicest way to restart the worker, and increases memory usage with each
+                            // restart. But such restarts should be extremely rare, this should be just a last resort.
+                            _workerTask = null;
                             RunStopTasks();
                             RunStartTasks();
                         }

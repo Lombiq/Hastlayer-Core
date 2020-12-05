@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Hast.Layer;
 using Hast.Synthesis.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -27,7 +27,7 @@ namespace Hast.Synthesis.Helpers
                 deviceManifest,
                 ReturnLatencyOrThrowIfInvalid(timingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned), expression));
 
-            public static bool IsRightOperandConstant(BinaryOperatorExpression expression, out string constantValue)
+        public static bool IsRightOperandConstant(BinaryOperatorExpression expression, out string constantValue)
         {
             var binaryOperator = expression.Operator;
             constantValue = string.Empty;
