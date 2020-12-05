@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Immutable;
 
 namespace Hast.TestInputs.Invalid
@@ -36,13 +36,17 @@ namespace Hast.TestInputs.Invalid
 
         public void MultiDimensionalArray()
         {
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
             var array = new int[2, 3];
+#pragma warning restore CA1814 // Prefer jagged arrays over multidimensional
             array[0, 1] = 10;
         }
 
         public void NullAssignment()
         {
+#pragma warning disable S1854 // Unused assignments should be removed
             var array1 = new int[5];
+#pragma warning restore S1854 // Unused assignments should be removed
             array1 = null;
             var x = array1.Length;
             var y = -x;

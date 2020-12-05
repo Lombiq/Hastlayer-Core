@@ -10,13 +10,19 @@ namespace Hast.TestInputs.Static
 
             for (uint i = 0; i < 3; i++)
             {
+                // Can't do it without passing CancellationToken which is not supported.
+#pragma warning disable CA2008 // Do not create tasks without passing a TaskScheduler
+#pragma warning disable VSTHRD105 // Avoid method overloads that assume TaskScheduler.Current
                 tasks[i] = Task.Factory.StartNew(
                     indexObject =>
                     {
                         var index = (uint)indexObject;
                         index += input;
                         return index % 2 == 0;
-                    }, i);
+                    },
+                    i);
+#pragma warning restore VSTHRD105 // Avoid method overloads that assume TaskScheduler.Current
+#pragma warning restore CA2008 // Do not create tasks without passing a TaskScheduler
             }
 
             // These two after each other don't make sense, but the test result will be still usable just for static
@@ -31,13 +37,19 @@ namespace Hast.TestInputs.Static
 
             for (uint i = 0; i < 3; i++)
             {
+                // Can't do it without passing CancellationToken which is not supported.
+#pragma warning disable CA2008 // Do not create tasks without passing a TaskScheduler
+#pragma warning disable VSTHRD105 // Avoid method overloads that assume TaskScheduler.Current
                 tasks[i] = Task.Factory.StartNew(
                     indexObject =>
                     {
                         var index = (uint)indexObject;
                         index += input;
                         return new Calculator { Number = index }.IsEven();
-                    }, i);
+                    },
+                    i);
+#pragma warning restore VSTHRD105 // Avoid method overloads that assume TaskScheduler.Current
+#pragma warning restore CA2008 // Do not create tasks without passing a TaskScheduler
             }
 
             Task.WhenAll(tasks).Wait();

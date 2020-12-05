@@ -1,4 +1,4 @@
-﻿namespace Hast.TestInputs.Static
+namespace Hast.TestInputs.Static
 {
     public class ConstantsUsingCases
     {
@@ -43,7 +43,7 @@
         public void ConstantPassingToMethod(int input)
         {
             var x = 15;
-            var y = x * 10 - 5;
+            var y = (x * 10) - 5;
             // The result of StaticConstantUsingMethod() can even be inlined here.
             var z = ConstantUsingMethod(y, input) + StaticConstantUsingMethod(y);
         }
@@ -70,9 +70,9 @@
             var arrayHolder8 = new ArrayHolder2((uint)initialArrayLength + 8);
         }
 
-        private int ConstantUsingMethod(int input1, int input2) => input1 * 2 + 8 - input2;
+        private int ConstantUsingMethod(int input1, int input2) => (input1 * 2) + 8 - input2;
 
-        private static int StaticConstantUsingMethod(int input) => input * 2 + 8;
+        private static int StaticConstantUsingMethod(int input) => (input * 2) + 8;
 
         private class ArrayHolder1
         {
@@ -91,13 +91,14 @@
 
             public ArrayHolder1(uint size)
             {
-                ArrayLength = (size >> 5) + (size % 32 == 0 ? 0 : (uint)5);
+                ArrayLength = (size >> 5) + (size % 32 == 0 ? 0 : 5U);
                 ArrayLengthCopy = ArrayLength << 5;
                 NonSubstitutableArrayLengthCopy = ArrayLengthCopy;
                 Array = new uint[ArrayLength];
             }
 
-            public ArrayHolder1(ArrayHolder1 previous) : this(previous.Array)
+            public ArrayHolder1(ArrayHolder1 previous)
+                : this(previous.Array)
             {
             }
         }
@@ -106,10 +107,7 @@
         {
             public uint ArrayLength { get; }
 
-            public ArrayHolder2(uint size)
-            {
-                ArrayLength = (size >> 5) + (size % 32 == 0 ? 0 : (uint)5);
-            }
+            public ArrayHolder2(uint size) => ArrayLength = (size >> 5) + (size % 32 == 0 ? 0 : 5U);
         }
     }
 }

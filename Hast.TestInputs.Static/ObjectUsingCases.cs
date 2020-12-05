@@ -1,14 +1,16 @@
-﻿namespace Hast.TestInputs.Static
+namespace Hast.TestInputs.Static
 {
     public class ObjectUsingCases
     {
         public void NullUsage()
         {
             var customObject = new MyClass { MyProperty = 5 };
+#pragma warning disable S3240 // The simplest possible condition syntax should be used
             if (customObject == null)
             {
                 customObject = new MyClass();
             }
+#pragma warning restore S3240 // The simplest possible condition syntax should be used
 
             customObject = null;
 

@@ -1,4 +1,4 @@
-﻿namespace Hast.TestInputs.Static
+namespace Hast.TestInputs.Static
 {
     public class LoopCases
     {
@@ -12,7 +12,9 @@
 
                 if (sum > 10)
                 {
+#pragma warning disable S1227 // break statements should not be used except for switch cases
                     break;
+#pragma warning restore S1227 // break statements should not be used except for switch cases
                 }
             }
         }
@@ -29,7 +31,9 @@
 
                     if (sum > 10)
                     {
+#pragma warning disable S1227 // break statements should not be used except for switch cases
                         break;
+#pragma warning restore S1227 // break statements should not be used except for switch cases
                     }
                 }
             }
