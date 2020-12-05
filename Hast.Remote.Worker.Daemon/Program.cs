@@ -44,7 +44,7 @@ namespace Hast.Remote.Worker.Daemon
         {
             try
             {
-                ManagedInstallerClass.InstallHelper(new string[] { _exePath });
+                ManagedInstallerClass.InstallHelper(new[] { _exePath });
             }
             catch
             {
@@ -58,7 +58,7 @@ namespace Hast.Remote.Worker.Daemon
         {
             try
             {
-                ManagedInstallerClass.InstallHelper(new string[] { "/u", _exePath });
+                ManagedInstallerClass.InstallHelper(new[] { "/u", _exePath });
             }
             catch
             {

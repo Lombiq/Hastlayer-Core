@@ -60,7 +60,7 @@ namespace Hast.VhdlBuilder.Extensions
             // A space will be added if no formatting is uses so the code remains syntactically correct even if being
             // just one line.
             string.Join(vhdlGenerationOptions.NewLineIfShouldFormat(), vhdl
-                .Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
+                .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
                 .Select(line => (!string.IsNullOrEmpty(line) ? vhdlGenerationOptions.IndentIfShouldFormat() : string.Empty) + line)) +
                 (vhdlGenerationOptions.FormatCode ? string.Empty : " ");
     }

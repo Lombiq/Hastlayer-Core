@@ -26,7 +26,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// delimited block of text, corresponding to lines of the block comment.
         /// </summary>
         public BlockComment(string textBlock)
-            : this(textBlock.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
+            : this(textBlock.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
         {
         }
 
