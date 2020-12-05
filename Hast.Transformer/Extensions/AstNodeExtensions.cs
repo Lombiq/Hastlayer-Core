@@ -359,7 +359,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         private static string CreateNameForUnnamedNode(this AstNode node) =>
             // The node doesn't really have a name so give it one that is suitably unique.
-            CreateParentEntityBasedName(node, node.ToString() + node.GetILRangeName());
+            CreateParentEntityBasedName(node, node + node.GetILRangeName());
 
         private static string CreateParentEntityBasedName(AstNode node, string name) =>
             node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;

@@ -109,7 +109,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     "Converting from " + fromType.Name +
                     " to " + toType.Name +
                     " to fix a binary expression. Although valid in .NET this could cause information loss due to rounding. " +
-                    "The affected expression: " + binaryOperatorExpression.ToString() +
+                    "The affected expression: " + binaryOperatorExpression +
                     " in member " + binaryOperatorExpression.FindFirstParentOfType<EntityDeclaration>().GetFullName() + ".");
             }
 

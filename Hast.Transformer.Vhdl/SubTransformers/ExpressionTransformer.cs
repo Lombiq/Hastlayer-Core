@@ -613,7 +613,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         "LossyCast",
                         "A cast from " + fromVhdlType.ToVhdl() + " to " + toVhdlType.ToVhdl() +
                         " was lossy. If the result can indeed reach values outside the target type's limits then underflow or overflow errors will occur. The affected expression: " +
-                        expression.ToString() + " in method " + scope.Method.GetFullName() + ".");
+                        expression + " in method " + scope.Method.GetFullName() + ".");
                 }
 
                 return typeConversionResult.ConvertedFromExpression;
@@ -627,7 +627,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (!(Transform(indexerExpression.Target, context) is IDataObject targetVariableReference))
                 {
                     throw new InvalidOperationException(
-                        "The target of the indexer expression " + expression.ToString() +
+                        "The target of the indexer expression " + expression +
                         " couldn't be transformed to a data object reference.".AddParentEntityName(expression));
                 }
 

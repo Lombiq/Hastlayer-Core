@@ -12,14 +12,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 throw new NotSupportedException(
                     "Evaluating only binary operator expressions where both operands are primitive expressions are supported. The left expression was: " +
-                    binaryOperatorExpression.Left.ToString() + ".");
+                    binaryOperatorExpression.Left + ".");
             }
 
             if (!(binaryOperatorExpression.Right is PrimitiveExpression))
             {
                 throw new NotSupportedException(
                     "Evaluating only binary operator expressions where both operands are primitive expressions are supported. The right expression was: " +
-                    binaryOperatorExpression.Right.ToString() + ".");
+                    binaryOperatorExpression.Right + ".");
             }
 
             dynamic leftValue = ((PrimitiveExpression)binaryOperatorExpression.Left).Value;
@@ -58,7 +58,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 throw new NotSupportedException(
                     "Evaluating only cast expressions that target a primitive expression are supported. The targeted expression was: " +
-                    castExpression.Expression.ToString() + ".");
+                    castExpression.Expression + ".");
             }
 
             var toType = castExpression.GetActualType();
@@ -107,7 +107,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 throw new NotSupportedException(
                     "Evaluating only unary expressions that target a primitive expression are supported. The targeted expression was: " +
-                    unaryOperatorExpression.Expression.ToString() + ".");
+                    unaryOperatorExpression.Expression + ".");
             }
 
             dynamic value = ((PrimitiveExpression)unaryOperatorExpression.Expression).Value;

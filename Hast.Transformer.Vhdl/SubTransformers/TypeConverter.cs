@@ -244,7 +244,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return KnownDataTypes.Void;
             }
 
-            throw new NotSupportedException("The type " + typeCode.ToString() + " is not supported for transforming.");
+            throw new NotSupportedException("The type " + typeCode + " is not supported for transforming.");
         }
 
         private DataType ConvertComposed(ComposedType type, IVhdlTransformationContext context)
@@ -268,7 +268,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return ConvertPrimitive(((PrimitiveType)type.BaseType).KnownTypeCode);
             }
 
-            throw new NotSupportedException("The type " + type.ToString() + " is not supported for transforming.");
+            throw new NotSupportedException("The type " + type + " is not supported for transforming.");
         }
 
         private DataType ConvertSimple(SimpleType type, IVhdlTransformationContext context)
@@ -290,7 +290,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             {
                                 throw new NotSupportedException(
                                     "Tasks can't return arrays as that would result in multi-dimensional arrays which is not supported. Affected type: " +
-                                    type.ToString() + ".",
+                                    type + ".",
                                     ex);
                             }
                         }

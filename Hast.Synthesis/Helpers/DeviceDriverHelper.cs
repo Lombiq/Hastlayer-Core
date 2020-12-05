@@ -62,7 +62,7 @@ namespace Hast.Synthesis.Helpers
             if (latency >= 0) return latency;
 
             throw new InvalidOperationException(
-                "No latency data found for the expression " + expression.ToString() +
+                "No latency data found for the expression " + expression +
                 ". This is most possibly a bug in Hastlayer, please submit a bug report with the affected code snippet: https://github.com/Lombiq/Hastlayer-SDK/issues.");
         }
     }

@@ -35,6 +35,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return base.Equals(obj) && RangeMin == otherType.RangeMin && RangeMin == otherType.RangeMax;
         }
 
-        public override int GetHashCode() => (Name + TypeCategory.ToString() + RangeMin + RangeMax).GetHashCode(StringComparison.InvariantCulture);
+        public override int GetHashCode() => (Name + TypeCategory + RangeMin + RangeMax).GetHashCode(StringComparison.InvariantCulture);
     }
 }

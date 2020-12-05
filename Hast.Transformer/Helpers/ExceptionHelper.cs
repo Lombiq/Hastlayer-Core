@@ -18,7 +18,7 @@ namespace Hast.Transformer.Helpers
 
         public static void ThrowOnlySingleDimensionalArraysSupporterException(AstNode affectedNode) =>
             throw new NotSupportedException(
-                affectedNode.ToString() + " is a multi-dimensional array. " +
+                affectedNode + " is a multi-dimensional array. " +
                 "Only single-dimensional arrays are supported, see: https://github.com/Lombiq/Hastlayer-SDK/issues/10."
                 .AddParentEntityName(affectedNode));
     }

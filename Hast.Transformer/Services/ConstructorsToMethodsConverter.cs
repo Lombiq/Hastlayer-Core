@@ -59,7 +59,7 @@ namespace Hast.Transformer.Services
                         throw new NotSupportedException(
                             "Only this() constructor initializers are supported. Unsupported constructor: " +
                             Environment.NewLine +
-                            constructorDeclaration.ToString());
+                            constructorDeclaration);
                     }
 
                     var invocation = new InvocationExpression(

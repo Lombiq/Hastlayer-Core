@@ -42,7 +42,7 @@ namespace Hast.Transformer.Services
                 fileHashes.Append(BitConverter.ToString(sha.ComputeHash(stream)).Replace("-", string.Empty, StringComparison.Ordinal));
             }
 
-            return "Hast.Transformer.TransformationContextCache." + fileHashes.ToString() + " - " + transformationId.GetHashCode(StringComparison.InvariantCulture);
+            return "Hast.Transformer.TransformationContextCache." + fileHashes + " - " + transformationId.GetHashCode(StringComparison.InvariantCulture);
         }
     }
 }

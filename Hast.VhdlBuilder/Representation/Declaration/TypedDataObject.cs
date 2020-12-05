@@ -18,7 +18,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
-                DataObjectKind.ToString() +
+                DataObjectKind +
                 " " +
                 vhdlGenerationOptions.ShortenName(Name) +
                 (DataType != null ? ": " + DataType.ToReference().ToVhdl(vhdlGenerationOptions) : string.Empty) +

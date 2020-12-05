@@ -50,7 +50,7 @@ namespace Hast.Transformer
             {
                 var builder = new StringBuilder();
                 foreach (var item in result.Errors) builder.Append(Environment.NewLine + item);
-                throw new ArgumentException("The provided source code is invalid and has the following errors: " + builder.ToString());
+                throw new ArgumentException("The provided source code is invalid and has the following errors: " + builder);
             }
 
             return transformer.Transform(new[] { result.CompiledAssembly }, configuration);

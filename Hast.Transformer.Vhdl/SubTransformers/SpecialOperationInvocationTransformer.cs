@@ -38,7 +38,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (!IsSpecialOperationInvocation(expression))
             {
                 throw new InvalidOperationException(
-                    "The given expression (" + expression.ToString() + ") is not a special operation invocation.");
+                    "The given expression (" + expression + ") is not a special operation invocation.");
             }
 
             var targetMethodName = expression.GetTargetMemberFullName();
@@ -48,7 +48,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (string.IsNullOrEmpty(simdOperation))
             {
                 throw new NotSupportedException(
-                    "No transformer logic exists for the following special operation invocation: " + expression.ToString());
+                    "No transformer logic exists for the following special operation invocation: " + expression);
             }
 
             // Transforming the operation to parallel signal-using operations.

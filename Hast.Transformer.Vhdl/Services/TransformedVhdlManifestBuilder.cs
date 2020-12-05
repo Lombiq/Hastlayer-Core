@@ -383,7 +383,7 @@ namespace Hast.Transformer.Vhdl.Services
                     }
                     else if (!_pocoTransformer.IsSupportedMember(node))
                     {
-                        throw new NotSupportedException("The member " + node.ToString() + " is not supported for transformation.");
+                        throw new NotSupportedException("The member " + node + " is not supported for transformation.");
                     }
 
                     break;

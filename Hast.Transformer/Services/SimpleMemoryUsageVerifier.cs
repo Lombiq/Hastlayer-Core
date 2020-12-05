@@ -51,7 +51,7 @@ namespace Hast.Transformer.Services
                 {
                     throw new NotSupportedException(
                         "The cell count parameter of the batched SimpleMemory read operation in the expression " +
-                        assignmentExpression.ToString() +
+                        assignmentExpression +
                         " couldn't be statically determined. Such operations need to define the cell count at compile-time."
                         .AddParentEntityName(assignmentExpression));
                 }
