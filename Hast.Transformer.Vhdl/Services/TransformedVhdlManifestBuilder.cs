@@ -394,11 +394,6 @@ namespace Hast.Transformer.Vhdl.Services
                 case NodeType.Statement:
                     break;
                 case NodeType.Token:
-                    if (node is CSharpModifierToken)
-                    {
-                        var modifier = node as CSharpModifierToken;
-                    }
-
                     break;
                 case NodeType.TypeDeclaration:
                     var typeDeclaration = node as TypeDeclaration;

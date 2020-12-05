@@ -277,11 +277,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                 .As<MethodDeclaration>();
                         }
 
-                        var targetMaxDegreeOfParallelism = context.TransformationContext
-                            .GetTransformerConfiguration()
-                            .GetMaxInvocationInstanceCountConfigurationForMember(targetMethod)
-                            .MaxDegreeOfParallelism;
-
                         // We only need to care about the invocation here. Since this is a Task start there will be
                         // some form of await later.
                         _stateMachineInvocationBuilder.BuildInvocation(

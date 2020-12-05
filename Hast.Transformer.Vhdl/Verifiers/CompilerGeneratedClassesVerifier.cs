@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using System;
 using System.Collections.Generic;
@@ -24,8 +24,6 @@ namespace Hast.Transformer.Vhdl.Verifiers
                 {
                     // Adding parameters for every field that the method used, in alphabetical order, and changing field
                     // references to parameter references.
-
-                    var parametersForFormerFields = new SortedList<string, ParameterDeclaration>();
 
                     Action<MemberReferenceExpression> memberReferenceExpressionProcessor = memberReferenceExpression =>
                     {

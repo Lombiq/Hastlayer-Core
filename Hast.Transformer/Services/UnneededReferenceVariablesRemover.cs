@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Linq;
 
 namespace Hast.Transformer.Services
@@ -18,8 +18,6 @@ namespace Hast.Transformer.Services
 
                 var left = assignmentExpression.Left;
                 var right = assignmentExpression.Right;
-
-                var leftType = left.GetActualType();
 
                 // Let's check whether the assignment is for a reference type and whether it's between two variables or
                 // a variable and a field/property/array item access (properties at these stage are only

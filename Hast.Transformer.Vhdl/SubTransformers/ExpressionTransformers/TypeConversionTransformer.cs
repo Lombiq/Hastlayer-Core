@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.Helpers;
+using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
@@ -175,8 +175,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 return result;
             }
-
-            Func<DataType, int> getSize = dataType => ((SizedDataType)dataType).Size;
 
             var fromSize = fromType.GetSize();
             var toSize = toType.GetSize();

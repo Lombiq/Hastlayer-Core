@@ -111,7 +111,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             var stateMachine = context.Scope.StateMachine;
-            var preTransformationStateCount = stateMachine.States.Count;
 
             var resultReferences = _binaryOperatorExpressionTransformer
                 .TransformParallelBinaryOperatorExpressions(binaryOperations, context);

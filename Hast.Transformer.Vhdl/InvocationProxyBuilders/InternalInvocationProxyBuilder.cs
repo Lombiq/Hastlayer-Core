@@ -260,11 +260,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     proxyComponent.ProcessInReset = proxyInResetBlock;
                     var bodyBlock = new InlineBlock();
 
-                    Func<int, DataObjectReference> getTargetStartedVariableReference = index => proxyComponent
-                        .CreatePrefixedSegmentedObjectName(ArchitectureComponentNameHelper
-                            .CreateStartedSignalName(getTargetMemberComponentName(index)).TrimExtendedVhdlIdDelimiters())
-                        .ToVhdlVariableReference();
-
                     DataObjectReference targetAvailableIndicatorVariableReference = null;
                     SizedDataType targetAvailableIndicatorDataType = null;
 
