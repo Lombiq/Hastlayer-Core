@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -65,7 +65,6 @@ namespace Hast.Remote.Worker.Daemon
                     await host.RunAsync<IServiceProvider>(serviceProvider =>
                     {
                         var worker = serviceProvider.GetService<ITransformationWorker>();
-                        var configurationAccessor = serviceProvider.GetService<IConfiguration>();
 
                         // Only counting startup crashes.
                         _restartCount = 0;

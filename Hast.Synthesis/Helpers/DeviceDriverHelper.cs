@@ -29,7 +29,6 @@ namespace Hast.Synthesis.Helpers
 
         public static bool IsRightOperandConstant(BinaryOperatorExpression expression, out string constantValue)
         {
-            var binaryOperator = expression.Operator;
             constantValue = string.Empty;
 
             if (expression.Right is PrimitiveExpression primitiveExpression)
