@@ -47,7 +47,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             string codeOutput;
             var hiddenlyUpdatedNodesUpdatedCount = 0;
             var passCount = 0;
-            const int maxPassCount = 1000;
+            const int maxPassCount = 1_000;
             do
             {
                 codeOutput = rootNode.ToString();

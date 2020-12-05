@@ -324,12 +324,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     if (vhdlType.Name == KnownDataTypes.Int8.Name)
                     {
                         var value = Convert.ToInt64(valueString, CultureInfo.InvariantCulture);
-                        if (value < -2147483648 || value > 2147483647) binaryLiteral = Convert.ToString(value, 2);
+                        if (value < -2_147_483_648 || value > 2_147_483_647) binaryLiteral = Convert.ToString(value, 2);
                     }
                     else
                     {
                         var value = Convert.ToUInt64(valueString, CultureInfo.InvariantCulture);
-                        if (value > 2147483647) binaryLiteral = Convert.ToString((long)value, 2);
+                        if (value > 2_147_483_647) binaryLiteral = Convert.ToString((long)value, 2);
                     }
 
                     if (!string.IsNullOrEmpty(binaryLiteral))

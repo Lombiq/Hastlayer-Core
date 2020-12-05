@@ -300,7 +300,7 @@ namespace Hast.Remote.Worker
 
                     // Waiting a bit between cycles not to have excessive Blob Storage usage due to polling (otherwise
                     // it's not an issue, this loop barely uses any CPU).
-                    await Task.Delay(1000);
+                    await Task.Delay(1_000);
                     _restartCount = 0;
                 }
             }
@@ -320,7 +320,7 @@ namespace Hast.Remote.Worker
                     _restartCount++;
 
                     // Waiting a bit for transient errors to go away.
-                    await Task.Delay(10000);
+                    await Task.Delay(10_000);
 
                     await Work(cancellationToken);
                 }
@@ -346,7 +346,7 @@ namespace Hast.Remote.Worker
             }
 
             _telemetryClient.Flush();
-            Task.Delay(10000).Wait();
+            Task.Delay(10_000).Wait();
         }
 
         public static async Task<IHastlayer> CreateHastlayerAsync(

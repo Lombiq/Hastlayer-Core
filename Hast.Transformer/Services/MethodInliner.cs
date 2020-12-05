@@ -49,7 +49,7 @@ namespace Hast.Transformer.Services
 
             string codeOutput;
             var passCount = 0;
-            const int maxPassCount = 1000;
+            const int maxPassCount = 1_000;
             do
             {
                 codeOutput = syntaxTree.ToString();
