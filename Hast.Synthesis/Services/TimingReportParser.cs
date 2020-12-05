@@ -118,7 +118,7 @@ namespace Hast.Synthesis.Services
                     case "not":
                         isSignAgnosticUnaryOperatorType = true;
                         unaryOperator = operandSizeBits == 1 ?
-                            (UnaryOperatorType?)UnaryOperatorType.Not : (UnaryOperatorType?)UnaryOperatorType.BitNot;
+                            UnaryOperatorType.Not : (UnaryOperatorType?)UnaryOperatorType.BitNot;
                         break;
                     case "or":
                         isSignAgnosticBinaryOperatorType = true;

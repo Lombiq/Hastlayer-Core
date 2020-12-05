@@ -144,14 +144,13 @@ namespace Hast.Transformer.Vhdl.Services
             var transformerResults = await Task.WhenAll(TransformMembers(transformationContext.SyntaxTree, vhdlTransformationContext));
             var warnings = new List<ITransformationWarning>();
             var potentiallyInvokingArchitectureComponents = transformerResults
-                .SelectMany(result =>
-                    result.ArchitectureComponentResults
-                        .Select(componentResult =>
-                        {
-                            warnings.AddRange(componentResult.Warnings);
-                            return componentResult.ArchitectureComponent;
-                        })
-                        .Cast<IArchitectureComponent>())
+                .SelectMany(result => result
+                    .ArchitectureComponentResults
+                    .Select(componentResult =>
+                    {
+                        warnings.AddRange(componentResult.Warnings);
+                        return componentResult.ArchitectureComponent;
+                    }))
                 .ToList();
             var architectureComponentResults = transformerResults.SelectMany(transformerResult => transformerResult.ArchitectureComponentResults);
             foreach (var architectureComponentResult in architectureComponentResults)
