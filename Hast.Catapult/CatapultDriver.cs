@@ -1,4 +1,4 @@
-﻿using Hast.Catapult.Abstractions;
+using Hast.Catapult.Abstractions;
 using Hast.Synthesis;
 using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
@@ -22,7 +22,7 @@ namespace Hast.Catapult
                 {
                     if (_timingReport == null)
                     {
-                        var timingReport =
+                        const string timingReport =
 @"Op	InType	OutType	Template	DesignStat	DPD	TWDFR
 and	std_logic_vector1	std_logic_vector1	sync	impl	0,796	0,113
 and	std_logic_vector8	std_logic_vector8	sync	impl	1,078	0,138

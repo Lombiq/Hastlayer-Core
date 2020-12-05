@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
@@ -16,7 +16,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
         {
             var simpleMemoryUsingComponents = components.Where(c => c.AreSimpleMemorySignalsAdded());
 
-            var proxyComponentName = "System.Void Hast::SimpleMemoryOperationProxy()";
+            const string proxyComponentName = "System.Void Hast::SimpleMemoryOperationProxy()";
 
             if (!simpleMemoryUsingComponents.Any()) return new BasicComponent(proxyComponentName);
 

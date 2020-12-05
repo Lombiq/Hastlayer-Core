@@ -421,7 +421,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         // Keeping track of the index of the state after while statements, so this can be used to break out of the loop.
         private static Stack<int> GetOrCreateAfterWhileStateIndexStack(ISubTransformerContext context)
         {
-            var key = "Hast.Transformer.Vhdl.AfterWhileStateIndexStack";
+            const string key = "Hast.Transformer.Vhdl.AfterWhileStateIndexStack";
 
             if (context.Scope.CustomProperties.TryGetValue(key, out var stack)) return stack;
 

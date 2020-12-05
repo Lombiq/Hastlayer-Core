@@ -1,4 +1,4 @@
-﻿using Hast.Synthesis;
+using Hast.Synthesis;
 using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
@@ -22,7 +22,7 @@ namespace Hast.Xilinx
                 {
                     if (_timingReport == null)
                     {
-                        var timingReport =
+                        const string timingReport =
 @"Op	InType	OutType	Template	DesignStat	DPD	TWDFR
 and	std_logic_vector1	std_logic_vector1	sync	impl	1,238	-0,007
 and	std_logic_vector8	std_logic_vector8	sync	impl	1,397	-0,007

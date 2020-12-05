@@ -22,7 +22,7 @@ namespace Hast.Xilinx
                 {
                     if (_timingReport == null)
                     {
-                        var timingReport =
+                        const string timingReport =
 @"Op	InType	OutType	Template	DesignStat	DPD	TWDFR
 and	std_logic_vector1	std_logic_vector1	sync	impl	0,341	-0,037
 and	std_logic_vector8	std_logic_vector8	sync	impl	0,469	-0,037
