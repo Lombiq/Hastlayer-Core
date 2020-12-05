@@ -1,4 +1,4 @@
-﻿using Hast.Common.Helpers;
+using Hast.Common.Helpers;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 

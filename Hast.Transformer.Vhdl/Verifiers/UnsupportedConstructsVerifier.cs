@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.SubTransformers;
+using Hast.Transformer.Vhdl.SubTransformers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Hast.Common.Interfaces;
 using System;
