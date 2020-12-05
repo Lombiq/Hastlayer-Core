@@ -15592,7 +15592,7 @@ begin
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\: boolean := false;
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -15600,7 +15600,7 @@ begin
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -15627,7 +15627,7 @@ begin
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num3\ := to_signed(0, 32);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\ := false;
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num4\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\ := to_unsigned(0, 16);
@@ -15635,7 +15635,7 @@ begin
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num5\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\ := to_unsigned(0, 16);
@@ -15710,22 +15710,22 @@ begin
                         -- while ((long)(num3) < this.iterationsPerTask) {
                         -- 	uint num4;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                        -- 	ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                        -- 	return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                        -- 	num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                         -- 	uint num5;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                        -- 	ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                        -- 	return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                        -- 	num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 		num2 = (uint)((long)(num2) + 1L);
                         -- 	}
@@ -15744,22 +15744,22 @@ begin
                             -- {
                             -- 	uint num4;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                            -- 	ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                            -- 	return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                            -- 	num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                             -- 	uint num5;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                            -- 	ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                            -- 	return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                            -- 	num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                             -- 		num2 = (uint)((long)(num2) + 1L);
                             -- 	}
@@ -15771,7 +15771,7 @@ begin
                             -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                            -- ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
@@ -15807,20 +15807,20 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                        -- return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                        -- num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
                         -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                        -- ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
@@ -15849,14 +15849,14 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                        -- return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                        -- num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 	num2 = (uint)((long)(num2) + 1L);
@@ -15934,7 +15934,7 @@ begin
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\: boolean := false;
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -15942,7 +15942,7 @@ begin
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -15969,7 +15969,7 @@ begin
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num3\ := to_signed(0, 32);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\ := false;
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num4\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\ := to_unsigned(0, 16);
@@ -15977,7 +15977,7 @@ begin
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num5\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\ := to_unsigned(0, 16);
@@ -16052,22 +16052,22 @@ begin
                         -- while ((long)(num3) < this.iterationsPerTask) {
                         -- 	uint num4;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                        -- 	ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                        -- 	return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                        -- 	num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                         -- 	uint num5;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                        -- 	ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                        -- 	return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                        -- 	num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 		num2 = (uint)((long)(num2) + 1L);
                         -- 	}
@@ -16086,22 +16086,22 @@ begin
                             -- {
                             -- 	uint num4;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                            -- 	ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                            -- 	return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                            -- 	num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                             -- 	uint num5;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                            -- 	ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                            -- 	return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                            -- 	num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                             -- 		num2 = (uint)((long)(num2) + 1L);
                             -- 	}
@@ -16113,7 +16113,7 @@ begin
                             -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                            -- ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
@@ -16149,20 +16149,20 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                        -- return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                        -- num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
                         -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                        -- ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
@@ -16191,14 +16191,14 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                        -- return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                        -- num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 	num2 = (uint)((long)(num2) + 1L);
@@ -16276,7 +16276,7 @@ begin
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\: boolean := false;
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -16284,7 +16284,7 @@ begin
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -16311,7 +16311,7 @@ begin
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num3\ := to_signed(0, 32);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\ := false;
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num4\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\ := to_unsigned(0, 16);
@@ -16319,7 +16319,7 @@ begin
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num5\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\ := to_unsigned(0, 16);
@@ -16394,22 +16394,22 @@ begin
                         -- while ((long)(num3) < this.iterationsPerTask) {
                         -- 	uint num4;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                        -- 	ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                        -- 	return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                        -- 	num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                         -- 	uint num5;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                        -- 	ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                        -- 	return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                        -- 	num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 		num2 = (uint)((long)(num2) + 1L);
                         -- 	}
@@ -16428,22 +16428,22 @@ begin
                             -- {
                             -- 	uint num4;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                            -- 	ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                            -- 	return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                            -- 	num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                             -- 	uint num5;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                            -- 	ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                            -- 	return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                            -- 	num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                             -- 		num2 = (uint)((long)(num2) + 1L);
                             -- 	}
@@ -16455,7 +16455,7 @@ begin
                             -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                            -- ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
@@ -16491,20 +16491,20 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855 = randomXorshiftLfsr.State;
+                        -- return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855;
+                        -- num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_5edd8f7ba0c4ae5014393a0be67651ef5268f5e50185de910f723849fa64e855\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
                         -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                        -- ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
@@ -16533,14 +16533,14 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600 = randomXorshiftLfsr.State;
+                        -- return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600;
+                        -- num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_8d7d67cbec4e40233992cfbc9913f205133d0c0ac8acac695d9ffddfe78fd600\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 	num2 = (uint)((long)(num2) + 1L);
