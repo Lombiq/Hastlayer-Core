@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -106,67 +106,28 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             // The commented out cases with unsupported operators are here so adding them later is easier.
-            switch (expression.Operator)
+            binary.Operator = expression.Operator switch
             {
-                case BinaryOperatorType.Add:
-                    binary.Operator = BinaryOperator.Add;
-                    break;
-                //case BinaryOperatorType.Any:
-                //    break;
-                case BinaryOperatorType.BitwiseAnd:
-                case BinaryOperatorType.ConditionalAnd:
-                    binary.Operator = BinaryOperator.And;
-                    break;
-                case BinaryOperatorType.BitwiseOr:
-                case BinaryOperatorType.ConditionalOr:
-                    binary.Operator = BinaryOperator.Or;
-                    break;
-                case BinaryOperatorType.Divide:
-                    binary.Operator = BinaryOperator.Divide;
-                    break;
-                case BinaryOperatorType.Equality:
-                    binary.Operator = BinaryOperator.Equality;
-                    break;
-                case BinaryOperatorType.ExclusiveOr:
-                    binary.Operator = BinaryOperator.ExclusiveOr;
-                    break;
-                case BinaryOperatorType.GreaterThan:
-                    binary.Operator = BinaryOperator.GreaterThan;
-                    break;
-                case BinaryOperatorType.GreaterThanOrEqual:
-                    binary.Operator = BinaryOperator.GreaterThanOrEqual;
-                    break;
-                case BinaryOperatorType.InEquality:
-                    binary.Operator = BinaryOperator.InEquality;
-                    break;
-                case BinaryOperatorType.LessThan:
-                    binary.Operator = BinaryOperator.LessThan;
-                    break;
-                case BinaryOperatorType.LessThanOrEqual:
-                    binary.Operator = BinaryOperator.LessThanOrEqual;
-                    break;
-                case BinaryOperatorType.Modulus:
-                    // The % operator in .NET, called modulus in the AST, is in reality a different remainder operator.
-                    binary.Operator = BinaryOperator.Remainder;
-                    break;
-                case BinaryOperatorType.Multiply:
-                    binary.Operator = BinaryOperator.Multiply;
-                    break;
-                //case BinaryOperatorType.NullCoalescing:
-                //    break;
+                BinaryOperatorType.Add => BinaryOperator.Add,
+                BinaryOperatorType.BitwiseAnd or BinaryOperatorType.ConditionalAnd => BinaryOperator.And,
+                BinaryOperatorType.BitwiseOr or BinaryOperatorType.ConditionalOr => BinaryOperator.Or,
+                BinaryOperatorType.Divide => BinaryOperator.Divide,
+                BinaryOperatorType.Equality => BinaryOperator.Equality,
+                BinaryOperatorType.ExclusiveOr => BinaryOperator.ExclusiveOr,
+                BinaryOperatorType.GreaterThan => BinaryOperator.GreaterThan,
+                BinaryOperatorType.GreaterThanOrEqual => BinaryOperator.GreaterThanOrEqual,
+                BinaryOperatorType.InEquality => BinaryOperator.InEquality,
+                BinaryOperatorType.LessThan => BinaryOperator.LessThan,
+                BinaryOperatorType.LessThanOrEqual => BinaryOperator.LessThanOrEqual,
+                BinaryOperatorType.Modulus => BinaryOperator.Remainder,// The % operator in .NET, called modulus in the AST, is in reality a different remainder operator.
+                BinaryOperatorType.Multiply => BinaryOperator.Multiply,
                 // Left and right shift for numerical types is a function call in VHDL, so handled separately. See
                 // below. The sll/srl or sra/sla operators shouldn't be used, see:
                 // https://www.nandland.com/vhdl/examples/example-shifts.html and https://stackoverflow.com/questions/9018087/shift-a-std-logic-vector-of-n-bit-to-right-or-left
-                case BinaryOperatorType.ShiftLeft:
-                case BinaryOperatorType.ShiftRight:
-                    break;
-                case BinaryOperatorType.Subtract:
-                    binary.Operator = BinaryOperator.Subtract;
-                    break;
-                default:
-                    throw new NotImplementedException("Binary operator " + expression.Operator + " is not supported.");
-            }
-
+                BinaryOperatorType.ShiftLeft or BinaryOperatorType.ShiftRight => binary.Operator,
+                BinaryOperatorType.Subtract => BinaryOperator.Subtract,
+                _ => throw new NotSupportedException("Binary operator " + expression.Operator + " is not supported."),
+            };
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
 

@@ -171,17 +171,6 @@ namespace Hast.Transformer.Services
                 // The invocation now can be replaced with a reference to the return variable.
                 invocationExpression.ReplaceWith(returnVariableReference);
 
-                //var endingComment = new Comment($" Ending inlined block of the method {methodFullName}.");
-                //if (invocationParentStatement.NextSibling == null)
-                //{
-                //    AstInsertionHelper.InsertStatementAfter(invocationParentStatement, new EmptyStatement());
-                //    invocationParentStatement.NextSibling.AddChild(endingComment, Roles.Comment);
-                //}
-                //else
-                //{
-                //    invocationParentStatement.AddChild(endingComment, Roles.Comment);
-                //}
-
                 invocationParentStatement.PrevSibling.AddChild(
                     new Comment($" Ending inlined block of the method {methodFullName}."), Roles.Comment);
             }

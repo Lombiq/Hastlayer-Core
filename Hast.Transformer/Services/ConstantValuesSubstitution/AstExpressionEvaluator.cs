@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
 
@@ -25,53 +25,31 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             dynamic leftValue = ((PrimitiveExpression)binaryOperatorExpression.Left).Value;
             dynamic rightValue = ((PrimitiveExpression)binaryOperatorExpression.Right).Value;
 
-            switch (binaryOperatorExpression.Operator)
+            return binaryOperatorExpression.Operator switch
             {
-                //case BinaryOperatorType.Any:
-                //    break;
-                case BinaryOperatorType.BitwiseAnd:
-                    return leftValue & rightValue;
-                case BinaryOperatorType.BitwiseOr:
-                    return leftValue | rightValue;
-                case BinaryOperatorType.ConditionalAnd:
-                    return leftValue && rightValue;
-                case BinaryOperatorType.ConditionalOr:
-                    return leftValue || rightValue;
-                case BinaryOperatorType.ExclusiveOr:
-                    return leftValue ^ rightValue;
-                case BinaryOperatorType.GreaterThan:
-                    return leftValue > rightValue;
-                case BinaryOperatorType.GreaterThanOrEqual:
-                    return leftValue >= rightValue;
-                case BinaryOperatorType.Equality:
-                    return leftValue.Equals(rightValue);
-                case BinaryOperatorType.InEquality:
-                    return !leftValue.Equals(rightValue);
-                case BinaryOperatorType.LessThan:
-                    return leftValue < rightValue;
-                case BinaryOperatorType.LessThanOrEqual:
-                    return leftValue <= rightValue;
-                case BinaryOperatorType.Add:
-                    return leftValue + rightValue;
-                case BinaryOperatorType.Subtract:
-                    return leftValue - rightValue;
-                case BinaryOperatorType.Multiply:
-                    return leftValue * rightValue;
-                case BinaryOperatorType.Divide:
-                    return leftValue / rightValue;
-                case BinaryOperatorType.Modulus:
-                    return leftValue % rightValue;
-                case BinaryOperatorType.ShiftLeft:
-                    return leftValue << rightValue;
-                case BinaryOperatorType.ShiftRight:
-                    return leftValue >> rightValue;
-                case BinaryOperatorType.NullCoalescing:
-                    return leftValue ?? rightValue;
-                default:
-                    throw new NotImplementedException(
-                        "Evaluating binary operator expressions with the operator " + binaryOperatorExpression.Operator +
-                        " is not supported. Affected expression: " + binaryOperatorExpression.ToString());
-            }
+                BinaryOperatorType.BitwiseAnd => leftValue & rightValue,
+                BinaryOperatorType.BitwiseOr => leftValue | rightValue,
+                BinaryOperatorType.ConditionalAnd => leftValue && rightValue,
+                BinaryOperatorType.ConditionalOr => leftValue || rightValue,
+                BinaryOperatorType.ExclusiveOr => leftValue ^ rightValue,
+                BinaryOperatorType.GreaterThan => leftValue > rightValue,
+                BinaryOperatorType.GreaterThanOrEqual => leftValue >= rightValue,
+                BinaryOperatorType.Equality => leftValue.Equals(rightValue),
+                BinaryOperatorType.InEquality => !leftValue.Equals(rightValue),
+                BinaryOperatorType.LessThan => leftValue < rightValue,
+                BinaryOperatorType.LessThanOrEqual => leftValue <= rightValue,
+                BinaryOperatorType.Add => leftValue + rightValue,
+                BinaryOperatorType.Subtract => leftValue - rightValue,
+                BinaryOperatorType.Multiply => leftValue * rightValue,
+                BinaryOperatorType.Divide => leftValue / rightValue,
+                BinaryOperatorType.Modulus => leftValue % rightValue,
+                BinaryOperatorType.ShiftLeft => leftValue << rightValue,
+                BinaryOperatorType.ShiftRight => leftValue >> rightValue,
+                BinaryOperatorType.NullCoalescing => leftValue ?? rightValue,
+                _ => throw new NotSupportedException(
+                    "Evaluating binary operator expressions with the operator " + binaryOperatorExpression.Operator +
+                    " is not supported. Affected expression: " + binaryOperatorExpression),
+            };
         }
 
         public dynamic EvaluateCastExpression(CastExpression castExpression)
@@ -136,8 +114,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             switch (unaryOperatorExpression.Operator)
             {
-                //case UnaryOperatorType.Any:
-                //    break;
+                ////case UnaryOperatorType.Any:
+                ////    break;
                 case UnaryOperatorType.Not:
                     return !value;
                 case UnaryOperatorType.BitNot:
@@ -154,12 +132,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     return value++;
                 case UnaryOperatorType.PostDecrement:
                     return value--;
-                //case UnaryOperatorType.Dereference:
-                //    break;
-                //case UnaryOperatorType.AddressOf:
-                //    break;
-                //case UnaryOperatorType.Await:
-                //    break;
                 default:
                     throw new NotSupportedException(
                         "Evaluating unary operator expressions with the operator " + unaryOperatorExpression.Operator +

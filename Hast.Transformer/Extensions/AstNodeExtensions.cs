@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Resolver;
+using ICSharpCode.Decompiler.CSharp.Resolver;
 using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
@@ -344,9 +344,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                     else return property.Getter.GetFullName();
                 }
 
-                // This will only be the case for Task.Factory.StartNew calls made from lambdas, e.g. the <Run>b__0
-                // method here:
-                // Task.Factory.StartNew (<>c__DisplayClass3_.<>9__0 ?? (<>c__DisplayClass3_.<>9__0 = <>c__DisplayClass3_.<Run>b__0), num);
+                //// This will only be the case for Task.Factory.StartNew calls made from lambdas, e.g. the <Run>b__0
+                //// method here:
+                //// Task.Factory.StartNew (<>c__DisplayClass3_.<>9__0 ?? (<>c__DisplayClass3_.<>9__0 = <>c__DisplayClass3_.<Run>b__0), num);
                 MethodGroupResolveResult methodGroupResolveResult;
                 if ((methodGroupResolveResult = node.GetResolveResult<MethodGroupResolveResult>()) != null)
                 {

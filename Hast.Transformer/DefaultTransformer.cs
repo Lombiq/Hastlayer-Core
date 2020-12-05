@@ -223,28 +223,28 @@ namespace Hast.Transformer
                 // Must revisit after an ILSpy update.
 
                 decompiler.ILTransforms
-                    // InlineReturnTransform might need to be removed: it creates returns with ternary operators and
-                    // introduces multiple return statements.
-
-                    // Converts simple while loops into for loops. However, all resulting loops are while (true) ones
-                    // with a break statement inside.
-                    // Not necessary to remove it with ForStatement = DoWhileStatement = false
-                    //.Remove<HighLevelLoopTransform>()
-
-                    // Creates local variables instead of assigning them to DisplayClasses. E.g. instead of:
-                    //
-                    //      ParallelAlgorithm.<> c__DisplayClass3_0 <> c__DisplayClass3_;
-                    //      <> c__DisplayClass3_ = new ParallelAlgorithm.<> c__DisplayClass3_0();
-                    //      <> c__DisplayClass3_.input = memory.ReadUInt32(0);
-                    //
-                    // ...we'd get:
-                    //
-                    //      uint input;
-                    //      input = memory.ReadUInt32(0);
-                    //      Func<object, uint> func = default(Func<object, uint>);
-                    //      <> c__DisplayClass3_0 @object;
-                    //
-                    // Note that the DisplayClass is not instantiated either.
+                    //// InlineReturnTransform might need to be removed: it creates returns with ternary operators and
+                    //// introduces multiple return statements.
+                    ////
+                    //// Converts simple while loops into for loops. However, all resulting loops are while (true) ones
+                    //// with a break statement inside.
+                    //// Not necessary to remove it with ForStatement = DoWhileStatement = false
+                    //// .Remove<HighLevelLoopTransform>()
+                    ////
+                    //// Creates local variables instead of assigning them to DisplayClasses. E.g. instead of:
+                    ////
+                    ////      ParallelAlgorithm.<> c__DisplayClass3_0 <> c__DisplayClass3_;
+                    ////      <> c__DisplayClass3_ = new ParallelAlgorithm.<> c__DisplayClass3_0();
+                    ////      <> c__DisplayClass3_.input = memory.ReadUInt32(0);
+                    ////
+                    //// ...we'd get:
+                    ////
+                    ////      uint input;
+                    ////      input = memory.ReadUInt32(0);
+                    ////      Func<object, uint> func = default(Func<object, uint>);
+                    ////      <> c__DisplayClass3_0 @object;
+                    ////
+                    //// Note that the DisplayClass is not instantiated either.
                     .Remove("TransformDisplayClassUsage");
 
                 decompiler.AstTransforms

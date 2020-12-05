@@ -224,7 +224,6 @@ namespace Hast.Transformer.Vhdl.Services
                     }
                 }
 
-                // attribute dont_touch : string;
                 if (anyMultiCycleOperations)
                 {
                     hastIpArchitecture.Declarations.Add(new LogicalBlock(

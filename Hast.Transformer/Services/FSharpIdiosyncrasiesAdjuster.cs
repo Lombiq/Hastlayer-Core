@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Models;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Linq;
@@ -82,15 +82,15 @@ namespace Hast.Transformer.Services
                 }
                 else if (invocationExpression.IsTaskStart())
                 {
-                    // The expression is something like if it was created from F# code, and this is what we need to handle:
-                    // Task.Factory.StartNew ((Func<object, OutputType>)new NameOfTaskStartingMethod@35 (input).Invoke, (object)inputArgument);
-                    // Such shorthand expression when created from C# look like this:
-                    // Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object)inputArgument);
-                    // The F# closure receives the current value of local variables, not the latest one if in a loop.
-                    // Thus to mimic how this works we'll add the parameters of the compiler-generated class' ctor as
-                    // further parameters like:
-                    // Task.Factory.StartNew ((Func<object, OutputType>)new Run@35 (input).Invoke, (object)inputArgument, other, arguments);
-                    // This won't be correct C# but the rest of the Transformer will be tricked into passing them on.
+                    //// The expression is something like if it was created from F# code, and this is what we need to handle:
+                    //// Task.Factory.StartNew ((Func<object, OutputType>)new NameOfTaskStartingMethod@35 (input).Invoke, (object)inputArgument);
+                    //// Such shorthand expression when created from C# look like this:
+                    //// Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object)inputArgument);
+                    //// The F# closure receives the current value of local variables, not the latest one if in a loop.
+                    //// Thus to mimic how this works we'll add the parameters of the compiler-generated class' ctor as
+                    //// further parameters like:
+                    //// Task.Factory.StartNew ((Func<object, OutputType>)new Run@35 (input).Invoke, (object)inputArgument, other, arguments);
+                    //// This won't be correct C# but the rest of the Transformer will be tricked into passing them on.
 
                     // Getting the member reference like: new NameOfTaskStartingMethod@35 (input).Invoke
                     MemberReferenceExpression invocationMemberReference;

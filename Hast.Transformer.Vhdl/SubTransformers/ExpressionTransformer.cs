@@ -68,33 +68,36 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (expression is AssignmentExpression assignment)
             {
+
+#pragma warning disable S125 // Sections of code should not be commented out
                 /*
-                Task.Factory.StartNew(lambda => here) calls are compiled into one of the two version:
-                * If the lambda is a closure on local variables then a DisplayClass with fields for all local variables
-                  and a method(e.g.ParallelAlgorithm, MonteCarloPiEstimator).Sometimes such a DisplayClass will be
-                  generated even if no local variables are accessed(e.g. (ParallelizedCalculateIntegerSumUpToNumbers()).
-                * If no local variables are access then a method with the[CompilerGenerated] attribute within the same
-                  class (e.g.ImageContrastModifier, Fix64Calculator.PrimeCalculator.ParallelizedArePrimeNumbers(),
-                  KpzKernelsParallelizedInterface, Posit32Calculator.ParallelizedCalculateIntegerSumUpToNumbers()).
+                                Task.Factory.StartNew(lambda => here) calls are compiled into one of the two version:
+                                * If the lambda is a closure on local variables then a DisplayClass with fields for all local variables
+                                  and a method(e.g.ParallelAlgorithm, MonteCarloPiEstimator).Sometimes such a DisplayClass will be
+                                  generated even if no local variables are accessed(e.g. (ParallelizedCalculateIntegerSumUpToNumbers()).
+                                * If no local variables are access then a method with the[CompilerGenerated] attribute within the same
+                                  class (e.g.ImageContrastModifier, Fix64Calculator.PrimeCalculator.ParallelizedArePrimeNumbers(),
+                                  KpzKernelsParallelizedInterface, Posit32Calculator.ParallelizedCalculateIntegerSumUpToNumbers()).
 
-                Each of these start with:
-                    Task<OutputType>[] array;
-                    array = new Task<OutputType>[numberOfTasks];
+                                Each of these start with:
+                                    Task<OutputType>[] array;
+                                    array = new Task<OutputType>[numberOfTasks];
 
-                In the first case ("array" is a Task<T> array) the DisplayClass will be instantiated, its fields populated and then the Task started:
-                    <>c__DisplayClass4_0<> c__DisplayClass4_;
-                    <>c__DisplayClass4_ = new <>c__DisplayClass4_0();
-                    <>c__DisplayClass4_.localVariable1 = ...;
-                    <>c__DisplayClass4_.localVariable2 = ...;
-                    array[i] = Task.Factory.StartNew(<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<NameOfTaskStartingMethod>b__0), inputArgument);
+                                In the first case ("array" is a Task<T> array) the DisplayClass will be instantiated, its fields populated and then the Task started:
+                                    <>c__DisplayClass4_0<> c__DisplayClass4_;
+                                    <>c__DisplayClass4_ = new <>c__DisplayClass4_0();
+                                    <>c__DisplayClass4_.localVariable1 = ...;
+                                    <>c__DisplayClass4_.localVariable2 = ...;
+                                    array[i] = Task.Factory.StartNew(<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<NameOfTaskStartingMethod>b__0), inputArgument);
 
-                In the second case there will be just a Task start invocation:
-                    array[i] = Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object) inputArgument);
+                                In the second case there will be just a Task start invocation:
+                                    array[i] = Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object) inputArgument);
 
-                Since both cases are almost all assignments we're handling them mostly here.
-                Both of these are then awaited as:
-                    Task.WhenAll(array).Wait();
-                */
+                                Since both cases are almost all assignments we're handling them mostly here.
+                                Both of these are then awaited as:
+                                    Task.WhenAll(array).Wait();
+                                */
+#pragma warning restore S125 // Sections of code should not be commented out
 
                 IVhdlElement TransformSimpleAssignmentExpression(Expression left, Expression right)
                 {
@@ -223,8 +226,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
                 else
                 {
-                    // Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will
-                    // be like following: <>c__DisplayClass4_ = new <>c__DisplayClass4_0();
+                    //// Handling TPL-related DisplayClass instantiation (created in place of lambda delegates). These will
+                    //// be like following: <>c__DisplayClass4_ = new <>c__DisplayClass4_0();
                     string rightObjectFullName;
                     if (assignment.Right is ObjectCreateExpression rightObjectCreateExpression &&
                         (rightObjectFullName = rightObjectCreateExpression.Type.GetFullName()).IsDisplayOrClosureClassName())
@@ -239,9 +242,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return Empty.Instance;
                     }
 
-                    // Handling Task starts like:
-                    // array[i] = Task.Factory.StartNew(<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<NameOfTaskStartingMethod>b__0), inputArgument);
-                    // array[i] = Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object) inputArgument);
+                    //// Handling Task starts like:
+                    //// array[i] = Task.Factory.StartNew(<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<NameOfTaskStartingMethod>b__0), inputArgument);
+                    //// array[i] = Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object) inputArgument);
                     else if (assignment.Right.Is<InvocationExpression>(
                         invocation => invocation.IsTaskStart(),
                         out var invocationExpression))
@@ -434,7 +437,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 var memberFullName = memberReference.GetMemberFullName();
 
-                // Expressions like return Task.CompletedTask;
+                //// Expressions like return Task.CompletedTask;
                 if (memberFullName.IsTaskCompletedTaskPropertyName())
                 {
                     return Empty.Instance;
@@ -452,9 +455,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (targetIdentifier != null &&
                     scope.VariableNameToDisplayClassNameMappings.TryGetValue(targetIdentifier, out var displayClassName))
                 {
-                    // This is field access on the DisplayClass object (the field was created to pass variables from
-                    // the local scope to the method generated from the lambda expression). Can look something like:
-                    // <>c__DisplayClass9_.numbers = new uint[35];
+                    //// This is field access on the DisplayClass object (the field was created to pass variables from
+                    //// the local scope to the method generated from the lambda expression). Can look something like:
+                    //// <>c__DisplayClass9_.numbers = new uint[35];
                     return context.TransformationContext.TypeDeclarationLookupTable
                         .Lookup(displayClassName)
                         .Members
@@ -504,8 +507,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
             else if (expression is UnaryOperatorExpression unary)
             {
-                // Increment/decrement unary operators that are in their own statements are compiled into binary operators
-                // (e.g. i++ will be i = i + 1) so we don't have to care about those.
+                //// Increment/decrement unary operators that are in their own statements are compiled into binary operators
+                //// (e.g. i++ will be i = i + 1) so we don't have to care about those.
 
                 // Since unary operations can also take significant time (but they can't be multi-cycle) to complete
                 // they're also assigned to result variables as with binary operator expressions.

@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
@@ -27,8 +27,8 @@ namespace Hast.Transformer.Services
             {
                 base.VisitDefaultValueExpression(defaultValueExpression);
 
-                // Handling cases like the one below, where Fix64 is a struct without a parameterless ctor:
-                // public static Fix64 Zero() => new Fix64();
+                //// Handling cases like the one below, where Fix64 is a struct without a parameterless ctor:
+                //// public static Fix64 Zero() => new Fix64();
 
                 HandleExpression(defaultValueExpression, defaultValueExpression.Type);
             }
