@@ -15,7 +15,8 @@ namespace Hast.Transformer.Vhdl.Tests
         [Fact]
         public Task InvalidExternalVariableAssignmentIsPrevented() =>
             Host.RunAsync<ITransformer>(transformer =>
-                Should.ThrowAsync(() =>
+                Should.ThrowAsync(
+                    () =>
                     TransformInvalidTestInputs<InvalidParallelCases>(transformer, c => c.InvalidExternalVariableAssignment(0)),
                     typeof(NotSupportedException)));
 
@@ -23,27 +24,33 @@ namespace Hast.Transformer.Vhdl.Tests
         public Task InvalidArrayUsageIsPrevented() =>
             Host.RunAsync<ITransformer>(async transformer =>
             {
-                await Should.ThrowAsync(() =>
+                await Should.ThrowAsync(
+                    () =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.InvalidArrayAssignment()),
                     typeof(NotSupportedException));
 
-                await Should.ThrowAsync(() =>
+                await Should.ThrowAsync(
+                    () =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.ArraySizeIsNotStatic(0)),
                     typeof(NotSupportedException));
 
-                await Should.ThrowAsync(() =>
+                await Should.ThrowAsync(
+                    () =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.ArrayCopyToIsNotStaticCopy(0)),
                     typeof(NotSupportedException));
 
-                await Should.ThrowAsync(() =>
+                await Should.ThrowAsync(
+                    () =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.UnsupportedImmutableArrayCreateRangeUsage()),
                     typeof(NotSupportedException));
 
-                await Should.ThrowAsync(() =>
+                await Should.ThrowAsync(
+                    () =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.MultiDimensionalArray()),
                     typeof(NotSupportedException));
 
-                await Should.ThrowAsync(() =>
+                await Should.ThrowAsync(
+                    () =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.NullAssignment()),
                     typeof(NotSupportedException));
             });
@@ -51,7 +58,8 @@ namespace Hast.Transformer.Vhdl.Tests
         [Fact]
         public Task InvalidHardwareEntryPointsArePrevented() =>
             Host.RunAsync<ITransformer>(transformer =>
-                Should.ThrowAsync(() =>
+                Should.ThrowAsync(
+                    () =>
                     TransformInvalidTestInputs<InvalidHardwareEntryPoint>(transformer, c => c.EntryPointMethod()),
                     typeof(NotSupportedException)));
 
@@ -59,11 +67,13 @@ namespace Hast.Transformer.Vhdl.Tests
         public Task InvalidLanguageConstructsArePrevented() =>
             Host.RunAsync<ITransformer>(async transformer =>
             {
-                await Should.ThrowAsync(() =>
+                await Should.ThrowAsync(
+                    () =>
                     TransformInvalidTestInputs<InvalidLanguageConstructCases>(transformer, c => c.CustomValueTypeReferenceEquals()),
                     typeof(InvalidOperationException));
 
-                await Should.ThrowAsync(() =>
+                await Should.ThrowAsync(
+                    () =>
                     TransformInvalidTestInputs<InvalidLanguageConstructCases>(transformer, c => c.InvalidModelUsage()),
                     typeof(NotSupportedException));
             });
@@ -72,11 +82,13 @@ namespace Hast.Transformer.Vhdl.Tests
         public Task InvalidInvalidObjectUsingCasesArePrevented() =>
             Host.RunAsync<ITransformer>(async transformer =>
             {
-                await Should.ThrowAsync(() =>
+                await Should.ThrowAsync(
+                    () =>
                     TransformInvalidTestInputs<InvalidObjectUsingCases>(transformer, c => c.ReferenceAssignment(0)),
                     typeof(NotSupportedException));
 
-                await Should.ThrowAsync(() =>
+                await Should.ThrowAsync(
+                    () =>
                     TransformInvalidTestInputs<InvalidObjectUsingCases>(transformer, c => c.SelfReferencingType()),
                     typeof(NotSupportedException));
             });

@@ -21,7 +21,8 @@ namespace Hast.Transformer.Helpers
 
             var result =
                 assignmentExpression.Left.GetActualType()?.IsArray() == true &&
-                assignmentExpression.Right.Is(invocation =>
+                assignmentExpression.Right.Is(
+                    invocation =>
                     invocation.IsSimpleMemoryInvocation() &&
                     invocation.Arguments.Count == 2, out readInvocation);
 

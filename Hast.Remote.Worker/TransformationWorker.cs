@@ -106,7 +106,8 @@ namespace Hast.Remote.Worker
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        _transformationTasks[jobBlob.Name] = Task.Factory.StartNew(async blobObject =>
+                        _transformationTasks[jobBlob.Name] = Task.Factory.StartNew(
+                            async blobObject =>
                         {
                             var blob = (CloudBlockBlob)blobObject;
                             var telemetry = new TransformationTelemetry
@@ -290,7 +291,8 @@ namespace Hast.Remote.Worker
                             telemetry.FinishTimeUtc = _clock.UtcNow;
                             _applicationInsightsTelemetryManager.TrackTransformation(telemetry);
                         }, jobBlob, cancellationToken)
-                        .ContinueWith((task, blobNameObject) =>
+                        .ContinueWith(
+                            (task, blobNameObject) =>
                             _transformationTasks.TryRemove((string)blobNameObject, out _), jobBlob.Name);
                     }
 

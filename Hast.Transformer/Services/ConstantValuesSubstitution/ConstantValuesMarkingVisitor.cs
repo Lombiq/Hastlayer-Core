@@ -73,7 +73,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             // Assignments shouldn't be handled here, see ConstantValuesSubstitutingVisitor.
 
-            if (primitiveExpressionParent.Is<ArrayCreateExpression>(expression =>
+            if (primitiveExpressionParent.Is<ArrayCreateExpression>(
+                expression =>
                 {
                     if (expression.Arguments.Count > 1)
                     {

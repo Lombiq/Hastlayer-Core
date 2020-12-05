@@ -26,7 +26,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // a field's value set in the ctor depends on a ctor argument, which in turn depends on the same field of
             // another instance).
 
-            if (objectCreateExpression.Parent.Is(assignment =>
+            if (objectCreateExpression.Parent.Is(
+                assignment =>
                 assignment.Left.GetActualType()?.GetFullName() == objectCreateExpression.Type.GetFullName(),
                 out AssignmentExpression parentAssignment))
             {

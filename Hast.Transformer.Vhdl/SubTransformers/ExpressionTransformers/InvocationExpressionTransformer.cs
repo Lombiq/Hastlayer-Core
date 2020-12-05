@@ -297,7 +297,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // Is it a Task.Something().Wait() call?
                 MemberReferenceExpression memberReference = null;
                 if (waitTarget.Is<InvocationExpression>(invocation =>
-                    invocation.Target.Is(member =>
+                    invocation.Target.Is(
+                        member =>
                         member.Target.Is<TypeReferenceExpression>(type =>
                             _typeConverter.ConvertAstType(
                                 type.Type,
