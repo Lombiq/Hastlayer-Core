@@ -487,7 +487,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                                         .CreateFinishedSignalReference(invokerName, targetMemberName, i),
                                                     Expression = Value.False
                                                 },
-                                                waitingForStartedInnnerBlock)
+                                                waitingForStartedInnnerBlock),
                                             }
                                         },
                                     },
@@ -576,7 +576,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                                     Left = InvocationHelper
                                                         .CreateStartedSignalReference(invokerName, targetMemberName, i),
                                                     Operator = BinaryOperator.Equality,
-                                                    Right = Value.False
+                                                    Right = Value.False,
                                                 },
                                                 True = new InlineBlock(
                                                     new Assignment
@@ -589,7 +589,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                                         AssignTo = InvocationHelper
                                                             .CreateFinishedSignalReference(invokerName, targetMemberName, i),
                                                         Expression = Value.False
-                                                    })
+                                                    }),
                                             }
                                         },
                                     },

@@ -80,7 +80,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         {
                             ArchitectureComponent = fieldComponent,
                             Body = fieldComponent.BuildBody(),
-                            Declarations = fieldComponent.BuildDeclarations()
+                            Declarations = fieldComponent.BuildDeclarations(),
                         },
                     },
                 };

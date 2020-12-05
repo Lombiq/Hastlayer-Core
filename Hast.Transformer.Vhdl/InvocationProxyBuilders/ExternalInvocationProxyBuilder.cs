@@ -71,7 +71,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                             new If
                             {
                                 Condition = waitForInvocationFinishedIfElse.Condition,
-                                True = waitForInvocationFinishedIfElse.True
+                                True = waitForInvocationFinishedIfElse.True,
                             },
                         },
                 });
@@ -122,14 +122,14 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                             {
                                 Left = finishedSignalReference,
                                 Operator = BinaryOperator.Equality,
-                                Right = Value.True
+                                Right = Value.True,
                             },
 
                         },
                         True = new Assignment
                         {
                             AssignTo = finishedSignalReference,
-                            Expression = Value.False
+                            Expression = Value.False,
                         },
                     }),
             };
