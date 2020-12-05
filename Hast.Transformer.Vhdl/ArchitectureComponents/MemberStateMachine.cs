@@ -27,7 +27,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             {
                 DataType = _statesEnum,
                 Name = this.CreateStateVariableName(),
-                InitialValue = this.CreateStateName(0).ToVhdlIdValue()
+                InitialValue = this.CreateStateName(0).ToVhdlIdValue(),
             };
             LocalVariables.Add(_stateVariable);
 
@@ -35,7 +35,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             {
                 DataType = KnownDataTypes.Boolean,
                 Name = this.CreateStartedSignalName(),
-                InitialValue = Value.False
+                InitialValue = Value.False,
             };
             ExternallyDrivenSignals.Add(_startedSignal);
 
@@ -43,7 +43,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             {
                 DataType = KnownDataTypes.Boolean,
                 Name = this.CreateFinishedSignalName(),
-                InitialValue = Value.False
+                InitialValue = Value.False,
             };
             InternallyDrivenSignals.Add(_finishedSignal);
 
@@ -56,9 +56,9 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                     {
                         Left = _startedSignal.Name.ToVhdlSignalReference(),
                         Operator = BinaryOperator.Equality,
-                        Right = Value.True
+                        Right = Value.True,
                     },
-                    True = this.CreateStateChange(2)
+                    True = this.CreateStateChange(2),
                 });
 
             var finalStateBlock = new InlineBlock(
@@ -70,18 +70,18 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                     {
                         Left = _startedSignal.Name.ToVhdlSignalReference(),
                         Operator = BinaryOperator.Equality,
-                        Right = Value.True
+                        Right = Value.True,
                     },
                     True = new Assignment { AssignTo = _finishedSignal, Expression = Value.True },
                     Else = new InlineBlock(
                         new Assignment { AssignTo = _finishedSignal, Expression = Value.False },
-                        this.ChangeToStartState())
+                        this.ChangeToStartState()),
                 });
 
             _states = new List<IMemberStateMachineState>
             {
                 new MemberStateMachineState { Body = startStateBlock },
-                new MemberStateMachineState { Body = finalStateBlock }
+                new MemberStateMachineState { Body = finalStateBlock },
             };
         }
 
@@ -96,7 +96,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             _multiCycleOperations.Add(new MultiCycleOperation
             {
                 OperationResultReference = operationResultReference,
-                RequiredClockCyclesCeiling = requiredClockCyclesCeiling
+                RequiredClockCyclesCeiling = requiredClockCyclesCeiling,
             });
         }
 

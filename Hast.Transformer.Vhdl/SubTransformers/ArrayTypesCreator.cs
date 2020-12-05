@@ -73,7 +73,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 _arrayDeclarations[typeName] = new ArrayType
                 {
                     ElementType = elementType,
-                    Name = typeName
+                    Name = typeName,
                 };
             }
         }

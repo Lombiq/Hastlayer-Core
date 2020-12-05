@@ -15,7 +15,7 @@ namespace Hast.VhdlBuilder
             {
                 Mode = PortMode.In,
                 Name = clockSignalName,
-                DataType = KnownDataTypes.StdLogic
+                DataType = KnownDataTypes.StdLogic,
             };
 
             module.Entity.Ports.Add(clockPort);
@@ -26,7 +26,7 @@ namespace Hast.VhdlBuilder
                 var wrappingIf = new IfElse
                 {
                     Condition = new Invocation("rising_edge", clockSignalName.ToVhdlSignalReference()),
-                    True = new InlineBlock { Body = new List<IVhdlElement>(process.Body) } // Needs to copy the list.
+                    True = new InlineBlock { Body = new List<IVhdlElement>(process.Body) }, // Needs to copy the list.
                 };
                 process.Body.Clear();
                 process.Add(wrappingIf);

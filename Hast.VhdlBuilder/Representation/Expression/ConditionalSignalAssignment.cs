@@ -35,7 +35,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
             return new Assignment
             {
                 AssignTo = AssignTo,
-                Expression = new Raw(Whens.ToVhdl(vhdlGenerationOptions, " else ", string.Empty))
+                Expression = new Raw(Whens.ToVhdl(vhdlGenerationOptions, " else ", string.Empty)),
             }.ToVhdl(vhdlGenerationOptions);
         }
     }

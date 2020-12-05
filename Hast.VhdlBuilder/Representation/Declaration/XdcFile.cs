@@ -24,7 +24,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 PathReference = pathReference,
                 ClockCycles = clockCycles,
                 Type = "setup",
-                IsHierarchical = isHierarchical
+                IsHierarchical = isHierarchical,
             });
 
             Lines.Add(new XdcPath
@@ -32,7 +32,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 PathReference = pathReference,
                 ClockCycles = clockCycles - 1,
                 Type = "hold",
-                IsHierarchical = isHierarchical
+                IsHierarchical = isHierarchical,
             });
         }
 

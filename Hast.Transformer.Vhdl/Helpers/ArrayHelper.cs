@@ -26,7 +26,7 @@ namespace Hast.Transformer.Vhdl.Helpers
                 Name = CreateArrayTypeName(elementType),
                 ElementType = elementType,
                 RangeFrom = 0,
-                RangeTo = length - 1
+                RangeTo = length - 1,
             };
 
         public static void ThrowArraysCantBeNullIfArray(Expression expression)

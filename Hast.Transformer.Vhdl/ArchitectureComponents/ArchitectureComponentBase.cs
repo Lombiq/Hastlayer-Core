@@ -115,9 +115,9 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                     {
                         Left = CommonPortNames.Reset.ToVhdlSignalReference(),
                         Operator = BinaryOperator.Equality,
-                        Right = Value.OneCharacter
+                        Right = Value.OneCharacter,
                     },
-                    True = ifInResetBlock
+                    True = ifInResetBlock,
                 };
                 if (notInReset != null)
                 {

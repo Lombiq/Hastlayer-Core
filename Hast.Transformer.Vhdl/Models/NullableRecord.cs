@@ -13,7 +13,7 @@ namespace Hast.Transformer.Vhdl.Models
             var isNullField = new RecordField
             {
                 DataType = KnownDataTypes.Boolean,
-                Name = IsNullFieldName
+                Name = IsNullFieldName,
             };
 
             Fields.Add(isNullField);

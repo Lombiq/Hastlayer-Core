@@ -66,7 +66,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     fieldComponent.GlobalVariables.Add(new Variable
                     {
                         Name = fieldFullName.ToExtendedVhdlId(),
-                        DataType = dataType
+                        DataType = dataType,
                     });
                 }
 
@@ -81,8 +81,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             ArchitectureComponent = fieldComponent,
                             Body = fieldComponent.BuildBody(),
                             Declarations = fieldComponent.BuildDeclarations()
-                        }
-                    }
+                        },
+                    },
                 };
             });
         }

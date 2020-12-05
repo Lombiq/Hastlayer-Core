@@ -91,7 +91,7 @@ namespace Hast.Transformer.Vhdl.Tests
             config.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                 new MemberInvocationInstanceCountConfiguration("Hast.TestInputs.ClassStructure1.RootClass.VirtualMethod")
                 {
-                    MaxDegreeOfParallelism = 5
+                    MaxDegreeOfParallelism = 5,
                 });
             await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
@@ -135,7 +135,7 @@ namespace Hast.Transformer.Vhdl.Tests
             configuration.HardwareEntryPointMemberFullNames = new[]
             {
                 "System.Void " + typeof(RootClass).FullName + "::" + nameof(RootClass.VirtualMethod) + "(System.Int32)",
-                "System.Void " + typeof(ComplexTypeHierarchy).FullName + "::" + typeof(IInterface1).FullName + "." + nameof(IInterface1.Interface1Method1) + "()"
+                "System.Void " + typeof(ComplexTypeHierarchy).FullName + "::" + typeof(IInterface1).FullName + "." + nameof(IInterface1.Interface1Method1) + "()",
             };
             var transformer = GetTransformer();
 
@@ -162,7 +162,7 @@ namespace Hast.Transformer.Vhdl.Tests
             configuration.HardwareEntryPointMemberNamePrefixes = new[]
             {
                 typeof(RootClass).FullName + "." + nameof(RootClass.VirtualMethod),
-                typeof(ComplexTypeHierarchy).Namespace
+                typeof(ComplexTypeHierarchy).Namespace,
             };
             var transformer = GetTransformer();
 

@@ -27,24 +27,24 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             component.InternallyDrivenSignals.Add(new Signal
             {
                 DataType = SimpleMemoryTypes.CellIndexInternalSignalDataType,
-                Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.CellIndex)
+                Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.CellIndex),
             });
             component.InternallyDrivenSignals.Add(new Signal
             {
                 DataType = SimpleMemoryTypes.DataSignalsDataType,
-                Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.DataOut)
+                Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.DataOut),
             });
             component.InternallyDrivenSignals.Add(new Signal
             {
                 DataType = SimpleMemoryTypes.EnableSignalsDataType,
                 Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.ReadEnable),
-                InitialValue = Value.False
+                InitialValue = Value.False,
             });
             component.InternallyDrivenSignals.Add(new Signal
             {
                 DataType = SimpleMemoryTypes.EnableSignalsDataType,
                 Name = component.CreateSimpleMemorySignalName(SimpleMemoryPortNames.WriteEnable),
-                InitialValue = Value.False
+                InitialValue = Value.False,
             });
         }
 

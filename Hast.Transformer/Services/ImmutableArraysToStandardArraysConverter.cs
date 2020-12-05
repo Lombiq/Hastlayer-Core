@@ -294,7 +294,7 @@ namespace Hast.Transformer.Services
             {
                 var arrayAstType = new ComposedType
                 {
-                    BaseType = GetClonedElementTypeFromImmutableArrayAstType(astType)
+                    BaseType = GetClonedElementTypeFromImmutableArrayAstType(astType),
                 };
                 arrayAstType.ArraySpecifiers.Add(new ArraySpecifier(1));
                 arrayAstType.AddAnnotation(arrayType.ToResolveResult());

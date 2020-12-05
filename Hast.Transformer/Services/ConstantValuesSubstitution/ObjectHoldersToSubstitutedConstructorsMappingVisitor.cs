@@ -61,7 +61,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 var constructorReference = new ConstructorReference
                 {
                     Constructor = constructorDeclarationClone,
-                    OriginalAssignmentTarget = parentAssignment.Left
+                    OriginalAssignmentTarget = parentAssignment.Left,
                 };
 
                 _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parentAssignment.Left.GetFullName()] =

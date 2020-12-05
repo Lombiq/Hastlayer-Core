@@ -34,7 +34,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         In,
         InOut,
-        Out
+        Out,
     }
 
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]

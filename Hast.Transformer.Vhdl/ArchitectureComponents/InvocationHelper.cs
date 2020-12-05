@@ -23,14 +23,14 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             {
                 DataType = KnownDataTypes.Boolean,
                 Name = startedSignalReference.Name,
-                InitialValue = Value.False
+                InitialValue = Value.False,
             });
 
             // Set the start signal for the state machine.
             return new Assignment
             {
                 AssignTo = startedSignalReference,
-                Expression = Value.True
+                Expression = Value.True,
             };
         }
 
@@ -51,14 +51,14 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 {
                     DataType = KnownDataTypes.Boolean,
                     Name = CreateFinishedSignalReference(component, targetStateMachineName, i).Name,
-                    InitialValue = Value.False
+                    InitialValue = Value.False,
                 });
 
                 // Reset the start signal in the finished block.
                 allInvokedStateMachinesFinishedIfElseTrue.Add(new Assignment
                 {
                     AssignTo = CreateStartedSignalReference(component, targetStateMachineName, i),
-                    Expression = Value.False
+                    Expression = Value.False,
                 });
             }
 
@@ -67,7 +67,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 {
                     Left = CreateStartedSignalReference(component, targetStateMachineName, index),
                     Operator = BinaryOperator.Equality,
-                    Right = CreateFinishedSignalReference(component, targetStateMachineName, index)
+                    Right = CreateFinishedSignalReference(component, targetStateMachineName, index),
                 };
 
             return new IfElse<IBlockElement>
@@ -75,7 +75,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 Condition = BinaryChainBuilder.BuildBinaryChain(
                     Enumerable.Range(0, degreeOfParallelism).Select(i => createStartedEqualsFinishedBinary(i)),
                     waitForAll ? BinaryOperator.And : BinaryOperator.Or),
-                True = allInvokedStateMachinesFinishedIfElseTrue
+                True = allInvokedStateMachinesFinishedIfElseTrue,
             };
         }
 

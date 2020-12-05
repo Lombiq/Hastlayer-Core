@@ -139,7 +139,7 @@ namespace Hast.VhdlBuilder.Representation
         {
             FormatCode = true,
             OmitComments = false,
-            NameShortener = SimpleNameShortener
+            NameShortener = SimpleNameShortener,
         };
 
         public bool FormatCode { get; set; } = true;

@@ -14,7 +14,7 @@ namespace Hast.Transformer
     public enum Language
     {
         CSharp,
-        VisualBasic
+        VisualBasic,
     }
 
     public static class TransformerExtensions
@@ -31,7 +31,7 @@ namespace Hast.Transformer
             {
                 GenerateInMemory = false,
                 TreatWarningsAsErrors = false,
-                OutputAssembly = "DynamicHastAssembly" + Sha2456Helper.ComputeHash(sourceCode)
+                OutputAssembly = "DynamicHastAssembly" + Sha2456Helper.ComputeHash(sourceCode),
             };
 
             switch (language)

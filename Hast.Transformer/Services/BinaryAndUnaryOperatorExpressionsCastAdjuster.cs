@@ -38,7 +38,7 @@ namespace Hast.Transformer.Services
                 BinaryOperatorType.GreaterThanOrEqual,
                 BinaryOperatorType.LessThanOrEqual,
                 BinaryOperatorType.ShiftLeft,
-                BinaryOperatorType.ShiftRight
+                BinaryOperatorType.ShiftRight,
             };
 
             private static readonly BinaryOperatorType[] _binaryOperatorsProducingNumericResults = new[]
@@ -52,7 +52,7 @@ namespace Hast.Transformer.Services
                 BinaryOperatorType.BitwiseOr,
                 BinaryOperatorType.ExclusiveOr,
                 BinaryOperatorType.ShiftLeft,
-                BinaryOperatorType.ShiftRight
+                BinaryOperatorType.ShiftRight,
             };
 
             private static readonly string[] _numericTypes = new[]
@@ -64,7 +64,7 @@ namespace Hast.Transformer.Services
                 typeof(int).FullName,
                 typeof(uint).FullName,
                 typeof(long).FullName,
-                typeof(ulong).FullName
+                typeof(ulong).FullName,
             };
 
             // Those types that have arithmetic, relational and bitwise operations defined for them, see:
@@ -74,14 +74,14 @@ namespace Hast.Transformer.Services
                 typeof(int).FullName,
                 typeof(uint).FullName,
                 typeof(long).FullName,
-                typeof(ulong).FullName
+                typeof(ulong).FullName,
             };
 
             private static readonly UnaryOperatorType[] _unaryOperatorsWithNumericPromotions = new[]
             {
                 UnaryOperatorType.Plus,
                 UnaryOperatorType.Minus,
-                UnaryOperatorType.BitNot
+                UnaryOperatorType.BitNot,
             };
 
             private static readonly string[] _typesConvertedToIntInUnaryOperations = new[]
@@ -90,7 +90,7 @@ namespace Hast.Transformer.Services
                 typeof(sbyte).FullName,
                 typeof(short).FullName,
                 typeof(ushort).FullName,
-                typeof(char).FullName
+                typeof(char).FullName,
             };
 
             private readonly IKnownTypeLookupTable _knownTypeLookupTable;

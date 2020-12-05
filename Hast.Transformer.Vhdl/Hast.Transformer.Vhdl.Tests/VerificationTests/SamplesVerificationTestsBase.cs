@@ -52,7 +52,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                         new MemberInvocationInstanceCountConfigurationForMethod<MonteCarloPiEstimator>(m => m.EstimatePi(null), 0)
                         {
-                            MaxDegreeOfParallelism = 3 // Using a smaller degree because we don't need excess repetition.
+                            MaxDegreeOfParallelism = 3, // Using a smaller degree because we don't need excess repetition.
                         });
                     configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomXorshiftLfsr16>(p => p.NextUInt16());
 
@@ -62,21 +62,21 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                         new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
                         {
-                            MaxDegreeOfParallelism = 3
+                            MaxDegreeOfParallelism = 3,
                         });
 
                     configuration.AddHardwareEntryPointType<PrimeCalculator>();
                     transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                         new MemberInvocationInstanceCountConfigurationForMethod<PrimeCalculator>(p => p.ParallelizedArePrimeNumbers(default), 0)
                         {
-                            MaxDegreeOfParallelism = 3
+                            MaxDegreeOfParallelism = 3,
                         });
 
                     configuration.AddHardwareEntryPointType<RecursiveAlgorithms>();
                     transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
                         new MemberInvocationInstanceCountConfigurationForMethod<RecursiveAlgorithms>("Recursively")
                         {
-                            MaxRecursionDepth = 3
+                            MaxRecursionDepth = 3,
                         });
 
                     configuration.AddHardwareEntryPointType<SimdCalculator>();
@@ -96,7 +96,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsParallelizedInterface>(p => p.ScheduleIterations(null), 0)
                             {
-                                MaxDegreeOfParallelism = 3
+                                MaxDegreeOfParallelism = 3,
                             });
                     })),
                 await Host.RunGetAsync(provider => TransformAssembliesToVhdl(
@@ -110,10 +110,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsParallelizedInterface>(p => p.ScheduleIterations(null), 0)
                             {
-                                MaxDegreeOfParallelism = 3
+                                MaxDegreeOfParallelism = 3,
                             });
                         configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomMwc64X>(r => r.NextUInt32());
-                    }))
+                    })),
             };
 
         protected Task<VhdlHardwareDescription> CreateVhdlForUnumSample(string deviceName = null) =>
@@ -153,7 +153,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                         new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
                         {
-                            MaxDegreeOfParallelism = 3
+                            MaxDegreeOfParallelism = 3,
                         });
                 }));
 
@@ -168,7 +168,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                         new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
                         {
-                            MaxDegreeOfParallelism = 3
+                            MaxDegreeOfParallelism = 3,
                         });
                 }));
 
@@ -205,7 +205,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                         configuration.TransformerConfiguration().AddLengthForMultipleArrays(
                             Posit32.QuireSize >> 6,
                             Posit32FusedCalculatorExtensions.ManuallySizedArrays);
-                    }))
+                    })),
             };
 
         protected Task<VhdlHardwareDescription> CreateVhdlForFix64Samples(string deviceName = null) =>
@@ -219,7 +219,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                         new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(f => f.ParallelizedCalculateIntegerSumUpToNumbers(default), 0)
                         {
-                            MaxDegreeOfParallelism = 3
+                            MaxDegreeOfParallelism = 3,
                         });
                 }));
 
@@ -234,7 +234,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                         new MemberInvocationInstanceCountConfigurationForMethod<FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm>(f => f.Run(null), 0)
                         {
-                            MaxDegreeOfParallelism = 3
+                            MaxDegreeOfParallelism = 3,
                         });
                 }));
     }

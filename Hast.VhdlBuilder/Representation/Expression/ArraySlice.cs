@@ -19,7 +19,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
                 IndexFrom = IndexFrom,
                 IndexTo = IndexTo,
                 IsDownTo = IsDownTo,
-                Vector = ArrayReference
+                Vector = ArrayReference,
             }.ToVhdl(vhdlGenerationOptions);
     }
 }

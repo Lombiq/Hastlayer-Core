@@ -47,7 +47,7 @@ namespace Hast.Transformer.Vhdl.Services
 
             var vhdlGenerationOptions = new VhdlGenerationOptions
             {
-                OmitComments = !vhdlGenerationConfiguration.AddComments
+                OmitComments = !vhdlGenerationConfiguration.AddComments,
             };
 
             if (vhdlGenerationConfiguration.ShortenNames)
@@ -62,7 +62,7 @@ namespace Hast.Transformer.Vhdl.Services
                 HardwareEntryPointNamesToMemberIdMappings = transformedVhdlManifest.MemberIdTable.Mappings,
                 VhdlSource = transformedVhdlManifest.Manifest.ToVhdl(vhdlGenerationOptions),
                 Warnings = transformedVhdlManifest.Warnings,
-                XdcSource = xdcSource
+                XdcSource = xdcSource,
             };
 
             if (transformationContext.HardwareGenerationConfiguration.EnableCaching)

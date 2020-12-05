@@ -29,49 +29,49 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             {
                 Name = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId(),
                 Mode = PortMode.In,
-                DataType = SimpleMemoryTypes.DataSignalsDataType
+                DataType = SimpleMemoryTypes.DataSignalsDataType,
             });
 
             ports.Add(new Port
             {
                 Name = SimpleMemoryPortNames.DataOut.ToExtendedVhdlId(),
                 Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.DataSignalsDataType
+                DataType = SimpleMemoryTypes.DataSignalsDataType,
             });
 
             ports.Add(new Port
             {
                 Name = SimpleMemoryPortNames.CellIndex.ToExtendedVhdlId(),
                 Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.CellIndexSignalDataType
+                DataType = SimpleMemoryTypes.CellIndexSignalDataType,
             });
 
             ports.Add(new Port
             {
                 Name = SimpleMemoryPortNames.ReadEnable.ToExtendedVhdlId(),
                 Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.EnableSignalsDataType
+                DataType = SimpleMemoryTypes.EnableSignalsDataType,
             });
 
             ports.Add(new Port
             {
                 Name = SimpleMemoryPortNames.WriteEnable.ToExtendedVhdlId(),
                 Mode = PortMode.Out,
-                DataType = SimpleMemoryTypes.EnableSignalsDataType
+                DataType = SimpleMemoryTypes.EnableSignalsDataType,
             });
 
             ports.Add(new Port
             {
                 Name = SimpleMemoryPortNames.ReadsDone.ToExtendedVhdlId(),
                 Mode = PortMode.In,
-                DataType = SimpleMemoryTypes.DoneSignalsDataType
+                DataType = SimpleMemoryTypes.DoneSignalsDataType,
             });
 
             ports.Add(new Port
             {
                 Name = SimpleMemoryPortNames.WritesDone.ToExtendedVhdlId(),
                 Mode = PortMode.In,
-                DataType = SimpleMemoryTypes.DoneSignalsDataType
+                DataType = SimpleMemoryTypes.DoneSignalsDataType,
             });
         }
     }

@@ -112,7 +112,7 @@ namespace Hast.Remote.Worker
                             var telemetry = new TransformationTelemetry
                             {
                                 JobName = blob.Name,
-                                StartTimeUtc = _clock.UtcNow
+                                StartTimeUtc = _clock.UtcNow,
                             };
 
                             try
@@ -180,7 +180,7 @@ namespace Hast.Remote.Worker
                                             {
                                                 RemoteHastlayerVersion = GetType().Assembly.GetName().Version.ToString(),
                                                 Token = job.Token,
-                                                AppId = job.AppId
+                                                AppId = job.AppId,
                                             };
 
                                             IHardwareRepresentation hardwareRepresentation;
@@ -194,7 +194,7 @@ namespace Hast.Remote.Worker
                                                         EnableCaching = true,
                                                         HardwareEntryPointMemberFullNames = job.Configuration.HardwareEntryPointMemberFullNames,
                                                         HardwareEntryPointMemberNamePrefixes = job.Configuration.HardwareEntryPointMemberNamePrefixes,
-                                                        EnableHardwareImplementationComposition = false
+                                                        EnableHardwareImplementationComposition = false,
                                                     });
 
                                                 cancellationToken.ThrowIfCancellationRequested();
@@ -204,7 +204,7 @@ namespace Hast.Remote.Worker
                                                 result.HardwareDescription = new HardwareDescription
                                                 {
                                                     Language = hardwareRepresentation.HardwareDescription.Language,
-                                                    SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray())
+                                                    SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray()),
                                                 };
                                             }
                                             catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
@@ -369,7 +369,7 @@ namespace Hast.Remote.Worker
                     typeof(VhdlTransformingEngine).Assembly,
                     typeof(NexysA7Driver).Assembly,
                     typeof(TimingReportParser).Assembly,
-                    typeof(CatapultDriver).Assembly
+                    typeof(CatapultDriver).Assembly,
                 },
                 ConfigureLogging = builder =>
                 {
@@ -385,7 +385,7 @@ namespace Hast.Remote.Worker
                     services.AddSingleton<ITransformationWorker, TransformationWorker>();
 
                     onServiceRegistration?.Invoke(sender, services);
-                }
+                },
             };
 
             cancellationToken.ThrowIfCancellationRequested();

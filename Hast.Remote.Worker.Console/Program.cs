@@ -12,7 +12,7 @@ namespace Hast.Remote.Worker.Console
         {
             var configuration = new TransformationWorkerConfiguration
             {
-                StorageConnectionString = "UseDevelopmentStorage=true"
+                StorageConnectionString = "UseDevelopmentStorage=true",
             };
 
             using var host = (Hastlayer)await TransformationWorker.CreateHastlayerAsync(configuration);

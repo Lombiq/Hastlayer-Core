@@ -158,7 +158,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             {
                                 Name = leftDataObject.Name,
                                 AliasedObject = aliasedObjectReference,
-                                DataType = leftVariable.DataType
+                                DataType = leftVariable.DataType,
                             });
                     }
 
@@ -176,7 +176,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return new Assignment
                     {
                         AssignTo = leftDataObject,
-                        Expression = rightTransformed
+                        Expression = rightTransformed,
                     };
                 }
 
@@ -288,7 +288,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                 {
                                     Reference = Transform(argument, context),
                                     DataType = _declarableTypeCreator
-                                        .CreateDeclarableType(argument, argument.GetActualType(), context.TransformationContext)
+                                        .CreateDeclarableType(argument, argument.GetActualType(), context.TransformationContext),
                                 }),
                             GetMaxDegreeOfParallelism(targetMethod),
                             context);
@@ -391,7 +391,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         BinaryOperatorExpression = binaryExpression,
                         LeftTransformed = leftTransformed,
-                        RightTransformed = rightTransformed
+                        RightTransformed = rightTransformed,
                     },
                     context);
             }
@@ -415,7 +415,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     transformedParameters.Add(new TransformedInvocationParameter
                     {
                         Reference = Transform(argument, context),
-                        DataType = _declarableTypeCreator.CreateDeclarableType(argument, argument.GetActualType(), context.TransformationContext)
+                        DataType = _declarableTypeCreator.CreateDeclarableType(argument, argument.GetActualType(), context.TransformationContext),
                     });
                 }
 
@@ -499,7 +499,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return new RecordFieldAccess
                 {
                     Instance = (IDataObject)Transform(memberReference.Target, context),
-                    FieldName = memberReference.MemberName.ToExtendedVhdlId()
+                    FieldName = memberReference.MemberName.ToExtendedVhdlId(),
                 };
             }
             else if (expression is UnaryOperatorExpression unary)
@@ -528,7 +528,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         transformedOperation = new Unary
                         {
                             Operator = UnaryOperator.Negation,
-                            Expression = transformedExpression
+                            Expression = transformedExpression,
                         };
 
                         break;
@@ -567,7 +567,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 scope.CurrentBlock.Add(new Assignment
                 {
                     AssignTo = operationResultDataObjectReference,
-                    Expression = transformedOperation
+                    Expression = transformedOperation,
                 });
 
                 return operationResultDataObjectReference;
@@ -648,14 +648,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             _typeConverter.ConvertType(indexExpression.GetActualType(), context.TransformationContext),
                             KnownDataTypes.UnrangedInt,
                             Transform(indexExpression, context))
-                        .ConvertedFromExpression
+                        .ConvertedFromExpression,
                 };
             }
             else if (expression is ParenthesizedExpression parenthesizedExpression)
             {
                 return new Parenthesized
                 {
-                    Target = Transform(parenthesizedExpression.Expression, context)
+                    Target = Transform(parenthesizedExpression.Expression, context),
                 };
             }
             else if (expression is ObjectCreateExpression objectCreateExpression)
@@ -711,7 +711,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 context.Scope.CurrentBlock.Add(new Assignment
                 {
                     AssignTo = NullableRecord.CreateIsNullFieldAccess(initiailizationResult.RecordInstanceReference),
-                    Expression = Value.True
+                    Expression = Value.True,
                 });
 
                 // There is no need for struct instantiation per se if the value was originally assigned to a
@@ -814,9 +814,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             AssignTo = new RecordFieldAccess
                             {
                                 Instance = result.RecordInstanceReference,
-                                FieldName = field.Name
+                                FieldName = field.Name,
                             },
-                            Expression = initializerExpression
+                            Expression = initializerExpression,
                         });
                     }
                 }

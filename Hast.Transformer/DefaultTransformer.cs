@@ -384,7 +384,7 @@ namespace Hast.Transformer
                 TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
                 KnownTypeLookupTable = knownTypeLookupTable,
                 ArraySizeHolder = arraySizeHolder,
-                DeviceDriver = deviceDriver
+                DeviceDriver = deviceDriver,
             };
 
             foreach (var eventHandler in _eventHandlers) eventHandler?.Invoke(this, context);

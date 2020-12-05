@@ -42,7 +42,7 @@ namespace Hast.VhdlBuilder.Extensions
             new DataObjectReference
             {
                 DataObjectKind = DataObjectKind.Variable,
-                Name = variableName
+                Name = variableName,
             };
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Hast.VhdlBuilder.Extensions
             new DataObjectReference
             {
                 DataObjectKind = DataObjectKind.Signal,
-                Name = signalName
+                Name = signalName,
             };
 
         public static string IndentLinesIfShouldFormat(this string vhdl, IVhdlGenerationOptions vhdlGenerationOptions) =>

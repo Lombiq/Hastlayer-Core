@@ -7,7 +7,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         In,
         Out,
         Buffer,
-        InOut
+        InOut,
     }
 
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]

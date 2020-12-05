@@ -129,7 +129,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 ConvertedFromExpression = subResult.ConvertedFromExpression,
                 ConvertedToDataObject = toDataObject,
                 IsLossy = subResult.IsLossy,
-                IsResized = subResult.IsResized
+                IsResized = subResult.IsResized,
             };
 
             // If both types are arrays then if the array size is different slicing is needed.
@@ -141,7 +141,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 {
                     ArrayReference = toDataObject,
                     IndexFrom = 0,
-                    IndexTo = fromArray.RangeTo
+                    IndexTo = fromArray.RangeTo,
                 };
                 result.IsResized = true;
             }
@@ -164,7 +164,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     {
                         ArrayReference = (IDataObject)fromExpression,
                         IndexFrom = 0,
-                        IndexTo = toArray.RangeTo
+                        IndexTo = toArray.RangeTo,
                     };
                     result.IsResized = true;
                 }

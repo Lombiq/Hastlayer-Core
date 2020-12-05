@@ -37,7 +37,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             var variable = new Variable
             {
                 Name = component.GetNextUnusedIndexedObjectName(name),
-                DataType = dataType
+                DataType = dataType,
             };
 
             component.LocalVariables.Add(variable);
@@ -53,7 +53,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             var signal = new Signal
             {
                 Name = component.GetNextUnusedIndexedObjectName(name),
-                DataType = dataType
+                DataType = dataType,
             };
 
             component.InternallyDrivenSignals.Add(signal);

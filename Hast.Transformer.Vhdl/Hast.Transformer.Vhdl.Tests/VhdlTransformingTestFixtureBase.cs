@@ -31,7 +31,7 @@ namespace Hast.Transformer.Vhdl.Tests
                         typeof(DefaultTransformer).Assembly,
                         typeof(MemberIdTable).Assembly,
                         typeof(IDeviceDriverSelector).Assembly,
-                        typeof(Nexys4DdrDriver).Assembly
+                        typeof(Nexys4DdrDriver).Assembly,
                     });
 
             _hostConfiguration.OnServiceRegistration += (configuration, services) =>

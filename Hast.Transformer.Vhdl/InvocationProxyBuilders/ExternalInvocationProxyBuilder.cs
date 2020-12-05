@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
@@ -26,14 +26,14 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             {
                 Name = "FinishedInternal".ToExtendedVhdlId(),
                 DataType = KnownDataTypes.Boolean,
-                InitialValue = Value.False
+                InitialValue = Value.False,
             };
             proxyComponent.InternallyDrivenSignals.Add(finishedSignal);
             var finishedSignalReference = finishedSignal.ToReference();
             proxyComponent.BeginBodyWith = new Assignment
             {
                 AssignTo = CommonPortNames.Finished.ToVhdlSignalReference(),
-                Expression = finishedSignalReference
+                Expression = finishedSignalReference,
             };
 
             var memberSelectingCase = new Case { Expression = CommonPortNames.MemberId.ToVhdlIdValue() };
@@ -45,7 +45,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 proxyComponent.OtherMemberMaxInvocationInstanceCounts[hardwareEntryPointMemberResult.Member] = 1;
                 var when = new CaseWhen
                 {
-                    Expression = memberId.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                    Expression = memberId.ToVhdlValue(KnownDataTypes.UnrangedInt),
                 };
 
                 var waitForInvocationFinishedIfElse = InvocationHelper
@@ -54,7 +54,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 waitForInvocationFinishedIfElse.True.Add(new Assignment
                 {
                     AssignTo = finishedSignalReference,
-                    Expression = Value.True
+                    Expression = Value.True,
                 });
 
                 when.Add(new IfElse
@@ -63,7 +63,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     {
                         Left = InvocationHelper.CreateStartedSignalReference(proxyComponent, memberName, 0),
                         Operator = BinaryOperator.Equality,
-                        Right = Value.False
+                        Right = Value.False,
                     },
                     True = InvocationHelper.CreateInvocationStart(proxyComponent, memberName, 0),
                     ElseIfs = new List<If<IVhdlElement>>
@@ -72,8 +72,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                             {
                                 Condition = waitForInvocationFinishedIfElse.Condition,
                                 True = waitForInvocationFinishedIfElse.True
-                            }
-                        }
+                            },
+                        },
                 });
                 ;
 
@@ -91,15 +91,15 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     {
                         Left = startedPortReference,
                         Operator = BinaryOperator.Equality,
-                        Right = Value.True
+                        Right = Value.True,
                     },
                     Operator = BinaryOperator.And,
                     Right = new Binary
                     {
                         Left = finishedSignalReference,
                         Operator = BinaryOperator.Equality,
-                        Right = Value.False
-                    }
+                        Right = Value.False,
+                    },
 
                 },
                 True = new InlineBlock(
@@ -115,7 +115,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                             {
                                 Left = startedPortReference,
                                 Operator = BinaryOperator.Equality,
-                                Right = Value.False
+                                Right = Value.False,
                             },
                             Operator = BinaryOperator.And,
                             Right = new Binary
@@ -123,15 +123,15 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 Left = finishedSignalReference,
                                 Operator = BinaryOperator.Equality,
                                 Right = Value.True
-                            }
+                            },
 
                         },
                         True = new Assignment
                         {
                             AssignTo = finishedSignalReference,
                             Expression = Value.False
-                        }
-                    })
+                        },
+                    }),
             };
 
             return proxyComponent;

@@ -80,19 +80,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 var invocationIndexVariableName = stateMachine.CreateInvocationIndexVariableName(targetMethodName);
                 var invocationIndexVariableType = new RangedDataType(KnownDataTypes.UnrangedInt)
                 {
-                    RangeMax = instanceCount - 1
+                    RangeMax = instanceCount - 1,
                 };
                 var invocationIndexVariableReference = invocationIndexVariableName.ToVhdlVariableReference();
                 stateMachine.LocalVariables.AddIfNew(new Variable
                 {
                     DataType = invocationIndexVariableType,
                     InitialValue = KnownDataTypes.UnrangedInt.DefaultValue,
-                    Name = invocationIndexVariableName
+                    Name = invocationIndexVariableName,
                 });
 
                 var proxyCase = new Case
                 {
-                    Expression = invocationIndexVariableReference
+                    Expression = invocationIndexVariableReference,
                 };
 
                 for (int i = 0; i < instanceCount; i++)
@@ -113,8 +113,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         {
                             {
                                 buildInvocationBlockResult.InvocationBlock
-                            }
-                        }
+                            },
+                        },
                     });
                 }
 
@@ -127,8 +127,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         Left = invocationIndexVariableReference,
                         Operator = BinaryOperator.Add,
-                        Right = 1.ToVhdlValue(invocationIndexVariableType)
-                    }
+                        Right = 1.ToVhdlValue(invocationIndexVariableType),
+                    },
                 });
 
                 return new BuildInvocationResult { OutParameterBackAssignments = outParameterBackAssignments };
@@ -237,7 +237,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         false)
                     {
                         DataType = parameterSignalType,
-                        Name = parameterSignalName
+                        Name = parameterSignalName,
                     });
 
                     // Assign local variables to/from the intermediary parameter signal.
@@ -275,7 +275,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return new Assignment
                     {
                         AssignTo = assignTo,
-                        Expression = assignmentExpression
+                        Expression = assignmentExpression,
                     };
                 }
 
@@ -294,7 +294,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return new BuildInvocationBlockResult
             {
                 InvocationBlock = invocationBlock,
-                OutParameterBackAssignments = outParameterBackAssignments
+                OutParameterBackAssignments = outParameterBackAssignments,
             };
         }
 
@@ -327,7 +327,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     AssignTo = stateMachine
                         .CreateInvocationIndexVariableName(targetMethodName)
                         .ToVhdlVariableReference(),
-                    Expression = 0.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                    Expression = 0.ToVhdlValue(KnownDataTypes.UnrangedInt),
                 });
             }
 
@@ -348,7 +348,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     stateMachine.ExternallyDrivenSignals.AddIfNew(new Signal
                     {
                         DataType = returnType,
-                        Name = returnSignalReference.Name
+                        Name = returnSignalReference.Name,
                     });
 
                     // The return signal's value needs to be copied over to a local variable. Otherwise if we'd re-use the
@@ -360,7 +360,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     currentBlock.Add(new Assignment
                     {
                         AssignTo = returnVariableReference,
-                        Expression = returnSignalReference
+                        Expression = returnSignalReference,
                     });
 
                     // Using the reference of the state machine's return value in place of the original method call.

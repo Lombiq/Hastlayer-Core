@@ -74,7 +74,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     {
                         Member = method,
                         IsHardwareEntryPointMember = method.IsHardwareEntryPointMember(),
-                        ArchitectureComponentResults = stateMachineResults
+                        ArchitectureComponentResults = stateMachineResults,
                     };
                 });
         }
@@ -102,7 +102,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 stateMachine.InternallyDrivenSignals.Add(new Signal
                 {
                     Name = stateMachine.CreateReturnSignalReference().Name,
-                    DataType = returnType
+                    DataType = returnType,
                 });
             }
 
@@ -126,19 +126,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     true)
                 {
                     DataType = parameterDataType,
-                    Name = parameterSignalReference.Name
+                    Name = parameterSignalReference.Name,
                 });
 
                 stateMachine.LocalVariables.Add(new Variable
                 {
                     DataType = parameterDataType,
-                    Name = parameterLocalVariableReference.Name
+                    Name = parameterLocalVariableReference.Name,
                 });
 
                 openingBlock.Add(new Assignment
                 {
                     AssignTo = parameterLocalVariableReference,
-                    Expression = parameterSignalReference
+                    Expression = parameterSignalReference,
                 });
 
                 // If the parameter can be modified inside and those changes should be passed back then we need to
@@ -163,13 +163,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         true)
                     {
                         DataType = parameterDataType,
-                        Name = outParameterSignalReference.Name
+                        Name = outParameterSignalReference.Name,
                     });
 
                     stateMachine.States[1].Body.Add(new Assignment
                     {
                         AssignTo = outParameterSignalReference,
-                        Expression = parameterLocalVariableReference
+                        Expression = parameterLocalVariableReference,
                     });
                 }
             }
@@ -182,8 +182,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     Method = method,
                     StateMachine = stateMachine,
-                    CurrentBlock = new CurrentBlock(stateMachine, openingBlock, stateMachine.AddState(openingBlock))
-                }
+                    CurrentBlock = new CurrentBlock(stateMachine, openingBlock, stateMachine.AddState(openingBlock)),
+                },
             };
 
             var labels = method.Body.FindAllChildrenOfType<LabelStatement>();
@@ -214,7 +214,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 ArchitectureComponent = stateMachine,
                 Declarations = stateMachine.BuildDeclarations(),
-                Body = stateMachine.BuildBody()
+                Body = stateMachine.BuildBody(),
             };
 
             // Warnings would be repeated for each instance of the state machine otherwise.

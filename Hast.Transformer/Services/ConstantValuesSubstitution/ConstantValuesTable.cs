@@ -72,7 +72,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         return new
                         {
                             ValueDescriptor = valueDescriptor,
-                            Height = parent != null ? height : int.MaxValue
+                            Height = parent != null ? height : int.MaxValue,
                         };
                     })
                     .OrderBy(valueWithHeight => valueWithHeight.Height)

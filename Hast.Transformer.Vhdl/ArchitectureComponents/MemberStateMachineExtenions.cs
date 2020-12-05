@@ -28,7 +28,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return new Assignment
             {
                 AssignTo = stateMachine.CreateStateVariableName().ToVhdlVariableReference(),
-                Expression = stateMachine.CreateStateName(destinationStateIndex).ToVhdlIdValue()
+                Expression = stateMachine.CreateStateName(destinationStateIndex).ToVhdlIdValue(),
             };
         }
 

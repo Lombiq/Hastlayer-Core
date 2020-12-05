@@ -74,7 +74,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         return new RecordField
                         {
                             DataType = fieldDataType,
-                            Name = name.ToExtendedVhdlId()
+                            Name = name.ToExtendedVhdlId(),
                         };
 
                     });

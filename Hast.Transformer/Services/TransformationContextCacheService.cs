@@ -27,7 +27,7 @@ namespace Hast.Transformer.Services
                 transformationContext,
                 new MemoryCacheEntryOptions
                 {
-                    SlidingExpiration = TimeSpan.FromHours(5)
+                    SlidingExpiration = TimeSpan.FromHours(5),
                 });
         }
 

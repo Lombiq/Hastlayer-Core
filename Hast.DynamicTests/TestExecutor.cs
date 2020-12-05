@@ -42,7 +42,7 @@ namespace Hast.DynamicTests
             var hardwareRepresentation = await hastlayer.GenerateHardware(
                 new[]
                 {
-                    typeof(T).Assembly
+                    typeof(T).Assembly,
                 },
                 configuration);
 

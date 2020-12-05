@@ -73,7 +73,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 // Prefixing the name so it won't clash with boolean arrays created by the transforming logic.
                 Name = ("InternalInvocationProxy_" +
                     ArrayHelper.CreateArrayTypeName(KnownDataTypes.Boolean).TrimExtendedVhdlIdDelimiters())
-                    .ToExtendedVhdlId()
+                    .ToExtendedVhdlId(),
             };
             var runningStates = new VhdlBuilder.Representation.Declaration.Enum
             {
@@ -82,12 +82,12 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 {
                     waitingForStartedStateValue,
                     waitingForFinishedStateValue,
-                    afterFinishedStateValue
-                }.ToList()
+                    afterFinishedStateValue,
+                }.ToList(),
             };
             proxyComponents.Add(new BasicComponent((namePrefix + "_CommonDeclarations").ToExtendedVhdlId())
             {
-                Declarations = new InlineBlock(booleanArrayType, runningStates)
+                Declarations = new InlineBlock(booleanArrayType, runningStates),
             });
 
             foreach (var invokedMember in invokedMembers)
@@ -132,7 +132,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         {
                             AssignTo = targetParameters
                                         .Single(p => p.TargetParameterName == parameter.TargetParameterName),
-                            Expression = parameter.ToReference()
+                            Expression = parameter.ToReference(),
                         });
                     };
 
@@ -154,7 +154,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         {
                             AssignTo = componentsByName[invokerName]
                                     .CreateReturnSignalReferenceForTargetComponent(targetMemberName, invokerIndex),
-                            Expression = returnSignal.ToReference()
+                            Expression = returnSignal.ToReference(),
                         };
                     };
 
@@ -183,7 +183,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         {
                             AssignTo = receivingParameters
                                         .Single(p => p.TargetParameterName == parameter.TargetParameterName),
-                            Expression = parameter.ToReference()
+                            Expression = parameter.ToReference(),
                         });
                     };
 
@@ -228,7 +228,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                     .CreateStartedSignalName(targetComponentName)
                                     .ToVhdlSignalReference(),
                                 Expression = InvocationHelper
-                                        .CreateStartedSignalReference(invokerName, targetMemberName, invokerIndex)
+                                        .CreateStartedSignalReference(invokerName, targetMemberName, invokerIndex),
                             });
 
                             signalConnectionsBlock.Body.AddRange(buildInParameterAssignments(invokerName, invokerIndex, targetIndex));
@@ -239,7 +239,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                         .CreateFinishedSignalReference(invokerName, targetMemberName, invokerIndex),
                                 Expression = ArchitectureComponentNameHelper
                                     .CreateFinishedSignalName(targetComponentName)
-                                    .ToVhdlSignalReference()
+                                    .ToVhdlSignalReference(),
                             });
 
                             var returnAssignment = buildReturnAssigment(invokerName, invokerIndex, targetIndex);
@@ -283,14 +283,14 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         {
                             Name = booleanArrayType.Name,
                             TypeCategory = DataTypeCategory.Array,
-                            Size = targetComponentCount
+                            Size = targetComponentCount,
                         };
                         proxyComponent.LocalVariables.Add(new Variable
                         {
                             DataType = targetAvailableIndicatorDataType,
                             Name = targetAvailableIndicatorVariableReference.Name,
                             InitialValue = ("others => " + KnownDataTypes.Boolean.DefaultValue.ToVhdl())
-                                .ToVhdlValue(targetAvailableIndicatorDataType)
+                                .ToVhdlValue(targetAvailableIndicatorDataType),
                         });
 
                         bodyBlock.Add(new LineComment(
@@ -306,8 +306,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                     .CreateStartedSignalName(getTargetMemberComponentName(c))
                                     .ToVhdlSignalReference(),
                                     Operator = BinaryOperator.Equality,
-                                    Right = Value.False
-                                }
+                                    Right = Value.False,
+                                },
                             };
                             for (int s = c + 1; s < targetComponentCount; s++)
                             {
@@ -317,7 +317,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                         .CreateStartedSignalName(getTargetMemberComponentName(s))
                                         .ToVhdlSignalReference(),
                                     Operator = BinaryOperator.Equality,
-                                    Right = Value.True
+                                    Right = Value.True,
                                 });
                             }
 
@@ -329,9 +329,9 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                     AssignTo = new ArrayElementAccess
                                     {
                                         ArrayReference = targetAvailableIndicatorVariableReference,
-                                        IndexExpression = c.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                                        IndexExpression = c.ToVhdlValue(KnownDataTypes.UnrangedInt),
                                     },
-                                    Expression = BinaryChainBuilder.BuildBinaryChain(selectorConditions, BinaryOperator.And)
+                                    Expression = BinaryChainBuilder.BuildBinaryChain(selectorConditions, BinaryOperator.And),
                                 });
                         }
                     }
@@ -362,9 +362,9 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 DataType = new RangedDataType(KnownDataTypes.UnrangedInt)
                                 {
                                     RangeMin = 0,
-                                    RangeMax = targetComponentCount - 1
+                                    RangeMax = targetComponentCount - 1,
                                 },
-                                Name = runningIndexName
+                                Name = runningIndexName,
                             });
 
                             var runningStateVariableName = proxyComponent
@@ -374,7 +374,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                             {
                                 DataType = runningStates,
                                 Name = runningStateVariableName,
-                                InitialValue = waitingForStartedStateValue
+                                InitialValue = waitingForStartedStateValue,
                             });
 
                             var invocationHandlerBlock = new LogicalBlock(
@@ -386,7 +386,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                             var runningStateCase = new Case
                             {
-                                Expression = runningStateVariableReference
+                                Expression = runningStateVariableReference,
                             };
 
                             // WaitingForStarted state
@@ -403,19 +403,19 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                         new Assignment
                                         {
                                             AssignTo = runningStateVariableReference,
-                                            Expression = waitingForFinishedStateValue
+                                            Expression = waitingForFinishedStateValue,
                                         },
                                         new Assignment
                                         {
                                             AssignTo = runningIndexVariableReference,
-                                            Expression = targetIndex.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                                            Expression = targetIndex.ToVhdlValue(KnownDataTypes.UnrangedInt),
                                         },
                                         new Assignment
                                         {
                                             AssignTo = ArchitectureComponentNameHelper
                                                 .CreateStartedSignalName(getTargetMemberComponentName(targetIndex))
                                                 .ToVhdlSignalReference(),
-                                            Expression = Value.True
+                                            Expression = Value.True,
                                         });
 
                                     if (targetComponentCount > 1)
@@ -425,9 +425,9 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                             AssignTo = new ArrayElementAccess
                                             {
                                                 ArrayReference = targetAvailableIndicatorVariableReference,
-                                                IndexExpression = targetIndex.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                                                IndexExpression = targetIndex.ToVhdlValue(KnownDataTypes.UnrangedInt),
                                             },
-                                            Expression = Value.False
+                                            Expression = Value.False,
                                         });
                                     }
 
@@ -449,7 +449,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 {
                                     var availableTargetSelectingCase = new Case
                                     {
-                                        Expression = targetAvailableIndicatorVariableReference
+                                        Expression = targetAvailableIndicatorVariableReference,
                                     };
 
                                     for (int c = 0; c < targetComponentCount; c++)
@@ -457,14 +457,14 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                         availableTargetSelectingCase.Whens.Add(new CaseWhen
                                         {
                                             Expression = CreateBooleanIndicatorValue(targetAvailableIndicatorDataType, c),
-                                            Body = new List<IVhdlElement> { { createComponentAvailableBody(c) } }
+                                            Body = new List<IVhdlElement> { { createComponentAvailableBody(c) } },
                                         });
                                     }
 
                                     availableTargetSelectingCase.Whens.Add(new CaseWhen
                                     {
                                         Expression = "others".ToVhdlIdValue(),
-                                        Body = new List<IVhdlElement> { { Null.Instance.Terminate() } }
+                                        Body = new List<IVhdlElement> { { Null.Instance.Terminate() } },
                                     });
 
                                     waitingForStartedInnnerBlock.Add(availableTargetSelectingCase);
@@ -489,8 +489,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                                 },
                                                 waitingForStartedInnnerBlock)
                                             }
-                                        }
-                                    }
+                                        },
+                                    },
                                 });
                             }
 
@@ -498,7 +498,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                             {
                                 var runningIndexCase = new Case
                                 {
-                                    Expression = runningIndexVariableReference
+                                    Expression = runningIndexVariableReference,
                                 };
 
                                 for (int c = 0; c < targetComponentCount; c++)
@@ -511,20 +511,20 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                             new Assignment
                                             {
                                                 AssignTo = runningStateVariableReference,
-                                                Expression = afterFinishedStateValue
+                                                Expression = afterFinishedStateValue,
                                             },
                                             new Assignment
                                             {
                                                 AssignTo = InvocationHelper
                                                     .CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                                Expression = Value.True
+                                                Expression = Value.True,
                                             },
                                             new Assignment
                                             {
                                                 AssignTo = ArchitectureComponentNameHelper
                                                     .CreateStartedSignalName(getTargetMemberComponentName(c))
                                                     .ToVhdlSignalReference(),
-                                                Expression = Value.False
+                                                Expression = Value.False,
                                             });
 
                                         var returnAssignment = buildReturnAssigment(invokerName, i, c);
@@ -537,14 +537,14 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                             Condition = ArchitectureComponentNameHelper
                                                 .CreateFinishedSignalName(getTargetMemberComponentName(c))
                                                 .ToVhdlSignalReference(),
-                                            True = isFinishedIfTrue
+                                            True = isFinishedIfTrue,
                                         };
                                     }
 
                                     runningIndexCase.Whens.Add(new CaseWhen
                                     {
                                         Expression = c.ToVhdlValue(KnownDataTypes.UnrangedInt),
-                                        Body = new List<IVhdlElement> { { caseWhenBody } }
+                                        Body = new List<IVhdlElement> { { caseWhenBody } },
                                     });
                                 }
 
@@ -553,8 +553,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                     Expression = waitingForFinishedStateValue,
                                     Body = new List<IVhdlElement>
                                     {
-                                        { runningIndexCase }
-                                    }
+                                        { runningIndexCase },
+                                    },
                                 });
                             }
 
@@ -591,8 +591,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                                         Expression = Value.False
                                                     })
                                             }
-                                        }
-                                    }
+                                        },
+                                    },
                                 });
                             }
 
@@ -601,7 +601,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                             {
                                 AssignTo = InvocationHelper
                                     .CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                Expression = Value.False
+                                Expression = Value.False,
                             });
 
                             invocationHandlerBlock.Add(runningStateCase);
@@ -625,7 +625,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             return new Value
             {
                 DataType = targetAvailableIndicatorDataType,
-                EvaluatedContent = new InlineBlock(booleanArray)
+                EvaluatedContent = new InlineBlock(booleanArray),
             };
         }
     }

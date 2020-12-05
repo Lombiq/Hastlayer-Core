@@ -12,7 +12,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         Array,
         Character,
         Unit,
-        Composite
+        Composite,
     }
 
     /// <summary>

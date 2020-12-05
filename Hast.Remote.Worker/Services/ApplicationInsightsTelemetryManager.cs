@@ -39,7 +39,7 @@ namespace Hast.Remote.Worker.Services
                 Duration = telemetry.FinishTimeUtc - telemetry.StartTimeUtc,
                 Timestamp = telemetry.StartTimeUtc,
                 Success = telemetry.IsSuccess,
-                Url = new Uri(telemetry.JobName, UriKind.Relative)
+                Url = new Uri(telemetry.JobName, UriKind.Relative),
             };
 
             requestTelemetry.Context.User.AccountId = telemetry.AppId.ToString(CultureInfo.InvariantCulture);

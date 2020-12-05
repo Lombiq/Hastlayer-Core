@@ -83,7 +83,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var binary = new Binary
             {
                 Left = partiallyTransformedExpression.LeftTransformed,
-                Right = partiallyTransformedExpression.RightTransformed
+                Right = partiallyTransformedExpression.RightTransformed,
             };
 
             var expression = partiallyTransformedExpression.BinaryOperatorExpression;
@@ -312,7 +312,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         Operator = BinaryOperator.And,
                         Right =
                             string.Join("", Enumerable.Repeat(1, countSize))
-                            .ToVhdlValue(new StdLogicVector { Size = countSize })
+                            .ToVhdlValue(new StdLogicVector { Size = countSize }),
                     };
 
                     var bitwiseAndBinary = new BinaryOperatorExpression(
@@ -335,8 +335,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         // The result will be like to_integer(unsigned(SmartResize(..))). The cast to unsigned is
                         // necessary because in .NET the input of the shift is always treated as unsigned. Right shifts
                         // will also have a bitwise AND inside unsigned().
-                        Invocation.ToInteger(new Invocation("unsigned", resize))
-                    }
+                        Invocation.ToInteger(new Invocation("unsigned", resize)),
+                    },
                 };
             }
 
@@ -366,15 +366,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     Parameters = new List<IVhdlElement>
                     {
                         binaryElement,
-                        resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt)
-                    }
+                        resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt),
+                    },
                 };
             }
 
             var operationResultAssignment = new Assignment
             {
                 AssignTo = operationResultDataObjectReference,
-                Expression = binaryElement
+                Expression = binaryElement,
             };
 
             var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
@@ -394,7 +394,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     Attribute = KnownDataTypes.DontTouchAttribute,
                     Expression = new Value { DataType = KnownDataTypes.UnrangedString, Content = "true" },
                     ItemClass = operationResultDataObjectReference.DataObjectKind.ToString(),
-                    Of = operationResultDataObjectReference
+                    Of = operationResultDataObjectReference,
                 });
             }
 
@@ -446,8 +446,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         {
                             Left = waitedCyclesCountVariableReference,
                             Operator = BinaryOperator.GreaterThanOrEqual,
-                            Right = clockCyclesToWait.ToVhdlValue(waitedCyclesCountVariable.DataType)
-                        }
+                            Right = clockCyclesToWait.ToVhdlValue(waitedCyclesCountVariable.DataType),
+                        },
                     };
                     waitForResultBlock.Add(waitForResultIf);
 
@@ -466,8 +466,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         {
                             Left = waitedCyclesCountVariableReference,
                             Operator = BinaryOperator.Add,
-                            Right = "1".ToVhdlValue(waitedCyclesCountVariable.DataType)
-                        }
+                            Right = "1".ToVhdlValue(waitedCyclesCountVariable.DataType),
+                        },
                     };
                 }
 

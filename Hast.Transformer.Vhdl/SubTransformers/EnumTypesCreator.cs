@@ -38,7 +38,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Name = typeDeclaration.GetFullName().ToExtendedVhdlId(),
                     Values = typeDeclaration.Members
                         .Select(member => member.GetFullName().ToExtendedVhdlIdValue())
-                        .ToList()
+                        .ToList(),
                 });
             }
         }

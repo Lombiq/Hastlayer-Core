@@ -15,7 +15,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 new object[] { AlveoU200ManifestProvider.DeviceName },
                 new object[] { AlveoU250ManifestProvider.DeviceName },
                 new object[] { AlveoU280ManifestProvider.DeviceName },
-                new object[] { AwsF1ManifestProvider.DeviceName }
+                new object[] { AwsF1ManifestProvider.DeviceName },
             };
 
         [Theory, MemberData(nameof(AllDevices))]

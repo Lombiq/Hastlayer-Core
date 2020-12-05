@@ -27,7 +27,7 @@ namespace Hast.Remote.Worker.Daemon
             {
                 Log = DisplayName,
                 // The EventLog source can't contain dots like the service's technical name.
-                Source = "HastRemoteWorkerDaemon"
+                Source = "HastRemoteWorkerDaemon",
             };
 
             ServiceName = Name;
@@ -55,7 +55,7 @@ namespace Hast.Remote.Worker.Daemon
                 var appSettings = Hastlayer.BuildConfiguration();
                 var configuration = new TransformationWorkerConfiguration
                 {
-                    StorageConnectionString = appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey)
+                    StorageConnectionString = appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey),
                 };
 
                 using var host = (Hastlayer)await TransformationWorker.CreateHastlayerAsync(

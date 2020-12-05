@@ -95,7 +95,7 @@ namespace Hast.Transformer.Vhdl.Services
             hastIpModule.Libraries.Add(new Library
             {
                 Name = "ieee",
-                Uses = new List<string> { "std_logic_1164.all", "numeric_std.all" }
+                Uses = new List<string> { "std_logic_1164.all", "numeric_std.all" },
             });
 
             // Creating the Hast_IP entity. Its name can't be an extended identifier.
@@ -192,7 +192,7 @@ namespace Hast.Transformer.Vhdl.Services
                     var alteraAttribute = new VhdlBuilder.Representation.Declaration.Attribute
                     {
                         Name = "altera_attribute",
-                        ValueType = KnownDataTypes.UnrangedString
+                        ValueType = KnownDataTypes.UnrangedString,
                     };
 
                     hastIpArchitecture.Declarations.Add(new LogicalBlock(
@@ -203,7 +203,7 @@ namespace Hast.Transformer.Vhdl.Services
                             Attribute = alteraAttribute,
                             Of = hastIpArchitecture.ToReference(),
                             ItemClass = "architecture",
-                            Expression = sdcExpression
+                            Expression = sdcExpression,
                         }));
                 }
             }
@@ -299,25 +299,25 @@ namespace Hast.Transformer.Vhdl.Services
             {
                 Name = CommonPortNames.MemberId,
                 Mode = PortMode.In,
-                DataType = KnownDataTypes.UnrangedInt
+                DataType = KnownDataTypes.UnrangedInt,
             });
             ports.Add(new Port
             {
                 Name = CommonPortNames.Reset,
                 Mode = PortMode.In,
-                DataType = KnownDataTypes.StdLogic
+                DataType = KnownDataTypes.StdLogic,
             });
             ports.Add(new Port
             {
                 Name = CommonPortNames.Started,
                 Mode = PortMode.In,
-                DataType = KnownDataTypes.Boolean
+                DataType = KnownDataTypes.Boolean,
             });
             ports.Add(new Port
             {
                 Name = CommonPortNames.Finished,
                 Mode = PortMode.Out,
-                DataType = KnownDataTypes.Boolean
+                DataType = KnownDataTypes.Boolean,
             });
 
             ProcessUtility.AddClockToProcesses(hastIpModule, CommonPortNames.Clock);
@@ -348,7 +348,7 @@ namespace Hast.Transformer.Vhdl.Services
                 Manifest = manifest,
                 MemberIdTable = memberIdTable,
                 Warnings = warnings,
-                XdcFile = xdcFile
+                XdcFile = xdcFile,
             };
         }
 
@@ -480,7 +480,7 @@ namespace Hast.Transformer.Vhdl.Services
             hastIpModule.Libraries.Add(new Library
             {
                 Name = "work",
-                Uses = new List<string> { libraryName + ".all" }
+                Uses = new List<string> { libraryName + ".all" },
             });
         }
     }

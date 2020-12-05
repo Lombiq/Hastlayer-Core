@@ -111,7 +111,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 Expression = _typeConversionTransformer.ImplementTypeConversion(
                     invocationParameters[0].DataType,
                     SimpleMemoryTypes.CellIndexInternalSignalDataType, invocationParameters[0].Reference)
-                    .ConvertedFromExpression
+                    .ConvertedFromExpression,
             });
 
             // Setting the write/read enable signal.
@@ -121,7 +121,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             currentBlock.Add(new Assignment
             {
                 AssignTo = enableSignalReference,
-                Expression = Value.True
+                Expression = Value.True,
             });
 
             var is4BytesOperation = targetMemberReference.MemberName.EndsWith("4Bytes", StringComparison.InvariantCulture);
@@ -173,14 +173,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                 ArrayReference = (IDataObject)variableToConvert,
                                 IsDownTo = true,
                                 IndexFrom = indexFrom,
-                                IndexTo = indexTo
+                                IndexTo = indexTo,
                             });
 
                     return new Value
                     {
                         DataType = ArrayHelper.CreateArrayInstantiation(KnownDataTypes.UInt8, 4),
                         EvaluatedContent = new InlineBlock(
-                            CreateSlice(7, 0), CreateSlice(15, 8), CreateSlice(23, 16), CreateSlice(31, 24))
+                            CreateSlice(7, 0), CreateSlice(15, 8), CreateSlice(23, 16), CreateSlice(31, 24)),
                     };
                 }
 
@@ -202,7 +202,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                 ArrayReference = dataOutReference,
                                 IsDownTo = true,
                                 IndexFrom = (elementIndex + 1) * 8 - 1,
-                                IndexTo = elementIndex * 8
+                                IndexTo = elementIndex * 8,
                             },
                             // The data to write is conventionally the second parameter.
                             Expression = new Invocation(
@@ -210,8 +210,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                 new ArrayElementAccess
                                 {
                                     ArrayReference = arrayReference,
-                                    IndexExpression = elementIndex.ToVhdlValue(KnownDataTypes.UnrangedInt)
-                                })
+                                    IndexExpression = elementIndex.ToVhdlValue(KnownDataTypes.UnrangedInt),
+                                }),
                         });
 
                     // Arrays smaller than 4 elements can be written with Write4Bytes(), so need to take care of them.
@@ -229,7 +229,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     {
                         AssignTo = dataOutReference,
                         // The data to write is conventionally the second parameter.
-                        Expression = ImplementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false)
+                        Expression = ImplementSimpleMemoryTypeConversion(invocationParameters[1].Reference, false),
                     });
                 }
             }
@@ -246,16 +246,16 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             .ToExtendedVhdlId()
                             .ToVhdlSignalReference(),
                         Operator = BinaryOperator.Equality,
-                        Right = Value.True
+                        Right = Value.True,
                     },
-                    True = memoryOperationFinishedBlock
+                    True = memoryOperationFinishedBlock,
                 });
             var memoryOperationFinishedStateIndex = stateMachine.AddState(endMemoryOperationBlock);
 
             memoryOperationFinishedBlock.Add(new Assignment
             {
                 AssignTo = enableSignalReference,
-                Expression = Value.False
+                Expression = Value.False,
             });
 
             currentBlock.Add(stateMachine.CreateStateChange(memoryOperationFinishedStateIndex));
@@ -282,7 +282,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 currentBlock.Add(new Assignment
                 {
                     AssignTo = dataInTemporaryVariableReference,
-                    Expression = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference()
+                    Expression = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference(),
                 });
 
                 return ImplementSimpleMemoryTypeConversion(dataInTemporaryVariableReference, true);
@@ -356,9 +356,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                     AssignTo = new ArrayElementAccess
                                     {
                                         ArrayReference = arrayReference,
-                                        IndexExpression = index.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                                        IndexExpression = index.ToVhdlValue(KnownDataTypes.UnrangedInt),
                                     },
-                                    Expression = resultReference
+                                    Expression = resultReference,
                                 });
                             index++;
                         }
@@ -403,7 +403,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         {
                             ArrayReference = (IDataObject)transformedParameters.First().Reference,
                             IndexFrom = 0,
-                            IndexTo = sourceArrayLength - 1
+                            IndexTo = sourceArrayLength - 1,
                         };
                     }
                 }
@@ -422,7 +422,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     {
                         ArrayReference = targetArrayReference,
                         IndexFrom = 0,
-                        IndexTo = sourceArrayLength - 1
+                        IndexTo = sourceArrayLength - 1,
                     };
                 }
                 else if (sourceArrayLength > targetArrayLength)
@@ -431,14 +431,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     {
                         ArrayReference = sourceArrayReference,
                         IndexFrom = 0,
-                        IndexTo = targetArrayLength - 1
+                        IndexTo = targetArrayLength - 1,
                     };
                 }
 
                 return new Assignment
                 {
                     AssignTo = targetArrayReference,
-                    Expression = sourceArrayReference
+                    Expression = sourceArrayReference,
                 };
             }
 

@@ -6,7 +6,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         Constant,
         Variable,
         Signal,
-        File
+        File,
     }
 
     public interface IDataObject : INamedElement, IReferenceableDeclaration<IDataObject>

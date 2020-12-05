@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var result = new MemberTransformerResult
                 {
-                    Member = typeDeclaration
+                    Member = typeDeclaration,
                 };
 
                 var record = _recordComposer.CreateRecordFromType(typeDeclaration, context);
@@ -58,9 +58,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             {
                                 ArchitectureComponent = component,
                                 Declarations = component.BuildDeclarations(),
-                                Body = component.BuildBody()
+                                Body = component.BuildBody(),
                             }
-                        }
+                        },
                     };
 
                 return result;

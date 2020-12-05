@@ -305,7 +305,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 UnaryOperatorType.Decrement,
                 UnaryOperatorType.Increment,
                 UnaryOperatorType.PostDecrement,
-                UnaryOperatorType.PostIncrement
+                UnaryOperatorType.PostIncrement,
             };
             if (expression.Parent.Is<UnaryOperatorExpression>(unary => mutatingUnaryOperators.Contains(unary.Operator)))
             {

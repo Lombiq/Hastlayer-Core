@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 {
                     Left = component.CreateSimpleMemoryReadEnableSignalReference(),
                     Operator = BinaryOperator.Or,
-                    Right = component.CreateSimpleMemoryWriteEnableSignalReference()
+                    Right = component.CreateSimpleMemoryWriteEnableSignalReference(),
                 }));
 
             signalsAssignmentBlock.Add(BuildConditionalPortAssignment(
@@ -49,7 +49,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             // from a generated state machine.
             return new BasicComponent(proxyComponentName)
             {
-                Body = signalsAssignmentBlock
+                Body = signalsAssignmentBlock,
             };
         }
 
@@ -60,7 +60,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
         {
             var assignment = new ConditionalSignalAssignment
             {
-                AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference()
+                AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference(),
             };
 
             foreach (var component in components)
@@ -77,7 +77,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 assignment.Whens.Add(new SignalAssignmentWhen
                 {
                     Expression = expressionBuilderForComponentsAssignment(component),
-                    Value = value
+                    Value = value,
                 });
             }
 
@@ -85,7 +85,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
             {
                 Value = portName == SimpleMemoryPortNames.CellIndex ?
                     KnownDataTypes.UnrangedInt.DefaultValue :
-                    SimpleMemoryTypes.DataSignalsDataType.DefaultValue
+                    SimpleMemoryTypes.DataSignalsDataType.DefaultValue,
             });
 
             return assignment;
@@ -100,7 +100,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference(),
                 Expression = BinaryChainBuilder.BuildBinaryChain(
                     components.Select(c => c.CreateSimpleMemorySignalReference(portName)),
-                    BinaryOperator.Or)
+                    BinaryOperator.Or),
             };
         }
     }

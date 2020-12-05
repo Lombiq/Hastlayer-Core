@@ -106,7 +106,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     BinaryOperatorExpression = binaryOperatorExpression,
                     LeftTransformed = new ArrayElementAccess { ArrayReference = vector1, IndexExpression = indexValue },
-                    RightTransformed = new ArrayElementAccess { ArrayReference = vector2, IndexExpression = indexValue }
+                    RightTransformed = new ArrayElementAccess { ArrayReference = vector2, IndexExpression = indexValue },
                 });
             }
 
@@ -135,7 +135,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 DataType = _typeConverter.ConvertType(
                     expression.GetActualType(),
                     context.TransformationContext),
-                EvaluatedContent = new InlineBlock(resultReferences)
+                EvaluatedContent = new InlineBlock(resultReferences),
             };
         }
 
@@ -147,7 +147,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 nameof(SimdOperations.AddVectors),
                 nameof(SimdOperations.SubtractVectors),
                 nameof(SimdOperations.MultiplyVectors),
-                nameof(SimdOperations.DivideVectors)
+                nameof(SimdOperations.DivideVectors),
             };
 
             for (int i = 0; i < simdOperations.Length; i++)

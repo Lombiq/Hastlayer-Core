@@ -329,7 +329,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             new VhdlBuilder.Representation.Declaration.ArrayType
             {
                 ElementType = elementType,
-                Name = ArrayHelper.CreateArrayTypeName(elementType)
+                Name = ArrayHelper.CreateArrayTypeName(elementType),
             };
 
         private static bool IsTaskType(IType type) =>
