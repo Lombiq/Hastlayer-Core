@@ -1,4 +1,4 @@
-﻿using Hast.Common.Validation;
+using Hast.Common.Validation;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
@@ -35,10 +35,11 @@ namespace Hast.Transformer.Models
                 if (existingSize.Length != length)
                 {
                     throw new NotSupportedException(
-                        "Array sizes should be statically defined but the array stored in the array holder \"" +
-                        holderName + "\" has multiple length assigned (previously it had a length of " + existingSize.Length +
-                        " and secondly a  length of " + length +
-                        " specified). Make sure that a variable, field or property always stores an array of the same size (including target variables, fields and properties when it's passed around).");
+                        $"Array sizes should be statically defined but the array stored in the array holder " +
+                        $"\"{holderName}\" has multiple length assigned (previously it had a length of " +
+                        $"{existingSize.Length} and secondly a  length of {length} specified). Make sure that a " +
+                        $"variable, field or property always stores an array of the same size (including target " +
+                        $"variables, fields and properties when it's passed around).");
                 }
 
                 return;

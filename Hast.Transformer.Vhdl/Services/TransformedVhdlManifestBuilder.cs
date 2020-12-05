@@ -196,7 +196,8 @@ namespace Hast.Transformer.Vhdl.Services
                     };
 
                     hastIpArchitecture.Declarations.Add(new LogicalBlock(
-                        new LineComment("Adding multi-cycle path constraints for Quartus Prime. See: https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/solutions/rd05162013_635.html"),
+                        new LineComment("Adding multi-cycle path constraints for Quartus Prime. See: " +
+                        "https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/solutions/rd05162013_635.html"),
                         alteraAttribute,
                         new AttributeSpecification
                         {
@@ -265,7 +266,9 @@ namespace Hast.Transformer.Vhdl.Services
             if (!hardwareEntryPointMemberResults.Any())
             {
                 throw new InvalidOperationException(
-                    "There aren't any hardware entry point members, however at least one is needed to execute anything on hardware. Did you forget to pass all the assemblies to Hastlayer? Are there methods suitable as hardware entry points (see the documentation)?");
+                    "There aren't any hardware entry point members, however at least one is needed to execute " +
+                    "anything on hardware. Did you forget to pass all the assemblies to Hastlayer? Are there " +
+                    "methods suitable as hardware entry points (see the documentation)?");
             }
 
             var memberIdTable = BuildMemberIdTable(hardwareEntryPointMemberResults);

@@ -301,16 +301,17 @@ namespace Hast.Transformer.Services
                 return arrayAstType;
             }
 
-            private static void ThrowIfMultipleMembersWithTheNameExist(EntityDeclaration member)
+            private static void ThrowIfMultipleMembersWithTheNameExist(EntityDeclaration entityDeclaration)
             {
-                var fullName = member.GetFullName();
-                if (member.FindFirstParentTypeDeclaration().Members.Count(m => m.GetFullName() == fullName) > 1)
+                var fullName = entityDeclaration.GetFullName();
+                if (entityDeclaration.FindFirstParentTypeDeclaration().Members.Count(m => m.GetFullName() == fullName) > 1)
                 {
                     throw new NotSupportedException(
-                        "ImmutableArrays are converted into standard arrays. After such conversions a new member with the signature " +
-                        fullName +
-                        " was created, tough a previously existing member has the same signature. Change the members so even after converting ImmutableArrays they will have unique signatures. The full declaration of the converted member: " +
-                        Environment.NewLine + member.ToString());
+                        $"ImmutableArrays are converted into standard arrays. After such conversions a new member " +
+                        $"with the signature {fullName} was created, tough a previously existing member has the " +
+                        $"same signature. Change the members so even after converting ImmutableArrays they will " +
+                        $"have unique signatures. The full declaration of the converted member: " +
+                        $"{Environment.NewLine}{entityDeclaration}");
                 }
             }
         }

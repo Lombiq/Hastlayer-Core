@@ -99,10 +99,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 &&
                 !(expression.Left is NullReferenceExpression || expression.Right is NullReferenceExpression))
             {
-                throw new InvalidOperationException(
-                    "Unsupported operator in the following binary operator expression: " + expression.ToString() +
-                    ". This could mean that you attempted to use an operator on custom types either without the operator being defined for the type or they are custom value types and you mistakenly tried to use ReferenceEquals() on them."
-                    .AddParentEntityName(expression));
+                string message = $"Unsupported operator in the following binary operator expression: {expression}. " +
+                    $"This could mean that you attempted to use an operator on custom types either without the " +
+                    $"operator being defined for the type or they are custom value types and you mistakenly tried " +
+                    $"to use ReferenceEquals() on them.";
+                throw new InvalidOperationException(message.AddParentEntityName(expression));
             }
 
             // The commented out cases with unsupported operators are here so adding them later is easier.

@@ -1,4 +1,4 @@
-﻿namespace Hast.Transformer.Vhdl.SimpleMemory
+namespace Hast.Transformer.Vhdl.SimpleMemory
 {
     /// <summary>
     /// Stores long comments that are inserted into the generated VHDL code to help understand it.
@@ -11,6 +11,7 @@
         /// Comment describing how the SimpleMemory ports of the generated hardware component behave.
         /// </summary>
         public const string Ports = Constants.LongGeneratedCodeComments.Ports +
+#pragma warning disable S103 // Lines should not be too long
 @"
 * DataIn: Data read out from the memory (usually on-board DDR RAM, but depends on the framework) should be assigned to this port by the framework. The width of this port is always 32b, independent of the hardware platform (if the bus to the memory is wider then caching needs to be implemented in the framework to make use of it). Inputs of the algorithm implemented in Hast_IP all come through this port.
 * DataOut: Data to be written to the memory is assigned to this port. The width of this port is always 32b, independent of the hardware platform (if the bus to the memory is wider then caching needs to be implemented in the framework to make use of it). Outputs of the algorithm implemented in Hast_IP all go through this port.
@@ -25,5 +26,6 @@
     3. Once WritesDone is TRUE, WriteEnable is set to FALSE.
 * ReadsDone: Indicates whether a memory read operation is completed.
 * WritesDone: Indicates whether a memory write operation is completed.";
+#pragma warning restore S103 // Lines should not be too long
     }
 }

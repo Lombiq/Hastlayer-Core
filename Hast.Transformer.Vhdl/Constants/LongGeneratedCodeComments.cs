@@ -1,4 +1,4 @@
-﻿namespace Hast.Transformer.Vhdl.Constants
+namespace Hast.Transformer.Vhdl.Constants
 {
     /// <summary>
     /// Stores long comments that are inserted into the generated VHDL code to help understand it.
@@ -17,6 +17,7 @@
         /// Comment describing how the ports of the generated hardware component behave.
         /// </summary>
         public const string Ports =
+#pragma warning disable S103 // Lines should not be too long
 @"Hast_IP's simple interface makes it suitable to plug it into any hardware implementation. The meaning and usage of the ports are as below:
 * MemberId: Each transformed .NET hardware entry point member (i.e. methods that are configured to be available to be called from the host PC) has a unique zero-based numeric ID. When selecting which one to execute this ID should be used. 
 * Started: Indicates whether the execution of a given hardware entry point member is started. Used in the following way:
@@ -26,6 +27,7 @@
 * Finished: Indicates whether the execution of a given hardware entry point member is complete. See the documentation of the Started port above on how it is used.
 * Reset: Synchronous reset.
 * Clock: The main clock.";
+#pragma warning restore S103 // Lines should not be too long
 
         /// <summary>
         /// Stores an overview comment that is inserted into the generated VHDL code to help understand it.

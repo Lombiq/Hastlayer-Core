@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +29,9 @@ namespace Hast.Transformer.Services
                         if (method.Parameters.Count > 1)
                         {
                             throw new InvalidOperationException(
-                                "The method " + methodName + " contains parameters apart from the SimpleMemory parameter. Hardware entry points should only have a single SimpleMemory parameter and nothing else.");
+                                $"The method {methodName} contains parameters apart from the SimpleMemory parameter." +
+                                $" Hardware entry points should only have a single SimpleMemory parameter and " +
+                                $"nothing else.");
                         }
                     }
                 }
