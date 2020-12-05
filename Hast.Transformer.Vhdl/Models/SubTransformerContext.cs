@@ -115,10 +115,7 @@ namespace Hast.Transformer.Vhdl.Models
             _stateMachine = stateMachine;
         }
 
-        public void Add(IVhdlElement element)
-        {
-            _currentBlock.Add(element);
-        }
+        public void Add(IVhdlElement element) => _currentBlock.Add(element);
 
         public void ChangeBlockToDifferentState(IBlockElement newBlock, int stateMachineStateIndex)
         {
@@ -126,9 +123,6 @@ namespace Hast.Transformer.Vhdl.Models
             ChangeBlock(newBlock);
         }
 
-        public void ChangeBlock(IBlockElement newBlock)
-        {
-            _currentBlock = newBlock;
-        }
+        public void ChangeBlock(IBlockElement newBlock) => _currentBlock = newBlock;
     }
 }

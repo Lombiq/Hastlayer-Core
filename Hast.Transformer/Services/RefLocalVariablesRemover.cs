@@ -5,10 +5,7 @@ namespace Hast.Transformer.Services
 {
     public class RefLocalVariablesRemover : IRefLocalVariablesRemover
     {
-        public void RemoveRefLocalVariables(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new InitializersChangingVisitor());
-        }
+        public void RemoveRefLocalVariables(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new InitializersChangingVisitor());
 
         private class InitializersChangingVisitor : DepthFirstAstVisitor
         {

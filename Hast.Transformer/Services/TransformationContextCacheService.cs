@@ -20,16 +20,13 @@ namespace Hast.Transformer.Services
         public ITransformationContext GetTransformationContext(IEnumerable<string> assemblyPaths, string transformationId) =>
             _cache.Get(GetCacheKey(assemblyPaths, transformationId)) as ITransformationContext;
 
-        public void SetTransformationContext(ITransformationContext transformationContext, IEnumerable<string> assemblyPaths)
-        {
-            _cache.Set(
+        public void SetTransformationContext(ITransformationContext transformationContext, IEnumerable<string> assemblyPaths) => _cache.Set(
                 GetCacheKey(assemblyPaths, transformationContext.Id),
                 transformationContext,
                 new MemoryCacheEntryOptions
                 {
                     SlidingExpiration = TimeSpan.FromHours(5),
                 });
-        }
 
         private static string GetCacheKey(IEnumerable<string> assemblyPaths, string transformationId)
         {

@@ -31,10 +31,7 @@ namespace Hast.Transformer.Vhdl.Models
         /// <summary>
         /// Add a type that doesn't depend on any other type but other types depend on it.
         /// </summary>
-        public void AddBaseType(DataType type)
-        {
-            AddDependency(type, null);
-        }
+        public void AddBaseType(DataType type) => AddDependency(type, null);
 
         /// <summary>
         /// Gets all types stored in this table.
@@ -52,15 +49,9 @@ namespace Hast.Transformer.Vhdl.Models
 
         private class DataTypeEqualityComparer : IEqualityComparer<DataType>
         {
-            public bool Equals(DataType x, DataType y)
-            {
-                return x.Name == y.Name;
-            }
+            public bool Equals(DataType x, DataType y) => x.Name == y.Name;
 
-            public int GetHashCode(DataType dataType)
-            {
-                return dataType.Name.GetHashCode(StringComparison.InvariantCulture);
-            }
+            public int GetHashCode(DataType dataType) => dataType.Name.GetHashCode(StringComparison.InvariantCulture);
         }
     }
 }

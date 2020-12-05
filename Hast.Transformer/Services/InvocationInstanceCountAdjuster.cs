@@ -18,12 +18,9 @@ namespace Hast.Transformer.Services
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
         }
 
-        public void AdjustInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
-        {
-            syntaxTree.AcceptVisitor(new InvocationInstanceCountAdjustingVisitor(
+        public void AdjustInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration) => syntaxTree.AcceptVisitor(new InvocationInstanceCountAdjustingVisitor(
                 _typeDeclarationLookupTableFactory.Create(syntaxTree),
                 configuration));
-        }
 
         private class InvocationInstanceCountAdjustingVisitor : DepthFirstAstVisitor
         {

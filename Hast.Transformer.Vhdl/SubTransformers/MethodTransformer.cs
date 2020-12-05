@@ -1,4 +1,4 @@
-﻿using Hast.Common.Configuration;
+using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
@@ -28,56 +28,54 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _declarableTypeCreator = declarableTypeCreator;
         }
 
-        public Task<IMemberTransformerResult> Transform(MethodDeclaration method, IVhdlTransformationContext context)
-        {
-            return Task.Run(async () =>
+        public Task<IMemberTransformerResult> Transform(MethodDeclaration method, IVhdlTransformationContext context) =>
+            Task.Run(async () =>
+            {
+                if (method.Modifiers.HasFlag(Modifiers.Extern))
                 {
-                    if (method.Modifiers.HasFlag(Modifiers.Extern))
+                    throw new InvalidOperationException(
+                        "The method " + method.GetFullName() +
+                        " can't be transformed because it's extern. Only managed code can be transformed.");
+                }
+
+                var stateMachineCount = context
+                    .GetTransformerConfiguration()
+                    .GetMaxInvocationInstanceCountConfigurationForMember(method).MaxInvocationInstanceCount;
+                var stateMachineResults = new IArchitectureComponentResult[stateMachineCount];
+
+                // Not much use to parallelize computation unless there are a lot of state machines to create or
+                // the method is very complex. We'll need to examine when to parallelize here and determine it in
+                // runtime.
+                if (stateMachineCount > 50)
+                {
+                    var stateMachineComputingTasks = new List<Task<IArchitectureComponentResult>>();
+
+                    for (int i = 0; i < stateMachineCount; i++)
                     {
-                        throw new InvalidOperationException(
-                            "The method " + method.GetFullName() +
-                            " can't be transformed because it's extern. Only managed code can be transformed.");
+                        var task = new Task<IArchitectureComponentResult>(
+                            index => BuildStateMachineFromMethod(method, context, (int)index),
+                            i);
+                        task.Start();
+                        stateMachineComputingTasks.Add(task);
                     }
 
-                    var stateMachineCount = context
-                        .GetTransformerConfiguration()
-                        .GetMaxInvocationInstanceCountConfigurationForMember(method).MaxInvocationInstanceCount;
-                    var stateMachineResults = new IArchitectureComponentResult[stateMachineCount];
-
-                    // Not much use to parallelize computation unless there are a lot of state machines to create or
-                    // the method is very complex. We'll need to examine when to parallelize here and determine it in
-                    // runtime.
-                    if (stateMachineCount > 50)
+                    stateMachineResults = await Task.WhenAll(stateMachineComputingTasks);
+                }
+                else
+                {
+                    for (int i = 0; i < stateMachineCount; i++)
                     {
-                        var stateMachineComputingTasks = new List<Task<IArchitectureComponentResult>>();
-
-                        for (int i = 0; i < stateMachineCount; i++)
-                        {
-                            var task = new Task<IArchitectureComponentResult>(
-                                index => BuildStateMachineFromMethod(method, context, (int)index),
-                                i);
-                            task.Start();
-                            stateMachineComputingTasks.Add(task);
-                        }
-
-                        stateMachineResults = await Task.WhenAll(stateMachineComputingTasks);
+                        stateMachineResults[i] = BuildStateMachineFromMethod(method, context, i);
                     }
-                    else
-                    {
-                        for (int i = 0; i < stateMachineCount; i++)
-                        {
-                            stateMachineResults[i] = BuildStateMachineFromMethod(method, context, i);
-                        }
-                    }
+                }
 
-                    return (IMemberTransformerResult)new MemberTransformerResult
-                    {
-                        Member = method,
-                        IsHardwareEntryPointMember = method.IsHardwareEntryPointMember(),
-                        ArchitectureComponentResults = stateMachineResults,
-                    };
-                });
-        }
+                return (IMemberTransformerResult)new MemberTransformerResult
+                {
+                    Member = method,
+                    IsHardwareEntryPointMember = method.IsHardwareEntryPointMember(),
+                    ArchitectureComponentResults = stateMachineResults,
+                };
+            });
 
         private IArchitectureComponentResult BuildStateMachineFromMethod(
             MethodDeclaration method,

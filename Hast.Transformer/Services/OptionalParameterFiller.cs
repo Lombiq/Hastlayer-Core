@@ -14,10 +14,7 @@ namespace Hast.Transformer.Services
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
         }
 
-        public void FillOptionalParamters(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new OptionalParamtersFillingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
-        }
+        public void FillOptionalParamters(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new OptionalParamtersFillingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
 
         private class OptionalParamtersFillingVisitor : DepthFirstAstVisitor
         {

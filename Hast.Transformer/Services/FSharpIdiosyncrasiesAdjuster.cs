@@ -14,10 +14,7 @@ namespace Hast.Transformer.Services
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
         }
 
-        public void AdjustFSharpIdiosyncrasies(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new FSharpIdiosyncrasiesAdjustingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
-        }
+        public void AdjustFSharpIdiosyncrasies(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new FSharpIdiosyncrasiesAdjustingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
 
         private class FSharpIdiosyncrasiesAdjustingVisitor : DepthFirstAstVisitor
         {

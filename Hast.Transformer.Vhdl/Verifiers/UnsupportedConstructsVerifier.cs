@@ -18,10 +18,7 @@ namespace Hast.Transformer.Vhdl.Verifiers
             _displayClassFieldTransformer = displayClassFieldTransformer;
         }
 
-        public void ThrowIfUnsupportedConstructsFound(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new UnsupportedConstructsFindingVisitor(_displayClassFieldTransformer));
-        }
+        public void ThrowIfUnsupportedConstructsFound(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new UnsupportedConstructsFindingVisitor(_displayClassFieldTransformer));
 
         private class UnsupportedConstructsFindingVisitor : DepthFirstAstVisitor
         {

@@ -11,9 +11,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string Label { get; set; }
         public List<PortMapping> PortMappings { get; set; } = new List<PortMapping>();
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return Terminated.Terminate(
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => Terminated.Terminate(
                 Label + " : " + vhdlGenerationOptions.ShortenName(Component.Name) + vhdlGenerationOptions.NewLineIfShouldFormat() +
 
                     "port map (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
@@ -23,7 +21,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     Terminated.Terminate(")", vhdlGenerationOptions) +
 
                 ")", vhdlGenerationOptions);
-        }
     }
 
     public class PortMapping : IVhdlElement

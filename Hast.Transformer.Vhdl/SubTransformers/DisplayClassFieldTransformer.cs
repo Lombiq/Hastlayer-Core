@@ -24,14 +24,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
         }
 
-        public bool IsDisplayClassField(FieldDeclaration field)
-        {
-            return field.GetFullName().IsDisplayOrClosureClassMemberName();
-        }
+        public bool IsDisplayClassField(FieldDeclaration field) => field.GetFullName().IsDisplayOrClosureClassMemberName();
 
-        public Task<IMemberTransformerResult> Transform(FieldDeclaration field, IVhdlTransformationContext context)
-        {
-            return Task.Run(() =>
+        public Task<IMemberTransformerResult> Transform(FieldDeclaration field, IVhdlTransformationContext context) =>
+            Task.Run(() =>
             {
                 var fieldFullName = field.GetFullName();
                 var fieldComponent = new BasicComponent(fieldFullName);
@@ -85,7 +81,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     },
                 };
             });
-        }
 
         private class ArrayCreationDataTypeRetrievingVisitor : DepthFirstAstVisitor
         {

@@ -11,10 +11,7 @@ namespace Hast.Transformer.Services
 {
     public class MemberIdentifiersFixer : IMemberIdentifiersFixer
     {
-        public void FixMemberIdentifiers(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new MemberIdentifiersFixingVisitor());
-        }
+        public void FixMemberIdentifiers(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new MemberIdentifiersFixingVisitor());
 
         private class MemberIdentifiersFixingVisitor : DepthFirstAstVisitor
         {

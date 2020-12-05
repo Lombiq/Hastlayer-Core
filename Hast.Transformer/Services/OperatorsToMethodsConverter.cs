@@ -5,10 +5,7 @@ namespace Hast.Transformer.Services
 {
     public class OperatorsToMethodsConverter : IOperatorsToMethodsConverter
     {
-        public void ConvertOperatorsToMethods(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new OperatorConvertingVisitor());
-        }
+        public void ConvertOperatorsToMethods(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new OperatorConvertingVisitor());
 
         private class OperatorConvertingVisitor : DepthFirstAstVisitor
         {

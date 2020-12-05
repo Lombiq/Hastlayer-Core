@@ -75,10 +75,7 @@ namespace Hast.Transformer.Services
                 }
             }
 
-            private bool IsInlinableVariableIdentifier(IdentifierExpression identifierExpression)
-            {
-                return _inlinableVariableMappings.ContainsKey(identifierExpression.Identifier);
-            }
+            private bool IsInlinableVariableIdentifier(IdentifierExpression identifierExpression) => _inlinableVariableMappings.ContainsKey(identifierExpression.Identifier);
         }
     }
 }

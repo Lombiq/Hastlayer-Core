@@ -7,10 +7,7 @@ namespace Hast.VhdlBuilder.Testing
     public static class VhdlElementExtensions
     {
         public static bool ShouldBe<T>(this IVhdlElement element)
-            where T : class, IVhdlElement
-        {
-            return element.ShouldBe<T>(null);
-        }
+            where T : class, IVhdlElement => element.ShouldBe<T>(null);
 
         public static bool ShouldBe<T>(this IVhdlElement element, Expression<Func<T, bool>> predicate)
             where T : class, IVhdlElement
@@ -24,10 +21,7 @@ namespace Hast.VhdlBuilder.Testing
         }
 
         public static bool Is<T>(this IVhdlElement element)
-            where T : class, IVhdlElement
-        {
-            return element.Is<T>(null);
-        }
+            where T : class, IVhdlElement => element.Is<T>(null);
 
         public static bool Is<T>(this IVhdlElement element, Expression<Func<T, bool>> predicate)
             where T: class, IVhdlElement

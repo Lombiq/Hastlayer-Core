@@ -13,8 +13,7 @@ namespace Hast.Transformer.Services
 {
     public class ImmutableArraysToStandardArraysConverter : IImmutableArraysToStandardArraysConverter
     {
-        public void ConvertImmutableArraysToStandardArrays(SyntaxTree syntaxTree, IKnownTypeLookupTable knownTypeLookupTable)
-        {
+        public void ConvertImmutableArraysToStandardArrays(SyntaxTree syntaxTree, IKnownTypeLookupTable knownTypeLookupTable) =>
             // Note that ImmutableArrays can only be single-dimensional in themselves so the whole code here is built
             // around that assumption (though it's possible to create ImmutableArrays of ImmutableArrays, but this is
             // not supported yet).
@@ -23,7 +22,6 @@ namespace Hast.Transformer.Services
             // like fields, could also be handled for example.
 
             syntaxTree.AcceptVisitor(new ImmutableArraysToStandardArraysConvertingVisitor(knownTypeLookupTable));
-        }
 
         private class ImmutableArraysToStandardArraysConvertingVisitor : DepthFirstAstVisitor
         {

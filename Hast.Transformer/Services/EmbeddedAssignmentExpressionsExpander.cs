@@ -6,10 +6,7 @@ namespace Hast.Transformer.Services
 {
     public class EmbeddedAssignmentExpressionsExpander : IEmbeddedAssignmentExpressionsExpander
     {
-        public void ExpandEmbeddedAssignmentExpressions(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new EmbeddedAssignmentExpressionsExpandingVisitor());
-        }
+        public void ExpandEmbeddedAssignmentExpressions(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new EmbeddedAssignmentExpressionsExpandingVisitor());
 
         private class EmbeddedAssignmentExpressionsExpandingVisitor : DepthFirstAstVisitor
         {

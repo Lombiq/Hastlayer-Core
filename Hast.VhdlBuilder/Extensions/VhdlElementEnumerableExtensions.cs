@@ -9,10 +9,7 @@ namespace System.Collections.Generic
         public static string ToVhdl<T>(
             this IEnumerable<T> elements,
             IVhdlGenerationOptions vhdlGenerationOptions)
-            where T : IVhdlElement
-        {
-            return elements.ToVhdl(vhdlGenerationOptions, string.Empty, null);
-        }
+            where T : IVhdlElement => elements.ToVhdl(vhdlGenerationOptions, string.Empty, null);
 
         public static string ToVhdl<T>(
             this IEnumerable<T> elements,

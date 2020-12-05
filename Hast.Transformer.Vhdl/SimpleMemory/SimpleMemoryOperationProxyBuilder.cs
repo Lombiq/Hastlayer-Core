@@ -93,15 +93,12 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
 
         private static Assignment BuildConditionalOrPortAssignment(
             string portName,
-            IEnumerable<IArchitectureComponent> components)
-        {
-            return new Assignment
+            IEnumerable<IArchitectureComponent> components) => new Assignment
             {
                 AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference(),
                 Expression = BinaryChainBuilder.BuildBinaryChain(
                     components.Select(c => c.CreateSimpleMemorySignalReference(portName)),
                     BinaryOperator.Or),
             };
-        }
     }
 }

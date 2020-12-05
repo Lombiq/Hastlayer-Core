@@ -10,10 +10,7 @@ namespace Hast.Transformer.Services
 {
     public class ObjectInitializerExpander : IObjectInitializerExpander
     {
-        public void ExpandObjectInitializers(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new ObjectInitializerExpanderVisitor());
-        }
+        public void ExpandObjectInitializers(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new ObjectInitializerExpanderVisitor());
 
         private class ObjectInitializerExpanderVisitor : DepthFirstAstVisitor
         {

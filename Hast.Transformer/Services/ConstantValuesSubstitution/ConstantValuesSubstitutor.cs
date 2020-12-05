@@ -22,9 +22,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             SyntaxTree syntaxTree,
             IArraySizeHolder arraySizeHolder,
             IHardwareGenerationConfiguration configuration,
-            IKnownTypeLookupTable knownTypeLookupTable)
-        {
-            new ConstantValuesSubstitutingAstProcessor(
+            IKnownTypeLookupTable knownTypeLookupTable) => new ConstantValuesSubstitutingAstProcessor(
                 new ConstantValuesTable(),
                 _typeDeclarationLookupTableFactory.Create(syntaxTree),
                 arraySizeHolder,
@@ -32,6 +30,5 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 _astExpressionEvaluator,
                 knownTypeLookupTable)
                 .SubstituteConstantValuesInSubTree(syntaxTree, false);
-        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -23,9 +23,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _recordComposer.IsSupportedRecordMember(node) ||
             (node is FieldDeclaration && !_displayClassFieldTransformer.IsDisplayClassField((FieldDeclaration)node));
 
-        public Task<IMemberTransformerResult> Transform(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
-        {
-            return Task.Run<IMemberTransformerResult>(() =>
+        public Task<IMemberTransformerResult> Transform(TypeDeclaration typeDeclaration, IVhdlTransformationContext context) =>
+            Task.Run<IMemberTransformerResult>(() =>
             {
                 var result = new MemberTransformerResult
                 {
@@ -52,19 +51,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 result.ArchitectureComponentResults = new List<IArchitectureComponentResult>
+                {
                     {
+                        new ArchitectureComponentResult
                         {
-                            new ArchitectureComponentResult
-                            {
-                                ArchitectureComponent = component,
-                                Declarations = component.BuildDeclarations(),
-                                Body = component.BuildBody(),
-                            }
-                        },
-                    };
+                            ArchitectureComponent = component,
+                            Declarations = component.BuildDeclarations(),
+                            Body = component.BuildBody(),
+                        }
+                    },
+                };
 
                 return result;
             });
-        }
     }
 }

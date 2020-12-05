@@ -9,10 +9,7 @@ namespace Hast.Transformer.Services
 {
     public class DirectlyAccessedNewObjectVariablesCreator : IDirectlyAccessedNewObjectVariablesCreator
     {
-        public void CreateVariablesForDirectlyAccessedNewObjects(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new DirectlyAccessedNewObjectVariableCreatingVisitor());
-        }
+        public void CreateVariablesForDirectlyAccessedNewObjects(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new DirectlyAccessedNewObjectVariableCreatingVisitor());
 
         private class DirectlyAccessedNewObjectVariableCreatingVisitor : DepthFirstAstVisitor
         {

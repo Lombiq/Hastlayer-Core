@@ -82,44 +82,29 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public static DataObjectReference CreateStartedSignalReference(
             IArchitectureComponent component,
             string targetStateMachineName,
-            int index)
-        {
-            return CreateStartedSignalReference(component.Name, targetStateMachineName, index);
-        }
+            int index) => CreateStartedSignalReference(component.Name, targetStateMachineName, index);
 
         public static DataObjectReference CreateStartedSignalReference(
             string componentName,
             string targetStateMachineName,
-            int index)
-        {
-            return CreateSignalReference(componentName, targetStateMachineName, NameSuffixes.Started, index);
-        }
+            int index) => CreateSignalReference(componentName, targetStateMachineName, NameSuffixes.Started, index);
 
         public static DataObjectReference CreateFinishedSignalReference(
             IArchitectureComponent component,
             string targetStateMachineName,
-            int index)
-        {
-            return CreateFinishedSignalReference(component.Name, targetStateMachineName, index);
-        }
+            int index) => CreateFinishedSignalReference(component.Name, targetStateMachineName, index);
 
         public static DataObjectReference CreateFinishedSignalReference(
             string componentName,
             string targetStateMachineName,
-            int index)
-        {
-            return CreateSignalReference(componentName, targetStateMachineName, NameSuffixes.Finished, index);
-        }
+            int index) => CreateSignalReference(componentName, targetStateMachineName, NameSuffixes.Finished, index);
 
         private static DataObjectReference CreateSignalReference(
             string componentName,
             string targetStateMachineName,
             string signalName,
-            int index)
-        {
-            return ArchitectureComponentNameHelper
+            int index) => ArchitectureComponentNameHelper
                 .CreatePrefixedSegmentedObjectName(componentName, targetStateMachineName, signalName, index.ToString(CultureInfo.InvariantCulture))
                 .ToVhdlSignalReference();
-        }
     }
 }

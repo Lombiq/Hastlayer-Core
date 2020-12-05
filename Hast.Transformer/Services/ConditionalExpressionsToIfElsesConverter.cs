@@ -9,10 +9,7 @@ namespace Hast.Transformer.Services
 {
     public class ConditionalExpressionsToIfElsesConverter : IConditionalExpressionsToIfElsesConverter
     {
-        public void ConvertConditionalExpressionsToIfElses(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new ConditionalExpressionsConvertingVisitor());
-        }
+        public void ConvertConditionalExpressionsToIfElses(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new ConditionalExpressionsConvertingVisitor());
 
         private class ConditionalExpressionsConvertingVisitor : DepthFirstAstVisitor
         {

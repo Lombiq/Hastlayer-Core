@@ -10,10 +10,7 @@ namespace Hast.Transformer.Services
 {
     public class CustomPropertiesToMethodsConverter : ICustomPropertiesToMethodsConverter
     {
-        public void ConvertCustomPropertiesToMethods(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new CustomPropertiesConvertingVisitor(syntaxTree));
-        }
+        public void ConvertCustomPropertiesToMethods(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new CustomPropertiesConvertingVisitor(syntaxTree));
 
         private class CustomPropertiesConvertingVisitor : DepthFirstAstVisitor
         {

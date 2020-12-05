@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.Configuration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;
@@ -7,10 +7,8 @@ namespace Hast.Transformer.Services
 {
     public class TaskBodyInvocationInstanceCountsSetter : ITaskBodyInvocationInstanceCountsSetter
     {
-        public void SetTaskBodyInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
-        {
+        public void SetTaskBodyInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration) =>
             syntaxTree.AcceptVisitor(new TaskBodyInvocationInstanceCountsSetterVisitor(configuration.TransformerConfiguration()));
-        }
 
         private class TaskBodyInvocationInstanceCountsSetterVisitor : DepthFirstAstVisitor
         {

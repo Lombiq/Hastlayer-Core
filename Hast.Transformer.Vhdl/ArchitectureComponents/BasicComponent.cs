@@ -12,10 +12,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         {
         }
 
-        public override IVhdlElement BuildDeclarations()
-        {
-            return BuildDeclarationsBlock(Declarations);
-        }
+        public override IVhdlElement BuildDeclarations() => BuildDeclarationsBlock(Declarations);
 
         public override IVhdlElement BuildBody()
         {

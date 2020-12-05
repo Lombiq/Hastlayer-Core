@@ -139,18 +139,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             MethodDeclaration targetDeclaration,
             int instanceCount,
             bool waitForAll,
-            ISubTransformerContext context)
-        {
-            return BuildInvocationWait(targetDeclaration, instanceCount, -1, waitForAll, context);
-        }
+            ISubTransformerContext context) => BuildInvocationWait(targetDeclaration, instanceCount, -1, waitForAll, context);
 
         public IVhdlElement BuildSingleInvocationWait(
             MethodDeclaration targetDeclaration,
             int targetIndex,
-            ISubTransformerContext context)
-        {
-            return BuildInvocationWait(targetDeclaration, 1, targetIndex, true, context).Single();
-        }
+            ISubTransformerContext context) => BuildInvocationWait(targetDeclaration, 1, targetIndex, true, context).Single();
 
         /// <summary>
         /// Be aware that the method can change the current block.

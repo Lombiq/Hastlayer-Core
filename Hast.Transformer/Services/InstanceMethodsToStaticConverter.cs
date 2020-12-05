@@ -10,10 +10,7 @@ namespace Hast.Transformer.Services
 {
     public class InstanceMethodsToStaticConverter : IInstanceMethodsToStaticConverter
     {
-        public void ConvertInstanceMethodsToStatic(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new InstanceMethodsToStaticConvertingVisitor(syntaxTree));
-        }
+        public void ConvertInstanceMethodsToStatic(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new InstanceMethodsToStaticConvertingVisitor(syntaxTree));
 
         private class InstanceMethodsToStaticConvertingVisitor : DepthFirstAstVisitor
         {

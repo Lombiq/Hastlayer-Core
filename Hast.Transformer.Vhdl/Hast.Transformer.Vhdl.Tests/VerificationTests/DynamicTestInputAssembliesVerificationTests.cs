@@ -10,19 +10,16 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         protected override bool UseStubMemberSuitabilityChecker => false;
 
         [Fact]
-        public async Task DynamicTestInputAssemblyMatchesApproved()
-        {
-            await Host.RunAsync<ITransformer>(async transformer =>
-            {
-                var hardwareDescription = await TransformAssembliesToVhdl(
-                    transformer,
-                    new[] { typeof(BinaryAndUnaryOperatorExpressionCases).Assembly },
-                    configuration =>
-                    {
-                    });
+        public async Task DynamicTestInputAssemblyMatchesApproved() => await Host.RunAsync<ITransformer>(async transformer =>
+                                                                     {
+                                                                         var hardwareDescription = await TransformAssembliesToVhdl(
+                                                                             transformer,
+                                                                             new[] { typeof(BinaryAndUnaryOperatorExpressionCases).Assembly },
+                                                                             configuration =>
+                                                                             {
+                                                                             });
 
-                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
-            });
-        }
+                                                                         hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+                                                                     });
     }
 }

@@ -20,12 +20,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         public UnconstrainedArrayInstantiation CreateArrayInstantiation(
             ArrayCreateExpression expression,
-            IVhdlTransformationContext context)
-        {
-            return ArrayHelper.CreateArrayInstantiation(
+            IVhdlTransformationContext context) => ArrayHelper.CreateArrayInstantiation(
                 _typeConverter.ConvertAstType(expression.Type, context),
                 expression.GetStaticLength());
-        }
 
         public IVhdlElement Transform(ArrayCreateExpression expression, ISubTransformerContext context)
         {

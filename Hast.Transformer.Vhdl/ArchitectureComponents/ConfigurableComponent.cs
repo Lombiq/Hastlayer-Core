@@ -16,19 +16,13 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         {
         }
 
-        public override IVhdlElement BuildDeclarations()
-        {
-            return BuildDeclarationsBlock(BeginDeclarationsWith, EndDeclarationsWith);
-        }
+        public override IVhdlElement BuildDeclarations() => BuildDeclarationsBlock(BeginDeclarationsWith, EndDeclarationsWith);
 
-        public override IVhdlElement BuildBody()
-        {
-            return new LogicalBlock(
+        public override IVhdlElement BuildBody() => new LogicalBlock(
                 new LineComment(Name + " start"),
                 BeginBodyWith ?? Empty.Instance,
                 BuildProcess(ProcessNotInReset, ProcessInReset),
                 EndBodyWith ?? Empty.Instance,
                 new LineComment(Name + " end"));
-        }
     }
 }

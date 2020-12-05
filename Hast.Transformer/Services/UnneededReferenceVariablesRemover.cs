@@ -5,10 +5,7 @@ namespace Hast.Transformer.Services
 {
     public class UnneededReferenceVariablesRemover : IUnneededReferenceVariablesRemover
     {
-        public void RemoveUnneededVariables(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new AssignmentsDiscoveringVisitor());
-        }
+        public void RemoveUnneededVariables(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new AssignmentsDiscoveringVisitor());
 
         private class AssignmentsDiscoveringVisitor : DepthFirstAstVisitor
         {

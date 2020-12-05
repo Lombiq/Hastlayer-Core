@@ -11,10 +11,7 @@ namespace Hast.Transformer.Services
     // methods static too.
     public class ConstructorsToMethodsConverter : IConstructorsToMethodsConverter
     {
-        public void ConvertConstructorsToMethods(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new ConstructorConvertingVisitor());
-        }
+        public void ConvertConstructorsToMethods(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new ConstructorConvertingVisitor());
 
         private class ConstructorConvertingVisitor : DepthFirstAstVisitor
         {

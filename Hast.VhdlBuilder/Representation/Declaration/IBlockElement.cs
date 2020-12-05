@@ -9,9 +9,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
     public static class BlockElementExtensions
     {
-        public static void Add(this IBlockElement blockElement, IVhdlElement element)
-        {
-            blockElement.Body.Add(element);
-        }
+        public static void Add(this IBlockElement blockElement, IVhdlElement element) => blockElement.Body.Add(element);
     }
 }

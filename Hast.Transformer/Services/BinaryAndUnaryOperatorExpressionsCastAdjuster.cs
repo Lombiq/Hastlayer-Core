@@ -8,10 +8,8 @@ namespace Hast.Transformer.Services
 {
     public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IBinaryAndUnaryOperatorExpressionsCastAdjuster
     {
-        public void AdjustBinaryAndUnaryOperatorExpressions(SyntaxTree syntaxTree, IKnownTypeLookupTable knownTypeLookupTable)
-        {
+        public void AdjustBinaryAndUnaryOperatorExpressions(SyntaxTree syntaxTree, IKnownTypeLookupTable knownTypeLookupTable) =>
             syntaxTree.AcceptVisitor(new BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor(knownTypeLookupTable));
-        }
 
         private class BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor : DepthFirstAstVisitor
         {

@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Models;
+using Hast.Transformer.Models;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
@@ -7,10 +7,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// <summary>
         /// Indicates whether the member is a hardware entry point, i.e. should be executable from the host computer.
         /// </summary>
-        public static bool IsHardwareEntryPointMember(this EntityDeclaration member)
-        {
-            return member.GetHardwareEntryPointMemberMetadata() != null && member.GetHardwareEntryPointMemberMetadata().IsHardwareEntryPointMember;
-        }
+        public static bool IsHardwareEntryPointMember(this EntityDeclaration member) =>
+            member.GetHardwareEntryPointMemberMetadata() != null &&
+            member.GetHardwareEntryPointMemberMetadata().IsHardwareEntryPointMember;
 
         internal static void SetHardwareEntryPointMember(this EntityDeclaration member)
         {
@@ -25,9 +24,6 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             metadata.IsHardwareEntryPointMember = true;
         }
 
-        internal static HardwareEntryPointMemberMetadata GetHardwareEntryPointMemberMetadata(this EntityDeclaration member)
-        {
-            return member.Annotation<HardwareEntryPointMemberMetadata>();
-        }
+        internal static HardwareEntryPointMemberMetadata GetHardwareEntryPointMemberMetadata(this EntityDeclaration member) => member.Annotation<HardwareEntryPointMemberMetadata>();
     }
 }
