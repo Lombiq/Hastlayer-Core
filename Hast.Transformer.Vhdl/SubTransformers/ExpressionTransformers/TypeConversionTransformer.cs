@@ -81,17 +81,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             bool convertToLeftType;
             // Is the result type of the expression equal to one of the operands? Then convert the other operand.
-            if (expressionType == leftType || expressionType == rightType)
-            {
-                convertToLeftType = expressionType == leftType;
-            }
-
-            // If the result type of the expression is something else (e.g. if the operation is inequality then for two
-            // integer operands the result type will be boolean) then convert in a way that's lossless.
-            else
-            {
-                convertToLeftType = ImplementTypeConversion(leftVhdlType, rightVhdlType, Empty.Instance).IsLossy;
-            }
+            convertToLeftType = expressionType == leftType || expressionType == rightType ? expressionType == leftType : ImplementTypeConversion(leftVhdlType, rightVhdlType, Empty.Instance).IsLossy;
 
             var fromType = convertToLeftType ? rightVhdlType : leftVhdlType;
             var toType = convertToLeftType ? leftVhdlType : rightVhdlType;

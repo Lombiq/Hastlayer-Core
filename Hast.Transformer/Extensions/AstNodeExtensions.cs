@@ -198,7 +198,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         {
             var children = new Queue<AstNode>(node.Children);
             var matchingChildren = new List<T>();
-            if (predicate == null) predicate = n => true;
+            predicate ??= n => true;
 
             while (children.Count != 0)
             {

@@ -51,16 +51,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var targetMemberReference = expression.Target as MemberReferenceExpression;
 
             // This is a SimpleMemory access.
-            if (expression.IsSimpleMemoryInvocation())
-            {
-                return TransformSimpleMemoryInvocation(expression, transformedParameters, targetMemberReference, context);
-            }
-
-            // This is a standard member access.
-            else
-            {
-                return TransformMemberInvocation(expression, transformedParameters, targetMemberReference, context);
-            }
+            return expression.IsSimpleMemoryInvocation() ? TransformSimpleMemoryInvocation(expression, transformedParameters, targetMemberReference, context) : TransformMemberInvocation(expression, transformedParameters, targetMemberReference, context);
         }
 
         private IVhdlElement TransformSimpleMemoryInvocation(
@@ -94,14 +85,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 stateMachine.AddNewStateAndChangeCurrentBlock(context);
             }
 
-            if (isWrite)
-            {
-                currentBlock.Add(new LineComment("Begin SimpleMemory write."));
-            }
-            else
-            {
-                currentBlock.Add(new LineComment("Begin SimpleMemory read."));
-            }
+            currentBlock.Add(isWrite ? new LineComment("Begin SimpleMemory write.") : new LineComment("Begin SimpleMemory read."));
 
             // Setting CellIndex.
             currentBlock.Add(new Assignment

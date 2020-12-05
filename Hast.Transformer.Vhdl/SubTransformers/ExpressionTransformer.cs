@@ -253,9 +253,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         MethodDeclaration targetMethod;
 
                         // Is this the first type of Task starts?
-                        if (firstArgument is BinaryOperatorExpression binaryOperatorExpression)
-                        {
-                            targetMethod = binaryOperatorExpression
+                        targetMethod = firstArgument is BinaryOperatorExpression binaryOperatorExpression ? binaryOperatorExpression
                                 .Right
                                 .As<ParenthesizedExpression>()
                                 .Expression
@@ -263,19 +261,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                                 .Right
                                 .As<MemberReferenceExpression>()
                                 .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
-                                .As<MethodDeclaration>();
-                        }
-
-                        // Or the second one?
-                        else
-                        {
-                            targetMethod = firstArgument
+                                .As<MethodDeclaration>() : firstArgument
                                 .As<CastExpression>()
                                 .Expression
                                 .As<MemberReferenceExpression>()
                                 .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
                                 .As<MethodDeclaration>();
-                        }
 
                         // We only need to care about the invocation here. Since this is a Task start there will be
                         // some form of await later.

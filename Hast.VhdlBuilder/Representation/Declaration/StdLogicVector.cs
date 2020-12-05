@@ -11,7 +11,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         private Value _defaultValue;
         public override Value DefaultValue
         {
-            get => _defaultValue == null ? "others => '0'".ToVhdlValue(this) : _defaultValue;
+            get => _defaultValue ?? "others => '0'".ToVhdlValue(this);
             set => _defaultValue = value;
         }
 

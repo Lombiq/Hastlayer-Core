@@ -251,16 +251,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     if (parameter.DataType != parameterSignalType)
                     {
                         IAssignmentTypeConversionResult conversionResult;
-                        if (flowDirection == ParameterFlowDirection.Out)
-                        {
-                            conversionResult = _typeConversionTransformer
-                                .ImplementTypeConversionForAssignment(parameter.DataType, parameterSignalType, parameterReference, assignTo);
-                        }
-                        else
-                        {
-                            conversionResult = _typeConversionTransformer
+                        conversionResult = flowDirection == ParameterFlowDirection.Out ? _typeConversionTransformer
+                                .ImplementTypeConversionForAssignment(parameter.DataType, parameterSignalType, parameterReference, assignTo) : _typeConversionTransformer
                                 .ImplementTypeConversionForAssignment(parameterSignalType, parameter.DataType, parameterSignalReference, assignTo);
-                        }
 
                         assignTo = conversionResult.ConvertedToDataObject;
                         assignmentExpression = conversionResult.ConvertedFromExpression;

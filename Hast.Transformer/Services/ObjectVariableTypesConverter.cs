@@ -78,14 +78,7 @@ namespace Hast.Transformer.Services
                     {
                         // If there are multiple casts for the given parameter then we'll deal with it as an object unless
                         // all casts are for the same type.
-                        if (Expression == null || Expression.Type == castExpression.Type)
-                        {
-                            Expression = castExpression;
-                        }
-                        else
-                        {
-                            Expression = null;
-                        }
+                        Expression = Expression == null || Expression.Type == castExpression.Type ? castExpression : null;
                     }
                 }
             }

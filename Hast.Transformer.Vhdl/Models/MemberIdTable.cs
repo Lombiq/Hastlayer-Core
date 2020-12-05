@@ -18,7 +18,7 @@ namespace Hast.Transformer.Vhdl.Models
         {
             get
             {
-                if (_emptyInstance == null) _emptyInstance = new MemberIdTable();
+                _emptyInstance ??= new MemberIdTable();
                 return _emptyInstance;
             }
         }

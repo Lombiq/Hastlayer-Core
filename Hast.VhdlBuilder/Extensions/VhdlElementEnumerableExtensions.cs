@@ -42,7 +42,7 @@ namespace System.Collections.Generic
                 stringBuilder.Append(resultArray[i]);
             }
 
-            if (lastElementTerminator == null) lastElementTerminator = elementTerminator;
+            lastElementTerminator ??= elementTerminator;
             stringBuilder.Append(lastElement.ToVhdl(vhdlGenerationOptions) + lastElementTerminator);
 
             return stringBuilder.ToString();

@@ -126,8 +126,8 @@ namespace Hast.Transformer.Services
                 // If no type can be determined then nothing to do.
                 if (leftType == null && rightType == null) return;
 
-                if (leftType == null) leftType = rightType;
-                if (rightType == null) rightType = leftType;
+                leftType ??= rightType;
+                rightType ??= leftType;
 
                 var leftTypeFullName = leftType.GetFullName();
                 var rightTypeFullName = rightType.GetFullName();

@@ -150,18 +150,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var resultTypeSize = resultVhdlType.GetSize();
 
             IDataObject operationResultDataObjectReference;
-            if (operationResultDataObjectIsVariable)
-            {
-                operationResultDataObjectReference = stateMachine
+            operationResultDataObjectReference = operationResultDataObjectIsVariable ? stateMachine
                     .CreateVariableWithNextUnusedIndexedName("binaryOperationResult", resultVhdlType)
-                    .ToReference();
-            }
-            else
-            {
-                operationResultDataObjectReference = stateMachine
+                    .ToReference() : stateMachine
                     .CreateSignalWithNextUnusedIndexedName("binaryOperationResult", resultVhdlType)
                     .ToReference();
-            }
 
             IVhdlElement binaryElement = binary;
 
@@ -231,17 +224,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);
             var clockCyclesNeededForUnsignedOperation = deviceDriver
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, false);
-            if (leftVhdlType != null && rightVhdlType != null && leftVhdlType.Name == rightVhdlType.Name)
-            {
-                clockCyclesNeededForOperation = leftVhdlType.Name == "signed" ?
+            clockCyclesNeededForOperation = leftVhdlType != null && rightVhdlType != null && leftVhdlType.Name == rightVhdlType.Name ? leftVhdlType.Name == "signed" ?
                     clockCyclesNeededForSignedOperation :
-                    clockCyclesNeededForUnsignedOperation;
-            }
-            else
-            {
-                // If the operands have different signs then let's take the slower version just to be safe.
-                clockCyclesNeededForOperation = Math.Max(clockCyclesNeededForSignedOperation, clockCyclesNeededForUnsignedOperation);
-            }
+                    clockCyclesNeededForUnsignedOperation : Math.Max(clockCyclesNeededForSignedOperation, clockCyclesNeededForUnsignedOperation);
 
             var isShift = false;
             if (expression.Operator == BinaryOperatorType.ShiftLeft || expression.Operator == BinaryOperatorType.ShiftRight)

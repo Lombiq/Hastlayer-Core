@@ -359,10 +359,7 @@ namespace Hast.Transformer.Vhdl.Services
             VhdlTransformationContext transformationContext,
             List<Task<IMemberTransformerResult>> memberTransformerTasks = null)
         {
-            if (memberTransformerTasks == null)
-            {
-                memberTransformerTasks = new List<Task<IMemberTransformerResult>>();
-            }
+            memberTransformerTasks ??= new List<Task<IMemberTransformerResult>>();
 
             var traverseTo = node.Children;
 

@@ -67,7 +67,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             ISubTransformerScope scope,
             IBlockElement newBlock = null)
         {
-            if (newBlock == null) newBlock = new InlineBlock();
+            newBlock ??= new InlineBlock();
             var newStateIndex = scope.StateMachine.AddState(newBlock);
             scope.CurrentBlock.Add(scope.StateMachine.CreateStateChange(newStateIndex));
             scope.CurrentBlock.ChangeBlockToDifferentState(newBlock, newStateIndex);

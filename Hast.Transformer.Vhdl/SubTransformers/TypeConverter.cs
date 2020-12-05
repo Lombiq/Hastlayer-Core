@@ -88,14 +88,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 // For inner classes (member types) the BaseType will contain the actual type (in a strange way the
                 // actual type will be the BaseType of itself...).
-                if (type.GetFullName() == composedType.BaseType.GetFullName())
-                {
-                    return ConvertAstType(composedType.BaseType, context);
-                }
-                else
-                {
-                    return ConvertComposed(composedType, context);
-                }
+                return type.GetFullName() == composedType.BaseType.GetFullName() ? ConvertAstType(composedType.BaseType, context) : ConvertComposed(composedType, context);
             }
             else if (type is SimpleType) return ConvertSimple((SimpleType)type, context);
 
