@@ -23,10 +23,10 @@ namespace Hast.DynamicTests
 
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
-            //var folderName = configuration.HardwareEntryPointMemberFullNames.Single();
-            //var methodNameStartIndex = folderName.IndexOf("::");
-            //folderName = folderName.Substring(methodNameStartIndex + 2, folderName.IndexOf("(") - 2 - methodNameStartIndex);
-            //configuration.HardwareFrameworkPath = $@"E:\ShortPath\BinaryAndUnaryTests\{folderName}";
+            // var folderName = configuration.HardwareEntryPointMemberFullNames.Single();
+            // var methodNameStartIndex = folderName.IndexOf("::");
+            // folderName = folderName.Substring(methodNameStartIndex + 2, folderName.IndexOf("(") - 2 - methodNameStartIndex);
+            // configuration.HardwareFrameworkPath = $@"E:\ShortPath\BinaryAndUnaryTests\{folderName}";
 
             hastlayer.ExecutedOnHardware += (sender, e) =>
             {

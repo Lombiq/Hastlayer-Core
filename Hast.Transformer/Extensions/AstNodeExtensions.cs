@@ -49,7 +49,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             var iLVariableResolveResult = node.GetResolveResult<ILVariableResolveResult>();
             if (iLVariableResolveResult != null) return CreateParentEntityBasedName(node, iLVariableResolveResult.Variable.Name);
 
-            if (node is PrimitiveType) return ((PrimitiveType)node).Keyword;
+            if (node is PrimitiveType type) return type.Keyword;
 
             if (node is ComposedType composedType)
             {
@@ -66,14 +66,14 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 return name;
             }
 
-            if (node is IdentifierExpression)
+            if (node is IdentifierExpression expression)
             {
-                return CreateParentEntityBasedName(node, ((IdentifierExpression)node).Identifier);
+                return CreateParentEntityBasedName(node, expression.Identifier);
             }
 
-            if (node is IndexerExpression)
+            if (node is IndexerExpression expression1)
             {
-                return ((IndexerExpression)node).Target.GetFullName();
+                return expression1.Target.GetFullName();
             }
 
             if (node is Identifier)
@@ -81,9 +81,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 return ((Identifier)node).Name;
             }
 
-            if (node is Attribute)
+            if (node is Attribute attribute)
             {
-                return ((Attribute)node).Type.GetFullName();
+                return attribute.Type.GetFullName();
             }
 
             if (node is TypeReferenceExpression)

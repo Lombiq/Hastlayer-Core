@@ -124,7 +124,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return KnownDataTypes.UInt8;
                 case KnownTypeCode.Char:
                     return KnownDataTypes.Character;
-                //case KnownTypeCode.ICriticalNotifyCompletion:
+                // case KnownTypeCode.ICriticalNotifyCompletion:
                 //    break;
                 case KnownTypeCode.DBNull:
                     break;
@@ -141,13 +141,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Exception:
                     break;
                 // Available in a later ILSpy release.
-                //case KnownTypeCode.FormattableString:
+                // case KnownTypeCode.FormattableString:
                 //    break;
-                //case KnownTypeCode.IAsyncDisposable:
+                // case KnownTypeCode.IAsyncDisposable:
                 //    break;
-                //case KnownTypeCode.IAsyncEnumerableOfT:
+                // case KnownTypeCode.IAsyncEnumerableOfT:
                 //    break;
-                //case KnownTypeCode.IAsyncEnumeratorOfT:
+                // case KnownTypeCode.IAsyncEnumeratorOfT:
                 //    break;
                 case KnownTypeCode.ICollection:
                     break;
@@ -164,9 +164,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.IEnumeratorOfT:
                     break;
                 // Available in a later ILSpy release.
-                //case KnownTypeCode.IFormattable:
+                // case KnownTypeCode.IFormattable:
                 //    break;
-                //case KnownTypeCode.INotifyCompletion:
+                // case KnownTypeCode.INotifyCompletion:
                 //    break;
                 case KnownTypeCode.IList:
                     break;
@@ -185,7 +185,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.IntPtr:
                     break;
                 // Available in a later ILSpy release.
-                //case KnownTypeCode.MemoryOfT:
+                // case KnownTypeCode.MemoryOfT:
                 //    break;
                 case KnownTypeCode.MulticastDelegate:
                     break;
@@ -196,14 +196,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Object:
                     return KnownDataTypes.StdLogicVector32;
                 // Available in a later ILSpy release.
-                //case KnownTypeCode.ReadOnlySpanOfT:
+                // case KnownTypeCode.ReadOnlySpanOfT:
                 //    break;
                 case KnownTypeCode.SByte:
                     return KnownDataTypes.Int8;
                 case KnownTypeCode.Single:
                     break;
                 // Available in a later ILSpy release.
-                //case KnownTypeCode.SpanOfT:
+                // case KnownTypeCode.SpanOfT:
                 //    break;
                 case KnownTypeCode.String:
                     return KnownDataTypes.UnrangedString;
@@ -214,7 +214,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Type:
                     break;
                 // Available in a later ILSpy release.
-                //case KnownTypeCode.TypedReference:
+                // case KnownTypeCode.TypedReference:
                 //    break;
                 case KnownTypeCode.UInt16:
                     return KnownDataTypes.UInt16;
@@ -227,9 +227,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 case KnownTypeCode.Unsafe:
                     break;
                 // Available in a later ILSpy release.
-                //case KnownTypeCode.ValueTask:
+                // case KnownTypeCode.ValueTask:
                 //    break;
-                //case KnownTypeCode.ValueTaskOfT:
+                // case KnownTypeCode.ValueTaskOfT:
                 //    break;
                 case KnownTypeCode.ValueType:
                     break;
