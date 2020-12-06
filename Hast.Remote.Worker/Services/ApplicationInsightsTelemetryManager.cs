@@ -1,5 +1,6 @@
 using Hast.Common.Interfaces;
 using Hast.Layer;
+using Hast.Remote.Worker.Models;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.DependencyCollector;
@@ -9,9 +10,8 @@ using Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel;
 using Microsoft.ApplicationInsights.WorkerService;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Linq;
-using Microsoft.Extensions.Logging;
 using System.Globalization;
+using System.Linq;
 
 namespace Hast.Remote.Worker.Services
 {
@@ -31,7 +31,7 @@ namespace Hast.Remote.Worker.Services
             _telemetryClient = telemetryClient;
         }
 
-        public void TrackTransformation(ITransformationTelemetry telemetry)
+        public void TrackTransformation(TransformationTelemetry telemetry)
         {
             var requestTelemetry = new RequestTelemetry
             {

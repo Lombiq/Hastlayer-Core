@@ -1,18 +1,17 @@
 using System;
 using System.Configuration.Install;
 using System.Linq;
-using System.Reflection;
 using System.ServiceProcess;
 
 namespace Hast.Remote.Worker.Daemon
 {
-    static class Program
+    public static class Program
     {
         [STAThread]
-        static void Main()
+        public static void Main()
         {
             // Below code taken mostly from http://www.codeproject.com/Articles/27112/Installing-NET-Windows-Services-the-easiest-way
-            var service = ServiceController.GetServices().Where(controller => controller.ServiceName == Service.Name).SingleOrDefault();
+            var service = ServiceController.GetServices().SingleOrDefault(controller => controller.ServiceName == Service.Name);
 
             // Service not installed
             if (service == null)
@@ -36,9 +35,9 @@ namespace Hast.Remote.Worker.Daemon
         }
     }
 
-    static class SelfInstaller
+    public static class SelfInstaller
     {
-        private static readonly string _exePath = Assembly.GetExecutingAssembly().Location;
+        private static readonly string _exePath = typeof(Program).Assembly.Location;
 
         public static bool InstallMe()
         {

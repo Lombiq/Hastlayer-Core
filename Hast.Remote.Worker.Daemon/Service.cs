@@ -58,8 +58,12 @@ namespace Hast.Remote.Worker.Daemon
                     StorageConnectionString = appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey),
                 };
 
+                // The we need features which aren't public.
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
                 using var host = (Hastlayer)await TransformationWorker.CreateHastlayerAsync(
                     configuration, cancellationToken: _cancellationTokenSource.Token);
+#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
+
                 try
                 {
                     await host.RunAsync<IServiceProvider>(serviceProvider =>
@@ -69,7 +73,7 @@ namespace Hast.Remote.Worker.Daemon
                         // Only counting startup crashes.
                         _restartCount = 0;
 
-                        return worker.Work(_cancellationTokenSource.Token);
+                        return worker.WorkAsync(_cancellationTokenSource.Token);
                     });
                 }
                 catch (Exception ex) when (!ex.IsFatal())
