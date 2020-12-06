@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Hast.VhdlBuilder.Extensions;
 
@@ -7,7 +7,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Record : DataType
     {
-        public List<RecordField> Fields { get; set; } = new List<RecordField>();
+        public List<RecordField> Fields { get; } = new List<RecordField>();
 
         public Record()
         {

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Hast.VhdlBuilder.Extensions;
@@ -10,9 +10,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public string Label { get; set; }
         public string Name { get { return Label; } set { Label = value; } }
-        public List<IDataObject> SensitivityList { get; set; } = new List<IDataObject>();
-        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
-        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
+        public List<IDataObject> SensitivityList { get; } = new List<IDataObject>();
+        public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(

@@ -77,9 +77,9 @@ namespace Hast.Transformer.Vhdl.Models
         public IDictionary<string, string> VariableNameToDisplayClassNameMappings { get; } = new Dictionary<string, string>();
         public IDictionary<string, MethodDeclaration> TaskVariableNameToDisplayClassMethodMappings { get; } = new Dictionary<string, MethodDeclaration>();
         public IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; } = new Dictionary<int, ISet<string>>();
-        public IDictionary<string, int> LabelsToStateIndicesMappings { get; set; } = new Dictionary<string, int>();
+        public IDictionary<string, int> LabelsToStateIndicesMappings { get; } = new Dictionary<string, int>();
         public IDictionary<string, dynamic> CustomProperties { get; } = new Dictionary<string, dynamic>();
-        public IList<ITransformationWarning> Warnings { get; set; } = new List<ITransformationWarning>();
+        public IList<ITransformationWarning> Warnings { get; } = new List<ITransformationWarning>();
     }
 
     public class CurrentBlock : ICurrentBlock

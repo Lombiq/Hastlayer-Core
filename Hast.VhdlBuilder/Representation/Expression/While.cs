@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -9,7 +9,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class While : IBlockElement
     {
         public IVhdlElement Condition { get; set; }
-        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(

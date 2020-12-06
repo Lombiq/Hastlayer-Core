@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
@@ -26,7 +26,7 @@ namespace Hast.VhdlBuilder
                 var wrappingIf = new IfElse
                 {
                     Condition = new Invocation("rising_edge", clockSignalName.ToVhdlSignalReference()),
-                    True = new InlineBlock { Body = new List<IVhdlElement>(process.Body) }, // Needs to copy the list.
+                    True = new InlineBlock(process.Body.ToList()), // Needs to copy the list.
                 };
                 process.Body.Clear();
                 process.Add(wrappingIf);

@@ -78,13 +78,10 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             var runningStates = new VhdlBuilder.Representation.Declaration.Enum
             {
                 Name = (namePrefix + "_RunningStates").ToExtendedVhdlId(),
-                Values = new[]
-                {
-                    waitingForStartedStateValue,
-                    waitingForFinishedStateValue,
-                    afterFinishedStateValue,
-                }.ToList(),
             };
+            runningStates.Values.Add(waitingForStartedStateValue);
+            runningStates.Values.Add(waitingForFinishedStateValue);
+            runningStates.Values.Add(afterFinishedStateValue);
             proxyComponents.Add(new BasicComponent((namePrefix + "_CommonDeclarations").ToExtendedVhdlId())
             {
                 Declarations = new InlineBlock(booleanArrayType, runningStates),
@@ -449,26 +446,21 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                                     for (int c = 0; c < targetComponentCount; c++)
                                     {
-                                        availableTargetSelectingCase.Whens.Add(new CaseWhen
-                                        {
-                                            Expression = CreateBooleanIndicatorValue(targetAvailableIndicatorDataType, c),
-                                            Body = new List<IVhdlElement> { { createComponentAvailableBody(c) } },
-                                        });
+                                        availableTargetSelectingCase.Whens.Add(new CaseWhen(
+                                            expression: CreateBooleanIndicatorValue(targetAvailableIndicatorDataType, c),
+                                            body: new List<IVhdlElement> { { createComponentAvailableBody(c) } }));
                                     }
 
-                                    availableTargetSelectingCase.Whens.Add(new CaseWhen
-                                    {
-                                        Expression = "others".ToVhdlIdValue(),
-                                        Body = new List<IVhdlElement> { { Null.Instance.Terminate() } },
-                                    });
+                                    availableTargetSelectingCase.Whens.Add(new CaseWhen(
+                                        expression: "others".ToVhdlIdValue(),
+                                        body: new List<IVhdlElement> { { Null.Instance.Terminate() } }));
 
                                     waitingForStartedInnnerBlock.Add(availableTargetSelectingCase);
                                 }
 
-                                runningStateCase.Whens.Add(new CaseWhen
-                                {
-                                    Expression = waitingForStartedStateValue,
-                                    Body = new List<IVhdlElement>
+                                runningStateCase.Whens.Add(new CaseWhen(
+                                    expression: waitingForStartedStateValue,
+                                    body: new List<IVhdlElement>
                                     {
                                         {
                                             new If
@@ -485,8 +477,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                                 waitingForStartedInnnerBlock),
                                             }
                                         },
-                                    },
-                                });
+                                    }));
                             }
 
                             // WaitingForFinished state
@@ -536,29 +527,24 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                         };
                                     }
 
-                                    runningIndexCase.Whens.Add(new CaseWhen
-                                    {
-                                        Expression = c.ToVhdlValue(KnownDataTypes.UnrangedInt),
-                                        Body = new List<IVhdlElement> { { caseWhenBody } },
-                                    });
+                                    runningIndexCase.Whens.Add(new CaseWhen(
+                                        expression: c.ToVhdlValue(KnownDataTypes.UnrangedInt),
+                                        body: new List<IVhdlElement> { { caseWhenBody } }));
                                 }
 
-                                runningStateCase.Whens.Add(new CaseWhen
-                                {
-                                    Expression = waitingForFinishedStateValue,
-                                    Body = new List<IVhdlElement>
+                                runningStateCase.Whens.Add(new CaseWhen(
+                                    expression: waitingForFinishedStateValue,
+                                    body: new List<IVhdlElement>
                                     {
                                         { runningIndexCase },
-                                    },
-                                });
+                                    }));
                             }
 
                             // AfterFinished state
                             {
-                                runningStateCase.Whens.Add(new CaseWhen
-                                {
-                                    Expression = afterFinishedStateValue,
-                                    Body = new List<IVhdlElement>
+                                runningStateCase.Whens.Add(new CaseWhen(
+                                    expression: afterFinishedStateValue,
+                                    body: new List<IVhdlElement>
                                     {
                                         {
                                             new LineComment("Invoking components need to pull down the Started signal to false.")
@@ -587,8 +573,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                                     }),
                                             }
                                         },
-                                    },
-                                });
+                                    }));
                             }
 
                             // Adding reset for the finished signal.

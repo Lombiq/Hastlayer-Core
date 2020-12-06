@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Hast.VhdlBuilder.Extensions;
@@ -9,10 +9,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Function : ISubProgram
     {
         public string Name { get; set; }
-        public List<FunctionArgument> Arguments { get; set; } = new List<FunctionArgument>();
+        public List<FunctionArgument> Arguments { get; } = new List<FunctionArgument>();
         public DataType ReturnType { get; set; }
-        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
-        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {

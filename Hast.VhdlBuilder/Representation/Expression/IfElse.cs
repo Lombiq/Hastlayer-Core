@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Hast.VhdlBuilder.Extensions;
 
@@ -7,7 +7,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class IfElse<T> : If<T>, IVhdlElement where T : IVhdlElement
     {
-        public List<If<T>> ElseIfs { get; set; } = new List<If<T>>();
+        public List<If<T>> ElseIfs { get; } = new List<If<T>>();
         public T Else { get; set; }
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)

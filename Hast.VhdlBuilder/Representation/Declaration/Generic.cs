@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Expression;
@@ -8,7 +8,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Generic : IVhdlElement
     {
-        public List<GenericItem> Items { get; set; } = new List<GenericItem>();
+        public List<GenericItem> Items { get; } = new List<GenericItem>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(

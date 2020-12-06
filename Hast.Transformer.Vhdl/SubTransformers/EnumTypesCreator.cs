@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
@@ -33,13 +33,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (typeDeclaration.ClassType != ClassType.Enum) return;
 
-                _enumDeclarations.Add(new Enum
-                {
-                    Name = typeDeclaration.GetFullName().ToExtendedVhdlId(),
-                    Values = typeDeclaration.Members
-                        .Select(member => member.GetFullName().ToExtendedVhdlIdValue())
-                        .ToList(),
-                });
+                var values = typeDeclaration.Members.Select(member => member.GetFullName().ToExtendedVhdlIdValue());
+                _enumDeclarations.Add(new Enum(values) { Name = typeDeclaration.GetFullName().ToExtendedVhdlId() });
             }
         }
     }

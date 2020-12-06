@@ -57,7 +57,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     Expression = Value.True,
                 });
 
-                when.Add(new IfElse
+                var ifElse = new IfElse
                 {
                     Condition = new Binary
                     {
@@ -66,16 +66,13 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         Right = Value.False,
                     },
                     True = InvocationHelper.CreateInvocationStart(proxyComponent, memberName, 0),
-                    ElseIfs = new List<If<IVhdlElement>>
-                        {
-                            new If
-                            {
-                                Condition = waitForInvocationFinishedIfElse.Condition,
-                                True = waitForInvocationFinishedIfElse.True,
-                            },
-                        },
+                };
+                ifElse.ElseIfs.Add(new If
+                {
+                    Condition = waitForInvocationFinishedIfElse.Condition,
+                    True = waitForInvocationFinishedIfElse.True,
                 });
-                ;
+                when.Add(ifElse);
 
                 memberSelectingCase.Whens.Add(when);
             }

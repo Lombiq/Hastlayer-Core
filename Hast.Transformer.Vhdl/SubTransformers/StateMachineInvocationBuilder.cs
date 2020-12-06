@@ -106,16 +106,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     outParameterBackAssignments.AddRange(buildInvocationBlockResult.OutParameterBackAssignments);
 
-                    proxyCase.Whens.Add(new CaseWhen
-                    {
-                        Expression = i.ToVhdlValue(invocationIndexVariableType),
-                        Body = new List<IVhdlElement>
+                    proxyCase.Whens.Add(new CaseWhen(
+                        expression: i.ToVhdlValue(invocationIndexVariableType),
+                        body: new List<IVhdlElement>
                         {
                             {
                                 buildInvocationBlockResult.InvocationBlock
                             },
-                        },
-                    });
+                        }));
                 }
 
                 AddInvocationStartComment();

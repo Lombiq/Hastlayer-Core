@@ -92,11 +92,9 @@ namespace Hast.Transformer.Vhdl.Services
             var hastIpModule = new VhdlBuilder.Representation.Declaration.Module { Architecture = hastIpArchitecture };
 
             // Adding libraries
-            hastIpModule.Libraries.Add(new Library
-            {
-                Name = "ieee",
-                Uses = new List<string> { "std_logic_1164.all", "numeric_std.all" },
-            });
+            hastIpModule.Libraries.Add(new Library(
+                name: "ieee",
+                uses: new List<string> { "std_logic_1164.all", "numeric_std.all" }));
 
             // Creating the Hast_IP entity. Its name can't be an extended identifier.
             var hastIpEntity = hastIpModule.Entity = new Entity { Name = Entity.ToSafeEntityName("Hast_IP") };
@@ -470,11 +468,9 @@ namespace Hast.Transformer.Vhdl.Services
                 manifest.Modules.Add(new LogicalBlock(new Raw(reader.ReadToEnd())));
             }
 
-            hastIpModule.Libraries.Add(new Library
-            {
-                Name = "work",
-                Uses = new List<string> { libraryName + ".all" },
-            });
+            hastIpModule.Libraries.Add(new Library(
+                name: "work",
+                uses: new List<string> { libraryName + ".all" }));
         }
     }
 }

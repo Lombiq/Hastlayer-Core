@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class Case : IVhdlElement
     {
         public IVhdlElement Expression { get; set; }
-        public List<CaseWhen> Whens { get; set; } = new List<CaseWhen>();
+        public List<CaseWhen> Whens { get; } = new List<CaseWhen>();
 
         /// <summary>
         /// Gets or sets a value indicating whether the case expression is a matching case (case?) new to VHDL 2008.
@@ -46,7 +46,15 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class CaseWhen : IBlockElement
     {
         public IVhdlElement Expression { get; set; }
-        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
+
+        public CaseWhen() { }
+
+        public CaseWhen(IVhdlElement expression, List<IVhdlElement> body)
+        {
+            Expression = expression;
+            Body = body;
+        }
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             "when " + Expression.ToVhdl(vhdlGenerationOptions) + " => " + vhdlGenerationOptions.NewLineIfShouldFormat() +

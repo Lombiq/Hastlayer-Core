@@ -13,7 +13,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class BlockComment : IVhdlElement
     {
-        public List<string> Lines { get; set; }
+        public List<string> Lines { get; } = new List<string>();
 
         /// <summary>
         /// Gets or sets a value indicating whether the comment won't be omitted even if this is configured in

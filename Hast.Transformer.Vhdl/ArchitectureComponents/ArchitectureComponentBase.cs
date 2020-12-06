@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.Constants;
+using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
@@ -16,20 +16,17 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public string Name { get; private set; }
         public IList<Variable> LocalVariables { get; private set; } = new List<Variable>();
         public IList<Alias> LocalAliases { get; private set; } = new List<Alias>();
-        public IList<AttributeSpecification> LocalAttributeSpecifications { get; set; } = new List<AttributeSpecification>();
+        public IList<AttributeSpecification> LocalAttributeSpecifications { get; } = new List<AttributeSpecification>();
         public IList<Variable> GlobalVariables { get; private set; } = new List<Variable>();
         public IList<Signal> InternallyDrivenSignals { get; private set; } = new List<Signal>();
         public IList<Signal> ExternallyDrivenSignals { get; private set; } = new List<Signal>();
-        public IList<AttributeSpecification> GlobalAttributeSpecifications { get; set; } = new List<AttributeSpecification>();
+        public IList<AttributeSpecification> GlobalAttributeSpecifications { get; } = new List<AttributeSpecification>();
         public IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; private set; } =
             new Dictionary<EntityDeclaration, int>();
         public DependentTypesTable DependentTypesTable { get; private set; } = new DependentTypesTable();
 
         protected readonly List<IMultiCycleOperation> _multiCycleOperations = new List<IMultiCycleOperation>();
-        public IEnumerable<IMultiCycleOperation> MultiCycleOperations
-        {
-            get { return _multiCycleOperations; }
-        }
+        public IEnumerable<IMultiCycleOperation> MultiCycleOperations => _multiCycleOperations;
 
         protected ArchitectureComponentBase(string name)
         {
@@ -84,7 +81,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         {
             var process = new Process { Name = Name.ToExtendedVhdlId() };
 
-            process.Declarations = LocalVariables.Cast<IVhdlElement>().ToList();
+            process.Declarations.AddRange(LocalVariables.Cast<IVhdlElement>().ToList());
             process.Declarations.AddRange(LocalAliases);
             process.Declarations.AddRange(LocalAttributeSpecifications);
 

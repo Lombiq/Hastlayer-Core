@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -32,9 +32,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             }
         }
 
-        public List<Generic> Generics { get; set; } = new List<Generic>();
-        public List<Port> Ports { get; set; } = new List<Port>();
-        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
+        public List<Generic> Generics { get; } = new List<Generic>();
+        public List<Port> Ports { get; } = new List<Port>();
+        public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {

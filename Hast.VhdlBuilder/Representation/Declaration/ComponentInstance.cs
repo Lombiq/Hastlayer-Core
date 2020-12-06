@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Hast.VhdlBuilder.Extensions;
 
@@ -9,7 +9,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public Component Component { get; set; }
         public string Label { get; set; }
-        public List<PortMapping> PortMappings { get; set; } = new List<PortMapping>();
+        public List<PortMapping> PortMappings { get; } = new List<PortMapping>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => Terminated.Terminate(
                 Label + " : " + vhdlGenerationOptions.ShortenName(Component.Name) + vhdlGenerationOptions.NewLineIfShouldFormat() +

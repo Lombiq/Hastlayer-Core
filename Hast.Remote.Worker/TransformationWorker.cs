@@ -187,16 +187,18 @@ namespace Hast.Remote.Worker
                                             IHardwareRepresentation hardwareRepresentation;
                                             try
                                             {
-                                                hardwareRepresentation = await _hastlayer.GenerateHardware(
-                                                    assemblyPaths,
-                                                    new Layer.HardwareGenerationConfiguration(job.Configuration.DeviceName, null)
+                                                var hardwareGenerationConfiguration =
+                                                    new Layer.HardwareGenerationConfiguration(
+                                                        job.Configuration.DeviceName,
+                                                        null,
+                                                        job.Configuration.CustomConfiguration,
+                                                        job.Configuration.HardwareEntryPointMemberFullNames,
+                                                        job.Configuration.HardwareEntryPointMemberNamePrefixes)
                                                     {
-                                                        CustomConfiguration = job.Configuration.CustomConfiguration,
                                                         EnableCaching = true,
-                                                        HardwareEntryPointMemberFullNames = job.Configuration.HardwareEntryPointMemberFullNames,
-                                                        HardwareEntryPointMemberNamePrefixes = job.Configuration.HardwareEntryPointMemberNamePrefixes,
                                                         EnableHardwareImplementationComposition = false,
-                                                    });
+                                                    };
+                                                hardwareRepresentation = await _hastlayer.GenerateHardware(assemblyPaths, hardwareGenerationConfiguration);
 
                                                 cancellationToken.ThrowIfCancellationRequested();
 

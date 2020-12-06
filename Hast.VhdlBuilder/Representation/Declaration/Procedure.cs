@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Hast.VhdlBuilder.Extensions;
@@ -9,9 +9,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Procedure : ISubProgram
     {
         public string Name { get; set; }
-        public List<ProcedureParameter> Parameters { get; set; } = new List<ProcedureParameter>();
-        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
-        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
+        public List<ProcedureParameter> Parameters { get; } = new List<ProcedureParameter>();
+        public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {

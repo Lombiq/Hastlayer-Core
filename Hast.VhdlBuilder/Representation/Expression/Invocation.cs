@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Hast.VhdlBuilder.Extensions;
@@ -10,7 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class Invocation : IVhdlElement
     {
         public IVhdlElement Target { get; set; }
-        public List<IVhdlElement> Parameters { get; set; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Parameters { get; } = new List<IVhdlElement>();
 
         public Invocation()
         {

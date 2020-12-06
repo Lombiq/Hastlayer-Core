@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -23,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
             }
         }
 
-        public List<SignalAssignmentWhen> Whens { get; set; } = new List<SignalAssignmentWhen>();
+        public List<SignalAssignmentWhen> Whens { get; } = new List<SignalAssignmentWhen>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {

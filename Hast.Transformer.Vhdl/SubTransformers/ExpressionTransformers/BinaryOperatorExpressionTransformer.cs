@@ -273,18 +273,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             bitwiseAndBinary.Clone<BinaryOperatorExpression>(), maxOperandSize, false));
                 }
 
-                binaryElement = new Invocation
+                var invocation = new Invocation
                 {
                     Target = (expression.Operator == BinaryOperatorType.ShiftLeft ? "shift_left" : "shift_right").ToVhdlIdValue(),
-                    Parameters = new List<IVhdlElement>
-                    {
-                        binary.Left,
-                        // The result will be like to_integer(unsigned(SmartResize(..))). The cast to unsigned is
-                        // necessary because in .NET the input of the shift is always treated as unsigned. Right shifts
-                        // will also have a bitwise AND inside unsigned().
-                        Invocation.ToInteger(new Invocation("unsigned", resize)),
-                    },
                 };
+                invocation.Parameters.Add(binary.Left);
+                // The result will be like to_integer(unsigned(SmartResize(..))). The cast to unsigned is
+                // necessary because in .NET the input of the shift is always treated as unsigned. Right shifts
+                // will also have a bitwise AND inside unsigned().
+                invocation.Parameters.Add(Invocation.ToInteger(new Invocation("unsigned", resize)));
+
+                binaryElement = invocation;
             }
 
             // Shifts also need type conversion if the right operator doesn't have the same type as the left one.
@@ -307,15 +306,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (shouldResizeResult)
             {
-                binaryElement = new Invocation
+                var invocation = new Invocation
                 {
                     Target = ResizeHelper.SmartResizeName.ToVhdlIdValue(),
-                    Parameters = new List<IVhdlElement>
-                    {
-                        binaryElement,
-                        resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt),
-                    },
                 };
+                invocation.Parameters.Add(binaryElement);
+                invocation.Parameters.Add(resultTypeSize.ToVhdlValue(KnownDataTypes.UnrangedInt));
+                binaryElement = invocation;
             }
 
             var operationResultAssignment = new Assignment

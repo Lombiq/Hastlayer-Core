@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -12,8 +12,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public string Name { get; set; }
         public Entity Entity { get; set; }
-        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
-        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
         public ArchitectureReference ToReference() => new ArchitectureReference { Name = Name };
 

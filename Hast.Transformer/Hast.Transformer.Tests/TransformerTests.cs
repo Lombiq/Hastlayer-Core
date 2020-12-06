@@ -1,4 +1,4 @@
-﻿using Hast.Common.Services;
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis;
 using Hast.Synthesis.Services;
@@ -99,17 +99,17 @@ namespace Hast.Transformer.Vhdl.Tests
             await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the max degree of parallelism being different.");
 
-            config.HardwareEntryPointMemberFullNames = new[] { "aaa" };
+            config.HardwareEntryPointMemberFullNames.Add("aaa");
             await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
-            config.HardwareEntryPointMemberFullNames = new[] { "bbb" };
+            config.HardwareEntryPointMemberFullNames.Add("bbb");
             await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members being different.");
 
-            config.HardwareEntryPointMemberNamePrefixes = new[] { "aaa" };
+            config.HardwareEntryPointMemberNamePrefixes.Add("aaa");
             await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
-            config.HardwareEntryPointMemberNamePrefixes = new[] { "bbb" };
+            config.HardwareEntryPointMemberNamePrefixes.Add("bbb");
             await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members prefixed being different.");
         }
@@ -132,11 +132,10 @@ namespace Hast.Transformer.Vhdl.Tests
         public async Task IncludedMembersAndTheirReferencesAreOnlyInTheSyntaxTree()
         {
             var configuration = CreateConfig();
-            configuration.HardwareEntryPointMemberFullNames = new[]
-            {
-                "System.Void " + typeof(RootClass).FullName + "::" + nameof(RootClass.VirtualMethod) + "(System.Int32)",
-                "System.Void " + typeof(ComplexTypeHierarchy).FullName + "::" + typeof(IInterface1).FullName + "." + nameof(IInterface1.Interface1Method1) + "()",
-            };
+            configuration.HardwareEntryPointMemberFullNames
+                .Add($"System.Void {typeof(RootClass).FullName}::{nameof(RootClass.VirtualMethod)}(System.Int32)");
+            configuration.HardwareEntryPointMemberFullNames
+                .Add($"System.Void {typeof(ComplexTypeHierarchy).FullName}::{typeof(IInterface1).FullName}.{nameof(IInterface1.Interface1Method1)}()");
             var transformer = GetTransformer();
 
             await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
@@ -159,11 +158,8 @@ namespace Hast.Transformer.Vhdl.Tests
         public async Task IncludedMembersPrefixedAndTheirReferencesAreOnlyInTheSyntaxTree()
         {
             var configuration = CreateConfig();
-            configuration.HardwareEntryPointMemberNamePrefixes = new[]
-            {
-                typeof(RootClass).FullName + "." + nameof(RootClass.VirtualMethod),
-                typeof(ComplexTypeHierarchy).Namespace,
-            };
+            configuration.HardwareEntryPointMemberNamePrefixes.Add($"{typeof(RootClass).FullName}.{nameof(RootClass.VirtualMethod)}");
+            configuration.HardwareEntryPointMemberNamePrefixes.Add(typeof(ComplexTypeHierarchy).Namespace);
             var transformer = GetTransformer();
 
             await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
