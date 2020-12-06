@@ -375,13 +375,7 @@ architecture Imp of Hast_IP is
         \GenomeMatcher::Traceback(SimpleMemory).0._State_28\, 
         \GenomeMatcher::Traceback(SimpleMemory).0._State_29\, 
         \GenomeMatcher::Traceback(SimpleMemory).0._State_30\, 
-        \GenomeMatcher::Traceback(SimpleMemory).0._State_31\, 
-        \GenomeMatcher::Traceback(SimpleMemory).0._State_32\, 
-        \GenomeMatcher::Traceback(SimpleMemory).0._State_33\, 
-        \GenomeMatcher::Traceback(SimpleMemory).0._State_34\, 
-        \GenomeMatcher::Traceback(SimpleMemory).0._State_35\, 
-        \GenomeMatcher::Traceback(SimpleMemory).0._State_36\, 
-        \GenomeMatcher::Traceback(SimpleMemory).0._State_37\);
+        \GenomeMatcher::Traceback(SimpleMemory).0._State_31\);
     -- Signals:
     Signal \GenomeMatcher::Traceback(SimpleMemory).0._Finished\: boolean := false;
     Signal \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -3467,7 +3461,7 @@ begin
         Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.16\: boolean := false;
         Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.17\: boolean := false;
-        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629\: signed(31 downto 0) := to_signed(0, 32);
         Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.18\: boolean := false;
         Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.19\: boolean := false;
         Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.20\: boolean := false;
@@ -3518,7 +3512,7 @@ begin
                 \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number2\ := to_unsigned(0, 16);
                 \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.16\ := false;
                 \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.17\ := false;
-                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982\ := to_signed(0, 32);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629\ := to_signed(0, 32);
                 \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.18\ := false;
                 \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.19\ := false;
                 \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.20\ := false;
@@ -3795,13 +3789,13 @@ begin
                         -- if ((int)(num4) > (int)(num3)) {
                         -- 	if ((int)(num4) > (int)(num2)) {
                         -- 		number = num4;
-                        -- 		int conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982;
-                        -- 		if (((int)(row) != 0 && (int)(column) != 0)) {
-                        -- 			conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- 		int conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629;
+                        -- 		if (((int)(row) == 0 || (int)(column) == 0)) {
+                        -- 			conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 3;
                         -- 		} else {
-                        -- 			conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- 			conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 2;
                         -- 		}
-                        -- 		number2 = (ushort)(conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982);
+                        -- 		number2 = (ushort)(conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629);
                         -- 	} else {
                         -- 		number = num2;
                         -- 		number2 = 0;
@@ -3861,13 +3855,13 @@ begin
                         -- {
                         -- 	if ((int)(num4) > (int)(num2)) {
                         -- 		number = num4;
-                        -- 		int conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982;
-                        -- 		if (((int)(row) != 0 && (int)(column) != 0)) {
-                        -- 			conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- 		int conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629;
+                        -- 		if (((int)(row) == 0 || (int)(column) == 0)) {
+                        -- 			conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 3;
                         -- 		} else {
-                        -- 			conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- 			conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 2;
                         -- 		}
-                        -- 		number2 = (ushort)(conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982);
+                        -- 		number2 = (ushort)(conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629);
                         -- 	} else {
                         -- 		number = num2;
                         -- 		number2 = 0;
@@ -3877,13 +3871,13 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- if ((int)(num4) > (int)(num2)) {
                         -- 	number = num4;
-                        -- 	int conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982;
-                        -- 	if (((int)(row) != 0 && (int)(column) != 0)) {
-                        -- 		conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- 	int conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629;
+                        -- 	if (((int)(row) == 0 || (int)(column) == 0)) {
+                        -- 		conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 3;
                         -- 	} else {
-                        -- 		conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- 		conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 2;
                         -- 	}
-                        -- 	number2 = (ushort)(conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982);
+                        -- 	number2 = (ushort)(conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629);
                         -- } else {
                         -- 	number = num2;
                         -- 	number2 = 0;
@@ -3914,13 +3908,13 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	number = num4;
-                        -- 	int conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982;
-                        -- 	if (((int)(row) != 0 && (int)(column) != 0)) {
-                        -- 		conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- 	int conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629;
+                        -- 	if (((int)(row) == 0 || (int)(column) == 0)) {
+                        -- 		conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 3;
                         -- 	} else {
-                        -- 		conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- 		conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 2;
                         -- 	}
-                        -- 	number2 = (ushort)(conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982);
+                        -- 	number2 = (ushort)(conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -3928,18 +3922,18 @@ begin
                         -- 
                         \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num4\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982;
+                        -- int conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (((int)(row) != 0 && (int)(column) != 0)) {
-                        -- 	conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- if (((int)(row) == 0 || (int)(column) == 0)) {
+                        -- 	conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 3;
                         -- } else {
-                        -- 	conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- 	conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 2;
                         -- }
                         -- 
-                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.18\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row\), 32)) /= to_signed(0, 32);
-                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.19\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column\), 32)) /= to_signed(0, 32);
-                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.20\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.18\ and \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.19\;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.18\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row\), 32)) = to_signed(0, 32);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.19\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column\), 32)) = to_signed(0, 32);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.20\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.18\ or \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.19\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_23\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_23\.
@@ -3955,9 +3949,9 @@ begin
                     when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_22\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
-                        -- number2 = (ushort)(conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982);
+                        -- number2 = (ushort)(conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629);
                         -- 
-                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number2\ := SmartResize(unsigned((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982\)), 16);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number2\ := SmartResize(unsigned((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629\)), 16);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_19\.
                         if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_22\) then 
                             \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_20\;
@@ -3967,13 +3961,13 @@ begin
                         -- True branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- 	conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 3;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 3;
                         -- 
-                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982\ := to_signed(2, 32);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629\ := to_signed(3, 32);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\.
                         if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_23\) then 
                             \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_22\;
@@ -3983,13 +3977,13 @@ begin
                         -- False branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- 	conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629 = 2;
                         -- 
-                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982\ := to_signed(3, 32);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional1db49457ce7c5351698d989cba6835f37dfe51660ab17312b17a51f3a9036629\ := to_signed(2, 32);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\.
                         if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_24\) then 
                             \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_22\;
@@ -4176,19 +4170,14 @@ begin
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.29\: boolean := false;
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.30\: boolean := false;
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.31\: boolean := false;
+        Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\: boolean := false;
+        Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.33\: boolean := false;
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.5\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.33\: signed(31 downto 0) := to_signed(0, 32);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.34\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.5\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\: boolean := false;
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.number2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.37\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.6\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.38\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.39\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4248,19 +4237,14 @@ begin
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.29\ := false;
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.30\ := false;
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.31\ := false;
+                \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\ := false;
+                \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.33\ := false;
                 \GenomeMatcher::Traceback(SimpleMemory).0.number\ := to_unsigned(0, 32);
-                \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\ := to_signed(0, 32);
-                \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.5\ := (others => '0');
-                \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.33\ := to_signed(0, 32);
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.34\ := to_signed(0, 32);
+                \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.5\ := (others => '0');
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\ := to_signed(0, 32);
-                \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\ := false;
-                \GenomeMatcher::Traceback(SimpleMemory).0.number2\ := to_unsigned(0, 32);
+                \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\ := to_signed(0, 32);
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.37\ := to_signed(0, 32);
-                \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.6\ := (others => '0');
-                \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.38\ := to_signed(0, 32);
-                \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.39\ := to_signed(0, 32);
-                \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.40\ := to_signed(0, 32);
             else 
                 case \GenomeMatcher::Traceback(SimpleMemory).0._State\ is 
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_0\ => 
@@ -4442,14 +4426,10 @@ begin
                             -- 	if ((int)(num8) >= (int)(num4)) {
                             -- 		num9 = (ushort)memory.ReadUInt32 (num8);
                             -- 	}
-                            -- 	if ((int)(num12) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) {
+                            -- 	if (((int)(num12) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) || (int)(num12) == 3) {
                             -- 		uint number;
                             -- 		number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
                             -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number);
-                            -- 	} else if ((int)(num12) == 3) {
-                            -- 		uint number2;
-                            -- 		number2 = memory.ReadUInt32 ((int)(2 + (int)(num10)));
-                            -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number2);
                             -- 	}
                             -- 	num7 = num9;
                             -- 	num6 = num8;
@@ -4508,14 +4488,10 @@ begin
                             -- 	if ((int)(num8) >= (int)(num4)) {
                             -- 		num9 = (ushort)memory.ReadUInt32 (num8);
                             -- 	}
-                            -- 	if ((int)(num12) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) {
+                            -- 	if (((int)(num12) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) || (int)(num12) == 3) {
                             -- 		uint number;
                             -- 		number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
                             -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number);
-                            -- 	} else if ((int)(num12) == 3) {
-                            -- 		uint number2;
-                            -- 		number2 = memory.ReadUInt32 ((int)(2 + (int)(num10)));
-                            -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number2);
                             -- 	}
                             -- 	num7 = num9;
                             -- 	num6 = num8;
@@ -4761,14 +4737,10 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_23\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_17\.
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num12) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) {
+                        -- if (((int)(num12) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) || (int)(num12) == 3) {
                         -- 	uint number;
                         -- 	number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
                         -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number);
-                        -- } else if ((int)(num12) == 3) {
-                        -- 	uint number2;
-                        -- 	number2 = memory.ReadUInt32 ((int)(2 + (int)(num10)));
-                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number2);
                         -- }
                         -- 
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.26\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32)) = to_signed(2, 32);
@@ -4809,18 +4781,20 @@ begin
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.29\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num8\), 32)) < signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num4\), 32));
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.30\ := \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.28\ or \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.29\;
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.31\ := \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.26\ and (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.30\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32)) = to_signed(3, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.33\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.31\) or \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \GenomeMatcher::Traceback(SimpleMemory).0._State_28\ and ends in state \GenomeMatcher::Traceback(SimpleMemory).0._State_31\.
-                        --     * The false branch starts in state \GenomeMatcher::Traceback(SimpleMemory).0._State_32\ and ends in state \GenomeMatcher::Traceback(SimpleMemory).0._State_33\.
                         --     * Execution after either branch will continue in the following state: \GenomeMatcher::Traceback(SimpleMemory).0._State_27\.
 
-                        if (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.31\) then 
+                        if (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.33\) then 
                             \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_28\;
                         else 
-                            \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_32\;
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_27\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5229
+                        -- Clock cycles needed to complete this state (approximation): 0.9107
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_27\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_26\.
                         -- The following section was transformed from the .NET statement below:
@@ -4851,9 +4825,9 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\ := to_signed(2, 32) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.34\ := to_signed(2, 32) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32);
                         -- Begin SimpleMemory read.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.34\);
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_29\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
@@ -4867,16 +4841,16 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number);
                             -- 
-                            \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.33\ := SmartResize(to_signed(2, 32) * \GenomeMatcher::Traceback(SimpleMemory).0.num5\, 32);
-                            \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.34\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num4\), 32)) + (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.33\);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\ := SmartResize(to_signed(2, 32) * \GenomeMatcher::Traceback(SimpleMemory).0.num5\, 32);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num4\), 32)) + (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\);
                             \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_30\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_30\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.34\) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.37\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32);
                         -- Begin SimpleMemory write.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.37\);
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\GenomeMatcher::Traceback(SimpleMemory).0.number\);
                         \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_31\;
@@ -4889,91 +4863,6 @@ begin
                             -- Going to the state after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_26\.
                             if (\GenomeMatcher::Traceback(SimpleMemory).0._State\ = \GenomeMatcher::Traceback(SimpleMemory).0._State_31\) then 
                                 \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_27\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::Traceback(SimpleMemory).0._State_32\ => 
-                        -- False branch of the if-else started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_26\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num12) == 3) {
-                        -- 	uint number2;
-                        -- 	number2 = memory.ReadUInt32 ((int)(2 + (int)(num10)));
-                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number2);
-                        -- }
-                        -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32)) = to_signed(3, 32);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \GenomeMatcher::Traceback(SimpleMemory).0._State_34\ and ends in state \GenomeMatcher::Traceback(SimpleMemory).0._State_37\.
-                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::Traceback(SimpleMemory).0._State_33\.
-
-                        if (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\) then 
-                            \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_34\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_33\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.264
-                    when \GenomeMatcher::Traceback(SimpleMemory).0._State_33\ => 
-                        -- State after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_32\.
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_26\.
-                        if (\GenomeMatcher::Traceback(SimpleMemory).0._State\ = \GenomeMatcher::Traceback(SimpleMemory).0._State_33\) then 
-                            \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_27\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::Traceback(SimpleMemory).0._State_34\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_32\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	uint number2;
-                        -- 	number2 = memory.ReadUInt32 ((int)(2 + (int)(num10)));
-                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number2);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint number2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- number2 = memory.ReadUInt32 ((int)(2 + (int)(num10)));
-                        -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.37\ := to_signed(2, 32) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32);
-                        -- Begin SimpleMemory read.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.37\);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_35\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \GenomeMatcher::Traceback(SimpleMemory).0._State_35\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.6\ := \DataIn\;
-                            \GenomeMatcher::Traceback(SimpleMemory).0.number2\ := ConvertStdLogicVectorToUInt32(\GenomeMatcher::Traceback(SimpleMemory).0.dataIn.6\);
-                            -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number2);
-                            -- 
-                            \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.38\ := SmartResize(to_signed(2, 32) * \GenomeMatcher::Traceback(SimpleMemory).0.num5\, 32);
-                            \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.39\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num4\), 32)) + (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.38\);
-                            \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_36\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7471
-                    when \GenomeMatcher::Traceback(SimpleMemory).0._State_36\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.40\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.39\) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32);
-                        -- Begin SimpleMemory write.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.40\);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\GenomeMatcher::Traceback(SimpleMemory).0.number2\);
-                        \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_37\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \GenomeMatcher::Traceback(SimpleMemory).0._State_37\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\WritesDone\ = true) then 
-                            -- SimpleMemory write finished.
-                            \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                            -- Going to the state after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_32\.
-                            if (\GenomeMatcher::Traceback(SimpleMemory).0._State\ = \GenomeMatcher::Traceback(SimpleMemory).0._State_37\) then 
-                                \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_33\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
