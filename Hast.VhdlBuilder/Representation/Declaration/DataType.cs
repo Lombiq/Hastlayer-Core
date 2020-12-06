@@ -76,7 +76,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             }
 
             // If one is null, but not both, return false.
-            if ((a is null) || (b is null))
+            if (a is null || b is null)
             {
                 return false;
             }

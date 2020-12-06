@@ -25,7 +25,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             // There are no block comments in VHDL prior to VHDL 2008 so if the code is not formatted there can't be
             // any comments.
-            if (!vhdlGenerationOptions.FormatCode || (vhdlGenerationOptions.OmitComments && !CantBeOmitted))
+            if (!vhdlGenerationOptions.FormatCode || vhdlGenerationOptions.OmitComments && !CantBeOmitted)
             {
                 return string.Empty;
             }

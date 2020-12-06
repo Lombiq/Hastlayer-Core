@@ -183,7 +183,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             // Trying supported cast scenarios:
 
-            if ((KnownDataTypes.SignedIntegers.Contains(fromType) && KnownDataTypes.SignedIntegers.Contains(toType)) ||
+            if (KnownDataTypes.SignedIntegers.Contains(fromType) && KnownDataTypes.SignedIntegers.Contains(toType) ||
                 KnownDataTypes.UnsignedIntegers.Contains(fromType) && KnownDataTypes.UnsignedIntegers.Contains(toType))
             {
                 if (fromSize == toSize)

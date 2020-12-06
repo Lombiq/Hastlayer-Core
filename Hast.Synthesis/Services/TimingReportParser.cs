@@ -87,7 +87,7 @@ namespace Hast.Synthesis.Services
                     case "add":
                         binaryOperator = BinaryOperatorType.Add;
                         break;
-                    case var op when (op.StartsWith("div", StringComparison.Ordinal)):
+                    case var op when op.StartsWith("div", StringComparison.Ordinal):
                         binaryOperator = BinaryOperatorType.Divide;
                         break;
                     case "eq":
@@ -109,7 +109,7 @@ namespace Hast.Synthesis.Services
                         // BinaryOperatorType.Modulus is actually the remainder operator and corresponds to the
                         // VHDL operator rem, see below.
                         break;
-                    case var op when (op.StartsWith("mul", StringComparison.Ordinal)):
+                    case var op when op.StartsWith("mul", StringComparison.Ordinal):
                         binaryOperator = BinaryOperatorType.Multiply;
                         break;
                     case "neq":
@@ -124,10 +124,10 @@ namespace Hast.Synthesis.Services
                         isSignAgnosticBinaryOperatorType = true;
                         binaryOperator = BinaryOperatorType.BitwiseOr;
                         break;
-                    case var op when (op.StartsWith("dotnet_shift_left", StringComparison.Ordinal)):
+                    case var op when op.StartsWith("dotnet_shift_left", StringComparison.Ordinal):
                         binaryOperator = BinaryOperatorType.ShiftLeft;
                         break;
-                    case var op when (op.StartsWith("dotnet_shift_right", StringComparison.Ordinal)):
+                    case var op when op.StartsWith("dotnet_shift_right", StringComparison.Ordinal):
                         binaryOperator = BinaryOperatorType.ShiftRight;
                         break;
                     case "rem":

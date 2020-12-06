@@ -66,8 +66,8 @@ namespace Hast.Transformer.Services
 
                 // Changing consumer code of the property to use it as methods.
                 _syntaxTree.AcceptVisitor(new PropertyAccessChangingVisitor(
-                    (getter.Body.Any() ? getter.GetFullName() : null),
-                    (setter.Body.Any() ? setter.GetFullName() : null))); ;
+                    getter.Body.Any() ? getter.GetFullName() : null,
+                    setter.Body.Any() ? setter.GetFullName() : null)); ;
 
                 propertyDeclaration.Remove();
             }

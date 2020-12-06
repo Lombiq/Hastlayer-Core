@@ -47,7 +47,7 @@ namespace Hast.Synthesis.Helpers
 
         public static decimal ComputeClockCyclesFromLatency(IDeviceManifest deviceManifest, decimal latencyNs)
         {
-            var latencyClockCycles = latencyNs * (deviceManifest.ClockFrequencyHz * 0.000000001M);
+            var latencyClockCycles = latencyNs * deviceManifest.ClockFrequencyHz * 0.000000001M;
 
             // If there is no latency then let's try with a basic default (unless the operation is "instant" there should
             // be latency data).

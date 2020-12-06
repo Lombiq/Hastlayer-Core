@@ -38,7 +38,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     !field.Variables.Any(variable => variable.Name.EndsWith("__this", StringComparison.Ordinal)) &&
                     // Roslyn adds a field like public Func<object, bool> <>9__0; with the same argument and return types
                     // as the original lambda. Nothing needs to be done with this.
-                    !(field.ReturnType.Is<SimpleType>(simple => simple.GetActualType().IsFunc())) &&
+                    !field.ReturnType.Is<SimpleType>(simple => simple.GetActualType().IsFunc()) &&
                     // Sometimes the compiler adds a static field containing an object of the parent class as below:
                     // public static readonly HastlayerOptimizedAlgorithm.<>c <>9 = new HastlayerOptimizedAlgorithm.<>c ();
                     field.Modifiers != (Modifiers.Public | Modifiers.Static | Modifiers.Readonly);

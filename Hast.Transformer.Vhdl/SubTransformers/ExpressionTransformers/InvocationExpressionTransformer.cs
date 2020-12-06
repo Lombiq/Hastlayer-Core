@@ -96,7 +96,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // CellIndex is conventionally the first invocation parameter.
                 Expression = _typeConversionTransformer.ImplementTypeConversion(
                     invocationParameters[0].DataType,
-                    SimpleMemoryTypes.CellIndexInternalSignalDataType, invocationParameters[0].Reference)
+                    SimpleMemoryTypes.CellIndexInternalSignalDataType,
+                    invocationParameters[0].Reference)
                     .ConvertedFromExpression,
             });
 

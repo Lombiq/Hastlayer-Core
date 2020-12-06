@@ -39,7 +39,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         private class BinaryOperatorJsonConverter : JsonConverter
         {
-            public override bool CanConvert(Type objectType) => (objectType == typeof(BinaryOperator));
+            public override bool CanConvert(Type objectType) => objectType == typeof(BinaryOperator);
 
             public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
             {

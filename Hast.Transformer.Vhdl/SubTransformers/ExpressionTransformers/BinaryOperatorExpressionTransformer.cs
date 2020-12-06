@@ -159,20 +159,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             IVhdlElement binaryElement = binary;
 
             var shouldResizeResult =
+                isMultiplication &&
                 (
-                    // If the type of the result is the same as the type of the binary expression but the expression is
-                    // a multiplication then this means that the result of the operation wouldn't fit into the result
-                    // type. This is allowed in .NET (an explicit cast is needed in C# but that will be removed by the
-                    // compiler) but will fail in VHDL with something like "[Synth 8-690] width mismatch in assignment;
-                    // target has 16 bits, source has 32 bits." In this cases we need to add a type conversion. Also
-                    // see the block below.
-                    // E.g. ushort = ushort * ushort is valid in IL but in VHDL it must have a length truncation:
-                    // unsigned(15 downto 0) = resize(unsigned(15 downto 0) * unsigned(15 downto 0), 16)
-                    isMultiplication &&
-                    (
-                        resultType == expression.GetActualType() ||
-                        resultType == leftType && resultType == rightType
-                    )
+                    resultType == expression.GetActualType() ||
+                    resultType == leftType && resultType == rightType
                 );
 
             DataType leftVhdlType = null;
@@ -194,25 +184,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (leftType != null && rightType != null)
             {
                 shouldResizeResult = shouldResizeResult ||
-                    (
-                        // If the operands and the result have the same size then the result won't fit.
-                        isMultiplication &&
-                        resultTypeSize != 0 &&
-                        resultTypeSize == leftTypeSize &&
-                        resultTypeSize == rightTypeSize
-                    )
+                    isMultiplication &&
+                    resultTypeSize != 0 &&
+                    resultTypeSize == leftTypeSize &&
+                    resultTypeSize == rightTypeSize
                     ||
-                    (
-                        // If the operation is an addition and the types of the result and the operands differ then we
-                        // also have to resize.
-                        expression.Operator == BinaryOperatorType.Add &&
-                        !(resultType == leftType && resultType == rightType)
-                    )
+                    expression.Operator == BinaryOperatorType.Add &&
+                    !(resultType == leftType && resultType == rightType)
                     ||
-                    (
-                        // If the operand and result sizes don't match.
-                        resultTypeSize != 0 && (resultTypeSize != leftTypeSize || resultTypeSize != rightTypeSize)
-                    );
+                    resultTypeSize != 0 && (resultTypeSize != leftTypeSize || resultTypeSize != rightTypeSize);
             }
 
             var maxOperandSize = Math.Max(leftTypeSize, rightTypeSize);

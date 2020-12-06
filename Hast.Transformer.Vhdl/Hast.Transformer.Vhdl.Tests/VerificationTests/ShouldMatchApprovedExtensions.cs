@@ -36,7 +36,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         public static void ShouldMatchApprovedWithVhdlConfiguration(
             this IEnumerable<VhdlHardwareDescription> hardwareDescriptions,
             string deviceName = null) =>
-            (string.Join(string.Empty, hardwareDescriptions.Select(hardwareDescription => hardwareDescription.VhdlSource + hardwareDescription.XdcSource)))
+            string.Join(string.Empty, hardwareDescriptions.Select(hardwareDescription => hardwareDescription.VhdlSource + hardwareDescription.XdcSource))
                 .ShouldMatchApproved(configurationBuilder =>
                 {
                     var configuration = configurationBuilder.WithVhdlConfiguration().UseCallerLocation();

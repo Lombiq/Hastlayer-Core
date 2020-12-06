@@ -33,14 +33,12 @@ namespace Hast.Transformer.Services
                 foreach (var member in type.Members)
                 {
                     var fullName = member.GetFullName();
-                    if ((
-                            (noIncludedMembers ||
-                            configuration.HardwareEntryPointMemberFullNames.Contains(fullName) ||
-                            fullName.GetMemberNameAlternates().Intersect(configuration.HardwareEntryPointMemberFullNames).Any() ||
-                            configuration.HardwareEntryPointMemberNamePrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix, StringComparison.InvariantCulture)))
+                    if ((noIncludedMembers ||
+                         configuration.HardwareEntryPointMemberFullNames.Contains(fullName) ||
+                         fullName.GetMemberNameAlternates().Intersect(configuration.HardwareEntryPointMemberFullNames).Any() ||
+                         configuration.HardwareEntryPointMemberNamePrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix, StringComparison.InvariantCulture)))
                         &&
-                            _memberSuitabilityChecker.IsSuitableHardwareEntryPointMember(member, typeDeclarationLookupTable)
-                        ))
+                        _memberSuitabilityChecker.IsSuitableHardwareEntryPointMember(member, typeDeclarationLookupTable))
                     {
                         if (member is MethodDeclaration)
                         {
