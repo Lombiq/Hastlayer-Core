@@ -399,7 +399,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         /// Creates a conditional state change to the destination state that will only take place if the state wasn't
         /// already changed in the current state.
         /// </summary>
-        private IVhdlElement CreateConditionalStateChange(int destinationStateIndex, ISubTransformerContext context)
+        private static IVhdlElement CreateConditionalStateChange(int destinationStateIndex, ISubTransformerContext context)
         {
             // We need an if to check whether the state was changed in the logic. If it was then that means that the
             // subroutine was exited so we mustn't overwrite the new state.

@@ -138,7 +138,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             };
         }
 
-        private string TryGetSimdOperation(string targetMethodName)
+        private static string TryGetSimdOperation(string targetMethodName)
         {
             var simdOperationsClassFullNamePrefix = typeof(SimdOperations).FullName + "::";
             var simdOperations = new[]

@@ -110,7 +110,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return vhdlType;
         }
 
-        private DataType ConvertPrimitive(KnownTypeCode typeCode)
+        private static DataType ConvertPrimitive(KnownTypeCode typeCode)
         {
             switch (typeCode)
             {

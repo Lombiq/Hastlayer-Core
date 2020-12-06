@@ -109,7 +109,7 @@ namespace Hast.Transformer.Services
                 member.ReplaceWith(primitive);
             }
 
-            private IType GetTypeOfStaticIdentifier(Identifier identifier) =>
+            private static IType GetTypeOfStaticIdentifier(Identifier identifier) =>
                 (identifier.Parent as MemberReferenceExpression)?
                 .FindFirstChildOfType<TypeReferenceExpression>()?
                 .Type
