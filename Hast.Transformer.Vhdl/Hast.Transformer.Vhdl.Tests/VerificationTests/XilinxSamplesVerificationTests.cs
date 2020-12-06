@@ -20,51 +20,51 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
         [Theory, MemberData(nameof(AllDevices))]
         public async Task BasicSamplesMatchApproved(string deviceName) =>
-            (await CreateSourceForBasicSamples(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateSourceForBasicSamples()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task KpzSamplesMatchesApproved(string deviceName) =>
-            (await CreateVhdlForKpzSamples(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForKpzSamples()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task UnumSampleMatchesApproved(string deviceName) =>
-            (await CreateVhdlForUnumSample(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForUnumSample()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task PositSampleMatchesApproved(string deviceName) =>
-            (await CreateVhdlForPositSample(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForPositSample()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task Posit32SampleMatchesApproved(string deviceName) =>
-            (await CreateVhdlForPosit32Sample(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForPosit32Sample()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task Posit32AdvancedSampleMatchesApproved(string deviceName) =>
-            (await CreateSourceForAdvancedPosit32Sample(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateSourceForAdvancedPosit32Sample()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task Posit32SampleWithInliningMatchesApproved(string deviceName) =>
-            (await CreateVhdlForPosit32SampleWithInlining(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForPosit32SampleWithInlining()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task Posit32FusedSampleMatchesApproved(string deviceName) =>
-            (await CreateVhdlForPosit32FusedSample(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForPosit32FusedSample()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task Fix64SamplesMatchesApproved(string deviceName) =>
-            (await CreateVhdlForFix64Samples(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForFix64Samples()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task FSharpSamplesMatchesApproved(string deviceName) =>
-            (await CreateVhdlForFSharpSamples(deviceName)).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForFSharpSamples()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
     }
 }
