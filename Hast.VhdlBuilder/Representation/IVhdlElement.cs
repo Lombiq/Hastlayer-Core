@@ -1,5 +1,4 @@
-﻿
-namespace Hast.VhdlBuilder.Representation
+﻿namespace Hast.VhdlBuilder.Representation
 {
     /// <summary>
     /// Represents an entity in a VHDL source.

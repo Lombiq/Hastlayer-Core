@@ -1,4 +1,3 @@
-﻿
 namespace Hast.Transformer.Models
 {
     public class HardwareEntryPointMemberMetadata

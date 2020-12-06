@@ -1,5 +1,4 @@
-﻿
-namespace Hast.VhdlBuilder.Representation.Declaration
+﻿namespace Hast.VhdlBuilder.Representation.Declaration
 {
     public interface INamedElement : IVhdlElement
     {

@@ -1,4 +1,3 @@
-﻿
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
     public abstract class DataObjectBase : IDataObject
