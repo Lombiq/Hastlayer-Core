@@ -391,8 +391,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 // Nothing to do.
             }
-            else throw new NotSupportedException(
+            else
+            {
+                throw new NotSupportedException(
                 "Statements of type " + statement.GetType() + " are not supported.".AddParentEntityName(statement));
+            }
         }
 
         /// <summary>

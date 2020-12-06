@@ -341,7 +341,10 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                         if (parentAssignment.Left == node) return property.Setter.GetFullName();
                         if (parentAssignment.Right == node) return property.Getter.GetFullName();
                     }
-                    else return property.Getter.GetFullName();
+                    else
+                    {
+                        return property.Getter.GetFullName();
+                    }
                 }
 
                 //// This will only be the case for Task.Factory.StartNew calls made from lambdas, e.g. the <Run>b__0

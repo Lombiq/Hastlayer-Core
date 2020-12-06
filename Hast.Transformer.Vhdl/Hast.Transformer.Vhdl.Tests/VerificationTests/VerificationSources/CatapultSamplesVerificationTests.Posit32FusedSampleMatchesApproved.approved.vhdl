@@ -1171,7 +1171,7 @@ begin
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.return.1\: \Lombiq.Arithmetics.Quire\;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\: \Lombiq.Arithmetics.Posit32\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1450,17 +1450,17 @@ begin
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_14\ => 
                         -- State after the while loop which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_11\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e;
+                        -- Posit32 object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e = new Posit32 (quire);
+                        -- object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135 = new Posit32 (quire);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\.\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\.\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(Lombiq.Arithmetics.Quire)
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).q.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.quire\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_27\;
@@ -1641,15 +1641,15 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(Lombiq.Arithmetics.Quire)
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.In.0\;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.quire\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).q.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 (0, objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e.PositBits);
+                            -- memory.WriteUInt32 (0, object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135.PositBits);
                             -- 
                             -- Begin SimpleMemory write.
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\.\PositBits\);
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\.\PositBits\);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_28\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -2628,7 +2628,7 @@ begin
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -2710,7 +2710,7 @@ begin
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\ := to_signed(0, 64);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\ := to_unsigned(0, 32);
             else 
                 case \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ is 
@@ -3408,13 +3408,13 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\.
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02;
+                        -- uint conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (signBit) {
-                        -- 	conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = Posit32.GetTwosComplement (num);
+                        -- 	conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = Posit32.GetTwosComplement (num);
                         -- } else {
-                        -- 	conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = num;
+                        -- 	conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = num;
                         -- }
                         -- 
 
@@ -3640,20 +3640,20 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02;
+                        -- return conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\;
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\ => 
                         -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = Posit32.GetTwosComplement (num);
+                        -- 	conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = Posit32.GetTwosComplement (num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = Posit32.GetTwosComplement (num);
+                        -- conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = Posit32.GetTwosComplement (num);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
@@ -3665,7 +3665,7 @@ begin
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= false;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\;
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\;
                             -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
                             if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_46\) then 
                                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\;
@@ -3676,13 +3676,13 @@ begin
                         -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = num;
+                        -- 	conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = num;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = num;
+                        -- conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = num;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_47\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\;
@@ -9858,7 +9858,7 @@ begin
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.return.1\: \Lombiq.Arithmetics.Quire\;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\: \Lombiq.Arithmetics.Posit32\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -10137,17 +10137,17 @@ begin
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_14\ => 
                         -- State after the while loop which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_11\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e;
+                        -- Posit32 object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e = new Posit32 (quire);
+                        -- object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135 = new Posit32 (quire);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\.\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\.\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(Lombiq.Arithmetics.Quire)
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).q.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.quire\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_27\;
@@ -10328,15 +10328,15 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(Lombiq.Arithmetics.Quire)
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.In.0\;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.quire\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).q.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 (0, objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e.PositBits);
+                            -- memory.WriteUInt32 (0, object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135.PositBits);
                             -- 
                             -- Begin SimpleMemory write.
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objectffd9139c321969eb0a42e1e3ae043fc0d22d96a54e32c2dc05d540c7e97af68e\.\PositBits\);
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\.\PositBits\);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_28\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -11175,9 +11175,9 @@ begin
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.62\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.63\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.64\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.65\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -11298,9 +11298,9 @@ begin
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.62\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.63\ := to_signed(0, 64);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.64\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.7\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.65\ := to_unsigned(0, 32);
             else 
@@ -12444,20 +12444,20 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\.
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02;
+                        -- uint conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (signBit) {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487;
-                        -- 	bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487 = num;
-                        -- 	uint return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487;
-                        -- 	return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487 = (uint)((long)(~bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487) + 1L);
+                        -- 	uint bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84;
+                        -- 	bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84 = num;
+                        -- 	uint return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84;
+                        -- 	return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84 = (uint)((long)(~bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487;
+                        -- 	conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84;
                         -- } else {
-                        -- 	conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = num;
+                        -- 	conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = num;
                         -- }
                         -- 
 
@@ -12683,9 +12683,9 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_56\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02;
+                        -- return conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\;
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_57\ => 
@@ -12694,12 +12694,12 @@ begin
                         -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487;
-                        -- 	bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487 = num;
-                        -- 	uint return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487;
-                        -- 	return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487 = (uint)((long)(~bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487) + 1L);
+                        -- 	uint bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84;
+                        -- 	bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84 = num;
+                        -- 	uint return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84;
+                        -- 	return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84 = (uint)((long)(~bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487;
+                        -- 	conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -12707,26 +12707,26 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487;
+                        -- uint bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487 = num;
+                        -- bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84 = num;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487;
+                        -- uint return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487 = (uint)((long)(~bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487) + 1L);
+                        -- return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84 = (uint)((long)(~bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84) + 1L);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.7\ := not(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.7\ := not(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84\);
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.65\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.7\), 64)) + to_signed(1, 64)), 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.65\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.65\);
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487;
+                        -- conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_d5e78a1cc4c5ce9ecd46e134cd314afbdaeeeb0c6ac7678364f0a765152de487\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_68c0a0f35ad06bf4e3106a641cde19bfecd6547c059af7c59b27f8310ee3ef84\;
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_57\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_56\;
@@ -12736,13 +12736,13 @@ begin
                         -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = num;
+                        -- 	conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = num;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02 = num;
+                        -- conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = num;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionala777843480080cfd7ce563a33d79f12dd3aff5a7f1e7ee2bc6ae68dce3ba9f02\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_58\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_56\;

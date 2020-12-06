@@ -32,7 +32,10 @@ namespace Hast.Transformer.Vhdl.Models
             {
                 _mappings[memberFullName] = id;
             }
-            else _mappings[memberFullName] = id;
+            else
+            {
+                _mappings[memberFullName] = id;
+            }
         }
 
         public int LookupMemberId(string memberFullName)

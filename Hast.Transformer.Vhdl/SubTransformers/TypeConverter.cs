@@ -83,14 +83,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public DataType ConvertAstType(AstType type, IVhdlTransformationContext context)
         {
-            if (type is PrimitiveType) return ConvertPrimitive(((PrimitiveType)type).KnownTypeCode);
+            if (type is PrimitiveType)
+            {
+                return ConvertPrimitive(((PrimitiveType)type).KnownTypeCode);
+            }
             else if (type is ComposedType composedType)
             {
                 // For inner classes (member types) the BaseType will contain the actual type (in a strange way the
                 // actual type will be the BaseType of itself...).
                 return type.GetFullName() == composedType.BaseType.GetFullName() ? ConvertAstType(composedType.BaseType, context) : ConvertComposed(composedType, context);
             }
-            else if (type is SimpleType) return ConvertSimple((SimpleType)type, context);
+            else if (type is SimpleType)
+            {
+                return ConvertSimple((SimpleType)type, context);
+            }
 
             return ConvertTypeInternal(type.GetActualType(), context);
         }

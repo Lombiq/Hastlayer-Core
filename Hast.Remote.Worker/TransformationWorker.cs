@@ -292,7 +292,9 @@ namespace Hast.Remote.Worker
 
                             telemetry.FinishTimeUtc = _clock.UtcNow;
                             _applicationInsightsTelemetryManager.TrackTransformation(telemetry);
-                        }, jobBlob, cancellationToken)
+                        },
+                            jobBlob,
+                            cancellationToken)
                         .ContinueWith(
                             (task, blobNameObject) =>
                             _transformationTasks.TryRemove((string)blobNameObject, out _), jobBlob.Name);
