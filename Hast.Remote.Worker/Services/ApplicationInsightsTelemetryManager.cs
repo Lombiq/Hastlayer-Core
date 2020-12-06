@@ -54,7 +54,7 @@ namespace Hast.Remote.Worker.Services
                 configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY").Value;
             if (string.IsNullOrEmpty(key))
             {
-                throw new Exception("Please set up the instrumentation key via appsettings.json or environment " +
+                throw new InvalidOperationException("Please set up the instrumentation key via appsettings.json or environment " +
                     "variable, see APPINSIGHTS_INSTRUMENTATIONKEY part here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core");
             }
 
