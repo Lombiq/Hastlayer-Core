@@ -7,7 +7,7 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 {
     public abstract class IntegrationTestFixtureBase : IDisposable
     {
-        private bool _disposed = false;
+        private bool _disposed;
         protected HastlayerConfiguration _hostConfiguration = new HastlayerConfiguration();
 
         private readonly Lazy<Hastlayer> _host;

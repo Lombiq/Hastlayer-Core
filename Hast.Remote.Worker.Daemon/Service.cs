@@ -19,7 +19,7 @@ namespace Hast.Remote.Worker.Daemon
         private readonly EventLog _eventLog;
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private Task _workerTask;
-        private int _restartCount = 0;
+        private int _restartCount;
 
         public Service()
         {

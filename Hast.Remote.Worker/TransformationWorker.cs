@@ -39,7 +39,7 @@ namespace Hast.Remote.Worker
         private readonly TelemetryClient _telemetryClient;
         private readonly ConcurrentDictionary<string, Task> _transformationTasks = new ConcurrentDictionary<string, Task>();
 
-        private int _restartCount = 0;
+        private int _restartCount;
         private System.Timers.Timer _oldResultBlobsCleanerTimer;
 
         public TransformationWorker(
