@@ -10,7 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     /// Represents a Xilinx XDC constraints file.
     /// </summary>
     /// <remarks>
-    /// <para>See <see cref="Expression.MultiCycleSdcStatementsAttributeExpression"/> for something similar for Quartus Prime.</para>
+    /// <para>See <c>Expression.MultiCycleSdcStatementsAttributeExpression</c> for something similar for Quartus Prime.</para>
     /// </remarks>
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class XdcFile : IVhdlElement
