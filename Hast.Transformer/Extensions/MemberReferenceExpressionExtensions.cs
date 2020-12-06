@@ -16,7 +16,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// </param>
         /// <param name="findLeftmostMemberIfRecursive">
         /// If the member reference references another member (like <c>this.Property1.Property2.Property3</c>) then if
-        /// set to <c>true</c> the member corresponding to the leftmost member (<c>this.Property1</c> in this case) will
+        /// set to <see langword="true"/> the member corresponding to the leftmost member (<c>this.Property1</c> in this case) will
         /// be looked up.
         /// </param>
         public static EntityDeclaration FindMemberDeclaration(

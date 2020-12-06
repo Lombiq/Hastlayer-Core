@@ -8,7 +8,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// <summary>
         /// Searches for a member on the type that has the same signature as the supplied member.
         /// </summary>
-        /// <returns>The declaration of the matching member if found, <c>null</c> otherwise.</returns>
+        /// <returns>The declaration of the matching member if found, <see langword="null"/> otherwise.</returns>
         public static T FindMatchingMember<T>(
             this TypeDeclaration typeDeclaration,
             T memberDeclaration,

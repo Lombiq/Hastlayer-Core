@@ -10,7 +10,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// </summary>
         /// <returns>
         /// The <see cref="TypeDeclaration"/> of the interface's method that the declaration implements a method of,
-        /// or <c>null</c> if the declaration is not an implementation of any method of any interface.
+        /// or <see langword="null"/> if the declaration is not an implementation of any method of any interface.
         /// </returns>
         public static T FindImplementedInterfaceMethod<T>(this T member, Func<AstType, TypeDeclaration> lookupDeclaration)
             where T : EntityDeclaration
