@@ -271,45 +271,75 @@ architecture Imp of Hast_IP is
         \GenomeMatcher::FillTable(SimpleMemory).0._State_8\, 
         \GenomeMatcher::FillTable(SimpleMemory).0._State_9\, 
         \GenomeMatcher::FillTable(SimpleMemory).0._State_10\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_11\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_12\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_13\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_14\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_15\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_16\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_17\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_18\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_19\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_20\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_21\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_22\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_23\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_24\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_25\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_26\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_27\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_28\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_29\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_30\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_31\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_32\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_33\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_34\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_35\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_36\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_37\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_38\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_39\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_40\, 
-        \GenomeMatcher::FillTable(SimpleMemory).0._State_41\);
+        \GenomeMatcher::FillTable(SimpleMemory).0._State_11\);
     -- Signals:
     Signal \GenomeMatcher::FillTable(SimpleMemory).0._Finished\: boolean := false;
     Signal \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
     Signal \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
+    Signal \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).row.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).column.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).inputOneLength.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).inputTwoStartIndex.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).resultStartIndex.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).resultLength.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16)._Started.0\: boolean := false;
     Signal \GenomeMatcher::FillTable(SimpleMemory).0._Started\: boolean := false;
+    Signal \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16)._Finished.0\: boolean := false;
     -- System.Void Hast.Samples.SampleAssembly.GenomeMatcher::FillTable(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
+
+
+    -- System.Void Hast.Samples.SampleAssembly.GenomeMatcher::FillCell(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16).0 declarations start
+    -- State machine states:
+    type \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._States\ is (
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_0\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_1\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_2\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_3\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_4\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_5\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_6\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_7\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_8\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_9\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_10\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_11\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_12\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_13\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_14\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_15\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_16\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_17\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_18\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_19\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_20\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_22\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_23\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_24\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_25\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_26\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_27\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_28\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_29\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_30\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_31\, 
+        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_32\);
+    -- Signals:
+    Signal \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._Finished\: boolean := false;
+    Signal \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
+    Signal \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\: boolean := false;
+    Signal \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\: boolean := false;
+    Signal \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._Started\: boolean := false;
+    Signal \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputOneLength.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputTwoStartIndex.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultStartIndex.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultLength.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    -- System.Void Hast.Samples.SampleAssembly.GenomeMatcher::FillCell(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16).0 declarations end
 
 
     -- System.Void Hast.Samples.SampleAssembly.GenomeMatcher::Traceback(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
@@ -2212,14 +2242,9 @@ architecture Imp of Hast_IP is
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\, 
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\, 
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\, 
-        \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\, 
-        \ObjectOrientedShowcase::Run(SimpleMemory).0._State_22\);
+        \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\);
     -- Signals:
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0._Finished\: boolean := false;
-    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
-    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
-    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.Out.0\: \Hast.Samples.SampleAssembly.MemoryContainer\;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.Out.0\: \Hast.Samples.SampleAssembly.MemoryContainer\;
@@ -2245,6 +2270,10 @@ architecture Imp of Hast_IP is
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[]).numberContainers.parameter.Out.0\: \Hast.Samples.SampleAssembly.NumberContainer_Array\(0 to 3);
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\: boolean := false;
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0._Started\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.In.0\: \Hast.Samples.SampleAssembly.MemoryContainer\;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Finished.0\: boolean := false;
@@ -3147,51 +3176,16 @@ begin
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.resultStartIndex\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.1\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num5\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.resultLength\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num6\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num7\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num5\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.4\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num8\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num9\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num10\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num11\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num12\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num13\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.8\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.10\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.12\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.13\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.14\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.4\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.5\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.6\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.19\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.20\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.26\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.28\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.29\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -3201,6 +3195,13 @@ begin
                 \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).row.parameter.Out.0\ <= to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).column.parameter.Out.0\ <= to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).inputOneLength.parameter.Out.0\ <= to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).inputTwoStartIndex.parameter.Out.0\ <= to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).resultStartIndex.parameter.Out.0\ <= to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).resultLength.parameter.Out.0\ <= to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16)._Started.0\ <= false;
                 \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_0\;
                 \GenomeMatcher::FillTable(SimpleMemory).0.num\ := to_unsigned(0, 16);
                 \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.0\ := (others => '0');
@@ -3208,51 +3209,16 @@ begin
                 \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.1\ := (others => '0');
                 \GenomeMatcher::FillTable(SimpleMemory).0.num3\ := to_unsigned(0, 16);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.num4\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.resultStartIndex\ := to_unsigned(0, 16);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.1\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.num5\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.resultLength\ := to_unsigned(0, 16);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.num6\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.num4\ := to_unsigned(0, 16);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.3\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.num7\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.num5\ := to_unsigned(0, 16);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.4\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.num8\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 32);
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 32);
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.7\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.num9\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.num10\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.num11\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.num12\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.8\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.9\ := to_signed(0, 32);
-                \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.2\ := (others => '0');
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.10\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.11\ := to_signed(0, 32);
-                \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.3\ := (others => '0');
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.12\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.13\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.14\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.16\ := to_signed(0, 32);
-                \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.4\ := (others => '0');
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.17\ := to_signed(0, 32);
-                \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.5\ := (others => '0');
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.18\ := to_signed(0, 32);
-                \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.6\ := (others => '0');
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.19\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.20\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e\ := to_signed(0, 32);
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.26\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\ := to_signed(0, 32);
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.28\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.29\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.5\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.6\ := to_unsigned(0, 16);
             else 
                 case \GenomeMatcher::FillTable(SimpleMemory).0._State\ is 
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_0\ => 
@@ -3323,18 +3289,18 @@ begin
                             \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(unsigned(to_signed(2, 32) + signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num\), 32))), 16);
                             \GenomeMatcher::FillTable(SimpleMemory).0.num3\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort num4;
+                            -- ushort resultStartIndex;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num4 = (ushort)((int)(num3) + (int)(num2));
+                            -- resultStartIndex = (ushort)((int)(num3) + (int)(num2));
                             -- 
                             \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num3\), 32)) + signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num2\), 32))), 16);
-                            \GenomeMatcher::FillTable(SimpleMemory).0.num4\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.1\);
+                            \GenomeMatcher::FillTable(SimpleMemory).0.resultStartIndex\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.1\);
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort num5;
+                            -- ushort resultLength;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num5 = (ushort)((int)(num) * (int)(num2));
+                            -- resultLength = (ushort)((int)(num) * (int)(num2));
                             -- 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_6\;
                         end if;
@@ -3342,69 +3308,23 @@ begin
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_6\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num\), 32)) * signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num2\), 32))), 16);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num5\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.2\);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.resultLength\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.2\);
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort num6;
+                        -- ushort num4;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num6 = 0;
+                        -- num4 = 0;
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num6\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.num4\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num6) < (int)(num2)) {
-                        -- 	ushort num7;
-                        -- 	num7 = 0;
-                        -- 	while ((int)(num7) < (int)(num)) {
-                        -- 		ushort num8;
-                        -- 		num8 = (ushort)((int)(num4) + (int)(num7) + (int)(num6) * (int)(num));
-                        -- 		ushort num9;
-                        -- 		num9 = 0;
-                        -- 		ushort num10;
-                        -- 		num10 = 0;
-                        -- 		ushort num11;
-                        -- 		num11 = 0;
-                        -- 		ushort num12;
-                        -- 		num12 = 0;
-                        -- 		ushort num13;
-                        -- 		num13 = 0;
-                        -- 		if ((int)(num6) != 0) {
-                        -- 			num9 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - (int)(num)));
-                        -- 		}
-                        -- 		if ((int)(num7) != 0) {
-                        -- 			num10 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - 1));
-                        -- 		}
-                        -- 		if ((int)(num7) != 0 && (int)(num6) != 0) {
-                        -- 			num11 = (ushort)memory.ReadUInt32 ((int)(num8) - (int)(num) - 1);
-                        -- 		}
-                        -- 		if (memory.ReadUInt32 ((int)(2 + (int)(num7))) == memory.ReadUInt32 ((int)((int)(num3) + (int)(num6)))) {
-                        -- 			num11 = (ushort)((int)(num11) + 1);
-                        -- 		}
-                        -- 		if ((int)(num11) > (int)(num10)) {
-                        -- 			if ((int)(num11) > (int)(num9)) {
-                        -- 				num12 = num11;
-                        -- 				int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                        -- 				if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                        -- 					conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
-                        -- 				} else {
-                        -- 					conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
-                        -- 				}
-                        -- 				num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
-                        -- 			} else {
-                        -- 				num12 = num9;
-                        -- 				num13 = 0;
-                        -- 			}
-                        -- 		} else if ((int)(num10) > (int)(num9)) {
-                        -- 			num12 = num10;
-                        -- 			num13 = 1;
-                        -- 		} else {
-                        -- 			num12 = num9;
-                        -- 			num13 = 0;
-                        -- 		}
-                        -- 		memory.WriteUInt32 (num8, num12);
-                        -- 		memory.WriteUInt32 ((int)((int)(num8) + (int)(num5)), num13);
-                        -- 		num7 = (ushort)((int)(num7) + 1);
+                        -- while ((int)(num4) < (int)(num2)) {
+                        -- 	ushort num5;
+                        -- 	num5 = 0;
+                        -- 	while ((int)(num5) < (int)(num)) {
+                        -- 		this.FillCell (memory, num4, num5, num, num3, resultStartIndex, resultLength);
+                        -- 		num5 = (ushort)((int)(num5) + 1);
                         -- 	}
-                        -- 	num6 = (ushort)((int)(num6) + 1);
+                        -- 	num4 = (ushort)((int)(num4) + 1);
                         -- }
                         -- 
                         -- Starting a while loop.
@@ -3413,122 +3333,30 @@ begin
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_6\.
                         -- The while loop's condition:
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.3\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) < signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num2\), 32));
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.3\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num4\), 32)) < signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num2\), 32));
                         if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.3\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	ushort num7;
-                            -- 	num7 = 0;
-                            -- 	while ((int)(num7) < (int)(num)) {
-                            -- 		ushort num8;
-                            -- 		num8 = (ushort)((int)(num4) + (int)(num7) + (int)(num6) * (int)(num));
-                            -- 		ushort num9;
-                            -- 		num9 = 0;
-                            -- 		ushort num10;
-                            -- 		num10 = 0;
-                            -- 		ushort num11;
-                            -- 		num11 = 0;
-                            -- 		ushort num12;
-                            -- 		num12 = 0;
-                            -- 		ushort num13;
-                            -- 		num13 = 0;
-                            -- 		if ((int)(num6) != 0) {
-                            -- 			num9 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - (int)(num)));
-                            -- 		}
-                            -- 		if ((int)(num7) != 0) {
-                            -- 			num10 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - 1));
-                            -- 		}
-                            -- 		if ((int)(num7) != 0 && (int)(num6) != 0) {
-                            -- 			num11 = (ushort)memory.ReadUInt32 ((int)(num8) - (int)(num) - 1);
-                            -- 		}
-                            -- 		if (memory.ReadUInt32 ((int)(2 + (int)(num7))) == memory.ReadUInt32 ((int)((int)(num3) + (int)(num6)))) {
-                            -- 			num11 = (ushort)((int)(num11) + 1);
-                            -- 		}
-                            -- 		if ((int)(num11) > (int)(num10)) {
-                            -- 			if ((int)(num11) > (int)(num9)) {
-                            -- 				num12 = num11;
-                            -- 				int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                            -- 				if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                            -- 					conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
-                            -- 				} else {
-                            -- 					conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
-                            -- 				}
-                            -- 				num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
-                            -- 			} else {
-                            -- 				num12 = num9;
-                            -- 				num13 = 0;
-                            -- 			}
-                            -- 		} else if ((int)(num10) > (int)(num9)) {
-                            -- 			num12 = num10;
-                            -- 			num13 = 1;
-                            -- 		} else {
-                            -- 			num12 = num9;
-                            -- 			num13 = 0;
-                            -- 		}
-                            -- 		memory.WriteUInt32 (num8, num12);
-                            -- 		memory.WriteUInt32 ((int)((int)(num8) + (int)(num5)), num13);
-                            -- 		num7 = (ushort)((int)(num7) + 1);
+                            -- 	ushort num5;
+                            -- 	num5 = 0;
+                            -- 	while ((int)(num5) < (int)(num)) {
+                            -- 		this.FillCell (memory, num4, num5, num, num3, resultStartIndex, resultLength);
+                            -- 		num5 = (ushort)((int)(num5) + 1);
                             -- 	}
-                            -- 	num6 = (ushort)((int)(num6) + 1);
+                            -- 	num4 = (ushort)((int)(num4) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort num7;
+                            -- ushort num5;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num7 = 0;
+                            -- num5 = 0;
                             -- 
-                            \GenomeMatcher::FillTable(SimpleMemory).0.num7\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                            \GenomeMatcher::FillTable(SimpleMemory).0.num5\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- while ((int)(num7) < (int)(num)) {
-                            -- 	ushort num8;
-                            -- 	num8 = (ushort)((int)(num4) + (int)(num7) + (int)(num6) * (int)(num));
-                            -- 	ushort num9;
-                            -- 	num9 = 0;
-                            -- 	ushort num10;
-                            -- 	num10 = 0;
-                            -- 	ushort num11;
-                            -- 	num11 = 0;
-                            -- 	ushort num12;
-                            -- 	num12 = 0;
-                            -- 	ushort num13;
-                            -- 	num13 = 0;
-                            -- 	if ((int)(num6) != 0) {
-                            -- 		num9 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - (int)(num)));
-                            -- 	}
-                            -- 	if ((int)(num7) != 0) {
-                            -- 		num10 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - 1));
-                            -- 	}
-                            -- 	if ((int)(num7) != 0 && (int)(num6) != 0) {
-                            -- 		num11 = (ushort)memory.ReadUInt32 ((int)(num8) - (int)(num) - 1);
-                            -- 	}
-                            -- 	if (memory.ReadUInt32 ((int)(2 + (int)(num7))) == memory.ReadUInt32 ((int)((int)(num3) + (int)(num6)))) {
-                            -- 		num11 = (ushort)((int)(num11) + 1);
-                            -- 	}
-                            -- 	if ((int)(num11) > (int)(num10)) {
-                            -- 		if ((int)(num11) > (int)(num9)) {
-                            -- 			num12 = num11;
-                            -- 			int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                            -- 			if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                            -- 				conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
-                            -- 			} else {
-                            -- 				conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
-                            -- 			}
-                            -- 			num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
-                            -- 		} else {
-                            -- 			num12 = num9;
-                            -- 			num13 = 0;
-                            -- 		}
-                            -- 	} else if ((int)(num10) > (int)(num9)) {
-                            -- 		num12 = num10;
-                            -- 		num13 = 1;
-                            -- 	} else {
-                            -- 		num12 = num9;
-                            -- 		num13 = 0;
-                            -- 	}
-                            -- 	memory.WriteUInt32 (num8, num12);
-                            -- 	memory.WriteUInt32 ((int)((int)(num8) + (int)(num5)), num13);
-                            -- 	num7 = (ushort)((int)(num7) + 1);
+                            -- while ((int)(num5) < (int)(num)) {
+                            -- 	this.FillCell (memory, num4, num5, num, num3, resultStartIndex, resultLength);
+                            -- 	num5 = (ushort)((int)(num5) + 1);
                             -- }
                             -- 
                             -- Starting a while loop.
@@ -3544,658 +3372,53 @@ begin
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_7\.
                         -- The while loop's condition:
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.4\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32)) < signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num\), 32));
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.4\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num5\), 32)) < signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num\), 32));
                         if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	ushort num8;
-                            -- 	num8 = (ushort)((int)(num4) + (int)(num7) + (int)(num6) * (int)(num));
-                            -- 	ushort num9;
-                            -- 	num9 = 0;
-                            -- 	ushort num10;
-                            -- 	num10 = 0;
-                            -- 	ushort num11;
-                            -- 	num11 = 0;
-                            -- 	ushort num12;
-                            -- 	num12 = 0;
-                            -- 	ushort num13;
-                            -- 	num13 = 0;
-                            -- 	if ((int)(num6) != 0) {
-                            -- 		num9 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - (int)(num)));
-                            -- 	}
-                            -- 	if ((int)(num7) != 0) {
-                            -- 		num10 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - 1));
-                            -- 	}
-                            -- 	if ((int)(num7) != 0 && (int)(num6) != 0) {
-                            -- 		num11 = (ushort)memory.ReadUInt32 ((int)(num8) - (int)(num) - 1);
-                            -- 	}
-                            -- 	if (memory.ReadUInt32 ((int)(2 + (int)(num7))) == memory.ReadUInt32 ((int)((int)(num3) + (int)(num6)))) {
-                            -- 		num11 = (ushort)((int)(num11) + 1);
-                            -- 	}
-                            -- 	if ((int)(num11) > (int)(num10)) {
-                            -- 		if ((int)(num11) > (int)(num9)) {
-                            -- 			num12 = num11;
-                            -- 			int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                            -- 			if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                            -- 				conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
-                            -- 			} else {
-                            -- 				conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
-                            -- 			}
-                            -- 			num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
-                            -- 		} else {
-                            -- 			num12 = num9;
-                            -- 			num13 = 0;
-                            -- 		}
-                            -- 	} else if ((int)(num10) > (int)(num9)) {
-                            -- 		num12 = num10;
-                            -- 		num13 = 1;
-                            -- 	} else {
-                            -- 		num12 = num9;
-                            -- 		num13 = 0;
-                            -- 	}
-                            -- 	memory.WriteUInt32 (num8, num12);
-                            -- 	memory.WriteUInt32 ((int)((int)(num8) + (int)(num5)), num13);
-                            -- 	num7 = (ushort)((int)(num7) + 1);
+                            -- 	this.FillCell (memory, num4, num5, num, num3, resultStartIndex, resultLength);
+                            -- 	num5 = (ushort)((int)(num5) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort num8;
+                            -- this.FillCell (memory, num4, num5, num, num3, resultStartIndex, resultLength);
                             -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- num8 = (ushort)((int)(num4) + (int)(num7) + (int)(num6) * (int)(num));
-                            -- 
-                            \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.5\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num4\), 32)) + signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32));
+                            -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.GenomeMatcher::FillCell(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16)
+                            \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).row.parameter.Out.0\ <= \GenomeMatcher::FillTable(SimpleMemory).0.num4\;
+                            \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).column.parameter.Out.0\ <= \GenomeMatcher::FillTable(SimpleMemory).0.num5\;
+                            \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).inputOneLength.parameter.Out.0\ <= \GenomeMatcher::FillTable(SimpleMemory).0.num\;
+                            \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).inputTwoStartIndex.parameter.Out.0\ <= \GenomeMatcher::FillTable(SimpleMemory).0.num3\;
+                            \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).resultStartIndex.parameter.Out.0\ <= \GenomeMatcher::FillTable(SimpleMemory).0.resultStartIndex\;
+                            \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).resultLength.parameter.Out.0\ <= \GenomeMatcher::FillTable(SimpleMemory).0.resultLength\;
+                            \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16)._Started.0\ <= true;
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_11\;
                         else 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.86325
+                        -- Clock cycles needed to complete this state (approximation): 0.46515
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_10\ => 
                         -- State after the while loop which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num6 = (ushort)((int)(num6) + 1);
+                        -- num4 = (ushort)((int)(num4) + 1);
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.29\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) + to_signed(1, 32)), 16);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num6\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.29\);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.6\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num4\), 32)) + to_signed(1, 32)), 16);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.num4\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.6\);
                         -- Returning to the repeated state of the while loop which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_6\ if the loop wasn't exited with a state change.
                         if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_10\) then 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_11\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.6\ := SmartResize(signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) * signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num\), 32)), 32);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(unsigned(\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.5\ + \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.6\), 16);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num8\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.7\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num9;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num9 = 0;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num9\ := SmartResize(unsigned(to_signed(0, 32)), 16);
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num10;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num10 = 0;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num10\ := SmartResize(unsigned(to_signed(0, 32)), 16);
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num11;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num11 = 0;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num11\ := SmartResize(unsigned(to_signed(0, 32)), 16);
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num12;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num12 = 0;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num12\ := SmartResize(unsigned(to_signed(0, 32)), 16);
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort num13;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num13 = 0;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned(to_signed(0, 32)), 16);
-                        -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num6) != 0) {
-                        -- 	num9 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - (int)(num)));
-                        -- }
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_12\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7803
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_12\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.8\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) /= to_signed(0, 32);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_14\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_15\.
-                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_13\.
-
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.8\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_14\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_13\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.33405
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_13\ => 
-                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_12\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num7) != 0) {
-                        -- 	num10 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - 1));
-                        -- }
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.10\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32)) /= to_signed(0, 32);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_17\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_18\.
-                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_16\.
-
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.10\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_17\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_16\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.33405
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_14\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_12\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num9 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - (int)(num)));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num9 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - (int)(num)));
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.9\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num8\), 32)) - signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num\), 32));
-                        -- Begin SimpleMemory read.
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.9\);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_15\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3564
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_15\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.2\ := \DataIn\;
-                            \GenomeMatcher::FillTable(SimpleMemory).0.num9\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::FillTable(SimpleMemory).0.dataIn.2\), 16);
-                            -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_12\.
-                            if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_15\) then 
-                                \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_13\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_16\ => 
-                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_13\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num7) != 0 && (int)(num6) != 0) {
-                        -- 	num11 = (ushort)memory.ReadUInt32 ((int)(num8) - (int)(num) - 1);
-                        -- }
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.12\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32)) /= to_signed(0, 32);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.13\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) /= to_signed(0, 32);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.14\ := \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.12\ and \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.13\;
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_20\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_21\.
-                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_19\.
-
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.14\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_20\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_19\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7875
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_17\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_13\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num10 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - 1));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num10 = (ushort)memory.ReadUInt32 ((int)((int)(num8) - 1));
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.11\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num8\), 32)) - to_signed(1, 32);
-                        -- Begin SimpleMemory read.
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.11\);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_18\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3564
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_18\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.3\ := \DataIn\;
-                            \GenomeMatcher::FillTable(SimpleMemory).0.num10\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::FillTable(SimpleMemory).0.dataIn.3\), 16);
-                            -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_13\.
-                            if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_18\) then 
-                                \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_16\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_19\ => 
-                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_16\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (memory.ReadUInt32 ((int)(2 + (int)(num7))) == memory.ReadUInt32 ((int)((int)(num3) + (int)(num6)))) {
-                        -- 	num11 = (ushort)((int)(num11) + 1);
-                        -- }
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.17\ := to_signed(2, 32) + signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32));
-                        -- Begin SimpleMemory read.
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.17\);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_22\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_20\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_16\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num11 = (ushort)memory.ReadUInt32 ((int)(num8) - (int)(num) - 1);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num11 = (ushort)memory.ReadUInt32 ((int)(num8) - (int)(num) - 1);
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.15\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num8\), 32)) - signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num\), 32));
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.16\ := \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.15\ - to_signed(1, 32);
-                        -- Begin SimpleMemory read.
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\ <= \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.16\;
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_21\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7128
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_21\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.4\ := \DataIn\;
-                            \GenomeMatcher::FillTable(SimpleMemory).0.num11\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::FillTable(SimpleMemory).0.dataIn.4\), 16);
-                            -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_16\.
-                            if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_21\) then 
-                                \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_19\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_22\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.5\ := \DataIn\;
-                            \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.18\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num3\), 32)) + signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32));
-                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_23\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_23\ => 
-                        -- Begin SimpleMemory read.
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.18\);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_24\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_24\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.6\ := \DataIn\;
-                            \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.19\ := ConvertStdLogicVectorToUInt32(\GenomeMatcher::FillTable(SimpleMemory).0.dataIn.5\) = ConvertStdLogicVectorToUInt32(\GenomeMatcher::FillTable(SimpleMemory).0.dataIn.6\);
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_26\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_26\.
-                            --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
-
-                            if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.19\) then 
-                                \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_26\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_25\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3336
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_25\ => 
-                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_24\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num11) > (int)(num10)) {
-                        -- 	if ((int)(num11) > (int)(num9)) {
-                        -- 		num12 = num11;
-                        -- 		int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                        -- 		if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                        -- 			conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
-                        -- 		} else {
-                        -- 			conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
-                        -- 		}
-                        -- 		num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
-                        -- 	} else {
-                        -- 		num12 = num9;
-                        -- 		num13 = 0;
-                        -- 	}
-                        -- } else if ((int)(num10) > (int)(num9)) {
-                        -- 	num12 = num10;
-                        -- 	num13 = 1;
-                        -- } else {
-                        -- 	num12 = num9;
-                        -- 	num13 = 0;
-                        -- }
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num11\), 32)) > signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num10\), 32));
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_29\.
-                        --     * The false branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_36\.
-                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_27\.
-
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_28\;
-                        else 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_35\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.50535
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_26\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_24\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num11 = (ushort)((int)(num11) + 1);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num11 = (ushort)((int)(num11) + 1);
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.20\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num11\), 32)) + to_signed(1, 32)), 16);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num11\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.20\);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_24\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_26\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_25\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_27\ => 
-                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- memory.WriteUInt32 (num8, num12);
-                        -- 
-                        -- Begin SimpleMemory write.
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\ <= signed(SmartResize(\GenomeMatcher::FillTable(SimpleMemory).0.num8\, 32));
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\GenomeMatcher::FillTable(SimpleMemory).0.num12\, 32));
-                        \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_39\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_28\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	if ((int)(num11) > (int)(num9)) {
-                        -- 		num12 = num11;
-                        -- 		int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                        -- 		if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                        -- 			conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
-                        -- 		} else {
-                        -- 			conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
-                        -- 		}
-                        -- 		num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
-                        -- 	} else {
-                        -- 		num12 = num9;
-                        -- 		num13 = 0;
-                        -- 	}
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num11) > (int)(num9)) {
-                        -- 	num12 = num11;
-                        -- 	int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                        -- 	if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                        -- 		conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
-                        -- 	} else {
-                        -- 		conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
-                        -- 	}
-                        -- 	num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
-                        -- } else {
-                        -- 	num12 = num9;
-                        -- 	num13 = 0;
-                        -- }
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num11\), 32)) > signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num9\), 32));
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_31\.
-                        --     * The false branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\.
-                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_29\.
-
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_30\;
-                        else 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_34\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.50535
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_29\ => 
-                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\.
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_29\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_27\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_30\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num12 = num11;
-                        -- 	int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                        -- 	if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                        -- 		conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
-                        -- 	} else {
-                        -- 		conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
-                        -- 	}
-                        -- 	num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num12 = num11;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num12\ := \GenomeMatcher::FillTable(SimpleMemory).0.num11\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                        -- 	conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
-                        -- } else {
-                        -- 	conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
-                        -- }
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) /= to_signed(0, 32);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32)) /= to_signed(0, 32);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\ := \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ and \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\;
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\.
-                        --     * The false branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_33\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_33\.
-                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_31\.
-
-                        if ((\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\)) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_32\;
-                        else 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_33\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7875
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_31\ => 
-                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned((\GenomeMatcher::FillTable(SimpleMemory).0.conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e\)), 16);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_31\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_29\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_32\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e\ := to_signed(2, 32);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_32\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_31\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_33\ => 
-                        -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e\ := to_signed(3, 32);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_33\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_31\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_34\ => 
-                        -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num12 = num9;
-                        -- 	num13 = 0;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num12 = num9;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num12\ := \GenomeMatcher::FillTable(SimpleMemory).0.num9\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num13 = 0;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned(to_signed(0, 32)), 16);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_34\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_29\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_35\ => 
-                        -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num10) > (int)(num9)) {
-                        -- 	num12 = num10;
-                        -- 	num13 = 1;
-                        -- } else {
-                        -- 	num12 = num9;
-                        -- 	num13 = 0;
-                        -- }
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.26\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num10\), 32)) > signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num9\), 32));
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_37\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_37\.
-                        --     * The false branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_38\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_38\.
-                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_36\.
-
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.26\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_37\;
-                        else 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_38\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.50535
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_36\ => 
-                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\.
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_36\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_27\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_37\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num12 = num10;
-                        -- 	num13 = 1;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num12 = num10;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num12\ := \GenomeMatcher::FillTable(SimpleMemory).0.num10\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num13 = 1;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned(to_signed(1, 32)), 16);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_37\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_36\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_38\ => 
-                        -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num12 = num9;
-                        -- 	num13 = 0;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num12 = num9;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num12\ := \GenomeMatcher::FillTable(SimpleMemory).0.num9\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num13 = 0;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned(to_signed(0, 32)), 16);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_38\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_36\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_39\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\WritesDone\ = true) then 
-                            -- SimpleMemory write finished.
-                            \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.GenomeMatcher::FillCell(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16)
+                        if (\GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16)._Started.0\ = \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16)._Finished.0\) then 
+                            \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 ((int)((int)(num8) + (int)(num5)), num13);
+                            -- num5 = (ushort)((int)(num5) + 1);
                             -- 
-                            \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num8\), 32)) + signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num5\), 32));
-                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_40\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_40\ => 
-                        -- Begin SimpleMemory write.
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\GenomeMatcher::FillTable(SimpleMemory).0.num13\, 32));
-                        \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_41\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_41\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\WritesDone\ = true) then 
-                            -- SimpleMemory write finished.
-                            \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num7 = (ushort)((int)(num7) + 1);
-                            -- 
-                            \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.28\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32)) + to_signed(1, 32)), 16);
-                            \GenomeMatcher::FillTable(SimpleMemory).0.num7\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.28\);
+                            \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num5\), 32)) + to_signed(1, 32)), 16);
+                            \GenomeMatcher::FillTable(SimpleMemory).0.num5\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.5\);
                             -- Returning to the repeated state of the while loop which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_7\ if the loop wasn't exited with a state change.
-                            if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_41\) then 
+                            if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_11\) then 
                                 \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_9\;
                             end if;
                         end if;
@@ -4205,6 +3428,701 @@ begin
         end if;
     end process;
     -- System.Void Hast.Samples.SampleAssembly.GenomeMatcher::FillTable(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
+
+
+    -- System.Void Hast.Samples.SampleAssembly.GenomeMatcher::FillCell(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16).0 state machine start
+    \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._StateMachine\: process (\Clock\) 
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\: \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._States\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_0\;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputOneLength\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputTwoStartIndex\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultStartIndex\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultLength\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.3\: boolean := false;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.5\: boolean := false;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.7\: boolean := false;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.8\: boolean := false;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.9\: boolean := false;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.3\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.4\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.14\: boolean := false;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.15\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number2\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.16\: boolean := false;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.17\: boolean := false;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.18\: boolean := false;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.19\: boolean := false;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.20\: boolean := false;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.21\: boolean := false;
+        Variable \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._Finished\ <= false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.DataOut\ <= (others => '0');
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ <= false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ <= false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_0\;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputOneLength\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputTwoStartIndex\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultStartIndex\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultLength\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.2\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num2\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num3\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num4\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.3\ := false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.0\ := (others => '0');
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.5\ := false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.6\ := to_signed(0, 32);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.1\ := (others => '0');
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.7\ := false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.8\ := false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.9\ := false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.10\ := to_signed(0, 32);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.11\ := to_signed(0, 32);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.2\ := (others => '0');
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.12\ := to_signed(0, 32);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.3\ := (others => '0');
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.13\ := to_signed(0, 32);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.4\ := (others => '0');
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.14\ := false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.15\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number2\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.16\ := false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.17\ := false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982\ := to_signed(0, 32);
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.18\ := false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.19\ := false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.20\ := false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.21\ := false;
+                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.22\ := to_signed(0, 32);
+            else 
+                case \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ is 
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._Started\ = true) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._Started\ = true) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._Finished\ <= true;
+                        else 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._Finished\ <= false;
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_2\ => 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row.parameter.In\;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column.parameter.In\;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputOneLength\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputOneLength.parameter.In\;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputTwoStartIndex\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputTwoStartIndex.parameter.In\;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultStartIndex\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultStartIndex.parameter.In\;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultLength\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultLength.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (ushort)((int)(resultStartIndex) + (int)(column) + (int)(row) * (int)(inputOneLength));
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.0\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultStartIndex\), 32)) + signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column\), 32));
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.1\ := SmartResize(signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row\), 32)) * signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputOneLength\), 32)), 32);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7803
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.2\ := SmartResize(unsigned(\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.0\ + \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.1\), 16);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num\ := (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.2\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = 0;
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num2\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = 0;
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num3\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = 0;
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num4\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((int)(row) != 0) {
+                        -- 	num2 = (ushort)memory.ReadUInt32 ((int)((int)(num) - (int)(inputOneLength)));
+                        -- }
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.3\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row\), 32)) /= to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_5\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_6\.
+                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_4\.
+
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.3\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_5\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.73215
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_4\ => 
+                        -- State after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((int)(column) != 0) {
+                        -- 	num3 = (ushort)memory.ReadUInt32 ((int)((int)(num) - 1));
+                        -- }
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.5\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column\), 32)) /= to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_8\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_9\.
+                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_7\.
+
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.5\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_8\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.33405
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_5\ => 
+                        -- True branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num2 = (ushort)memory.ReadUInt32 ((int)((int)(num) - (int)(inputOneLength)));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = (ushort)memory.ReadUInt32 ((int)((int)(num) - (int)(inputOneLength)));
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.4\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num\), 32)) - signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputOneLength\), 32));
+                        -- Begin SimpleMemory read.
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.4\);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ <= true;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3564
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_6\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ <= false;
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.0\ := \DataIn\;
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num2\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.0\), 16);
+                            -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_3\.
+                            if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_6\) then 
+                                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_4\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_7\ => 
+                        -- State after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((int)(column) != 0 && (int)(row) != 0) {
+                        -- 	num4 = (ushort)memory.ReadUInt32 ((int)(num) - (int)(inputOneLength) - 1);
+                        -- }
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.7\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column\), 32)) /= to_signed(0, 32);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.8\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row\), 32)) /= to_signed(0, 32);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.9\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.7\ and \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.8\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_11\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_12\.
+                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_10\.
+
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.9\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_11\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_10\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7875
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_8\ => 
+                        -- True branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num3 = (ushort)memory.ReadUInt32 ((int)((int)(num) - 1));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = (ushort)memory.ReadUInt32 ((int)((int)(num) - 1));
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.6\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num\), 32)) - to_signed(1, 32);
+                        -- Begin SimpleMemory read.
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.6\);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ <= true;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3564
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_9\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ <= false;
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.1\ := \DataIn\;
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num3\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.1\), 16);
+                            -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_4\.
+                            if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_9\) then 
+                                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_7\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_10\ => 
+                        -- State after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (memory.ReadUInt32 ((int)(2 + (int)(column))) == memory.ReadUInt32 ((int)((int)(inputTwoStartIndex) + (int)(row)))) {
+                        -- 	num4 = (ushort)((int)(num4) + 1);
+                        -- }
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.12\ := to_signed(2, 32) + signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column\), 32));
+                        -- Begin SimpleMemory read.
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.12\);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ <= true;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3981
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_11\ => 
+                        -- True branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num4 = (ushort)memory.ReadUInt32 ((int)(num) - (int)(inputOneLength) - 1);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = (ushort)memory.ReadUInt32 ((int)(num) - (int)(inputOneLength) - 1);
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.10\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num\), 32)) - signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputOneLength\), 32));
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.11\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.10\ - to_signed(1, 32);
+                        -- Begin SimpleMemory read.
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.CellIndex\ <= \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.11\;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ <= true;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_12\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7128
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_12\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ <= false;
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.2\ := \DataIn\;
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num4\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.2\), 16);
+                            -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_7\.
+                            if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_12\) then 
+                                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_10\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_13\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ <= false;
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.3\ := \DataIn\;
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.13\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputTwoStartIndex\), 32)) + signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row\), 32));
+                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_14\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3981
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_14\ => 
+                        -- Begin SimpleMemory read.
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.13\);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ <= true;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_15\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_15\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\ReadsDone\ = true) then 
+                            -- SimpleMemory read finished.
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ <= false;
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.4\ := \DataIn\;
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.14\ := ConvertStdLogicVectorToUInt32(\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.3\) = ConvertStdLogicVectorToUInt32(\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.dataIn.4\);
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_17\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_17\.
+                            --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_16\.
+
+                            if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.14\) then 
+                                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_17\;
+                            else 
+                                -- There was no false branch, so going directly to the state after the if-else.
+                                \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_16\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3336
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_16\ => 
+                        -- State after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_15\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort number;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort number2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((int)(num4) > (int)(num3)) {
+                        -- 	if ((int)(num4) > (int)(num2)) {
+                        -- 		number = num4;
+                        -- 		int conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982;
+                        -- 		if (((int)(row) != 0 && (int)(column) != 0)) {
+                        -- 			conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- 		} else {
+                        -- 			conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- 		}
+                        -- 		number2 = (ushort)(conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982);
+                        -- 	} else {
+                        -- 		number = num2;
+                        -- 		number2 = 0;
+                        -- 	}
+                        -- } else if ((int)(num3) > (int)(num2)) {
+                        -- 	number = num3;
+                        -- 	number2 = 1;
+                        -- } else {
+                        -- 	number = num2;
+                        -- 	number2 = 0;
+                        -- }
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.16\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num4\), 32)) > signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num3\), 32));
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_19\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_20\.
+                        --     * The false branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_26\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_27\.
+                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_18\.
+
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.16\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_19\;
+                        else 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_26\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.50535
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_17\ => 
+                        -- True branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_15\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num4 = (ushort)((int)(num4) + 1);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = (ushort)((int)(num4) + 1);
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.15\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num4\), 32)) + to_signed(1, 32)), 16);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num4\ := (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.15\);
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_15\.
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_17\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_16\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3981
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_18\ => 
+                        -- State after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_16\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- memory.WriteUInt32 (num, number);
+                        -- 
+                        -- Begin SimpleMemory write.
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.CellIndex\ <= signed(SmartResize(\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num\, 32));
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ <= true;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number\, 32));
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_30\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_19\ => 
+                        -- True branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_16\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	if ((int)(num4) > (int)(num2)) {
+                        -- 		number = num4;
+                        -- 		int conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982;
+                        -- 		if (((int)(row) != 0 && (int)(column) != 0)) {
+                        -- 			conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- 		} else {
+                        -- 			conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- 		}
+                        -- 		number2 = (ushort)(conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982);
+                        -- 	} else {
+                        -- 		number = num2;
+                        -- 		number2 = 0;
+                        -- 	}
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((int)(num4) > (int)(num2)) {
+                        -- 	number = num4;
+                        -- 	int conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982;
+                        -- 	if (((int)(row) != 0 && (int)(column) != 0)) {
+                        -- 		conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- 	} else {
+                        -- 		conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- 	}
+                        -- 	number2 = (ushort)(conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982);
+                        -- } else {
+                        -- 	number = num2;
+                        -- 	number2 = 0;
+                        -- }
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.17\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num4\), 32)) > signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num2\), 32));
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_22\.
+                        --     * The false branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_25\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_25\.
+                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_20\.
+
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.17\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\;
+                        else 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_25\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.50535
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_20\ => 
+                        -- State after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_19\.
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_16\.
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_20\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_18\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\ => 
+                        -- True branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_19\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	number = num4;
+                        -- 	int conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982;
+                        -- 	if (((int)(row) != 0 && (int)(column) != 0)) {
+                        -- 		conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- 	} else {
+                        -- 		conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- 	}
+                        -- 	number2 = (ushort)(conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- number = num4;
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num4\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (((int)(row) != 0 && (int)(column) != 0)) {
+                        -- 	conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- } else {
+                        -- 	conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- }
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.18\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row\), 32)) /= to_signed(0, 32);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.19\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column\), 32)) /= to_signed(0, 32);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.20\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.18\ and \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.19\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_23\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_23\.
+                        --     * The false branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_24\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_24\.
+                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_22\.
+
+                        if ((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.20\)) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_23\;
+                        else 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_24\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7875
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_22\ => 
+                        -- State after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- number2 = (ushort)(conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982);
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number2\ := SmartResize(unsigned((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982\)), 16);
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_19\.
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_22\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_20\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_23\ => 
+                        -- True branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 2;
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982\ := to_signed(2, 32);
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\.
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_23\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_22\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_24\ => 
+                        -- False branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982 = 3;
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.conditional6b67f6b58da9aab696b246412479fe391a965fcf8cba97e7c1a81a6f10780982\ := to_signed(3, 32);
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_21\.
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_24\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_22\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_25\ => 
+                        -- False branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_19\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	number = num2;
+                        -- 	number2 = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- number = num2;
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- number2 = 0;
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number2\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_19\.
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_25\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_20\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_26\ => 
+                        -- False branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_16\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((int)(num3) > (int)(num2)) {
+                        -- 	number = num3;
+                        -- 	number2 = 1;
+                        -- } else {
+                        -- 	number = num2;
+                        -- 	number2 = 0;
+                        -- }
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.21\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num3\), 32)) > signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num2\), 32));
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_28\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_28\.
+                        --     * The false branch starts in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_29\ and ends in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_29\.
+                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_27\.
+
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.21\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_28\;
+                        else 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_29\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.50535
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_27\ => 
+                        -- State after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_26\.
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_16\.
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_27\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_18\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_28\ => 
+                        -- True branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_26\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	number = num3;
+                        -- 	number2 = 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- number = num3;
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- number2 = 1;
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number2\ := SmartResize(unsigned(to_signed(1, 32)), 16);
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_26\.
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_28\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_27\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_29\ => 
+                        -- False branch of the if-else started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_26\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	number = num2;
+                        -- 	number2 = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- number = num2;
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- number2 = 0;
+                        -- 
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number2\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_26\.
+                        if (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ = \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_29\) then 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_27\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_30\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ <= false;
+                            -- The following section was transformed from the .NET statement below:
+                            -- memory.WriteUInt32 ((int)((int)(num) + (int)(resultLength)), number2);
+                            -- 
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.22\ := signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.num\), 32)) + signed(SmartResize((\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultLength\), 32));
+                            -- The last SimpleMemory write just finished, so need to start the next one in the next state.
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_31\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3981
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_31\ => 
+                        -- Begin SimpleMemory write.
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.binaryOperationResult.22\);
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ <= true;
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.number2\, 32));
+                        \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_32\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_32\ => 
+                        -- Waiting for the SimpleMemory operation to finish.
+                        if (\WritesDone\ = true) then 
+                            -- SimpleMemory write finished.
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ <= false;
+                            \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State\ := \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast.Samples.SampleAssembly.GenomeMatcher::FillCell(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16).0 state machine end
 
 
     -- System.Void Hast.Samples.SampleAssembly.GenomeMatcher::Traceback(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
@@ -4227,9 +4145,8 @@ begin
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.num8\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.num9\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num10\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num10\: signed(15 downto 0) := to_signed(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.num11\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num12\: signed(15 downto 0) := to_signed(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.7\: boolean := false;
@@ -4239,6 +4156,7 @@ begin
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.11\: signed(15 downto 0) := to_signed(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.12\: boolean := false;
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.13\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num12\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
@@ -4299,9 +4217,8 @@ begin
                 \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.2\ := (others => '0');
                 \GenomeMatcher::Traceback(SimpleMemory).0.num8\ := to_unsigned(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.num9\ := to_unsigned(0, 16);
-                \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := to_unsigned(0, 16);
+                \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := to_signed(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := to_signed(0, 16);
-                \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := to_signed(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.5\ := false;
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.6\ := false;
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.7\ := false;
@@ -4311,6 +4228,7 @@ begin
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.11\ := to_signed(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.12\ := false;
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 16);
+                \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := to_unsigned(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 32);
                 \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.3\ := (others => '0');
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
@@ -4480,65 +4398,59 @@ begin
                             -- 
                             \GenomeMatcher::Traceback(SimpleMemory).0.num9\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort num10;
+                            -- short num10;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num10 = 0;
+                            -- num10 = (short)num;
                             -- 
-                            \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := signed(\GenomeMatcher::Traceback(SimpleMemory).0.num\);
                             -- The following section was transformed from the .NET statement below:
                             -- short num11;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num11 = (short)num;
+                            -- num11 = (short)num2;
                             -- 
-                            \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := signed(\GenomeMatcher::Traceback(SimpleMemory).0.num\);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := signed(\GenomeMatcher::Traceback(SimpleMemory).0.num2\);
                             -- The following section was transformed from the .NET statement below:
-                            -- short num12;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- num12 = (short)num2;
-                            -- 
-                            \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := signed(\GenomeMatcher::Traceback(SimpleMemory).0.num2\);
-                            -- The following section was transformed from the .NET statement below:
-                            -- while ((int)(num11) >= 0 && (int)(num12) >= 0 && (int)(num7) > 0) {
+                            -- while ((int)(num10) >= 0 && (int)(num11) >= 0 && (int)(num7) > 0) {
+                            -- 	if ((int)(num10) == 0) {
+                            -- 		num10 = (short)((int)(num10) - 1);
+                            -- 	}
                             -- 	if ((int)(num11) == 0) {
                             -- 		num11 = (short)((int)(num11) - 1);
                             -- 	}
-                            -- 	if ((int)(num12) == 0) {
-                            -- 		num12 = (short)((int)(num12) - 1);
-                            -- 	}
-                            -- 	num10 = (ushort)memory.ReadUInt32 ((int)((int)(num6) + (int)(num5)));
-                            -- 	switch (num10) {
+                            -- 	ushort num12;
+                            -- 	num12 = (ushort)memory.ReadUInt32 ((int)((int)(num6) + (int)(num5)));
+                            -- 	switch (num12) {
                             -- 	case 2:
                             -- 		num8 = (ushort)((int)(num6) - (int)(num) - 1);
+                            -- 		num10 = (short)((int)(num10) - 1);
                             -- 		num11 = (short)((int)(num11) - 1);
-                            -- 		num12 = (short)((int)(num12) - 1);
                             -- 		break;
                             -- 	case 1:
                             -- 		num8 = (ushort)((int)(num6) - 1);
-                            -- 		num11 = (short)((int)(num11) - 1);
+                            -- 		num10 = (short)((int)(num10) - 1);
                             -- 		break;
                             -- 	case 0:
                             -- 		num8 = (ushort)((int)(num6) - (int)(num));
-                            -- 		num12 = (short)((int)(num12) - 1);
+                            -- 		num11 = (short)((int)(num11) - 1);
                             -- 		break;
                             -- 	case 3:
+                            -- 		num10 = (short)((int)(num10) - 1);
                             -- 		num11 = (short)((int)(num11) - 1);
-                            -- 		num12 = (short)((int)(num12) - 1);
                             -- 		break;
                             -- 	}
                             -- 	if ((int)(num8) >= (int)(num4)) {
                             -- 		num9 = (ushort)memory.ReadUInt32 (num8);
                             -- 	}
-                            -- 	if ((int)(num10) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) {
+                            -- 	if ((int)(num12) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) {
                             -- 		uint number;
-                            -- 		number = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                            -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number);
-                            -- 	} else if ((int)(num10) == 3) {
+                            -- 		number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                            -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number);
+                            -- 	} else if ((int)(num12) == 3) {
                             -- 		uint number2;
-                            -- 		number2 = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                            -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number2);
+                            -- 		number2 = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                            -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number2);
                             -- 	}
                             -- 	num7 = num9;
                             -- 	num6 = num8;
@@ -4551,8 +4463,8 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_8\.
                         -- The while loop's condition:
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.5\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) >= to_signed(0, 32);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.6\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32) >= to_signed(0, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.5\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32) >= to_signed(0, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.6\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) >= to_signed(0, 32);
                         \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0.9636
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_10\ => 
@@ -4567,51 +4479,52 @@ begin
                         if (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.9\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
+                            -- 	if ((int)(num10) == 0) {
+                            -- 		num10 = (short)((int)(num10) - 1);
+                            -- 	}
                             -- 	if ((int)(num11) == 0) {
                             -- 		num11 = (short)((int)(num11) - 1);
                             -- 	}
-                            -- 	if ((int)(num12) == 0) {
-                            -- 		num12 = (short)((int)(num12) - 1);
-                            -- 	}
-                            -- 	num10 = (ushort)memory.ReadUInt32 ((int)((int)(num6) + (int)(num5)));
-                            -- 	switch (num10) {
+                            -- 	ushort num12;
+                            -- 	num12 = (ushort)memory.ReadUInt32 ((int)((int)(num6) + (int)(num5)));
+                            -- 	switch (num12) {
                             -- 	case 2:
                             -- 		num8 = (ushort)((int)(num6) - (int)(num) - 1);
+                            -- 		num10 = (short)((int)(num10) - 1);
                             -- 		num11 = (short)((int)(num11) - 1);
-                            -- 		num12 = (short)((int)(num12) - 1);
                             -- 		break;
                             -- 	case 1:
                             -- 		num8 = (ushort)((int)(num6) - 1);
-                            -- 		num11 = (short)((int)(num11) - 1);
+                            -- 		num10 = (short)((int)(num10) - 1);
                             -- 		break;
                             -- 	case 0:
                             -- 		num8 = (ushort)((int)(num6) - (int)(num));
-                            -- 		num12 = (short)((int)(num12) - 1);
+                            -- 		num11 = (short)((int)(num11) - 1);
                             -- 		break;
                             -- 	case 3:
+                            -- 		num10 = (short)((int)(num10) - 1);
                             -- 		num11 = (short)((int)(num11) - 1);
-                            -- 		num12 = (short)((int)(num12) - 1);
                             -- 		break;
                             -- 	}
                             -- 	if ((int)(num8) >= (int)(num4)) {
                             -- 		num9 = (ushort)memory.ReadUInt32 (num8);
                             -- 	}
-                            -- 	if ((int)(num10) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) {
+                            -- 	if ((int)(num12) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) {
                             -- 		uint number;
-                            -- 		number = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                            -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number);
-                            -- 	} else if ((int)(num10) == 3) {
+                            -- 		number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                            -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number);
+                            -- 	} else if ((int)(num12) == 3) {
                             -- 		uint number2;
-                            -- 		number2 = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                            -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number2);
+                            -- 		number2 = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                            -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number2);
                             -- 	}
                             -- 	num7 = num9;
                             -- 	num6 = num8;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if ((int)(num11) == 0) {
-                            -- 	num11 = (short)((int)(num11) - 1);
+                            -- if ((int)(num10) == 0) {
+                            -- 	num10 = (short)((int)(num10) - 1);
                             -- }
                             -- 
                             \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_12\;
@@ -4621,7 +4534,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.74415
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_12\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.10\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) = to_signed(0, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.10\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32) = to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \GenomeMatcher::Traceback(SimpleMemory).0._State_14\ and ends in state \GenomeMatcher::Traceback(SimpleMemory).0._State_14\.
@@ -4637,11 +4550,11 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_13\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num12) == 0) {
-                        -- 	num12 = (short)((int)(num12) - 1);
+                        -- if ((int)(num11) == 0) {
+                        -- 	num11 = (short)((int)(num11) - 1);
                         -- }
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.12\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32) = to_signed(0, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.12\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) = to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \GenomeMatcher::Traceback(SimpleMemory).0._State_16\ and ends in state \GenomeMatcher::Traceback(SimpleMemory).0._State_16\.
@@ -4658,14 +4571,14 @@ begin
                         -- True branch of the if-else started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	num11 = (short)((int)(num11) - 1);
+                        -- 	num10 = (short)((int)(num10) - 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num11 = (short)((int)(num11) - 1);
+                        -- num10 = (short)((int)(num10) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.11\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.11\);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_12\.
                         if (\GenomeMatcher::Traceback(SimpleMemory).0._State\ = \GenomeMatcher::Traceback(SimpleMemory).0._State_14\) then 
                             \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_13\;
@@ -4674,7 +4587,10 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_15\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_13\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num10 = (ushort)memory.ReadUInt32 ((int)((int)(num6) + (int)(num5)));
+                        -- ushort num12;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num12 = (ushort)memory.ReadUInt32 ((int)((int)(num6) + (int)(num5)));
                         -- 
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.14\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num6\), 32)) + (\GenomeMatcher::Traceback(SimpleMemory).0.num5\);
                         -- Begin SimpleMemory read.
@@ -4686,14 +4602,14 @@ begin
                         -- True branch of the if-else started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_13\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	num12 = (short)((int)(num12) - 1);
+                        -- 	num11 = (short)((int)(num11) - 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num12 = (short)((int)(num12) - 1);
+                        -- num11 = (short)((int)(num11) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.13\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.13\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.13\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.13\);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_13\.
                         if (\GenomeMatcher::Traceback(SimpleMemory).0._State\ = \GenomeMatcher::Traceback(SimpleMemory).0._State_16\) then 
                             \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_15\;
@@ -4705,29 +4621,29 @@ begin
                             -- SimpleMemory read finished.
                             \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.3\ := \DataIn\;
-                            \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::Traceback(SimpleMemory).0.dataIn.3\), 16);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::Traceback(SimpleMemory).0.dataIn.3\), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- switch (num10) {
+                            -- switch (num12) {
                             -- case 2:
                             -- 	num8 = (ushort)((int)(num6) - (int)(num) - 1);
+                            -- 	num10 = (short)((int)(num10) - 1);
                             -- 	num11 = (short)((int)(num11) - 1);
-                            -- 	num12 = (short)((int)(num12) - 1);
                             -- 	break;
                             -- case 1:
                             -- 	num8 = (ushort)((int)(num6) - 1);
-                            -- 	num11 = (short)((int)(num11) - 1);
+                            -- 	num10 = (short)((int)(num10) - 1);
                             -- 	break;
                             -- case 0:
                             -- 	num8 = (ushort)((int)(num6) - (int)(num));
-                            -- 	num12 = (short)((int)(num12) - 1);
+                            -- 	num11 = (short)((int)(num11) - 1);
                             -- 	break;
                             -- case 3:
+                            -- 	num10 = (short)((int)(num10) - 1);
                             -- 	num11 = (short)((int)(num11) - 1);
-                            -- 	num12 = (short)((int)(num12) - 1);
                             -- 	break;
                             -- }
                             -- 
-                            case \GenomeMatcher::Traceback(SimpleMemory).0.num10\ is 
+                            case \GenomeMatcher::Traceback(SimpleMemory).0.num12\ is 
                                 when SmartResize(unsigned(to_signed(2, 32)), 16) => 
                                     \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_19\;
                                 when SmartResize(unsigned(to_signed(1, 32)), 16) => 
@@ -4769,19 +4685,19 @@ begin
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.16\ := SmartResize(unsigned(\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.15\ - to_signed(1, 32)), 16);
                         \GenomeMatcher::Traceback(SimpleMemory).0.num8\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.16\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num11 = (short)((int)(num11) - 1);
+                        -- num10 = (short)((int)(num10) - 1);
                         -- 
                         \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_20\;
                         -- Clock cycles needed to complete this state (approximation): 0.7128
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_20\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.17\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.17\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.17\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.17\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num12 = (short)((int)(num12) - 1);
+                        -- num11 = (short)((int)(num11) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.18\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.18\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.18\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.18\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
@@ -4797,10 +4713,10 @@ begin
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num6\), 32)) - to_signed(1, 32)), 16);
                         \GenomeMatcher::Traceback(SimpleMemory).0.num8\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.19\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num11 = (short)((int)(num11) - 1);
+                        -- num10 = (short)((int)(num10) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.20\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.20\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.20\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.20\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
@@ -4816,10 +4732,10 @@ begin
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.21\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num6\), 32)) - signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num\), 32))), 16);
                         \GenomeMatcher::Traceback(SimpleMemory).0.num8\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.21\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num12 = (short)((int)(num12) - 1);
+                        -- num11 = (short)((int)(num11) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.22\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.22\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.22\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.22\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
@@ -4830,15 +4746,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7128
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_23\ => 
                         -- The following section was transformed from the .NET statement below:
+                        -- num10 = (short)((int)(num10) - 1);
+                        -- 
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.23\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.23\);
+                        -- The following section was transformed from the .NET statement below:
                         -- num11 = (short)((int)(num11) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.23\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.23\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num12 = (short)((int)(num12) - 1);
-                        -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.24\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.24\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.24\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.24\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
@@ -4850,17 +4766,17 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_24\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num10) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) {
+                        -- if ((int)(num12) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) {
                         -- 	uint number;
-                        -- 	number = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number);
-                        -- } else if ((int)(num10) == 3) {
+                        -- 	number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number);
+                        -- } else if ((int)(num12) == 3) {
                         -- 	uint number2;
-                        -- 	number2 = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number2);
+                        -- 	number2 = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number2);
                         -- }
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.26\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32)) = to_signed(2, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.26\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32)) = to_signed(2, 32);
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.27\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num9\), 32)) + to_signed(1, 32);
                         \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_27\;
                         -- Clock cycles needed to complete this state (approximation): 0.7317
@@ -4934,17 +4850,17 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	uint number;
-                        -- 	number = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number);
+                        -- 	number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- uint number;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- number = memory.ReadUInt32 ((int)(2 + (int)(num11)));
+                        -- number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\ := to_signed(2, 32) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\ := to_signed(2, 32) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32);
                         -- Begin SimpleMemory read.
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\);
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -4958,7 +4874,7 @@ begin
                             \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.5\ := \DataIn\;
                             \GenomeMatcher::Traceback(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\GenomeMatcher::Traceback(SimpleMemory).0.dataIn.5\);
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number);
+                            -- memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number);
                             -- 
                             \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.33\ := SmartResize(to_signed(2, 32) * \GenomeMatcher::Traceback(SimpleMemory).0.num5\, 32);
                             \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.34\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num4\), 32)) + (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.33\);
@@ -4967,7 +4883,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7803
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_32\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.34\) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.34\) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32);
                         -- Begin SimpleMemory write.
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\);
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
@@ -4988,13 +4904,13 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_34\ => 
                         -- False branch of the if-else started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_28\.
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num10) == 3) {
+                        -- if ((int)(num12) == 3) {
                         -- 	uint number2;
-                        -- 	number2 = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number2);
+                        -- 	number2 = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number2);
                         -- }
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32)) = to_signed(3, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32)) = to_signed(3, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \GenomeMatcher::Traceback(SimpleMemory).0._State_36\ and ends in state \GenomeMatcher::Traceback(SimpleMemory).0._State_39\.
@@ -5019,17 +4935,17 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	uint number2;
-                        -- 	number2 = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number2);
+                        -- 	number2 = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- uint number2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- number2 = memory.ReadUInt32 ((int)(2 + (int)(num11)));
+                        -- number2 = memory.ReadUInt32 ((int)(2 + (int)(num10)));
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.37\ := to_signed(2, 32) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.37\ := to_signed(2, 32) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32);
                         -- Begin SimpleMemory read.
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.37\);
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -5043,7 +4959,7 @@ begin
                             \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.6\ := \DataIn\;
                             \GenomeMatcher::Traceback(SimpleMemory).0.number2\ := ConvertStdLogicVectorToUInt32(\GenomeMatcher::Traceback(SimpleMemory).0.dataIn.6\);
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number2);
+                            -- memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num10)), number2);
                             -- 
                             \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.38\ := SmartResize(to_signed(2, 32) * \GenomeMatcher::Traceback(SimpleMemory).0.num5\, 32);
                             \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.39\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num4\), 32)) + (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.38\);
@@ -5052,7 +4968,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7803
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_38\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.40\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.39\) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.40\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.39\) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32);
                         -- Begin SimpleMemory write.
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.40\);
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
@@ -17338,9 +17254,8 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \ObjectOrientedShowcase::Run(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0._State\: \ObjectOrientedShowcase::Run(SimpleMemory).0._States\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_0\;
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7\: \Hast.Samples.SampleAssembly.MemoryContainer\;
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.input\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\: \Hast.Samples.SampleAssembly.MemoryContainer\;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.array\: \Hast.Samples.SampleAssembly.NumberContainer_Array\(0 to 3);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -17357,7 +17272,7 @@ begin
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\: boolean := false;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -17367,10 +17282,6 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ObjectOrientedShowcase::Run(SimpleMemory).0._Finished\ <= false;
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32).number.parameter.Out.0\ <= to_unsigned(0, 32);
@@ -17386,9 +17297,12 @@ begin
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Started.0\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\ <= false;
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_0\;
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := to_unsigned(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\ := (others => '0');
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.input\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\ := to_unsigned(0, 32);
@@ -17402,7 +17316,7 @@ begin
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.5\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\ := false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\ := to_unsigned(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ := to_signed(0, 32);
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := to_signed(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\ := false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
@@ -17428,59 +17342,43 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_2\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint num;
+                        -- uint input;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = memory.ReadUInt32 (0);
+                        -- MemoryContainer object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e;
                         -- 
-                        -- Begin SimpleMemory read.
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        -- The following section was transformed from the .NET statement below:
+                        -- object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e = new MemoryContainer (memory);
+                        -- 
+                        -- Initializing record fields to their defaults.
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\.\IsNull\ := false;
+                        -- Invoking the target's constructor.
+                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= true;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_3\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\);
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+                        if (\ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Finished.0\) then 
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= false;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- MemoryContainer object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7;
+                            -- input = Hast.Samples.SampleAssembly.MemoryContainer.GetInput (object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e);
                             -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7 = new MemoryContainer (memory);
-                            -- 
-                            -- Initializing record fields to their defaults.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7\.\IsNull\ := false;
-                            -- Invoking the target's constructor.
-                            -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= true;
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput()
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= true;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_4\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
-                        if (\ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Finished.0\) then 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= false;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.In.0\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num = Hast.Samples.SampleAssembly.MemoryContainer.GetInput (object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7);
-                            -- 
-                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput()
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_5\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_5\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput()
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().return.0\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.In.0\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.In.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.input\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- NumberContainer[] array;
                             -- 
@@ -17497,9 +17395,9 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\WasIncreased\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := to_unsigned(99, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- array [0].Number = num;
+                            -- array [0].Number = input;
                             -- 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.input\;
                             -- The following section was transformed from the .NET statement below:
                             -- array [1] = new NumberContainer {
                             -- 
@@ -17510,9 +17408,9 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\WasIncreased\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\Number\ := to_unsigned(99, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- array [1].Number = (uint)((long)(num) + 4L);
+                            -- array [1].Number = (uint)((long)(input) + 4L);
                             -- 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\ObjectOrientedShowcase::Run(SimpleMemory).0.num\), 64)) + to_signed(4, 64)), 32);
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\ObjectOrientedShowcase::Run(SimpleMemory).0.input\), 64)) + to_signed(4, 64)), 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\Number\ := (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- array [2] = new NumberContainer {
@@ -17539,26 +17437,26 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32).number.parameter.Out.0\ <= to_unsigned(9, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_6\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.49995
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_6\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_5\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.NumberContainer::.ctor(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- Hast.Samples.SampleAssembly.NumberContainer.set_NumberPlusFive (array [0], (uint)((long)(num) + 10L));
+                            -- Hast.Samples.SampleAssembly.NumberContainer.set_NumberPlusFive (array [0], (uint)((long)(input) + 10L));
                             -- 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize((\ObjectOrientedShowcase::Run(SimpleMemory).0.num\), 64)) + to_signed(10, 64)), 32);
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize((\ObjectOrientedShowcase::Run(SimpleMemory).0.input\), 64)) + to_signed(10, 64)), 32);
                             -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.NumberContainer::set_NumberPlusFive(System.UInt32)
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32).value.parameter.Out.0\ <= (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_7\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.49995
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_7\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.NumberContainer::set_NumberPlusFive(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\ <= false;
@@ -17570,10 +17468,10 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= to_unsigned(5, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_8\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_8\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
@@ -17585,10 +17483,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumberBy10()
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10()._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_9\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_9\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumberBy10()
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10()._Started.0\ <= false;
@@ -17600,10 +17498,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer)
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).numberContainer.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Started.0\ <= false;
@@ -17627,10 +17525,10 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.increaseBy\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).originalNumber.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.originalNumber\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumberByParameterTimes10(System.UInt32&,System.UInt32&)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Started.0\ <= false;
@@ -17645,10 +17543,10 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
@@ -17682,10 +17580,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::get_NumberPlusFive()
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::get_NumberPlusFive()
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\ <= false;
@@ -17700,41 +17598,41 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\ := not(\ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\WasIncreased\);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ and ends in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\.
-                            --     * Execution after either branch will continue in the following state: \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
+                            --     * The true branch starts in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ and ends in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\.
+                            --     * Execution after either branch will continue in the following state: \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
 
                             if (\ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\) then 
-                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\;
+                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
-                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\;
+                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.0984
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ => 
-                        -- State after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\ => 
+                        -- State after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- array3 [0] = numberContainer;
                         -- 
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.array3\(to_integer(to_signed(0, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num2;
+                        -- int num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = 0;
+                        -- num = 0;
                         -- 
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ := to_signed(0, 32);
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (num2 < 4) {
-                        -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num2], array3 [0].Number);
-                        -- 	num2 = num2 + 1;
+                        -- while (num < 4) {
+                        -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num], array3 [0].Number);
+                        -- 	num = num + 1;
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ => 
-                        -- True branch of the if-else started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ => 
+                        -- True branch of the if-else started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (numberContainer, 5u);
@@ -17747,75 +17645,75 @@ begin
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= to_unsigned(5, 32);
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
-                            -- Going to the state after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
-                            if (\ObjectOrientedShowcase::Run(SimpleMemory).0._State\ = \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\) then 
-                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\;
+                            -- Going to the state after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\.
+                            if (\ObjectOrientedShowcase::Run(SimpleMemory).0._State\ = \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\) then 
+                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\ => 
-                        -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\ => 
+                        -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
                         -- The while loop's condition:
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ < to_signed(4, 32);
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ < to_signed(4, 32);
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num2], array3 [0].Number);
-                            -- 	num2 = num2 + 1;
+                            -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num], array3 [0].Number);
+                            -- 	num = num + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num2], array3 [0].Number);
+                            -- Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num], array3 [0].Number);
                             -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\;
-                        else 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\;
+                        else 
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.46515
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\ => 
-                        -- State after the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\ => 
+                        -- State after the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
                         -- The following section was transformed from the .NET statement below:
                         -- memory.WriteUInt32 (0, this.SumNumberContainers (array));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberContainers(Hast.Samples.SampleAssembly.NumberContainer[])
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[]).numberContainers.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\ <= true;
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.num2\));
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array3\(to_integer(to_signed(0, 32))).\Number\;
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\ => 
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.num\));
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array3\(to_integer(to_signed(0, 32))).\Number\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.num2\)) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.num\)) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = num2 + 1;
+                            -- num = num + 1;
                             -- 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ + to_signed(1, 32);
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\;
-                            -- Returning to the repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ if the loop wasn't exited with a state change.
-                            if (\ObjectOrientedShowcase::Run(SimpleMemory).0._State\ = \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\) then 
-                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ + to_signed(1, 32);
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\;
+                            -- Returning to the repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\ if the loop wasn't exited with a state change.
+                            if (\ObjectOrientedShowcase::Run(SimpleMemory).0._State\ = \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\) then 
+                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberContainers(Hast.Samples.SampleAssembly.NumberContainer[])
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\ <= false;
@@ -17825,10 +17723,10 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\ObjectOrientedShowcase::Run(SimpleMemory).0.return.8\);
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_22\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_22\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -20536,13 +20434,11 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -20560,13 +20456,11 @@ begin
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.dataIn.0\ := (others => '0');
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\ := to_signed(0, 16);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.0\ := to_unsigned(0, 32);
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\ := to_signed(0, 16);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.1\ := to_unsigned(0, 32);
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\ := to_unsigned(0, 32);
             else 
                 case \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ is 
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_0\ => 
@@ -20616,34 +20510,32 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- if ((int)(number) == 0 || (int)(number) == 1) {
+                            -- if ((int)(number) <= 1) {
                             -- 	return (uint)number;
                             -- }
                             -- 
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) = to_signed(0, 32);
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) = to_signed(1, 32);
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) <= to_signed(1, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_6\ and ends in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_6\.
                             --     * Execution after either branch will continue in the following state: \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_5\.
 
-                            if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\) then 
+                            if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.1\) then 
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_6\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7866
+                        -- Clock cycles needed to complete this state (approximation): 0.53625
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- return this.RecursivelyCalculateFibonacchiSeries (memory, (short)((int)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (short)((int)(number) - 1));
                         -- 
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) - to_signed(2, 32), 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) - to_signed(2, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.2\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.3564
@@ -20669,7 +20561,7 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) - to_signed(1, 32), 16);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.number\), 32) - to_signed(1, 32), 16);
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_8\;
                         end if;
@@ -20680,7 +20572,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_9\ => 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.5\);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.3\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -20689,8 +20581,8 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.6\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.0\ + \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.1\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.6\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.0\ + \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return.1\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.binaryOperationResult.4\;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -20708,13 +20600,11 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -20732,13 +20622,11 @@ begin
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.dataIn.0\ := (others => '0');
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\ := to_signed(0, 16);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.0\ := to_unsigned(0, 32);
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\ := to_signed(0, 16);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.1\ := to_unsigned(0, 32);
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\ := to_unsigned(0, 32);
             else 
                 case \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ is 
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_0\ => 
@@ -20788,34 +20676,32 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- if ((int)(number) == 0 || (int)(number) == 1) {
+                            -- if ((int)(number) <= 1) {
                             -- 	return (uint)number;
                             -- }
                             -- 
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) = to_signed(0, 32);
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) = to_signed(1, 32);
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) <= to_signed(1, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_6\ and ends in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_6\.
                             --     * Execution after either branch will continue in the following state: \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_5\.
 
-                            if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\) then 
+                            if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.1\) then 
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_6\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7866
+                        -- Clock cycles needed to complete this state (approximation): 0.53625
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- return this.RecursivelyCalculateFibonacchiSeries (memory, (short)((int)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (short)((int)(number) - 1));
                         -- 
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) - to_signed(2, 32), 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) - to_signed(2, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.2\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.3564
@@ -20841,7 +20727,7 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) - to_signed(1, 32), 16);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.number\), 32) - to_signed(1, 32), 16);
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_8\;
                         end if;
@@ -20852,7 +20738,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_9\ => 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.5\);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.3\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -20861,8 +20747,8 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.6\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.0\ + \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.1\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.6\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.0\ + \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return.1\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.binaryOperationResult.4\;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -20880,13 +20766,11 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -20904,13 +20788,11 @@ begin
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.dataIn.0\ := (others => '0');
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\ := to_signed(0, 16);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.0\ := to_unsigned(0, 32);
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\ := to_signed(0, 16);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.1\ := to_unsigned(0, 32);
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\ := to_unsigned(0, 32);
             else 
                 case \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ is 
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_0\ => 
@@ -20960,34 +20842,32 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- if ((int)(number) == 0 || (int)(number) == 1) {
+                            -- if ((int)(number) <= 1) {
                             -- 	return (uint)number;
                             -- }
                             -- 
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) = to_signed(0, 32);
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) = to_signed(1, 32);
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) <= to_signed(1, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_6\ and ends in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_6\.
                             --     * Execution after either branch will continue in the following state: \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_5\.
 
-                            if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\) then 
+                            if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.1\) then 
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_6\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7866
+                        -- Clock cycles needed to complete this state (approximation): 0.53625
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- return this.RecursivelyCalculateFibonacchiSeries (memory, (short)((int)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (short)((int)(number) - 1));
                         -- 
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) - to_signed(2, 32), 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) - to_signed(2, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.2\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.3564
@@ -21013,7 +20893,7 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) - to_signed(1, 32), 16);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.number\), 32) - to_signed(1, 32), 16);
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_8\;
                         end if;
@@ -21024,7 +20904,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_9\ => 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.5\);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.3\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -21033,8 +20913,8 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.6\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.0\ + \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.1\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.6\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.0\ + \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return.1\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.binaryOperationResult.4\;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -21052,13 +20932,11 @@ begin
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\: boolean := false;
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\: signed(15 downto 0) := to_signed(0, 16);
         Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -21076,13 +20954,11 @@ begin
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.dataIn.0\ := (others => '0');
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\ := false;
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\ := to_signed(0, 16);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.0\ := to_unsigned(0, 32);
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\ := to_signed(0, 16);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\ := to_signed(0, 16);
                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.1\ := to_unsigned(0, 32);
-                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.6\ := to_unsigned(0, 32);
+                \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\ := to_unsigned(0, 32);
             else 
                 case \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ is 
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_0\ => 
@@ -21132,34 +21008,32 @@ begin
                             -- SimpleMemory write finished.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- if ((int)(number) == 0 || (int)(number) == 1) {
+                            -- if ((int)(number) <= 1) {
                             -- 	return (uint)number;
                             -- }
                             -- 
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) = to_signed(0, 32);
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) = to_signed(1, 32);
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\ := SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) <= to_signed(1, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_6\ and ends in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_6\.
                             --     * Execution after either branch will continue in the following state: \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_5\.
 
-                            if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\) then 
+                            if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.1\) then 
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_6\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
                                 \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_5\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7866
+                        -- Clock cycles needed to complete this state (approximation): 0.53625
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_5\ => 
                         -- State after the if-else which was started in state \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- return this.RecursivelyCalculateFibonacchiSeries (memory, (short)((int)(number) - 2)) + this.RecursivelyCalculateFibonacchiSeries (memory, (short)((int)(number) - 1));
                         -- 
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) - to_signed(2, 32), 16);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) - to_signed(2, 32), 16);
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.2\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.3564
@@ -21185,7 +21059,7 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.0\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) - to_signed(1, 32), 16);
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\ := SmartResize(SmartResize((\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.number\), 32) - to_signed(1, 32), 16);
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_8\;
                         end if;
@@ -21196,7 +21070,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_9\ => 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int16)
-                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.5\);
+                        \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).number.parameter.Out.0\ <= (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.3\);
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= true;
                         \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -21205,8 +21079,8 @@ begin
                         if (\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ = \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Finished.0\) then 
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16)._Started.0\ <= false;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.1\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).return.0\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.6\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.0\ + \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.1\;
-                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.6\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.0\ + \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return.1\;
+                            \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.return\ <= \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.binaryOperationResult.4\;
                             \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State\ := \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
@@ -22884,6 +22758,19 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.GenomeMatcher::Traceback(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.GenomeMatcher::FillCell(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16) start
+    -- Signal connections for System.Void Hast.Samples.SampleAssembly.GenomeMatcher::FillTable(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
+    \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._Started\ <= \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16)._Started.0\;
+    \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.row.parameter.In\ <= \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).row.parameter.Out.0\;
+    \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.column.parameter.In\ <= \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).column.parameter.Out.0\;
+    \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputOneLength.parameter.In\ <= \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).inputOneLength.parameter.Out.0\;
+    \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.inputTwoStartIndex.parameter.In\ <= \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).inputTwoStartIndex.parameter.Out.0\;
+    \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultStartIndex.parameter.In\ <= \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).resultStartIndex.parameter.Out.0\;
+    \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.resultLength.parameter.In\ <= \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).resultLength.parameter.Out.0\;
+    \GenomeMatcher::FillTable(SimpleMemory).0.GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16)._Finished.0\ <= \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0._Finished\;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.GenomeMatcher::FillCell(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16) end
+
+
     -- System.Void Hast::InternalInvocationProxy().Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(System.Object) start
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.ImageContrastModifier::ChangeContrast(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
     \ImageContrastModifier::<ChangeContrast>b__6_0(Object).0._Started\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__6_0(Object)._Started.0\;
@@ -23881,10 +23768,10 @@ begin
 
 
     -- System.Void Hast::SimpleMemoryOperationProxy() start
-    \CellIndex\ <= to_integer(\GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\) when \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\) when \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\) when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\Loopback::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MemoryContainer::GetInput().0.SimpleMemory.CellIndex\) when \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else to_integer(\MemoryTest::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \MemoryTest::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MemoryTest::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.CellIndex\) when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\) when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else 0;
-    \DataOut\ <= \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.DataOut\ when \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ else \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.DataOut\ when \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\ when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MemoryContainer::GetInput().0.SimpleMemory.DataOut\ when \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else \MemoryTest::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \MemoryTest::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\ when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\ when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else (others => '0');
-    \ReadEnable\ <= \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \MemoryTest::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\;
-    \WriteEnable\ <= \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ or \MemoryTest::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ or \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\;
+    \CellIndex\ <= to_integer(\GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\) when \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.CellIndex\) when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ else to_integer(\GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\) when \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\) when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\Loopback::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MemoryContainer::GetInput().0.SimpleMemory.CellIndex\) when \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else to_integer(\MemoryTest::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \MemoryTest::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MemoryTest::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.CellIndex\) when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\) when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else 0;
+    \DataOut\ <= \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.DataOut\ when \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ else \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.DataOut\ when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ else \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.DataOut\ when \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\ when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MemoryContainer::GetInput().0.SimpleMemory.DataOut\ when \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else \MemoryTest::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \MemoryTest::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\ when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\ when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else (others => '0');
+    \ReadEnable\ <= \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \MemoryTest::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\;
+    \WriteEnable\ <= \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ or \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ or \MemoryTest::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ or \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\;
     -- System.Void Hast::SimpleMemoryOperationProxy() end
 
 end Imp;

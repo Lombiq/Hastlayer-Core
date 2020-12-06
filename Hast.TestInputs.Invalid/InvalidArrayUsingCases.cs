@@ -12,7 +12,7 @@ namespace Hast.TestInputs.Invalid
 
             var array1 = new[] { 1 };
             var value1 = GetItemValuePlusOne(array1, 0);
-            var array2 = new[] { 1, 2, };
+            var array2 = new[] { 1, 2 };
             var value2 = GetItemValuePlusOne(array2, 0);
         }
 

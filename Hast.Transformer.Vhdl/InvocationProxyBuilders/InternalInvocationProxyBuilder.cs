@@ -472,7 +472,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                                 {
                                                     AssignTo = InvocationHelper
                                                         .CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                                    Expression = Value.False
+                                                    Expression = Value.False,
                                                 },
                                                 waitingForStartedInnnerBlock),
                                             }
@@ -563,13 +563,13 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                                     new Assignment
                                                     {
                                                         AssignTo = runningStateVariableReference,
-                                                        Expression = waitingForStartedStateValue
+                                                        Expression = waitingForStartedStateValue,
                                                     },
                                                     new Assignment
                                                     {
                                                         AssignTo = InvocationHelper
                                                             .CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                                        Expression = Value.False
+                                                        Expression = Value.False,
                                                     }),
                                             }
                                         },
