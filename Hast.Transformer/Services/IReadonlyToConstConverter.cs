@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -10,7 +10,7 @@ namespace Hast.Transformer.Services
     /// applies to fields that have the <see cref="ReplaceableAttribute"/>.
     /// </summary>
     /// <example>
-    /// If you have this code:
+    /// <para>If you have this code:</para>
     /// <code>
     ///     public class ParallelAlgorithm
     ///     {
@@ -22,11 +22,11 @@ namespace Hast.Transformer.Services
     ///             var input = memory.ReadInt32(Run_InputInt32Index);
     ///             var tasks = new Task&lt;int&gt;[MaxDegreeOfParallelism];
     /// </code>
-    /// The last line becomes by default:
+    /// <para>The last line becomes by default:</para>
     /// <code>
     ///             var tasks = new Task&lt;int&gt;[260];
     /// </code>
-    /// But with substitution of 123:
+    /// <para>But with substitution of 123:</para>
     /// <code>
     ///             var tasks = new Task&lt;int&gt;[123];
     /// </code>
