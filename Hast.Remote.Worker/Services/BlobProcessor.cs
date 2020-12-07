@@ -1,4 +1,4 @@
-﻿using Hast.Common.Services;
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Remote.Worker.Models;
@@ -190,7 +190,7 @@ namespace Hast.Remote.Worker.Services
                                 EnableHardwareImplementationComposition = false,
                             };
                         var hardwareRepresentation = await _hastlayer
-                            .GenerateHardware(assemblyPaths, hardwareGenerationConfiguration);
+                            .GenerateHardwareAsync(assemblyPaths, hardwareGenerationConfiguration);
 
                         cancellationToken.ThrowIfCancellationRequested();
 

@@ -39,7 +39,7 @@ namespace Hast.DynamicTests
             };
 
             Console.WriteLine("Hardware generation starts.");
-            var hardwareRepresentation = await hastlayer.GenerateHardware(
+            var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
                 new[]
                 {
                     typeof(T).Assembly,
@@ -48,7 +48,7 @@ namespace Hast.DynamicTests
 
             Console.WriteLine("Hardware generated, starting hardware execution.");
             var proxyGenerationConfiguration = new ProxyGenerationConfiguration { VerifyHardwareResults = true };
-            var hardwareInstance = await hastlayer.GenerateProxy(
+            var hardwareInstance = await hastlayer.GenerateProxyAsync(
                 hardwareRepresentation,
                 new T(),
                 proxyGenerationConfiguration);
