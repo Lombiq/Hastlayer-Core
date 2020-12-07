@@ -1,4 +1,4 @@
-﻿using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Synthesis
@@ -12,7 +12,14 @@ namespace Hast.Synthesis
     /// </remarks>
     public interface IDeviceDriver : IDeviceManifestProvider
     {
+        /// <summary>
+        /// Returns the number of cycles required to perform <paramref name="expression"/> that has 2 operands.
+        /// </summary>
         decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned);
+
+        /// <summary>
+        /// Returns the number of cycles required to perform <paramref name="expression"/> that has 1 operand.
+        /// </summary>
         decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned);
     }
 }

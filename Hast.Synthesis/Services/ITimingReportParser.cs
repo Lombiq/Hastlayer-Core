@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Hast.Common.Interfaces;
 using Hast.Synthesis.Models;
 
@@ -10,6 +10,9 @@ namespace Hast.Synthesis.Services
     /// </summary>
     public interface ITimingReportParser : ISingletonDependency
     {
+        /// <summary>
+        /// Returns a timing report from the text reader.
+        /// </summary>
         ITimingReport Parse(TextReader reportReader);
     }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Synthesis.Services
@@ -14,6 +14,5 @@ namespace Hast.Synthesis.Services
 
         public IDeviceDriver GetDriver(string deviceName) =>
             _drivers.FirstOrDefault(driver => driver.DeviceManifest?.Name == deviceName);
-
     }
 }

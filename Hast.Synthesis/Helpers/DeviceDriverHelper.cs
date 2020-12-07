@@ -56,13 +56,14 @@ namespace Hast.Synthesis.Helpers
             return latencyClockCycles;
         }
 
-        public static decimal ReturnLatencyOrThrowIfInvalid(decimal latency, Expression expression)
+        public static decimal ReturnLatencyOrThrowIfInvalid(decimal latencyNs, Expression expression)
         {
-            if (latency >= 0) return latency;
+            if (latencyNs >= 0) return latencyNs;
 
             throw new InvalidOperationException(
-                "No latency data found for the expression " + expression +
-                ". This is most possibly a bug in Hastlayer, please submit a bug report with the affected code snippet: https://github.com/Lombiq/Hastlayer-SDK/issues.");
+                $"No latency data found for the {nameof(expression)} {expression}. This is most possibly a bug in " +
+                $"Hastlayer, please submit a bug report with the affected code snippet: " +
+                $"https://github.com/Lombiq/Hastlayer-SDK/issues.");
         }
     }
 }

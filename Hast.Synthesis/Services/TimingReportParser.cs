@@ -13,12 +13,13 @@ namespace Hast.Synthesis.Services
 {
     public class TimingReportParser : ITimingReportParser
     {
+        private const string Delimiter = "\t";
         private static readonly CsvConfiguration CsvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture);
 
         public ITimingReport Parse(TextReader reportReader)
         {
             using var csvReader = new CsvReader(reportReader, CsvConfiguration);
-            csvReader.Configuration.Delimiter = "	";
+            csvReader.Configuration.Delimiter = Delimiter;
             csvReader.Configuration.CultureInfo = CultureInfo.InvariantCulture;
 
             csvReader.Read();
@@ -32,22 +33,14 @@ namespace Hast.Synthesis.Services
 
                 // These are not directly applicable in .NET.
                 var skippedOperators = new[] { "nand", "nor", "xnor" };
-                if (skippedOperators.Contains(operatorString))
-                {
-                    continue;
-                }
-
-                // Instead of the shift_left/right* versions we use dotnet_shift_left/right, which also takes a
-                // surrounding SmartResize() call into account.
-                if (operatorString.StartsWith("shift_left", StringComparison.Ordinal) || operatorString.StartsWith("shift_right", StringComparison.Ordinal))
-                {
-                    continue;
-                }
-
-                var dpdString = csvReader.GetField<string>("DPD");
-
-                // If the DPD is not specified then nothing to do.
-                if (string.IsNullOrEmpty(dpdString))
+                if (skippedOperators.Contains(operatorString) ||
+                    // Instead of the shift_left/right* versions we use dotnet_shift_left/right, which also takes a
+                    // surrounding SmartResize() call into account.
+                    operatorString.StartsWith("shift_left", StringComparison.Ordinal) ||
+                    operatorString.StartsWith("shift_right", StringComparison.Ordinal) ||
+                    // If the DPD is not specified then nothing to do.
+                    !(csvReader.GetField<string>("DPD") is { } dpdString) ||
+                    string.IsNullOrEmpty(dpdString))
                 {
                     continue;
                 }
@@ -160,48 +153,66 @@ namespace Hast.Synthesis.Services
                 // TWDFR = Requirement plus delays - Source clock delay - Requirement for arrival (clock period)
                 // For Quartus Prime:
                 // TWDFR = Data required time -(Data Arrival Time -Data Delay) -Setup relationship(clock period)
-                var twdfr = decimal.Parse(
-                    csvReader.GetField<string>("TWDFR").Replace(',', '.'), // Taking care of decimal commas.
-                    NumberStyles.Any,
-                    CultureInfo.InvariantCulture);
+                //// var twdfr = decimal.Parse(
+                ////     csvReader.GetField<string>("TWDFR").Replace(',', '.'), // Taking care of decimal commas.
+                ////     NumberStyles.Any,
+                ////     CultureInfo.InvariantCulture);
 
-                if (binaryOperator.HasValue)
-                {
-                    timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
-
-                    if (isSignAgnosticBinaryOperatorType)
-                    {
-                        timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
-                    }
-
-                    // Bitwise and/or are defined for bools too, so need to handle that above, then handling
-                    // their conditional pairs here. (Unary bit not is only defined for arithmetic types.)
-                    if (operandSizeBits == 1 &&
-                        (binaryOperator == BinaryOperatorType.BitwiseOr || binaryOperator == BinaryOperatorType.BitwiseAnd))
-                    {
-                        binaryOperator = binaryOperator == BinaryOperatorType.BitwiseOr ?
-                            BinaryOperatorType.ConditionalOr : BinaryOperatorType.ConditionalAnd;
-
-                        timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
-
-                        if (isSignAgnosticBinaryOperatorType)
-                        {
-                            timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
-                        }
-                    }
-                }
-                else if (unaryOperator.HasValue)
-                {
-                    timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
-
-                    if (isSignAgnosticUnaryOperatorType)
-                    {
-                        timingReport.SetLatencyNs(unaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
-                    }
-                }
+                HandleOperatorHasValue(
+                    (value, bits, signed) => timingReport.SetLatencyNs(value, bits, signed, constantOperand, dpd),
+                    unaryOperator,
+                    binaryOperator,
+                    operandSizeBits,
+                    isSigned,
+                    binaryOperator.HasValue ? isSignAgnosticBinaryOperatorType : isSignAgnosticUnaryOperatorType);
             }
 
             return timingReport;
+        }
+
+        private static void HandleOperatorHasValue(
+            Action<dynamic, int, bool> setLatencyNs,
+            UnaryOperatorType? unaryOperator,
+            BinaryOperatorType? binaryOperator,
+            int operandSizeBits,
+            bool isSigned,
+            bool isSignAgnostic)
+        {
+            if (!binaryOperator.HasValue)
+            {
+                if (!unaryOperator.HasValue) return;
+                setLatencyNs(unaryOperator.Value, operandSizeBits, isSigned);
+
+                if (isSignAgnostic)
+                {
+                    setLatencyNs(unaryOperator.Value, operandSizeBits, !isSigned);
+                }
+
+                return;
+            }
+
+            setLatencyNs(binaryOperator.Value, operandSizeBits, isSigned);
+
+            if (isSignAgnostic)
+            {
+                setLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned);
+            }
+
+            // Bitwise and/or are defined for bools too, so need to handle that above, then handling
+            // their conditional pairs here. (Unary bit not is only defined for arithmetic types.)
+            if (operandSizeBits == 1 &&
+                (binaryOperator == BinaryOperatorType.BitwiseOr || binaryOperator == BinaryOperatorType.BitwiseAnd))
+            {
+                binaryOperator = binaryOperator == BinaryOperatorType.BitwiseOr ?
+                    BinaryOperatorType.ConditionalOr : BinaryOperatorType.ConditionalAnd;
+
+                setLatencyNs(binaryOperator.Value, operandSizeBits, isSigned);
+
+                if (isSignAgnostic)
+                {
+                    setLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned);
+                }
+            }
         }
 
         private class TimingReport : ITimingReport
@@ -213,8 +224,7 @@ namespace Hast.Synthesis.Services
                 int operandSizeBits,
                 bool isSigned,
                 string constantOperand,
-                decimal dpd,
-                decimal twdfr)
+                decimal dpd)
             {
                 _timings[GetKey(operatorType, operandSizeBits, isSigned, constantOperand)] = dpd;
 
@@ -225,7 +235,7 @@ namespace Hast.Synthesis.Services
                 // Therefore, saving a 0 bit version here too.
                 if (operandSizeBits == 1)
                 {
-                    SetLatencyNs(operatorType, 0, isSigned, constantOperand, dpd, twdfr);
+                    SetLatencyNs(operatorType, 0, isSigned, constantOperand, dpd);
                 }
             }
 
