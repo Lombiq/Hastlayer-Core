@@ -19,8 +19,8 @@ namespace Hast.VhdlBuilder.Representation
         }
 
         /// <summary>
-        /// The raw VHDL source code to add to the syntax tree. Can contain lazily evaluated parameters with the
-        /// <c>string.Format()</c> syntax.
+        /// Initializes a new instance of the <see cref="Raw"/> class. The raw VHDL source code to add to the syntax
+        /// tree. Can contain lazily evaluated parameters with the <c>string.Format()</c> syntax.
         /// </summary>
         /// <param name="source"></param>
         public Raw(string source, params IVhdlElement[] parameters)

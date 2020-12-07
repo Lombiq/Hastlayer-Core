@@ -61,9 +61,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     variableType.GetFullName().IsDisplayOrClosureClassName() ||
                     (variableSimpleType != null &&
                     (
-                        // The TaskFactory object is saved to a variable like TaskFactory arg_97_0;
+                        //// The TaskFactory object is saved to a variable like TaskFactory arg_97_0;
                         (isTaskFactory = variableSimpleType.Identifier == nameof(System.Threading.Tasks.TaskFactory)) ||
-                        // Delegates used for the body of Tasks are functions like: Func<object, bool> arg_97_1;
+                        //// Delegates used for the body of Tasks are functions like: Func<object, bool> arg_97_1;
                         variableSimpleType.Identifier == "Func"
                     ));
                 if (!omitStatement)
@@ -117,9 +117,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         Expression = returnExpression,
                     };
 
-                    // If the expression is an assignment we can't assign it to the return signal, so need to split it.
-                    // This happens with lines like:
-                    // return (Number += increaseBy);
+                    //// If the expression is an assignment we can't assign it to the return signal, so need to split it.
+                    //// This happens with lines like:
+                    //// return (Number += increaseBy);
                     if (assigmentElement.Expression is Assignment)
                     {
                         currentBlock.Add(assigmentElement.Expression);

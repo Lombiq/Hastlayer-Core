@@ -22,8 +22,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public bool CantBeOmitted { get; set; }
 
         /// <summary>
-        /// Creates a new <see cref="BlockComment"/> object, initialized with a string that contains a newline character-
-        /// delimited block of text, corresponding to lines of the block comment.
+        /// Initializes a new instance of the <see cref="BlockComment"/> class. Initialized with a string that contains
+        /// a newline character-delimited block of text, corresponding to lines of the block comment.
         /// </summary>
         public BlockComment(string textBlock)
             : this(textBlock.Split(new[] { Environment.NewLine }, StringSplitOptions.None))

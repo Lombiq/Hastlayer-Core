@@ -55,8 +55,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 }
             }
 
-            // If both of them are PrimitiveExpressions that's something strange (like writing e.g. "if (1 == 3) { ....").
-            // Let's assume that then the correct type is that of the expression's.
+            //// If both of them are PrimitiveExpressions that's something strange (like writing e.g. "if (1 == 3) { ....").
+            //// Let's assume that then the correct type is that of the expression's.
             else if (binaryOperatorExpression.Left is PrimitiveExpression && binaryOperatorExpression.Right is PrimitiveExpression)
             {
                 leftType = expressionType;

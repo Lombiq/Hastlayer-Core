@@ -306,9 +306,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (operationIsMultiCycle &&
                 context.TransformationContext.DeviceDriver.DeviceManifest.UsesVivadoInToolChain())
             {
-                // We need to add an attribute like the one below so Vivado won't merge this variable/signal with
-                // others, thus allowing us to create XDC timing constraints for it.
-                // attribute dont_touch of \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ : variable is "true";
+                //// We need to add an attribute like the one below so Vivado won't merge this variable/signal with
+                //// others, thus allowing us to create XDC timing constraints for it.
+                //// attribute dont_touch of \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ : variable is "true";
 
                 var attributes = operationResultDataObjectIsVariable ?
                     stateMachine.LocalAttributeSpecifications :
