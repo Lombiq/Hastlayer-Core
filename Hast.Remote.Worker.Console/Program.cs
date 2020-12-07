@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Hast.Remote.Worker.Console
 {
-    internal class Program
+    public class Program
     {
+        protected Program() { }
+
         private static async Task Main()
         {
             var configuration = new TransformationWorkerConfiguration
@@ -15,7 +17,10 @@ namespace Hast.Remote.Worker.Console
                 StorageConnectionString = "UseDevelopmentStorage=true",
             };
 
+            // Those features are for internal use only.
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
             using var host = (Hastlayer)await TransformationWorker.CreateHastlayerAsync(configuration);
+#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
 
 #if DEBUG
             var logger = host.GetLogger<Program>();
@@ -26,7 +31,7 @@ namespace Hast.Remote.Worker.Console
             }
 #endif
 
-            var cancellationTokenSource = new CancellationTokenSource();
+            using var cancellationTokenSource = new CancellationTokenSource();
             System.Console.CancelKeyPress += (sender, eventArgs) =>
             {
                 eventArgs.Cancel = true;
