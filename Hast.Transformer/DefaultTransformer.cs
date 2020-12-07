@@ -34,7 +34,7 @@ namespace Hast.Transformer
 #endif
 
         // Used for turning off language features to make processing easier.
-        private static DecompilerSettings DecompilerSettings = new DecompilerSettings
+        private static readonly DecompilerSettings DecompilerSettings = new DecompilerSettings
         {
             AlwaysShowEnumMemberValues = false,
             AnonymousMethods = false,
@@ -368,14 +368,6 @@ namespace Hast.Transformer
                 _simpleMemoryUsageVerifier.VerifySimpleMemoryUsage(syntaxTree);
             }
 
-            var deviceDriver = _deviceDriverSelector.GetDriver(configuration.DeviceName);
-
-            if (deviceDriver == null)
-            {
-                throw new InvalidOperationException(
-                    $"No device driver with the name \"{configuration.DeviceName}\" was found.");
-            }
-
             var context = new TransformationContext
             {
                 Id = transformationId,
@@ -384,17 +376,28 @@ namespace Hast.Transformer
                 TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
                 KnownTypeLookupTable = knownTypeLookupTable,
                 ArraySizeHolder = arraySizeHolder,
-                DeviceDriver = deviceDriver,
+                DeviceDriver = _deviceDriverSelector.GetDriver(configuration.DeviceName),
             };
+
+            PostProcess(context, assemblyPaths);
+
+            return await _engine.TransformAsync(context);
+        }
+
+        private void PostProcess(TransformationContext context, IList<string> assemblyPaths)
+        {
+            if (context.DeviceDriver == null)
+            {
+                throw new InvalidOperationException(
+                    $"No device driver with the name \"{context.HardwareGenerationConfiguration.DeviceName}\" was found.");
+            }
 
             foreach (var eventHandler in _eventHandlers) eventHandler?.Invoke(this, context);
 
-            if (configuration.EnableCaching)
+            if (context.HardwareGenerationConfiguration.EnableCaching)
             {
                 _transformationContextCacheService.SetTransformationContext(context, assemblyPaths);
             }
-
-            return await _engine.TransformAsync(context);
         }
 
         private static async Task WriteSyntaxTreeAsync(SyntaxTree syntaxTree, string fileName)
@@ -406,7 +409,10 @@ namespace Hast.Transformer
                     await File.WriteAllTextAsync(fileName, syntaxTree.ToString());
                     return;
                 }
-                catch (IOException) { }
+                catch (IOException)
+                {
+                    // It's no big deal if we can't create it.
+                }
             }
         }
 

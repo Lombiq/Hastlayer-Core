@@ -22,25 +22,27 @@ namespace Hast.Transformer
         public static Task<IHardwareDescription> TransformAsync(
             this ITransformer transformer,
             string sourceCode,
-            Language language,
+            Language dotNetLanguage,
             IHardwareGenerationConfiguration configuration)
         {
             CompilerResults result;
-            var providerOptions = new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } };
-            var parameters = new CompilerParameters()
+            var providerOptions = new Dictionary<string, string> { { "CompilerVersion", "v4.0" } };
+            var parameters = new CompilerParameters
             {
                 GenerateInMemory = false,
                 TreatWarningsAsErrors = false,
                 OutputAssembly = "DynamicHastAssembly" + Sha2456Helper.ComputeHash(sourceCode),
             };
 
-            switch (language)
+            switch (dotNetLanguage)
             {
                 case Language.CSharp:
-                    result = new CSharpCodeProvider(providerOptions).CompileAssemblyFromSource(parameters, sourceCode);
+                    using (var csharpCompiler = new CSharpCodeProvider(providerOptions))
+                        result = csharpCompiler.CompileAssemblyFromSource(parameters, sourceCode);
                     break;
                 case Language.VisualBasic:
-                    result = new VBCodeProvider(providerOptions).CompileAssemblyFromSource(parameters, sourceCode);
+                    using (var vbCompiler = new VBCodeProvider(providerOptions))
+                        result = vbCompiler.CompileAssemblyFromSource(parameters, sourceCode);
                     break;
                 default:
                     throw new ArgumentException("Unsupported .NET language.");

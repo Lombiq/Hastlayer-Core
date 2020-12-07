@@ -69,7 +69,7 @@ namespace Hast.Transformer.Services
                         short _ => short.Parse(resultString, CultureInfo.InvariantCulture),
                         ushort _ => ushort.Parse(resultString, CultureInfo.InvariantCulture),
                         byte _ => byte.Parse(resultString, CultureInfo.InvariantCulture),
-                        bool _ => resultString.ToLowerInvariant() == "true",
+                        bool _ => resultString.ToUpperInvariant() == "TRUE",
                         _ => value.Value,
                     };
                 }

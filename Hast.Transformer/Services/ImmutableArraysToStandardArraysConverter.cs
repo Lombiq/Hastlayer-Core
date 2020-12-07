@@ -269,7 +269,8 @@ namespace Hast.Transformer.Services
                 });
             }
 
-            private static void ProcessIfIsImmutableArray<T>(T node, Action<ArrayType> processor) where T : AstNode
+            private static void ProcessIfIsImmutableArray<T>(T node, Action<ArrayType> processor)
+                where T : AstNode
             {
                 var type = node.GetActualType();
 
