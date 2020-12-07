@@ -179,7 +179,7 @@ namespace Hast.Transformer
             _logger = logger;
         }
 
-        public async Task<IHardwareDescription> Transform(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
+        public async Task<IHardwareDescription> TransformAsync(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
             var transformerConfiguration = configuration.TransformerConfiguration();
 
@@ -308,7 +308,7 @@ namespace Hast.Transformer
             if (configuration.EnableCaching && _transformationContextCacheService
                 .GetTransformationContext(assemblyPaths, transformationId) is { } cachedTransformationContext)
             {
-                return await _engine.Transform(cachedTransformationContext);
+                return await _engine.TransformAsync(cachedTransformationContext);
             }
 
             // Since this is about known (i.e. .NET built-in) types it doesn't matter which type system we use.
@@ -394,7 +394,7 @@ namespace Hast.Transformer
                 _transformationContextCacheService.SetTransformationContext(context, assemblyPaths);
             }
 
-            return await _engine.Transform(context);
+            return await _engine.TransformAsync(context);
         }
 
         private static async Task WriteSyntaxTreeAsync(SyntaxTree syntaxTree, string fileName)

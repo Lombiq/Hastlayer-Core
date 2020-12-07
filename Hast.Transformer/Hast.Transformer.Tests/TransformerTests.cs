@@ -48,7 +48,7 @@ namespace Hast.Transformer.Vhdl.Tests
 
             _mocker
                 .GetMock<ITransformingEngine>()
-                .Setup(engine => engine.Transform(It.IsAny<ITransformationContext>()))
+                .Setup(engine => engine.TransformAsync(It.IsAny<ITransformationContext>()))
                 .Returns<ITransformationContext>(context =>
                     {
                         // Sending out the context through a field is not a nice solutions but there doesn't seem to be
@@ -65,11 +65,11 @@ namespace Hast.Transformer.Vhdl.Tests
             var configuration = CreateConfig();
             var transformer = GetTransformer();
 
-            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, configuration);
+            await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, configuration);
 
             _mocker
                 .GetMock<ITransformingEngine>()
-                .Verify(engine => engine.Transform(It.Is<ITransformationContext>(context => context != null)));
+                .Verify(engine => engine.TransformAsync(It.Is<ITransformationContext>(context => context != null)));
 
             _producedContext.Id.ShouldNotBeNullOrEmpty();
             _producedContext.SyntaxTree.ShouldNotBeNull();
@@ -83,9 +83,9 @@ namespace Hast.Transformer.Vhdl.Tests
             var config = CreateConfig();
             var transformer = GetTransformer();
 
-            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             var firstId = _producedContext.Id;
-            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, config);
+            await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of assemblies transformed being different.");
 
             config.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
@@ -93,24 +93,24 @@ namespace Hast.Transformer.Vhdl.Tests
                 {
                     MaxDegreeOfParallelism = 5,
                 });
-            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
             config.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Single().MaxDegreeOfParallelism = 15;
-            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the max degree of parallelism being different.");
 
             config.HardwareEntryPointMemberFullNames.Add("aaa");
-            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
             config.HardwareEntryPointMemberFullNames.Add("bbb");
-            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members being different.");
 
             config.HardwareEntryPointMemberNamePrefixes.Add("aaa");
-            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
             config.HardwareEntryPointMemberNamePrefixes.Add("bbb");
-            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+            await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members prefixed being different.");
         }
 
@@ -118,7 +118,7 @@ namespace Hast.Transformer.Vhdl.Tests
         public async Task UnusedDeclarationsArentInTheSyntaxTree()
         {
             var transformer = GetTransformer();
-            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, CreateConfig());
+            await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, CreateConfig());
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(7, "Not the number of types remained in the syntax tree than there are used.");
@@ -138,7 +138,7 @@ namespace Hast.Transformer.Vhdl.Tests
                 .Add($"System.Void {typeof(ComplexTypeHierarchy).FullName}::{typeof(IInterface1).FullName}.{nameof(IInterface1.Interface1Method1)}()");
             var transformer = GetTransformer();
 
-            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
+            await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(3, "Not the number of types remained in the syntax tree than there are used.");
@@ -162,7 +162,7 @@ namespace Hast.Transformer.Vhdl.Tests
             configuration.HardwareEntryPointMemberNamePrefixes.Add(typeof(ComplexTypeHierarchy).Namespace);
             var transformer = GetTransformer();
 
-            await transformer.Transform(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
+            await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(5, "Not the number of types remained in the syntax tree than there are used.");

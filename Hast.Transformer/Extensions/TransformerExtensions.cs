@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +19,7 @@ namespace Hast.Transformer
 
     public static class TransformerExtensions
     {
-        public static Task<IHardwareDescription> Transform(
+        public static Task<IHardwareDescription> TransformAsync(
             this ITransformer transformer,
             string sourceCode,
             Language language,
@@ -53,7 +53,7 @@ namespace Hast.Transformer
                 throw new ArgumentException("The provided source code is invalid and has the following errors: " + builder);
             }
 
-            return transformer.Transform(new[] { result.CompiledAssembly }, configuration);
+            return transformer.TransformAsync(new[] { result.CompiledAssembly }, configuration);
         }
     }
 }

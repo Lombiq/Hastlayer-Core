@@ -23,7 +23,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _recordComposer.IsSupportedRecordMember(node) ||
             node is FieldDeclaration && !_displayClassFieldTransformer.IsDisplayClassField((FieldDeclaration)node);
 
-        public Task<IMemberTransformerResult> Transform(TypeDeclaration typeDeclaration, IVhdlTransformationContext context) =>
+        public Task<IMemberTransformerResult> TransformAsync(TypeDeclaration typeDeclaration, IVhdlTransformationContext context) =>
             Task.Run<IMemberTransformerResult>(() =>
             {
                 var result = new MemberTransformerResult

@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Hast.Common.Interfaces;
@@ -11,6 +11,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     public interface IPocoTransformer : IDependency
     {
         bool IsSupportedMember(AstNode node);
-        Task<IMemberTransformerResult> Transform(TypeDeclaration typeDeclaration, IVhdlTransformationContext context);
+        Task<IMemberTransformerResult> TransformAsync(TypeDeclaration typeDeclaration, IVhdlTransformationContext context);
     }
 }

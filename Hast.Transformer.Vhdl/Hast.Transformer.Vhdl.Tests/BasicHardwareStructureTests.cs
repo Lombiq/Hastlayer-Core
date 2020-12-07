@@ -27,7 +27,7 @@ namespace Hast.Transformer.Vhdl.Tests
 
             await Host.RunAsync<ITransformer>(async transformer =>
             {
-                var hardwareDescription = await TransformClassStrutureExamplesToVhdl(transformer);
+                var hardwareDescription = await TransformClassStrutureExamplesToVhdlAsync(transformer);
 
                 hardwareDescription.Language.ShouldBe("VHDL");
                 hardwareDescription.HardwareEntryPointNamesToMemberIdMappings.Count.ShouldBe(14);
@@ -46,7 +46,7 @@ namespace Hast.Transformer.Vhdl.Tests
 
             await Host.RunAsync<ITransformer>(async transformer =>
             {
-                await TransformClassStrutureExamplesToVhdl(transformer);
+                await TransformClassStrutureExamplesToVhdlAsync(transformer);
                 var topModule = (Module)manifest.Modules.Last();
 
                 var architecture = topModule.Architecture;
@@ -63,8 +63,8 @@ namespace Hast.Transformer.Vhdl.Tests
             });
         }
 
-        private Task<VhdlHardwareDescription> TransformClassStrutureExamplesToVhdl(ITransformer transformer) =>
-            TransformAssembliesToVhdl(
+        private Task<VhdlHardwareDescription> TransformClassStrutureExamplesToVhdlAsync(ITransformer transformer) =>
+            TransformAssembliesToVhdlAsync(
                 transformer,
                 new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
                 configuration => configuration.TransformerConfiguration().UseSimpleMemory = false);

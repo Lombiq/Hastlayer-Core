@@ -28,7 +28,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _declarableTypeCreator = declarableTypeCreator;
         }
 
-        public Task<IMemberTransformerResult> Transform(MethodDeclaration method, IVhdlTransformationContext context) =>
+        public Task<IMemberTransformerResult> TransformAsync(MethodDeclaration method, IVhdlTransformationContext context) =>
             Task.Run(async () =>
             {
                 if (method.Modifiers.HasFlag(Modifiers.Extern))

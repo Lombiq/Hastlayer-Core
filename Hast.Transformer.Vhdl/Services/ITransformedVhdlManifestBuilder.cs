@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Common.Interfaces;
@@ -7,6 +7,6 @@ namespace Hast.Transformer.Vhdl.Services
 {
     public interface ITransformedVhdlManifestBuilder : IDependency
     {
-        Task<ITransformedVhdlManifest> BuildManifest(ITransformationContext transformationContext);
+        Task<ITransformedVhdlManifest> BuildManifestAsync(ITransformationContext transformationContext);
     }
 }

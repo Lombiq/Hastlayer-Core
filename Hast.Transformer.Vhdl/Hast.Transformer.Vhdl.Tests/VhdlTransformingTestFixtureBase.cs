@@ -44,7 +44,7 @@ namespace Hast.Transformer.Vhdl.Tests
             };
         }
 
-        protected virtual async Task<VhdlHardwareDescription> TransformAssembliesToVhdl(
+        protected virtual async Task<VhdlHardwareDescription> TransformAssembliesToVhdlAsync(
             ITransformer transformer,
             IList<Assembly> assemblies,
             Action<HardwareGenerationConfiguration> configurationModifier = null,
@@ -53,7 +53,7 @@ namespace Hast.Transformer.Vhdl.Tests
             deviceName ??= DeviceName;
             var configuration = new HardwareGenerationConfiguration(deviceName, null) { EnableCaching = false };
             configurationModifier?.Invoke(configuration);
-            return (VhdlHardwareDescription)await transformer.Transform(assemblies, configuration);
+            return (VhdlHardwareDescription)await transformer.TransformAsync(assemblies, configuration);
         }
 
         private class StubMemberSuitabilityChecker : IMemberSuitabilityChecker

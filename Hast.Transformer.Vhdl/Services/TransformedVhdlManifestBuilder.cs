@@ -73,7 +73,7 @@ namespace Hast.Transformer.Vhdl.Services
             _unsupportedConstructsVerifier = unsupportedConstructsVerifier;
         }
 
-        public async Task<ITransformedVhdlManifest> BuildManifest(ITransformationContext transformationContext)
+        public async Task<ITransformedVhdlManifest> BuildManifestAsync(ITransformationContext transformationContext)
         {
             var syntaxTree = transformationContext.SyntaxTree;
 
@@ -369,11 +369,11 @@ namespace Hast.Transformer.Vhdl.Services
                 case NodeType.Member:
                     if (node is MethodDeclaration)
                     {
-                        memberTransformerTasks.Add(_methodTransformer.Transform((MethodDeclaration)node, transformationContext));
+                        memberTransformerTasks.Add(_methodTransformer.TransformAsync((MethodDeclaration)node, transformationContext));
                     }
                     else if (node is FieldDeclaration && _displayClassFieldTransformer.IsDisplayClassField((FieldDeclaration)node))
                     {
-                        memberTransformerTasks.Add(_displayClassFieldTransformer.Transform((FieldDeclaration)node, transformationContext));
+                        memberTransformerTasks.Add(_displayClassFieldTransformer.TransformAsync((FieldDeclaration)node, transformationContext));
                     }
                     else if (!_pocoTransformer.IsSupportedMember(node))
                     {
@@ -407,7 +407,7 @@ namespace Hast.Transformer.Vhdl.Services
                                 !typeDeclaration.Members.Any(member => member.IsHardwareEntryPointMember()) &&
                                 !typeDeclaration.Modifiers.HasFlag(Modifiers.Static))
                             {
-                                memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext));
+                                memberTransformerTasks.Add(_pocoTransformer.TransformAsync(typeDeclaration, transformationContext));
                             }
 
                             traverseTo = traverseTo.Where(n =>

@@ -14,7 +14,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         [Fact]
         public async Task ClassStructureAssembliesMatchApproved() => await Host.RunAsync<ITransformer>(async transformer =>
                                                                    {
-                                                                       var hardwareDescription = await TransformAssembliesToVhdl(
+                                                                       var hardwareDescription = await TransformAssembliesToVhdlAsync(
                                                                            transformer,
                                                                            new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
                                                                            configuration =>
@@ -28,7 +28,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         [Fact]
         public async Task StaticTestInputAssemblyMatchesApproved() => await Host.RunAsync<ITransformer>(async transformer =>
                                                                     {
-                                                                        var hardwareDescription = await TransformAssembliesToVhdl(
+                                                                        var hardwareDescription = await TransformAssembliesToVhdlAsync(
                                                                             transformer,
                                                                             new[] { typeof(ArrayUsingCases).Assembly },
                                                                             configuration =>

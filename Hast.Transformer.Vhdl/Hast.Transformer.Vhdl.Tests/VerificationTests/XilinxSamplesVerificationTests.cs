@@ -20,51 +20,51 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
         [Theory, MemberData(nameof(AllDevices))]
         public async Task BasicSamplesMatchApproved(string deviceName) =>
-            (await CreateSourceForBasicSamples()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateSourceForBasicSamplesAsync()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task KpzSamplesMatchesApproved(string deviceName) =>
-            (await CreateVhdlForKpzSamples()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForKpzSamplesAsync()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task UnumSampleMatchesApproved(string deviceName) =>
-            (await CreateVhdlForUnumSample()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForUnumSampleAsync()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task PositSampleMatchesApproved(string deviceName) =>
-            (await CreateVhdlForPositSample()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForPositSampleAsync()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task Posit32SampleMatchesApproved(string deviceName) =>
-            (await CreateVhdlForPosit32Sample()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForPosit32SampleAsync()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task Posit32AdvancedSampleMatchesApproved(string deviceName) =>
-            (await CreateSourceForAdvancedPosit32Sample()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateSourceForAdvancedPosit32SampleAsync()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task Posit32SampleWithInliningMatchesApproved(string deviceName) =>
-            (await CreateVhdlForPosit32SampleWithInlining()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForPosit32SampleWithInliningAsync()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task Posit32FusedSampleMatchesApproved(string deviceName) =>
-            (await CreateVhdlForPosit32FusedSample()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForPosit32FusedSampleAsync()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task Fix64SamplesMatchesApproved(string deviceName) =>
-            (await CreateVhdlForFix64Samples()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForFix64SamplesAsync()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
         [Theory, MemberData(nameof(AllDevices))]
         [InlineData(Nexys4DdrManifestProvider.DeviceName)]
         public async Task FSharpSamplesMatchesApproved(string deviceName) =>
-            (await CreateVhdlForFSharpSamples()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
+            (await CreateVhdlForFSharpSamplesAsync()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
     }
 }

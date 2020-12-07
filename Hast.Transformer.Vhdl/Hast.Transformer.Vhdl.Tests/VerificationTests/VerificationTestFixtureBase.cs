@@ -26,12 +26,12 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         // ShouldlyConfiguration.DiffTools.SetDiffToolPriorities(kDiffTortoiseHg);
         // }
 
-        protected override Task<VhdlHardwareDescription> TransformAssembliesToVhdl(
+        protected override Task<VhdlHardwareDescription> TransformAssembliesToVhdlAsync(
            ITransformer transformer,
            IList<Assembly> assemblies,
            Action<HardwareGenerationConfiguration> configurationModifier = null,
             string deviceName = null) =>
-            base.TransformAssembliesToVhdl(
+            base.TransformAssembliesToVhdlAsync(
                 transformer,
                 assemblies,
                 configuration =>
