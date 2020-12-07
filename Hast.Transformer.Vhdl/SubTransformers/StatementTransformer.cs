@@ -59,13 +59,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // PrimeCalculator.<>c__DisplayClass9_0 <>c__DisplayClass9_; They are being kept track of when
                     // processing the corresponding ObjectCreateExpressions.
                     variableType.GetFullName().IsDisplayOrClosureClassName() ||
-                    variableSimpleType != null &&
+                    (variableSimpleType != null &&
                     (
                         // The TaskFactory object is saved to a variable like TaskFactory arg_97_0;
                         (isTaskFactory = variableSimpleType.Identifier == nameof(System.Threading.Tasks.TaskFactory)) ||
                         // Delegates used for the body of Tasks are functions like: Func<object, bool> arg_97_1;
                         variableSimpleType.Identifier == "Func"
-                    );
+                    ));
                 if (!omitStatement)
                 {
                     foreach (var variableInitializer in variableStatement.Variables)

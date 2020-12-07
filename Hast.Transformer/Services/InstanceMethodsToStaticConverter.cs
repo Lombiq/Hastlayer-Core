@@ -104,8 +104,8 @@ namespace Hast.Transformer.Services
                     var targetType = targetMemberReference.Target.GetActualType();
                     var isAffectedMethodCall =
                         (targetMemberReference.Target is ThisReferenceExpression ||
-                            targetType != null &&
-                            targetType.GetFullName() == _methodParentFullName)
+                            (targetType != null &&
+                            targetType.GetFullName() == _methodParentFullName))
                         &&
                         targetMemberReference.GetMemberFullName() == _methodFullName;
 

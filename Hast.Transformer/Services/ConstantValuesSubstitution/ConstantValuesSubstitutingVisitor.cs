@@ -73,10 +73,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (!(assignmentExpression.Right is PrimitiveExpression) &&
                 !assignmentExpression.Right.Is<BinaryOperatorExpression>(binary =>
-                    binary.Left.GetFullName() == assignmentExpression.Left.GetFullName() &&
-                        binary.Right is PrimitiveExpression ||
-                    binary.Right.GetFullName() == assignmentExpression.Left.GetFullName() &&
-                        binary.Left is PrimitiveExpression))
+                    (binary.Left.GetFullName() == assignmentExpression.Left.GetFullName() &&
+                        binary.Right is PrimitiveExpression) ||
+                    (binary.Right.GetFullName() == assignmentExpression.Left.GetFullName() &&
+                        binary.Left is PrimitiveExpression)))
             {
                 _constantValuesTable.MarkAsNonConstant(assignmentExpression.Left, parentBlock);
             }
@@ -323,7 +323,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             // First checking if there is a substitution for the expression; if not then if it's a member reference
             // then check whether there is a global substitution for the member.
-            if (!isHardToFollow && _constantValuesTable.RetrieveAndDeleteConstantValue(expression, out valueExpression) ||
+            if ((!isHardToFollow && _constantValuesTable.RetrieveAndDeleteConstantValue(expression, out valueExpression)) ||
                 expression.Is<MemberReferenceExpression>(memberReferenceExpression =>
                 {
                     var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);

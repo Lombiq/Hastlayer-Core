@@ -198,27 +198,27 @@ namespace Hast.Transformer.Services
                 else
                 {
                     // Omitting decimal, double, float rules as those are not supported any way.
-                    if (leftTypeFullName == ulongFullName && rightTypeFullName != ulongFullName ||
-                        leftTypeFullName != ulongFullName && rightTypeFullName == ulongFullName)
+                    if ((leftTypeFullName == ulongFullName && rightTypeFullName != ulongFullName) ||
+                        (leftTypeFullName != ulongFullName && rightTypeFullName == ulongFullName))
                     {
                         if (leftTypeFullName == ulongFullName) CastRightToLeft();
                         else CastLeftToRight();
                     }
-                    else if (leftTypeFullName == longFullName && rightTypeFullName != longFullName ||
-                        leftTypeFullName != longFullName && rightTypeFullName == longFullName)
+                    else if ((leftTypeFullName == longFullName && rightTypeFullName != longFullName) ||
+                        (leftTypeFullName != longFullName && rightTypeFullName == longFullName))
                     {
                         if (leftTypeFullName == longFullName) CastRightToLeft();
                         else CastLeftToRight();
                     }
-                    else if (leftTypeFullName == uintFullName && typesConvertedToLongForUint.Contains(rightTypeFullName) ||
-                        rightTypeFullName == uintFullName && typesConvertedToLongForUint.Contains(leftTypeFullName))
+                    else if ((leftTypeFullName == uintFullName && typesConvertedToLongForUint.Contains(rightTypeFullName)) ||
+                        (rightTypeFullName == uintFullName && typesConvertedToLongForUint.Contains(leftTypeFullName)))
                     {
                         var longType = _knownTypeLookupTable.Lookup(KnownTypeCode.Int64);
                         ReplaceLeft(longType);
                         ReplaceRight(longType);
                     }
-                    else if (leftTypeFullName == uintFullName && rightTypeFullName != uintFullName ||
-                        leftTypeFullName != uintFullName && rightTypeFullName == uintFullName)
+                    else if ((leftTypeFullName == uintFullName && rightTypeFullName != uintFullName) ||
+                        (leftTypeFullName != uintFullName && rightTypeFullName == uintFullName))
                     {
                         if (leftTypeFullName == uintFullName) CastRightToLeft();
                         else CastLeftToRight();

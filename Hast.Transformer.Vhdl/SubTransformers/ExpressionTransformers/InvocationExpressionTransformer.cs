@@ -188,7 +188,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                             {
                                 ArrayReference = dataOutReference,
                                 IsDownTo = true,
-                                IndexFrom = (elementIndex + 1) * 8 - 1,
+                                IndexFrom = ((elementIndex + 1) * 8) - 1,
                                 IndexTo = elementIndex * 8,
                             },
                             // The data to write is conventionally the second parameter.

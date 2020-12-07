@@ -83,14 +83,14 @@ namespace Hast.TestInputs.Dynamic
 
             // These variations can't be applied to the operands directly except for shift (which has a cast).
             if (
-                leftType == "sbyte" && rightType == "ulong" ||
-                leftType == "short" && rightType == "ulong" ||
-                leftType == "int" && rightType == "ulong" ||
-                leftType == "long" && rightType == "ulong" ||
-                leftType == "ulong" && rightType == "sbyte" ||
-                leftType == "ulong" && rightType == "short" ||
-                leftType == "ulong" && rightType == "int" ||
-                leftType == "ulong" && rightType == "long")
+                (leftType == "sbyte" && rightType == "ulong") ||
+                (leftType == "short" && rightType == "ulong") ||
+                (leftType == "int" && rightType == "ulong") ||
+                (leftType == "long" && rightType == "ulong") ||
+                (leftType == "ulong" && rightType == "sbyte") ||
+                (leftType == "ulong" && rightType == "short") ||
+                (leftType == "ulong" && rightType == "int") ||
+                (leftType == "ulong" && rightType == "long"))
             {
                 return;
             }

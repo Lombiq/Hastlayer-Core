@@ -44,13 +44,13 @@ namespace Hast.Transformer.Vhdl.Verifiers
                         // parallelized expressions (since that would require concurrent access too).
                         var isAssignedTo =
                             // The field is directly assigned to.
-                            memberReferenceExpression.Parent is AssignmentExpression &&
-                            ((AssignmentExpression)memberReferenceExpression.Parent).Left == memberReferenceExpression
+                            (memberReferenceExpression.Parent is AssignmentExpression &&
+                            ((AssignmentExpression)memberReferenceExpression.Parent).Left == memberReferenceExpression)
                             ||
                             // The field's indexed element is assigned to.
-                            memberReferenceExpression.Parent is IndexerExpression &&
+                            (memberReferenceExpression.Parent is IndexerExpression &&
                             memberReferenceExpression.Parent.Parent is AssignmentExpression &&
-                            ((AssignmentExpression)memberReferenceExpression.Parent.Parent).Left == memberReferenceExpression.Parent;
+                            ((AssignmentExpression)memberReferenceExpression.Parent.Parent).Left == memberReferenceExpression.Parent);
                         if (isAssignedTo)
                         {
                             throw new NotSupportedException(

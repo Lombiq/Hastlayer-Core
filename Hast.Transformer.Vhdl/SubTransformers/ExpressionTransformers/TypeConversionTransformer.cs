@@ -86,7 +86,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var fromType = convertToLeftType ? rightVhdlType : leftVhdlType;
             var toType = convertToLeftType ? leftVhdlType : rightVhdlType;
 
-            if (isLeft && toType == leftVhdlType || !isLeft && toType == rightVhdlType)
+            if ((isLeft && toType == leftVhdlType) || (!isLeft && toType == rightVhdlType))
             {
                 return variableReference;
             }
@@ -183,8 +183,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             // Trying supported cast scenarios:
 
-            if (KnownDataTypes.SignedIntegers.Contains(fromType) && KnownDataTypes.SignedIntegers.Contains(toType) ||
-                KnownDataTypes.UnsignedIntegers.Contains(fromType) && KnownDataTypes.UnsignedIntegers.Contains(toType))
+            if ((KnownDataTypes.SignedIntegers.Contains(fromType) && KnownDataTypes.SignedIntegers.Contains(toType)) ||
+                (KnownDataTypes.UnsignedIntegers.Contains(fromType) && KnownDataTypes.UnsignedIntegers.Contains(toType)))
             {
                 if (fromSize == toSize)
                 {

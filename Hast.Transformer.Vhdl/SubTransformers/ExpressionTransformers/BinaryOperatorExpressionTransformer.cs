@@ -94,8 +94,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // At this point if non-primitive types are checked for equality it could mean that they are custom types
             // either without the equality operator defined or they are custom value types and a ReferenceEquals() is
             // attempted on them which is wrong.
-            if (((!leftType.IsPrimitive() || leftType.GetKnownTypeCode() == KnownTypeCode.Object) && leftType.Kind != TypeKind.Enum ||
-                (!rightType.IsPrimitive() || rightType.GetKnownTypeCode() == KnownTypeCode.Object) && rightType.Kind != TypeKind.Enum)
+            if ((((!leftType.IsPrimitive() || leftType.GetKnownTypeCode() == KnownTypeCode.Object) && leftType.Kind != TypeKind.Enum) ||
+                ((!rightType.IsPrimitive() || rightType.GetKnownTypeCode() == KnownTypeCode.Object) && rightType.Kind != TypeKind.Enum))
                 &&
                 !(expression.Left is NullReferenceExpression || expression.Right is NullReferenceExpression))
             {
@@ -162,7 +162,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 isMultiplication &&
                 (
                     resultType == expression.GetActualType() ||
-                    resultType == leftType && resultType == rightType
+                    (resultType == leftType && resultType == rightType)
                 );
 
             DataType leftVhdlType = null;
@@ -184,15 +184,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (leftType != null && rightType != null)
             {
                 shouldResizeResult = shouldResizeResult ||
-                    isMultiplication &&
+                    (isMultiplication &&
                     resultTypeSize != 0 &&
                     resultTypeSize == leftTypeSize &&
-                    resultTypeSize == rightTypeSize
+                    resultTypeSize == rightTypeSize)
                     ||
-                    expression.Operator == BinaryOperatorType.Add &&
-                    !(resultType == leftType && resultType == rightType)
+                    (expression.Operator == BinaryOperatorType.Add &&
+                    !(resultType == leftType && resultType == rightType))
                     ||
-                    resultTypeSize != 0 && (resultTypeSize != leftTypeSize || resultTypeSize != rightTypeSize);
+                    (resultTypeSize != 0 && (resultTypeSize != leftTypeSize || resultTypeSize != rightTypeSize));
             }
 
             var maxOperandSize = Math.Max(leftTypeSize, rightTypeSize);
