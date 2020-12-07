@@ -1,19 +1,19 @@
-﻿using Hast.Layer;
+using Hast.Layer;
+using Hast.TestInputs.Dynamic;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Hast.TestInputs.Dynamic;
 
 namespace Hast.DynamicTests
 {
     internal static class TestExecutor
     {
-        public static Task ExecuteSelectedTest<T>(Expression<Action<T>> caseSelector, Action<T> testExecutor)
+        public static Task ExecuteSelectedTestAsync<T>(Expression<Action<T>> caseSelector, Action<T> testExecutor)
             where T : DynamicTestInputBase, new() =>
-            ExecuteTest(configuration => configuration.AddHardwareEntryPointMethod(caseSelector), testExecutor);
+            ExecuteTestAsync(configuration => configuration.AddHardwareEntryPointMethod(caseSelector), testExecutor);
 
-        public static async Task ExecuteTest<T>(Action<HardwareGenerationConfiguration> configurator, Action<T> testExecutor)
+        public static async Task ExecuteTestAsync<T>(Action<HardwareGenerationConfiguration> configurator, Action<T> testExecutor)
             where T : DynamicTestInputBase, new()
         {
             using var hastlayer = Hastlayer.Create();
@@ -23,20 +23,19 @@ namespace Hast.DynamicTests
 
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
-            // var folderName = configuration.HardwareEntryPointMemberFullNames.Single();
-            // var methodNameStartIndex = folderName.IndexOf("::");
-            // folderName = folderName.Substring(methodNameStartIndex + 2, folderName.IndexOf("(") - 2 - methodNameStartIndex);
-            // configuration.HardwareFrameworkPath = $@"E:\ShortPath\BinaryAndUnaryTests\{folderName}";
+            // Thoth, what's this?
+            //// var folderName = configuration.HardwareEntryPointMemberFullNames.Single();
+            //// var methodNameStartIndex = folderName.IndexOf("::");
+            //// folderName = folderName.Substring(methodNameStartIndex + 2, folderName.IndexOf("(") - 2 - methodNameStartIndex);
+            //// configuration.HardwareFrameworkPath = $@"E:\ShortPath\BinaryAndUnaryTests\{folderName}";
 
             hastlayer.ExecutedOnHardware += (sender, e) =>
-            {
                 Console.WriteLine(
                     "Executing on hardware took " +
                     e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
                     " milliseconds (net) " +
                     e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
                     " milliseconds (all together).");
-            };
 
             Console.WriteLine("Hardware generation starts.");
             var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(

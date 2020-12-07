@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Hast.DynamicTests
 {
-    class Program
+    public static class Program
     {
         public static Task Main() =>
             // Uncomment this to generate the content of BinaryAndUnaryOperatorExpressionCases.
