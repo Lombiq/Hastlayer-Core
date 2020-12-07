@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace Hast.Remote.Worker.Services
 {
-    [IDependencyInitializer(nameof(InitializeService))]
+    [DependencyInitializer(nameof(InitializeService))]
     public class ApplicationInsightsTelemetryManager : IApplicationInsightsTelemetryManager
     {
         private readonly TelemetryClient _telemetryClient;

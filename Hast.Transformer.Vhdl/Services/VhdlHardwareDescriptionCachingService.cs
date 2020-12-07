@@ -18,13 +18,13 @@ namespace Hast.Transformer.Vhdl.Services
             if (!_appDataFolder.FileExists(filePath)) return null;
 
             await using var fileStream = _appDataFolder.OpenFile(filePath);
-            return await VhdlHardwareDescription.Deserialize(fileStream);
+            return await VhdlHardwareDescription.DeserializeAsync(fileStream);
         }
 
         public Task SetHardwareDescription(string cacheKey, VhdlHardwareDescription hardwareDescription)
         {
             using var fileStream = _appDataFolder.CreateFile(GetCacheFilePath(cacheKey));
-            return hardwareDescription.Serialize(fileStream);
+            return hardwareDescription.SerializeAsync(fileStream);
         }
 
         private string GetCacheFilePath(string cacheKey)

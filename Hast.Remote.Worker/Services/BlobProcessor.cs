@@ -195,7 +195,7 @@ namespace Hast.Remote.Worker.Services
                         cancellationToken.ThrowIfCancellationRequested();
 
                         await using var memoryStream = new MemoryStream();
-                        await hardwareRepresentation.HardwareDescription.Serialize(memoryStream);
+                        await hardwareRepresentation.HardwareDescription.SerializeAsync(memoryStream);
                         result.HardwareDescription = new HardwareDescription
                         {
                             Language = hardwareRepresentation.HardwareDescription.Language,
