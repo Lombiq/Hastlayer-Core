@@ -13,10 +13,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     {
         private readonly ITypeConverter _typeConverter;
 
-        public ArrayCreateExpressionTransformer(ITypeConverter typeConverter)
-        {
-            _typeConverter = typeConverter;
-        }
+        public ArrayCreateExpressionTransformer(ITypeConverter typeConverter) => _typeConverter = typeConverter;
 
         public UnconstrainedArrayInstantiation CreateArrayInstantiation(
             ArrayCreateExpression expression,

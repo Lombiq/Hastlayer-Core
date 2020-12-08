@@ -74,10 +74,7 @@ namespace Hast.Transformer.Services
         {
             private readonly Dictionary<string, MethodDeclaration> _inlinableMethods;
 
-            public MethodCallChangingVisitor(Dictionary<string, MethodDeclaration> inlinableMethods)
-            {
-                _inlinableMethods = inlinableMethods;
-            }
+            public MethodCallChangingVisitor(Dictionary<string, MethodDeclaration> inlinableMethods) => _inlinableMethods = inlinableMethods;
 
             public override void VisitInvocationExpression(InvocationExpression invocationExpression)
             {

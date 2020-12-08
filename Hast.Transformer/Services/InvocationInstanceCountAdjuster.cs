@@ -13,10 +13,7 @@ namespace Hast.Transformer.Services
     {
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
 
-        public InvocationInstanceCountAdjuster(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory)
-        {
-            _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
-        }
+        public InvocationInstanceCountAdjuster(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory) => _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
 
         public void AdjustInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration) => syntaxTree.AcceptVisitor(new InvocationInstanceCountAdjustingVisitor(
                 _typeDeclarationLookupTableFactory.Create(syntaxTree),

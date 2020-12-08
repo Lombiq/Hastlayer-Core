@@ -15,10 +15,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public PortMode Mode { get; set; }
 
-        public Port()
-        {
-            DataObjectKind = DataObjectKind.Signal;
-        }
+        public Port() => DataObjectKind = DataObjectKind.Signal;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             vhdlGenerationOptions.ShortenName(Name) +

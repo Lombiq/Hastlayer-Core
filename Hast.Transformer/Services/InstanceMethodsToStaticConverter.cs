@@ -16,10 +16,7 @@ namespace Hast.Transformer.Services
         {
             private readonly SyntaxTree _syntaxTree;
 
-            public InstanceMethodsToStaticConvertingVisitor(SyntaxTree syntaxTree)
-            {
-                _syntaxTree = syntaxTree;
-            }
+            public InstanceMethodsToStaticConvertingVisitor(SyntaxTree syntaxTree) => _syntaxTree = syntaxTree;
 
             public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
             {

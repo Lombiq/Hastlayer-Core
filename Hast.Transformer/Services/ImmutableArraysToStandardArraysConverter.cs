@@ -27,10 +27,7 @@ namespace Hast.Transformer.Services
         {
             private readonly IKnownTypeLookupTable _knownTypeLookupTable;
 
-            public ImmutableArraysToStandardArraysConvertingVisitor(IKnownTypeLookupTable knownTypeLookupTable)
-            {
-                _knownTypeLookupTable = knownTypeLookupTable;
-            }
+            public ImmutableArraysToStandardArraysConvertingVisitor(IKnownTypeLookupTable knownTypeLookupTable) => _knownTypeLookupTable = knownTypeLookupTable;
 
             public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
             {

@@ -9,10 +9,7 @@ namespace Hast.Transformer.Services
     {
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
 
-        public FSharpIdiosyncrasiesAdjuster(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory)
-        {
-            _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
-        }
+        public FSharpIdiosyncrasiesAdjuster(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory) => _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
 
         public void AdjustFSharpIdiosyncrasies(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new FSharpIdiosyncrasiesAdjustingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
 
@@ -20,10 +17,7 @@ namespace Hast.Transformer.Services
         {
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
 
-            public FSharpIdiosyncrasiesAdjustingVisitor(ITypeDeclarationLookupTable typeDeclarationLookupTable)
-            {
-                _typeDeclarationLookupTable = typeDeclarationLookupTable;
-            }
+            public FSharpIdiosyncrasiesAdjustingVisitor(ITypeDeclarationLookupTable typeDeclarationLookupTable) => _typeDeclarationLookupTable = typeDeclarationLookupTable;
 
             public override void VisitInvocationExpression(InvocationExpression invocationExpression)
             {

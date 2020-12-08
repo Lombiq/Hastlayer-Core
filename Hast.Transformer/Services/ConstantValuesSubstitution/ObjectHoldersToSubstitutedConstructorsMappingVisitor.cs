@@ -10,10 +10,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
     {
         private readonly ConstantValuesSubstitutingAstProcessor _constantValuesSubstitutingAstProcessor;
 
-        public ObjectHoldersToSubstitutedConstructorsMappingVisitor(ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor)
-        {
-            _constantValuesSubstitutingAstProcessor = constantValuesSubstitutingAstProcessor;
-        }
+        public ObjectHoldersToSubstitutedConstructorsMappingVisitor(ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor) => _constantValuesSubstitutingAstProcessor = constantValuesSubstitutingAstProcessor;
 
         public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
         {

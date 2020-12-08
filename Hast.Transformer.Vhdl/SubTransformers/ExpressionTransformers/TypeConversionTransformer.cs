@@ -15,10 +15,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     {
         private readonly ITypeConverter _typeConverter;
 
-        public TypeConversionTransformer(ITypeConverter typeConverter)
-        {
-            _typeConverter = typeConverter;
-        }
+        public TypeConversionTransformer(ITypeConverter typeConverter) => _typeConverter = typeConverter;
 
         public IVhdlElement ImplementTypeConversionForBinaryExpression(
             BinaryOperatorExpression binaryOperatorExpression,

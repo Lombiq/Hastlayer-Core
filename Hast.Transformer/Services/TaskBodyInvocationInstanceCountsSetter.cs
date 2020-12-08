@@ -15,10 +15,7 @@ namespace Hast.Transformer.Services
             private readonly Dictionary<string, int> _taskStartsCountInMembers = new Dictionary<string, int>();
             private readonly TransformerConfiguration _configuration;
 
-            public TaskBodyInvocationInstanceCountsSetterVisitor(TransformerConfiguration configuration)
-            {
-                _configuration = configuration;
-            }
+            public TaskBodyInvocationInstanceCountsSetterVisitor(TransformerConfiguration configuration) => _configuration = configuration;
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {

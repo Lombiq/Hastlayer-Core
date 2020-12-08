@@ -7,10 +7,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public DataType ValueType { get; set; }
 
-        public Attribute()
-        {
-            TypeCategory = DataTypeCategory.Identifier;
-        }
+        public Attribute() => TypeCategory = DataTypeCategory.Identifier;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(

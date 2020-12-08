@@ -25,10 +25,7 @@
         {
             public int[] Array { get; }
 
-            public ArrayHolder(int[] array)
-            {
-                Array = array;
-            }
+            public ArrayHolder(int[] array) => Array = array;
         }
     }
 }

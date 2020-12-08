@@ -13,13 +13,13 @@ namespace Hast.VhdlBuilder.Representation.Expression
         // These below need to be Lazy, because otherwise there would be a circular dependency between the static
         // ctors with KnownDataTypes (since it uses ToVhdlValue() and thus this class a lot for default values).
         private static readonly Lazy<Value> _trueLazy = new Lazy<Value>(() => new Value { DataType = KnownDataTypes.Boolean, Content = "true" });
-        public static Value True { get { return _trueLazy.Value; } }
+        public static Value True => _trueLazy.Value;
         private static readonly Lazy<Value> _falseLazy = new Lazy<Value>(() => new Value { DataType = KnownDataTypes.Boolean, Content = "false" });
-        public static Value False { get { return _falseLazy.Value; } }
+        public static Value False => _falseLazy.Value;
         private static readonly Lazy<Value> _zeroCharacterLazy = new Lazy<Value>(() => new Character('0'));
-        public static Value ZeroCharacter { get { return _zeroCharacterLazy.Value; } }
+        public static Value ZeroCharacter => _zeroCharacterLazy.Value;
         private static readonly Lazy<Value> _oneCharacterLazy = new Lazy<Value>(() => new Character('1'));
-        public static Value OneCharacter { get { return _oneCharacterLazy.Value; } }
+        public static Value OneCharacter => _oneCharacterLazy.Value;
 
         public DataType DataType { get; set; }
         public string Content { get; set; }

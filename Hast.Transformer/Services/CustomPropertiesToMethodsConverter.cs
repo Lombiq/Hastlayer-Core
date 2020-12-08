@@ -16,10 +16,7 @@ namespace Hast.Transformer.Services
         {
             private readonly SyntaxTree _syntaxTree;
 
-            public CustomPropertiesConvertingVisitor(SyntaxTree syntaxTree)
-            {
-                _syntaxTree = syntaxTree;
-            }
+            public CustomPropertiesConvertingVisitor(SyntaxTree syntaxTree) => _syntaxTree = syntaxTree;
 
             public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
             {

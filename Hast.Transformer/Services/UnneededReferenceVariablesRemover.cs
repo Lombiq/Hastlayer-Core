@@ -50,10 +50,7 @@ namespace Hast.Transformer.Services
 
             public bool? AssignedToOnce { get; private set; }
 
-            public AssignmentsCheckingVisitor(string identifier)
-            {
-                _identifier = identifier;
-            }
+            public AssignmentsCheckingVisitor(string identifier) => _identifier = identifier;
 
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
             {

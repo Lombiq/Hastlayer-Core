@@ -9,10 +9,7 @@ namespace Hast.Transformer.Services
     {
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
 
-        public OptionalParameterFiller(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory)
-        {
-            _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
-        }
+        public OptionalParameterFiller(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory) => _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
 
         public void FillOptionalParamters(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new OptionalParamtersFillingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
 
@@ -20,10 +17,7 @@ namespace Hast.Transformer.Services
         {
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
 
-            public OptionalParamtersFillingVisitor(ITypeDeclarationLookupTable typeDeclarationLookupTable)
-            {
-                _typeDeclarationLookupTable = typeDeclarationLookupTable;
-            }
+            public OptionalParamtersFillingVisitor(ITypeDeclarationLookupTable typeDeclarationLookupTable) => _typeDeclarationLookupTable = typeDeclarationLookupTable;
 
             public override void VisitInvocationExpression(InvocationExpression invocationExpression)
             {

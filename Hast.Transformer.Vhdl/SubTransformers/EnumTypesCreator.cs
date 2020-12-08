@@ -22,10 +22,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             private readonly List<IVhdlElement> _enumDeclarations;
 
-            public EnumCheckingVisitor(List<IVhdlElement> enumDeclarations)
-            {
-                _enumDeclarations = enumDeclarations;
-            }
+            public EnumCheckingVisitor(List<IVhdlElement> enumDeclarations) => _enumDeclarations = enumDeclarations;
 
             public override void VisitTypeDeclaration(TypeDeclaration typeDeclaration)
             {

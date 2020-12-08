@@ -12,10 +12,7 @@ namespace Hast.Transformer.Services
     {
         private readonly IMemoryCache _cache;
 
-        public TransformationContextCacheService(IMemoryCache cache)
-        {
-            _cache = cache;
-        }
+        public TransformationContextCacheService(IMemoryCache cache) => _cache = cache;
 
         public ITransformationContext GetTransformationContext(IEnumerable<string> assemblyPaths, string transformationId) =>
             _cache.Get(GetCacheKey(assemblyPaths, transformationId)) as ITransformationContext;

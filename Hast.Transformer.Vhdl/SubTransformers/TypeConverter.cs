@@ -14,10 +14,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         private readonly IRecordComposer _recordComposer;
 
-        public TypeConverter(IRecordComposer recordComposer)
-        {
-            _recordComposer = recordComposer;
-        }
+        public TypeConverter(IRecordComposer recordComposer) => _recordComposer = recordComposer;
 
         public DataType ConvertType(
             IType type,

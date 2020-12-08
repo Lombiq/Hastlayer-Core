@@ -13,10 +13,7 @@ namespace Hast.Transformer.Vhdl.Verifiers
     {
         private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
 
-        public UnsupportedConstructsVerifier(IDisplayClassFieldTransformer displayClassFieldTransformer)
-        {
-            _displayClassFieldTransformer = displayClassFieldTransformer;
-        }
+        public UnsupportedConstructsVerifier(IDisplayClassFieldTransformer displayClassFieldTransformer) => _displayClassFieldTransformer = displayClassFieldTransformer;
 
         public void ThrowIfUnsupportedConstructsFound(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new UnsupportedConstructsFindingVisitor(_displayClassFieldTransformer));
 
@@ -24,10 +21,7 @@ namespace Hast.Transformer.Vhdl.Verifiers
         {
             private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
 
-            public UnsupportedConstructsFindingVisitor(IDisplayClassFieldTransformer displayClassFieldTransformer)
-            {
-                _displayClassFieldTransformer = displayClassFieldTransformer;
-            }
+            public UnsupportedConstructsFindingVisitor(IDisplayClassFieldTransformer displayClassFieldTransformer) => _displayClassFieldTransformer = displayClassFieldTransformer;
 
             public override void VisitFieldDeclaration(FieldDeclaration fieldDeclaration)
             {

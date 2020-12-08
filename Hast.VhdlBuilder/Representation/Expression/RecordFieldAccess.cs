@@ -12,7 +12,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         private IDataObject _instance;
         public IDataObject Instance
         {
-            get { return _instance; }
+            get => _instance;
             set
             {
                 _instance = value;

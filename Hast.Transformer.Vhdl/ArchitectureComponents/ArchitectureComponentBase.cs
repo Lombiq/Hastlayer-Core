@@ -28,10 +28,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         protected readonly List<IMultiCycleOperation> _multiCycleOperations = new List<IMultiCycleOperation>();
         public IEnumerable<IMultiCycleOperation> MultiCycleOperations => _multiCycleOperations;
 
-        protected ArchitectureComponentBase(string name)
-        {
-            Name = name;
-        }
+        protected ArchitectureComponentBase(string name) => Name = name;
 
         public abstract IVhdlElement BuildDeclarations();
 

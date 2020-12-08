@@ -6,7 +6,7 @@
     public class Null : IVhdlElement
     {
         private static readonly Null _instance = new Null();
-        public static Null Instance { get { return _instance; } }
+        public static Null Instance => _instance;
 
         private Null()
         {

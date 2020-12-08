@@ -13,10 +13,7 @@ namespace Hast.Transformer.Models
         {
         }
 
-        public ArraySizeHolder(Dictionary<string, IArraySize> preConfiguredArraySizes)
-        {
-            _arraySizes = new Dictionary<string, IArraySize>(preConfiguredArraySizes);
-        }
+        public ArraySizeHolder(Dictionary<string, IArraySize> preConfiguredArraySizes) => _arraySizes = new Dictionary<string, IArraySize>(preConfiguredArraySizes);
 
         public IArraySize GetSize(AstNode arrayHolder)
         {

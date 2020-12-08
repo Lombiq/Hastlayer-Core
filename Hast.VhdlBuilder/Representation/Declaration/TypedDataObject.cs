@@ -12,8 +12,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// </summary>
         public Value InitialValue
         {
-            get { return _initialValue ?? DataType.DefaultValue; }
-            set { _initialValue = value; }
+            get => _initialValue ?? DataType.DefaultValue;
+            set => _initialValue = value;
         }
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>

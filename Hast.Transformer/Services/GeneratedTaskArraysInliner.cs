@@ -39,10 +39,7 @@ namespace Hast.Transformer.Services
         {
             private readonly Dictionary<string, string> _inlinableVariableMappings;
 
-            public InlinableTaskArraysInliningVisitor(Dictionary<string, string> inlinableVariableMappings)
-            {
-                _inlinableVariableMappings = inlinableVariableMappings;
-            }
+            public InlinableTaskArraysInliningVisitor(Dictionary<string, string> inlinableVariableMappings) => _inlinableVariableMappings = inlinableVariableMappings;
 
             public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
             {

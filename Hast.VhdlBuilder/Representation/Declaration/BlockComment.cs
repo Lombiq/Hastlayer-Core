@@ -30,15 +30,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
         }
 
-        public BlockComment(params string[] lines) : this()
-        {
-            Lines = lines.ToList();
-        }
+        public BlockComment(params string[] lines) : this() => Lines = lines.ToList();
 
-        public BlockComment()
-        {
-            Lines = new List<string>();
-        }
+        public BlockComment() => Lines = new List<string>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {

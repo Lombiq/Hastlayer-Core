@@ -12,10 +12,7 @@ namespace Hast.VhdlBuilder.Representation
         {
         }
 
-        public Terminated(IVhdlElement element)
-        {
-            Element = element;
-        }
+        public Terminated(IVhdlElement element) => Element = element;
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminate(Element.ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);

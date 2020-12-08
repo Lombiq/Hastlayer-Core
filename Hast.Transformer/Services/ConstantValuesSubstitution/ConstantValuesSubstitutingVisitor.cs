@@ -393,10 +393,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             private readonly MethodDeclaration _constructor;
 
-            public ConstructorConstantValuesTableBuildingVisitor(MethodDeclaration constructor)
-            {
-                _constructor = constructor;
-            }
+            public ConstructorConstantValuesTableBuildingVisitor(MethodDeclaration constructor) => _constructor = constructor;
 
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
             {

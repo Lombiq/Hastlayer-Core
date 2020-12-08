@@ -91,15 +91,9 @@ namespace Hast.Transformer.Vhdl.Models
 
         public decimal RequiredClockCycles
         {
-            get
-            {
-                return _stateMachine.States[StateMachineStateIndex].RequiredClockCycles;
-            }
+            get => _stateMachine.States[StateMachineStateIndex].RequiredClockCycles;
 
-            set
-            {
-                _stateMachine.States[StateMachineStateIndex].RequiredClockCycles = value;
-            }
+            set => _stateMachine.States[StateMachineStateIndex].RequiredClockCycles = value;
         }
 
         public CurrentBlock(IMemberStateMachine stateMachine, IBlockElement currentBlock, int stateMachineStateIndex)

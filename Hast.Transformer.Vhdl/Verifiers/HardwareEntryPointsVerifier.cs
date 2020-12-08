@@ -10,10 +10,7 @@ namespace Hast.Transformer.Vhdl.Verifiers
     {
         private readonly IMemberSuitabilityChecker _memberSuitabilityChecker;
 
-        public HardwareEntryPointsVerifier(IMemberSuitabilityChecker memberSuitabilityChecker)
-        {
-            _memberSuitabilityChecker = memberSuitabilityChecker;
-        }
+        public HardwareEntryPointsVerifier(IMemberSuitabilityChecker memberSuitabilityChecker) => _memberSuitabilityChecker = memberSuitabilityChecker;
 
         public void VerifyHardwareEntryPoints(SyntaxTree syntaxTree, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {

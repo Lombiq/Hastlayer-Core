@@ -65,10 +65,7 @@ namespace Hast.Transformer.Services
 
                 public CastExpression Expression { get; private set; }
 
-                public ParameterCastExpressionFindingVisitor(string parameterName)
-                {
-                    _parameterName = parameterName;
-                }
+                public ParameterCastExpressionFindingVisitor(string parameterName) => _parameterName = parameterName;
 
                 public override void VisitCastExpression(CastExpression castExpression)
                 {

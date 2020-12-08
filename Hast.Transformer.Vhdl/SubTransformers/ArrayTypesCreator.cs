@@ -11,10 +11,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         private readonly ITypeConverter _typeConverter;
 
-        public ArrayTypesCreator(ITypeConverter typeConverter)
-        {
-            _typeConverter = typeConverter;
-        }
+        public ArrayTypesCreator(ITypeConverter typeConverter) => _typeConverter = typeConverter;
 
         public IEnumerable<ArrayType> CreateArrayTypes(SyntaxTree syntaxTree, IVhdlTransformationContext context)
         {

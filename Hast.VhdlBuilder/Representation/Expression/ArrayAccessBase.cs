@@ -7,7 +7,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         private IDataObject _arrayReference;
         public IDataObject ArrayReference
         {
-            get { return _arrayReference; }
+            get => _arrayReference;
             set
             {
                 _arrayReference = value;

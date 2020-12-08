@@ -30,10 +30,7 @@ namespace Hast.Transformer.Services
         {
             private readonly Dictionary<string, TypeDeclaration> _typeDeclarations;
 
-            public TypeDeclarationLookupTable(Dictionary<string, TypeDeclaration> typeDeclarations)
-            {
-                _typeDeclarations = typeDeclarations;
-            }
+            public TypeDeclarationLookupTable(Dictionary<string, TypeDeclaration> typeDeclarations) => _typeDeclarations = typeDeclarations;
 
             public TypeDeclaration Lookup(string fullName)
             {

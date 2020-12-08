@@ -16,10 +16,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// </summary>
         public bool CantBeOmitted { get; set; }
 
-        public LineComment(string text)
-        {
-            Text = text;
-        }
+        public LineComment(string text) => Text = text;
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {

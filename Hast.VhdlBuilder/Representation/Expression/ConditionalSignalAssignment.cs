@@ -11,7 +11,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         private IDataObject _assignTo;
         public IDataObject AssignTo
         {
-            get { return _assignTo; }
+            get => _assignTo;
             set
             {
                 if (value.DataObjectKind != DataObjectKind.Signal)

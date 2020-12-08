@@ -14,10 +14,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         private readonly Signal _finishedSignal;
 
         private List<IMemberStateMachineState> _states;
-        public IReadOnlyList<IMemberStateMachineState> States
-        {
-            get { return _states; }
-        }
+        public IReadOnlyList<IMemberStateMachineState> States => _states;
 
         public MemberStateMachine(string name) : base(name)
         {

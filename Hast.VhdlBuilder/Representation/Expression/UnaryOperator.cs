@@ -10,10 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public static readonly UnaryOperator Identity = new UnaryOperator("+");
         public static readonly UnaryOperator Negation = new UnaryOperator("-");
 
-        private UnaryOperator(string source)
-        {
-            _source = source;
-        }
+        private UnaryOperator(string source) => _source = source;
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => _source;
     }

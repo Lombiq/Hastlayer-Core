@@ -20,7 +20,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// </summary>
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
                 if (!Regex.IsMatch(value, "^[" + SafeNameCharacterSet + "]*$", RegexOptions.IgnoreCase))

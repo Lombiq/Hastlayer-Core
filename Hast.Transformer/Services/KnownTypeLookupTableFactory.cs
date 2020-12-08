@@ -17,10 +17,7 @@ namespace Hast.Transformer.Services
         {
             private readonly ICompilation _compilation;
 
-            public KnownTypeLookupTable(ICompilation compilation)
-            {
-                _compilation = compilation;
-            }
+            public KnownTypeLookupTable(ICompilation compilation) => _compilation = compilation;
 
             public IType Lookup(KnownTypeCode typeCode) => _compilation.FindType(typeCode);
         }

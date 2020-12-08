@@ -21,10 +21,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public Value Value { get; set; }
 
-        public GenericItem()
-        {
-            DataObjectKind = DataObjectKind.Constant;
-        }
+        public GenericItem() => DataObjectKind = DataObjectKind.Constant;
 
         public override IDataObject ToReference() => this;
 

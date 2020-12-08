@@ -9,10 +9,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
     {
         private readonly ISimpleMemoryOperationProxyBuilder _simpleMemoryOperationProxyBuilder;
 
-        public SimpleMemoryComponentBuilder(ISimpleMemoryOperationProxyBuilder simpleMemoryOperationProxyBuilder)
-        {
-            _simpleMemoryOperationProxyBuilder = simpleMemoryOperationProxyBuilder;
-        }
+        public SimpleMemoryComponentBuilder(ISimpleMemoryOperationProxyBuilder simpleMemoryOperationProxyBuilder) => _simpleMemoryOperationProxyBuilder = simpleMemoryOperationProxyBuilder;
 
         public void AddSimpleMemoryComponentsToArchitecture(
             IEnumerable<IArchitectureComponent> invokingComponents,

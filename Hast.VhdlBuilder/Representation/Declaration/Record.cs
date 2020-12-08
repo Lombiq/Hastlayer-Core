@@ -9,10 +9,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public List<RecordField> Fields { get; } = new List<RecordField>();
 
-        public Record()
-        {
-            TypeCategory = DataTypeCategory.Composite;
-        }
+        public Record() => TypeCategory = DataTypeCategory.Composite;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
@@ -24,10 +21,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class RecordField : TypedDataObjectBase
     {
-        public RecordField()
-        {
-            DataObjectKind = DataObjectKind.Variable;
-        }
+        public RecordField() => DataObjectKind = DataObjectKind.Variable;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
