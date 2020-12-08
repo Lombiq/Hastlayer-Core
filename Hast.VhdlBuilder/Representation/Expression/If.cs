@@ -4,7 +4,8 @@ using Hast.VhdlBuilder.Extensions;
 namespace Hast.VhdlBuilder.Representation.Expression
 {
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    public class If<T> : IVhdlElement where T : IVhdlElement
+    public class If<T> : IVhdlElement
+        where T : IVhdlElement
     {
         public IVhdlElement Condition { get; set; }
         public T True { get; set; }

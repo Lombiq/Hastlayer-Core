@@ -25,7 +25,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string Name { get; set; }
         public virtual Value DefaultValue { get; set; }
 
-        public DataType(DataType previous) : this()
+        public DataType(DataType previous)
+            : this()
         {
             TypeCategory = previous.TypeCategory;
             Name = previous.Name;
@@ -56,6 +57,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// </summary>
         public virtual bool IsLiteralArrayType() =>
             this == KnownDataTypes.UnrangedInt || Name == "bit_vector" || Name == "std_logic_vector" || Name == "string";
+
+        public virtual int GetSize() => 0;
 
         public override bool Equals(object obj)
         {

@@ -5,7 +5,8 @@ using Hast.VhdlBuilder.Extensions;
 namespace Hast.VhdlBuilder.Representation.Expression
 {
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    public class IfElse<T> : If<T>, IVhdlElement where T : IVhdlElement
+    public class IfElse<T> : If<T>, IVhdlElement
+        where T : IVhdlElement
     {
         public List<If<T>> ElseIfs { get; } = new List<If<T>>();
         public T Else { get; set; }
@@ -18,12 +19,15 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
             foreach (var elseIf in ElseIfs)
             {
+                // More than 1 "else if" statement is very rare, so it isn't worth the cost of a StringBuilder.
+#pragma warning disable S1643 // Strings should not be concatenated using '+' in a loop
                 vhdl +=
                     "elsif (" + elseIf.Condition.ToVhdl(vhdlGenerationOptions) + ") then " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                         elseIf.True.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions);
+#pragma warning restore S1643 // Strings should not be concatenated using '+' in a loop
             }
 
-            if (Else != null)
+            if (!Equals(Else, default(T)))
             {
                 vhdl += "else " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Else.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions);

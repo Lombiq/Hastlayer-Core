@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using Hast.VhdlBuilder.Extensions;
+﻿using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Expression;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -15,7 +14,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             set => _defaultValue = value;
         }
 
-        public StdLogicVector(DataType baseType) : base(baseType)
+        public StdLogicVector(DataType baseType)
+            : base(baseType)
         {
         }
 

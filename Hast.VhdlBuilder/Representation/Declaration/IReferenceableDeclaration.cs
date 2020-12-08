@@ -8,7 +8,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
     }
 
-    public interface IReferenceableDeclaration<out T> : IReferenceableDeclaration where T : IVhdlElement
+    /// <summary>
+    /// Represents a VHDL element that is <see cref="IReferenceableDeclaration"/> and also can be referenced as an
+    /// <see cref="IVhdlElement"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of the reference.</typeparam>
+    public interface IReferenceableDeclaration<out T> : IReferenceableDeclaration
+        where T : IVhdlElement
     {
         T ToReference();
     }

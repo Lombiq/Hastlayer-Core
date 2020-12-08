@@ -8,8 +8,15 @@
         File,
     }
 
+    /// <summary>
+    /// Represents a <see href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-types-of-data-object/">
+    /// VHDL data object</see>.
+    /// </summary>
     public interface IDataObject : INamedElement, IReferenceableDeclaration<IDataObject>
     {
+        /// <summary>
+        /// Gets or sets the type of the data object.
+        /// </summary>
         DataObjectKind DataObjectKind { get; set; }
     }
 }

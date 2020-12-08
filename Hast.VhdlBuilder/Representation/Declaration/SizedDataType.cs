@@ -46,6 +46,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 " downto 0)";
         }
 
+        public override int GetSize() => Size;
+
         public override bool Equals(object obj)
         {
             var otherType = obj as SizedDataType;
@@ -55,10 +57,5 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         }
 
         public override int GetHashCode() => (Name + TypeCategory + Size).GetHashCode(StringComparison.InvariantCulture);
-    }
-
-    public static class SizedDataTypeExtensions
-    {
-        public static int GetSize(this DataType type) => type is SizedDataType ? ((SizedDataType)type).Size : 0;
     }
 }

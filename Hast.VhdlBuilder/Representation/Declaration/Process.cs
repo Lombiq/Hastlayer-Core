@@ -9,9 +9,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Process : ISubProgram
     {
         public string Label { get; set; }
-        public string Name { get => Label;
-            set => Label = value;
-        }
+
+        public string Name { get => Label; set => Label = value; }
+
         public List<IDataObject> SensitivityList { get; } = new List<IDataObject>();
         public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
         public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();

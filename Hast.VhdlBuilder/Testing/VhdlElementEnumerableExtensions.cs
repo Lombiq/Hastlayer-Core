@@ -8,35 +8,35 @@ namespace Hast.VhdlBuilder.Testing
 {
     public static class VhdlElementEnumerableExtensions
     {
-        public static bool ShouldContain<T>(this IEnumerable<IVhdlElement> elements)
-            where T : class, IVhdlElement => elements.ShouldContain<T>(null);
+        public static bool ShouldContain<T>(this IEnumerable<IVhdlElement> elementsToCheck)
+            where T : class, IVhdlElement => elementsToCheck.ShouldContain<T>(null);
 
         public static bool ShouldContain<T>(
-            this IEnumerable<IVhdlElement> elements,
+            this IEnumerable<IVhdlElement> elementsToCheck,
             Expression<Func<T, bool>> predicate)
             where T : class, IVhdlElement
         {
-            if (elements.Contains(predicate)) return true;
+            if (elementsToCheck.Contains(predicate)) return true;
 
             throw new VhdlStructureAssertionFailedException(
-                "The block of elements didn't contain any " + typeof(T).Name + " elements" +
-                (predicate == null ? "." : " matching " + predicate + "."),
-                elements.ToVhdl(VhdlGenerationOptions.Debug));
+                $"The block of elements didn't contain any {typeof(T).Name} elements{(predicate == null ? "." : " matching " + predicate + ".")}",
+                elementsToCheck.ToVhdl(VhdlGenerationOptions.Debug));
         }
 
         public static bool ShouldRecursivelyContain(
-            this IEnumerable<IVhdlElement> elements,
-            Expression<Func<IVhdlElement, bool>> predicate) => elements.ShouldRecursivelyContain<IVhdlElement>(predicate);
+            this IEnumerable<IVhdlElement> elementsToCheck,
+            Expression<Func<IVhdlElement, bool>> predicate) =>
+            elementsToCheck.ShouldRecursivelyContain<IVhdlElement>(predicate);
 
-        public static bool ShouldRecursivelyContain<T>(this IEnumerable<IVhdlElement> elements)
-            where T : class, IVhdlElement => elements.ShouldRecursivelyContain<T>(null);
+        public static bool ShouldRecursivelyContain<T>(this IEnumerable<IVhdlElement> elementsToCheck)
+            where T : class, IVhdlElement => elementsToCheck.ShouldRecursivelyContain<T>(null);
 
         public static bool ShouldRecursivelyContain<T>(
-            this IEnumerable<IVhdlElement> elements,
+            this IEnumerable<IVhdlElement> elementsToCheck,
             Expression<Func<T, bool>> predicate)
             where T : class, IVhdlElement
         {
-            var queue = new Queue<IVhdlElement>(elements);
+            var queue = new Queue<IVhdlElement>(elementsToCheck);
 
             while (queue.Count > 0)
             {
@@ -44,9 +44,9 @@ namespace Hast.VhdlBuilder.Testing
 
                 if (element.Is(predicate)) return true;
 
-                if (element is IBlockElement)
+                if (element is IBlockElement blockElement)
                 {
-                    foreach (var subElement in ((IBlockElement)element).Body)
+                    foreach (var subElement in blockElement.Body)
                     {
                         queue.Enqueue(subElement);
                     }
@@ -56,7 +56,7 @@ namespace Hast.VhdlBuilder.Testing
             throw new VhdlStructureAssertionFailedException(
                 "The block of elements nor their children didn't contain any " + typeof(T).Name + " elements" +
                 (predicate == null ? "." : " matching " + predicate + "."),
-                elements.ToVhdl(VhdlGenerationOptions.Debug));
+                elementsToCheck.ToVhdl(VhdlGenerationOptions.Debug));
         }
 
         public static bool Contains<T>(this IEnumerable<IVhdlElement> elements)

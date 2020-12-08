@@ -9,7 +9,7 @@ namespace System.Collections.Generic
         public static string ToVhdl<T>(
             this IEnumerable<T> elements,
             IVhdlGenerationOptions vhdlGenerationOptions)
-            where T : IVhdlElement => elements.ToVhdl(vhdlGenerationOptions, string.Empty, null);
+            where T : IVhdlElement => elements.ToVhdl(vhdlGenerationOptions, string.Empty);
 
         public static string ToVhdl<T>(
             this IEnumerable<T> elements,
@@ -18,12 +18,13 @@ namespace System.Collections.Generic
             string lastElementTerminator = null)
             where T : IVhdlElement
         {
-            if (elements == null || !elements.Any()) return string.Empty;
+            if (elements == null) return string.Empty;
 
             // It's efficient to run this parallelized implementation even with a low number of items (or even one)
             // because the overhead of checking whether there are more than a few elements is bigger than the below
             // ceremony.
             var elementsArray = elements.ToArray();
+            if (!elementsArray.Any()) return string.Empty;
             var lastElement = elementsArray[elementsArray.Length - 1];
             var resultArray = new string[elementsArray.Length];
 

@@ -1,9 +1,11 @@
 using Hast.VhdlBuilder.Extensions;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    [SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "Yes, they do.")]
     public static class KnownDataTypes
     {
         // There is a private field and a public one for each type because the DefaultValue construction needs the type
@@ -27,11 +29,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             Name = "signed",
             Size = 16,
         };
-        public static readonly SizedDataType BinaryString = new SizedDataType(_binaryString)
-        {
-            DefaultValue = default(short).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_int16),
-        };
-
         private static readonly DataType _character = new DataType { TypeCategory = DataTypeCategory.Character, Name = "character" };
         public static readonly DataType Character = new DataType(_character)
         {
@@ -52,6 +49,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             Name = "signed",
             Size = 8,
         };
+
         public static readonly SizedDataType Int8 = new SizedDataType(_int8)
         {
             DefaultValue = default(sbyte).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_int8),
@@ -132,6 +130,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             Name = "dont_touch",
             ValueType = UnrangedString,
+        };
+
+        public static SizedDataType BinaryString { get; } = new SizedDataType(_binaryString)
+        {
+            DefaultValue = default(short).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_int16),
         };
     }
 }

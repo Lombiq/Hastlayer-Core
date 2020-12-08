@@ -51,30 +51,40 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
             if (DataType.TypeCategory == DataTypeCategory.Identifier)
             {
+                // This is how the source should look.
+#pragma warning disable CA1308 // Normalize strings to uppercase
                 return vhdlGenerationOptions.ShortenName(DataType == KnownDataTypes.Boolean ? content.ToLowerInvariant() : content);
+#pragma warning restore CA1308 // Normalize strings to uppercase
             }
 
             if (DataType.TypeCategory == DataTypeCategory.Array)
             {
-                if (content.Contains("others =>", StringComparison.InvariantCulture))
-                {
-                    return $"({content})";
-                }
-                else if (DataType.IsLiteralArrayType())
-                {
-                    return $"\"{content}\"";
-                }
-                else if (EvaluatedContent is IBlockElement)
-                {
-                    content = ((IBlockElement)EvaluatedContent).Body.ToVhdl(vhdlGenerationOptions, ", ", string.Empty);
-                }
-
-                return $"({content})";
+                return ToVhdlArray(content, vhdlGenerationOptions);
             }
 
             if (DataType.TypeCategory == DataTypeCategory.Character) return "'" + content + "'";
 
             return content;
+        }
+
+        private string ToVhdlArray(string content, IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            if (content.Contains("others =>", StringComparison.InvariantCulture))
+            {
+                return $"({content})";
+            }
+
+            if (DataType.IsLiteralArrayType())
+            {
+                return $"\"{content}\"";
+            }
+
+            if (EvaluatedContent is IBlockElement blockElement)
+            {
+                content = blockElement.Body.ToVhdl(vhdlGenerationOptions, ", ", string.Empty);
+            }
+
+            return $"({content})";
         }
 
         public static IVhdlElement UnrangedInt(int value) => new Value
