@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
@@ -13,7 +13,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         private readonly Signal _startedSignal;
         private readonly Signal _finishedSignal;
 
-        private List<IMemberStateMachineState> _states;
+        private readonly List<IMemberStateMachineState> _states;
         public IReadOnlyList<IMemberStateMachineState> States => _states;
 
         public MemberStateMachine(string name)
