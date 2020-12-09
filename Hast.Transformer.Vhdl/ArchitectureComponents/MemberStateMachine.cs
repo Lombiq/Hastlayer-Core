@@ -16,7 +16,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         private List<IMemberStateMachineState> _states;
         public IReadOnlyList<IMemberStateMachineState> States => _states;
 
-        public MemberStateMachine(string name) : base(name)
+        public MemberStateMachine(string name)
+            : base(name)
         {
             _statesEnum = new Enum { Name = this.CreatePrefixedObjectName("_States") };
 

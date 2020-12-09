@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Representation;
+using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
@@ -12,7 +12,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public IVhdlElement BeginBodyWith { get; set; }
         public IVhdlElement EndBodyWith { get; set; }
 
-        public ConfigurableComponent(string name) : base(name)
+        public ConfigurableComponent(string name)
+            : base(name)
         {
         }
 

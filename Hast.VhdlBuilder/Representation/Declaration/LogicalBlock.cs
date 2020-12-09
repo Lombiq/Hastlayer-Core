@@ -7,11 +7,13 @@
     /// </summary>
     public class LogicalBlock : InlineBlock
     {
-        public LogicalBlock(params IVhdlElement[] vhdlElements) : base(vhdlElements)
+        public LogicalBlock(params IVhdlElement[] vhdlElements)
+            : base(vhdlElements)
         {
         }
 
-        public LogicalBlock() : base()
+        public LogicalBlock()
+            : base()
         {
         }
 

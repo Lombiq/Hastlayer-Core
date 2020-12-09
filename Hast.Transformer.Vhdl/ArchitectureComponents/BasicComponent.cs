@@ -8,7 +8,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         public IVhdlElement Declarations { get; set; }
         public IVhdlElement Body { get; set; }
 
-        public BasicComponent(string name) : base(name)
+        public BasicComponent(string name)
+            : base(name)
         {
         }
 
