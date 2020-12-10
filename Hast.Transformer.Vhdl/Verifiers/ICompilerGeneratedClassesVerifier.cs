@@ -1,5 +1,5 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
-using Hast.Common.Interfaces;
+﻿using Hast.Common.Interfaces;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.Verifiers
 {

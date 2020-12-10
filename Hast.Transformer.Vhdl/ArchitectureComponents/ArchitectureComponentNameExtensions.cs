@@ -37,7 +37,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 component.LocalVariables.Any(variable => variable.Name == component.CreatePrefixedObjectName(objectName)) ||
                 component.InternallyDrivenSignals.Any(signal => signal.Name == component.CreatePrefixedObjectName(objectName)))
             {
-                objectName = name + "." + ++objectNameIndex;
+                objectNameIndex++;
+                objectName = name + "." + objectNameIndex;
             }
 
             return component.CreatePrefixedObjectName(objectName);

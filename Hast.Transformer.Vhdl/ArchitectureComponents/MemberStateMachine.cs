@@ -10,8 +10,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
     {
         private readonly Enum _statesEnum;
         private readonly Variable _stateVariable;
-        private readonly Signal _startedSignal;
-        private readonly Signal _finishedSignal;
 
         private readonly List<IMemberStateMachineState> _states;
         public IReadOnlyList<IMemberStateMachineState> States => _states;
@@ -29,15 +27,15 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             };
             LocalVariables.Add(_stateVariable);
 
-            _startedSignal = new Signal
+            var startedSignal = new Signal
             {
                 DataType = KnownDataTypes.Boolean,
                 Name = this.CreateStartedSignalName(),
                 InitialValue = Value.False,
             };
-            ExternallyDrivenSignals.Add(_startedSignal);
+            ExternallyDrivenSignals.Add(startedSignal);
 
-            _finishedSignal = new Signal
+            var _finishedSignal = new Signal
             {
                 DataType = KnownDataTypes.Boolean,
                 Name = this.CreateFinishedSignalName(),
@@ -52,7 +50,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 {
                     Condition = new Binary
                     {
-                        Left = _startedSignal.Name.ToVhdlSignalReference(),
+                        Left = startedSignal.Name.ToVhdlSignalReference(),
                         Operator = BinaryOperator.Equality,
                         Right = Value.True,
                     },
@@ -66,7 +64,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 {
                     Condition = new Binary
                     {
-                        Left = _startedSignal.Name.ToVhdlSignalReference(),
+                        Left = startedSignal.Name.ToVhdlSignalReference(),
                         Operator = BinaryOperator.Equality,
                         Right = Value.True,
                     },

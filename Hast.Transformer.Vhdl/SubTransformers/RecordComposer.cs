@@ -76,7 +76,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             DataType = fieldDataType,
                             Name = name.ToExtendedVhdlId(),
                         };
-
                     });
 
                 return RecordHelper.CreateNullableRecord(recordName, recordFields);

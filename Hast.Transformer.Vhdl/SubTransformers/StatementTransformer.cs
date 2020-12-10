@@ -108,7 +108,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         returnExpression = _typeConversionTransformer
                             .ImplementTypeConversion(expressionVhdlType, returnType, returnExpression)
                             .ConvertedFromExpression;
-
                     }
 
                     var assigmentElement = new Assignment

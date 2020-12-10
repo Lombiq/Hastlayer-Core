@@ -14,7 +14,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             parameter.GetActualType().IsReferenceType == true ||
             (parameter.FindFirstParentEntityDeclaration().GetFullName().IsConstructorName() &&
             parameter.FindFirstParentTypeDeclaration().GetFullName() == parameter.GetActualTypeFullName()) ||
-            parameter.ParameterModifier.HasFlag(ParameterModifier.Out) ||
-            parameter.ParameterModifier.HasFlag(ParameterModifier.Ref);
+            parameter.ParameterModifier == ParameterModifier.Out ||
+            parameter.ParameterModifier == ParameterModifier.Ref;
     }
 }

@@ -97,7 +97,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         Operator = BinaryOperator.Equality,
                         Right = Value.False,
                     },
-
                 },
                 True = new InlineBlock(
                     new LineComment("Starting the state machine corresponding to the given member ID."),
@@ -121,7 +120,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 Operator = BinaryOperator.Equality,
                                 Right = Value.True,
                             },
-
                         },
                         True = new Assignment
                         {

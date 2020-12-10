@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using Hast.Common.Interfaces;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
-using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 {
