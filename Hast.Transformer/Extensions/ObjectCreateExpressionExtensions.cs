@@ -1,14 +1,15 @@
-﻿using System.Linq;
-using Hast.Transformer.Helpers;
+﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
+using System.Linq;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class ObjectCreateExpressionExtensions
     {
         public static string GetConstructorFullName(this ObjectCreateExpression objectCreateExpression) =>
-            objectCreateExpression.Annotation<MethodReference>()?.FullName;
+            objectCreateExpression.GetResolveResult<InvocationResolveResult>()?.Member.GetFullName();
 
         public static EntityDeclaration FindConstructorDeclaration(
             this ObjectCreateExpression objectCreateExpression,
@@ -22,7 +23,7 @@ namespace ICSharpCode.NRefactory.CSharp
 
             var constructorType = typeDeclarationLookupTable.Lookup(createdTypeName);
 
-            if (constructorType == null) ExceptionHelper.ThrowDeclarationNotFoundException(createdTypeName);
+            if (constructorType == null) ExceptionHelper.ThrowDeclarationNotFoundException(createdTypeName, objectCreateExpression);
 
             return constructorType
                 .Members

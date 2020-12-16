@@ -1,5 +1,6 @@
 ﻿using Hast.Layer;
-using ICSharpCode.NRefactory.CSharp;
+using Hast.Synthesis;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Models
 {
@@ -9,7 +10,7 @@ namespace Hast.Transformer.Models
     public interface ITransformationContext
     {
         /// <summary>
-        /// A string suitable to identify the given transformation.
+        /// A hash string suitable to identify the given transformation.
         /// </summary>
         string Id { get; }
 
@@ -29,8 +30,18 @@ namespace Hast.Transformer.Models
         ITypeDeclarationLookupTable TypeDeclarationLookupTable { get; }
 
         /// <summary>
-        /// Container for the sizes of statically sized arrays. 
+        /// Table to look up known types.
+        /// </summary>
+        IKnownTypeLookupTable KnownTypeLookupTable { get; }
+
+        /// <summary>
+        /// Container for the sizes of statically sized arrays.
         /// </summary>
         IArraySizeHolder ArraySizeHolder { get; }
+
+        /// <summary>
+        /// The driver of the currently targeted hardware device.
+        /// </summary>
+        IDeviceDriver DeviceDriver { get; }
     }
 }

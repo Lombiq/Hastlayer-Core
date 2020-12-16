@@ -1,7 +1,7 @@
-﻿using System;
-using Hast.Transformer.Helpers;
+﻿using Hast.Transformer.Helpers;
+using System;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class EntityDeclarationExtensions
     {
@@ -16,7 +16,7 @@ namespace ICSharpCode.NRefactory.CSharp
             where T : EntityDeclaration
         {
             var privateImplementationType = member is MethodDeclaration ?
-                ((MethodDeclaration)(object)member).PrivateImplementationType : 
+                ((MethodDeclaration)(object)member).PrivateImplementationType :
                 ((PropertyDeclaration)(object)member).PrivateImplementationType;
 
             // This is an explicitly implemented method so just returning the interface's type declaration directly.
@@ -45,7 +45,7 @@ namespace ICSharpCode.NRefactory.CSharp
 
                     if (baseTypeDeclaration == null)
                     {
-                        ExceptionHelper.ThrowDeclarationNotFoundException(baseType.GetFullName());
+                        ExceptionHelper.ThrowDeclarationNotFoundException(baseType.GetFullName(), member);
                     }
 
                     if (baseTypeDeclaration.ClassType == ClassType.Interface)

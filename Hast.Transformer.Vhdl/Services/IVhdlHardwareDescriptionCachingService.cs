@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using Hast.Common.Models;
 using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.Models;
-using Orchard;
+using Hast.Common.Interfaces;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Services
 {
@@ -9,6 +9,5 @@ namespace Hast.Transformer.Vhdl.Services
     {
         Task<VhdlHardwareDescription> GetHardwareDescription(string cacheKey);
         Task SetHardwareDescription(string cacheKey, VhdlHardwareDescription hardwareDescription);
-        string GetCacheKey(ITransformationContext transformationContext);
     }
 }

@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using Hast.Common.Extensions;
+﻿using Hast.Common.Extensions;
 using Hast.Layer;
 using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Linq;
 
 namespace Hast.Transformer.Services
 {
@@ -55,7 +55,19 @@ namespace Hast.Transformer.Services
                         }
 
                         member.SetHardwareEntryPointMember();
-                        member.AddReference(syntaxTree);
+
+                        // Referencing all parent types. This is necessary if the hardware entry point is in a nested
+                        // class.
+                        var parent = member.FindFirstParentTypeDeclaration();
+                        var child = member;
+                        while (parent != null)
+                        {
+                            child.AddReference(parent);
+                            child = parent;
+                            parent = parent.FindFirstParentTypeDeclaration();
+                        }
+                        child.AddReference(syntaxTree);
+
                         member.AcceptVisitor(referencedNodesFlaggingVisitor);
                     }
                 }
@@ -160,8 +172,9 @@ namespace Hast.Transformer.Services
                     var typeReferenceExpression = (TypeReferenceExpression)memberReferenceExpression.Target;
                     if (typeReferenceExpression.Type.Is<SimpleType>(simple => simple.Identifier == "MethodImplOptions"))
                     {
-                        // This can happen when a method is extern (see: https://msdn.microsoft.com/en-us/library/e59b22c5.aspx),
-                        // thus has no body but has the MethodImpl attribute (e.g. Math.Abs(double value). Nothing to do.
+                        // This can happen when a method is extern (see:
+                        // https://msdn.microsoft.com/en-us/library/e59b22c5.aspx), thus has no body but has the
+                        // MethodImpl attribute (e.g. Math.Abs(double value). Nothing to do.
                         return;
                     }
                 }
@@ -171,8 +184,8 @@ namespace Hast.Transformer.Services
 
                 if (member == null || member.WasVisited()) return;
 
-                // Using the reference expression as the "from", since e.g. two calls to the same method should be counted 
-                // twice, even if from the same method.
+                // Using the reference expression as the "from", since e.g. two calls to the same method should be
+                // counted twice, even if from the same method.
                 member.AddReference(memberReferenceExpression);
 
                 // Referencing the member's parent as well.
@@ -192,8 +205,8 @@ namespace Hast.Transformer.Services
 
                 member.SetVisited();
 
-                // Since when e.g. another method is referenced that is above the level of this expression in the syntax
-                // tree, thus it won't be visited unless we start a visitor there too.
+                // Since when e.g. another method is referenced that is above the level of this expression in the
+                // syntax tree, thus it won't be visited unless we start a visitor there too.
                 member.AcceptVisitor(this);
             }
         }
@@ -230,7 +243,7 @@ namespace Hast.Transformer.Services
 
                 var unreferencedMembers = typeDeclaration.Members.Where(member => !member.IsReferenced());
 
-                // Removing the type if it's empty but leaving if it was references as a type (which is with an 
+                // Removing the type if it's empty but leaving if it was referenced as a type (which is with an 
                 // object create expression or a default value expression).
                 if (typeDeclaration.Members.Count == unreferencedMembers.Count() && !typeDeclaration.IsReferenced())
                 {

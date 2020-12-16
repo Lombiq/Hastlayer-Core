@@ -1,4 +1,4 @@
-﻿using ICSharpCode.NRefactory.CSharp;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Helpers
 {
@@ -26,7 +26,7 @@ namespace Hast.Transformer.Helpers
             }
             else
             {
-                var role = new ICSharpCode.NRefactory.Role<T>(typeof(T).Name);
+                var role = new Role<T>(typeof(T).Name);
                 if (before) enclosingNode.InsertChildBefore(adjacentSibling, statement, role);
                 else enclosingNode.InsertChildAfter(adjacentSibling, statement, role);
             }

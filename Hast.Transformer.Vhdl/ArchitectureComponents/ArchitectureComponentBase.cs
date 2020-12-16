@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Hast.Transformer.Vhdl.Constants;
+﻿using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
@@ -15,12 +15,21 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
     {
         public string Name { get; private set; }
         public IList<Variable> LocalVariables { get; private set; } = new List<Variable>();
+        public IList<Alias> LocalAliases { get; private set; } = new List<Alias>();
+        public IList<AttributeSpecification> LocalAttributeSpecifications { get; set; } = new List<AttributeSpecification>();
         public IList<Variable> GlobalVariables { get; private set; } = new List<Variable>();
         public IList<Signal> InternallyDrivenSignals { get; private set; } = new List<Signal>();
         public IList<Signal> ExternallyDrivenSignals { get; private set; } = new List<Signal>();
-        public IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; private set; } = 
+        public IList<AttributeSpecification> GlobalAttributeSpecifications { get; set; } = new List<AttributeSpecification>();
+        public IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; private set; } =
             new Dictionary<EntityDeclaration, int>();
         public DependentTypesTable DependentTypesTable { get; private set; } = new DependentTypesTable();
+
+        protected readonly List<IMultiCycleOperation> _multiCycleOperations = new List<IMultiCycleOperation>();
+        public IEnumerable<IMultiCycleOperation> MultiCycleOperations
+        {
+            get { return _multiCycleOperations; }
+        }
 
 
         protected ArchitectureComponentBase(string name)
@@ -59,6 +68,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             }
             declarationsBlock.Body.AddRange(GlobalVariables);
 
+            declarationsBlock.Body.AddRange(GlobalAttributeSpecifications);
+
             if (endWith != null)
             {
                 declarationsBlock.Add(endWith);
@@ -74,6 +85,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             var process = new Process { Name = Name.ToExtendedVhdlId() };
 
             process.Declarations = LocalVariables.Cast<IVhdlElement>().ToList();
+            process.Declarations.AddRange(LocalAliases);
+            process.Declarations.AddRange(LocalAttributeSpecifications);
 
             var ifInResetBlock = new InlineBlock(new LineComment("Synchronous reset"));
 

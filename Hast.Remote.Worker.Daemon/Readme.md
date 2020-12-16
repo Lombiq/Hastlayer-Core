@@ -1,4 +1,4 @@
-﻿# Hastlayer - Remote Worker Daemon readme
+﻿# Hastlayer - Remote Worker Daemon
 
 
 
@@ -30,4 +30,4 @@ To minimize downtime and have the ability to roll back to the previously install
 
 ## Logging
 
-The service writes log messages during start and stop to the Windows event log. You can view the entries in the Windows Event Viewer under "Applications and Services Logs" in the log "Hastlayer Remote Worker Daemon". Once the service is running the standard Orchard logs will be used (note that the Daemon starts a standard Hastlayer shell which will run its own Orchard host and have its own log files).
+The service writes log messages during start and stop to the Windows event log. You can view the entries in the Windows Event Viewer under "Applications and Services Logs" in the log "Hastlayer Remote Worker Daemon". Once the service is running the standard Microsoft.Extensions.Logging logs will be used.

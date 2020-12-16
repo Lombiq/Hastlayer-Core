@@ -1,5 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using ICSharpCode.NRefactory.CSharp;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Text.RegularExpressions;
 
 namespace System
 {
@@ -28,25 +28,39 @@ namespace System
         }
 
         /// <summary>
-        /// Checks whether the string looks like the name of a compiler-generated DisplayClass.
+        /// Checks whether the string looks like the name of a compiler-generated class generated from an F# closure.
+        /// </summary>
+        /// <example>
+        /// Such a name is like following: Run@28
+        /// </example>
+        // // A class name containing "@" would be invalid in standard C#, so this is a fairly safe bet.
+        public static bool IsClosureClassName(this string name) => Regex.IsMatch(name, @".+\@\d+", RegexOptions.Compiled);
+
+        /// <summary>
+        /// Checks whether the string looks like the name of a compiler-generated DisplayClass from C# or one
+        /// generated from an F# closure.
         /// </summary>
         /// <example>
         /// Such a name is like following: 
-        /// "Hast.Samples.SampleAssembly.PrimeCalculator/<>c__DisplayClass9_0"
-        /// "Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm/<>c"
+        /// "Hast.Samples.SampleAssembly.PrimeCalculator+<>c__DisplayClass9_0"
+        /// "Hast.Samples.SampleAssembly.HastlayerOptimizedAlgorithm+<>c"
+        /// Run@28
         /// </example>
-        public static bool IsDisplayClassName(this string name) =>
-            // A class anme containing "<>" would be invalid in standard C#, so this is a fairly safe bet.
-            name.Contains("/<>c");
+        public static bool IsDisplayOrClosureClassName(this string name) =>
+            // A class name containing "<>" would be invalid in standard C#, so this is a fairly safe bet.
+            name.Contains("+<>c") ||
+            name.IsClosureClassName();
 
         /// <summary>
         /// Checks whether the string looks like the name of a compiler-generated DisplayClass member.
         /// </summary>
         /// <example>
         /// Such a name is like following: 
-        /// "System.UInt32[] Hast.Samples.SampleAssembly.PrimeCalculator/<>c__DisplayClass2::numbers"
+        /// "System.UInt32[] Hast.Samples.SampleAssembly.PrimeCalculator+<>c__DisplayClass2::numbers"
+        /// "System.UInt32 Hast.Samples.FSharpSampleAssembly.FSharpParallelAlgorithmContainer+Run@28::Invoke(System.UInt32)"
         /// </example>
-        public static bool IsDisplayClassMemberName(this string name) => name.IsDisplayClassName() && name.Contains("::");
+        public static bool IsDisplayOrClosureClassMemberName(this string name) =>
+            name.IsDisplayOrClosureClassName() && name.Contains("::");
 
         /// <summary>
         /// Checks whether the string looks like the name of a compiler-generated method that was created in place of a
@@ -56,7 +70,7 @@ namespace System
         /// Such a name is like:
         /// "System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers2>b__9_0(System.Object)"
         /// or: 
-        /// "Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier/PixelProcessingTaskInput)"
+        /// "Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__6_0(Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput)"
         /// </example>
         public static bool IsInlineCompilerGeneratedMethodName(this string name) =>
             // A name where before the "<" there is nothing is invalid in standard C#, so this is a fairly safe bet.
@@ -76,9 +90,9 @@ namespace System
         /// </summary>
         /// <remarks>
         /// Such a field's name looks like 
-        /// "System.UInt32 Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::<ArrayLength>k__BackingField".
+        /// "System.UInt32 Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder1::<ArrayLength>k__BackingField".
         /// It will contain the name of the property. This needs to be converted into the corresponding full property name:
-        /// "System.UInt32 Hast.TestInputs.Various.ConstantsUsingCases/ArrayHolder1::ArrayLength()"
+        /// "System.UInt32 Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder1::ArrayLength()"
         /// </remarks>
         public static string ConvertFullBackingFieldNameToPropertyName(this string name) =>
              name.ConvertSimpleBackingFieldNameToPropertyName() + "()";
@@ -102,13 +116,14 @@ namespace System
         public static bool IsConstructorName(this string name) => name.Contains(".ctor");
 
         /// <summary>
-        /// Adds the full name of the given node's parent entity to the message string.
+        /// Adds the full name of the given node's parent entity to the message string. Useful in exception message for
+        /// example.
         /// </summary>
-        public static string AddParentEntityName(this string exceptionMessage, AstNode node)
+        public static string AddParentEntityName(this string message, AstNode node)
         {
             var parentEntity = node.FindFirstParentEntityDeclaration();
-            if (parentEntity == null) return exceptionMessage;
-            return exceptionMessage + " Parent entity where the affected code is: " + parentEntity.GetFullName();
+            if (parentEntity == null) return message;
+            return message + " Parent entity where the affected code is: " + parentEntity.GetFullName();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class TypeDeclarationExtensions
     {
@@ -10,8 +10,8 @@ namespace ICSharpCode.NRefactory.CSharp
         /// </summary>
         /// <returns>The declaration of the matching member if found, <c>null</c> otherwise.</returns>
         public static T FindMatchingMember<T>(
-            this TypeDeclaration typeDeclaration, 
-            T memberDeclaration, 
+            this TypeDeclaration typeDeclaration,
+            T memberDeclaration,
             Func<AstType, TypeDeclaration> lookupDeclaration)
             where T : EntityDeclaration
         {

@@ -137,13 +137,12 @@ namespace Hast.VhdlBuilder.Representation
                 return newName;
             };
 
-        private static readonly VhdlGenerationOptions _debugOptions = new VhdlGenerationOptions
+        public static VhdlGenerationOptions Debug { get; } = new VhdlGenerationOptions
         {
             FormatCode = true,
             OmitComments = false,
             NameShortener = SimpleNameShortener
         };
-        public static VhdlGenerationOptions Debug => _debugOptions;
 
         public bool FormatCode { get; set; } = true;
         public bool OmitComments { get; set; } = true;

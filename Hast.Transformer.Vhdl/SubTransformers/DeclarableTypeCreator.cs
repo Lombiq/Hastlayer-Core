@@ -2,8 +2,9 @@
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -18,17 +19,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
 
-        public DataType CreateDeclarableType(AstNode valueHolder, TypeReference typeReference, IVhdlTransformationContext context)
+        public DataType CreateDeclarableType(AstNode valueHolder, IType type, IVhdlTransformationContext context)
         {
-            if (typeReference.IsArray)
+            if ((valueHolder.GetMemberResolveResult()?.Member.ReturnType as ITypeDefinition)?
+                    .KnownTypeCode == KnownTypeCode.Void)
+            {
+                return _typeConverter.ConvertAstType(new PrimitiveType("void"), context);
+            }
+            else if (type.IsArray())
             {
                 return ArrayHelper.CreateArrayInstantiation(
-                    _typeConverter.ConvertTypeReference(((Mono.Cecil.ArrayType)typeReference).ElementType, context),
+                    _typeConverter.ConvertType(type.GetElementType(), context),
                     context.ArraySizeHolder.GetSizeOrThrow(valueHolder).Length);
             }
             else
             {
-                return _typeConverter.ConvertTypeReference(typeReference, context);
+                return _typeConverter.ConvertType(type, context);
             }
         }
     }

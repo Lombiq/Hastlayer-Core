@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Common.Configuration;
+﻿using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -10,7 +7,10 @@ using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 {
@@ -42,6 +42,23 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 }
             }
 
+            foreach (var invokedMember in invokedMembers)
+            {
+                var memberFullName = invokedMember.Key.GetFullName();
+
+                // Is this a recursive member? If yes then remove the last component (i.e. the one with the highest
+                // index, the deepest one in the call stack) from the list of invoking ones, because that won't invoke
+                // anything else.
+                var maxIndexComponents = invokedMember.Value
+                    .Where(component => component.Key.StartsWith(memberFullName))
+                    .OrderByDescending(component => component.Key);
+
+                if (maxIndexComponents.Any())
+                {
+                    invokedMember.Value.Remove(maxIndexComponents.First());
+                }
+            }
+
 
             var proxyComponents = new List<IArchitectureComponent>(invokedMembers.Count);
             // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would 
@@ -69,7 +86,10 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     afterFinishedStateValue
                 }.ToList()
             };
-            proxyComponents.Add(new BasicComponent((namePrefix + "_CommonDeclarations").ToExtendedVhdlId()) { Declarations = new InlineBlock(booleanArrayType, runningStates) });
+            proxyComponents.Add(new BasicComponent((namePrefix + "_CommonDeclarations").ToExtendedVhdlId())
+            {
+                Declarations = new InlineBlock(booleanArrayType, runningStates)
+            });
 
 
             foreach (var invokedMember in invokedMembers)
@@ -182,9 +202,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 var invocationsCount = 0;
                 var invocationsCanBePaired =
                     !invokedFromSingleComponent &&
-                    invokedFromComponents
-                        .FirstOrDefault(componentInvocation => componentInvocation.Value > 1)
-                        .Equals(default(KeyValuePair<string, int>)) &&
+                    !invokedFromComponents.Any(componentInvocation => componentInvocation.Value > 1) &&
                     (invocationsCount = invokedFromComponents.Sum(invokingComponent => invokingComponent.Value)) <= targetComponentCount;
 
                 if (invokedFromSingleComponent || invocationsCanBePaired)
@@ -261,9 +279,9 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         // Creating a boolean vector where each of the elements will indicate whether the target
                         // component with that index is available and can be started. I.e. targetAvailableIndicator(0)
                         // being true tells that the target component with index 0 can be started.
-                        // All this is necessary to avoid a ifs with large conditions which would cause timing 
-                        // errors with more than cca. 20 components. This implementation can be better implemented
-                        // with parallel paths.
+                        // All this is necessary to avoid ifs with large conditions which would cause timing errors
+                        // with more than cca. 20 components. This implementation can be better implemented with
+                        // parallel paths.
                         targetAvailableIndicatorVariableReference = proxyComponent
                             .CreatePrefixedSegmentedObjectName("targetAvailableIndicator")
                             .ToVhdlVariableReference();
@@ -277,11 +295,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         {
                             DataType = targetAvailableIndicatorDataType,
                             Name = targetAvailableIndicatorVariableReference.Name,
-                            InitialValue = new Value
-                            {
-                                DataType = targetAvailableIndicatorDataType,
-                                Content = "others => " + KnownDataTypes.Boolean.DefaultValue.ToVhdl()
-                            }
+                            InitialValue = ("others => " + KnownDataTypes.Boolean.DefaultValue.ToVhdl())
+                                .ToVhdlValue(targetAvailableIndicatorDataType)
                         });
 
                         bodyBlock.Add(new LineComment(
@@ -289,15 +304,17 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                         for (int c = 0; c < targetComponentCount; c++)
                         {
-                            var selectorConditions = new List<IVhdlElement>();
-                            selectorConditions.Add(new Binary
+                            var selectorConditions = new List<IVhdlElement>
                             {
-                                Left = ArchitectureComponentNameHelper
+                                new Binary
+                                {
+                                    Left = ArchitectureComponentNameHelper
                                     .CreateStartedSignalName(getTargetMemberComponentName(c))
                                     .ToVhdlSignalReference(),
-                                Operator = BinaryOperator.Equality,
-                                Right = Value.False
-                            });
+                                    Operator = BinaryOperator.Equality,
+                                    Right = Value.False
+                                }
+                            };
                             for (int s = c + 1; s < targetComponentCount; s++)
                             {
                                 selectorConditions.Add(new Binary

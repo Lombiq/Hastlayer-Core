@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Transformer.Abstractions.Configuration;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Services
 {
@@ -48,14 +44,18 @@ namespace Hast.Transformer.Services
                 // Only do something if there's no invocation instance count configured.
                 if (invokingMemberMaxInvocationConfiguration.MaxInvocationInstanceCount != 1) return;
 
-                // Searching for a parent while statement that has a condition with a variable and a primitive expression,
-                // i.e. something like num < 10.
+                // Searching for a parent while statement that has a condition with a variable and a primitive
+                // expression, i.e. something like num < 10.
 
                 var parentWhile = memberReferenceExpression.FindFirstParentOfType<WhileStatement>();
 
                 if (parentWhile == null ||
                     !parentWhile.Condition.Is<BinaryOperatorExpression>(
-                        expression => expression.Right is IdentifierExpression || expression.Left is IdentifierExpression,
+                        expression =>
+                            expression.Left is IdentifierExpression ||
+                            expression.Left.FindFirstChildOfType<IdentifierExpression>() != null ||
+                            expression.Right is IdentifierExpression ||
+                            expression.Right.FindFirstChildOfType<IdentifierExpression>() != null,
                         out var condition))
                 {
                     return;
@@ -65,6 +65,13 @@ namespace Hast.Transformer.Services
                 if (primitiveExpression == null)
                 {
                     primitiveExpression = condition.Right as PrimitiveExpression ?? condition.Right.FindFirstChildOfType<PrimitiveExpression>();
+
+                    if (condition.Right.Is<BinaryOperatorExpression>(out var innerCondition))
+                    {
+                        // In code decopmiled from F# it can happen that the expression will be decompiled into 
+                        // "1 + actual number"... Taking care of that here.
+                        primitiveExpression = innerCondition.Right as PrimitiveExpression ?? innerCondition.Right.FindFirstChildOfType<PrimitiveExpression>();
+                    }
                 }
 
                 if (primitiveExpression == null) return;

@@ -1,7 +1,8 @@
-﻿using System.Linq;
-using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+﻿using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
+using System.Linq;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -40,19 +41,19 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         // This could be optimized not to look up everything every time when called from VisitObjectCreateExpression()
         // and VisitInvocationExpression().
-        private  static ParameterDeclaration FindParameterForExpressionPassedToCall(
+        private static ParameterDeclaration FindParameterForExpressionPassedToCall(
             Expression callExpression,
             AstNodeCollection<Expression> invocationArguments,
             Expression passedExpression,
             ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
-            var methodReference = callExpression.Annotation<MethodReference>();
+            var methodReference = callExpression.GetResolveResult<InvocationResolveResult>();
 
             if (methodReference == null) return null;
 
-            var targetFullName = methodReference.FullName;
+            var targetFullName = methodReference.Member.GetFullName();
 
-            var targetType = typeDeclarationLookupTable.Lookup(methodReference.DeclaringType.FullName);
+            var targetType = typeDeclarationLookupTable.Lookup(methodReference.Member.DeclaringType.GetFullName());
 
             // This can happen e.g. with SimpleMemory calls: the type is not transformed.
             if (targetType == null) return null;

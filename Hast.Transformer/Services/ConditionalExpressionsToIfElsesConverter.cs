@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using Hast.Common.Helpers;
+﻿using Hast.Common.Helpers;
 using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.Decompiler.ILAst;
-using ICSharpCode.NRefactory.CSharp;
-
+using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.IL;
+using System.Linq;
 
 namespace Hast.Transformer.Services
 {
@@ -32,52 +31,45 @@ namespace Hast.Transformer.Services
                 {
                     var variableName = "conditional" + Sha2456Helper.ComputeHash(conditionalExpression.GetFullName());
 
-                    var typeInformation = conditionalExpression.Annotation<TypeInformation>();
-                    if (typeInformation == null)
-                    {
-                        // If a conditional expression is inside a cast then a TypeInformation annotation will be only
-                        // on the cast.
-                        typeInformation = conditionalExpression
-                            .FindFirstParentOfType<CastExpression>()
-                            .Annotation<TypeInformation>();
-                    }
+                    var resolveResult = conditionalExpression.GetResolveResult();
 
-                    var variableTypeReference = typeInformation.InferredType;
+                    var variableType = resolveResult.Type;
+
+                    ILVariableResolveResult CreateILVariableResolveResult() =>
+                        VariableHelper.CreateILVariableResolveResult(VariableKind.Local, variableType, variableName);
 
                     // First creating a variable for the result.
-                    var variableDeclaration = 
-                        new VariableDeclarationStatement(AstBuilder.ConvertType(variableTypeReference), variableName);
-                    variableDeclaration.Variables.Single().AddAnnotation(variableTypeReference);
+                    var variableDeclaration =
+                        new VariableDeclarationStatement(TypeHelper.CreateAstType(variableType), variableName);
+                    variableDeclaration.Variables.Single().AddAnnotation(CreateILVariableResolveResult());
                     AstInsertionHelper.InsertStatementBefore(
                         conditionalExpression.FindFirstParentStatement(),
                         variableDeclaration);
 
-                    // Then moving the conditational expression so its result is assigned to the variable.
-                    var variableIdentifier = new IdentifierExpression(variableName);
-                    variableIdentifier.AddAnnotation(new ILVariable { Name = variableName, Type = variableTypeReference });
-                    var newConditionalExpression = (ConditionalExpression)conditionalExpression.Clone();
+                    // Then moving the conditional expression so its result is assigned to the variable.
+                    var newConditionalExpression = conditionalExpression.Clone<ConditionalExpression>();
                     assignment = new AssignmentExpression(
-                        new IdentifierExpression(variableName).WithAnnotation(new ILVariable { Name = variableName, Type = variableTypeReference }), 
+                        new IdentifierExpression(variableName).WithAnnotation(CreateILVariableResolveResult()),
                         newConditionalExpression);
 
 
-                    assignment.AddAnnotation(typeInformation);
+                    assignment.AddAnnotation(resolveResult);
 
                     AstInsertionHelper.InsertStatementAfter(variableDeclaration, new ExpressionStatement(assignment));
 
                     // And finally swapping out the original expression with the variable reference.
-                    conditionalExpression.ReplaceWith(variableIdentifier.Clone());
+                    conditionalExpression.ReplaceWith(new IdentifierExpression(variableName).WithAnnotation(CreateILVariableResolveResult()));
                     conditionalExpression = newConditionalExpression;
                 }
 
                 // Enclosing the assignments into BlockStatements because this is also what normal if-else statements 
                 // are decompiled into. This is also necessary to establish a variable scope.
-                var trueAssignment = (AssignmentExpression)assignment.Clone();
+                var trueAssignment = assignment.Clone<AssignmentExpression>();
                 trueAssignment.Right = conditionalExpression.TrueExpression.Clone();
                 var trueBlock = new BlockStatement();
                 trueBlock.Statements.Add(new ExpressionStatement(trueAssignment));
 
-                var falseAssignment = (AssignmentExpression)assignment.Clone();
+                var falseAssignment = assignment.Clone<AssignmentExpression>();
                 falseAssignment.Right = conditionalExpression.FalseExpression.Clone();
                 var falseBlock = new BlockStatement();
                 falseBlock.Statements.Add(new ExpressionStatement(falseAssignment));

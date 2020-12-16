@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
-using Orchard;
+using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {

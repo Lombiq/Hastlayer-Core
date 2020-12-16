@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using Hast.Transformer.Vhdl.Helpers;
+﻿using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
-using Orchard.Caching;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using Microsoft.Extensions.Caching.Memory;
+using System;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -14,20 +14,17 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         // Needs Lazy because unfortunately TypeConverter and RecordComposer depend on each other.
         private readonly Lazy<IDeclarableTypeCreator> _declarableTypeCreatorLazy;
-        private readonly ICacheManager _cacheManager;
+        private readonly IMemoryCache _memoryCache;
 
 
-        public RecordComposer(ICacheManager cacheManager, Lazy<IDeclarableTypeCreator> declarableTypeCreatorLazy)
+        public RecordComposer(IMemoryCache memoryCache, Lazy<IDeclarableTypeCreator> declarableTypeCreatorLazy)
         {
-            _cacheManager = cacheManager;
+            _memoryCache = memoryCache;
             _declarableTypeCreatorLazy = declarableTypeCreatorLazy;
         }
 
 
-        public bool IsSupportedRecordMember(AstNode node)
-        {
-            return node is PropertyDeclaration || node is FieldDeclaration;
-        }
+        public bool IsSupportedRecordMember(AstNode node) => node is PropertyDeclaration || node is FieldDeclaration;
 
         public NullableRecord CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
         {
@@ -35,7 +32,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // result in the record being composed.
             var typeFullName = typeDeclaration.GetFullName();
 
-            return _cacheManager.Get("ComposedRecord." + typeFullName, true, ctx =>
+            return _memoryCache.GetOrCreate("ComposedRecord." + typeFullName, ctx =>
             {
                 var recordName = typeFullName.ToExtendedVhdlId();
 
@@ -45,7 +42,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     .Where(member =>
                         (member is PropertyDeclaration ||
                         member.Is<FieldDeclaration>(field => !field.GetFullName().IsBackingFieldName())) &&
-                        !member.GetActualTypeReference().IsSimpleMemory())
+                        !member.GetActualType().IsSimpleMemory())
                     .Select(member =>
                     {
                         var name = member.Name;
@@ -61,11 +58,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         DataType fieldDataType;
 
                         // If the field stores an instance of this type then we shouldn't declare that, otherwise we'd
-                        // get a stack overflow. This won't help against having a type that contains this type, so 
-                        // indirect circular type dependency.
+                        // get a stack overflow. Since it's not valid in VHDL ("[Synth 8-4702] element type of the
+                        // record element is same as the parent record type" in Vivado) we shouldn't even allow it.
+                        // This won't help against having a type that contains this type, so indirect circular type
+                        // dependency.
                         if (member.ReturnType.GetFullName() == typeFullName)
                         {
-                            fieldDataType = new NullableRecord { Name = recordName }.ToReference();
+                            throw new NotSupportedException(
+                                "A type referencing itself in its properties or fields (like in a linked list implementation) is not supported. The member " +
+                                member.GetFullName() + " references its parent type.".AddParentEntityName(member));
                         }
                         else
                         {

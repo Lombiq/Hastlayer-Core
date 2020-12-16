@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+using Hast.Common.Models;
 using Hast.Layer;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure2;
@@ -7,35 +6,48 @@ using Hast.Transformer.Abstractions;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Testing;
-using Lombiq.OrchardAppHost;
-using NUnit.Framework;
+using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
-    [TestFixture]
     public class BasicHardwareStructureTests : VhdlTransformingTestFixtureBase
     {
-        [Test]
+        [Fact]
         public async Task BasicHardwareDescriptionPropertiesAreCorrect()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            VhdlManifest manifest = null;
+
+            _hostConfiguration.OnServiceRegistration += (configuration, services) =>
+                services.AddSingleton(new EventHandler<ITransformedVhdlManifest>((sender, e) => manifest = e.Manifest));
+
+            await Host.RunAsync<ITransformer>(async transformer =>
             {
                 var hardwareDescription = await TransformClassStrutureExamplesToVhdl(transformer);
 
                 hardwareDescription.Language.ShouldBe("VHDL");
                 hardwareDescription.HardwareEntryPointNamesToMemberIdMappings.Count.ShouldBe(14);
                 hardwareDescription.VhdlSource.ShouldNotBeNullOrEmpty();
-                hardwareDescription.VhdlManifestIfFresh.ShouldNotBeNull(); // Since caching is off.
+                manifest.ShouldNotBeNull(); // Since caching is off.
             });
         }
 
-        [Test]
+        [Fact]
         public async Task BasicVhdlStructureIsCorrect()
         {
-            await _host.Run<ITransformer>(async transformer =>
+            VhdlManifest manifest = null;
+
+            _hostConfiguration.OnServiceRegistration += (configuration, services) =>
+                services.AddSingleton(new EventHandler<ITransformedVhdlManifest>((sender, e) => manifest = e.Manifest));
+
+            await Host.RunAsync<ITransformer>(async transformer =>
             {
-                var topModule = (Module)(await TransformClassStrutureExamplesToVhdl(transformer)).VhdlManifestIfFresh.Modules.Last();
+                await TransformClassStrutureExamplesToVhdl(transformer);
+                var topModule = (Module)manifest.Modules.Last();
 
                 var architecture = topModule.Architecture;
                 architecture.Name.ShouldNotBeNullOrEmpty();
@@ -52,15 +64,10 @@ namespace Hast.Transformer.Vhdl.Tests
         }
 
 
-        private Task<VhdlHardwareDescription> TransformClassStrutureExamplesToVhdl(ITransformer transformer)
-        {
-            return TransformAssembliesToVhdl(
+        private Task<VhdlHardwareDescription> TransformClassStrutureExamplesToVhdl(ITransformer transformer) =>
+            TransformAssembliesToVhdl(
                 transformer,
                 new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
-                configuration =>
-                {
-                    configuration.TransformerConfiguration().UseSimpleMemory = false;
-                });
-        }
+                configuration => configuration.TransformerConfiguration().UseSimpleMemory = false);
     }
 }

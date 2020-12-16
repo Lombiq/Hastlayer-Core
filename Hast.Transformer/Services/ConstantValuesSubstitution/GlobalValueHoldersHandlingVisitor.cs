@@ -1,6 +1,7 @@
-﻿using System;
 using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
+using System.Linq;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -38,9 +39,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 var parameter = ConstantValueSubstitutionHelper
                     .FindConstructorParameterForPassedExpression(objectCreateExpression, argument, _typeDeclarationLookupTable);
 
-                if (argument is PrimitiveExpression)
+                if (argument is PrimitiveExpression primitiveExpression)
                 {
-                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, (PrimitiveExpression)argument, _rootNode, true);
+                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, primitiveExpression, _rootNode, true);
                 }
                 else
                 {
@@ -59,15 +60,24 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 var parameter = ConstantValueSubstitutionHelper
                     .FindMethodParameterForPassedExpression(invocationExpression, argument, _typeDeclarationLookupTable);
 
-                if (argument is PrimitiveExpression)
+                if (argument is PrimitiveExpression expression)
                 {
-                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, (PrimitiveExpression)argument, _rootNode, true);
+                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, expression, _rootNode, true);
                 }
                 else
                 {
                     _constantValuesTable.MarkAsNonConstant(parameter, _rootNode);
                 }
             }
+        }
+
+        public override void VisitParameterDeclaration(ParameterDeclaration parameterDeclaration)
+        {
+            base.VisitParameterDeclaration(parameterDeclaration);
+
+            // Handling parameters with default values.
+            if (!(parameterDeclaration.DefaultExpression is PrimitiveExpression primitiveExpression)) return;
+            _constantValuesTable.MarkAsPotentiallyConstant(parameterDeclaration, primitiveExpression, _rootNode, true);
         }
 
         public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
@@ -84,10 +94,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             // If a primitive value is assigned then re-mark it so if there are multiple different such assignments
             // then the member will be unmarked.
-            if (parentAssignment.Right is PrimitiveExpression)
+            if (parentAssignment.Right is PrimitiveExpression expression)
             {
                 _constantValuesTable
-                    .MarkAsPotentiallyConstant(memberEntity, (PrimitiveExpression)parentAssignment.Right, _rootNode, true);
+                    .MarkAsPotentiallyConstant(memberEntity, expression, _rootNode, true);
             }
             else
             {
@@ -101,11 +111,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             // Method substitution is only valid if there is only one return statement in the method (or multiple
             // ones but returning the same constant value).
-            if (returnStatement.Expression is PrimitiveExpression)
+            if (returnStatement.Expression is PrimitiveExpression primitiveExpression)
             {
                 _constantValuesTable.MarkAsPotentiallyConstant(
                     returnStatement.FindFirstParentEntityDeclaration(),
-                    (PrimitiveExpression)returnStatement.Expression,
+                    primitiveExpression,
                     _rootNode,
                     true);
             }
@@ -131,6 +141,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 _constantValuesTable.MarkAsNonConstant(propertyDeclaration, _rootNode);
             }
+            else if (propertyDeclaration.Initializer is PrimitiveExpression primitiveExpression)
+            {
+                _constantValuesTable.MarkAsPotentiallyConstant(propertyDeclaration, primitiveExpression, _rootNode, true);
+            }
         }
 
         public override void VisitFieldDeclaration(FieldDeclaration fieldDeclaration)
@@ -140,6 +154,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (!fieldDeclaration.IsReadOnlyMember())
             {
                 _constantValuesTable.MarkAsNonConstant(fieldDeclaration, _rootNode);
+            }
+            else
+            {
+                // The AST should be processed in a way at this stage that there aren't multiple variables.
+                var variable = fieldDeclaration.Variables.SingleOrDefault();
+                if (variable?.Initializer is PrimitiveExpression primitiveExpression)
+                {
+                    _constantValuesTable.MarkAsPotentiallyConstant(fieldDeclaration, primitiveExpression, _rootNode, true);
+                }
             }
         }
     }

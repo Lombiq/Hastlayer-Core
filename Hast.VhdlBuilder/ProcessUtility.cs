@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Hast.VhdlBuilder.Extensions;
+﻿using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.VhdlBuilder
 {
@@ -20,16 +20,7 @@ namespace Hast.VhdlBuilder
 
             module.Entity.Ports.Add(clockPort);
 
-            // Also looking on level down, so detecting processes even if they're in an inline block.
-            var processes = 
-                module.Architecture.Body.Where(element => element is Process)
-                .Union(module.Architecture.Body
-                    .Where(element => !(element is Process) && element is IBlockElement)
-                    .Cast<InlineBlock>()
-                    .SelectMany(block => block.Body.Where(element => element is Process)))
-                .Cast<Process>();
-
-            foreach (var process in processes)
+            foreach (var process in FindProcesses(module.Architecture.Body))
             {
                 process.SensitivityList.Add(clockPort);
                 var wrappingIf = new IfElse
@@ -41,5 +32,14 @@ namespace Hast.VhdlBuilder
                 process.Add(wrappingIf);
             }
         }
+
+        public static IEnumerable<Process> FindProcesses(IEnumerable<IVhdlElement> elements) =>
+            // Also looking on level down, so detecting processes even if they're in an inline block.
+            elements.Where(element => element is Process)
+                .Union(elements
+                    .Where(element => !(element is Process) && element is IBlockElement)
+                    .Cast<InlineBlock>()
+                    .SelectMany(block => block.Body.Where(element => element is Process)))
+            .Cast<Process>();
     }
 }

@@ -1,20 +1,20 @@
-﻿using System;
+﻿using Hast.Transformer.Models;
+using Microsoft.Extensions.Caching.Memory;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.Caching;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Transformer.Services
 {
     public class TransformationContextCacheService : ITransformationContextCacheService
     {
-        private readonly MemoryCache _cache = MemoryCache.Default;
+        private readonly IMemoryCache _cache;
 
+        public TransformationContextCacheService(IMemoryCache cache)
+        {
+            _cache = cache;
+        }
 
         public ITransformationContext GetTransformationContext(IEnumerable<string> assemblyPaths, string transformationId) =>
             _cache.Get(GetCacheKey(assemblyPaths, transformationId)) as ITransformationContext;
@@ -24,7 +24,7 @@ namespace Hast.Transformer.Services
             _cache.Set(
                 GetCacheKey(assemblyPaths, transformationContext.Id),
                 transformationContext,
-                new CacheItemPolicy
+                new MemoryCacheEntryOptions
                 {
                     SlidingExpiration = TimeSpan.FromHours(5)
                 });

@@ -1,5 +1,4 @@
-﻿using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Models
 {
@@ -21,18 +20,12 @@ namespace Hast.Transformer.Models
         /// </summary>
         /// <param name="type">The AST type to look up the type declaration for.</param>
         /// <returns>The retrieved <see cref="TypeDeclaration"/> if found or <c>null</c> otherwise.</returns>
-        public static TypeDeclaration Lookup(this ITypeDeclarationLookupTable typeDeclarationLookupTable, AstType type)
-        {
-            var typeReference = type.Annotation<TypeReference>();
-            if (typeReference == null) return null;
-            return typeDeclarationLookupTable.Lookup(typeReference.FullName);
-        }
+        public static TypeDeclaration Lookup(this ITypeDeclarationLookupTable typeDeclarationLookupTable, AstType type) =>
+            typeDeclarationLookupTable.Lookup(type.GetActualTypeFullName());
 
         public static TypeDeclaration Lookup(
-            this ITypeDeclarationLookupTable typeDeclarationLookupTable, 
-            TypeReferenceExpression typeReferenceExpression)
-        {
-            return typeDeclarationLookupTable.Lookup(typeReferenceExpression.Type);
-        }
+            this ITypeDeclarationLookupTable typeDeclarationLookupTable,
+            TypeReferenceExpression typeReferenceExpression) =>
+            typeDeclarationLookupTable.Lookup(typeReferenceExpression.Type);
     }
 }

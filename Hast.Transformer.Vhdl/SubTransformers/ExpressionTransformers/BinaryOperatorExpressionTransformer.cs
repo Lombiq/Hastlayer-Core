@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Synthesis.Services;
-using Hast.Transformer.Helpers;
+﻿using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
@@ -10,25 +7,24 @@ using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
     public class BinaryOperatorExpressionTransformer : IBinaryOperatorExpressionTransformer
     {
-        private readonly IDeviceDriverSelector _deviceDriverSelector;
         private readonly ITypeConverter _typeConverter;
         private readonly ITypeConversionTransformer _typeConversionTransformer;
 
 
         public BinaryOperatorExpressionTransformer(
-            IDeviceDriverSelector deviceDriverSelector,
             ITypeConverter typeConverter,
             ITypeConversionTransformer typeConversionTransformer)
         {
-            _deviceDriverSelector = deviceDriverSelector;
             _typeConverter = typeConverter;
             _typeConversionTransformer = typeConversionTransformer;
         }
@@ -71,15 +67,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         public IVhdlElement TransformBinaryOperatorExpression(
             IPartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
-            ISubTransformerContext context)
-        {
-            return TransformBinaryOperatorExpressionInner(
+            ISubTransformerContext context) =>
+            TransformBinaryOperatorExpressionInner(
                 partiallyTransformedExpression,
                 true,
                 true,
                 true,
                 context);
-        }
 
 
         private IVhdlElement TransformBinaryOperatorExpressionInner(
@@ -97,22 +91,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var expression = partiallyTransformedExpression.BinaryOperatorExpression;
 
-            // If the left and/or right expressions are cast then the type that matters here is the result type of that
-            // cast, so also checking for that.
+            var leftType = expression.Left.GetActualType();
+            var rightType = expression.Right.GetActualType();
 
-            var leftTypeReference = expression.Left.GetActualTypeReference(true) ?? expression.Left.GetActualTypeReference();
-
-            var rightTypeReference = expression.Right.GetActualTypeReference(true) ?? expression.Right.GetActualTypeReference();
-
-            // At this point if non-primitive types are checked for equality it could mean that they are custom 
-            // types either without the equality operator defined or they are custom value types and a
-            // ReferenceEquals() is attempted on them which is wrong.
-            if ((leftTypeReference != null &&
-                        !leftTypeReference.IsPrimitive &&
-                        (leftTypeReference as TypeDefinition)?.IsEnum != true ||
-                    rightTypeReference != null &&
-                        !rightTypeReference.IsPrimitive &&
-                        (rightTypeReference as TypeDefinition)?.IsEnum != true)
+            // At this point if non-primitive types are checked for equality it could mean that they are custom types
+            // either without the equality operator defined or they are custom value types and a ReferenceEquals() is
+            // attempted on them which is wrong.
+            if (((!leftType.IsPrimitive() || leftType.GetKnownTypeCode() == KnownTypeCode.Object) && leftType.Kind != TypeKind.Enum ||
+                (!rightType.IsPrimitive() || rightType.GetKnownTypeCode() == KnownTypeCode.Object) && rightType.Kind != TypeKind.Enum)
                 &&
                 !(expression.Left is NullReferenceExpression || expression.Right is NullReferenceExpression))
             {
@@ -172,7 +158,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 //case BinaryOperatorType.NullCoalescing:
                 //    break;
                 // Left and right shift for numerical types is a function call in VHDL, so handled separately. See
-                // below. The sll/srl or sra/sla operators shouldn't be used, see: 
+                // below. The sll/srl or sra/sla operators shouldn't be used, see:
                 // https://www.nandland.com/vhdl/examples/example-shifts.html and https://stackoverflow.com/questions/9018087/shift-a-std-logic-vector-of-n-bit-to-right-or-left
                 case BinaryOperatorType.ShiftLeft:
                 case BinaryOperatorType.ShiftRight:
@@ -189,22 +175,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var currentBlock = context.Scope.CurrentBlock;
 
             var firstNonParenthesizedExpressionParent = expression.FindFirstNonParenthesizedExpressionParent();
-            var resultTypeReference = expression.GetResultTypeReference();
+            var resultType = expression.GetResultType();
             var isMultiplication = expression.Operator == BinaryOperatorType.Multiply;
 
 
-            TypeReference preCastTypeReference = null;
+            IType preCastType = null;
             // If the parent is an explicit cast then we need to follow that, otherwise there could be a resize
             // to a smaller type here, then a resize to a bigger type as a result of the cast.
             var hasExplicitCast = firstNonParenthesizedExpressionParent is CastExpression;
             if (hasExplicitCast)
             {
-                preCastTypeReference = resultTypeReference;
-                resultTypeReference = firstNonParenthesizedExpressionParent.GetActualTypeReference(true);
+                preCastType = resultType;
+                resultType = firstNonParenthesizedExpressionParent.GetActualType();
             }
 
-            var resultType = _typeConverter.ConvertTypeReference(resultTypeReference, context.TransformationContext);
-            var resultTypeSize = resultType.GetSize();
+            var resultVhdlType = _typeConverter.ConvertType(resultType, context.TransformationContext);
+            var resultTypeSize = resultVhdlType.GetSize();
 
 
 
@@ -212,13 +198,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (operationResultDataObjectIsVariable)
             {
                 operationResultDataObjectReference = stateMachine
-                    .CreateVariableWithNextUnusedIndexedName("binaryOperationResult", resultType)
+                    .CreateVariableWithNextUnusedIndexedName("binaryOperationResult", resultVhdlType)
                     .ToReference();
             }
             else
             {
                 operationResultDataObjectReference = stateMachine
-                    .CreateSignalWithNextUnusedIndexedName("binaryOperationResult", resultType)
+                    .CreateSignalWithNextUnusedIndexedName("binaryOperationResult", resultVhdlType)
                     .ToReference();
             }
 
@@ -226,37 +212,37 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var shouldResizeResult =
                 (
-                    // If the type of the result is the same as the type of the binary expression but the expression is a
-                    // multiplication then this means that the result of the operation wouldn't fit into the result type.
-                    // This is allowed in .NET (an explicit cast is needed in C# but that will be removed by the compiler)
-                    // but will fail in VHDL with something like "[Synth 8-690] width mismatch in assignment; target has 
-                    // 16 bits, source has 32 bits." In this cases we need to add a type conversion. Also see the block
-                    // below.
+                    // If the type of the result is the same as the type of the binary expression but the expression is
+                    // a multiplication then this means that the result of the operation wouldn't fit into the result
+                    // type. This is allowed in .NET (an explicit cast is needed in C# but that will be removed by the
+                    // compiler) but will fail in VHDL with something like "[Synth 8-690] width mismatch in assignment;
+                    // target has 16 bits, source has 32 bits." In this cases we need to add a type conversion. Also
+                    // see the block below.
                     // E.g. ushort = ushort * ushort is valid in IL but in VHDL it must have a length truncation:
                     // unsigned(15 downto 0) = resize(unsigned(15 downto 0) * unsigned(15 downto 0), 16)
                     isMultiplication &&
                     (
-                        resultTypeReference == expression.GetActualTypeReference() ||
-                        resultTypeReference == leftTypeReference && resultTypeReference == rightTypeReference
+                        resultType == expression.GetActualType() ||
+                        resultType == leftType && resultType == rightType
                     )
                 );
 
-            DataType leftType = null;
+            DataType leftVhdlType = null;
             var leftTypeSize = 0;
-            if (leftTypeReference != null) // The type reference will be null if e.g. the expression is a PrimitiveExpression.
+            if (leftType != null) // The type reference will be null if e.g. the expression is a PrimitiveExpression.
             {
-                leftType = _typeConverter.ConvertTypeReference(leftTypeReference, context.TransformationContext);
-                leftTypeSize = leftType.GetSize();
+                leftVhdlType = _typeConverter.ConvertType(leftType, context.TransformationContext);
+                leftTypeSize = leftVhdlType.GetSize();
             }
-            DataType rightType = null;
+            DataType rightVhdlType = null;
             var rightTypeSize = 0;
-            if (rightTypeReference != null)
+            if (rightType != null && rightType.Kind != TypeKind.Null)
             {
-                rightType = _typeConverter.ConvertTypeReference(rightTypeReference, context.TransformationContext);
-                rightTypeSize = rightType.GetSize();
+                rightVhdlType = _typeConverter.ConvertType(rightType, context.TransformationContext);
+                rightTypeSize = rightVhdlType.GetSize();
             }
 
-            if (leftTypeReference != null && rightTypeReference != null)
+            if (leftType != null && rightType != null)
             {
                 shouldResizeResult = shouldResizeResult ||
                     (
@@ -268,10 +254,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     )
                     ||
                     (
-                        // If the operation is an addition and the types of the result and the operands differ then we 
+                        // If the operation is an addition and the types of the result and the operands differ then we
                         // also have to resize.
                         expression.Operator == BinaryOperatorType.Add &&
-                        !(resultTypeReference == leftTypeReference && resultTypeReference == rightTypeReference)
+                        !(resultType == leftType && resultType == rightType)
                     )
                     ||
                     (
@@ -283,15 +269,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var maxOperandSize = Math.Max(leftTypeSize, rightTypeSize);
             if (maxOperandSize == 0) maxOperandSize = resultTypeSize;
 
-            var deviceDriver = _deviceDriverSelector.GetDriver(context);
+            var deviceDriver = context.TransformationContext.DeviceDriver;
             decimal clockCyclesNeededForOperation;
             var clockCyclesNeededForSignedOperation = deviceDriver
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);
             var clockCyclesNeededForUnsignedOperation = deviceDriver
                 .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, false);
-            if (leftType != null && rightType != null && leftType.Name == rightType.Name)
+            if (leftVhdlType != null && rightVhdlType != null && leftVhdlType.Name == rightVhdlType.Name)
             {
-                clockCyclesNeededForOperation = leftType.Name == "signed" ?
+                clockCyclesNeededForOperation = leftVhdlType.Name == "signed" ?
                     clockCyclesNeededForSignedOperation :
                     clockCyclesNeededForUnsignedOperation;
             }
@@ -311,14 +297,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 // shifting out to the void) but 2, since only a shift by 1 happens (as 33 is 100001 in binary).
                 // See: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/left-shift-operator
                 // So we need to truncate.
-                // Furthermore right shifts will also do a bitwise AND with just 1s on the count, see:
+                // Furthermore both shifts will also do a bitwise AND with just 1s on the count, see:
                 // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/right-shift-operator
+                // How the vacated bits are filled on shifting in either direction is the same (see:
+                // https://www.csee.umbc.edu/portal/help/VHDL/numeric_std.vhdl).
 
                 var countSize = leftTypeSize <= 32 ? 5 : 6;
                 IVhdlElement resize = ResizeHelper.SmartResize(binary.Right, countSize);
 
                 if (expression.Operator == BinaryOperatorType.ShiftRight)
                 {
+                    // Since we're already resizing the additional "& 11111" (or "& 111111") might not be needed.
+                    // However it's just an identity operation due to the count parameter having the same size. Also,
+                    // while this was only added to right shifts .NET actually does the same for left shifts too.
+                    // However, it seems to work. Needs further testing to see if it can be removed (it was added in
+                    // 21ae34098e48 without anything else being changed and it did fix an issue).
                     resize = new Binary
                     {
                         Left = resize,
@@ -329,14 +322,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     };
 
                     var bitwiseAndBinary = new BinaryOperatorExpression(
-                        expression.Left.Clone(), 
-                        BinaryOperatorType.BitwiseAnd, 
+                        expression.Left.Clone(),
+                        BinaryOperatorType.BitwiseAnd,
                         expression.Right.Clone());
 
                     clockCyclesNeededForOperation += Math.Max(
                         deviceDriver.GetClockCyclesNeededForBinaryOperation(bitwiseAndBinary, maxOperandSize, true),
                         deviceDriver.GetClockCyclesNeededForBinaryOperation(
-                            (BinaryOperatorExpression)bitwiseAndBinary.Clone(), maxOperandSize, false));
+                            bitwiseAndBinary.Clone<BinaryOperatorExpression>(), maxOperandSize, false));
                 }
 
                 binaryElement = new Invocation
@@ -345,7 +338,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     Parameters = new List<IVhdlElement>
                     {
                         binary.Left,
-                        // The result will be like to_integer(unsigned(SmartResize(..))). The cast to unsigned is 
+                        // The result will be like to_integer(unsigned(SmartResize(..))). The cast to unsigned is
                         // necessary because in .NET the input of the shift is always treated as unsigned. Right shifts
                         // will also have a bitwise AND inside unsigned().
                         Invocation.ToInteger(new Invocation("unsigned", resize))
@@ -357,12 +350,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (hasExplicitCast || isShift)
             {
                 var fromType = isShift && !hasExplicitCast ?
-                    leftType :
-                    _typeConverter.ConvertTypeReference(preCastTypeReference, context.TransformationContext);
+                    leftVhdlType :
+                    _typeConverter.ConvertType(preCastType, context.TransformationContext);
 
                 var typeConversionResult = _typeConversionTransformer.ImplementTypeConversion(
                     fromType,
-                    resultType,
+                    resultVhdlType,
                     binaryElement);
 
                 binaryElement = typeConversionResult.ConvertedFromExpression;
@@ -394,7 +387,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
-            // If the current state takes more than one clock cycle we add a new state and follow up there.
+            if (operationIsMultiCycle &&
+                context.TransformationContext.DeviceDriver.DeviceManifest.UsesVivadoInToolChain())
+            {
+                // We need to add an attribute like the one below so Vivado won't merge this variable/signal with
+                // others, thus allowing us to create XDC timing constraints for it.
+                // attribute dont_touch of \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ : variable is "true";
+
+                var attributes = operationResultDataObjectIsVariable ?
+                    stateMachine.LocalAttributeSpecifications :
+                    stateMachine.GlobalAttributeSpecifications;
+                attributes.Add(new AttributeSpecification
+                {
+                    Attribute = KnownDataTypes.DontTouchAttribute,
+                    Expression = new Value { DataType = KnownDataTypes.UnrangedString, Content = "true" },
+                    ItemClass = operationResultDataObjectReference.DataObjectKind.ToString(),
+                    Of = operationResultDataObjectReference
+                });
+            }
+
+            // If the current state already takes more than one clock cycle we add a new state and follow up there.
             if (isFirstOfSimdOperationsOrIsSingleOperation && !operationIsMultiCycle)
             {
                 stateMachine.AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(context, clockCyclesNeededForOperation);
@@ -414,6 +426,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             // Then we transition from that state forward to a state where the actual algorithm continues.
             else
             {
+                var clockCyclesToWait = (int)Math.Ceiling(clockCyclesNeededForOperation);
+
                 // Building the wait state, just when this is the first transform of multiple SIMD operations (or is a
                 // single operation).
                 if (isFirstOfSimdOperationsOrIsSingleOperation)
@@ -424,8 +438,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     var waitedCyclesCountInitialValue = "0".ToVhdlValue(waitedCyclesCountVariable.DataType);
                     waitedCyclesCountVariable.InitialValue = waitedCyclesCountInitialValue;
                     var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
-
-                    var clockCyclesToWait = (int)Math.Ceiling(clockCyclesNeededForOperation);
 
                     var waitForResultBlock = new InlineBlock(
                         new GeneratedComment(vhdlGenerationOptions =>
@@ -468,6 +480,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
 
                 currentBlock.Add(operationResultAssignment);
+                stateMachine.RecordMultiCycleOperation(operationResultDataObjectReference, clockCyclesToWait);
 
 
                 // Changing the current block to the one in the state after the wait state, just when this is the last

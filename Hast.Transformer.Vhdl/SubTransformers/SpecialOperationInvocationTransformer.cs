@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Hast.Common.Numerics;
+﻿using Hast.Common.Numerics;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -21,7 +20,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
 
         public SpecialOperationInvocationTransformer(
-            IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer, 
+            IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer,
             ITypeConverter typeConverter)
         {
             _binaryOperatorExpressionTransformer = binaryOperatorExpressionTransformer;
@@ -83,26 +82,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // The result type of each artificial BinaryOperatorExpression should be the same as the SIMD method call's
             // return array type's element type.
-            var resultElementTypeInformation = expression
-                .Annotation<TypeInformation>()
-                .ExpectedType
-                .GetElementType()
-                .ToTypeInformation();
+            var resultElementResolveResult = expression.GetActualType().GetElementType().ToResolveResult();
+            var intType = context.TransformationContext.KnownTypeLookupTable.Lookup(KnownTypeCode.Int32);
 
             for (int i = 0; i < maxDegreeOfParallelism; i++)
             {
                 var binaryOperatorExpression = new BinaryOperatorExpression(
                         new IndexerExpression(
-                            expression.Arguments.First().Clone(), // The first array's reference.
-                            new PrimitiveExpression(i)), // The expression object can't be re-used below.
+                            // The first array's reference.
+                            expression.Arguments.First().Clone(),
+                            // The expression object can't be re-used below.
+                            new PrimitiveExpression(i).WithAnnotation(intType.ToResolveResult())),
                         simdBinaryOperator,
                         new IndexerExpression(
-                            expression.Arguments.Skip(1).First().Clone(), // The second array's reference.
-                            new PrimitiveExpression(i)));
+                            // The second array's reference.
+                            expression.Arguments.Skip(1).First().Clone(),
+                            new PrimitiveExpression(i).WithAnnotation(intType.ToResolveResult())));
 
-                binaryOperatorExpression.AddAnnotation(resultElementTypeInformation);
+                binaryOperatorExpression.AddAnnotation(resultElementResolveResult);
 
-                var indexValue = new Value { DataType = KnownDataTypes.UnrangedInt, Content = i.ToString() };
+                var indexValue = Value.UnrangedInt(i);
 
                 binaryOperations.Add(new PartiallyTransformedBinaryOperatorExpression
                 {
@@ -122,16 +121,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // If no new states were added, i.e. the operation wasn't a multi-cycle one with wait states, then we add
             // a new state here: this is needed because accessing the results (since they are assigned to signals) 
             // should always happen in a separate state.
-            if (stateMachine.States.Count == preTransformationStateCount)
+            // A state may have been added already because the state before the SIMD operations would otherwise go over
+            // a clock cycle, but in that case we still need to add another one, so the fact alone that there is a new 
+            // state is not enough; checking if this is an empty state instead.
+            var currentBlock = context.Scope.CurrentBlock;
+            if (stateMachine.States[currentBlock.StateMachineStateIndex].Body.Body.Any())
             {
+                currentBlock.Add(new LineComment("A SIMD operation's results should always be read out in the next clock cycle at earliest, so closing the current state."));
                 stateMachine.AddNewStateAndChangeCurrentBlock(context);
             }
 
             // Returning the results as an array initialization value (i.e.: array := (result1, result2);)
             return new Value
             {
-                DataType = _typeConverter.ConvertTypeReference(
-                    expression.GetActualTypeReference(), 
+                DataType = _typeConverter.ConvertType(
+                    expression.GetActualType(),
                     context.TransformationContext),
                 EvaluatedContent = new InlineBlock(resultReferences)
             };

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
+﻿using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 
 namespace Hast.Transformer.Services
 {
@@ -23,12 +18,12 @@ namespace Hast.Transformer.Services
             {
                 base.VisitAssignmentExpression(assignmentExpression);
 
-                var typeReference = assignmentExpression.GetActualTypeReference();
+                var type = assignmentExpression.GetActualType();
 
                 if (assignmentExpression.Parent is Statement ||
-                    assignmentExpression.Parent is ICSharpCode.NRefactory.CSharp.Attribute ||
+                    assignmentExpression.Parent is Attribute ||
                     // This is a DisplayClass-related if, those are handled specially later on.
-                    typeReference.FullName.StartsWith("System.Func`2<System.Object,"))
+                    type.IsFunc())
                 {
                     return;
                 }
@@ -37,20 +32,20 @@ namespace Hast.Transformer.Services
                 // embedded assignment. Not using the left side directly later because that can be any complex value
                 // access, keeping it simple.
                 var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
-                    "assignment", 
-                    assignmentExpression, 
-                    AstBuilder.ConvertType(typeReference));
+                    "assignment",
+                    assignmentExpression,
+                    TypeHelper.CreateAstType(type));
 
                 var firstParentStatement = assignmentExpression.FindFirstParentStatement();
-                var typeInformation = assignmentExpression.GetTypeInformationOrCreateFromActualTypeReference();
+                var resolveResult = assignmentExpression.CreateResolveResultFromActualType();
 
                 var tempVariableAssignment = new AssignmentExpression(variableIdentifier, assignmentExpression.Right.Clone())
-                    .WithAnnotation(typeInformation);
+                    .WithAnnotation(resolveResult);
 
                 AstInsertionHelper.InsertStatementBefore(firstParentStatement, new ExpressionStatement(tempVariableAssignment));
 
                 var leftAssignment = new AssignmentExpression(assignmentExpression.Left.Clone(), variableIdentifier.Clone())
-                    .WithAnnotation(typeInformation);
+                    .WithAnnotation(resolveResult);
 
                 AstInsertionHelper.InsertStatementBefore(firstParentStatement, new ExpressionStatement(leftAssignment));
 

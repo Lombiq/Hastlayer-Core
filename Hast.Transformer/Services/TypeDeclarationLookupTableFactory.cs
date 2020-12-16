@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using Hast.Common.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
-using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
-using Orchard;
 
 namespace Hast.Transformer.Services
 {
@@ -19,7 +19,10 @@ namespace Hast.Transformer.Services
         {
             var typeDeclarations = syntaxTree
                 .GetAllTypeDeclarations()
-                .ToDictionary(d => d.Annotation<TypeDefinition>().FullName);
+                // Attributes can be copied into multiple assemblies having the exact same name and everything so
+                // excluding them here.
+                .Where(declaration => !declaration.GetActualType().IsAttribute())
+                .ToDictionary(d => d.GetActualTypeFullName());
 
             return new TypeDeclarationLookupTable(typeDeclarations);
         }
@@ -34,8 +37,8 @@ namespace Hast.Transformer.Services
             {
                 _typeDeclarations = typeDeclarations;
             }
-        
-        
+
+
             public TypeDeclaration Lookup(string fullName)
             {
                 _typeDeclarations.TryGetValue(fullName, out var declaration);

@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.Abstractions.Configuration;
-using Hast.Transformer.Vhdl.Events;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Services
 {
@@ -12,13 +13,13 @@ namespace Hast.Transformer.Vhdl.Services
     {
         private readonly IVhdlHardwareDescriptionCachingService _vhdlHardwareDescriptionCachingService;
         private readonly ITransformedVhdlManifestBuilder _transformedVhdlManifestBuilder;
-        private readonly IVhdlTransformationEventHandler _vhdlTransformationEventHandler;
+        private readonly IEnumerable<EventHandler<ITransformedVhdlManifest>> _vhdlTransformationEventHandler;
 
 
         public VhdlTransformingEngine(
             IVhdlHardwareDescriptionCachingService vhdlHardwareDescriptionCachingService,
             ITransformedVhdlManifestBuilder transformedVhdlManifestBuilder,
-            IVhdlTransformationEventHandler vhdlTransformationEventHandler)
+            IEnumerable<EventHandler<ITransformedVhdlManifest>> vhdlTransformationEventHandler)
         {
             _vhdlHardwareDescriptionCachingService = vhdlHardwareDescriptionCachingService;
             _transformedVhdlManifestBuilder = transformedVhdlManifestBuilder;
@@ -28,17 +29,18 @@ namespace Hast.Transformer.Vhdl.Services
 
         public async Task<IHardwareDescription> Transform(ITransformationContext transformationContext)
         {
-            var cacheKey = _vhdlHardwareDescriptionCachingService.GetCacheKey(transformationContext);
-
             if (transformationContext.HardwareGenerationConfiguration.EnableCaching)
             {
                 var cachedHardwareDescription = await _vhdlHardwareDescriptionCachingService
-                    .GetHardwareDescription(cacheKey);
-                if (cachedHardwareDescription != null) return cachedHardwareDescription; 
+                    .GetHardwareDescription(transformationContext.Id);
+                if (cachedHardwareDescription != null) return cachedHardwareDescription;
             }
 
             var transformedVhdlManifest = await _transformedVhdlManifestBuilder.BuildManifest(transformationContext);
-            _vhdlTransformationEventHandler.TransformedVhdlManifestBuilt(transformedVhdlManifest);
+            foreach(var handler in _vhdlTransformationEventHandler)
+            {
+                handler?.Invoke(this, transformedVhdlManifest);
+            }
 
             var vhdlGenerationConfiguration = transformationContext
                 .HardwareGenerationConfiguration
@@ -55,12 +57,21 @@ namespace Hast.Transformer.Vhdl.Services
                 vhdlGenerationOptions.NameShortener = VhdlGenerationOptions.SimpleNameShortener;
             }
 
-            var vhdlSource = transformedVhdlManifest.Manifest.ToVhdl(vhdlGenerationOptions);
-            var hardwareDescription = new VhdlHardwareDescription(vhdlSource, transformedVhdlManifest);
+            var xdcSource = transformedVhdlManifest.XdcFile?.ToVhdl(vhdlGenerationOptions);
+            var hardwareDescription = new VhdlHardwareDescription
+            {
+                TransformationId = transformationContext.Id,
+                HardwareEntryPointNamesToMemberIdMappings = transformedVhdlManifest.MemberIdTable.Mappings,
+                VhdlSource = transformedVhdlManifest.Manifest.ToVhdl(vhdlGenerationOptions),
+                Warnings = transformedVhdlManifest.Warnings,
+                XdcSource = xdcSource
+            };
 
             if (transformationContext.HardwareGenerationConfiguration.EnableCaching)
             {
-                await _vhdlHardwareDescriptionCachingService.SetHardwareDescription(cacheKey, hardwareDescription); 
+                await _vhdlHardwareDescriptionCachingService.SetHardwareDescription(
+                    transformationContext.Id,
+                    hardwareDescription);
             }
 
             return hardwareDescription;

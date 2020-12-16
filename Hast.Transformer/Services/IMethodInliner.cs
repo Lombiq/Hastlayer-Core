@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ICSharpCode.NRefactory.CSharp;
-using Orchard;
+using Hast.Layer;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Services
 {
@@ -13,6 +14,6 @@ namespace Hast.Transformer.Services
     /// </summary>
     public interface IMethodInliner : IDependency
     {
-        void InlineMethods(SyntaxTree syntaxTree);
+        void InlineMethods(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
     }
 }

@@ -1,4 +1,4 @@
-﻿# Hastlayer - VHDL Builder Readme
+﻿# Hastlayer - VHDL Builder
 
 
 

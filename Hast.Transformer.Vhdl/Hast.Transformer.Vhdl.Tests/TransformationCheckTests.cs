@@ -1,34 +1,27 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+using Hast.Common.Models;
 using Hast.Layer;
 using Hast.TestInputs.Invalid;
 using Hast.Transformer.Abstractions;
-using Hast.Transformer.Vhdl.Models;
-using Lombiq.OrchardAppHost;
-using NUnit.Framework;
 using Shouldly;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
-    [TestFixture]
     public class TransformationCheckTests : VhdlTransformingTestFixtureBase
     {
-        [Test]
-        public async Task InvalidExternalVariableAssignmentIsPrevented()
-        {
-            await _host.Run<ITransformer>(async transformer =>
-            {
-                await Should.ThrowAsync(() =>
+        [Fact]
+        public Task InvalidExternalVariableAssignmentIsPrevented() =>
+            Host.RunAsync<ITransformer>(transformer =>
+                Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidParallelCases>(transformer, c => c.InvalidExternalVariableAssignment(0)),
-                    typeof(NotSupportedException));
-            });
-        }
+                    typeof(NotSupportedException)));
 
-        [Test]
-        public async Task InvalidArrayUsageIsPrevented()
-        {
-            await _host.Run<ITransformer>(async transformer =>
+        [Fact]
+        public Task InvalidArrayUsageIsPrevented() =>
+            Host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.InvalidArrayAssignment()),
@@ -54,12 +47,17 @@ namespace Hast.Transformer.Vhdl.Tests
                     TransformInvalidTestInputs<InvalidArrayUsingCases>(transformer, c => c.NullAssignment()),
                     typeof(NotSupportedException));
             });
-        }
 
-        [Test]
-        public async Task InvalidLanguageConstructsArePrevented()
-        {
-            await _host.Run<ITransformer>(async transformer =>
+        [Fact]
+        public Task InvalidHardwareEntryPointsArePrevented() =>
+            Host.RunAsync<ITransformer>(transformer =>
+                Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs<InvalidHardwareEntryPoint>(transformer, c => c.EntryPointMethod()),
+                    typeof(NotSupportedException)));
+
+        [Fact]
+        public Task InvalidLanguageConstructsArePrevented() =>
+            Host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
                     TransformInvalidTestInputs<InvalidLanguageConstructCases>(transformer, c => c.CustomValueTypeReferenceEquals()),
@@ -69,32 +67,32 @@ namespace Hast.Transformer.Vhdl.Tests
                     TransformInvalidTestInputs<InvalidLanguageConstructCases>(transformer, c => c.InvalidModelUsage()),
                     typeof(NotSupportedException));
             });
-        }
 
-        [Test]
-        public async Task InvalidHardwareEntryPointsArePrevented()
-        {
-            await _host.Run<ITransformer>(async transformer =>
+        [Fact]
+        public Task InvalidInvalidObjectUsingCasesArePrevented() =>
+            Host.RunAsync<ITransformer>(async transformer =>
             {
                 await Should.ThrowAsync(() =>
-                    TransformInvalidTestInputs<InvalidHardwareEntryPoint>(transformer, c => c.EntryPointMethod()),
+                    TransformInvalidTestInputs<InvalidObjectUsingCases>(transformer, c => c.ReferenceAssignment(0)),
+                    typeof(NotSupportedException));
+
+                await Should.ThrowAsync(() =>
+                    TransformInvalidTestInputs<InvalidObjectUsingCases>(transformer, c => c.SelfReferencingType()),
                     typeof(NotSupportedException));
             });
-        }
 
 
         private Task<VhdlHardwareDescription> TransformInvalidTestInputs<T>(
             ITransformer transformer,
-            Expression<Action<T>> expression)
-        {
-            return TransformAssembliesToVhdl(
+            Expression<Action<T>> expression,
+            bool useSimpleMemory = false) =>
+            TransformAssembliesToVhdl(
                 transformer,
                 new[] { typeof(InvalidParallelCases).Assembly },
                 configuration =>
                 {
-                    configuration.TransformerConfiguration().UseSimpleMemory = false;
+                    configuration.TransformerConfiguration().UseSimpleMemory = useSimpleMemory;
                     configuration.AddHardwareEntryPointMethod(expression);
                 });
-        }
     }
 }

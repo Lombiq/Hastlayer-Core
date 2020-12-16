@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mono.Cecil;
+﻿using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class MethodDeclarationExtensions
     {
         public static bool IsConstructor(this MethodDeclaration methodDeclaration) =>
-            methodDeclaration.Annotation<MethodDefinition>()?.IsConstructor == true;
+            (methodDeclaration.GetMemberResolveResult()?.Member as IMethod)?.IsConstructor == true;
     }
 }

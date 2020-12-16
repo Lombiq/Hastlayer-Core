@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
-using Orchard;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Common.Interfaces;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
-using Mono.Cecil;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -38,6 +37,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 _arraySizeHolder.SetSize(assignmentExpression.Left, 4);
             }
+
+            if (SimpleMemoryAssignmentHelper.IsBatchedReadAssignment(assignmentExpression, out var cellCount))
+            {
+                _arraySizeHolder.SetSize(assignmentExpression.Left, cellCount);
+            }
         }
 
         public override void VisitPrimitiveExpression(PrimitiveExpression primitiveExpression)
@@ -45,7 +49,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             base.VisitPrimitiveExpression(primitiveExpression);
 
             // Not bothering with the various assembly attributes.
-            if (primitiveExpression.FindFirstParentOfType<ICSharpCode.NRefactory.CSharp.Attribute>() != null) return;
+            if (primitiveExpression.FindFirstParentOfType<ICSharpCode.Decompiler.CSharp.Syntax.Attribute>() != null) return;
 
             var primitiveExpressionParent = primitiveExpression.Parent;
 
@@ -53,7 +57,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (primitiveExpressionParent.Is<ParenthesizedExpression>(out var parenthesizedExpression) &&
                 parenthesizedExpression.Expression == primitiveExpression)
             {
-                var newExpression = (PrimitiveExpression)primitiveExpression.Clone();
+                var newExpression = primitiveExpression.Clone<PrimitiveExpression>();
                 parenthesizedExpression.ReplaceWith(newExpression);
                 primitiveExpression = newExpression;
                 primitiveExpressionParent = newExpression.Parent;
@@ -62,7 +66,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (primitiveExpressionParent.Is<CastExpression>(out var castExpression))
             {
                 var newExpression = new PrimitiveExpression(_astExpressionEvaluator.EvaluateCastExpression(castExpression));
-                newExpression.AddAnnotation(primitiveExpressionParent.GetActualTypeReference(true));
+                newExpression.AddAnnotation(primitiveExpressionParent.CreateResolveResultFromActualType());
 
                 primitiveExpressionParent.ReplaceWith(newExpression);
                 primitiveExpressionParent = newExpression.Parent;
@@ -95,9 +99,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 {
                     var newExpression = new PrimitiveExpression(
                         _astExpressionEvaluator.EvaluateBinaryOperatorExpression(binaryOperatorExpression));
-                    var resultType = binaryOperatorExpression.GetResultTypeReference();
-                    newExpression.AddAnnotation(resultType);
-                    if (!(newExpression.Value is bool) && resultType.FullName == typeof(bool).FullName)
+                    var resultType = binaryOperatorExpression.GetResultType();
+                    newExpression.AddAnnotation(resultType.ToResolveResult());
+                    if (!(newExpression.Value is bool) && resultType.GetFullName() == typeof(bool).FullName)
                     {
                         newExpression.Value = newExpression.Value.ToString() == 1.ToString();
                     }
@@ -109,13 +113,13 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         parentBlock);
                 }
             }
-            else if (primitiveExpressionParent is UnaryOperatorExpression)
+            else if (primitiveExpressionParent is UnaryOperatorExpression unaryOperatorExpression)
             {
                 // This is a unary expression where the target expression was already substituted with a const value.
-                // So we can also substitute the whole expression too.
+                // So we can also substitute the whole expression.
                 var newExpression = new PrimitiveExpression(
-                    _astExpressionEvaluator.EvaluateUnaryOperatorExpression((UnaryOperatorExpression)primitiveExpressionParent))
-                    .WithAnnotation(primitiveExpressionParent.GetTypeInformationOrCreateFromActualTypeReference());
+                    _astExpressionEvaluator.EvaluateUnaryOperatorExpression(unaryOperatorExpression))
+                    .WithAnnotation(primitiveExpressionParent.CreateResolveResultFromActualType());
 
                 _constantValuesSubstitutingAstProcessor.ConstantValuesTable
                     .MarkAsPotentiallyConstant(primitiveExpressionParent, newExpression, primitiveExpressionParent.Parent);
@@ -134,7 +138,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return;
             }
 
-            if (node.GetActualTypeReference()?.IsArray == false)
+            if (node.GetActualType()?.IsArray() == false)
             {
                 // Passing on constructor mappings.
 
@@ -175,9 +179,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 var existingSize = _arraySizeHolder.GetSize(node);
 
-                if (existingSize == null && node is MemberReferenceExpression)
+                if (existingSize == null && node is MemberReferenceExpression memberReferenceExpression)
                 {
-                    var member = ((MemberReferenceExpression)node).FindMemberDeclaration(_typeDeclarationLookupTable);
+                    var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
                     if (member == null) return;
                     existingSize = _arraySizeHolder.GetSize(member);
                     if (existingSize != null) _arraySizeHolder.SetSize(node, existingSize.Length);
@@ -198,10 +202,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 node: arrayHolder,
                 assignmentHandler: assignmentExpression =>
                 {
-                    if (assignmentExpression.Left is MemberReferenceExpression)
+                    if (assignmentExpression.Left is MemberReferenceExpression memberReferenceExpression)
                     {
                         _arraySizeHolder.SetSize(
-                            ((MemberReferenceExpression)assignmentExpression.Left).FindMemberDeclaration(_typeDeclarationLookupTable),
+                            memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable),
                             arrayLength);
                     }
                     _arraySizeHolder.SetSize(assignmentExpression.Left, arrayLength);
@@ -236,15 +240,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 assignmentHandler(assignmentExpression);
                 updateHiddenlyUpdatedNodesUpdated(assignmentExpression.Left);
             }
-            else if (parent is MemberReferenceExpression)
+            else if (parent is MemberReferenceExpression memberReferenceExpression)
             {
-                memberReferenceHandler((MemberReferenceExpression)parent);
+                memberReferenceHandler(memberReferenceExpression);
                 updateHiddenlyUpdatedNodesUpdated(parent);
             }
-            else if (parent is InvocationExpression)
+            else if (parent is InvocationExpression expression)
             {
                 var parameter = ConstantValueSubstitutionHelper.FindMethodParameterForPassedExpression(
-                    (InvocationExpression)parent,
+                    expression,
                     (Expression)node,
                     _typeDeclarationLookupTable);
 
@@ -268,10 +272,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 invocationParameterHandler(parameter);
                 updateHiddenlyUpdatedNodesUpdated(parameter);
             }
-            else if (parent is ObjectCreateExpression)
+            else if (parent is ObjectCreateExpression objectCreateExpression)
             {
                 var parameter = ConstantValueSubstitutionHelper.FindConstructorParameterForPassedExpression(
-                        (ObjectCreateExpression)parent,
+                        objectCreateExpression,
                         (Expression)node,
                         _typeDeclarationLookupTable);
 
@@ -285,20 +289,20 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 objectCreationParameterHandler(parameter);
                 updateHiddenlyUpdatedNodesUpdated(parameter);
             }
-            else if (parent is VariableInitializer)
+            else if (parent is VariableInitializer initializer)
             {
-                variableInitializerHandler((VariableInitializer)parent);
+                variableInitializerHandler(initializer);
                 updateHiddenlyUpdatedNodesUpdated(parent);
             }
-            else if (parent is ReturnStatement)
+            else if (parent is ReturnStatement statement)
             {
-                returnStatementHandler((ReturnStatement)parent);
+                returnStatementHandler(statement);
                 updateHiddenlyUpdatedNodesUpdated(parent);
             }
-            else if (parent is NamedExpression)
+            else if (parent is NamedExpression namedExpression)
             {
                 // NamedExpressions are used in object initializers, e.g. new MyClass { Property = true }.
-                namedExpressionHandler((NamedExpression)parent);
+                namedExpressionHandler(namedExpression);
                 updateHiddenlyUpdatedNodesUpdated(parent);
             }
         }

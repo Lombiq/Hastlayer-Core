@@ -1,21 +1,25 @@
-﻿using System;
+using CsvHelper;
+using CsvHelper.Configuration;
+using Hast.Synthesis.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using CsvHelper;
-using Hast.Synthesis.Models;
-using ICSharpCode.NRefactory.CSharp;
 
 namespace Hast.Synthesis.Services
 {
     public class TimingReportParser : ITimingReportParser
     {
+        private static readonly CsvConfiguration CsvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture);
+
         public ITimingReport Parse(TextReader reportReader)
         {
-            using (var csvReader = new CsvReader(reportReader))
+            using (var csvReader = new CsvReader(reportReader, CsvConfiguration))
             {
+
                 csvReader.Configuration.Delimiter = "	";
                 csvReader.Configuration.CultureInfo = CultureInfo.InvariantCulture;
 
@@ -79,8 +83,7 @@ namespace Hast.Synthesis.Services
                     {
                         case "and":
                             isSignAgnosticBinaryOperatorType = true;
-                            if (operandSizeBits == 1) binaryOperator = BinaryOperatorType.ConditionalAnd;
-                            else binaryOperator = BinaryOperatorType.BitwiseAnd;
+                            binaryOperator = BinaryOperatorType.BitwiseAnd;
                             break;
                         case "add":
                             binaryOperator = BinaryOperatorType.Add;
@@ -115,15 +118,14 @@ namespace Hast.Synthesis.Services
                             break;
                         case "not":
                             isSignAgnosticUnaryOperatorType = true;
-                            if (operandSizeBits == 1) unaryOperator = UnaryOperatorType.Not;
-                            else unaryOperator = UnaryOperatorType.BitNot;
+                            unaryOperator = operandSizeBits == 1 ?
+                                (UnaryOperatorType?)UnaryOperatorType.Not : (UnaryOperatorType?)UnaryOperatorType.BitNot;
                             break;
                         case "or":
                             isSignAgnosticBinaryOperatorType = true;
-                            if (operandSizeBits == 1) binaryOperator = BinaryOperatorType.ConditionalOr;
-                            else binaryOperator = BinaryOperatorType.BitwiseOr;
+                            binaryOperator = BinaryOperatorType.BitwiseOr;
                             break;
-                        case var op when(op.StartsWith("dotnet_shift_left")):
+                        case var op when (op.StartsWith("dotnet_shift_left")):
                             binaryOperator = BinaryOperatorType.ShiftLeft;
                             break;
                         case var op when (op.StartsWith("dotnet_shift_right")):
@@ -151,7 +153,7 @@ namespace Hast.Synthesis.Services
                     // Data Path Delay, i.e. the propagation of signals through the operation and the nets around it.
                     var dpd = decimal.Parse(
                         dpdString.Replace(',', '.'), // Taking care of decimal commas.
-                        NumberStyles.Any, 
+                        NumberStyles.Any,
                         CultureInfo.InvariantCulture);
 
                     // Timing window difference from requirement, i.e.:
@@ -171,6 +173,22 @@ namespace Hast.Synthesis.Services
                         if (isSignAgnosticBinaryOperatorType)
                         {
                             timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
+                        }
+
+                        // Bitwise and/or are defined for bools too, so need to handle that above, then handling
+                        // their conditional pairs here. (Unary bit not is only defined for arithmetic types.)
+                        if (operandSizeBits == 1 &&
+                            (binaryOperator == BinaryOperatorType.BitwiseOr || binaryOperator == BinaryOperatorType.BitwiseAnd))
+                        {
+                            binaryOperator = binaryOperator == BinaryOperatorType.BitwiseOr ?
+                                BinaryOperatorType.ConditionalOr : BinaryOperatorType.ConditionalAnd;
+
+                            timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, isSigned, constantOperand, dpd, twdfr);
+
+                            if (isSignAgnosticBinaryOperatorType)
+                            {
+                                timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd, twdfr);
+                            }
                         }
                     }
                     else if (unaryOperator.HasValue)
@@ -195,11 +213,11 @@ namespace Hast.Synthesis.Services
 
 
             public void SetLatencyNs(
-                dynamic operatorType, 
-                int operandSizeBits, 
-                bool isSigned, 
-                string constantOperand, 
-                decimal dpd, 
+                dynamic operatorType,
+                int operandSizeBits,
+                bool isSigned,
+                string constantOperand,
+                decimal dpd,
                 decimal twdfr)
             {
                 _timings[GetKey(operatorType, operandSizeBits, isSigned, constantOperand)] = dpd;
@@ -222,20 +240,13 @@ namespace Hast.Synthesis.Services
                 GetLatencyNsInternal(unaryOperator, operandSizeBits, isSigned, string.Empty);
 
 
-            private decimal GetLatencyNsInternal(dynamic operatorType, int operandSizeBits, bool isSigned, string constantOperand)
-            {
-                if (_timings.TryGetValue(GetKey(operatorType, operandSizeBits, isSigned, constantOperand), out decimal latency))
-                {
-                    return latency;
-                }
-
-                return -1;
-            }
+            private decimal GetLatencyNsInternal(dynamic operatorType, int operandSizeBits, bool isSigned, string constantOperand) =>
+                _timings.TryGetValue(GetKey(operatorType, operandSizeBits, isSigned, constantOperand), out decimal latency) ? latency : -1;
 
             private static string GetKey(dynamic operatorType, int operandSizeBits, bool isSigned, string constantOperand) =>
-                    operatorType.ToString() + 
-                    operandSizeBits.ToString() + 
-                    isSigned.ToString() + 
+                    operatorType.ToString() +
+                    operandSizeBits.ToString() +
+                    isSigned.ToString() +
                     (string.IsNullOrEmpty(constantOperand) ? "-" : constantOperand);
         }
     }

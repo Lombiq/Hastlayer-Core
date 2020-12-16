@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Hast.Common.Configuration;
+﻿using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -12,7 +8,11 @@ using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -20,7 +20,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     // structure, not to have one giant TransformInvocationExpression method.
     public class InvocationExpressionTransformer : IInvocationExpressionTransformer
     {
-        private static IEnumerable<string> _arrayCopyToMethodNames = typeof(Array)
+        private static readonly IEnumerable<string> _arrayCopyToMethodNames = typeof(Array)
             .GetMethods()
             .Where(method => method.Name == nameof(Array.Copy) && method.GetParameters().Count() == 3)
             .Select(method => method.GetFullName());
@@ -28,16 +28,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         private readonly IStateMachineInvocationBuilder _stateMachineInvocationBuilder;
         private readonly ITypeConverter _typeConverter;
         private readonly ISpecialOperationInvocationTransformer _specialOperationInvocationTransformer;
+        private readonly ITypeConversionTransformer _typeConversionTransformer;
 
 
         public InvocationExpressionTransformer(
             IStateMachineInvocationBuilder stateMachineInvocationBuilder,
             ITypeConverter typeConverter,
-            ISpecialOperationInvocationTransformer specialOperationInvocationTransformer)
+            ISpecialOperationInvocationTransformer specialOperationInvocationTransformer,
+            ITypeConversionTransformer typeConversionTransformer)
         {
             _stateMachineInvocationBuilder = stateMachineInvocationBuilder;
             _typeConverter = typeConverter;
             _specialOperationInvocationTransformer = specialOperationInvocationTransformer;
+            _typeConversionTransformer = typeConversionTransformer;
         }
 
 
@@ -101,44 +104,62 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 currentBlock.Add(new LineComment("Begin SimpleMemory read."));
             }
 
-            // Setting SimpleMemory control signals:
+            // Setting CellIndex.
             currentBlock.Add(new Assignment
             {
                 AssignTo = stateMachine.CreateSimpleMemoryCellIndexSignalReference(),
-                // Resizing the CellIndex parameter to the length of the signal, so there is no type mismatch.
                 // CellIndex is conventionally the first invocation parameter. 
-                Expression = Invocation.Resize(invocationParameters[0].Reference, SimpleMemoryTypes.CellIndexInternalSignalDataType.Size)
+                Expression = _typeConversionTransformer.ImplementTypeConversion(
+                    invocationParameters[0].DataType, 
+                    SimpleMemoryTypes.CellIndexInternalSignalDataType, invocationParameters[0].Reference)
+                    .ConvertedFromExpression
             });
 
-            var enablePortReference = isWrite ?
+            // Setting the write/read enable signal.
+            var enableSignalReference = isWrite ?
                 stateMachine.CreateSimpleMemoryWriteEnableSignalReference() :
                 stateMachine.CreateSimpleMemoryReadEnableSignalReference();
             currentBlock.Add(new Assignment
             {
-                AssignTo = enablePortReference,
+                AssignTo = enableSignalReference,
                 Expression = Value.True
             });
 
             var is4BytesOperation = targetMemberReference.MemberName.EndsWith("4Bytes");
+            var operationDataTypeName = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
 
             IVhdlElement implementSimpleMemoryTypeConversion(IVhdlElement variableToConvert, bool directionIsLogicVectorToType)
             {
-                string dataConversionInvocationTarget = null;
-                var operation = memberName.Replace("Write", string.Empty).Replace("Read", string.Empty);
-
                 // Using the built-in conversion functions to handle known data types.
-                if (operation == "UInt32" ||
-                    operation == "Int32" ||
-                    operation == "Boolean" ||
-                    operation == "Char")
+                if (operationDataTypeName == "UInt32" ||
+                    operationDataTypeName == "Int32" ||
+                    operationDataTypeName == "Boolean" ||
+                    operationDataTypeName == "Char")
                 {
+                    string dataConversionInvocationTarget;
                     if (directionIsLogicVectorToType)
                     {
-                        dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + operation;
+                        dataConversionInvocationTarget = "ConvertStdLogicVectorTo" + operationDataTypeName;
                     }
                     else
                     {
-                        dataConversionInvocationTarget = "Convert" + operation + "ToStdLogicVector";
+                        dataConversionInvocationTarget = "Convert" + operationDataTypeName + "ToStdLogicVector";
+
+                        DataType operationDataType = KnownDataTypes.Int32;
+                        if (operationDataTypeName == "UInt32") operationDataType = KnownDataTypes.UInt32;
+                        else if (operationDataTypeName == "Boolean") operationDataType = KnownDataTypes.Boolean;
+                        else if (operationDataTypeName == "Char") operationDataType = KnownDataTypes.Character;
+
+                        var invocationDataType = invocationParameters[1].DataType;
+                        // The two data types should be the case almost all the time but sometimes a type conversion is
+                        // needed.
+                        if (invocationDataType != operationDataType)
+                        {
+                            var conversionResult = _typeConversionTransformer
+                                .ImplementTypeConversion(invocationDataType, operationDataType, variableToConvert);
+
+                            variableToConvert = conversionResult.ConvertedFromExpression;
+                        }
                     }
 
                     return new Invocation(dataConversionInvocationTarget, variableToConvert);
@@ -164,7 +185,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     };
                 }
 
-                throw new InvalidOperationException("Invalid SimpleMemory operation: " + operation + ".");
+                throw new InvalidOperationException("Invalid SimpleMemory operation: " + memberName + ".");
             }
 
             if (isWrite)
@@ -195,7 +216,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         });
 
                     // Arrays smaller than 4 elements can be written with Write4Bytes(), so need to take care of them.
-                    var arrayLength = 
+                    var arrayLength =
                         context.TransformationContext.ArraySizeHolder.GetSizeOrThrow(expression.Arguments.Skip(1).First())
                         .Length;
                     for (int i = 0; i < arrayLength; i++)
@@ -234,7 +255,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             memoryOperationFinishedBlock.Add(new Assignment
             {
-                AssignTo = enablePortReference,
+                AssignTo = enableSignalReference,
                 Expression = Value.False
             });
 
@@ -252,7 +273,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             else
             {
                 memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory read finished."));
-
 
                 currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
                 customProperties[lastReadFinishedKey] = memoryOperationFinishedStateIndex;
@@ -430,7 +450,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (targetMemberReference.Target is MemberReferenceExpression)
             {
                 var targetTargetFullName = ((MemberReferenceExpression)targetMemberReference.Target).GetFullName();
-                if (targetTargetFullName.IsDisplayClassMemberName())
+                if (targetTargetFullName.IsDisplayOrClosureClassMemberName())
                 {
                     // We need to find the corresponding member in the parent class of this expression's class.
                     targetDeclaration = expression

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Hast.Common.Validation;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 using System.Linq;
-using ICSharpCode.NRefactory.CSharp;
-using Orchard.Validation;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -23,7 +23,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         }
 
 
-        /// <param name="scope">The node within the value should valid.</param>
+        /// <param name="scope">The node within which the value should valid.</param>
         public void MarkAsPotentiallyConstant(
             AstNode valueHolder,
             PrimitiveExpression expression,
@@ -34,7 +34,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (valueHolder == null) return;
 
-            var valueDescriptors = GetOrCreateValueDescriptors(valueHolder.GetFullNameWithUnifiedPropertyName());
+            var valueDescriptors = GetOrCreateValueDescriptors(valueHolder.GetFullName());
 
             if (disallowDifferentValues && expression != null)
             {
@@ -57,12 +57,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             Argument.ThrowIfNull(scope, nameof(scope));
 
-            GetOrCreateValueDescriptors(valueHolder.GetFullNameWithUnifiedPropertyName())[scope] = null;
+            GetOrCreateValueDescriptors(valueHolder.GetFullName())[scope] = null;
         }
 
         public bool RetrieveAndDeleteConstantValue(AstNode valueHolder, out PrimitiveExpression valueExpression)
         {
-            if (_valueHoldersAndValueDescriptors.TryGetValue(valueHolder.GetFullNameWithUnifiedPropertyName(), out var valueDescriptors) &&
+            if (_valueHoldersAndValueDescriptors.TryGetValue(valueHolder.GetFullName(), out var valueDescriptors) &&
                 valueDescriptors.Any())
             {
                 // Finding the value defined for the scope which is closest.

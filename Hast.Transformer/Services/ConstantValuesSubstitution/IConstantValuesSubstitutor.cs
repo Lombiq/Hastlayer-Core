@@ -1,7 +1,7 @@
 ﻿using Hast.Layer;
 using Hast.Transformer.Models;
-using ICSharpCode.NRefactory.CSharp;
-using Orchard;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
@@ -10,6 +10,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
     /// </summary>
     public interface IConstantValuesSubstitutor : IDependency
     {
-        IArraySizeHolder SubstituteConstantValues(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
+        void SubstituteConstantValues(
+            SyntaxTree syntaxTree,
+            IArraySizeHolder arraySizeHolder,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable);
     }
 }

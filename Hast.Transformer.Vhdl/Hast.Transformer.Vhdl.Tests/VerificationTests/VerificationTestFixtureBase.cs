@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Threading.Tasks;
+using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
-using Hast.Transformer.Vhdl.Models;
-using Shouldly;
-using Shouldly.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
@@ -30,17 +28,17 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
         protected override Task<VhdlHardwareDescription> TransformAssembliesToVhdl(
            ITransformer transformer,
-           IEnumerable<Assembly> assemblies,
-           Action<HardwareGenerationConfiguration> configurationModifier = null)
-        {
-            return base.TransformAssembliesToVhdl(
+           IList<Assembly> assemblies,
+           Action<HardwareGenerationConfiguration> configurationModifier = null,
+            string deviceName = null) =>
+            base.TransformAssembliesToVhdl(
                 transformer,
                 assemblies,
                 configuration =>
                 {
                     configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
                     configurationModifier?.Invoke(configuration);
-                });
-        }
+                },
+                deviceName);
     }
 }

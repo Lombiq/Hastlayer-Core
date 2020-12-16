@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using Hast.Transformer.Helpers;
+﻿using Hast.Transformer.Helpers;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
@@ -38,7 +37,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             public ArrayCreationCheckingVisitor(
                 ITypeConverter typeConverter,
-                Dictionary<string, ArrayType> arrayDeclarations, 
+                Dictionary<string, ArrayType> arrayDeclarations,
                 IVhdlTransformationContext context)
             {
                 _typeConverter = typeConverter;
@@ -51,9 +50,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 base.VisitAssignmentExpression(assignmentExpression);
 
-                if (SimpleMemoryAssignmentHelper.IsRead4BytesAssignment(assignmentExpression))
+                if (SimpleMemoryAssignmentHelper.IsRead4BytesAssignment(assignmentExpression) ||
+                    SimpleMemoryAssignmentHelper.IsBatchedReadAssignment(assignmentExpression, out var _))
                 {
-                    CreateArrayDeclarationIfNew(AstBuilder.ConvertType(assignmentExpression.GetActualTypeReference().GetElementType()));
+                    // ArrayType would be a clashing name so need to use GetElementType() as normal method.
+                    CreateArrayDeclarationIfNew(TypeHelper
+                        .CreateAstType(ICSharpCode.Decompiler.TypeSystem.TypeExtensions
+                            .GetElementType(assignmentExpression.GetActualType())));
                 }
             }
 

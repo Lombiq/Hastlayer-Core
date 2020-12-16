@@ -1,219 +1,34 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{55FFEC87-B87B-4BB6-B50D-26560C8F815A}</ProjectGuid>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hast.Transformer</RootNamespace>
-    <AssemblyName>Hast.Transformer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.Decompiler, Version=2.3.1.1855, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\ICSharpCode.Decompiler.2.3.1\lib\Net40\ICSharpCode.Decompiler.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ICSharpCode.NRefactory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ICSharpCode.NRefactory.Cecil, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.Cecil.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ICSharpCode.NRefactory.CSharp, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.CSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ICSharpCode.NRefactory.Xml, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\ICSharpCode.NRefactory.5.5.1\lib\Net40\ICSharpCode.NRefactory.Xml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil.Mdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil.Pdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil.Rocks, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Compile Remove="Hast.Transformer.Tests\**" />
+    <EmbeddedResource Remove="Hast.Transformer.Tests\**" />
+    <None Remove="Hast.Transformer.Tests\**" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Extensions\AnnotatableExtensions.cs" />
-    <Compile Include="Extensions\AstNodeExtensions.cs" />
-    <Compile Include="Extensions\AstTypeExtensions.cs" />
-    <Compile Include="Extensibility\Events\ITransformerEventHandler.cs" />
-    <Compile Include="Extensions\AstTransformEnumerableExtensions.cs" />
-    <Compile Include="Extensions\BinaryOperatorExpressionExtensions.cs" />
-    <Compile Include="Extensions\InvocationExpressionExtensions.cs" />
-    <Compile Include="Extensions\EntityDeclarationExtensions.cs" />
-    <Compile Include="Extensions\HardwareEntryPointMemberEntityDeclarationExtensions.cs" />
-    <Compile Include="Extensions\MemberReferenceExpressionExtensions.cs" />
-    <Compile Include="Extensions\MethodDeclarationExtensions.cs" />
-    <Compile Include="Extensions\ObjectCreateExpressionExtensions.cs" />
-    <Compile Include="Extensions\ReferenceMetadataAstNodeExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Extensions\SyntaxTreeExtensions.cs" />
-    <Compile Include="Extensions\TransformationContextExtensions.cs" />
-    <Compile Include="Extensions\InvocationInstanceCountTransformerConfigurationExtensions.cs" />
-    <Compile Include="Extensions\TypeDeclarationExtensions.cs" />
-    <Compile Include="Extensions\TypeReferenceExtensions.cs" />
-    <Compile Include="Helpers\ExceptionHelper.cs" />
-    <Compile Include="Helpers\SimpleMemoryAssignmentHelper.cs" />
-    <Compile Include="Helpers\VariableHelper.cs" />
-    <Compile Include="Helpers\AstInsertionHelper.cs" />
-    <Compile Include="Helpers\TypeHelper.cs" />
-    <Compile Include="Services\BinaryAndUnaryOperatorExpressionsCastAdjuster.cs" />
-    <Compile Include="Services\EmbeddedAssignmentExpressionsExpander.cs" />
-    <Compile Include="Services\IBinaryAndUnaryOperatorExpressionsCastAdjuster.cs" />
-    <Compile Include="Services\IEmbeddedAssignmentExpressionsExpander.cs" />
-    <Compile Include="Services\IMethodInliner.cs" />
-    <Compile Include="Services\IObjectInitializerExpander.cs" />
-    <Compile Include="Services\ITaskBodyInvocationInstanceCountsSetter.cs" />
-    <Compile Include="Services\ITransformationContextCacheService.cs" />
-    <Compile Include="Services\IUnaryIncrementsDecrementsConverter.cs" />
-    <Compile Include="Services\MemberSuitabilityChecker.cs" />
-    <Compile Include="Models\ArraySize.cs" />
-    <Compile Include="Services\ConstantValuesSubstitution\ConstantValueSubstitutionHelper.cs" />
-    <Compile Include="Helpers\MethodDeclarationFactory.cs" />
-    <Compile Include="Services\IMemberSuitabilityChecker.cs" />
-    <Compile Include="Models\ArraySizeHolder.cs" />
-    <Compile Include="Models\DeclarationReferenceMetadata.cs" />
-    <Compile Include="Models\HardwareEntryPointMemberMetadata.cs" />
-    <Compile Include="Models\IArraySizeHolder.cs" />
-    <Compile Include="Models\ITransformationContext.cs" />
-    <Compile Include="Models\TransformationContext.cs" />
-    <Compile Include="Models\ITypeDeclarationLookupTable.cs" />
-    <Compile Include="Services\ArrayInitializerExpander.cs" />
-    <Compile Include="Services\ConstantValuesSubstitution\AstExpressionEvaluator.cs" />
-    <Compile Include="Services\ConditionalExpressionsToIfElsesConverter.cs" />
-    <Compile Include="Services\ConstantValuesSubstitution\ConstantValuesMarkingVisitor.cs" />
-    <Compile Include="Services\ConstantValuesSubstitution\ConstantValuesSubstitutingAstProcessor.cs" />
-    <Compile Include="Services\ConstantValuesSubstitution\ConstantValuesSubstitutingVisitor.cs" />
-    <Compile Include="Services\ConstantValuesSubstitution\ConstantValuesSubstitutor.cs" />
-    <Compile Include="Services\ConstantValuesSubstitution\ConstantValuesTable.cs" />
-    <Compile Include="Services\ConstantValuesSubstitution\GlobalValueHoldersHandlingVisitor.cs" />
-    <Compile Include="Services\ConstantValuesSubstitution\ObjectHoldersToSubstitutedConstructorsMappingVisitor.cs" />
-    <Compile Include="Services\ConstructorsToMethodsConverter.cs" />
-    <Compile Include="Services\CustomPropertiesToMethodsConverter.cs" />
-    <Compile Include="Services\DirectlyAccessedNewObjectVariablesCreator.cs" />
-    <Compile Include="Services\GeneratedTaskArraysInliner.cs" />
-    <Compile Include="Services\IArrayInitializerExpander.cs" />
-    <Compile Include="Services\ConstantValuesSubstitution\IAstExpressionEvaluator.cs" />
-    <Compile Include="Services\IAutoPropertyInitializationFixer.cs" />
-    <Compile Include="Services\IConditionalExpressionsToIfElsesConverter.cs" />
-    <Compile Include="Services\ConstantValuesSubstitution\IConstantValuesSubstitutor.cs" />
-    <Compile Include="Services\IConstructorsToMethodsConverter.cs" />
-    <Compile Include="Services\ICustomPropertiesToMethodsConverter.cs" />
-    <Compile Include="Services\IDirectlyAccessedNewObjectVariablesCreator.cs" />
-    <Compile Include="Services\IGeneratedTaskArraysInliner.cs" />
-    <Compile Include="Services\IImmutableArraysToStandardArraysConverter.cs" />
-    <Compile Include="Services\IInstanceMethodsToStaticConverter.cs" />
-    <Compile Include="Services\IInvocationInstanceCountAdjuster.cs" />
-    <Compile Include="Services\ImmutableArraysToStandardArraysConverter.cs" />
-    <Compile Include="Services\InstanceMethodsToStaticConverter.cs" />
-    <Compile Include="Services\InvocationInstanceCountAdjuster.cs" />
-    <Compile Include="Services\IObjectVariableTypesConverter.cs" />
-    <Compile Include="Services\IOperatorAssignmentsToSimpleAssignmentsConverter.cs" />
-    <Compile Include="Services\IOperatorsToMethodsConverter.cs" />
-    <Compile Include="Services\ISyntaxTreeCleaner.cs" />
-    <Compile Include="Services\MethodInliner.cs" />
-    <Compile Include="Services\NoForPatternStatementTransform.cs" />
-    <Compile Include="Services\ObjectInitializerExpander.cs" />
-    <Compile Include="Services\ObjectVariableTypesConverter.cs" />
-    <Compile Include="Services\AutoPropertyInitializationFixer.cs" />
-    <Compile Include="Services\OperatorAssignmentsToSimpleAssignmentsConverter.cs" />
-    <Compile Include="Services\OperatorsToMethodsConverter.cs" />
-    <Compile Include="Services\TaskBodyInvocationInstanceCountsSetter.cs" />
-    <Compile Include="Services\TransformationContextCacheService.cs" />
-    <Compile Include="Services\UnaryIncrementsDecrementsConverter.cs" />
-    <Compile Include="SimpleMemory\SimpleMemoryInvocationExpressionExtensions.cs" />
-    <Compile Include="SimpleMemory\SimpleMemoryMethodDeclarationExtensions.cs" />
-    <Compile Include="SimpleMemory\SimpleMemoryParameterDeclarationExtensions.cs" />
-    <Compile Include="Services\SyntaxTreeCleaner.cs" />
-    <Compile Include="Services\TypeDeclarationLookupTableFactory.cs" />
-    <Compile Include="ITransformingEngine.cs" />
-    <Compile Include="DefaultTransformer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extensions\TransformerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj">
-      <Project>{9dee53c2-83ac-4048-adab-2993faffe4ea}</Project>
-      <Name>Hast.Transformer.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
-      <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
-      <Name>Hast.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Lombiq.OrchardAppHost\Lombiq.OrchardAppHost.csproj">
-      <Project>{3e852853-2d19-49bb-b6c9-39b01d6e9785}</Project>
-      <Name>Lombiq.OrchardAppHost</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj">
-      <Project>{2d1d92bb-4555-4cbe-8d0e-63563d6ce4c6}</Project>
-      <Name>Orchard.Framework</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
+    <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-    <None Include="Readme.md" />
+    <PackageReference Include="ICSharpCode.Decompiler">
+      <Version>6.0.0.5559-preview2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.CodeDom" Version="4.7.0" />
+    <PackageReference Include="System.Collections.Immutable">
+      <Version>1.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Module.txt" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

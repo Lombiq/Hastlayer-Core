@@ -1,47 +1,41 @@
-﻿using System.Reflection;
+using Hast.Layer;
+using Hast.Remote.Worker.Configuration;
+using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
-using Hast.Remote.Worker.Configuration;
-using Lombiq.OrchardAppHost;
-using Lombiq.OrchardAppHost.Configuration;
 
 namespace Hast.Remote.Worker.Console
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static async Task Main()
         {
-            Task.Run(async () =>
+            var configuration = new TransformationWorkerConfiguration
             {
-                var settings = new AppHostSettings
-                {
-                    ImportedExtensions = new[] { typeof(Program).Assembly, typeof(ITransformationWorker).Assembly },
-                    DefaultShellFeatureStates = new[]
-                    {
-                            new DefaultShellFeatureState
-                            {
-                                EnabledFeatures = new[]
-                                {
-                                    typeof(Program).Assembly.ShortName(),
-                                    typeof(ITransformationWorker).Assembly.ShortName()
-                                }
-                            }
-                    }
-                };
+                StorageConnectionString = "UseDevelopmentStorage=true"
+            };
 
-                using (var host = await OrchardAppHostFactory.StartTransientHost(settings, null, null))
-                {
-                    await host.Run<ITransformationWorker>(worker =>
-                    {
-                        var configuration = new TransformationWorkerConfiguration
-                        {
-                            StorageConnectionString = "UseDevelopmentStorage=true"
-                        };
+            using var host = (Hastlayer)await TransformationWorker.CreateHastlayerAsync(configuration);
 
-                        return worker.Work(configuration, CancellationToken.None);
-                    });
-                }
-            }).Wait();
+#if DEBUG
+            var logger = host.GetLogger<Program>();
+            for (int i = 0; i < (int)LogLevel.None; i++)
+            {
+                var logLevel = (LogLevel)i;
+                logger.Log(logLevel, $"{logLevel} testing");
+            }
+#endif
+
+            var cancellationTokenSource = new CancellationTokenSource();
+            System.Console.CancelKeyPress += (sender, eventArgs) =>
+            {
+                eventArgs.Cancel = true;
+                System.Console.WriteLine("Application cancelled via SIGINT, attempting graceful shutdown. Please allow at least 10 seconds for this...");
+                cancellationTokenSource.Cancel();
+            };
+            System.Console.WriteLine("Press Ctrl + C to cleanly terminate the application.");
+
+            await host.RunAsync<ITransformationWorker>(worker => worker.Work(cancellationTokenSource.Token));
         }
     }
 }

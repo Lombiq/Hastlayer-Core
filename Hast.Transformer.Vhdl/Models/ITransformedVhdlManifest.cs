@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.VhdlBuilder.Representation.Declaration;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.Models
 {
@@ -9,5 +9,10 @@ namespace Hast.Transformer.Vhdl.Models
         VhdlManifest Manifest { get; }
         MemberIdTable MemberIdTable { get; }
         IEnumerable<ITransformationWarning> Warnings { get; }
+
+        /// <summary>
+        /// Xilinx XDC file, only for Xilinx devices.
+        /// </summary>
+        XdcFile XdcFile { get; }
     }
 }

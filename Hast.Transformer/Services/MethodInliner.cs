@@ -1,40 +1,42 @@
-﻿using System;
+﻿using Hast.Common.Helpers;
+using Hast.Layer;
+using Hast.Transformer.Helpers;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Common.Helpers;
-using Hast.Transformer.Helpers;
-using ICSharpCode.NRefactory.CSharp;
-using ICSharpCode.NRefactory.TypeSystem;
-using Mono.Cecil;
 
 namespace Hast.Transformer.Services
 {
     public class MethodInliner : IMethodInliner
     {
-        public void InlineMethods(SyntaxTree syntaxTree)
+        public void InlineMethods(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
+            var additionalInlinableMethodsFullNames = configuration.TransformerConfiguration().AdditionalInlinableMethodsFullNames;
             var inlinableMethods = new Dictionary<string, MethodDeclaration>();
 
             foreach (var method in syntaxTree.GetAllTypeDeclarations().SelectMany(type => type.Members.Where(member => member is MethodDeclaration)))
             {
-                var isInlinableMethod = method.Attributes
-                    .Any(attributeSection => attributeSection
-                        .Attributes
-                        .Any(attribute => attribute
-                            .FindFirstChildOfType<MemberReferenceExpression>(expression => expression
-                                .Target
-                                .Is<TypeReferenceExpression>(type => type.GetFullName() == typeof(MethodImplOptions).FullName) &&
-                                expression.MemberName == nameof(MethodImplOptions.AggressiveInlining)) != null));
+                var isInlinableMethod =
+                    additionalInlinableMethodsFullNames.Contains(method.GetFullName()) ||
+                    method.Attributes
+                        .Any(attributeSection => attributeSection
+                            .Attributes
+                            .Any(attribute => attribute
+                                .FindFirstChildOfType<MemberReferenceExpression>(expression => expression
+                                    .Target
+                                    .Is<TypeReferenceExpression>(type =>
+                                        type.GetFullName() == typeof(MethodImplOptions).FullName) &&
+                                        expression.MemberName == nameof(MethodImplOptions.AggressiveInlining)) != null));
 
                 if (isInlinableMethod)
                 {
                     if (method.ReturnType.Is<PrimitiveType>(type => type.KnownTypeCode == KnownTypeCode.Void))
                     {
                         throw new NotSupportedException(
-                            "The method " + method.GetFullName() + 
+                            "The method " + method.GetFullName() +
                             " can't be inlined, because that's only available for non-void methods.");
                     }
 
@@ -67,7 +69,7 @@ namespace Hast.Transformer.Services
 
 
         private static string SuffixMethodIdentifier(string identifier, string methodIdentifierNameSuffix) =>
-            identifier + "_" + methodIdentifierNameSuffix;
+            identifier.EndsWith("_" + methodIdentifierNameSuffix) ? identifier : identifier + "_" + methodIdentifierNameSuffix;
 
 
         private class MethodCallChangingVisitor : DepthFirstAstVisitor
@@ -94,9 +96,23 @@ namespace Hast.Transformer.Services
 
                 var invocationParentStatement = invocationExpression.FindFirstParentStatement();
 
-                // Creating a suffix to make all identifiers (e.g. variable names) inside the method unique once inlined.
-                // Since the same method can be inlined multiple times in another method we also need to distinguish per
-                // invocation.
+                if (invocationParentStatement.PrevSibling == null)
+                {
+                    // The statement is in the first node of the subtree, i.e. the first statement in the block. To
+                    // make it work well we need to insert a new statement before it just for the comment (otherwise
+                    // either the comment would get lost if the parent is inlined too and these statements, and only
+                    // statements are fetched, or it would be inserted mid-statement).
+                    // We need to use a statement built into ILSpy otherwise it won't show up in the output. An
+                    // EmptyStatement is hackish but it's a noop and it works.
+                    AstInsertionHelper.InsertStatementBefore(invocationParentStatement, new EmptyStatement());
+                }
+                invocationParentStatement.PrevSibling.AddChild(
+                    new Comment($" Starting inlined block of the method {methodFullName}."), Roles.Comment);
+
+                // Creating a suffix to make all identifiers (e.g. variable names) inside the method unique once
+                // inlined. Since the same method can be inlined multiple times in another method we also need to
+                // distinguish per invocation. Furthermore, such inlined invocations can themselves be inlined too, so
+                // identifiers need to be continued to suffixed on every level.
                 var methodIdentifierNameSuffix = Sha2456Helper.ComputeHash(methodFullName + invocationExpression.GetFullName());
 
                 // Assigning all invocation arguments to newly created local variables which then will be used in the
@@ -109,7 +125,7 @@ namespace Hast.Transformer.Services
 
                     var variableReference = VariableHelper.DeclareAndReferenceVariable(
                         SuffixMethodIdentifier(parameter.Name, methodIdentifierNameSuffix),
-                        parameter.GetTypeInformationOrCreateFromActualTypeReference(),
+                        parameter.GetActualType(),
                         parameter.Type,
                         invocationParentStatement);
 
@@ -123,23 +139,54 @@ namespace Hast.Transformer.Services
                 // Creating variable for the method's return value.
                 var returnVariableReference = VariableHelper.DeclareAndReferenceVariable(
                     SuffixMethodIdentifier("return", methodIdentifierNameSuffix),
-                    method.GetTypeInformationOrCreateFromActualTypeReference(),
+                    method.GetActualType(),
                     method.ReturnType,
                     invocationParentStatement);
 
                 // Preparing and adding the method's body inline.
-                var inlinedBody = (BlockStatement)method.Body.Clone();
-                inlinedBody.AcceptVisitor(new MethodBodyAdaptingVisitor(methodIdentifierNameSuffix, returnVariableReference, methodFullName));
+                var inlinedBody = method.Body.Clone<BlockStatement>();
+                // If there are multiple return statements then control flow will be mimicked with goto jumps.
+                var exitLabel = new LabelStatement { Label = SuffixMethodIdentifier("Exit", methodIdentifierNameSuffix) };
+                ReturnStatement lastReturn = null;
+                if (inlinedBody.Statements.Last() is ReturnStatement returnStatement)
+                {
+                    // Only add the exit label if there are more than one return statements.
+                    if (inlinedBody.FindFirstChildOfType<ReturnStatement>(statement => statement != returnStatement) != null)
+                    {
+                        AstInsertionHelper.InsertStatementAfter(returnStatement, exitLabel);
+                    }
+
+                    lastReturn = returnStatement;
+                }
+                else
+                {
+                    // If the last statement is not a return statement then there should be multiple returns in the
+                    // method.
+                    inlinedBody.Add(exitLabel);
+                }
+                inlinedBody.AcceptVisitor(new MethodBodyAdaptingVisitor(methodIdentifierNameSuffix, returnVariableReference, lastReturn));
 
                 foreach (var statement in inlinedBody.Statements)
                 {
-                    AstInsertionHelper.InsertStatementBefore(
-                        invocationParentStatement,
-                        statement.Clone()); 
+                    AstInsertionHelper.InsertStatementBefore(invocationParentStatement, statement.Clone());
                 }
 
                 // The invocation now can be replaced with a reference to the return variable.
                 invocationExpression.ReplaceWith(returnVariableReference);
+
+                //var endingComment = new Comment($" Ending inlined block of the method {methodFullName}.");
+                //if (invocationParentStatement.NextSibling == null)
+                //{
+                //    AstInsertionHelper.InsertStatementAfter(invocationParentStatement, new EmptyStatement());
+                //    invocationParentStatement.NextSibling.AddChild(endingComment, Roles.Comment);
+                //}
+                //else
+                //{
+                //    invocationParentStatement.AddChild(endingComment, Roles.Comment);
+                //}
+
+                invocationParentStatement.PrevSibling.AddChild(
+                    new Comment($" Ending inlined block of the method {methodFullName}."), Roles.Comment);
             }
         }
 
@@ -147,19 +194,17 @@ namespace Hast.Transformer.Services
         {
             private readonly string _methodIdentifierNameSuffix;
             private readonly IdentifierExpression _returnVariableReference;
-            private readonly string _methodFullName;
-
-            private bool _aReturnStatementWasVisited;
+            private readonly ReturnStatement _lastReturn;
 
 
             public MethodBodyAdaptingVisitor(
-                string methodIdentifierNameSuffix, 
+                string methodIdentifierNameSuffix,
                 IdentifierExpression returnVariableReferenc,
-                string methodFullName)
+                ReturnStatement lastReturn)
             {
                 _methodIdentifierNameSuffix = methodIdentifierNameSuffix;
                 _returnVariableReference = returnVariableReferenc;
-                _methodFullName = methodFullName;
+                _lastReturn = lastReturn;
             }
 
 
@@ -167,18 +212,16 @@ namespace Hast.Transformer.Services
             {
                 base.VisitReturnStatement(returnStatement);
 
-                if (_aReturnStatementWasVisited)
+                if (returnStatement != _lastReturn)
                 {
-                    throw new NotSupportedException(
-                        "Inlining methods with only a single return statement is supported. The method " +
-                        _methodFullName + " contains more than one return statement.");
+                    AstInsertionHelper.InsertStatementAfter(
+                        returnStatement,
+                        new GotoStatement(SuffixMethodIdentifier("Exit", _methodIdentifierNameSuffix)));
                 }
 
                 returnStatement.ReplaceWith(new ExpressionStatement(new AssignmentExpression(
                     _returnVariableReference.Clone(),
                     returnStatement.Expression.Clone())));
-
-                _aReturnStatementWasVisited = true;
             }
 
             public override void VisitVariableInitializer(VariableInitializer variableInitializer)
@@ -193,6 +236,20 @@ namespace Hast.Transformer.Services
                 base.VisitIdentifierExpression(identifierExpression);
 
                 identifierExpression.Identifier = SuffixMethodIdentifier(identifierExpression.Identifier, _methodIdentifierNameSuffix);
+            }
+
+            public override void VisitLabelStatement(LabelStatement labelStatement)
+            {
+                base.VisitLabelStatement(labelStatement);
+
+                labelStatement.Label = SuffixMethodIdentifier(labelStatement.Label, _methodIdentifierNameSuffix);
+            }
+
+            public override void VisitGotoStatement(GotoStatement gotoStatement)
+            {
+                base.VisitGotoStatement(gotoStatement);
+
+                gotoStatement.Label = SuffixMethodIdentifier(gotoStatement.Label, _methodIdentifierNameSuffix);
             }
         }
     }

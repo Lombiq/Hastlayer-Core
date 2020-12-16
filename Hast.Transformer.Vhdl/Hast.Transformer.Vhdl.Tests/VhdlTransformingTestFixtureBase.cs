@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Autofac;
-using Autofac.Core;
+using Hast.Common.Models;
 using Hast.Layer;
-using Hast.Synthesis;
-using Hast.Synthesis.Abstractions;
 using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Models;
@@ -15,47 +7,41 @@ using Hast.Transformer.Services;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 using Hast.Xilinx;
-using ICSharpCode.NRefactory.CSharp;
+using Hast.Xilinx.Abstractions.ManifestProviders;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
     public abstract class VhdlTransformingTestFixtureBase : IntegrationTestFixtureBase
     {
-        protected virtual bool UseStubMemberSuitabilityChecker { get; set; } = true;
+        protected virtual bool UseStubMemberSuitabilityChecker => true;
+        protected virtual string DeviceName => Nexys4DdrManifestProvider.DeviceName;
 
 
         protected VhdlTransformingTestFixtureBase()
         {
-            _requiredExtension.AddRange(new[]
-            {
-                typeof(DefaultTransformer).Assembly,
-                typeof(MemberIdTable).Assembly,
-                typeof(IDeviceDriverSelector).Assembly,
-                typeof(Nexys4DdrDriver).Assembly
-            });
+            _hostConfiguration.Extensions = _hostConfiguration.Extensions
+                .Union(new[]
+                    {
+                        typeof(DefaultTransformer).Assembly,
+                        typeof(MemberIdTable).Assembly,
+                        typeof(IDeviceDriverSelector).Assembly,
+                        typeof(Nexys4DdrDriver).Assembly
+                    });
 
-            _shellRegistrationBuilder = builder =>
+
+            _hostConfiguration.OnServiceRegistration += (configuration, services) =>
             {
                 if (UseStubMemberSuitabilityChecker)
                 {
-                    // We need to override MemberSuitabilityChecker in Hast.Transformer. Since that registration happens
-                    // after this one we need to use this hackish way of circumventing that.
-                    builder.RegisterCallback(componentRegistry =>
-                    {
-                        var memberSuitabilityCheckerRegistration = componentRegistry
-                            .Registrations
-                            .Where(registration => registration
-                                .Services
-                                .Any(service => service is TypedService && ((TypedService)service).ServiceType == typeof(IMemberSuitabilityChecker)))
-                            .SingleOrDefault();
-
-                        if (memberSuitabilityCheckerRegistration == null) return;
-
-                        memberSuitabilityCheckerRegistration.Activating += (sender, activatingEventArgs) =>
-                        {
-                            activatingEventArgs.Instance = new StubMemberSuitabilityChecker();
-                        };
-                    }); 
+                    services.RemoveImplementations<IMemberSuitabilityChecker>();
+                    services.AddSingleton<IMemberSuitabilityChecker>(new StubMemberSuitabilityChecker());
                 }
             };
         }
@@ -63,10 +49,12 @@ namespace Hast.Transformer.Vhdl.Tests
 
         protected virtual async Task<VhdlHardwareDescription> TransformAssembliesToVhdl(
             ITransformer transformer,
-            IEnumerable<Assembly> assemblies,
-            Action<HardwareGenerationConfiguration> configurationModifier = null)
+            IList<Assembly> assemblies,
+            Action<HardwareGenerationConfiguration> configurationModifier = null,
+            string deviceName = null)
         {
-            var configuration = new HardwareGenerationConfiguration("Nexys4 DDR") { EnableCaching = false };
+            deviceName ??= DeviceName;
+            var configuration = new HardwareGenerationConfiguration(deviceName, null) { EnableCaching = false };
             configurationModifier?.Invoke(configuration);
             return (VhdlHardwareDescription)await transformer.Transform(assemblies, configuration);
         }

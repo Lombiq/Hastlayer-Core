@@ -1,9 +1,10 @@
-﻿using System;
-using System.Linq;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
-using ICSharpCode.Decompiler.Ast;
-using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
+using System.Linq;
 using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValuesSubstitutingAstProcessor;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
@@ -14,14 +15,17 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         private readonly ConstantValuesTable _constantValuesTable;
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
         private readonly IArraySizeHolder _arraySizeHolder;
+        private readonly IKnownTypeLookupTable _knownTypeLookupTable;
 
 
-        public ConstantValuesSubstitutingVisitor(ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor)
+        public ConstantValuesSubstitutingVisitor(
+            ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor)
         {
             _constantValuesSubstitutingAstProcessor = constantValuesSubstitutingAstProcessor;
             _constantValuesTable = constantValuesSubstitutingAstProcessor.ConstantValuesTable;
             _typeDeclarationLookupTable = constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable;
             _arraySizeHolder = constantValuesSubstitutingAstProcessor.ArraySizeHolder;
+            _knownTypeLookupTable = constantValuesSubstitutingAstProcessor.KnownTypeLookupTable;
         }
 
 
@@ -101,6 +105,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // mess up the AST upwards.
             if (ConstantValueSubstitutionHelper.IsMethodInvocation(memberReferenceExpression)) return;
 
+            // Is the target an array or some other indexer? We don't handle those.
+            if (memberReferenceExpression.Target is IndexerExpression) return;
+
             if (memberReferenceExpression.IsArrayLengthAccess())
             {
                 var arraySize = _arraySizeHolder.GetSize(memberReferenceExpression.Target);
@@ -113,12 +120,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 if (arraySize != null)
                 {
-                    var newExpression = new PrimitiveExpression(arraySize.Length);
-                    var typeInformation = memberReferenceExpression.Annotation<TypeInformation>();
-                    if (typeInformation != null)
-                    {
-                        newExpression.AddAnnotation(typeInformation);
-                    }
+                    var newExpression = new PrimitiveExpression(arraySize.Length)
+                        .WithAnnotation(memberReferenceExpression.CreateResolveResultFromActualType());
                     memberReferenceExpression.ReplaceWith(newExpression);
                 }
 
@@ -150,27 +153,50 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (ConstantValueSubstitutionHelper.IsInWhile(ifElseStatement)) return;
 
-            var primitiveCondition = ifElseStatement.Condition as PrimitiveExpression;
+            if (!(ifElseStatement.Condition is PrimitiveExpression primitiveCondition)) return;
 
-            if (primitiveCondition == null) return;
+            ReturnStatement replacingReturnStatement = null;
 
             void replaceIfElse(Statement branchStatement)
             {
                 // Moving all statements from the block up.
-                if (branchStatement is BlockStatement)
+                if (branchStatement is BlockStatement branchBlock)
                 {
-                    foreach (var statement in branchStatement.Children)
+                    foreach (var statement in branchBlock.Statements)
                     {
-                        AstInsertionHelper.InsertStatementBefore(ifElseStatement, (Statement)statement.Clone());
+                        var clone = statement.Clone<Statement>();
+                        // There should be at most a single return statement in this block.
+                        if (clone is ReturnStatement returnStatement) replacingReturnStatement = returnStatement;
+                        AstInsertionHelper.InsertStatementBefore(ifElseStatement, clone);
                     }
                 }
-                else ifElseStatement.ReplaceWith(branchStatement.Clone());
+                else
+                {
+                    var clone = branchStatement.Clone();
+                    if (clone is ReturnStatement returnStatement) replacingReturnStatement = returnStatement;
+                    ifElseStatement.ReplaceWith(clone);
+                }
             }
 
             if (primitiveCondition.Value.Equals(true)) replaceIfElse(ifElseStatement.TrueStatement);
             else if (ifElseStatement.FalseStatement != Statement.Null) replaceIfElse(ifElseStatement.FalseStatement);
 
-            ifElseStatement.Remove();
+            ifElseStatement.RemoveAndMark();
+
+            // Is this a return statement in the root level of a method or something similar? Because then any other
+            // statement after it should be removed too.
+            if (replacingReturnStatement != null &&
+                (replacingReturnStatement.Parent is EntityDeclaration ||
+                    replacingReturnStatement.Parent.Is<BlockStatement>(block => block.Parent is EntityDeclaration)))
+            {
+                var currentStatement = replacingReturnStatement.GetNextStatement();
+                while (currentStatement != null)
+                {
+                    var nextStatement = currentStatement.GetNextStatement();
+                    currentStatement.RemoveAndMark();
+                    currentStatement = nextStatement;
+                }
+            }
         }
 
         public override void VisitInvocationExpression(InvocationExpression invocationExpression)
@@ -222,7 +248,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // array size defined then just substitute the array length too.
             lengthArgument.ReplaceWith(
                 new PrimitiveExpression(existingSize.Length)
-                .WithAnnotation(TypeHelper.CreateInt32TypeInformation()));
+                .WithAnnotation(_knownTypeLookupTable.Lookup(KnownTypeCode.Int32).ToResolveResult()));
         }
 
         protected override void VisitChildren(AstNode node)
@@ -233,7 +259,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
 
             if ((node is IdentifierExpression || node is MemberReferenceExpression) &&
-                node.GetActualTypeReference()?.IsArray == false)
+                node.GetActualType()?.IsArray() == false)
             {
                 var fullName = node.GetFullName();
 
@@ -250,19 +276,32 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 }
             }
 
-            base.VisitChildren(node);
+            // Is this a const? Then we can just substitute it directly.
+            var resolveResult = node.GetResolveResult();
+            IType type;
+            if (resolveResult?.IsCompileTimeConstant == true &&
+                resolveResult.ConstantValue != null &&
+                !(node is PrimitiveExpression) &&
+                !(type = node.GetActualType()).IsEnum() &&
+                !(node is NullReferenceExpression))
+            {
+                node.ReplaceWith(new PrimitiveExpression(resolveResult.ConstantValue, resolveResult.ConstantValue.ToString())
+                    .WithAnnotation(new ConstantResolveResult(type, resolveResult.ConstantValue)));
+            }
+
+            // Attributes can slip in here but we don't care about those. Also, due to eliminating branches nodes can
+            // be removed on the fly.
+            if (!(node is Attribute) && !node.IsMarkedAsRemoved())
+            {
+                base.VisitChildren(node);
+            }
         }
 
 
         private bool TrySubstituteValueHolderInExpressionIfInSuitableAssignment(Expression expression)
         {
-            // If this is a value holder on the left side of an assignment then nothing to do. If it's in a while
-            // statement then it can't be safely substituted (due to e.g. loop variables).
-            if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression) ||
-                ConstantValueSubstitutionHelper.IsInWhile(expression))
-            {
-                return false;
-            }
+            // If this is a value holder on the left side of an assignment then nothing to do.
+            if (expression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == expression)) return false;
 
             // If the value holder is inside a unary operator that can mutate its state then it can't be substituted.
             var mutatingUnaryOperators = new[]
@@ -277,16 +316,26 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 return false;
             }
 
+            // If the expression is in a while statement then most of the time it can't be safely substituted (due to
+            // e.g. loop variables). Code with goto is hard to follow so we're not trying to do const substitution for
+            // those yet (except for constants that are handled separately in VisitChildren()) most of the time either.
+            var isHardToFollow =
+                ConstantValueSubstitutionHelper.IsInWhile(expression) ||
+                expression.FindFirstParentOfType<MethodDeclaration>()?.FindFirstChildOfType<GotoStatement>() != null;
+
+            PrimitiveExpression valueExpression = null;
+
             // First checking if there is a substitution for the expression; if not then if it's a member reference
             // then check whether there is a global substitution for the member.
-            if (_constantValuesTable.RetrieveAndDeleteConstantValue(expression, out PrimitiveExpression valueExpression) ||
+            if ((!isHardToFollow && _constantValuesTable.RetrieveAndDeleteConstantValue(expression, out valueExpression)) ||
                 expression.Is<MemberReferenceExpression>(memberReferenceExpression =>
                 {
                     var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
 
                     if (member == null) return false;
 
-                    if (_constantValuesTable.RetrieveAndDeleteConstantValue(member, out valueExpression))
+                    if ((!isHardToFollow || member.IsReadOnlyMember()) &&
+                        _constantValuesTable.RetrieveAndDeleteConstantValue(member, out valueExpression))
                     {
                         return true;
                     }
@@ -300,9 +349,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         while (
                             !_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
                                 .TryGetValue(currentMemberReference.Target.GetFullName(), out constructorReference) &&
-                            currentMemberReference.Target is MemberReferenceExpression)
+                            currentMemberReference.Target is MemberReferenceExpression currentMemberReferenceTarget)
                         {
-                            currentMemberReference = (MemberReferenceExpression)currentMemberReference.Target;
+                            currentMemberReference = currentMemberReferenceTarget;
                         }
 
                         if (constructorReference == null) return false;

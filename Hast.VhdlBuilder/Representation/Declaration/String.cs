@@ -10,10 +10,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public String()
         {
+            Name = "string";
             TypeCategory = DataTypeCategory.Array;
         }
 
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => "string(1 to " + Length + ")";
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => 
+            "string" + (Length > 0 ? "(1 to " + Length + ")" : string.Empty);
     }
 }

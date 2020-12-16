@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
+using System.Collections.Generic;
 using System.Linq;
-using Hast.Transformer.Helpers;
-using ICSharpCode.NRefactory.CSharp;
 using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValuesSubstitutingAstProcessor;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
@@ -29,7 +29,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // another instance).
 
             if (objectCreateExpression.Parent.Is(assignment =>
-                assignment.Left.GetActualTypeReference()?.FullName == objectCreateExpression.Type.GetFullName(),
+                assignment.Left.GetActualType()?.GetFullName() == objectCreateExpression.Type.GetFullName(),
                 out AssignmentExpression parentAssignment))
             {
                 var constructorDeclaration = objectCreateExpression
@@ -37,7 +37,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 if (constructorDeclaration == null) return;
 
-                var constructorDeclarationClone = (MethodDeclaration)constructorDeclaration.Clone();
+                var constructorDeclarationClone = constructorDeclaration.Clone<MethodDeclaration>();
 
                 var subConstantValuesTable = _constantValuesSubstitutingAstProcessor.ConstantValuesTable.Clone();
 
@@ -56,7 +56,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     _constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable,
                     _constantValuesSubstitutingAstProcessor.ArraySizeHolder.Clone(),
                     new Dictionary<string, ConstructorReference>(_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings),
-                    _constantValuesSubstitutingAstProcessor.AstExpressionEvaluator)
+                    _constantValuesSubstitutingAstProcessor.AstExpressionEvaluator,
+                    _constantValuesSubstitutingAstProcessor.KnownTypeLookupTable)
                 .SubstituteConstantValuesInSubTree(constructorDeclarationClone, true);
 
                 var constructorReference = new ConstructorReference

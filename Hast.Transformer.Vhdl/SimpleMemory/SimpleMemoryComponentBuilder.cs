@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
+﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.SimpleMemory
 {

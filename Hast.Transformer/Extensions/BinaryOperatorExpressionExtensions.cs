@@ -1,18 +1,18 @@
-﻿using Mono.Cecil;
+﻿using ICSharpCode.Decompiler.TypeSystem;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class BinaryOperatorExpressionExtensions
     {
-        public static TypeReference GetResultTypeReference(this BinaryOperatorExpression expression)
+        public static IType GetResultType(this BinaryOperatorExpression expression)
         {
-            var resultTypeReference = expression.GetActualTypeReference(true);
-            if (resultTypeReference == null)
+            var resultType = expression.GetActualType();
+            if (resultType == null)
             {
-                resultTypeReference = expression.FindFirstNonParenthesizedExpressionParent().GetActualTypeReference();
+                resultType = expression.FindFirstNonParenthesizedExpressionParent().GetActualType();
             }
 
-            return resultTypeReference;
+            return resultType;
         }
     }
 }

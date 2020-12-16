@@ -1,11 +1,10 @@
-﻿
-using Mono.Cecil;
+﻿using ICSharpCode.Decompiler.TypeSystem;
 
-namespace ICSharpCode.NRefactory.CSharp
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class SimpleMemoryParameterDeclarationExtensions
     {
         public static bool IsSimpleMemoryParameter(this ParameterDeclaration parameterDeclaration) =>
-            parameterDeclaration.Type.GetActualTypeReference().IsSimpleMemory();
+            parameterDeclaration.Type.GetActualType().IsSimpleMemory();
     }
 }
