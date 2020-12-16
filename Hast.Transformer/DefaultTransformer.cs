@@ -303,7 +303,7 @@ namespace Hast.Transformer
                         : transformationIdComponent);
             }
 
-            var transformationId = Sha2456Helper.ComputeHash(string.Join("\n", transformationIdComponents));
+            var transformationId = Sha256Helper.ComputeHash(string.Join("\n", transformationIdComponents));
 
             if (configuration.EnableCaching && _transformationContextCacheService
                 .GetTransformationContext(assemblyPaths, transformationId) is { } cachedTransformationContext)

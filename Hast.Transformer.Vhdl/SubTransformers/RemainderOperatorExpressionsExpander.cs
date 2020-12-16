@@ -50,7 +50,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
 
-                        "remainderOperand" + Sha2456Helper.ComputeHash(operand.GetFullName() + ilRangeName),
+                        "remainderOperand" + Sha256Helper.ComputeHash(operand.GetFullName() + ilRangeName),
                         operand.GetActualType(),
                         TypeHelper.CreateAstType(operand.GetActualType()),
                         operand.FindFirstParentStatement());

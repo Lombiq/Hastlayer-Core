@@ -107,7 +107,7 @@ namespace Hast.Transformer.Services
                 // inlined. Since the same method can be inlined multiple times in another method we also need to
                 // distinguish per invocation. Furthermore, such inlined invocations can themselves be inlined too, so
                 // identifiers need to be continued to suffixed on every level.
-                var methodIdentifierNameSuffix = Sha2456Helper.ComputeHash(methodFullName + invocationExpression.GetFullName());
+                var methodIdentifierNameSuffix = Sha256Helper.ComputeHash(methodFullName + invocationExpression.GetFullName());
 
                 // Assigning all invocation arguments to newly created local variables which then will be used in the
                 // inlined method's body.

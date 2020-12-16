@@ -31,7 +31,7 @@ namespace Hast.Transformer
             {
                 GenerateInMemory = false,
                 TreatWarningsAsErrors = false,
-                OutputAssembly = "DynamicHastAssembly" + Sha2456Helper.ComputeHash(sourceCode),
+                OutputAssembly = "DynamicHastAssembly" + Sha256Helper.ComputeHash(sourceCode),
             };
 
             switch (dotNetLanguage)
