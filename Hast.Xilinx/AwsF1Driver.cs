@@ -14,7 +14,7 @@ namespace Hast.Xilinx
         private readonly object _timingReportParserLock = new object();
 
         private ITimingReport _timingReport;
-        private ITimingReport TimingReport
+        public ITimingReport TimingReport
         {
             get
             {
@@ -28,16 +28,6 @@ namespace Hast.Xilinx
         }
 
 
-        public AwsF1Driver(ITimingReportParser timingReportParser)
-        {
-            _timingReportParser = timingReportParser;
-        }
-
-
-        public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
-            DeviceDriverHelper.ComputeClockCyclesForBinaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);
-
-        public decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
-            DeviceDriverHelper.ComputeClockCyclesForUnaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);
+        public AwsF1Driver(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
     }
 }
