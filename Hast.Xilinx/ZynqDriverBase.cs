@@ -19,7 +19,7 @@ namespace Hast.Xilinx
             {
                 lock (_timingReportParserLock)
                 {
-                    _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(NexysDriverBase)));
+                    _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(ZynqDriverBase)));
 
                     return _timingReport;
                 }
