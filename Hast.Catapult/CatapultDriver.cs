@@ -10,11 +10,10 @@ namespace Hast.Catapult
     public class CatapultDriver : CatapultManifestProvider, IDeviceDriver
     {
         private readonly ITimingReportParser _timingReportParser;
-
         private readonly object _timingReportParserLock = new object();
 
         private ITimingReport _timingReport;
-        private ITimingReport TimingReport
+        public ITimingReport TimingReport
         {
             get
             {
@@ -153,12 +152,12 @@ rem	signed16	signed16	sync	impl	24,175	0,072
 rem	unsigned32	unsigned32	sync	impl	51,186	0,069
 rem	signed32	signed32	sync	impl	54,292	0,127
 rem	unsigned64	unsigned64	sync	impl	131,430	0,065
-rem	signed64	signed64	sync	synth		
+rem	signed64	signed64	sync	synth
 not	std_logic_vector1	std_logic_vector1	sync	impl	0,656	0,134
 not	std_logic_vector8	std_logic_vector8	sync	impl	0,741	0,156
 not	std_logic_vector16	std_logic_vector16	sync	impl	0,787	0,139
 not	std_logic_vector32	std_logic_vector32	sync	impl	0,801	0,136
-not	std_logic_vector64	std_logic_vector64	sync	impl	1,347	0,108	
+not	std_logic_vector64	std_logic_vector64	sync	impl	1,347	0,108
 unary_minus	signed1	signed1	sync	impl	0,615	0,138
 unary_minus	signed8	signed8	sync	impl	1,719	0,141
 unary_minus	signed16	signed16	sync	impl	2,003	0,147
@@ -1069,17 +1068,9 @@ mul_by_0	unsigned64	unsigned64	sync	impl	0	0
             }
         }
 
-
         public CatapultDriver(ITimingReportParser timingReportParser)
         {
             _timingReportParser = timingReportParser;
         }
-
-
-        public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
-            DeviceDriverHelper.ComputeClockCyclesForBinaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);
-
-        public decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
-            DeviceDriverHelper.ComputeClockCyclesForUnaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);
     }
 }
