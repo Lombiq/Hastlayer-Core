@@ -13,7 +13,10 @@ namespace Hast.Synthesis.Services
 {
     public class TimingReportParser : ITimingReportParser
     {
-        private static readonly CsvConfiguration CsvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture);
+        private static readonly CsvConfiguration CsvConfiguration = new(CultureInfo.InvariantCulture)
+        {
+            MissingFieldFound = null, // Tolerate missing fields.
+        };
 
         public ITimingReport Parse(TextReader reportReader)
         {
@@ -223,7 +226,7 @@ namespace Hast.Synthesis.Services
                 _timings[GetKey(operatorType, operandSizeBits, isSigned, constantOperand)] = dpd;
 
                 // If the operand size is 1 that means that the operation also works with single-bit non-composite types
-                // where the latter may not have an explicit size. E.g. and std_logic_vector1 would be the same as 
+                // where the latter may not have an explicit size. E.g. and std_logic_vector1 would be the same as
                 // std_logic but the latter is not a sized data type (and thus it's apparent size will be 0, despite it
                 // being stored on at least one bit).
                 // Therefore, saving a 0 bit version here too.
