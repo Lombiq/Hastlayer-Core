@@ -1,9 +1,7 @@
-﻿using Hast.Catapult.Abstractions;
+using Hast.Catapult.Abstractions;
 using Hast.Synthesis;
-using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
-using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Catapult
 {
@@ -1068,9 +1066,6 @@ mul_by_0	unsigned64	unsigned64	sync	impl	0	0
             }
         }
 
-        public CatapultDriver(ITimingReportParser timingReportParser)
-        {
-            _timingReportParser = timingReportParser;
-        }
+        public CatapultDriver(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
     }
 }
