@@ -75,7 +75,7 @@ namespace Hast.Remote.Worker.Services
             {
                 // It's not guaranteed that we'd actually use it at this point and a lack of telemetry is not the kind
                 // of issue that warrants crashing the application.
-                services.Log(LogLevel.Warning, ex.Message);
+                services.LogDeferred(LogLevel.Warning, ex.Message);
             }
             if (key == null) return;
 
