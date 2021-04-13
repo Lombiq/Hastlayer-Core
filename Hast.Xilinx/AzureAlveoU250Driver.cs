@@ -17,9 +17,7 @@ namespace Hast.Xilinx
             {
                 lock (_timingReportParserLock)
                 {
-                    _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(AlveoU250Driver)));
-
-                    return _timingReport;
+                    return _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(AlveoU250Driver)));
                 }
             }
         }
