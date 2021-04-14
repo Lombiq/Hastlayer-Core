@@ -1,9 +1,7 @@
-﻿using Hast.Synthesis;
-using Hast.Synthesis.Helpers;
+using Hast.Synthesis;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Xilinx.Abstractions.ManifestProviders;
-using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Xilinx
 {
@@ -25,12 +23,6 @@ namespace Hast.Xilinx
                 }
             }
         }
-
-        public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
-            DeviceDriverHelper.ComputeClockCyclesForBinaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);
-
-        public decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
-            DeviceDriverHelper.ComputeClockCyclesForUnaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);
 
         protected NexysDriverBase(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
     }

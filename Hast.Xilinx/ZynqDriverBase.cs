@@ -1,4 +1,4 @@
-﻿using Hast.Synthesis;
+using Hast.Synthesis;
 using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
@@ -25,12 +25,6 @@ namespace Hast.Xilinx
                 }
             }
         }
-
-        public decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
-            DeviceDriverHelper.ComputeClockCyclesForBinaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);
-
-        public decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
-            DeviceDriverHelper.ComputeClockCyclesForUnaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);
 
         protected ZynqDriverBase(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
     }

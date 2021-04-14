@@ -1,4 +1,4 @@
-﻿using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions;
 using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -18,6 +18,7 @@ namespace Hast.Synthesis
 
         decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
             DeviceDriverHelper.ComputeClockCyclesForBinaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);
+
         decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
             DeviceDriverHelper.ComputeClockCyclesForUnaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);
     }
