@@ -1055,8 +1055,8 @@ begin
         Variable \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.bits2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.left\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.right\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit2\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.return.0\: \Lombiq.Arithmetics.Posit32\;
@@ -1171,17 +1171,17 @@ begin
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.dataIn.2\ := \DataIn\;
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.bits2\ := ConvertStdLogicVectorToUInt32(\Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.dataIn.2\);
                             -- The following section was transformed from the .NET statement below:
-                            -- Posit32 left;
+                            -- Posit32 posit;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- left = new Posit32 (bits, true);
+                            -- posit = new Posit32 (bits, true);
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.left\.\IsNull\ := false;
-                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.left\.\PositBits\ := to_unsigned(0, 32);
+                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit\.\IsNull\ := false;
+                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit\.\PositBits\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.left\;
+                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit\;
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.bits\;
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -1192,16 +1192,16 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.left\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- Posit32 right;
+                            -- Posit32 posit2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- right = new Posit32 (bits2, true);
+                            -- posit2 = new Posit32 (bits2, true);
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.right\.\IsNull\ := false;
-                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.right\.\PositBits\ := to_unsigned(0, 32);
+                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit2\.\IsNull\ := false;
+                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit2\.\PositBits\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0._State_9\;
@@ -1213,7 +1213,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0._State_10\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                        \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.right\;
+                        \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit2\;
                         \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.bits2\;
                         \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                         \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -1223,7 +1223,7 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.right\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit2\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- uint num2;
                             -- 
@@ -1233,7 +1233,7 @@ begin
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.num2\ := to_unsigned(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while ((long)(num2) < (long)(num)) {
-                            -- 	left = Posit32.op_Division (left, right);
+                            -- 	posit = Posit32.op_Division (posit, posit2);
                             -- 	num2 = (uint)((long)(num2) + 1L);
                             -- }
                             -- 
@@ -1248,16 +1248,16 @@ begin
                         if (\Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	left = Posit32.op_Division (left, right);
+                            -- 	posit = Posit32.op_Division (posit, posit2);
                             -- 	num2 = (uint)((long)(num2) + 1L);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- left = Posit32.op_Division (left, right);
+                            -- posit = Posit32.op_Division (posit, posit2);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Posit32 Lombiq.Arithmetics.Posit32::op_Division(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32)
-                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32 Posit32::op_Division(Posit32,Posit32).left.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.left\;
-                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32 Posit32::op_Division(Posit32,Posit32).right.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.right\;
+                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32 Posit32::op_Division(Posit32,Posit32).left.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit\;
+                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32 Posit32::op_Division(Posit32,Posit32).right.parameter.Out.0\ <= \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit2\;
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32 Posit32::op_Division(Posit32,Posit32)._Started.0\ <= true;
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0._State_14\;
                         else 
@@ -1270,9 +1270,9 @@ begin
                         -- uint positBits;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- positBits = left.PositBits;
+                        -- positBits = posit.PositBits;
                         -- 
-                        \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.positBits\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.left\.\PositBits\;
+                        \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.positBits\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit\.\PositBits\;
                         -- The following section was transformed from the .NET statement below:
                         -- memory.WriteUInt32 (0, positBits);
                         -- 
@@ -1287,7 +1287,7 @@ begin
                         if (\Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32 Posit32::op_Division(Posit32,Posit32)._Started.0\ = \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32 Posit32::op_Division(Posit32,Posit32)._Finished.0\) then 
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32 Posit32::op_Division(Posit32,Posit32)._Started.0\ <= false;
                             \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.return.0\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.Posit32 Posit32::op_Division(Posit32,Posit32).return.0\;
-                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.left\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.return.0\;
+                            \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.posit\ := \Posit32AdvancedCalculator::RepeatedDivision(SimpleMemory).0.return.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- num2 = (uint)((long)(num2) + 1L);
                             -- 
@@ -1746,7 +1746,7 @@ begin
     \Posit32::IsPositive().0._StateMachine\: process (\Clock\) 
         Variable \Posit32::IsPositive().0._State\: \Posit32::IsPositive().0._States\ := \Posit32::IsPositive().0._State_0\;
         Variable \Posit32::IsPositive().0.this\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::IsPositive().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::IsPositive().0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32::IsPositive().0.binaryOperationResult.1\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -1755,7 +1755,7 @@ begin
                 \Posit32::IsPositive().0._Finished\ <= false;
                 \Posit32::IsPositive().0.return\ <= false;
                 \Posit32::IsPositive().0._State\ := \Posit32::IsPositive().0._State_0\;
-                \Posit32::IsPositive().0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Posit32::IsPositive().0.binaryOperationResult.0\ := to_signed(0, 64);
                 \Posit32::IsPositive().0.binaryOperationResult.1\ := false;
             else 
                 case \Posit32::IsPositive().0._State\ is 
@@ -1779,13 +1779,14 @@ begin
                     when \Posit32::IsPositive().0._State_2\ => 
                         \Posit32::IsPositive().0.this\ := \Posit32::IsPositive().0.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return ((int)@this.PositBits & -2147483648) == 0;
+                        -- return (long)((@this.PositBits & 0x80000000u)) == 0L;
                         -- 
-                        \Posit32::IsPositive().0.binaryOperationResult.0\ := signed(\Posit32::IsPositive().0.this\.\PositBits\) and to_signed(-2147483648, 32);
-                        \Posit32::IsPositive().0.binaryOperationResult.1\ := (\Posit32::IsPositive().0.binaryOperationResult.0\) = to_signed(0, 32);
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Posit32::IsPositive().0.binaryOperationResult.0\ := signed(SmartResize(\Posit32::IsPositive().0.this\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Posit32::IsPositive().0.binaryOperationResult.1\ := signed(SmartResize(((\Posit32::IsPositive().0.binaryOperationResult.0\)), 64)) = to_signed(0, 64);
                         \Posit32::IsPositive().0.return\ <= \Posit32::IsPositive().0.binaryOperationResult.1\;
                         \Posit32::IsPositive().0._State\ := \Posit32::IsPositive().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4632
+                        -- Clock cycles needed to complete this state (approximation): 0.5667
                 end case;
             end if;
         end if;
@@ -4132,7 +4133,7 @@ begin
         Variable \Posit32::FractionSize().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSize().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSize().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionSize().0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionSize().0.binaryOperationResult.3\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -4156,7 +4157,7 @@ begin
                 \Posit32::FractionSize().0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32::FractionSize().0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::FractionSize().0.binaryOperationResult.2\ := to_signed(0, 32);
-                \Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\ := to_signed(0, 32);
+                \Posit32::FractionSize().0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1\ := to_unsigned(0, 32);
                 \Posit32::FractionSize().0.binaryOperationResult.3\ := false;
             else 
                 case \Posit32::FractionSize().0._State\ is 
@@ -4291,13 +4292,13 @@ begin
                         \Posit32::FractionSize().0.binaryOperationResult.2\ := to_signed(32, 32) - (\Posit32::FractionSize().0.binaryOperationResult.1\);
                         \Posit32::FractionSize().0.num\ := \Posit32::FractionSize().0.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c;
+                        -- uint conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((num > 0)) {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = num;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1 = ((uint)num);
                         -- } else {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = 0;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1 = 0u;
                         -- }
                         -- 
                         \Posit32::FractionSize().0.binaryOperationResult.3\ := \Posit32::FractionSize().0.num\ > to_signed(0, 32);
@@ -4316,22 +4317,22 @@ begin
                     when \Posit32::FractionSize().0._State_10\ => 
                         -- State after the if-else which was started in state \Posit32::FractionSize().0._State_9\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (uint)(conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c);
+                        -- return conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1;
                         -- 
-                        \Posit32::FractionSize().0.return\ <= unsigned((\Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\));
+                        \Posit32::FractionSize().0.return\ <= \Posit32::FractionSize().0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1\;
                         \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::FractionSize().0._State_11\ => 
                         -- True branch of the if-else started in state \Posit32::FractionSize().0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = num;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1 = ((uint)num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = num;
+                        -- conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1 = ((uint)num);
                         -- 
-                        \Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\ := \Posit32::FractionSize().0.num\;
+                        \Posit32::FractionSize().0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1\ := (unsigned(\Posit32::FractionSize().0.num\));
                         -- Going to the state after the if-else which was started in state \Posit32::FractionSize().0._State_9\.
                         if (\Posit32::FractionSize().0._State\ = \Posit32::FractionSize().0._State_11\) then 
                             \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_10\;
@@ -4341,13 +4342,13 @@ begin
                         -- False branch of the if-else started in state \Posit32::FractionSize().0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = 0;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1 = 0u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = 0;
+                        -- conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1 = 0u;
                         -- 
-                        \Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\ := to_signed(0, 32);
+                        \Posit32::FractionSize().0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \Posit32::FractionSize().0._State_9\.
                         if (\Posit32::FractionSize().0._State\ = \Posit32::FractionSize().0._State_12\) then 
                             \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_10\;
@@ -4369,7 +4370,7 @@ begin
         Variable \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::FractionSizeWithoutSignCheck().0.conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionSizeWithoutSignCheck().0.conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.3\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -4386,7 +4387,7 @@ begin
                 \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.2\ := to_signed(0, 32);
-                \Posit32::FractionSizeWithoutSignCheck().0.conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b\ := to_signed(0, 32);
+                \Posit32::FractionSizeWithoutSignCheck().0.conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe\ := to_unsigned(0, 32);
                 \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.3\ := false;
             else 
                 case \Posit32::FractionSizeWithoutSignCheck().0._State\ is 
@@ -4436,13 +4437,13 @@ begin
                         \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.2\ := to_signed(32, 32) - (\Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.1\);
                         \Posit32::FractionSizeWithoutSignCheck().0.num\ := \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b;
+                        -- uint conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((num > 0)) {
-                        -- 	conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b = num;
+                        -- 	conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe = ((uint)num);
                         -- } else {
-                        -- 	conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b = 0;
+                        -- 	conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe = 0u;
                         -- }
                         -- 
                         \Posit32::FractionSizeWithoutSignCheck().0.binaryOperationResult.3\ := \Posit32::FractionSizeWithoutSignCheck().0.num\ > to_signed(0, 32);
@@ -4461,22 +4462,22 @@ begin
                     when \Posit32::FractionSizeWithoutSignCheck().0._State_5\ => 
                         -- State after the if-else which was started in state \Posit32::FractionSizeWithoutSignCheck().0._State_4\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (uint)(conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b);
+                        -- return conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe;
                         -- 
-                        \Posit32::FractionSizeWithoutSignCheck().0.return\ <= unsigned((\Posit32::FractionSizeWithoutSignCheck().0.conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b\));
+                        \Posit32::FractionSizeWithoutSignCheck().0.return\ <= \Posit32::FractionSizeWithoutSignCheck().0.conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe\;
                         \Posit32::FractionSizeWithoutSignCheck().0._State\ := \Posit32::FractionSizeWithoutSignCheck().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::FractionSizeWithoutSignCheck().0._State_6\ => 
                         -- True branch of the if-else started in state \Posit32::FractionSizeWithoutSignCheck().0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b = num;
+                        -- 	conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe = ((uint)num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b = num;
+                        -- conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe = ((uint)num);
                         -- 
-                        \Posit32::FractionSizeWithoutSignCheck().0.conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b\ := \Posit32::FractionSizeWithoutSignCheck().0.num\;
+                        \Posit32::FractionSizeWithoutSignCheck().0.conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe\ := (unsigned(\Posit32::FractionSizeWithoutSignCheck().0.num\));
                         -- Going to the state after the if-else which was started in state \Posit32::FractionSizeWithoutSignCheck().0._State_4\.
                         if (\Posit32::FractionSizeWithoutSignCheck().0._State\ = \Posit32::FractionSizeWithoutSignCheck().0._State_6\) then 
                             \Posit32::FractionSizeWithoutSignCheck().0._State\ := \Posit32::FractionSizeWithoutSignCheck().0._State_5\;
@@ -4486,13 +4487,13 @@ begin
                         -- False branch of the if-else started in state \Posit32::FractionSizeWithoutSignCheck().0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b = 0;
+                        -- 	conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe = 0u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b = 0;
+                        -- conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe = 0u;
                         -- 
-                        \Posit32::FractionSizeWithoutSignCheck().0.conditional67dfc878ef144e102c8ace21e1c1a6c1353b7a249d9584de6e1009d88fd9361b\ := to_signed(0, 32);
+                        \Posit32::FractionSizeWithoutSignCheck().0.conditional688ddbc52a1b65eb25f8c82e49f0314e3fa4b7b70a9c2c4dcef22987938e2bfe\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \Posit32::FractionSizeWithoutSignCheck().0._State_4\.
                         if (\Posit32::FractionSizeWithoutSignCheck().0._State\ = \Posit32::FractionSizeWithoutSignCheck().0._State_7\) then 
                             \Posit32::FractionSizeWithoutSignCheck().0._State\ := \Posit32::FractionSizeWithoutSignCheck().0._State_5\;
@@ -4999,7 +5000,7 @@ begin
         Variable \Posit32::SetOne(UInt32,UInt16).0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::SetOne(UInt32,UInt16).0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::SetOne(UInt32,UInt16).0.index\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -5010,7 +5011,7 @@ begin
                 \Posit32::SetOne(UInt32,UInt16).0._State\ := \Posit32::SetOne(UInt32,UInt16).0._State_0\;
                 \Posit32::SetOne(UInt32,UInt16).0.bits\ := to_unsigned(0, 32);
                 \Posit32::SetOne(UInt32,UInt16).0.index\ := to_unsigned(0, 16);
-                \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\ := to_unsigned(0, 32);
             else 
                 case \Posit32::SetOne(UInt32,UInt16).0._State\ is 
@@ -5036,11 +5037,11 @@ begin
                         \Posit32::SetOne(UInt32,UInt16).0.bits\ := \Posit32::SetOne(UInt32,UInt16).0.bits.parameter.In\;
                         \Posit32::SetOne(UInt32,UInt16).0.index\ := \Posit32::SetOne(UInt32,UInt16).0.index.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return (uint)((int)bits | (1 << (int)index));
+                        -- return bits | (uint)(1 << (int)index);
                         -- 
-                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::SetOne(UInt32,UInt16).0.index\, 32)), 5))));
-                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\ := unsigned(signed(\Posit32::SetOne(UInt32,UInt16).0.bits\) or (\Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\));
-                        \Posit32::SetOne(UInt32,UInt16).0.return\ <= (\Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\);
+                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := unsigned(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::SetOne(UInt32,UInt16).0.index\, 32)), 5)))));
+                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\ := \Posit32::SetOne(UInt32,UInt16).0.bits\ or (\Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\);
+                        \Posit32::SetOne(UInt32,UInt16).0.return\ <= \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\;
                         \Posit32::SetOne(UInt32,UInt16).0._State\ := \Posit32::SetOne(UInt32,UInt16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.5685
                 end case;
@@ -5093,12 +5094,12 @@ begin
                         \Posit32::SetZero(UInt32,UInt16).0.bits\ := \Posit32::SetZero(UInt32,UInt16).0.bits.parameter.In\;
                         \Posit32::SetZero(UInt32,UInt16).0.index\ := \Posit32::SetZero(UInt32,UInt16).0.index.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return (uint)((int)bits & ~(1 << (int)index));
+                        -- return bits & (uint)(~(1 << (int)index));
                         -- 
                         \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.0\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::SetZero(UInt32,UInt16).0.index\, 32)), 5))));
                         \Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\ := not((\Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.0\));
-                        \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\ := unsigned(signed(\Posit32::SetZero(UInt32,UInt16).0.bits\) and \Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\);
-                        \Posit32::SetZero(UInt32,UInt16).0.return\ <= (\Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\);
+                        \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\ := \Posit32::SetZero(UInt32,UInt16).0.bits\ and unsigned((\Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\));
+                        \Posit32::SetZero(UInt32,UInt16).0.return\ <= \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\;
                         \Posit32::SetZero(UInt32,UInt16).0._State\ := \Posit32::SetZero(UInt32,UInt16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.68865
                 end case;
@@ -5116,7 +5117,7 @@ begin
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num2\: signed(31 downto 0) := to_signed(0, 32);
@@ -5139,7 +5140,7 @@ begin
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.b\ := to_unsigned(0, 8);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\ := to_unsigned(0, 32);
-                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := to_signed(0, 64);
+                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.3\ := to_unsigned(0, 32);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num2\ := to_signed(0, 32);
@@ -5188,11 +5189,11 @@ begin
                         -- uint num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = ((uint)((long)((bits >> 31)) & 1L));
+                        -- num = (bits >> 31) & 1u;
                         -- 
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := signed(SmartResize(shift_right(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111"))), 64));
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\ := SmartResize(unsigned(signed(SmartResize(((\Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\)), 64)) and to_signed(1, 64)), 32);
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\ := ((\Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\));
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := shift_right(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\ := (\Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\) and to_unsigned(1, 32);
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
                         -- bits = bits << 1;
                         -- 
@@ -5214,7 +5215,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8457
+                        -- Clock cycles needed to complete this state (approximation): 0.7524
                     when \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_2\.
                         -- The while loop's condition:
@@ -5342,7 +5343,8 @@ begin
         Variable \Posit32::Sqrt(Posit32).0.return.3\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32::Sqrt(Posit32).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::Sqrt(Posit32).0.return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::Sqrt(Posit32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::Sqrt(Posit32).0.conditionalb0221b28898fff0da4e8c5ea9683e10d4256978a69f823a47b73cdb74a70b2ec\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::Sqrt(Posit32).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32::Sqrt(Posit32).0.binaryOperationResult.2\: boolean := false;
         Variable \Posit32::Sqrt(Posit32).0.binaryOperationResult.3\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32::Sqrt(Posit32).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -5402,7 +5404,8 @@ begin
                 \Posit32::Sqrt(Posit32).0.return.3\ := to_signed(0, 16);
                 \Posit32::Sqrt(Posit32).0.num2\ := to_unsigned(0, 32);
                 \Posit32::Sqrt(Posit32).0.return.4\ := to_unsigned(0, 32);
-                \Posit32::Sqrt(Posit32).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \Posit32::Sqrt(Posit32).0.conditionalb0221b28898fff0da4e8c5ea9683e10d4256978a69f823a47b73cdb74a70b2ec\ := to_unsigned(0, 32);
+                \Posit32::Sqrt(Posit32).0.binaryOperationResult.1\ := to_signed(0, 64);
                 \Posit32::Sqrt(Posit32).0.binaryOperationResult.2\ := false;
                 \Posit32::Sqrt(Posit32).0.binaryOperationResult.3\ := to_signed(0, 16);
                 \Posit32::Sqrt(Posit32).0.binaryOperationResult.4\ := to_unsigned(0, 32);
@@ -5624,13 +5627,20 @@ begin
                             \Posit32::Sqrt(Posit32).0.return.4\ := \Posit32::Sqrt(Posit32).0.Posit32::FractionWithHiddenBitWithoutSignCheck().return.0\;
                             \Posit32::Sqrt(Posit32).0.num2\ := \Posit32::Sqrt(Posit32).0.return.4\;
                             -- The following section was transformed from the .NET statement below:
-                            -- if (((int)(num) & 1) != 0) {
+                            -- uint conditionalb0221b28898fff0da4e8c5ea9683e10d4256978a69f823a47b73cdb74a70b2ec;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- conditionalb0221b28898fff0da4e8c5ea9683e10d4256978a69f823a47b73cdb74a70b2ec = 1u;
+                            -- 
+                            \Posit32::Sqrt(Posit32).0.conditionalb0221b28898fff0da4e8c5ea9683e10d4256978a69f823a47b73cdb74a70b2ec\ := to_unsigned(1, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- if ((long)(((uint)num & 1u)) != 0L) {
                             -- 	num = (short)((int)(num) - 1);
                             -- 	num2 = num2 + num2;
                             -- }
                             -- 
-                            \Posit32::Sqrt(Posit32).0.binaryOperationResult.1\ := SmartResize((\Posit32::Sqrt(Posit32).0.num\), 32) and to_signed(1, 32);
-                            \Posit32::Sqrt(Posit32).0.binaryOperationResult.2\ := (\Posit32::Sqrt(Posit32).0.binaryOperationResult.1\) /= to_signed(0, 32);
+                            \Posit32::Sqrt(Posit32).0.binaryOperationResult.1\ := signed(SmartResize(ToUnsignedAndExpand(\Posit32::Sqrt(Posit32).0.num\, 32) and to_unsigned(1, 32), 64));
+                            \Posit32::Sqrt(Posit32).0.binaryOperationResult.2\ := signed(SmartResize(((\Posit32::Sqrt(Posit32).0.binaryOperationResult.1\)), 64)) /= to_signed(0, 64);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \Posit32::Sqrt(Posit32).0._State_14\ and ends in state \Posit32::Sqrt(Posit32).0._State_14\.
@@ -5643,7 +5653,7 @@ begin
                                 \Posit32::Sqrt(Posit32).0._State\ := \Posit32::Sqrt(Posit32).0._State_13\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.46365
+                        -- Clock cycles needed to complete this state (approximation): 0.5658
                     when \Posit32::Sqrt(Posit32).0._State_13\ => 
                         -- State after the if-else which was started in state \Posit32::Sqrt(Posit32).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
@@ -6311,10 +6321,10 @@ begin
                             -- bool signBit;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- signBit = (flag != flag2);
+                            -- signBit = flag != flag2;
                             -- 
                             \Posit32 Posit32::op_Division(Posit32,Posit32).0.binaryOperationResult.0\ := \Posit32 Posit32::op_Division(Posit32,Posit32).0.flag\ /= \Posit32 Posit32::op_Division(Posit32,Posit32).0.flag2\;
-                            \Posit32 Posit32::op_Division(Posit32,Posit32).0.signBit\ := (\Posit32 Posit32::op_Division(Posit32,Posit32).0.binaryOperationResult.0\);
+                            \Posit32 Posit32::op_Division(Posit32,Posit32).0.signBit\ := \Posit32 Posit32::op_Division(Posit32,Posit32).0.binaryOperationResult.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- left = Posit32.Abs (left);
                             -- 
