@@ -1,6 +1,9 @@
 using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,7 +11,30 @@ namespace Hast.Remote.Worker.Console
 {
     public class Program
     {
-        protected Program() { }
+        private readonly ITransformationWorker _transformationWorker;
+        private readonly IStringLocalizer T;
+
+        protected Program(IServiceProvider provider)
+        {
+            _transformationWorker = provider.GetRequiredService<ITransformationWorker>();
+
+            T = provider.GetRequiredService<IStringLocalizer<Program>>();
+        }
+
+        private Task RunAsync()
+        {
+            using var cancellationTokenSource = new CancellationTokenSource();
+            System.Console.CancelKeyPress += (_, eventArgs) =>
+            {
+                eventArgs.Cancel = true;
+                System.Console.WriteLine(
+                    T["Application cancelled via SIGINT, attempting graceful shutdown. Please allow at least 10 seconds for this..."]);
+                cancellationTokenSource.Cancel();
+            };
+            System.Console.WriteLine(T["Press Ctrl + C to cleanly terminate the application."]);
+
+            return _transformationWorker.WorkAsync(cancellationTokenSource.Token);
+        }
 
         private static async Task Main()
         {
@@ -31,16 +57,11 @@ namespace Hast.Remote.Worker.Console
             }
 #endif
 
-            using var cancellationTokenSource = new CancellationTokenSource();
-            System.Console.CancelKeyPress += (sender, eventArgs) =>
+            await host.RunGetAsync(async provider =>
             {
-                eventArgs.Cancel = true;
-                System.Console.WriteLine("Application cancelled via SIGINT, attempting graceful shutdown. Please allow at least 10 seconds for this...");
-                cancellationTokenSource.Cancel();
-            };
-            System.Console.WriteLine("Press Ctrl + C to cleanly terminate the application.");
-
-            await host.RunAsync<ITransformationWorker>(worker => worker.WorkAsync(cancellationTokenSource.Token));
+                await new Program(provider).RunAsync();
+                return true;
+            });
         }
     }
 }

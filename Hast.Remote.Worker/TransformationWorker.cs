@@ -192,6 +192,7 @@ namespace Hast.Remote.Worker
                     services.AddSingleton(configuration);
                     services.AddSingleton(container);
                     services.AddSingleton<ITransformationWorker, TransformationWorker>();
+                    services.AddLocalization();
 
                     onServiceRegistration?.Invoke(sender, services);
                 },

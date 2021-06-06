@@ -2,11 +2,16 @@ using Hast.Layer;
 using Hast.TestInputs.Dynamic;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Hast.DynamicTests
 {
+    [SuppressMessage(
+        "Globalization",
+        "CA1303:Do not pass literals as localized parameters",
+        Justification = "There should be no localization for testing.")]
     internal static class TestExecutor
     {
         public static Task ExecuteSelectedTestAsync<T>(Expression<Action<T>> caseSelector, Action<T> testExecutor)
