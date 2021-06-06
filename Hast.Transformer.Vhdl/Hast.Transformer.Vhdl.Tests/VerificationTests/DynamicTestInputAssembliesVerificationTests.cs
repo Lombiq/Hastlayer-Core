@@ -10,7 +10,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         protected override bool UseStubMemberSuitabilityChecker => false;
 
         [Fact]
-        public async Task DynamicTestInputAssemblyMatchesApproved() => await Host.RunAsync<ITransformer>(
+        public Task DynamicTestInputAssemblyMatchesApproved() => Host.RunAsync<ITransformer>(
             async transformer =>
             {
                 var hardwareDescription = await TransformAssembliesToVhdlAsync(

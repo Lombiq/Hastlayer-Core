@@ -52,6 +52,8 @@ namespace Hast.Remote.Worker
 
             // The exceptions are caught inside the async function so returning void is not a danger.
 #pragma warning disable VSTHRD101 // Avoid unsupported async delegates
+#pragma warning disable AsyncFixer03 // Avoid unsupported fire-and-forget async-void methods or delegates. Unhandled exceptions will crash the process.
+
             _oldResultBlobsCleanerTimer.Elapsed += async (_, _) =>
             {
                 try
@@ -73,6 +75,7 @@ namespace Hast.Remote.Worker
                     _logger.LogError(ex, "Error during cleaning up old result blobs.");
                 }
             };
+#pragma warning restore AsyncFixer03 // Avoid unsupported fire-and-forget async-void methods or delegates. Unhandled exceptions will crash the process.
 #pragma warning restore VSTHRD101 // Avoid unsupported async delegates
             _oldResultBlobsCleanerTimer.Enabled = true;
         }
