@@ -33,13 +33,14 @@ namespace Hast.VhdlBuilder.Extensions
         public static Value ToVhdlIdValue(this string id) => new IdentifierValue(id);
 
         public static Value ToVhdlValue(this string valueString, DataType dataType) =>
-            new Value { Content = valueString, DataType = dataType };
+            new()
+            { Content = valueString, DataType = dataType };
 
         /// <summary>
         /// Converts a variable name to a VHDL variable reference.
         /// </summary>
         public static DataObjectReference ToVhdlVariableReference(this string variableName) =>
-            new DataObjectReference
+            new()
             {
                 DataObjectKind = DataObjectKind.Variable,
                 Name = variableName,
@@ -49,7 +50,7 @@ namespace Hast.VhdlBuilder.Extensions
         /// Converts a signal name to a VHDL signal reference.
         /// </summary>
         public static DataObjectReference ToVhdlSignalReference(this string signalName) =>
-            new DataObjectReference
+            new()
             {
                 DataObjectKind = DataObjectKind.Signal,
                 Name = signalName,

@@ -239,7 +239,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         Operator = BinaryOperator.And,
                         Right =
                             string.Join("", Enumerable.Repeat(1, countSize))
-                            .ToVhdlValue(new StdLogicVector { Size = countSize }),
+                            .ToVhdlValue(new StdLogicVector { SizeNumber = countSize }),
                     };
 
                     var bitwiseAndBinary = new BinaryOperatorExpression(

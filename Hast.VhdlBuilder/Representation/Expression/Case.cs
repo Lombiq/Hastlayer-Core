@@ -23,9 +23,9 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
             builder
                 .Append("case");
-            if (IsMatching) builder.Append("?");
+            if (IsMatching) builder.Append('?');
             builder
-                .Append(" ")
+                .Append(' ')
                 .Append(Expression.ToVhdl(vhdlGenerationOptions))
                 .Append(" is ")
                 .Append(vhdlGenerationOptions.NewLineIfShouldFormat());
@@ -36,7 +36,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
             }
 
             builder.Append("end case");
-            if (IsMatching) builder.Append("?");
+            if (IsMatching) builder.Append('?');
 
             return Terminated.Terminate(builder.ToString(), vhdlGenerationOptions);
         }
@@ -62,6 +62,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
                 Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) :
                 Terminated.Terminate(vhdlGenerationOptions.IndentIfShouldFormat() + "null", vhdlGenerationOptions));
 
-        public static CaseWhen CreateOthers() => new CaseWhen { Expression = "others".ToVhdlValue(KnownDataTypes.Identifier) };
+        public static CaseWhen CreateOthers() => new() { Expression = "others".ToVhdlValue(KnownDataTypes.Identifier) };
     }
 }

@@ -55,7 +55,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
                     Declarations.ToVhdl(vhdlGenerationOptions))
                     .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
-                "end " + name, vhdlGenerationOptions);
+                "end " + name,
+                vhdlGenerationOptions);
         }
 
         /// <summary>

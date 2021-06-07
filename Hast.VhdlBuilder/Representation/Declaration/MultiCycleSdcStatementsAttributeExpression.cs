@@ -23,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 #pragma warning restore S103 // Lines should not be too long
     public class MultiCycleSdcStatementsAttributeExpression : IVhdlElement
     {
-        private readonly List<SdcStatement> _paths = new List<SdcStatement>();
+        private readonly List<SdcStatement> _paths = new();
 
         public void AddPath(string parentName, IDataObject pathReference, int clockCycles)
         {
@@ -48,7 +48,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             Terminated.Terminate(
                 "\"" +
                 string.Join(";", _paths.Select(statement => statement.ToVhdl(vhdlGenerationOptions))) +
-                "\"", vhdlGenerationOptions);
+                "\"",
+                vhdlGenerationOptions);
 
         private class SdcStatement : IVhdlElement
         {

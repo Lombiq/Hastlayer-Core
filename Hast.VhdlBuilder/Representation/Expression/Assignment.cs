@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.VhdlBuilder.Representation.Expression
@@ -13,6 +13,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
             Terminated.Terminate(
                 AssignTo.ToReference().ToVhdl(vhdlGenerationOptions) +
                 (AssignTo.DataObjectKind == DataObjectKind.Variable ? " := " : " <= ") +
-                Expression.ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);
+                Expression.ToVhdl(vhdlGenerationOptions),
+                vhdlGenerationOptions);
     }
 }

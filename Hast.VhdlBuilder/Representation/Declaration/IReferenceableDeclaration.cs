@@ -16,6 +16,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public interface IReferenceableDeclaration<out T> : IReferenceableDeclaration
         where T : IVhdlElement
     {
+        /// <summary>
+        /// Returns <see langword="this" />.
+        /// </summary>
         T ToReference();
     }
 }

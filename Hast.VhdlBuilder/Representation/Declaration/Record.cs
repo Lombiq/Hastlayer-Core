@@ -15,7 +15,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             Terminated.Terminate(
                 "type " + vhdlGenerationOptions.ShortenName(Name) + " is record " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Fields.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
-                "end record", vhdlGenerationOptions);
+                "end record",
+                vhdlGenerationOptions);
     }
 
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]

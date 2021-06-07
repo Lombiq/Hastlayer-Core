@@ -13,7 +13,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public BitVector(SizedDataType previous)
             : base(previous)
         {
-            Size = previous.Size;
+            SizeNumber = previous.SizeNumber;
             SizeExpression = previous.SizeExpression;
         }
 

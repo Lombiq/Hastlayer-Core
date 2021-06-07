@@ -23,6 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             Terminated.Terminate(
                 "type " + vhdlGenerationOptions.ShortenName(Name) + " is (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Values.ToVhdl(vhdlGenerationOptions, ", " + Environment.NewLine, string.Empty).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
-                ")", vhdlGenerationOptions);
+                ")",
+                vhdlGenerationOptions);
     }
 }

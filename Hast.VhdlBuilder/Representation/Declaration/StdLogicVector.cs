@@ -22,7 +22,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public StdLogicVector(SizedDataType previous)
             : base(previous)
         {
-            Size = previous.Size;
+            SizeNumber = previous.SizeNumber;
             SizeExpression = previous.SizeExpression;
         }
 

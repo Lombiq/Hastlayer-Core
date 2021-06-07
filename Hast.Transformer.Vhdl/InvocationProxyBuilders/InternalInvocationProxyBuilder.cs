@@ -171,7 +171,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 {
                     Name = booleanArrayType.Name,
                     TypeCategory = DataTypeCategory.Array,
-                    Size = targetComponentCount,
+                    SizeNumber = targetComponentCount,
                 };
                 proxyComponent.LocalVariables.Add(new Variable
                 {
@@ -676,9 +676,9 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
         {
             // This will create a boolean array where the everything is false except for the element with the given index.
 
-            var booleanArray = Enumerable.Repeat(Value.False, targetAvailableIndicatorDataType.Size).ToArray();
+            var booleanArray = Enumerable.Repeat(Value.False, targetAvailableIndicatorDataType.SizeNumber).ToArray();
             // Since the bit vector is downto the rightmost element is the 0th.
-            booleanArray[targetAvailableIndicatorDataType.Size - 1 - indicatedIndex] = Value.True;
+            booleanArray[targetAvailableIndicatorDataType.SizeNumber - 1 - indicatedIndex] = Value.True;
             return new Value
             {
                 DataType = targetAvailableIndicatorDataType,

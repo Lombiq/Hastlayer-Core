@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Representation.Declaration;
 using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression
@@ -14,6 +14,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
                 "attribute " + Attribute.ToReference().ToVhdl(vhdlGenerationOptions) + " of " + Of.ToVhdl(vhdlGenerationOptions) + ": " +
-                ItemClass + " is " + Expression.ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);
+                ItemClass + " is " + Expression.ToVhdl(vhdlGenerationOptions),
+                vhdlGenerationOptions);
     }
 }

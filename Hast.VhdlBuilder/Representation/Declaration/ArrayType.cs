@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -15,6 +15,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 " is array (" +
                 (MaxLength > 0 ? MaxLength + " downto 0" : RangeType.ToReference().ToVhdl(vhdlGenerationOptions) + " range <>") +
                 ") of " +
-                ElementType.ToReference().ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);
+                ElementType.ToReference().ToVhdl(vhdlGenerationOptions),
+                vhdlGenerationOptions);
     }
 }

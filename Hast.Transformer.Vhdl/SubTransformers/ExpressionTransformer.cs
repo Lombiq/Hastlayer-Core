@@ -346,7 +346,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             binaryLiteral = binaryLiteral.PadLeft(size, '0');
                         }
 
-                        return binaryLiteral.ToVhdlValue(new StdLogicVector { Size = size });
+                        return binaryLiteral.ToVhdlValue(new StdLogicVector { SizeNumber = size });
                     }
                 }
 

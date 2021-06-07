@@ -1,4 +1,4 @@
-﻿namespace Hast.VhdlBuilder.Representation.Declaration
+namespace Hast.VhdlBuilder.Representation.Declaration
 {
     /// <summary>
     /// Represents a block of VHDL elements that logically correspond to each other. The block has only a semantic
@@ -12,10 +12,7 @@
         {
         }
 
-        public LogicalBlock()
-            : base()
-        {
-        }
+        public LogicalBlock() { }
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             vhdlGenerationOptions.NewLineIfShouldFormat() +

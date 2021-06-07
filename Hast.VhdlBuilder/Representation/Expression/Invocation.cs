@@ -32,9 +32,9 @@ namespace Hast.VhdlBuilder.Representation.Expression
             Target.ToVhdl(vhdlGenerationOptions) +
             (Parameters != null && Parameters.Any() ? "(" + Parameters.ToVhdl(vhdlGenerationOptions, ", ", string.Empty) + ")" : string.Empty);
 
-        public static Invocation ToInteger(IVhdlElement value) => new Invocation("to_integer", value);
+        public static Invocation ToInteger(IVhdlElement value) => new("to_integer", value);
 
-        public static Invocation ToReal(IVhdlElement value) => new Invocation("real", value);
+        public static Invocation ToReal(IVhdlElement value) => new("real", value);
 
         public static Invocation Resize(IVhdlElement value, int size) => InvokeSizingFunction("resize", value, size);
 
@@ -43,7 +43,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public static Invocation ToUnsigned(IVhdlElement value, int size) => InvokeSizingFunction("to_unsigned", value, size);
 
         public static Invocation InvokeSizingFunction(string functionName, IVhdlElement value, int size) =>
-            new Invocation(functionName.ToVhdlIdValue(), value, size.ToVhdlValue(KnownDataTypes.UnrangedInt));
+            new(functionName.ToVhdlIdValue(), value, size.ToVhdlValue(KnownDataTypes.UnrangedInt));
     }
 
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]

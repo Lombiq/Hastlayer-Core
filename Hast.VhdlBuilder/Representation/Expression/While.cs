@@ -15,6 +15,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
             Terminated.Terminate(
                 "while " + Condition.ToVhdl(vhdlGenerationOptions) + " loop " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
-                "end loop", vhdlGenerationOptions);
+                "end loop",
+                vhdlGenerationOptions);
     }
 }

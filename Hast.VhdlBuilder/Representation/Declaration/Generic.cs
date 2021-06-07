@@ -14,7 +14,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             Terminated.Terminate(
                 "generic (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     (Items != null ? Items.ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions)).IndentLinesIfShouldFormat(vhdlGenerationOptions) : string.Empty) +
-                ")", vhdlGenerationOptions);
+                ")",
+                vhdlGenerationOptions);
     }
 
     public class GenericItem : DataObjectBase
@@ -25,7 +26,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override IDataObject ToReference() => this;
 
-        override public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
+        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             vhdlGenerationOptions.ShortenName(Name) +
             ": " +
             Value.DataType.ToVhdl(vhdlGenerationOptions) +

@@ -1,7 +1,7 @@
 using Hast.VhdlBuilder.Representation.Expression;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -69,6 +69,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public override int GetHashCode() => (Name + TypeCategory).GetHashCode(StringComparison.InvariantCulture);
 
+        [SuppressMessage("Blocker Code Smell", "S3875:\"operator==\" should not be overloaded on reference types", Justification = "Why?")]
         public static bool operator ==(DataType a, DataType b)
         {
             // If both are null, or both are the same instance, return true (ReferenceEquals() returns true if both

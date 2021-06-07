@@ -1,12 +1,11 @@
-﻿namespace Hast.VhdlBuilder.Representation.Expression
+namespace Hast.VhdlBuilder.Representation.Expression
 {
     /// <summary>
     /// Represents a VHDL null statement (mostly used in case constructs).
     /// </summary>
     public class Null : IVhdlElement
     {
-        private static readonly Null _instance = new Null();
-        public static Null Instance => _instance;
+        public static Null Instance { get; } = new Null();
 
         private Null()
         {

@@ -20,7 +20,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                             .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                     Terminated.Terminate(")", vhdlGenerationOptions) +
 
-                ")", vhdlGenerationOptions);
+                ")",
+                vhdlGenerationOptions);
     }
 
     public class PortMapping : IVhdlElement

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -10,23 +10,23 @@ namespace Hast.VhdlBuilder.Representation.Expression
     {
         private readonly string _source;
 
-        public static readonly BinaryOperator Add = new BinaryOperator("+");
-        public static readonly BinaryOperator And = new BinaryOperator("and");
-        public static readonly BinaryOperator Divide = new BinaryOperator("/");
-        public static readonly BinaryOperator Equality = new BinaryOperator("=");
-        public static readonly BinaryOperator ExclusiveOr = new BinaryOperator("xor");
-        public static readonly BinaryOperator GreaterThan = new BinaryOperator(">");
-        public static readonly BinaryOperator GreaterThanOrEqual = new BinaryOperator(">=");
-        public static readonly BinaryOperator InEquality = new BinaryOperator("/=");
-        public static readonly BinaryOperator LessThan = new BinaryOperator("<");
-        public static readonly BinaryOperator LessThanOrEqual = new BinaryOperator("<=");
-        public static readonly BinaryOperator Modulus = new BinaryOperator("mod");
-        public static readonly BinaryOperator Multiply = new BinaryOperator("*");
-        public static readonly BinaryOperator Or = new BinaryOperator("or");
-        public static readonly BinaryOperator Remainder = new BinaryOperator("rem");
-        public static readonly BinaryOperator ShiftLeftLogical = new BinaryOperator("sll");
-        public static readonly BinaryOperator ShiftRightLogical = new BinaryOperator("srl");
-        public static readonly BinaryOperator Subtract = new BinaryOperator("-");
+        public static readonly BinaryOperator Add = new("+");
+        public static readonly BinaryOperator And = new("and");
+        public static readonly BinaryOperator Divide = new("/");
+        public static readonly BinaryOperator Equality = new("=");
+        public static readonly BinaryOperator ExclusiveOr = new("xor");
+        public static readonly BinaryOperator GreaterThan = new(">");
+        public static readonly BinaryOperator GreaterThanOrEqual = new(">=");
+        public static readonly BinaryOperator InEquality = new("/=");
+        public static readonly BinaryOperator LessThan = new("<");
+        public static readonly BinaryOperator LessThanOrEqual = new("<=");
+        public static readonly BinaryOperator Modulus = new("mod");
+        public static readonly BinaryOperator Multiply = new("*");
+        public static readonly BinaryOperator Or = new("or");
+        public static readonly BinaryOperator Remainder = new("rem");
+        public static readonly BinaryOperator ShiftLeftLogical = new("sll");
+        public static readonly BinaryOperator ShiftRightLogical = new("srl");
+        public static readonly BinaryOperator Subtract = new("-");
 
         public static readonly JsonConverter JsonConverter = new BinaryOperatorJsonConverter();
 
@@ -59,7 +59,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
                     jObject.AddFirst(new JProperty("Source", ((BinaryOperator)value)._source));
                     jObject.WriteTo(writer);
                 }
-
             }
         }
     }

@@ -15,7 +15,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
         public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
-        public ArchitectureReference ToReference() => new ArchitectureReference { Name = Name };
+        public ArchitectureReference ToReference() => new() { Name = Name };
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
@@ -25,7 +25,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
-                "end " + name, vhdlGenerationOptions);
+                "end " + name,
+                vhdlGenerationOptions);
         }
 
         [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]

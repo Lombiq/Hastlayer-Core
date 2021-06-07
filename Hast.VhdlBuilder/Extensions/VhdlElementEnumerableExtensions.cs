@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Text;
 using Hast.VhdlBuilder.Representation;
 
@@ -25,7 +25,7 @@ namespace System.Collections.Generic
             // ceremony.
             var elementsArray = elements.ToArray();
             if (!elementsArray.Any()) return string.Empty;
-            var lastElement = elementsArray[elementsArray.Length - 1];
+            var lastElement = elementsArray[^1];
             var resultArray = new string[elementsArray.Length];
 
             Threading.Tasks.Parallel.For(0, elementsArray.Length - 1, i =>

@@ -25,6 +25,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
-                "end process", vhdlGenerationOptions);
+                "end process",
+                vhdlGenerationOptions);
     }
 }
