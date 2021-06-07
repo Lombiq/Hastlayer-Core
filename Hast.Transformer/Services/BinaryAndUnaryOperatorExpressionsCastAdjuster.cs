@@ -162,8 +162,7 @@ namespace Hast.Transformer.Services
                     // if this binary operator expression is not also in another binary operator expression, when it
                     // will be cast again.
                     var firstNonParenthesizedExpressionParent = binaryOperatorExpression.FindFirstNonParenthesizedExpressionParent();
-                    if (!(firstNonParenthesizedExpressionParent is CastExpression) &&
-                        !(firstNonParenthesizedExpressionParent is BinaryOperatorExpression))
+                    if (firstNonParenthesizedExpressionParent is not CastExpression and not BinaryOperatorExpression)
                     {
                         var castExpression = CreateCast(
                             binaryOperatorExpression.GetResultType(),
@@ -184,8 +183,7 @@ namespace Hast.Transformer.Services
 
                 // First handling shifts which are different from other affected binary operators because only the
                 // left operand is promoted, and only everything below int to int.
-                if (binaryOperatorExpression.Operator == BinaryOperatorType.ShiftLeft ||
-                    binaryOperatorExpression.Operator == BinaryOperatorType.ShiftRight)
+                if (binaryOperatorExpression.Operator is BinaryOperatorType.ShiftLeft or BinaryOperatorType.ShiftRight)
                 {
                     if (!new[] { longFullName, ulongFullName, intFullName, uintFullName }.Contains(leftTypeFullName))
                     {
@@ -244,10 +242,7 @@ namespace Hast.Transformer.Services
                 var isCast = unaryOperatorExpression.Expression is CastExpression;
                 var expectedType = unaryOperatorExpression.Expression.GetActualType();
 
-                void Replace(IType newType)
-                {
-                    unaryOperatorExpression.Expression.ReplaceWith(CreateCast(newType, unaryOperatorExpression.Expression, out var _));
-                }
+                void Replace(IType newType) => unaryOperatorExpression.Expression.ReplaceWith(CreateCast(newType, unaryOperatorExpression.Expression, out var _));
 
                 if (_typesConvertedToIntInUnaryOperations.Contains(type.GetFullName()) &&
                     (!isCast || expectedType.GetFullName() != typeof(int).FullName))

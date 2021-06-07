@@ -12,7 +12,7 @@ namespace Hast.Transformer.Services
 
         private class TaskBodyInvocationInstanceCountsSetterVisitor : DepthFirstAstVisitor
         {
-            private readonly Dictionary<string, int> _taskStartsCountInMembers = new Dictionary<string, int>();
+            private readonly Dictionary<string, int> _taskStartsCountInMembers = new();
             private readonly TransformerConfiguration _configuration;
 
             public TaskBodyInvocationInstanceCountsSetterVisitor(TransformerConfiguration configuration) => _configuration = configuration;

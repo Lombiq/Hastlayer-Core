@@ -1,4 +1,4 @@
-﻿using Hast.Common.Helpers;
+using Hast.Common.Helpers;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -17,11 +17,9 @@ namespace Hast.Transformer.Services
             {
                 base.VisitConditionalExpression(conditionalExpression);
 
-                var assignment = conditionalExpression.Parent as AssignmentExpression;
-
                 // Simple "variable = condition ? value1 : value2" expressions are easily handled but ones not in this
                 // form need some further work.
-                if (assignment == null ||
+                if (conditionalExpression.Parent is not AssignmentExpression assignment ||
                     !(assignment.Left is IdentifierExpression) ||
                     !(assignment.Parent is ExpressionStatement))
                 {

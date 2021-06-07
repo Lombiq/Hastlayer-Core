@@ -34,7 +34,7 @@ namespace Hast.Transformer
 #endif
 
         // Used for turning off language features to make processing easier.
-        private static readonly DecompilerSettings DecompilerSettings = new DecompilerSettings
+        private static readonly DecompilerSettings DecompilerSettings = new()
         {
             AlwaysShowEnumMemberValues = false,
             AnonymousMethods = false,

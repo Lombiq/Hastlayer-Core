@@ -9,7 +9,7 @@ namespace Hast.Transformer.Services
 
         private class InitializersChangingVisitor : DepthFirstAstVisitor
         {
-            private readonly Dictionary<string, Expression> _substitutes = new Dictionary<string, Expression>();
+            private readonly Dictionary<string, Expression> _substitutes = new();
 
             public override void VisitVariableDeclarationStatement(VariableDeclarationStatement variableDeclarationStatement)
             {

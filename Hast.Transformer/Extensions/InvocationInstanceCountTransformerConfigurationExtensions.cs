@@ -78,7 +78,7 @@ namespace Hast.Common.Configuration
         private class IndexedNameHolderSettingVisitor : DepthFirstAstVisitor
         {
             private readonly Dictionary<string, EntityDeclaration> _compilerGeneratedMembers;
-            private readonly Dictionary<EntityDeclaration, int> _lambdaCounts = new Dictionary<EntityDeclaration, int>();
+            private readonly Dictionary<EntityDeclaration, int> _lambdaCounts = new();
 
             public IndexedNameHolderSettingVisitor(Dictionary<string, EntityDeclaration> compilerGeneratedMembers) => _compilerGeneratedMembers = compilerGeneratedMembers;
 

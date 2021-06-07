@@ -51,7 +51,7 @@ namespace ICSharpCode.Decompiler.TypeSystem
         public static IType GetElementType(this IType type) =>
             type is TypeWithElementType typeWithElementType ? typeWithElementType.ElementType : null;
 
-        public static ResolveResult ToResolveResult(this IType type) => new ResolveResult(type);
+        public static ResolveResult ToResolveResult(this IType type) => new(type);
 
         // For nested types the conventional separator is a slash.
         public static string GetFullName(this IType type) => type.ReflectionName;

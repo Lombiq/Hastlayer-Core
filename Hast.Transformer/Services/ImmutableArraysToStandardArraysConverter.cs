@@ -281,7 +281,7 @@ namespace Hast.Transformer.Services
                 type?.GetFullName().StartsWith("System.Collections.Immutable.ImmutableArray", StringComparison.InvariantCulture) == true;
 
             private static ArrayType CreateArrayType(IType elementType, ICompilationProvider compilationProvider = null) =>
-                new ArrayType(compilationProvider?.Compilation ?? ((ICompilationProvider)elementType).Compilation, elementType, 1);
+                new(compilationProvider?.Compilation ?? ((ICompilationProvider)elementType).Compilation, elementType, 1);
 
             private static AstType GetClonedElementTypeFromImmutableArrayAstType(AstType astType) =>
                 ((SimpleType)astType).TypeArguments.Single().Clone();

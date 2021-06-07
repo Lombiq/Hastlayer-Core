@@ -8,14 +8,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
     {
         public dynamic EvaluateBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
         {
-            if (!(binaryOperatorExpression.Left is PrimitiveExpression))
+            if (binaryOperatorExpression.Left is not PrimitiveExpression)
             {
                 throw new NotSupportedException(
                     "Evaluating only binary operator expressions where both operands are primitive expressions are supported. The left expression was: " +
                     binaryOperatorExpression.Left + ".");
             }
 
-            if (!(binaryOperatorExpression.Right is PrimitiveExpression))
+            if (binaryOperatorExpression.Right is not PrimitiveExpression)
             {
                 throw new NotSupportedException(
                     "Evaluating only binary operator expressions where both operands are primitive expressions are supported. The right expression was: " +
@@ -54,7 +54,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         public dynamic EvaluateCastExpression(CastExpression castExpression)
         {
-            if (!(castExpression.Expression is PrimitiveExpression))
+            if (castExpression.Expression is not PrimitiveExpression)
             {
                 throw new NotSupportedException(
                     "Evaluating only cast expressions that target a primitive expression are supported. The targeted expression was: " +
@@ -64,46 +64,31 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             var toType = castExpression.GetActualType();
             dynamic value = ((PrimitiveExpression)castExpression.Expression).Value;
 
-            switch (toType.GetFullName())
+            return toType.GetFullName() switch
             {
-                case "System.Boolean":
-                    return (bool)value;
-                case "System.Byte":
-                    return (byte)value;
-                case "System.Char":
-                    return (char)value;
-                case "System.Decimal":
-                    return (decimal)value;
-                case "System.Double":
-                    return (double)value;
-                case "System.Int16":
-                    return (short)value;
-                case "System.Int32":
-                    return (int)value;
-                case "System.Int64":
-                    return (long)value;
-                case "System.Object":
-                    return value;
-                case "System.SByte":
-                    return (sbyte)value;
-                case "System.String":
-                    return (string)value;
-                case "System.UInt16":
-                    return (ushort)value;
-                case "System.UInt32":
-                    return (uint)value;
-                case "System.UInt64":
-                    return (ulong)value;
-                default:
-                    throw new NotSupportedException(
-                        "Evaluating casting to " + toType.GetFullName() + " is not supported. Affected expression: " +
-                        castExpression.ToString().AddParentEntityName(castExpression));
-            }
+                "System.Boolean" => (bool)value,
+                "System.Byte" => (byte)value,
+                "System.Char" => (char)value,
+                "System.Decimal" => (decimal)value,
+                "System.Double" => (double)value,
+                "System.Int16" => (short)value,
+                "System.Int32" => (int)value,
+                "System.Int64" => (long)value,
+                "System.Object" => value,
+                "System.SByte" => (sbyte)value,
+                "System.String" => (string)value,
+                "System.UInt16" => (ushort)value,
+                "System.UInt32" => (uint)value,
+                "System.UInt64" => (ulong)value,
+                _ => throw new NotSupportedException(
+                    "Evaluating casting to " + toType.GetFullName() + " is not supported. Affected expression: " +
+                    castExpression.ToString().AddParentEntityName(castExpression)),
+            };
         }
 
         public dynamic EvaluateUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
         {
-            if (!(unaryOperatorExpression.Expression is PrimitiveExpression))
+            if (unaryOperatorExpression.Expression is not PrimitiveExpression)
             {
                 throw new NotSupportedException(
                     "Evaluating only unary expressions that target a primitive expression are supported. The targeted expression was: " +
@@ -112,32 +97,22 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             dynamic value = ((PrimitiveExpression)unaryOperatorExpression.Expression).Value;
 
-            switch (unaryOperatorExpression.Operator)
+            return unaryOperatorExpression.Operator switch
             {
                 ////case UnaryOperatorType.Any:
                 ////    break;
-                case UnaryOperatorType.Not:
-                    return !value;
-                case UnaryOperatorType.BitNot:
-                    return ~value;
-                case UnaryOperatorType.Minus:
-                    return -value;
-                case UnaryOperatorType.Plus:
-                    return +value;
-                case UnaryOperatorType.Increment:
-                    return ++value;
-                case UnaryOperatorType.Decrement:
-                    return --value;
-                case UnaryOperatorType.PostIncrement:
-                    return value++;
-                case UnaryOperatorType.PostDecrement:
-                    return value--;
-                default:
-                    throw new NotSupportedException(
-                        "Evaluating unary operator expressions with the operator " + unaryOperatorExpression.Operator +
-                        " is not supported. Affected expression: " + unaryOperatorExpression.ToString()
-                        .AddParentEntityName(unaryOperatorExpression));
-            }
+                UnaryOperatorType.Not => !value,
+                UnaryOperatorType.BitNot => ~value,
+                UnaryOperatorType.Minus => -value,
+                UnaryOperatorType.Plus => +value,
+                UnaryOperatorType.Increment => ++value,
+                UnaryOperatorType.Decrement => --value,
+                UnaryOperatorType.PostIncrement => ++value,
+                UnaryOperatorType.PostDecrement => --value,
+                _ => throw new NotSupportedException(
+                    $"Evaluating unary operator expressions with the operator {unaryOperatorExpression.Operator} is" +
+                    $" not supported. Affected expression: {unaryOperatorExpression.ToString().AddParentEntityName(unaryOperatorExpression)}"),
+            };
         }
     }
 }

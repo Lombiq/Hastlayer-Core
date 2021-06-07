@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             BinaryOperatorExpression binaryOperatorExpression,
             DataObjectReference variableReference,
             bool isLeft,
-            ISubTransformerContext contex);
+            ISubTransformerContext context);
 
         IAssignmentTypeConversionResult ImplementTypeConversionForAssignment(
             DataType fromType,

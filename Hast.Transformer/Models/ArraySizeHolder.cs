@@ -7,7 +7,7 @@ namespace Hast.Transformer.Models
 {
     internal class ArraySizeHolder : IArraySizeHolder
     {
-        private readonly Dictionary<string, IArraySize> _arraySizes = new Dictionary<string, IArraySize>();
+        private readonly Dictionary<string, IArraySize> _arraySizes = new();
 
         public ArraySizeHolder()
         {
@@ -33,8 +33,8 @@ namespace Hast.Transformer.Models
                 {
                     throw new NotSupportedException(
                         $"Array sizes should be statically defined but the array stored in the array holder " +
-                        $"\"{holderName}\" has multiple length assigned (previously it had a length of " +
-                        $"{existingSize.Length} and secondly a  length of {length} specified). Make sure that a " +
+                        $"\"{holderName}\" has multiple {nameof(length)} assigned (previously it had a {nameof(length)} of " +
+                        $"{existingSize.Length} and secondly a  {nameof(length)} of {length} specified). Make sure that a " +
                         $"variable, field or property always stores an array of the same size (including target " +
                         $"variables, fields and properties when it's passed around).");
                 }

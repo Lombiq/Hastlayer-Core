@@ -45,7 +45,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             var constantValuesSubstitutingVisitor = new ConstantValuesSubstitutingVisitor(this);
 
             string codeOutput;
-            var hiddenlyUpdatedNodesUpdatedCount = 0;
+            int hiddenlyUpdatedNodesUpdatedCount;
             var passCount = 0;
             const int maxPassCount = 1_000;
             do
@@ -64,8 +64,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 else ConstantValuesTable.Clear();
 
                 passCount++;
-            } while ((codeOutput != rootNode.ToString() ||
-                        constantValuesMarkingVisitor.HiddenlyUpdatedNodesUpdated.Count != hiddenlyUpdatedNodesUpdatedCount) &&
+            }
+            while ((codeOutput != rootNode.ToString() ||
+                constantValuesMarkingVisitor.HiddenlyUpdatedNodesUpdated.Count != hiddenlyUpdatedNodesUpdatedCount) &&
                     passCount < maxPassCount);
 
             if (passCount == maxPassCount)

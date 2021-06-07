@@ -23,8 +23,8 @@ namespace Hast.Transformer.Services
         {
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
             private readonly TransformerConfiguration _transformerConfiguration;
-            private readonly HashSet<EntityDeclaration> _membersInvokedFromNonParallel = new HashSet<EntityDeclaration>();
-            private readonly HashSet<EntityDeclaration> _membersInvokedFromNonRecursive = new HashSet<EntityDeclaration>();
+            private readonly HashSet<EntityDeclaration> _membersInvokedFromNonParallel = new();
+            private readonly HashSet<EntityDeclaration> _membersInvokedFromNonRecursive = new();
 
             public InvocationInstanceCountAdjustingVisitor(
                 ITypeDeclarationLookupTable typeDeclarationLookupTable,

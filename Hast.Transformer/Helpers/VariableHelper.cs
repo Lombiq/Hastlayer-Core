@@ -48,6 +48,6 @@ namespace Hast.Transformer.Helpers
         }
 
         public static ILVariableResolveResult CreateILVariableResolveResult(VariableKind variableKind, IType type, string name) =>
-            new ILVariableResolveResult(new ILVariable(variableKind, type) { Name = name });
+            new(new ILVariable(variableKind, type) { Name = name });
     }
 }

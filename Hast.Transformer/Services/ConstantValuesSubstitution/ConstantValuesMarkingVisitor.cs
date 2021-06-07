@@ -16,7 +16,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         private readonly IArraySizeHolder _arraySizeHolder;
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
 
-        public HashSet<string> HiddenlyUpdatedNodesUpdated { get; } = new HashSet<string>();
+        public HashSet<string> HiddenlyUpdatedNodesUpdated { get; } = new();
 
         public ConstantValuesMarkingVisitor(
             ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor,
@@ -82,35 +82,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     }
 
                     return true;
-                }, out var arrayCreateExpression) &&
+                },
+                out var arrayCreateExpression) &&
                 arrayCreateExpression.Arguments.Single() == primitiveExpression)
             {
                 PassLengthOfArrayHolderToParent(arrayCreateExpression, Convert.ToInt32(primitiveExpression.Value, CultureInfo.InvariantCulture));
             }
-            else if (primitiveExpressionParent.Is<BinaryOperatorExpression>(out var binaryOperatorExpression))
+            else if (primitiveExpressionParent.Is<BinaryOperatorExpression>(out var binaryOperator))
             {
-                var left = binaryOperatorExpression.Left;
-                var right = binaryOperatorExpression.Right;
-
-                var otherExpression = left == primitiveExpression ? right : left;
-
-                if (otherExpression is PrimitiveExpression)
-                {
-                    var newExpression = new PrimitiveExpression(
-                        _astExpressionEvaluator.EvaluateBinaryOperatorExpression(binaryOperatorExpression));
-                    var resultType = binaryOperatorExpression.GetResultType();
-                    newExpression.AddAnnotation(resultType.ToResolveResult());
-                    if (!(newExpression.Value is bool) && resultType.GetFullName() == typeof(bool).FullName)
-                    {
-                        newExpression.Value = newExpression.Value.ToString() == "1";
-                    }
-
-                    var parentBlock = primitiveExpressionParent.FindFirstParentBlockStatement();
-                    _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsPotentiallyConstant(
-                        binaryOperatorExpression,
-                        newExpression,
-                        parentBlock);
-                }
+                VisitBinaryPrimitiveExpression(primitiveExpression, primitiveExpressionParent, binaryOperator);
             }
             else if (primitiveExpressionParent is UnaryOperatorExpression unaryOperatorExpression)
             {
@@ -123,19 +103,13 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 _constantValuesSubstitutingAstProcessor.ConstantValuesTable
                     .MarkAsPotentiallyConstant(primitiveExpressionParent, newExpression, primitiveExpressionParent.Parent);
             }
-
-            // ObjectCreateExpression, ReturnStatement, InvocationExpression are handled in GlobalValueHoldersHandlingVisitor.
         }
 
         protected override void VisitChildren(AstNode node)
         {
             base.VisitChildren(node);
 
-            if (!(node is IdentifierExpression) &&
-                !(node is MemberReferenceExpression))
-            {
-                return;
-            }
+            if (node is not IdentifierExpression and not MemberReferenceExpression) return;
 
             if (node.GetActualType()?.IsArray() == false)
             {
@@ -147,86 +121,112 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     return;
                 }
 
-                void ProcessParent(AstNode parent) =>
+                void Handler(AstNode parent) =>
                     _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parent.GetFullName()] =
                     constructorReference;
 
-                this.ProcessParent(
-                    node: node,
-                    assignmentHandler: assignment => ProcessParent(assignment.Left),
-                    memberReferenceHandler: memberReference =>
+                ProcessParent(
+                    node,
+                    new ProcessParentActions
                     {
-                        var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
-                            .FindMemberReferenceInConstructor(constructorReference.Constructor, memberReference.GetMemberFullName(), _typeDeclarationLookupTable);
-
-                        if (memberReferenceExpressionInConstructor != null &&
-                            _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
-                                .TryGetValue(memberReferenceExpressionInConstructor.GetFullName(), out constructorReference))
+                        AssignmentHandler = assignment => Handler(assignment.Left),
+                        MemberReferenceHandler = memberReference =>
                         {
-                            ProcessParent(memberReference);
-                        }
-                    },
-                    invocationParameterHandler: ProcessParent,
-                    objectCreationParameterHandler: ProcessParent,
-                    variableInitializerHandler: ProcessParent,
-                    returnStatementHandler: returnStatement => ProcessParent(returnStatement.FindFirstParentEntityDeclaration()),
-                    namedExpressionHandler: ProcessParent);
+                            var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
+                                .FindMemberReferenceInConstructor(constructorReference.Constructor, memberReference.GetMemberFullName(), _typeDeclarationLookupTable);
+
+                            if (memberReferenceExpressionInConstructor != null &&
+                                _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
+                                    .TryGetValue(memberReferenceExpressionInConstructor.GetFullName(), out constructorReference))
+                            {
+                                Handler(memberReference);
+                            }
+                        },
+                        InvocationParameterHandler = Handler,
+                        ObjectCreationParameterHandler = Handler,
+                        VariableInitializerHandler = Handler,
+                        ReturnStatementHandler = returnStatement => Handler(returnStatement.FindFirstParentEntityDeclaration()),
+                        NamedExpressionHandler = Handler,
+                    });
+
+                return;
             }
-            else
+
+            // Passing on array sizes.
+            var existingSize = _arraySizeHolder.GetSize(node);
+
+            if (existingSize == null && node is MemberReferenceExpression memberReferenceExpression)
             {
-                // Passing on array sizes.
+                var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
+                if (member == null) return;
+                existingSize = _arraySizeHolder.GetSize(member);
+                if (existingSize != null) _arraySizeHolder.SetSize(node, existingSize.Length);
+            }
 
-                var existingSize = _arraySizeHolder.GetSize(node);
+            if (existingSize == null) return;
 
-                if (existingSize == null && node is MemberReferenceExpression memberReferenceExpression)
+            PassLengthOfArrayHolderToParent(node, existingSize.Length);
+        }
+
+        private void VisitBinaryPrimitiveExpression(
+            PrimitiveExpression primitiveExpression,
+            AstNode primitiveExpressionParent,
+            BinaryOperatorExpression binaryOperatorExpression)
+        {
+            var left = binaryOperatorExpression.Left;
+            var right = binaryOperatorExpression.Right;
+
+            var otherExpression = left == primitiveExpression ? right : left;
+
+            if (otherExpression is PrimitiveExpression)
+            {
+                var newExpression = new PrimitiveExpression(
+                    _astExpressionEvaluator.EvaluateBinaryOperatorExpression(binaryOperatorExpression));
+                var resultType = binaryOperatorExpression.GetResultType();
+                newExpression.AddAnnotation(resultType.ToResolveResult());
+                if ((newExpression.Value is not bool) && resultType.GetFullName() == typeof(bool).FullName)
                 {
-                    var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
-                    if (member == null) return;
-                    existingSize = _arraySizeHolder.GetSize(member);
-                    if (existingSize != null) _arraySizeHolder.SetSize(node, existingSize.Length);
+                    newExpression.Value = newExpression.Value.ToString() == "1";
                 }
 
-                if (existingSize == null) return;
-
-                PassLengthOfArrayHolderToParent(node, existingSize.Length);
+                var parentBlock = primitiveExpressionParent.FindFirstParentBlockStatement();
+                _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsPotentiallyConstant(
+                    binaryOperatorExpression,
+                    newExpression,
+                    parentBlock);
             }
         }
 
         private void PassLengthOfArrayHolderToParent(AstNode arrayHolder, int arrayLength)
         {
-            void ProcessParent(AstNode parent) => _arraySizeHolder.SetSize(parent, arrayLength);
+            void Handler(AstNode parent) => _arraySizeHolder.SetSize(parent, arrayLength);
 
-            this.ProcessParent(
-                node: arrayHolder,
-                assignmentHandler: assignmentExpression =>
+            ProcessParent(
+                arrayHolder,
+                new ProcessParentActions
                 {
-                    if (assignmentExpression.Left is MemberReferenceExpression memberReferenceExpression)
+                    AssignmentHandler = assignmentExpression =>
                     {
-                        _arraySizeHolder.SetSize(
-                            memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable),
-                            arrayLength);
-                    }
+                        if (assignmentExpression.Left is MemberReferenceExpression memberReferenceExpression)
+                        {
+                            _arraySizeHolder.SetSize(
+                                memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable),
+                                arrayLength);
+                        }
 
-                    _arraySizeHolder.SetSize(assignmentExpression.Left, arrayLength);
-                },
-                memberReferenceHandler: parent => { }, // This would set a size for array.Length.
-                invocationParameterHandler: ProcessParent,
-                objectCreationParameterHandler: ProcessParent,
-                variableInitializerHandler: ProcessParent,
-                returnStatementHandler: returnStatement => _arraySizeHolder
-                    .SetSize(returnStatement.FindFirstParentEntityDeclaration(), arrayLength),
-                namedExpressionHandler: ProcessParent);
+                        _arraySizeHolder.SetSize(assignmentExpression.Left, arrayLength);
+                    },
+                    MemberReferenceHandler = _ => { }, // This would set a size for array.Length.
+                    InvocationParameterHandler = Handler,
+                    ObjectCreationParameterHandler = Handler,
+                    VariableInitializerHandler = Handler,
+                    ReturnStatementHandler = returnStatement => _arraySizeHolder
+                        .SetSize(returnStatement.FindFirstParentEntityDeclaration(), arrayLength),
+                    NamedExpressionHandler = Handler,
+                });
         }
 
-        private void ProcessParent(
-            AstNode node,
-            Action<AssignmentExpression> assignmentHandler,
-            Action<MemberReferenceExpression> memberReferenceHandler,
-            Action<ParameterDeclaration> invocationParameterHandler,
-            Action<ParameterDeclaration> objectCreationParameterHandler,
-            Action<VariableInitializer> variableInitializerHandler,
-            Action<ReturnStatement> returnStatementHandler,
-            Action<NamedExpression> namedExpressionHandler)
+        private void ProcessParent(AstNode node, ProcessParentActions actions)
         {
             var parent = node.Parent;
 
@@ -235,12 +235,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (parent.Is<AssignmentExpression>(assignment => assignment.Right == node, out var assignmentExpression) ||
                 parent.Is<InvocationExpression>(invocation => invocation.Target == node && invocation.Parent.Is(out assignmentExpression)))
             {
-                assignmentHandler(assignmentExpression);
+                actions.AssignmentHandler(assignmentExpression);
                 UpdateHiddenlyUpdatedNodesUpdated(assignmentExpression.Left);
             }
             else if (parent is MemberReferenceExpression memberReferenceExpression)
             {
-                memberReferenceHandler(memberReferenceExpression);
+                actions.MemberReferenceHandler(memberReferenceExpression);
                 UpdateHiddenlyUpdatedNodesUpdated(parent);
             }
             else if (parent is InvocationExpression expression)
@@ -254,20 +254,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 // can be null for special invocations like Task.WhenAll().
                 if (parameter == null)
                 {
-                    ProcessParent(
-                        node: node.Parent,
-                        assignmentHandler: assignmentHandler,
-                        memberReferenceHandler: memberReferenceHandler,
-                        invocationParameterHandler: invocationParameterHandler,
-                        objectCreationParameterHandler: objectCreationParameterHandler,
-                        variableInitializerHandler: variableInitializerHandler,
-                        returnStatementHandler: returnStatementHandler,
-                        namedExpressionHandler: namedExpressionHandler);
+                    ProcessParent(node.Parent, actions);
 
                     return;
                 }
 
-                invocationParameterHandler(parameter);
+                actions.InvocationParameterHandler(parameter);
                 UpdateHiddenlyUpdatedNodesUpdated(parameter);
             }
             else if (parent is ObjectCreateExpression objectCreateExpression)
@@ -284,25 +276,36 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     return;
                 }
 
-                objectCreationParameterHandler(parameter);
+                actions.ObjectCreationParameterHandler(parameter);
                 UpdateHiddenlyUpdatedNodesUpdated(parameter);
             }
             else if (parent is VariableInitializer initializer)
             {
-                variableInitializerHandler(initializer);
+                actions.VariableInitializerHandler(initializer);
                 UpdateHiddenlyUpdatedNodesUpdated(parent);
             }
             else if (parent is ReturnStatement statement)
             {
-                returnStatementHandler(statement);
+                actions.ReturnStatementHandler(statement);
                 UpdateHiddenlyUpdatedNodesUpdated(parent);
             }
             else if (parent is NamedExpression namedExpression)
             {
                 // NamedExpressions are used in object initializers, e.g. new MyClass { Property = true }.
-                namedExpressionHandler(namedExpression);
+                actions.NamedExpressionHandler(namedExpression);
                 UpdateHiddenlyUpdatedNodesUpdated(parent);
             }
+        }
+
+        private class ProcessParentActions
+        {
+            public Action<AssignmentExpression> AssignmentHandler { get; set; }
+            public Action<MemberReferenceExpression> MemberReferenceHandler { get; set; }
+            public Action<ParameterDeclaration> InvocationParameterHandler { get; set; }
+            public Action<ParameterDeclaration> ObjectCreationParameterHandler { get; set; }
+            public Action<VariableInitializer> VariableInitializerHandler { get; set; }
+            public Action<ReturnStatement> ReturnStatementHandler { get; set; }
+            public Action<NamedExpression> NamedExpressionHandler { get; set; }
         }
     }
 }

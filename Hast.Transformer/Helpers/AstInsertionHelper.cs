@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Helpers
 {
@@ -16,9 +16,9 @@ namespace Hast.Transformer.Helpers
             where T : Statement
         {
             var enclosingNode = adjacentSibling.Parent;
-            if (enclosingNode is BlockStatement)
+            if (enclosingNode is BlockStatement enclosingBlock)
             {
-                var statements = ((BlockStatement)enclosingNode).Statements;
+                var statements = enclosingBlock.Statements;
                 if (before) statements.InsertBefore(adjacentSibling, statement);
                 else statements.InsertAfter(adjacentSibling, statement);
             }
