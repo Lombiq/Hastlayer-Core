@@ -1,6 +1,6 @@
-﻿using Hast.Layer;
+﻿using Hast.Common.Interfaces;
+using Hast.Layer;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Services
 {

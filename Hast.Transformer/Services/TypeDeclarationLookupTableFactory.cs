@@ -1,9 +1,9 @@
-﻿using Hast.Transformer.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Hast.Common.Interfaces;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
-using Hast.Common.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Hast.Transformer.Services
 {

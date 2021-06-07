@@ -1,4 +1,4 @@
-﻿using Hast.Common.Validation;
+using Hast.Common.Validation;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,16 +31,13 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             var valueDescriptors = GetOrCreateValueDescriptors(valueHolder.GetFullName());
 
-            if (disallowDifferentValues && expression != null)
+            // Simply using != would yield a reference equality check.
+            if (disallowDifferentValues &&
+                expression != null &&
+                valueDescriptors.TryGetValue(scope, out var existingExpression) &&
+                (existingExpression == null || !expression.Value.Equals(existingExpression.Value)))
             {
-                if (valueDescriptors.TryGetValue(scope, out var existingExpression))
-                {
-                    // Simply using != would yield a reference equality check.
-                    if (existingExpression == null || !expression.Value.Equals(existingExpression.Value))
-                    {
-                        expression = null;
-                    }
-                }
+                expression = null;
             }
 
             valueDescriptors[scope] = expression;

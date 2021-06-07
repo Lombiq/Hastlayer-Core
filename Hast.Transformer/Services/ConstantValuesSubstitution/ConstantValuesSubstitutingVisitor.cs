@@ -38,17 +38,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             var parentBlock = assignmentExpression.FindFirstParentBlockStatement();
 
             // Indexed assignments with a constant index could also be handled eventually, but not really needed
-            // now.
-            if (assignmentExpression.Right is PrimitiveExpression && !(assignmentExpression.Left is IndexerExpression))
+            // now. There won't be a parent block for attributes for example.
+            if (assignmentExpression.Right is PrimitiveExpression expression &&
+                assignmentExpression.Left is not IndexerExpression &&
+                parentBlock != null)
             {
-                // There won't be a parent block for attributes for example.
-                if (parentBlock != null)
-                {
-                    _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsPotentiallyConstant(
-                        assignmentExpression.Left,
-                        (PrimitiveExpression)assignmentExpression.Right,
-                        parentBlock);
-                }
+                _constantValuesSubstitutingAstProcessor.ConstantValuesTable.MarkAsPotentiallyConstant(
+                    assignmentExpression.Left,
+                    expression,
+                    parentBlock);
             }
 
             // If this is assignment is in a while or an if-else then every assignment to it shouldn't affect anything
@@ -56,7 +54,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // expression can be both in a while or if (in which case it can't affect the parent scopes) or have a non-
             // constant assignment (and thus can't have a const value for the current scope).
 
-            if (!(assignmentExpression.Left is IdentifierExpression)) return;
+            if (assignmentExpression.Left is not IdentifierExpression) return;
 
             if (ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
             {
@@ -110,10 +108,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 var arraySize = _arraySizeHolder.GetSize(memberReferenceExpression.Target);
 
-                if (arraySize == null && memberReferenceExpression.Target is MemberReferenceExpression)
+                if (arraySize == null && memberReferenceExpression.Target is MemberReferenceExpression expression)
                 {
-                    arraySize = _arraySizeHolder.GetSize(
-                        ((MemberReferenceExpression)memberReferenceExpression.Target).FindMemberDeclaration(_typeDeclarationLookupTable));
+                    arraySize = _arraySizeHolder.GetSize(expression.FindMemberDeclaration(_typeDeclarationLookupTable));
                 }
 
                 if (arraySize != null)
@@ -151,7 +148,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             if (ConstantValueSubstitutionHelper.IsInWhile(ifElseStatement)) return;
 
-            if (!(ifElseStatement.Condition is PrimitiveExpression primitiveCondition)) return;
+            if (ifElseStatement.Condition is not PrimitiveExpression primitiveCondition) return;
 
             ReturnStatement replacingReturnStatement = null;
 
@@ -183,17 +180,19 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             // Is this a return statement in the root level of a method or something similar? Because then any other
             // statement after it should be removed too.
-            if (replacingReturnStatement != null &&
-                (replacingReturnStatement.Parent is EntityDeclaration ||
-                    replacingReturnStatement.Parent.Is<BlockStatement>(block => block.Parent is EntityDeclaration)))
+            if (replacingReturnStatement == null ||
+                (replacingReturnStatement.Parent is not EntityDeclaration &&
+                !replacingReturnStatement.Parent.Is<BlockStatement>(block => block.Parent is EntityDeclaration)))
             {
-                var currentStatement = replacingReturnStatement.GetNextStatement();
-                while (currentStatement != null)
-                {
-                    var nextStatement = currentStatement.GetNextStatement();
-                    currentStatement.RemoveAndMark();
-                    currentStatement = nextStatement;
-                }
+                return;
+            }
+
+            var currentStatement = replacingReturnStatement.GetNextStatement();
+            while (currentStatement != null)
+            {
+                var nextStatement = currentStatement.GetNextStatement();
+                currentStatement.RemoveAndMark();
+                currentStatement = nextStatement;
             }
         }
 
@@ -204,7 +203,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // Substituting method invocations that have a constant return value.
 
             // This shouldn't really happen, all targets should be member reference expressions.
-            if (!(invocationExpression.Target is MemberReferenceExpression)) return;
+            if (invocationExpression.Target is not MemberReferenceExpression) return;
 
             // If the member reference was substituted then we should also substitute the whole invocation.
             if (TrySubstituteValueHolderInExpressionIfInSuitableAssignment(invocationExpression.Target))
@@ -217,7 +216,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         {
             base.VisitUnaryOperatorExpression(unaryOperatorExpression);
 
-            if (!(unaryOperatorExpression.Expression is PrimitiveExpression)) return;
+            if (unaryOperatorExpression.Expression is not PrimitiveExpression) return;
 
             if (_constantValuesTable.RetrieveAndDeleteConstantValue(unaryOperatorExpression, out var valueExpression))
             {
@@ -235,12 +234,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             }
 
             var lengthArgument = arrayCreateExpression.Arguments.Single();
-            var parentAssignment = arrayCreateExpression.Parent as AssignmentExpression;
-            var existingSize = parentAssignment != null ?
+            var existingSize = arrayCreateExpression.Parent is AssignmentExpression parentAssignment ?
                 _arraySizeHolder.GetSize(parentAssignment.Left) :
                 null;
+            var noExistingSize = existingSize == null;
 
-            if (lengthArgument is PrimitiveExpression || existingSize == null) return;
+            if (noExistingSize || lengthArgument is PrimitiveExpression) return;
 
             // If the array creation doesn't have a static length but the value holder the array is assigned to has the
             // array size defined then just substitute the array length too.
@@ -275,15 +274,17 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             // Is this a const? Then we can just substitute it directly.
             var resolveResult = node.GetResolveResult();
-            IType type;
             if (resolveResult?.IsCompileTimeConstant == true &&
                 resolveResult.ConstantValue != null &&
-                !(node is PrimitiveExpression) &&
-                !(type = node.GetActualType()).IsEnum() &&
-                !(node is NullReferenceExpression))
+                !(node is PrimitiveExpression))
             {
-                node.ReplaceWith(new PrimitiveExpression(resolveResult.ConstantValue, resolveResult.ConstantValue.ToString())
-                    .WithAnnotation(new ConstantResolveResult(type, resolveResult.ConstantValue)));
+                var type = node.GetActualType();
+
+                if (!type.IsEnum() && !(node is NullReferenceExpression))
+                {
+                    node.ReplaceWith(new PrimitiveExpression(resolveResult.ConstantValue, resolveResult.ConstantValue.ToString())
+                        .WithAnnotation(new ConstantResolveResult(type, resolveResult.ConstantValue)));
+                }
             }
 
             // Attributes can slip in here but we don't care about those. Also, due to eliminating branches nodes can
@@ -399,19 +400,18 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 base.VisitAssignmentExpression(assignmentExpression);
 
-                var right = assignmentExpression.Right as PrimitiveExpression;
-
                 // We need to keep track of the last assignment in the root scope of the method. If after that there is
                 // another assignment with a non-constant value or in an if-else or while then that makes the value
                 // holder's constant value unusable.
 
-                if (right == null || ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
+                if (assignmentExpression.Right is not PrimitiveExpression right ||
+                    ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
                 {
                     ConstantValuesTable.MarkAsNonConstant(assignmentExpression.Left, _constructor);
                 }
                 else if (right != null)
                 {
-                    ConstantValuesTable.MarkAsPotentiallyConstant(assignmentExpression.Left, right, _constructor);
+                    ConstantValuesTable.MarkAsPotentiallyConstant(assignmentExpression.Left, right!, _constructor);
                 }
             }
         }

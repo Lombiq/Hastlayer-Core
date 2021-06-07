@@ -57,7 +57,8 @@ namespace Hast.Transformer.Services
                 syntaxTree.AcceptVisitor(new MethodCallChangingVisitor(inlinableMethods));
 
                 passCount++;
-            } while (codeOutput != syntaxTree.ToString() && passCount < maxPassCount);
+            }
+            while (codeOutput != syntaxTree.ToString() && passCount < maxPassCount);
 
             if (passCount == maxPassCount)
             {

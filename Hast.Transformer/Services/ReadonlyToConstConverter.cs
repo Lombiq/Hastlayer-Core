@@ -61,15 +61,15 @@ namespace Hast.Transformer.Services
                 {
                     result = value.Value switch
                     {
-                        string _ => resultString,
-                        int _ => int.Parse(resultString, CultureInfo.InvariantCulture),
-                        uint _ => uint.Parse(resultString, CultureInfo.InvariantCulture),
-                        long _ => long.Parse(resultString, CultureInfo.InvariantCulture),
-                        ulong _ => ulong.Parse(resultString, CultureInfo.InvariantCulture),
-                        short _ => short.Parse(resultString, CultureInfo.InvariantCulture),
-                        ushort _ => ushort.Parse(resultString, CultureInfo.InvariantCulture),
-                        byte _ => byte.Parse(resultString, CultureInfo.InvariantCulture),
-                        bool _ => resultString.ToUpperInvariant() == "TRUE",
+                        string => resultString,
+                        int => int.Parse(resultString, CultureInfo.InvariantCulture),
+                        uint => uint.Parse(resultString, CultureInfo.InvariantCulture),
+                        long => long.Parse(resultString, CultureInfo.InvariantCulture),
+                        ulong => ulong.Parse(resultString, CultureInfo.InvariantCulture),
+                        short => short.Parse(resultString, CultureInfo.InvariantCulture),
+                        ushort => ushort.Parse(resultString, CultureInfo.InvariantCulture),
+                        byte => byte.Parse(resultString, CultureInfo.InvariantCulture),
+                        bool => resultString.ToUpperInvariant() == "TRUE",
                         _ => value.Value,
                     };
                 }
@@ -97,7 +97,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitIdentifier(identifier);
 
-                if (!(identifier.Parent is MemberReferenceExpression member) ||
+                if (identifier.Parent is not MemberReferenceExpression member ||
                     identifier.Name != _name ||
                     !GetTypeOfStaticIdentifier(identifier).Equals(_typeDeclaration.GetActualType()))
                 {

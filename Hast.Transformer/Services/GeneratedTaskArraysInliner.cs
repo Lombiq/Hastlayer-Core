@@ -26,7 +26,10 @@ namespace Hast.Transformer.Services
 
                 var compilerGeneratedVariableName = string.Empty;
                 if (assignmentExpression.Left.Is<IdentifierExpression>(identifier =>
-                        (compilerGeneratedVariableName = identifier.Identifier).StartsWith("arg_", StringComparison.Ordinal)) &&
+                    {
+                        compilerGeneratedVariableName = identifier.Identifier;
+                        return compilerGeneratedVariableName.StartsWith("arg_", StringComparison.Ordinal);
+                    }) &&
                     assignmentExpression.Right.GetActualTypeFullName().StartsWith("System.Threading.Tasks.Task`1<", StringComparison.InvariantCulture))
                 {
                     InlinableVariableMapping[compilerGeneratedVariableName] =

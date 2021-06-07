@@ -80,11 +80,12 @@ namespace Hast.Transformer.Services
                         arrayLengthExpression.Clone())
                     .WithAnnotation(new MemberResolveResult(
                         memberReference.Target.GetResolveResult(),
-                            GetArrayMembers().Single(member =>
+                        GetArrayMembers().Single(member =>
                             {
                                 var parameters = (member as IMethod)?.Parameters;
                                 return member.Name == "Copy" &&
-                                    parameters.Count == 3 && parameters[2].Type.FullName == "System.Int32";
+                                    parameters?.Count == 3
+                                    && parameters[2].Type.FullName == "System.Int32";
                             })));
                 }
 

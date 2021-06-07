@@ -4,7 +4,6 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
@@ -51,6 +50,8 @@ namespace Hast.Transformer.Services
                 {
                     return;
                 }
+
+                if (member == null) return;
 
                 if (member.IsStatic)
                 {

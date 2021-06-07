@@ -59,7 +59,7 @@ namespace Hast.Transformer.Services
                 if (assignmentExpression.Left is IdentifierExpression identifierExpression &&
                     identifierExpression.Identifier == _identifier)
                 {
-                    AssignedToOnce = AssignedToOnce == null ? true : false;
+                    AssignedToOnce = AssignedToOnce == null;
                 }
             }
         }

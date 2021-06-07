@@ -1,11 +1,16 @@
-﻿using System;
+using System;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Models
 {
-    // A separate model for this so adding support for multi-dimensional arrays will be possible by extending it.
+    /// <summary>
+    /// A separate model for this so adding support for multi-dimensional arrays will be possible by extending it.
+    /// </summary>
     public interface IArraySize
     {
+        /// <summary>
+        /// Gets the Length of the array.
+        /// </summary>
         int Length { get; }
     }
 

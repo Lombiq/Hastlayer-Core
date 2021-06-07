@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.Semantics;
@@ -94,9 +94,7 @@ namespace Hast.Transformer.Services
                 {
                     base.VisitInvocationExpression(invocationExpression);
 
-                    var targetMemberReference = invocationExpression.Target as MemberReferenceExpression;
-
-                    if (targetMemberReference == null) return;
+                    if (invocationExpression.Target is not MemberReferenceExpression targetMemberReference) return;
 
                     var targetType = targetMemberReference.Target.GetActualType();
                     var isAffectedMethodCall =

@@ -12,7 +12,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
     /// </summary>
     internal class GlobalValueHoldersHandlingVisitor : DepthFirstAstVisitor
     {
-        private readonly ConstantValuesSubstitutingAstProcessor _constantValuesSubstitutingAstProcessor;
         private readonly ConstantValuesTable _constantValuesTable;
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
         private readonly AstNode _rootNode;
@@ -21,7 +20,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor,
             AstNode rootNode)
         {
-            _constantValuesSubstitutingAstProcessor = constantValuesSubstitutingAstProcessor;
             _constantValuesTable = constantValuesSubstitutingAstProcessor.ConstantValuesTable;
             _typeDeclarationLookupTable = constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable;
             _rootNode = rootNode;
@@ -74,7 +72,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             base.VisitParameterDeclaration(parameterDeclaration);
 
             // Handling parameters with default values.
-            if (!(parameterDeclaration.DefaultExpression is PrimitiveExpression primitiveExpression)) return;
+            if (parameterDeclaration.DefaultExpression is not PrimitiveExpression primitiveExpression) return;
             _constantValuesTable.MarkAsPotentiallyConstant(parameterDeclaration, primitiveExpression, _rootNode, true);
         }
 

@@ -237,11 +237,11 @@ namespace Hast.Transformer.Services
                 }
 
                 // Omitting decimal, double, float rules as those are not supported any way.
-                if ((leftTypeFullName == ulongFullName) != (rightTypeFullName == ulongFullName))
+                if (leftTypeFullName == ulongFullName != (rightTypeFullName == ulongFullName))
                 {
                     castConditional(leftTypeFullName == ulongFullName);
                 }
-                else if ((leftTypeFullName == longFullName) != (rightTypeFullName == longFullName))
+                else if (leftTypeFullName == longFullName != (rightTypeFullName == longFullName))
                 {
                     castConditional(leftTypeFullName == longFullName);
                 }
@@ -252,7 +252,7 @@ namespace Hast.Transformer.Services
                     replaceLeft(longType);
                     replaceRight(longType);
                 }
-                else if ((leftTypeFullName == uintFullName) != (rightTypeFullName == uintFullName))
+                else if (leftTypeFullName == uintFullName != (rightTypeFullName == uintFullName))
                 {
                     castConditional(leftTypeFullName == uintFullName);
                 }

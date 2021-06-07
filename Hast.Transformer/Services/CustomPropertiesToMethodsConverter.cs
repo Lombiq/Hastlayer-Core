@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
@@ -64,7 +64,7 @@ namespace Hast.Transformer.Services
                 // Changing consumer code of the property to use it as methods.
                 _syntaxTree.AcceptVisitor(new PropertyAccessChangingVisitor(
                     getter.Body.Any() ? getter.GetFullName() : null,
-                    setter.Body.Any() ? setter.GetFullName() : null)); ;
+                    setter.Body.Any() ? setter.GetFullName() : null));
 
                 propertyDeclaration.Remove();
             }
@@ -86,7 +86,8 @@ namespace Hast.Transformer.Services
 
                     var memberFullName = memberReferenceExpression.GetMemberFullName();
                     var memberResolveResult = memberReferenceExpression.GetMemberResolveResult();
-                    var property = memberResolveResult?.Member as IProperty;
+                    if (memberResolveResult?.Member is not IProperty property) return;
+
                     if (memberFullName == _getterName)
                     {
                         memberReferenceExpression.MemberName = property.Getter.Name;

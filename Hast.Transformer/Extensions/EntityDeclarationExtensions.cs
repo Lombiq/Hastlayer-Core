@@ -23,12 +23,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             if (!privateImplementationType.IsNull)
             {
                 var interfaceDeclaration = lookupDeclaration(privateImplementationType);
-                if (interfaceDeclaration != null)
-                {
-                    return interfaceDeclaration.FindMatchingMember(member, lookupDeclaration);
-                }
-
-                return null;
+                return interfaceDeclaration?.FindMatchingMember(member, lookupDeclaration);
             }
 
             // Otherwise if it's not public it can't be a member declared in an interface.
@@ -39,22 +34,24 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             // BaseTypes are flattened, so interface inheritance is taken into account.
             foreach (var baseType in parent.BaseTypes)
             {
-                if (baseType.NodeType == NodeType.TypeReference)
+                if (baseType.NodeType != NodeType.TypeReference) continue;
+
+                // baseType is a TypeReference but we need the corresponding TypeDeclaration to check for the methods.
+                var baseTypeDeclaration = lookupDeclaration(baseType);
+
+                if (baseTypeDeclaration == null)
                 {
-                    // baseType is a TypeReference but we need the corresponding TypeDeclaration to check for the methods.
-                    var baseTypeDeclaration = lookupDeclaration(baseType);
+                    ExceptionHelper.ThrowDeclarationNotFoundException(baseType.GetFullName(), member);
 
-                    if (baseTypeDeclaration == null)
-                    {
-                        ExceptionHelper.ThrowDeclarationNotFoundException(baseType.GetFullName(), member);
-                    }
-
-                    if (baseTypeDeclaration.ClassType == ClassType.Interface)
-                    {
-                        var matchingMethod = baseTypeDeclaration.FindMatchingMember(member, lookupDeclaration);
-                        if (matchingMethod != null) return matchingMethod;
-                    }
+                    // This won't even be reached, but it helps the code analyser see that the above line breaks the
+                    // execution path.
+                    return null;
                 }
+
+                if (baseTypeDeclaration.ClassType != ClassType.Interface) continue;
+
+                var matchingMethod = baseTypeDeclaration.FindMatchingMember(member, lookupDeclaration);
+                if (matchingMethod != null) return matchingMethod;
             }
 
             return null;

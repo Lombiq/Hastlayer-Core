@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
@@ -28,9 +25,7 @@ namespace Hast.Transformer.Services
 
                 foreach (var initializerElement in objectCreateExpression.Initializer.Elements)
                 {
-                    var namedInitializerExpression = initializerElement as NamedExpression;
-
-                    if (namedInitializerExpression == null)
+                    if (initializerElement is not NamedExpression namedInitializerExpression)
                     {
                         throw new NotSupportedException(
                             "Object initializers can only contain named expressions (i.e. \"Name = expression\" pairs)."

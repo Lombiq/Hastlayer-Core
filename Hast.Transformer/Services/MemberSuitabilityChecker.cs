@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Models;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
@@ -10,22 +10,20 @@ namespace Hast.Transformer.Services
     {
         public bool IsSuitableHardwareEntryPointMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
-            if (member is MethodDeclaration method)
+            if (member is MethodDeclaration method &&
+                method.Parent is TypeDeclaration declaration &&
+                // If it's a public virtual method,
+                (method.Modifiers == (Modifiers.Public | Modifiers.Virtual) ||
+                // or a public override method which is the same in F# (no direct virtual there, just abstract
+                // and override)
+                method.Modifiers == (Modifiers.Public | Modifiers.Override) ||
+                // or a public virtual async method,
+                method.Modifiers == (Modifiers.Public | Modifiers.Virtual | Modifiers.Async) ||
+                // or a public method that implements an interface.
+                method.FindImplementedInterfaceMethod(typeDeclarationLookupTable.Lookup) != null))
             {
-                if (method.Parent is TypeDeclaration &&
-                        // If it's a public virtual method,
-                        (method.Modifiers == (Modifiers.Public | Modifiers.Virtual) ||
-                        // or a public override method which is the same in F# (no direct virtual there, just abstract
-                        // and override)
-                        method.Modifiers == (Modifiers.Public | Modifiers.Override) ||
-                        // or a public virtual async method,
-                        method.Modifiers == (Modifiers.Public | Modifiers.Virtual | Modifiers.Async) ||
-                        // or a public method that implements an interface.
-                        method.FindImplementedInterfaceMethod(typeDeclarationLookupTable.Lookup) != null))
-                {
-                    var parent = (TypeDeclaration)method.Parent;
-                    return parent.ClassType == ClassType.Class && parent.Modifiers == Modifiers.Public;
-                }
+                var parent = declaration;
+                return parent.ClassType == ClassType.Class && parent.Modifiers == Modifiers.Public;
             }
 
             return false;

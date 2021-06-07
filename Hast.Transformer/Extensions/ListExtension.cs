@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Transforms;
+using ICSharpCode.Decompiler.CSharp.Transforms;
 using ICSharpCode.Decompiler.IL.Transforms;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +17,14 @@ namespace ICSharpCode.Decompiler
         public static IList<IAstTransform> Remove(this IList<IAstTransform> list, string className) =>
             RemoveInternal(list, className);
 
-        public static IList<IAstTransform> ReplaceWith<TReplace>(this IList<IAstTransform> list, IAstTransform replacement) =>
-            ReplaceWithInternal<IAstTransform, TReplace>(list, replacement);
-
         public static IList<IILTransform> Remove<TRemove>(this IList<IILTransform> list) =>
             RemoveInternal<IILTransform, TRemove>(list);
 
         public static IList<IILTransform> Remove(this IList<IILTransform> list, string className) =>
             RemoveInternal(list, className);
+
+        public static IList<IAstTransform> ReplaceWith<TReplace>(this IList<IAstTransform> list, IAstTransform replacement) =>
+            ReplaceWithInternal<IAstTransform, TReplace>(list, replacement);
 
         public static IList<IILTransform> ReplaceWith<TReplace>(this IList<IILTransform> list, IILTransform replacement) =>
             ReplaceWithInternal<IILTransform, TReplace>(list, replacement);

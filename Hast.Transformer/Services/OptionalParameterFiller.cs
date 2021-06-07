@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Models;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitInvocationExpression(invocationExpression);
 
-                if (!(invocationExpression.Target is MemberReferenceExpression memberReferenceExpression) ||
+                if (invocationExpression.Target is not MemberReferenceExpression memberReferenceExpression ||
                     !memberReferenceExpression.IsMethodReference())
                 {
                     return;
@@ -40,9 +40,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitObjectCreateExpression(objectCreateExpression);
 
-                var constructor = objectCreateExpression.FindConstructorDeclaration(_typeDeclarationLookupTable) as MethodDeclaration;
-
-                if (constructor == null) return;
+                if (objectCreateExpression.FindConstructorDeclaration(_typeDeclarationLookupTable) is not MethodDeclaration constructor) return;
 
                 // Need to skip the first "this" parameter.
                 FillOptionalParameters(objectCreateExpression.Arguments, constructor.Parameters.Skip(1).ToList());

@@ -33,41 +33,41 @@ namespace Hast.Transformer.Services
                 foreach (var member in type.Members)
                 {
                     var fullName = member.GetFullName();
-                    if ((noIncludedMembers ||
-                         configuration.HardwareEntryPointMemberFullNames.Contains(fullName) ||
-                         fullName.GetMemberNameAlternates().Intersect(configuration.HardwareEntryPointMemberFullNames).Any() ||
-                         configuration.HardwareEntryPointMemberNamePrefixes.Any(prefix => member.GetSimpleName().StartsWith(prefix, StringComparison.InvariantCulture)))
-                        &&
-                        _memberSuitabilityChecker.IsSuitableHardwareEntryPointMember(member, typeDeclarationLookupTable))
+                    if ((!noIncludedMembers &&
+                        !configuration.HardwareEntryPointMemberFullNames.Contains(fullName) &&
+                        !fullName.GetMemberNameAlternates().Intersect(configuration.HardwareEntryPointMemberFullNames).Any() &&
+                        !configuration
+                            .HardwareEntryPointMemberNamePrefixes
+                            .Any(prefix => member.GetSimpleName().StartsWith(prefix, StringComparison.InvariantCulture))) ||
+                        !_memberSuitabilityChecker.IsSuitableHardwareEntryPointMember(member, typeDeclarationLookupTable))
                     {
-                        if (member is MethodDeclaration)
-                        {
-                            var implementedInterfaceMethod = ((MethodDeclaration)member)
-                                .FindImplementedInterfaceMethod(typeDeclarationLookupTable.Lookup);
-                            if (implementedInterfaceMethod != null)
-                            {
-                                implementedInterfaceMethod.AddReference(member);
-                                implementedInterfaceMethod.FindFirstParentTypeDeclaration().AddReference(member);
-                            }
-                        }
-
-                        member.SetHardwareEntryPointMember();
-
-                        // Referencing all parent types. This is necessary if the hardware entry point is in a nested
-                        // class.
-                        var parent = member.FindFirstParentTypeDeclaration();
-                        var child = member;
-                        while (parent != null)
-                        {
-                            child.AddReference(parent);
-                            child = parent;
-                            parent = parent.FindFirstParentTypeDeclaration();
-                        }
-
-                        child.AddReference(syntaxTree);
-
-                        member.AcceptVisitor(referencedNodesFlaggingVisitor);
+                        continue;
                     }
+
+                    var implementedInterfaceMethod = (member as MethodDeclaration)?
+                        .FindImplementedInterfaceMethod(typeDeclarationLookupTable.Lookup);
+                    if (implementedInterfaceMethod != null)
+                    {
+                        implementedInterfaceMethod.AddReference(member);
+                        implementedInterfaceMethod.FindFirstParentTypeDeclaration().AddReference(member);
+                    }
+
+                    member.SetHardwareEntryPointMember();
+
+                    // Referencing all parent types. This is necessary if the hardware entry point is in a nested
+                    // class.
+                    var parent = member.FindFirstParentTypeDeclaration();
+                    var child = member;
+                    while (parent != null)
+                    {
+                        child.AddReference(parent);
+                        child = parent;
+                        parent = parent.FindFirstParentTypeDeclaration();
+                    }
+
+                    child.AddReference(syntaxTree);
+
+                    member.AcceptVisitor(referencedNodesFlaggingVisitor);
                 }
             }
 
@@ -141,7 +141,7 @@ namespace Hast.Transformer.Services
                     {
                         instantiatedType.Members
                             .SingleOrDefault(member => member.GetFullName() == element.GetFullName())
-                            .AddReference(objectCreateExpression); ;
+                            .AddReference(objectCreateExpression);
                     }
                 }
             }
@@ -161,16 +161,13 @@ namespace Hast.Transformer.Services
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-                if (memberReferenceExpression.Target is TypeReferenceExpression)
+                if (memberReferenceExpression.Target is TypeReferenceExpression typeReferenceExpression &&
+                    typeReferenceExpression.Type.Is<SimpleType>(simple => simple.Identifier == "MethodImplOptions"))
                 {
-                    var typeReferenceExpression = (TypeReferenceExpression)memberReferenceExpression.Target;
-                    if (typeReferenceExpression.Type.Is<SimpleType>(simple => simple.Identifier == "MethodImplOptions"))
-                    {
-                        // This can happen when a method is extern (see:
-                        // https://msdn.microsoft.com/en-us/library/e59b22c5.aspx), thus has no body but has the
-                        // MethodImpl attribute (e.g. Math.Abs(double value). Nothing to do.
-                        return;
-                    }
+                    // This can happen when a method is extern (see:
+                    // https://msdn.microsoft.com/en-us/library/e59b22c5.aspx), thus has no body but has the
+                    // MethodImpl attribute (e.g. Math.Abs(double value). Nothing to do.
+                    return;
                 }
 
                 var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
@@ -234,11 +231,11 @@ namespace Hast.Transformer.Services
             {
                 base.VisitTypeDeclaration(typeDeclaration);
 
-                var unreferencedMembers = typeDeclaration.Members.Where(member => !member.IsReferenced());
+                var unreferencedMembers = typeDeclaration.Members.Where(member => !member.IsReferenced()).ToList();
 
                 // Removing the type if it's empty but leaving if it was referenced as a type (which is with an
                 // object create expression or a default value expression).
-                if (typeDeclaration.Members.Count == unreferencedMembers.Count() && !typeDeclaration.IsReferenced())
+                if (typeDeclaration.Members.Count == unreferencedMembers.Count && !typeDeclaration.IsReferenced())
                 {
                     typeDeclaration.Remove();
                 }

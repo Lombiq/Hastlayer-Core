@@ -1,6 +1,6 @@
-﻿using Hast.Transformer.Models;
+﻿using Hast.Common.Interfaces;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Services
 {

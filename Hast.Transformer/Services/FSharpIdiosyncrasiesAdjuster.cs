@@ -40,8 +40,8 @@ namespace Hast.Transformer.Services
 
                     invocationExpression.ReplaceWith(arrayCreateExpression);
                 }
-                else if (targetFullName == "Microsoft.FSharp.Collections.ArrayModule.Get" ||
-                    targetFullName == "Microsoft.FSharp.Collections.ArrayModule.Set")
+                else if (targetFullName is "Microsoft.FSharp.Collections.ArrayModule.Get" or
+                    "Microsoft.FSharp.Collections.ArrayModule.Set")
                 {
                     var indexerExpression = new IndexerExpression();
 
@@ -118,7 +118,7 @@ namespace Hast.Transformer.Services
                 {
                     base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-                    if (!(memberReferenceExpression.Target is ThisReferenceExpression)) return;
+                    if (memberReferenceExpression.Target is not ThisReferenceExpression) return;
 
                     var parameterReference = new IdentifierExpression(memberReferenceExpression.MemberName);
                     memberReferenceExpression.CopyAnnotationsTo(parameterReference);
