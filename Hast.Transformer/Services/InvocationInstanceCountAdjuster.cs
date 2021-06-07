@@ -71,10 +71,30 @@ namespace Hast.Transformer.Services
                     .GetMaxInvocationInstanceCountConfigurationForMember(referencedMember);
 
                 var invokingMemberMaxInvocationConfiguration = _transformerConfiguration
-                    .GetMaxInvocationInstanceCountConfigurationForMember(referencingExpression.FindFirstParentOfType<EntityDeclaration>());
+                    .GetMaxInvocationInstanceCountConfigurationForMember(
+                        referencingExpression.FindFirstParentOfType<EntityDeclaration>());
 
                 var referencedMemberFullName = referencedMember.GetFullName();
 
+                AdjustMaxDegreeOfParallelism(
+                    invokingMemberMaxInvocationConfiguration,
+                    referencedMemberMaxInvocationConfiguration,
+                    referencedMember,
+                    referencedMemberFullName);
+
+                AdjustMaxRecursionDepth(
+                    invokingMemberMaxInvocationConfiguration,
+                    referencedMemberMaxInvocationConfiguration,
+                    referencedMember,
+                    referencedMemberFullName);
+            }
+
+            private void AdjustMaxDegreeOfParallelism(
+                MemberInvocationInstanceCountConfiguration invokingMemberMaxInvocationConfiguration,
+                MemberInvocationInstanceCountConfiguration referencedMemberMaxInvocationConfiguration,
+                EntityDeclaration referencedMember,
+                string referencedMemberFullName)
+            {
                 if (invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism > referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism)
                 {
                     referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism = invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism;
@@ -88,7 +108,7 @@ namespace Hast.Transformer.Services
                     }
                 }
                 else if (invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism == 1 &&
-                    !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
+                         !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
                 {
                     _membersInvokedFromNonParallel.Add(referencedMember);
 
@@ -99,7 +119,14 @@ namespace Hast.Transformer.Services
                         referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism++;
                     }
                 }
+            }
 
+            private void AdjustMaxRecursionDepth(
+                MemberInvocationInstanceCountConfiguration invokingMemberMaxInvocationConfiguration,
+                MemberInvocationInstanceCountConfiguration referencedMemberMaxInvocationConfiguration,
+                EntityDeclaration referencedMember,
+                string referencedMemberFullName)
+            {
                 if (invokingMemberMaxInvocationConfiguration.MaxRecursionDepth > referencedMemberMaxInvocationConfiguration.MaxRecursionDepth)
                 {
                     referencedMemberMaxInvocationConfiguration.MaxRecursionDepth = invokingMemberMaxInvocationConfiguration.MaxRecursionDepth;
@@ -111,7 +138,7 @@ namespace Hast.Transformer.Services
                     }
                 }
                 else if (invokingMemberMaxInvocationConfiguration.MaxRecursionDepth == 1 &&
-                    !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
+                         !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
                 {
                     _membersInvokedFromNonParallel.Add(referencedMember);
 

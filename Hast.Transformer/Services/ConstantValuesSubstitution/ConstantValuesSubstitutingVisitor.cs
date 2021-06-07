@@ -152,24 +152,26 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             ReturnStatement replacingReturnStatement = null;
 
+            Statement CloneStatement(Statement statement)
+            {
+                var clone = statement.Clone<Statement>();
+                if (clone is ReturnStatement returnStatement) replacingReturnStatement = returnStatement;
+                return clone;
+            }
+
             void ReplaceIfElse(Statement branchStatement)
             {
                 // Moving all statements from the block up.
-                if (branchStatement is BlockStatement branchBlock)
+                if (branchStatement is not BlockStatement branchBlock)
                 {
-                    foreach (var statement in branchBlock.Statements)
-                    {
-                        var clone = statement.Clone<Statement>();
-                        // There should be at most a single return statement in this block.
-                        if (clone is ReturnStatement returnStatement) replacingReturnStatement = returnStatement;
-                        AstInsertionHelper.InsertStatementBefore(ifElseStatement, clone);
-                    }
+                    ifElseStatement.ReplaceWith(CloneStatement(branchStatement));
+                    return;
                 }
-                else
+
+                foreach (var statement in branchBlock.Statements)
                 {
-                    var clone = branchStatement.Clone();
-                    if (clone is ReturnStatement returnStatement) replacingReturnStatement = returnStatement;
-                    ifElseStatement.ReplaceWith(clone);
+                    // There should be at most a single return statement in this block.
+                    AstInsertionHelper.InsertStatementBefore(ifElseStatement, CloneStatement(statement));
                 }
             }
 
@@ -324,62 +326,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             // First checking if there is a substitution for the expression; if not then if it's a member reference
             // then check whether there is a global substitution for the member.
+
             if ((!isHardToFollow && _constantValuesTable.RetrieveAndDeleteConstantValue(expression, out valueExpression)) ||
-                expression.Is<MemberReferenceExpression>(memberReferenceExpression =>
-                {
-                    var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
-
-                    if (member == null) return false;
-
-                    if ((!isHardToFollow || member.IsReadOnlyMember()) &&
-                        _constantValuesTable.RetrieveAndDeleteConstantValue(member, out valueExpression))
-                    {
-                        return true;
-                    }
-                    else if (member.IsReadOnlyMember())
-                    {
-                        // If this is a nested member reference (e.g. _member.Property1.Property2) then let's find the
-                        // first member that has a corresponding ctor.
-                        var currentMemberReference = memberReferenceExpression;
-                        ConstructorReference constructorReference = null;
-
-                        while (
-                            !_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
-                                .TryGetValue(currentMemberReference.Target.GetFullName(), out constructorReference) &&
-                            currentMemberReference.Target is MemberReferenceExpression currentMemberReferenceTarget)
-                        {
-                            currentMemberReference = currentMemberReferenceTarget;
-                        }
-
-                        if (constructorReference == null) return false;
-
-                        // Try to substitute this member reference's value with a value set in the corresponding
-                        // constructor.
-
-                        var constructor = constructorReference.Constructor;
-
-                        // Trying to find a place where the same member is references on the same ("this") instance.
-                        var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
-                            .FindMemberReferenceInConstructor(constructor, member.GetFullName(), _typeDeclarationLookupTable);
-
-                        if (memberReferenceExpressionInConstructor == null) return false;
-
-                        // Using the substitution also used in the constructor. This should be safe to do even if in
-                        // the ctor there are multiple assignments because an unretrieved constant will only remain in
-                        // the ConstantValuesTable if there are no more substitutions needed in the ctor.
-                        // But for this we need to rebuild a ConstantValuesTable just for this ctor. At this point the
-                        // ctor should be fully substituted so we only need to care about primitive expressions.
-
-                        var constructorConstantValuesTableBuildingVisitor =
-                            new ConstructorConstantValuesTableBuildingVisitor(constructor);
-                        constructor.AcceptVisitor(constructorConstantValuesTableBuildingVisitor);
-
-                        return constructorConstantValuesTableBuildingVisitor.ConstantValuesTable
-                            .RetrieveAndDeleteConstantValue(memberReferenceExpressionInConstructor, out valueExpression);
-                    }
-
-                    return false;
-                }))
+                expression.Is<MemberReferenceExpression>(referenceExpression =>
+                    HasGlobalSubstitution(referenceExpression, isHardToFollow, ref valueExpression)))
             {
                 expression.ReplaceWith(valueExpression.Clone());
                 return true;
@@ -388,9 +338,65 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             return false;
         }
 
+        private bool HasGlobalSubstitution(
+            MemberReferenceExpression memberReferenceExpression,
+            bool isHardToFollow,
+            ref PrimitiveExpression valueExpression)
+        {
+            var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
+
+            if (member == null) return false;
+
+            if ((!isHardToFollow || member.IsReadOnlyMember()) && _constantValuesTable.RetrieveAndDeleteConstantValue(member, out valueExpression))
+            {
+                return true;
+            }
+
+            if (member.IsReadOnlyMember())
+            {
+                // If this is a nested member reference (e.g. _member.Property1.Property2) then let's find the
+                // first member that has a corresponding ctor.
+                var currentMemberReference = memberReferenceExpression;
+                ConstructorReference constructorReference;
+
+                while (!_constantValuesSubstitutingAstProcessor
+                           .ObjectHoldersToConstructorsMappings
+                           .TryGetValue(currentMemberReference.Target.GetFullName(), out constructorReference) &&
+                       currentMemberReference.Target is MemberReferenceExpression currentMemberReferenceTarget)
+                {
+                    currentMemberReference = currentMemberReferenceTarget;
+                }
+
+                if (constructorReference == null) return false;
+
+                // Try to substitute this member reference's value with a value set in the corresponding
+                // constructor.
+
+                var constructor = constructorReference.Constructor;
+
+                // Trying to find a place where the same member is references on the same ("this") instance.
+                var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper.FindMemberReferenceInConstructor(constructor, member.GetFullName(), _typeDeclarationLookupTable);
+
+                if (memberReferenceExpressionInConstructor == null) return false;
+
+                // Using the substitution also used in the constructor. This should be safe to do even if in
+                // the ctor there are multiple assignments because a not-yet retrieved constant will only remain in
+                // the ConstantValuesTable if there are no more substitutions needed in the ctor.
+                // But for this we need to rebuild a ConstantValuesTable just for this ctor. At this point the
+                // ctor should be fully substituted so we only need to care about primitive expressions.
+
+                var constructorConstantValuesTableBuildingVisitor = new ConstructorConstantValuesTableBuildingVisitor(constructor);
+                constructor.AcceptVisitor(constructorConstantValuesTableBuildingVisitor);
+
+                return constructorConstantValuesTableBuildingVisitor.ConstantValuesTable.RetrieveAndDeleteConstantValue(memberReferenceExpressionInConstructor, out valueExpression);
+            }
+
+            return false;
+        }
+
         private class ConstructorConstantValuesTableBuildingVisitor : DepthFirstAstVisitor
         {
-            public ConstantValuesTable ConstantValuesTable { get; } = new ConstantValuesTable();
+            public ConstantValuesTable ConstantValuesTable { get; } = new();
 
             private readonly MethodDeclaration _constructor;
 
