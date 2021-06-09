@@ -3,7 +3,6 @@ using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.InvocationProxyBuilders;

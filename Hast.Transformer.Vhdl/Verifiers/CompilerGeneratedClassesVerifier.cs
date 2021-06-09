@@ -1,7 +1,6 @@
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Vhdl.Verifiers

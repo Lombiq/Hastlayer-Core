@@ -1,5 +1,4 @@
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;

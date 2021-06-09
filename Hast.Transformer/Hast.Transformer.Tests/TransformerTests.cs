@@ -1,6 +1,5 @@
 using Hast.Common.Services;
 using Hast.Layer;
-using Hast.Synthesis;
 using Hast.Synthesis.Services;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure1.ComplexTypes;
