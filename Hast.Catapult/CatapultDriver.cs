@@ -11,7 +11,7 @@ namespace Hast.Catapult
     {
         private readonly ITimingReportParser _timingReportParser;
 
-        private readonly object _timingReportParserLock = new object();
+        private readonly object _timingReportParserLock = new();
 
         private ITimingReport _timingReport;
         private ITimingReport TimingReport

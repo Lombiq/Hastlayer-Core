@@ -31,7 +31,7 @@ namespace Hast.Remote.Worker
         private readonly ILogger _logger;
         private readonly CloudBlobContainer _container;
         private readonly TelemetryClient _telemetryClient;
-        private readonly ConcurrentDictionary<string, Task> _transformationTasks = new ConcurrentDictionary<string, Task>();
+        private readonly ConcurrentDictionary<string, Task> _transformationTasks = new();
 
         private int _restartCount;
         private Timer _oldResultBlobsCleanerTimer;

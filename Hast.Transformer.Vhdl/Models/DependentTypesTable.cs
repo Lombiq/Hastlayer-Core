@@ -13,7 +13,7 @@ namespace Hast.Transformer.Vhdl.Models
     public class DependentTypesTable
     {
         private readonly Dictionary<DataType, HashSet<string>> _dependencies =
-            new Dictionary<DataType, HashSet<string>>(new DataTypeEqualityComparer());
+            new(new DataTypeEqualityComparer());
 
         /// <summary>
         /// Declare a dependency between two types.

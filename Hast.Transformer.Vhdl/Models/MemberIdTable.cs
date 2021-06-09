@@ -10,7 +10,7 @@ namespace Hast.Transformer.Vhdl.Models
     public class MemberIdTable
     {
         private static MemberIdTable _emptyInstance;
-        private readonly Dictionary<string, int> _mappings = new Dictionary<string, int>();
+        private readonly Dictionary<string, int> _mappings = new();
 
         public IReadOnlyDictionary<string, int> Mappings => _mappings;
 

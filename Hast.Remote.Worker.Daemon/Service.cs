@@ -17,7 +17,7 @@ namespace Hast.Remote.Worker.Daemon
         public const string DisplayName = "Hastlayer Remote Worker Daemon";
 
         private readonly EventLog _eventLog;
-        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private readonly CancellationTokenSource _cancellationTokenSource = new();
         private Task _workerTask;
         private int _restartCount;
 

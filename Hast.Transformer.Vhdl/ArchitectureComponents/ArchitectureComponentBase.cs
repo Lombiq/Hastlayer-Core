@@ -25,7 +25,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             new Dictionary<EntityDeclaration, int>();
         public DependentTypesTable DependentTypesTable { get; private set; } = new DependentTypesTable();
 
-        protected readonly List<IMultiCycleOperation> _multiCycleOperations = new List<IMultiCycleOperation>();
+        protected readonly List<IMultiCycleOperation> _multiCycleOperations = new();
         public IEnumerable<IMultiCycleOperation> MultiCycleOperations => _multiCycleOperations;
 
         protected ArchitectureComponentBase(string name) => Name = name;

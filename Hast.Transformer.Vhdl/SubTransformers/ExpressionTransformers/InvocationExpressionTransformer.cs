@@ -153,7 +153,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 else if (is4BytesOperation)
                 {
                     Invocation CreateSlice(int indexFrom, int indexTo) =>
-                        new Invocation(
+                        new(
                             "unsigned",
                             new ArraySlice
                             {

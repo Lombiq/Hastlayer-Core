@@ -21,7 +21,7 @@ namespace Hast.Transformer.Vhdl.Helpers
         }
 
         public static UnconstrainedArrayInstantiation CreateArrayInstantiation(DataType elementType, int length) =>
-            new UnconstrainedArrayInstantiation
+            new()
             {
                 Name = CreateArrayTypeName(elementType),
                 ElementType = elementType,

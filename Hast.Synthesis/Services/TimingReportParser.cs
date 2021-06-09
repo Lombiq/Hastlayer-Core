@@ -14,7 +14,7 @@ namespace Hast.Synthesis.Services
     public class TimingReportParser : ITimingReportParser
     {
         private const string Delimiter = "\t";
-        private static readonly CsvConfiguration CsvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture);
+        private static readonly CsvConfiguration CsvConfiguration = new(CultureInfo.InvariantCulture);
 
         public ITimingReport Parse(TextReader reportReader)
         {
@@ -217,7 +217,7 @@ namespace Hast.Synthesis.Services
 
         private class TimingReport : ITimingReport
         {
-            private readonly Dictionary<string, decimal> _timings = new Dictionary<string, decimal>();
+            private readonly Dictionary<string, decimal> _timings = new();
 
             public void SetLatencyNs(
                 dynamic operatorType,
