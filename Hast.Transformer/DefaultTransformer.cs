@@ -199,6 +199,7 @@ namespace Hast.Transformer
                     Path.GetFullPath(assemblyPath),
                     true,
                     module.Reader.DetectTargetFrameworkId(),
+                    null,
                     PEStreamOptions.PrefetchMetadata);
 
                 // When executed as a Windows service not all Hastlayer assemblies references' from transformed assemblies

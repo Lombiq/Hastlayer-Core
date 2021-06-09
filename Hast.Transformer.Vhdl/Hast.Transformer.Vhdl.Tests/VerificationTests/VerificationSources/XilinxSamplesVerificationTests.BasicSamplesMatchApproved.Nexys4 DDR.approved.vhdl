@@ -5303,9 +5303,7 @@ begin
                         -- 		byte[] pixelBytes;
                         -- 		pixelBytes = memory.Read4Bytes (num6 * 25 + num7 + 3);
                         -- 		PixelProcessingTaskInput objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8;
-                        -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput {
-                        -- 
-                        -- 		};
+                        -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput { };
                         -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.ContrastValue = num3;
                         -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.PixelBytes = pixelBytes;
                         -- 		array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8);
@@ -5361,9 +5359,7 @@ begin
                             -- 		byte[] pixelBytes;
                             -- 		pixelBytes = memory.Read4Bytes (num6 * 25 + num7 + 3);
                             -- 		PixelProcessingTaskInput objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8;
-                            -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput {
-                            -- 
-                            -- 		};
+                            -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput { };
                             -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.ContrastValue = num3;
                             -- 		objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.PixelBytes = pixelBytes;
                             -- 		array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8);
@@ -5398,9 +5394,7 @@ begin
                             -- 	byte[] pixelBytes;
                             -- 	pixelBytes = memory.Read4Bytes (num6 * 25 + num7 + 3);
                             -- 	PixelProcessingTaskInput objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8;
-                            -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput {
-                            -- 
-                            -- 	};
+                            -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput { };
                             -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.ContrastValue = num3;
                             -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.PixelBytes = pixelBytes;
                             -- 	array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8);
@@ -5427,9 +5421,7 @@ begin
                             -- 	byte[] pixelBytes;
                             -- 	pixelBytes = memory.Read4Bytes (num6 * 25 + num7 + 3);
                             -- 	PixelProcessingTaskInput objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8;
-                            -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput {
-                            -- 
-                            -- 	};
+                            -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput { };
                             -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.ContrastValue = num3;
                             -- 	objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8.PixelBytes = pixelBytes;
                             -- 	array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__6_0, objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8);
@@ -5475,9 +5467,7 @@ begin
                             -- PixelProcessingTaskInput objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput {
-                            -- 
-                            -- };
+                            -- objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8 = new PixelProcessingTaskInput { };
                             -- 
                             -- Initializing record fields to their defaults.
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objectb594c0a0dbb8ae697f6af84a74eb921fe3dbbf35287d1c90cda15708516dfac8\.\IsNull\ := false;
@@ -11809,9 +11799,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).0.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -11942,9 +11930,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).1.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -12075,9 +12061,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).2.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -12208,9 +12192,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).3.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -12341,9 +12323,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).4.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -12474,9 +12454,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).5.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -12607,9 +12585,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).6.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -12740,9 +12716,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).7.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -12873,9 +12847,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).8.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -13006,9 +12978,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).9.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -13139,9 +13109,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).10.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -13272,9 +13240,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).11.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -13405,9 +13371,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).12.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -13538,9 +13502,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).13.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -13671,9 +13633,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).14.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -13804,9 +13764,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).15.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -13937,9 +13895,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).16.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -14070,9 +14026,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).17.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -14203,9 +14157,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).18.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -14336,9 +14288,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).19.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -14469,9 +14419,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).20.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -14602,9 +14550,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).21.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -14735,9 +14681,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).22.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -14868,9 +14812,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).23.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -15001,9 +14943,7 @@ begin
                         -- PixelProcessingTaskOutput objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput {
-                        -- 
-                        -- };
+                        -- objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ImageContrastModifier::<ChangeContrast>b__6_0(Object).24.objectfb4ec21c37299324c6cd51f21c1180e07c66033a49ab6d766409d3ddd78baef8\.\IsNull\ := false;
@@ -15554,9 +15494,7 @@ begin
                         -- RandomXorshiftLfsr16 randomXorshiftLfsr;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr = new RandomXorshiftLfsr16 {
-                        -- 
-                        -- };
+                        -- randomXorshiftLfsr = new RandomXorshiftLfsr16 { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\IsNull\ := false;
@@ -15892,9 +15830,7 @@ begin
                         -- RandomXorshiftLfsr16 randomXorshiftLfsr;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr = new RandomXorshiftLfsr16 {
-                        -- 
-                        -- };
+                        -- randomXorshiftLfsr = new RandomXorshiftLfsr16 { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\IsNull\ := false;
@@ -16230,9 +16166,7 @@ begin
                         -- RandomXorshiftLfsr16 randomXorshiftLfsr;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- randomXorshiftLfsr = new RandomXorshiftLfsr16 {
-                        -- 
-                        -- };
+                        -- randomXorshiftLfsr = new RandomXorshiftLfsr16 { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\IsNull\ := false;
@@ -17317,9 +17251,7 @@ begin
                             -- array = new NumberContainer[4];
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- array [0] = new NumberContainer {
-                            -- 
-                            -- };
+                            -- array [0] = new NumberContainer { };
                             -- 
                             -- Initializing record fields to their defaults.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\IsNull\ := false;
@@ -17330,9 +17262,7 @@ begin
                             -- 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.input\;
                             -- The following section was transformed from the .NET statement below:
-                            -- array [1] = new NumberContainer {
-                            -- 
-                            -- };
+                            -- array [1] = new NumberContainer { };
                             -- 
                             -- Initializing record fields to their defaults.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\IsNull\ := false;
@@ -17344,9 +17274,7 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\ObjectOrientedShowcase::Run(SimpleMemory).0.input\), 64)) + to_signed(4, 64)), 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\Number\ := (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- array [2] = new NumberContainer {
-                            -- 
-                            -- };
+                            -- array [2] = new NumberContainer { };
                             -- 
                             -- Initializing record fields to their defaults.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32))).\IsNull\ := false;
@@ -17493,9 +17421,7 @@ begin
                             -- NumberContainer numberContainer;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- numberContainer = new NumberContainer {
-                            -- 
-                            -- };
+                            -- numberContainer = new NumberContainer { };
                             -- 
                             -- Initializing record fields to their defaults.
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\IsNull\ := false;

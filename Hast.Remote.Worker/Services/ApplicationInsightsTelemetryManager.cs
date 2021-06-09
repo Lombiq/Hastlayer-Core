@@ -1,6 +1,6 @@
-using Hast.Common.Interfaces;
+﻿using Hast.Common.Interfaces;
 using Hast.Layer;
-using Hast.Remote.Worker.Models;
+using Hast.Remote.Worker.Exceptions;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.DependencyCollector;
@@ -10,15 +10,17 @@ using Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel;
 using Microsoft.ApplicationInsights.WorkerService;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Globalization;
 using System.Linq;
+using Microsoft.Extensions.Logging;
+
 
 namespace Hast.Remote.Worker.Services
 {
-    [DependencyInitializer(nameof(InitializeService))]
+    [IDependencyInitializer(nameof(InitializeService))]
     public class ApplicationInsightsTelemetryManager : IApplicationInsightsTelemetryManager
     {
         private readonly TelemetryClient _telemetryClient;
+
 
         public ApplicationInsightsTelemetryManager(
             TelemetryConfiguration telemetryConfiguration,
@@ -31,7 +33,8 @@ namespace Hast.Remote.Worker.Services
             _telemetryClient = telemetryClient;
         }
 
-        public void TrackTransformation(TransformationTelemetry telemetry)
+
+        public void TrackTransformation(ITransformationTelemetry telemetry)
         {
             var requestTelemetry = new RequestTelemetry
             {
@@ -39,10 +42,10 @@ namespace Hast.Remote.Worker.Services
                 Duration = telemetry.FinishTimeUtc - telemetry.StartTimeUtc,
                 Timestamp = telemetry.StartTimeUtc,
                 Success = telemetry.IsSuccess,
-                Url = new Uri(telemetry.JobName, UriKind.Relative),
+                Url = new Uri(telemetry.JobName, UriKind.Relative)
             };
 
-            requestTelemetry.Context.User.AccountId = telemetry.AppId.ToString(CultureInfo.InvariantCulture);
+            requestTelemetry.Context.User.AccountId = telemetry.AppId.ToString();
 
             _telemetryClient.TrackRequest(requestTelemetry);
         }
@@ -54,16 +57,28 @@ namespace Hast.Remote.Worker.Services
                 configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY").Value;
             if (string.IsNullOrEmpty(key))
             {
-                throw new InvalidOperationException("Please set up the instrumentation key via appsettings.json or environment " +
-                    "variable, see APPINSIGHTS_INSTRUMENTATIONKEY part here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core");
+                throw new MissingInstrumentationKeyException(
+                    "Please set up the instrumentation key via appsettings.json or environment variable, see " +
+                    "APPINSIGHTS_INSTRUMENTATIONKEY part here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core");
             }
-
             return key;
         }
 
         public static void InitializeService(IServiceCollection services)
         {
-            var key = GetInstrumentationKey();
+            string key = null;
+            try
+            {
+                key = GetInstrumentationKey();
+            }
+            catch (MissingInstrumentationKeyException ex)
+            {
+                // It's not guaranteed that we'd actually use it at this point and a lack of telemetry is not the kind
+                // of issue that warrants crashing the application.
+                services.LogDeferred(LogLevel.Warning, ex.Message);
+            }
+            if (key == null) return;
+
             var options = new ApplicationInsightsServiceOptions
             {
                 EnableAdaptiveSampling = false,
@@ -77,7 +92,7 @@ namespace Hast.Remote.Worker.Services
             services.AddApplicationInsightsTelemetryProcessor<QuickPulseTelemetryProcessor>();
             services.AddApplicationInsightsTelemetryProcessor<AutocollectedMetricsExtractor>();
             services.AddApplicationInsightsTelemetryProcessor<AdaptiveSamplingTelemetryProcessor>();
-            services.ConfigureTelemetryModule<QuickPulseTelemetryModule>((module, o) => { });
+            services.ConfigureTelemetryModule<QuickPulseTelemetryModule>((_, _) => { });
 
             // Dependency tracking is disabled as it's not useful (only records blob storage operations) but causes
             // excessive AI usage.

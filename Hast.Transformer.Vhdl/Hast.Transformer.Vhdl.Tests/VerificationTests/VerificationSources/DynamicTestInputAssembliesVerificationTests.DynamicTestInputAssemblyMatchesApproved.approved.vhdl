@@ -9471,7 +9471,7 @@ begin
                         -- long num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = ((long)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1))));
+                        -- num = (long)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1)));
                         -- 
                         -- Begin SimpleMemory read.
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
@@ -9502,7 +9502,7 @@ begin
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.1\ := (\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.0\) or signed(SmartResize((unsigned(ConvertStdLogicVectorToInt32(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.dataIn.1\))), 64));
-                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num\ := ((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.1\));
+                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num\ := (\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.1\);
                             -- The following section was transformed from the .NET statement below:
                             -- long num2;
                             -- 
@@ -10156,7 +10156,7 @@ begin
                         -- long num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = ((long)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1))));
+                        -- num = (long)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1)));
                         -- 
                         -- Begin SimpleMemory read.
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
@@ -10187,7 +10187,7 @@ begin
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.1\ := (\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.0\) or signed(SmartResize((unsigned(ConvertStdLogicVectorToInt32(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.dataIn.1\))), 64));
-                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num\ := ((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.1\));
+                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num\ := (\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.1\);
                             -- The following section was transformed from the .NET statement below:
                             -- long num2;
                             -- 
@@ -11743,7 +11743,7 @@ begin
                         -- long num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = ((long)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1))));
+                        -- num = (long)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1)));
                         -- 
                         -- Begin SimpleMemory read.
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
@@ -11774,7 +11774,7 @@ begin
                             \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := (\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\) or signed(SmartResize((unsigned(ConvertStdLogicVectorToInt32(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.dataIn.1\))), 64));
-                            \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.num\ := ((\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\));
+                            \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.num\ := (\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\);
                             -- The following section was transformed from the .NET statement below:
                             -- byte b;
                             -- 
@@ -12195,9 +12195,9 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 34, (long)(0L - (long)(num5)));
+                            -- this.SaveResult (memory, 34, 0L - (long)num5);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 64) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.num5\), 64));
+                            \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 64) - signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.num5\, 64));
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0._State_55\;
                         end if;
@@ -12209,7 +12209,7 @@ begin
                     when \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0._State_56\ => 
                         -- Starting state machine invocation for the following method: System.Void Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases::SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64)
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).startCellIndex.parameter.Out.0\ <= to_signed(34, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= (\BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\);
+                        \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64).number.parameter.Out.0\ <= \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\;
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= true;
                         \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::AllUnaryOperatorExpressionVariations(SimpleMemory).0._State_57\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -12810,7 +12810,7 @@ begin
                             -- long num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = ((long)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1))));
+                            -- num2 = (long)(((long)memory.ReadInt32 (0) << 32) | (long)((uint)memory.ReadInt32 (1)));
                             -- 
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State\ := \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0._State_4\;
@@ -12846,7 +12846,7 @@ begin
                             \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.2\ := \DataIn\;
                             \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.1\ := (\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.0\) or signed(SmartResize((unsigned(ConvertStdLogicVectorToInt32(\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.dataIn.2\))), 64));
-                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\ := ((\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.1\));
+                            \CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.num2\ := (\CastExpressionCases::AllNumberCastingVariations(SimpleMemory).0.binaryOperationResult.1\);
                             -- The following section was transformed from the .NET statement below:
                             -- ulong num3;
                             -- 
