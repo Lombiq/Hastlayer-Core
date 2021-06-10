@@ -806,7 +806,7 @@ namespace Hast.TestInputs.Dynamic
 
         public virtual void LongBinaryOperatorExpressionVariationsLow(SimpleMemory memory)
         {
-            long input = (long)memory.ReadInt32(0) << 32 | (uint)memory.ReadInt32(1);
+            long input = ((long)memory.ReadInt32(0) << 32) | (uint)memory.ReadInt32(1);
             var longLeft = input;
 
             var byteRight = (byte)input;
@@ -880,7 +880,7 @@ namespace Hast.TestInputs.Dynamic
 
         public virtual void LongBinaryOperatorExpressionVariationsHigh(SimpleMemory memory)
         {
-            long input = (long)memory.ReadInt32(0) << 32 | (uint)memory.ReadInt32(1);
+            long input = ((long)memory.ReadInt32(0) << 32) | (uint)memory.ReadInt32(1);
             var longLeft = input;
 
             var intRight = (int)input;
@@ -943,7 +943,7 @@ namespace Hast.TestInputs.Dynamic
 
         public virtual void UlongBinaryOperatorExpressionVariationsLow(SimpleMemory memory)
         {
-            ulong input = (ulong)memory.ReadInt32(0) << 32 | (uint)memory.ReadInt32(1);
+            ulong input = ((ulong)memory.ReadInt32(0) << 32) | (uint)memory.ReadInt32(1);
             var ulongLeft = input;
 
             var byteRight = (byte)input;
@@ -995,7 +995,7 @@ namespace Hast.TestInputs.Dynamic
 
         public virtual void UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory memory)
         {
-            ulong input = (ulong)memory.ReadInt32(0) << 32 | (uint)memory.ReadInt32(1);
+            ulong input = ((ulong)memory.ReadInt32(0) << 32) | (uint)memory.ReadInt32(1);
             var ulongLeft = input;
 
             var intRight = (int)input;
@@ -1041,7 +1041,7 @@ namespace Hast.TestInputs.Dynamic
 
         public virtual void AllUnaryOperatorExpressionVariations(SimpleMemory memory)
         {
-            long input = (long)memory.ReadInt32(0) << 32 | (uint)memory.ReadInt32(1);
+            long input = ((long)memory.ReadInt32(0) << 32) | (uint)memory.ReadInt32(1);
 
             var byteOperand = (byte)input;
             SaveResult(memory, 0, ~byteOperand);

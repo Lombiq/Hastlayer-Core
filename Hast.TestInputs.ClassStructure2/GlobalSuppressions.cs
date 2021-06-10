@@ -21,3 +21,8 @@ using static Hast.TestInputs.ClassStructure2.SuppressionConstants;
     "S1481:Unused local variables should be removed",
     Justification = ThatsThePoint,
     Scope = "module")]
+[assembly: SuppressMessage(
+    "Critical Code Smell",
+    "S3353:Unchanged local variables should be \"const\"",
+    Justification = ThatsThePoint,
+    Scope = "module")]

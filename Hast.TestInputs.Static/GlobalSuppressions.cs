@@ -31,3 +31,8 @@ using static Hast.TestInputs.Static.SuppressionConstants;
     "S2583:Conditionally executed code should be reachable",
     Justification = ThatsThePoint,
     Scope = "module")]
+[assembly: SuppressMessage(
+    "Critical Code Smell",
+    "S3353:Unchanged local variables should be \"const\"",
+    Justification = ThatsThePoint,
+    Scope = "module")]

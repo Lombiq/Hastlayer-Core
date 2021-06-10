@@ -48,7 +48,9 @@ namespace Hast.TestInputs.Invalid
             var array1 = new int[5];
 #pragma warning restore S1854 // Unused assignments should be removed
             array1 = null;
-            var x = array1.Length;
+#pragma warning disable S2259 // Null pointers should not be dereferenced
+            var x = array1.Length; // Intentional, we are testing null assignment.
+#pragma warning restore S2259 // Null pointers should not be dereferenced
             var y = -x;
         }
 

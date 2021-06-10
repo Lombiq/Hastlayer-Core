@@ -7,7 +7,10 @@ namespace Hast.TestInputs.Dynamic
 {
     public static class BinaryAndUnaryOperatorExpressionCasesGenerator
     {
-        private static readonly string[] _needsShiftCastTypes = new[] { "uint", "long", "ulong" };
+        private const string UInt = "uint";
+        private const string Long = "long";
+        private const string ULong = "ulong";
+        private static readonly string[] _needsShiftCastTypes = new[] { UInt, Long, ULong };
 
         public static void Generate()
         {
@@ -20,7 +23,7 @@ namespace Hast.TestInputs.Dynamic
             {
                 memoryIndex = 0;
                 var leftType = types[i];
-                var leftIsLong = leftType == "long" || leftType == "ulong";
+                var leftIsLong = leftType is Long or ULong;
 
                 AddMethodStart(leftIsLong ? "Low" : string.Empty, codeBuilder, leftType);
 
@@ -46,16 +49,16 @@ namespace Hast.TestInputs.Dynamic
             for (int i = 0; i < types.Length; i++)
             {
                 var type = types[i];
-                var isUlong = type == "ulong";
+                var isUlong = type == ULong;
                 var variableName = type + "Operand";
 
                 codeBuilder.AppendLine($@"
-                    var {variableName} = {(type != "long" ? $"({type})" : string.Empty)}input;");
+                    var {variableName} = {(type != Long ? $"({type})" : string.Empty)}input;");
 
                 codeBuilder.AppendLine(AddSaveResult(memoryIndex, "~" + variableName, isUlong));
                 codeBuilder.AppendLine(AddSaveResult(memoryIndex, "+" + variableName, isUlong));
 
-                if (type != "ulong")
+                if (type != ULong)
                 {
                     codeBuilder.AppendLine(AddSaveResult(memoryIndex, "-" + variableName, isUlong));
                 }
@@ -74,7 +77,7 @@ namespace Hast.TestInputs.Dynamic
             var right = rightType + "Right";
 
             codeBuilder.AppendLine($@"
-                        var {right} = {(rightType != "int" || leftType.Contains("long", StringComparison.InvariantCulture) || leftType == "uint" ? $"({rightType})" : string.Empty)}input;");
+                        var {right} = {(rightType != "int" || leftType.Contains(Long, StringComparison.InvariantCulture) || leftType == UInt ? $"({rightType})" : string.Empty)}input;");
 
             var shiftRightOperandCast = _needsShiftCastTypes.Contains(rightType) ? "(int)" : string.Empty;
 
@@ -83,14 +86,14 @@ namespace Hast.TestInputs.Dynamic
 
             // These variations can't be applied to the operands directly except for shift (which has a cast).
             if (
-                (leftType == "sbyte" && rightType == "ulong") ||
-                (leftType == "short" && rightType == "ulong") ||
-                (leftType == "int" && rightType == "ulong") ||
-                (leftType == "long" && rightType == "ulong") ||
-                (leftType == "ulong" && rightType == "sbyte") ||
-                (leftType == "ulong" && rightType == "short") ||
-                (leftType == "ulong" && rightType == "int") ||
-                (leftType == "ulong" && rightType == "long"))
+                (leftType == "sbyte" && rightType == ULong) ||
+                (leftType == "short" && rightType == ULong) ||
+                (leftType == "int" && rightType == ULong) ||
+                (leftType == Long && rightType == ULong) ||
+                (leftType == ULong && rightType == "sbyte") ||
+                (leftType == ULong && rightType == "short") ||
+                (leftType == ULong && rightType == "int") ||
+                (leftType == ULong && rightType == Long))
             {
                 return;
             }
@@ -147,12 +150,12 @@ namespace Hast.TestInputs.Dynamic
                         public virtual void {leftType.ToUpperInvariant()[0]}{leftType[1..]}BinaryOperatorExpressionVariations{nameSuffix}(SimpleMemory memory)
                         {{");
 
-            if (leftType == "long" || leftType == "ulong")
+            if (leftType is Long or ULong)
             {
                 codeBuilder.AppendLine($@"{leftType} input = (({leftType})memory.ReadInt32(0) << 32) | (uint)memory.ReadInt32(1);
                         var {left} = input;");
             }
-            else if (leftType == "uint")
+            else if (leftType == UInt)
             {
                 codeBuilder.AppendLine($@"var input = memory.ReadUInt32(0);
                         var {left} = input;");

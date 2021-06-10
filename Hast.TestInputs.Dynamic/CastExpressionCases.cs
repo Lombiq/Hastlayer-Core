@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.TestInputs.Dynamic
 {
@@ -9,7 +9,7 @@ namespace Hast.TestInputs.Dynamic
             // Separate input for int so it doesn't need to be downcast from the long one which can potentially be
             // wrong too.
             var intInput = memory.ReadInt32(1);
-            long longInput = (long)memory.ReadInt32(0) << 32 | (uint)memory.ReadInt32(1);
+            long longInput = ((long)memory.ReadInt32(0) << 32) | (uint)memory.ReadInt32(1);
 
             var ulongResult = (ulong)longInput;
 

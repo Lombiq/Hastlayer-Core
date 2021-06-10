@@ -21,3 +21,8 @@ using static Hast.TestInputs.Invalid.SuppressionConstants;
     "CA1822:Mark members as static",
     Justification = ThatsThePoint,
     Scope = "module")]
+[assembly: SuppressMessage(
+    "Critical Code Smell",
+    "S3353:Unchanged local variables should be \"const\"",
+    Justification = ThatsThePoint,
+    Scope = "module")]
