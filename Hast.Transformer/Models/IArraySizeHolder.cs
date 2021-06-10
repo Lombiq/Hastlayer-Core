@@ -19,8 +19,19 @@ namespace Hast.Transformer.Models
     /// </summary>
     public interface IArraySizeHolder
     {
+        /// <summary>
+        /// Returns the size of the <paramref name="arrayHolder"/>.
+        /// </summary>
         IArraySize GetSize(AstNode arrayHolder);
+
+        /// <summary>
+        /// Sets the <paramref name="length"/> of the <paramref name="arrayHolder"/>.
+        /// </summary>
         void SetSize(AstNode arrayHolder, int length);
+
+        /// <summary>
+        /// Clones the node.
+        /// </summary>
         IArraySizeHolder Clone();
     }
 
