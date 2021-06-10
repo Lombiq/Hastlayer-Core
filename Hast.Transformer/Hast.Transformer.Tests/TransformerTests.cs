@@ -13,19 +13,19 @@ using Hast.Xilinx.Abstractions.ManifestProviders;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Moq;
 using Moq.AutoMock;
-using Xunit;
 using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Hast.Transformer.Vhdl.Tests
 {
     public class TransformerTests
     {
-        private ITransformationContext _producedContext;
         private readonly AutoMocker _mocker;
+        private ITransformationContext _producedContext;
 
         private ITransformer GetTransformer() => _mocker.CreateInstance<DefaultTransformer>();
 
@@ -121,8 +121,8 @@ namespace Hast.Transformer.Vhdl.Tests
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(7, "Not the number of types remained in the syntax tree than there are used.");
-            typeLookup.ShouldNotContainKey(typeof(UnusedDeclarations).Name, "Classes with unreferenced members weren't removed from the syntax tree.");
-            typeLookup[typeof(ComplexTypeHierarchy).Name].Members.ShouldNotContain(
+            typeLookup.ShouldNotContainKey(nameof(UnusedDeclarations), "Classes with unreferenced members weren't removed from the syntax tree.");
+            typeLookup[nameof(ComplexTypeHierarchy)].Members.ShouldNotContain(
                 member => member.Name == "UnusedMethod" || member.Name == "NonVirtualNonInterfaceMehod",
                 "Unreferenced members of classes weren't removed from the syntax tree.");
         }
@@ -141,14 +141,14 @@ namespace Hast.Transformer.Vhdl.Tests
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(3, "Not the number of types remained in the syntax tree than there are used.");
-            typeLookup[typeof(RootClass).Name].Members.Count.ShouldBe(1);
-            typeLookup[typeof(RootClass).Name].Members.Single().Name.ShouldBe("VirtualMethod");
-            typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Count.ShouldBe(3);
-            typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Select(member => member.Name)
+            typeLookup[nameof(RootClass)].Members.Count.ShouldBe(1);
+            typeLookup[nameof(RootClass)].Members.Single().Name.ShouldBe("VirtualMethod");
+            typeLookup[nameof(ComplexTypeHierarchy)].Members.Count.ShouldBe(3);
+            typeLookup[nameof(ComplexTypeHierarchy)].Members.Select(member => member.Name)
                 .SequenceEqual(new[] { "Interface1Method1", "PrivateMethod", "StaticMethod" })
                 .ShouldBeTrue();
-            typeLookup[typeof(IInterface1).Name].Members.Count.ShouldBe(1);
-            typeLookup[typeof(IInterface1).Name].Members.Select(member => member.Name)
+            typeLookup[nameof(IInterface1)].Members.Count.ShouldBe(1);
+            typeLookup[nameof(IInterface1)].Members.Select(member => member.Name)
                 .SequenceEqual(new[] { "Interface1Method1" })
                 .ShouldBeTrue();
         }
@@ -165,10 +165,10 @@ namespace Hast.Transformer.Vhdl.Tests
             var typeLookup = BuildTypeLookup();
 
             typeLookup.Count.ShouldBe(5, "Not the number of types remained in the syntax tree than there are used.");
-            typeLookup[typeof(RootClass).Name].Members.Count.ShouldBe(1);
-            typeLookup[typeof(RootClass).Name].Members.Single().Name.ShouldBe("VirtualMethod");
-            typeLookup[typeof(ComplexTypeHierarchy).Name].Members.Count.ShouldBe(7);
-            typeLookup[typeof(ComplexTypeHierarchy).Name].Members
+            typeLookup[nameof(RootClass)].Members.Count.ShouldBe(1);
+            typeLookup[nameof(RootClass)].Members.Single().Name.ShouldBe("VirtualMethod");
+            typeLookup[nameof(ComplexTypeHierarchy)].Members.Count.ShouldBe(7);
+            typeLookup[nameof(ComplexTypeHierarchy)].Members
                 .Select(member => member.Name)
                 .SequenceEqual(new[] { "Interface1Method1", "Interface1Method2", "Interface2Method1", "BaseInterfaceMethod1", "BaseInterfaceMethod2", "PrivateMethod", "StaticMethod" })
                 .ShouldBeTrue();
