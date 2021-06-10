@@ -1,6 +1,7 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Remote.Worker.Exceptions;
+using Hast.Remote.Worker.Models;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.DependencyCollector;
@@ -16,7 +17,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Hast.Remote.Worker.Services
 {
-    [IDependencyInitializer(nameof(InitializeService))]
+    [DependencyInitializer(nameof(InitializeService))]
     public class ApplicationInsightsTelemetryManager : IApplicationInsightsTelemetryManager
     {
         private readonly TelemetryClient _telemetryClient;
@@ -33,8 +34,7 @@ namespace Hast.Remote.Worker.Services
             _telemetryClient = telemetryClient;
         }
 
-
-        public void TrackTransformation(ITransformationTelemetry telemetry)
+        public void TrackTransformation(TransformationTelemetry telemetry)
         {
             var requestTelemetry = new RequestTelemetry
             {
