@@ -212,7 +212,7 @@ namespace Hast.Synthesis.Services
 
         private class TimingReport : ITimingReport
         {
-            private readonly Dictionary<string, decimal> _timings = new Dictionary<string, decimal>();
+            private readonly Dictionary<string, decimal> _timings = new();
 
 
             public void SetLatencyNs(

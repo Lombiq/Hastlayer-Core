@@ -1,4 +1,4 @@
-﻿using Hast.Synthesis;
+using Hast.Synthesis;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Xilinx.Abstractions.ManifestProviders;
@@ -8,7 +8,7 @@ namespace Hast.Xilinx
     public abstract class NexysDriverBase : NexysManifestProviderBase, IDeviceDriver
     {
         private readonly ITimingReportParser _timingReportParser;
-        private readonly object _timingReportParserLock = new object();
+        private readonly object _timingReportParserLock = new();
 
         private ITimingReport _timingReport;
         public ITimingReport TimingReport
