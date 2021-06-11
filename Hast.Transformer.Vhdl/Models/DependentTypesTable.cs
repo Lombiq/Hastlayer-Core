@@ -6,7 +6,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 namespace Hast.Transformer.Vhdl.Models
 {
     /// <summary>
-    /// Stores dependency relations between VDHL types, for custom types that need this. E.g. if MyArray is an array
+    /// Stores dependency relations between VHDL types, for custom types that need this. E.g. if MyArray is an array
     /// type that stores elements of type MyRecord then that will be stored as MyArray depending on MyRecord. This is
     /// needed because in VHDL MyArray should come after MyRecord in the code file.
     /// </summary>
@@ -51,7 +51,7 @@ namespace Hast.Transformer.Vhdl.Models
         {
             public bool Equals(DataType x, DataType y) => x.Name == y.Name;
 
-            public int GetHashCode(DataType dataType) => dataType.Name.GetHashCode(StringComparison.InvariantCulture);
+            public int GetHashCode(DataType obj) => obj.Name.GetHashCode(StringComparison.InvariantCulture);
         }
     }
 }

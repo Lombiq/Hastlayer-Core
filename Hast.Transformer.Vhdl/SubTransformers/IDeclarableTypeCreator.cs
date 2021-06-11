@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -11,6 +11,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     /// </summary>
     public interface IDeclarableTypeCreator : IDependency
     {
+        /// <summary>
+        /// Produces data types that can be used in variable, signal, etc. declarations.
+        /// </summary>
         DataType CreateDeclarableType(AstNode valueHolder, IType type, IVhdlTransformationContext context);
     }
 

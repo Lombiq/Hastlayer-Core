@@ -5,10 +5,13 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
+    /// <summary>
+    /// Transforms an expression into a VHDL element.
+    /// </summary>
     public interface IExpressionTransformer : IDependency
     {
         /// <summary>
-        /// Tra1nsforms an expression into a VHDL element that can be used in place of the original expression. Be aware
+        /// Transforms an expression into a VHDL element that can be used in place of the original expression. Be aware
         /// that <c>currentBlock</c>, being a reference, can change.
         /// </summary>
         /// <returns>

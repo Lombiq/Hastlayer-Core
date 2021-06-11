@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Hast.Layer;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Representation;
@@ -26,7 +26,7 @@ namespace Hast.Transformer.Vhdl.Models
         IVhdlElement Body { get; }
 
         /// <summary>
-        /// A collection of warnings generated within this component's scope.
+        /// Gets the collection of warnings generated within this component's scope.
         /// </summary>
         IEnumerable<ITransformationWarning> Warnings { get; }
     }
