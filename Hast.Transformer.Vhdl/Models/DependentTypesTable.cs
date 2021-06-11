@@ -47,6 +47,14 @@ namespace Hast.Transformer.Vhdl.Models
             return dependencies;
         }
 
+        /// <summary>
+        /// Adds this table to a list of tables but only if it actually has any dependencies.
+        /// </summary>
+        public void AddToIfNotEmpty(List<DependentTypesTable> tables)
+        {
+            if (_dependencies.Count > 0) tables.Add(this);
+        }
+
         private class DataTypeEqualityComparer : IEqualityComparer<DataType>
         {
             public bool Equals(DataType x, DataType y) => x.Name == y.Name;
