@@ -37,12 +37,18 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     {
                         configuration.TransformerConfiguration().UseSimpleMemory = false;
 
-                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                        configuration
+                            .TransformerConfiguration()
+                            .AddMemberInvocationInstanceCountConfiguration(
+                                new MemberInvocationInstanceCountConfigurationForMethod<ParallelCases>(
+                                    p => p.WhenAllWhenAnyAwaitedTasks(0), 0)
+                                { MaxDegreeOfParallelism = 3 });
+                        configuration
+                            .TransformerConfiguration()
+                            .AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<ParallelCases>(
-                                p => p.WhenAllWhenAnyAwaitedTasks(0), 0) { MaxDegreeOfParallelism = 3, });
-                        configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<ParallelCases>(
-                                p => p.ObjectUsingTasks(0), 0) { MaxDegreeOfParallelism = 3, });
+                                p => p.ObjectUsingTasks(0), 0)
+                            { MaxDegreeOfParallelism = 3 });
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();

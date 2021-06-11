@@ -26,13 +26,13 @@ namespace Hast.Transformer.Vhdl.Tests
                 services.AddSingleton(new EventHandler<ITransformedVhdlManifest>((sender, e) => manifest = e.Manifest));
 
             return Host.RunAsync<ITransformer>(async transformer =>
-             {
-                 var hardwareDescription = await TransformClassStrutureExamplesToVhdlAsync(transformer);
+            {
+                var hardwareDescription = await TransformClassStrutureExamplesToVhdlAsync(transformer);
 
-                 hardwareDescription.Language.ShouldBe("VHDL");
-                 hardwareDescription.HardwareEntryPointNamesToMemberIdMappings.Count.ShouldBe(14);
-                 hardwareDescription.VhdlSource.ShouldNotBeNullOrEmpty();
-                 manifest.ShouldNotBeNull(); // Since caching is off.
+                hardwareDescription.Language.ShouldBe("VHDL");
+                hardwareDescription.HardwareEntryPointNamesToMemberIdMappings.Count.ShouldBe(14);
+                hardwareDescription.VhdlSource.ShouldNotBeNullOrEmpty();
+                manifest.ShouldNotBeNull(); // Since caching is off.
             });
         }
 

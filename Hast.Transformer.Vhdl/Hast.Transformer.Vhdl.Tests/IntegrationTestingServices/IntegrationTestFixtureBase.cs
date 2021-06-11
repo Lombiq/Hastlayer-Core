@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -7,10 +7,11 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 {
     public abstract class IntegrationTestFixtureBase : IDisposable
     {
+        private readonly Lazy<Hastlayer> _host;
+
         private bool _disposed;
         protected HastlayerConfiguration _hostConfiguration = new();
 
-        private readonly Lazy<Hastlayer> _host;
         protected Hastlayer Host => _host.Value;
 
         protected IntegrationTestFixtureBase()
