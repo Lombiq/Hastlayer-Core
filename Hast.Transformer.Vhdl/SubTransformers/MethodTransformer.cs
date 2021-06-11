@@ -208,12 +208,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // We need to return the declarations and body here too so their computation can be parallelized too.
             // Otherwise we'd add them directly to context.Module.Architecture but that would need that collection to
             // be thread-safe.
-            var result = new ArchitectureComponentResult
-            {
-                ArchitectureComponent = stateMachine,
-                Declarations = stateMachine.BuildDeclarations(),
-                Body = stateMachine.BuildBody(),
-            };
+            var result = new ArchitectureComponentResult(stateMachine);
 
             // Warnings would be repeated for each instance of the state machine otherwise.
             if (stateMachineIndex == 0)

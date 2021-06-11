@@ -52,14 +52,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 result.ArchitectureComponentResults = new List<IArchitectureComponentResult>
                 {
-                    {
-                        new ArchitectureComponentResult
-                        {
-                            ArchitectureComponent = component,
-                            Declarations = component.BuildDeclarations(),
-                            Body = component.BuildBody(),
-                        }
-                    },
+                    new ArchitectureComponentResult(component),
                 };
 
                 return result;

@@ -7,12 +7,25 @@ using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
+    /// <summary>
+    /// Represents an operation with a known max cycle count that's more than one.
+    /// </summary>
     public interface IMultiCycleOperation
     {
+        /// <summary>
+        /// Gets the data object for this operation's result.
+        /// </summary>
         IDataObject OperationResultReference { get; }
+
+        /// <summary>
+        /// Gets the maximum number of clock cycles this operation should take.
+        /// </summary>
         int RequiredClockCyclesCeiling { get; }
     }
 
+    /// <summary>
+    /// Represents a VHDL component <see href="https://www.ics.uci.edu/~jmoorkan/vhdlref/compinst.html" />.
+    /// </summary>
     public interface IArchitectureComponent
     {
         /// <summary>
@@ -64,7 +77,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; }
 
         /// <summary>
-        /// Gets the dependency relations between VDHL types, for custom types declared in this component that need this.
+        /// Gets the dependency relations between VHDL types, for custom types declared in this component that need this.
         /// </summary>
         DependentTypesTable DependentTypesTable { get; }
 

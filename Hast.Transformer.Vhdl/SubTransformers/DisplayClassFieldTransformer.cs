@@ -70,15 +70,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     IsHardwareEntryPointMember = false,
                     Member = field,
-                    ArchitectureComponentResults = new[]
-                    {
-                        new ArchitectureComponentResult
-                        {
-                            ArchitectureComponent = fieldComponent,
-                            Body = fieldComponent.BuildBody(),
-                            Declarations = fieldComponent.BuildDeclarations(),
-                        },
-                    },
+                    ArchitectureComponentResults = new[] { new ArchitectureComponentResult(fieldComponent) },
                 };
             });
 
