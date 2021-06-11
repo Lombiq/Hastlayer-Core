@@ -33,7 +33,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // Don't create a variable if it's not necessary.
                     // Primitive values should be left out because operations with primitive operands can be faster on
                     // hardware.
-                    if (operand is PrimitiveExpression || operand is IdentifierExpression)
+                    if (operand is PrimitiveExpression or IdentifierExpression)
                     {
                         return;
                     }
@@ -49,7 +49,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
 
                     var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
-
                         "remainderOperand" + Sha256Helper.ComputeHash(operand.GetFullName() + ilRangeName),
                         operand.GetActualType(),
                         TypeHelper.CreateAstType(operand.GetActualType()),

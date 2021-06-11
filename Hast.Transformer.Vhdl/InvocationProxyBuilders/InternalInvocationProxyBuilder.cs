@@ -26,7 +26,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
         private readonly Value _afterFinishedStateValue = "AfterFinished".ToVhdlIdValue();
 
         public IEnumerable<IArchitectureComponent> BuildProxy(
-            IEnumerable<IArchitectureComponent> components,
+            ICollection<IArchitectureComponent> components,
             IVhdlTransformationContext transformationContext)
         {
             var componentsByName = components.ToDictionary(component => component.Name);
@@ -55,14 +55,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
             var proxyComponents = new List<IArchitectureComponent>(invokedMembers.Count);
 
-            var booleanArrayType = new ArrayType
-            {
-                ElementType = KnownDataTypes.Boolean,
-                // Prefixing the name so it won't clash with boolean arrays created by the transforming logic.
-                Name = ("InternalInvocationProxy_" +
-                    ArrayHelper.CreateArrayTypeName(KnownDataTypes.Boolean).TrimExtendedVhdlIdDelimiters())
-                    .ToExtendedVhdlId(),
-            };
+            var booleanArrayType = GetBooleanArrayType();
             var runningStates = new VhdlBuilder.Representation.Declaration.Enum
             {
                 Name = (NamePrefix + "_RunningStates").ToExtendedVhdlId(),
@@ -119,11 +112,9 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 else
                 {
                     BuildProxyInvokationFromMultipleComponents(
-                        proxyComponentName,
                         proxyComponents,
                         targetComponentCount,
                         targetMemberName,
-                        booleanArrayType,
                         invokedFromComponents,
                         runningStates,
                         componentsByName);
@@ -134,15 +125,16 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
         }
 
         private void BuildProxyInvokationFromMultipleComponents(
-            string proxyComponentName,
             List<IArchitectureComponent> proxyComponents,
             int targetComponentCount,
             string targetMemberName,
-            ArrayType booleanArrayType,
             List<KeyValuePair<string, int>> invokedFromComponents,
             VhdlBuilder.Representation.Declaration.Enum runningStates,
             Dictionary<string, IArchitectureComponent> componentsByName)
         {
+            var proxyComponentName = NamePrefix + targetMemberName;
+            var booleanArrayType = GetBooleanArrayType();
+
             // Note that the below implementation does not work perfectly. As the number of components increases
             // it becomes unstable. For example the CalculateFibonacchiSeries sample without debug memory writes
             // won't finish while the CalculateFactorial with them will work properly.
@@ -267,113 +259,28 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         Expression = runningStateVariableReference,
                     };
 
+                    var waitContext = new WaitContext
+                    {
+                        RunningStateVariableReference = runningStateVariableReference,
+                        RunningIndexVariableReference = runningIndexVariableReference,
+                        TargetAvailableIndicatorVariableReference = targetAvailableIndicatorVariableReference,
+                        TargetComponentCount = targetComponentCount,
+                        InvokerName = invokerName,
+                        InvokerIndex = i,
+                        TargetMemberName = targetMemberName,
+                        ComponentsByName = componentsByName,
+                        TargetAvailableIndicatorDataType = targetAvailableIndicatorDataType,
+                        RunningStateCase = runningStateCase,
+                    };
+
                     // WaitingForStarted state
-                    WaitForStarted(
-                        runningStateVariableReference,
-                        runningIndexVariableReference,
-                        targetAvailableIndicatorVariableReference,
-                        targetComponentCount,
-                        invokerName,
-                        i,
-                        targetMemberName,
-                        componentsByName,
-                        targetAvailableIndicatorDataType,
-                        runningStateCase);
+                    WaitForStarted(waitContext);
 
                     // WaitingForFinished state
-                    {
-                        var runningIndexCase = new Case
-                        {
-                            Expression = runningIndexVariableReference,
-                        };
-
-                        for (int c = 0; c < targetComponentCount; c++)
-                        {
-                            var caseWhenBody = CreateNullOperationIfTargetComponentEqualsInvokingComponent(c, targetMemberName, invokerName);
-
-                            if (caseWhenBody != null) continue;
-
-                            var isFinishedIfTrue = new InlineBlock(
-                                new Assignment
-                                {
-                                    AssignTo = runningStateVariableReference,
-                                    Expression = _afterFinishedStateValue,
-                                },
-                                new Assignment
-                                {
-                                    AssignTo = InvocationHelper
-                                        .CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                    Expression = Value.True,
-                                },
-                                new Assignment
-                                {
-                                    AssignTo = ArchitectureComponentNameHelper
-                                        .CreateStartedSignalName(GetTargetMemberComponentName(c, targetMemberName))
-                                        .ToVhdlSignalReference(),
-                                    Expression = Value.False,
-                                });
-
-                            var returnAssignment = BuildReturnAssigment(invokerName, i, c, targetMemberName, componentsByName);
-                            if (returnAssignment != null) isFinishedIfTrue.Add(returnAssignment);
-
-                            isFinishedIfTrue.Body.AddRange(BuildOutParameterAssignments(invokerName, i, c, targetMemberName, componentsByName));
-
-                            caseWhenBody = new If
-                            {
-                                Condition = ArchitectureComponentNameHelper
-                                    .CreateFinishedSignalName(GetTargetMemberComponentName(c, targetMemberName))
-                                    .ToVhdlSignalReference(),
-                                True = isFinishedIfTrue,
-                            };
-
-                            runningIndexCase.Whens.Add(new CaseWhen(
-                                expression: c.ToVhdlValue(KnownDataTypes.UnrangedInt),
-                                body: new List<IVhdlElement> { { caseWhenBody } }));
-                        }
-
-                        runningStateCase.Whens.Add(new CaseWhen(
-                            expression: _waitingForFinishedStateValue,
-                            body: new List<IVhdlElement>
-                            {
-                                        { runningIndexCase },
-                            }));
-                    }
+                    WaitForFinished(waitContext);
 
                     // AfterFinished state
-                    {
-                        runningStateCase.Whens.Add(new CaseWhen(
-                            expression: _afterFinishedStateValue,
-                            body: new List<IVhdlElement>
-                            {
-                                        {
-                                            new LineComment("Invoking components need to pull down the Started signal to false.")
-                                        },
-                                        {
-                                            new IfElse
-                                            {
-                                                Condition = new Binary
-                                                {
-                                                    Left = InvocationHelper
-                                                        .CreateStartedSignalReference(invokerName, targetMemberName, i),
-                                                    Operator = BinaryOperator.Equality,
-                                                    Right = Value.False,
-                                                },
-                                                True = new InlineBlock(
-                                                    new Assignment
-                                                    {
-                                                        AssignTo = runningStateVariableReference,
-                                                        Expression = _waitingForStartedStateValue,
-                                                    },
-                                                    new Assignment
-                                                    {
-                                                        AssignTo = InvocationHelper
-                                                            .CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                                        Expression = Value.False,
-                                                    }),
-                                            }
-                                        },
-                            }));
-                    }
+                    WhenFinished(waitContext);
 
                     // Adding reset for the finished signal.
                     proxyInResetBlock.Add(new Assignment
@@ -390,64 +297,175 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             proxyComponent.ProcessNotInReset = bodyBlock;
         }
 
-        private void WaitForStarted(
-            DataObjectReference runningStateVariableReference,
-            DataObjectReference runningIndexVariableReference,
-            DataObjectReference targetAvailableIndicatorVariableReference,
-            int targetComponentCount,
-            string invokerName,
-            int i,
-            string targetMemberName,
-            Dictionary<string, IArchitectureComponent> componentsByName,
-            SizedDataType targetAvailableIndicatorDataType,
-            Case runningStateCase)
+        private void WhenFinished(WaitContext context) =>
+            context
+                .RunningStateCase
+                .Whens
+                .Add(new CaseWhen(
+                    expression: _afterFinishedStateValue,
+                    body: new List<IVhdlElement>
+                    {
+                        new LineComment("Invoking components need to pull down the Started signal to false."),
+                        new IfElse
+                        {
+                            Condition = new Binary
+                            {
+                                Left = InvocationHelper.CreateStartedSignalReference(
+                                    context.InvokerName,
+                                    context.TargetMemberName,
+                                    context.InvokerIndex),
+                                Operator = BinaryOperator.Equality,
+                                Right = Value.False,
+                            },
+                            True = new InlineBlock(
+                                new Assignment
+                                {
+                                    AssignTo = context.RunningStateVariableReference,
+                                    Expression = _waitingForStartedStateValue,
+                                },
+                                new Assignment
+                                {
+                                    AssignTo = InvocationHelper.CreateFinishedSignalReference(
+                                        context.InvokerName,
+                                        context.TargetMemberName,
+                                        context.InvokerIndex),
+                                    Expression = Value.False,
+                                }),
+                        },
+                    }));
+
+        private void WaitForFinished(WaitContext context)
+        {
+            var runningIndexCase = new Case
+            {
+                Expression = context.RunningIndexVariableReference,
+            };
+
+            for (int componentIndex = 0; componentIndex < context.TargetComponentCount; componentIndex++)
+            {
+                var caseWhenBody = CreateNullOperationIfTargetComponentEqualsInvokingComponent(
+                    componentIndex,
+                    context.TargetMemberName,
+                    context.InvokerName);
+
+                if (caseWhenBody != null) continue;
+
+                var isFinishedIfTrue = new InlineBlock(
+                    new Assignment
+                    {
+                        AssignTo = context.RunningStateVariableReference,
+                        Expression = _afterFinishedStateValue,
+                    },
+                    new Assignment
+                    {
+                        AssignTo = InvocationHelper
+                            .CreateFinishedSignalReference(
+                                context.InvokerName,
+                                context.TargetMemberName,
+                                context.InvokerIndex),
+                        Expression = Value.True,
+                    },
+                    new Assignment
+                    {
+                        AssignTo = ArchitectureComponentNameHelper
+                            .CreateStartedSignalName(GetTargetMemberComponentName(
+                                componentIndex,
+                                context.TargetMemberName))
+                            .ToVhdlSignalReference(),
+                        Expression = Value.False,
+                    });
+
+                var returnAssignment = BuildReturnAssigment(
+                    context.InvokerName,
+                    context.InvokerIndex,
+                    componentIndex,
+                    context.TargetMemberName,
+                    context.ComponentsByName);
+                if (returnAssignment != null) isFinishedIfTrue.Add(returnAssignment);
+
+                isFinishedIfTrue.Body.AddRange(BuildOutParameterAssignments(
+                    context.InvokerName,
+                    context.InvokerIndex,
+                    componentIndex,
+                    context.TargetMemberName,
+                    context.ComponentsByName));
+
+                caseWhenBody = new If
+                {
+                    Condition = ArchitectureComponentNameHelper
+                        .CreateFinishedSignalName(GetTargetMemberComponentName(
+                            componentIndex,
+                            context.TargetMemberName))
+                        .ToVhdlSignalReference(),
+                    True = isFinishedIfTrue,
+                };
+
+                runningIndexCase.Whens.Add(new CaseWhen(
+                    expression: componentIndex.ToVhdlValue(KnownDataTypes.UnrangedInt),
+                    body: new List<IVhdlElement> { { caseWhenBody } }));
+            }
+
+            context.RunningStateCase.Whens.Add(new CaseWhen(
+                expression: _waitingForFinishedStateValue,
+                body: new List<IVhdlElement> { runningIndexCase }));
+        }
+
+        private void WaitForStarted(WaitContext context)
         {
             var waitingForStartedInnnerBlock = new InlineBlock();
 
             IVhdlElement CreateComponentAvailableBody(int targetIndex)
             {
-                var componentAvailableBody = CreateNullOperationIfTargetComponentEqualsInvokingComponent(targetIndex, targetMemberName, invokerName);
+                var componentAvailableBody = CreateNullOperationIfTargetComponentEqualsInvokingComponent(
+                    targetIndex,
+                    context.TargetMemberName,
+                    context.InvokerName);
 
                 if (componentAvailableBody != null) return componentAvailableBody;
 
                 var componentAvailableBodyBlock = new InlineBlock(
                     new Assignment
                     {
-                        AssignTo = runningStateVariableReference,
+                        AssignTo = context.RunningStateVariableReference,
                         Expression = _waitingForFinishedStateValue,
                     },
                     new Assignment
                     {
-                        AssignTo = runningIndexVariableReference,
+                        AssignTo = context.RunningIndexVariableReference,
                         Expression = targetIndex.ToVhdlValue(KnownDataTypes.UnrangedInt),
                     },
                     new Assignment
                     {
                         AssignTo = ArchitectureComponentNameHelper
-                            .CreateStartedSignalName(GetTargetMemberComponentName(targetIndex, targetMemberName))
+                            .CreateStartedSignalName(GetTargetMemberComponentName(targetIndex, context.TargetMemberName))
                             .ToVhdlSignalReference(),
                         Expression = Value.True,
                     });
 
-                if (targetComponentCount > 1)
+                if (context.TargetComponentCount > 1)
                 {
                     componentAvailableBodyBlock.Add(new Assignment
                     {
                         AssignTo = new ArrayElementAccess
                         {
-                            ArrayReference = targetAvailableIndicatorVariableReference,
+                            ArrayReference = context.TargetAvailableIndicatorVariableReference,
                             IndexExpression = targetIndex.ToVhdlValue(KnownDataTypes.UnrangedInt),
                         },
                         Expression = Value.False,
                     });
                 }
 
-                componentAvailableBodyBlock.Body.AddRange(BuildInParameterAssignments(invokerName, i, targetIndex, componentsByName, targetMemberName));
+                componentAvailableBodyBlock.Body.AddRange(BuildInParameterAssignments(
+                    context.InvokerName,
+                    context.InvokerIndex,
+                    targetIndex,
+                    context.ComponentsByName,
+                    context.TargetMemberName));
 
                 return componentAvailableBodyBlock;
             }
 
-            if (targetComponentCount == 1)
+            if (context.TargetComponentCount == 1)
             {
                 // If there is only a single target component then the implementation can be simpler.
                 // Also having a case targetAvailableIndicator is (true) when =>... isn't syntactically
@@ -460,13 +478,13 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             {
                 var availableTargetSelectingCase = new Case
                 {
-                    Expression = targetAvailableIndicatorVariableReference,
+                    Expression = context.TargetAvailableIndicatorVariableReference,
                 };
 
-                for (int c = 0; c < targetComponentCount; c++)
+                for (int c = 0; c < context.TargetComponentCount; c++)
                 {
                     availableTargetSelectingCase.Whens.Add(new CaseWhen(
-                        expression: CreateBooleanIndicatorValue(targetAvailableIndicatorDataType, c),
+                        expression: CreateBooleanIndicatorValue(context.TargetAvailableIndicatorDataType, c),
                         body: new List<IVhdlElement> { { CreateComponentAvailableBody(c) } }));
                 }
 
@@ -477,25 +495,29 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 waitingForStartedInnnerBlock.Add(availableTargetSelectingCase);
             }
 
-            runningStateCase.Whens.Add(new CaseWhen(
+            context.RunningStateCase.Whens.Add(new CaseWhen(
                 expression: _waitingForStartedStateValue,
                 body: new List<IVhdlElement>
                 {
-                                        {
-                                            new If
-                                            {
-                                                Condition = InvocationHelper
-                                                    .CreateStartedSignalReference(invokerName, targetMemberName, i),
-                                                True = new InlineBlock(
-                                                new Assignment
-                                                {
-                                                    AssignTo = InvocationHelper
-                                                        .CreateFinishedSignalReference(invokerName, targetMemberName, i),
-                                                    Expression = Value.False,
-                                                },
-                                                waitingForStartedInnnerBlock),
-                                            }
-                                        },
+                    new If
+                    {
+                        Condition = InvocationHelper
+                            .CreateStartedSignalReference(
+                                context.InvokerName,
+                                context.TargetMemberName,
+                                context.InvokerIndex),
+                        True = new InlineBlock(
+                            new Assignment
+                            {
+                                AssignTo = InvocationHelper
+                                    .CreateFinishedSignalReference(
+                                        context.InvokerName,
+                                        context.TargetMemberName,
+                                        context.InvokerIndex),
+                                Expression = Value.False,
+                            },
+                            waitingForStartedInnnerBlock),
+                    },
                 }));
         }
 
@@ -535,26 +557,26 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                         .Where(parameter =>
                             parameter.TargetMemberFullName == targetMemberName &&
                             parameter.Index == invokerIndex &&
-                            !parameter.IsOwn);
+                            !parameter.IsOwn)
+                        .ToList();
 
             if (!receivingParameters.Any()) return Enumerable.Empty<IVhdlElement>();
 
             return passedBackParameters.Select(parameter => new Assignment
             {
-                AssignTo = receivingParameters
-                            .Single(p => p.TargetParameterName == parameter.TargetParameterName),
+                AssignTo = receivingParameters.Single(p => p.TargetParameterName == parameter.TargetParameterName),
                 Expression = parameter.ToReference(),
             });
         }
 
-        private void BuildProxyInvokationFromSingleComponentOrPairable(
+        private static void BuildProxyInvokationFromSingleComponentOrPairable(
             List<KeyValuePair<string, int>> invokedFromComponents,
             bool invokedFromSingleComponent,
             string targetMemberName,
             InlineBlock signalConnectionsBlock,
             Dictionary<string, IArchitectureComponent> componentsByName)
         {
-            string GetTargetMemberComponentName(int index) =>
+            string GetTargetMemberComponentNameLocal(int index) =>
                 ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMemberName, index);
 
             for (int i = 0; i < invokedFromComponents.Count; i++)
@@ -565,7 +587,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 for (int j = 0; j < invokedFromComponent.Value; j++)
                 {
                     var targetIndex = invokedFromSingleComponent ? j : i;
-                    var targetComponentName = GetTargetMemberComponentName(targetIndex);
+                    var targetComponentName = GetTargetMemberComponentNameLocal(targetIndex);
                     var invokerIndex = invokedFromSingleComponent ? j : 0;
 
                     signalConnectionsBlock.Add(new LineComment(
@@ -640,7 +662,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 .GetInParameterSignals()
                 .Where(parameter =>
                     parameter.TargetMemberFullName == targetMemberName &&
-                    parameter.IsOwn);
+                    parameter.IsOwn)
+                .ToList();
 
             if (!targetParameters.Any()) return Enumerable.Empty<IVhdlElement>();
 
@@ -676,7 +699,9 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
         {
             // This will create a boolean array where the everything is false except for the element with the given index.
 
-            var booleanArray = Enumerable.Repeat(Value.False, targetAvailableIndicatorDataType.SizeNumber).ToArray();
+            var booleanArray = Enumerable
+                .Repeat((IVhdlElement)Value.False, targetAvailableIndicatorDataType.SizeNumber)
+                .ToArray();
             // Since the bit vector is downto the rightmost element is the 0th.
             booleanArray[targetAvailableIndicatorDataType.SizeNumber - 1 - indicatedIndex] = Value.True;
             return new Value
@@ -684,6 +709,30 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 DataType = targetAvailableIndicatorDataType,
                 EvaluatedContent = new InlineBlock(booleanArray),
             };
+        }
+
+        private static ArrayType GetBooleanArrayType() =>
+            new()
+            {
+                ElementType = KnownDataTypes.Boolean,
+                // Prefixing the name so it won't clash with boolean arrays created by the transforming logic.
+                Name = ("InternalInvocationProxy_" +
+                        ArrayHelper.CreateArrayTypeName(KnownDataTypes.Boolean).TrimExtendedVhdlIdDelimiters())
+                    .ToExtendedVhdlId(),
+            };
+
+        private class WaitContext
+        {
+            public DataObjectReference RunningStateVariableReference { get; set; }
+            public DataObjectReference RunningIndexVariableReference { get; set; }
+            public DataObjectReference TargetAvailableIndicatorVariableReference { get; set; }
+            public int TargetComponentCount { get; set; }
+            public string InvokerName { get; set; }
+            public int InvokerIndex { get; set; }
+            public string TargetMemberName { get; set; }
+            public Dictionary<string, IArchitectureComponent> ComponentsByName { get; set; }
+            public SizedDataType TargetAvailableIndicatorDataType { get; set; }
+            public Case RunningStateCase { get; set; }
         }
     }
 }

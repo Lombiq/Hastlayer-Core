@@ -17,7 +17,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         public UnconstrainedArrayInstantiation CreateArrayInstantiation(
             ArrayCreateExpression expression,
-            IVhdlTransformationContext context) => ArrayHelper.CreateArrayInstantiation(
+            IVhdlTransformationContext context) =>
+            ArrayHelper.CreateArrayInstantiation(
                 _typeConverter.ConvertAstType(expression.Type, context),
                 expression.GetStaticLength());
 
@@ -59,7 +60,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 // Initializing the array with the .NET default values (so there are no surprises when reading values
                 // without setting them previously).
-                return ArrayType.CreateDefaultInitialization(
+                return ArrayTypeBase.CreateDefaultInitialization(
                     ArrayHelper.CreateArrayInstantiation(elementAstType, length),
                     elementAstType);
             }

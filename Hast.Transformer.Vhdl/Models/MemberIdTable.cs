@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.Models
@@ -9,8 +9,8 @@ namespace Hast.Transformer.Vhdl.Models
     /// </summary>
     public class MemberIdTable
     {
-        private static MemberIdTable _emptyInstance;
         private readonly Dictionary<string, int> _mappings = new();
+        private static MemberIdTable _emptyInstance;
 
         public IReadOnlyDictionary<string, int> Mappings => _mappings;
 
@@ -28,20 +28,12 @@ namespace Hast.Transformer.Vhdl.Models
         public void SetMapping(string memberFullName, int id)
         {
             if (id > MaxId) MaxId = id;
-            if (!_mappings.ContainsKey(memberFullName))
-            {
-                _mappings[memberFullName] = id;
-            }
-            else
-            {
-                _mappings[memberFullName] = id;
-            }
+            _mappings[memberFullName] = id;
         }
 
         public int LookupMemberId(string memberFullName)
         {
-            int id;
-            if (_mappings.TryGetValue(memberFullName, out id)) return id;
+            if (_mappings.TryGetValue(memberFullName, out int id)) return id;
             throw new InvalidOperationException("No member ID mapping found for the given member name: " + memberFullName);
         }
     }

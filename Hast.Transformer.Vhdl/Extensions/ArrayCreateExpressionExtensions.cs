@@ -13,7 +13,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             {
                 var lengthArgument = expression.Arguments.Single();
 
-                if (!(lengthArgument is PrimitiveExpression))
+                if (lengthArgument is not PrimitiveExpression)
                 {
                     throw new NotSupportedException(
                         $"Only arrays with statically defined dimension length are supported. Consider adding the " +
@@ -36,6 +36,6 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         public static AstType GetElementType(this ArrayCreateExpression expression) =>
             // Sometimes instead of `new Task<uint>[2]` an array instantiation will be in form of
             // `new Task<bool>[2][] {}` even if the task is still one-dimensional. In this case its type will be a ComposedType.
-            expression.Type is ComposedType ? ((ComposedType)expression.Type).BaseType : expression.Type;
+            expression.Type is ComposedType composedType ? composedType.BaseType : expression.Type;
     }
 }

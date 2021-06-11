@@ -8,7 +8,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
     public interface IInternalInvocationProxyBuilder : IDependency
     {
         IEnumerable<IArchitectureComponent> BuildProxy(
-            IEnumerable<IArchitectureComponent> components,
+            ICollection<IArchitectureComponent> components,
             IVhdlTransformationContext transformationContext);
     }
 }

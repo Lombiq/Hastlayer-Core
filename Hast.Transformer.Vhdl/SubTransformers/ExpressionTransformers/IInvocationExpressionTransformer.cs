@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Hast.Common.Interfaces;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
@@ -16,7 +16,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         /// </summary>
         IVhdlElement TransformInvocationExpression(
             InvocationExpression expression,
-            IEnumerable<ITransformedInvocationParameter> transformedParameters,
+            ICollection<ITransformedInvocationParameter> transformedParameters,
             ISubTransformerContext context);
     }
 }

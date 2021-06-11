@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
@@ -62,7 +61,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 });
             }
 
-            Func<int, IVhdlElement> createStartedEqualsFinishedBinary = index =>
+            IVhdlElement CreateStartedEqualsFinishedBinary(int index) =>
                 new Binary
                 {
                     Left = CreateStartedSignalReference(component, targetStateMachineName, index),
@@ -73,7 +72,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return new IfElse<IBlockElement>
             {
                 Condition = BinaryChainBuilder.BuildBinaryChain(
-                    Enumerable.Range(0, degreeOfParallelism).Select(i => createStartedEqualsFinishedBinary(i)),
+                    Enumerable.Range(0, degreeOfParallelism).Select(i => CreateStartedEqualsFinishedBinary(i)),
                     waitForAll ? BinaryOperator.And : BinaryOperator.Or),
                 True = allInvokedStateMachinesFinishedIfElseTrue,
             };

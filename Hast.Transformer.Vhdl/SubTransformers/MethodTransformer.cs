@@ -34,8 +34,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 if (method.Modifiers.HasFlag(Modifiers.Extern))
                 {
                     throw new InvalidOperationException(
-                        "The method " + method.GetFullName() +
-                        " can't be transformed because it's extern. Only managed code can be transformed.");
+                        $"The {nameof(method)} {method.GetFullName()} can't be transformed because it's extern. Only " +
+                        $"managed code can be transformed.");
                 }
 
                 var stateMachineCount = context

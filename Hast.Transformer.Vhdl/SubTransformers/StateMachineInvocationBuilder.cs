@@ -202,72 +202,29 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             foreach (var parameter in transformedParameters)
             {
-                var parameterReference = parameter.Reference;
-
                 // Managing signals for parameter passing.
                 var targetParameter = methodParametersEnumerator.Current;
                 var parameterSignalType = _declarableTypeCreator
                     .CreateDeclarableType(targetParameter, targetParameter.Type, context.TransformationContext);
 
-                Assignment CreateParameterAssignment(ParameterFlowDirection flowDirection)
-                {
-                    var parameterSignalName = stateMachine
-                        .CreatePrefixedSegmentedObjectName(
-                            ArchitectureComponentNameHelper
-                                .CreateParameterSignalName(targetMethodName, targetParameter.Name, flowDirection)
-                                .TrimExtendedVhdlIdDelimiters(),
-                            index.ToString(CultureInfo.InvariantCulture));
-                    var parameterSignalReference = parameterSignalName.ToVhdlSignalReference();
-
-                    var signals = flowDirection == ParameterFlowDirection.Out ?
-                        stateMachine.InternallyDrivenSignals :
-                        stateMachine.ExternallyDrivenSignals;
-                    signals.AddIfNew(new ParameterSignal(
-                        targetMethodName,
-                        targetParameter.Name,
-                        index,
-                        false)
-                    {
-                        DataType = parameterSignalType,
-                        Name = parameterSignalName,
-                    });
-
-                    // Assign local variables to/from the intermediary parameter signal.
-                    // If the parameter is of direction In then the parameter element should contain an IDataObject.
-                    var assignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameterReference;
-                    var assignmentExpression = flowDirection == ParameterFlowDirection.Out ? parameterReference : parameterSignalReference;
-
-                    // We need to do type conversion if there is a type mismatch. This can also occur with Values (i.e.
-                    // transformed PrimitiveExpressions) since in .NET there can be an implicit downcast not visible in
-                    // the AST.
-                    if (parameter.DataType != parameterSignalType)
-                    {
-                        IAssignmentTypeConversionResult conversionResult;
-                        conversionResult = flowDirection == ParameterFlowDirection.Out ? _typeConversionTransformer
-                                .ImplementTypeConversionForAssignment(parameter.DataType, parameterSignalType, parameterReference, assignTo) : _typeConversionTransformer
-                                .ImplementTypeConversionForAssignment(parameterSignalType, parameter.DataType, parameterSignalReference, assignTo);
-
-                        assignTo = conversionResult.ConvertedToDataObject;
-                        assignmentExpression = conversionResult.ConvertedFromExpression;
-                    }
-
-                    // In this case the parameter is e.g. a primitive value, no need to assign to it.
-                    if (flowDirection == ParameterFlowDirection.In && !(parameterReference is IDataObject))
-                    {
-                        return null;
-                    }
-
-                    return new Assignment
-                    {
-                        AssignTo = assignTo,
-                        Expression = assignmentExpression,
-                    };
-                }
-
-                invocationBlock.Add(CreateParameterAssignment(ParameterFlowDirection.Out));
+                invocationBlock.Add(CreateParameterAssignment(
+                    ParameterFlowDirection.Out,
+                    parameter,
+                    parameterSignalType,
+                    targetMethodName,
+                    targetParameter,
+                    context,
+                    index));
                 if (targetParameter.IsOutFlowing())
                 {
-                    var assignment = CreateParameterAssignment(ParameterFlowDirection.In);
+                    var assignment = CreateParameterAssignment(
+                        ParameterFlowDirection.In,
+                        parameter,
+                        parameterSignalType,
+                        targetMethodName,
+                        targetParameter,
+                        context,
+                        index);
                     if (assignment != null) outParameterBackAssignments.Add(assignment);
                 }
 
@@ -280,6 +237,72 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 InvocationBlock = invocationBlock,
                 OutParameterBackAssignments = outParameterBackAssignments,
+            };
+        }
+
+        private Assignment CreateParameterAssignment(
+            ParameterFlowDirection flowDirection,
+            ITransformedInvocationParameter parameter,
+            DataType parameterSignalType,
+            string targetMethodName,
+            ParameterDeclaration targetParameter,
+            ISubTransformerContext context,
+            int index)
+        {
+            var parameterReference = parameter.Reference;
+            var scope = context.Scope;
+            var stateMachine = scope.StateMachine;
+
+            var parameterSignalName = stateMachine
+                .CreatePrefixedSegmentedObjectName(
+                    ArchitectureComponentNameHelper
+                        .CreateParameterSignalName(targetMethodName, targetParameter.Name, flowDirection)
+                        .TrimExtendedVhdlIdDelimiters(),
+                    index.ToString(CultureInfo.InvariantCulture));
+            var parameterSignalReference = parameterSignalName.ToVhdlSignalReference();
+
+            var signals = flowDirection == ParameterFlowDirection.Out ?
+                stateMachine.InternallyDrivenSignals :
+                stateMachine.ExternallyDrivenSignals;
+            signals.AddIfNew(new ParameterSignal(
+                targetMethodName,
+                targetParameter.Name,
+                index,
+                false)
+            {
+                DataType = parameterSignalType,
+                Name = parameterSignalName,
+            });
+
+            // Assign local variables to/from the intermediary parameter signal.
+            // If the parameter is of direction In then the parameter element should contain an IDataObject.
+            var assignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameterReference;
+            var assignmentExpression = flowDirection == ParameterFlowDirection.Out ? parameterReference : parameterSignalReference;
+
+            // We need to do type conversion if there is a type mismatch. This can also occur with Values (i.e.
+            // transformed PrimitiveExpressions) since in .NET there can be an implicit downcast not visible in
+            // the AST.
+            if (parameter.DataType != parameterSignalType)
+            {
+                IAssignmentTypeConversionResult conversionResult;
+                conversionResult = flowDirection == ParameterFlowDirection.Out ? _typeConversionTransformer
+                        .ImplementTypeConversionForAssignment(parameter.DataType, parameterSignalType, parameterReference, assignTo) : _typeConversionTransformer
+                        .ImplementTypeConversionForAssignment(parameterSignalType, parameter.DataType, parameterSignalReference, assignTo);
+
+                assignTo = conversionResult.ConvertedToDataObject;
+                assignmentExpression = conversionResult.ConvertedFromExpression;
+            }
+
+            // In this case the parameter is e.g. a primitive value, no need to assign to it.
+            if (flowDirection == ParameterFlowDirection.In && !(parameterReference is IDataObject))
+            {
+                return null;
+            }
+
+            return new Assignment
+            {
+                AssignTo = assignTo,
+                Expression = assignmentExpression,
             };
         }
 
@@ -354,9 +377,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // Noting that this component was finished in this state.
                 var finishedInvokedComponentsForStates = context.Scope.FinishedInvokedStateMachinesForStates;
-                ISet<string> finishedComponents;
                 if (!finishedInvokedComponentsForStates
-                    .TryGetValue(currentBlock.StateMachineStateIndex, out finishedComponents))
+                    .TryGetValue(currentBlock.StateMachineStateIndex, out var finishedComponents))
                 {
                     finishedComponents = finishedInvokedComponentsForStates[currentBlock.StateMachineStateIndex] =
                         new HashSet<string>();

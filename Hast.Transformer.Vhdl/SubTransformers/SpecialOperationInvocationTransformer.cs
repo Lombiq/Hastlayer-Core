@@ -38,7 +38,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (!IsSpecialOperationInvocation(expression))
             {
                 throw new InvalidOperationException(
-                    "The given expression (" + expression + ") is not a special operation invocation.");
+                    $"The given {nameof(expression)} ({expression}) is not a special operation invocation.");
             }
 
             var targetMethodName = expression.GetTargetMemberFullName();
@@ -60,24 +60,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var vector2 = (DataObjectReference)transformedParameters.Skip(1).First();
             var binaryOperations = new List<IPartiallyTransformedBinaryOperatorExpression>();
 
-            BinaryOperatorType simdBinaryOperator;
-            switch (simdOperation)
+            var simdBinaryOperator = simdOperation switch
             {
-                case nameof(SimdOperations.AddVectors):
-                    simdBinaryOperator = BinaryOperatorType.Add;
-                    break;
-                case nameof(SimdOperations.SubtractVectors):
-                    simdBinaryOperator = BinaryOperatorType.Subtract;
-                    break;
-                case nameof(SimdOperations.MultiplyVectors):
-                    simdBinaryOperator = BinaryOperatorType.Multiply;
-                    break;
-                case nameof(SimdOperations.DivideVectors):
-                    simdBinaryOperator = BinaryOperatorType.Divide;
-                    break;
-                default:
-                    throw new NotSupportedException("The SIMD operation " + simdOperation + " is not supported.");
-            }
+                nameof(SimdOperations.AddVectors) => BinaryOperatorType.Add,
+                nameof(SimdOperations.SubtractVectors) => BinaryOperatorType.Subtract,
+                nameof(SimdOperations.MultiplyVectors) => BinaryOperatorType.Multiply,
+                nameof(SimdOperations.DivideVectors) => BinaryOperatorType.Divide,
+                _ => throw new NotSupportedException($"The SIMD operation {simdOperation} is not supported."),
+            };
 
             // The result type of each artificial BinaryOperatorExpression should be the same as the SIMD method call's
             // return array type's element type.
@@ -86,17 +76,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             for (int i = 0; i < maxDegreeOfParallelism; i++)
             {
+                PrimitiveExpression GetIndexer(int index) =>
+                    new PrimitiveExpression(index).WithAnnotation(intType.ToResolveResult());
+
+                var arrayReferences = expression.Arguments.Take(2).Select(expression => expression.Clone()).ToList();
+
                 var binaryOperatorExpression = new BinaryOperatorExpression(
-                        new IndexerExpression(
-                            // The first array's reference.
-                            expression.Arguments.First().Clone(),
-                            // The expression object can't be re-used below.
-                            new PrimitiveExpression(i).WithAnnotation(intType.ToResolveResult())),
+                        new IndexerExpression(arrayReferences[0], GetIndexer(i)),
                         simdBinaryOperator,
-                        new IndexerExpression(
-                            // The second array's reference.
-                            expression.Arguments.Skip(1).First().Clone(),
-                            new PrimitiveExpression(i).WithAnnotation(intType.ToResolveResult())));
+                        new IndexerExpression(arrayReferences[1], GetIndexer(i)));
 
                 binaryOperatorExpression.AddAnnotation(resultElementResolveResult);
 
