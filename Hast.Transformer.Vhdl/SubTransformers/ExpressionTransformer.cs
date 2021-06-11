@@ -195,14 +195,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var toVhdlType = _declarableTypeCreator
                 .CreateDeclarableType(castExpression, castExpression.Type, context.TransformationContext);
 
-            // If the inner expression produced a data object then let's check the size of that: if it's the same
-            // size as the target type of the cast then no need to cast again.
-            var resultDataObject = innerExpressionResult as IDataObject;
-            if (resultDataObject == null && innerExpressionResult is Parenthesized resultParentesized)
-            {
-                resultDataObject = resultParentesized.Target as IDataObject;
-            }
-
             var typeConversionResult = _typeConversionTransformer
                 .ImplementTypeConversion(fromVhdlType, toVhdlType, innerExpressionResult);
             if (typeConversionResult.IsLossy)

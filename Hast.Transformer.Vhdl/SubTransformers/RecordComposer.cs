@@ -44,13 +44,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     .Select(member =>
                     {
                         var name = member.Name;
-                        ArrayCreateExpression arrayCreateExpression = null;
 
                         if (member is FieldDeclaration declaration)
                         {
                             var variable = declaration.Variables.Single();
                             name = variable.Name;
-                            arrayCreateExpression = variable.Initializer as ArrayCreateExpression;
                         }
 
                         // If the field stores an instance of this type then we shouldn't declare that, otherwise we'd

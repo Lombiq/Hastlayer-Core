@@ -35,13 +35,13 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             };
             ExternallyDrivenSignals.Add(startedSignal);
 
-            var _finishedSignal = new Signal
+            var finishedSignal = new Signal
             {
                 DataType = KnownDataTypes.Boolean,
                 Name = this.CreateFinishedSignalName(),
                 InitialValue = Value.False,
             };
-            InternallyDrivenSignals.Add(_finishedSignal);
+            InternallyDrivenSignals.Add(finishedSignal);
 
             var startStateBlock = new InlineBlock(
                 new LineComment("Start state"),
@@ -68,9 +68,9 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                         Operator = BinaryOperator.Equality,
                         Right = Value.True,
                     },
-                    True = new Assignment { AssignTo = _finishedSignal, Expression = Value.True },
+                    True = new Assignment { AssignTo = finishedSignal, Expression = Value.True },
                     Else = new InlineBlock(
-                        new Assignment { AssignTo = _finishedSignal, Expression = Value.False },
+                        new Assignment { AssignTo = finishedSignal, Expression = Value.False },
                         this.ChangeToStartState()),
                 });
 

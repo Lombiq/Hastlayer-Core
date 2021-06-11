@@ -21,7 +21,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public bool IsSupportedMember(AstNode node) =>
             _recordComposer.IsSupportedRecordMember(node) ||
-            (node is FieldDeclaration && !_displayClassFieldTransformer.IsDisplayClassField((FieldDeclaration)node));
+            (node is FieldDeclaration declaration && !_displayClassFieldTransformer.IsDisplayClassField(declaration));
 
         public Task<IMemberTransformerResult> TransformAsync(TypeDeclaration typeDeclaration, IVhdlTransformationContext context) =>
             Task.Run<IMemberTransformerResult>(() =>
@@ -40,7 +40,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     foreach (var field in record.Fields)
                     {
-                        if (field.DataType is ArrayTypeBase || field.DataType is Record)
+                        if (field.DataType is ArrayTypeBase or Record)
                         {
                             component.DependentTypesTable.AddDependency(record, field.DataType.Name);
                             hasDependency = true;
