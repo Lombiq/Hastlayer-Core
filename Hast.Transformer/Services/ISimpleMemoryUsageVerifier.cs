@@ -8,6 +8,9 @@ namespace Hast.Transformer.Services
     /// </summary>
     public interface ISimpleMemoryUsageVerifier : IDependency
     {
+        /// <summary>
+        /// Verifies the syntax tree so every usage of SimpleMemory is OK.
+        /// </summary>
         void VerifySimpleMemoryUsage(SyntaxTree syntaxTree);
     }
 }
