@@ -3,9 +3,19 @@ using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
+    /// <summary>
+    /// The current state of the <see cref="IMemberStateMachine" />.
+    /// </summary>
     public interface IMemberStateMachineState
     {
+        /// <summary>
+        /// Gets the block body of the member the state machine represents.
+        /// </summary>
         IBlockElement Body { get; }
+
+        /// <summary>
+        /// Gets or sets the clock cycles required to invoke the member the state machine represents.
+        /// </summary>
         decimal RequiredClockCycles { get; set; }
     }
 

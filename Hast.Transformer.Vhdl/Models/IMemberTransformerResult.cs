@@ -24,6 +24,10 @@ namespace Hast.Transformer.Vhdl.Models
         /// indirectly by the entry point.
         /// </summary>
         bool IsHardwareEntryPointMember { get; }
+
+        /// <summary>
+        /// Gets the returned results as <see cref="IArchitectureComponentResult"/>s.
+        /// </summary>
         IEnumerable<IArchitectureComponentResult> ArchitectureComponentResults { get; }
     }
 }

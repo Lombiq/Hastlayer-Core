@@ -5,8 +5,14 @@ using Hast.Transformer.Vhdl.Models;
 
 namespace Hast.Transformer.Vhdl.Services
 {
+    /// <summary>
+    /// Service for building VHDL manifest from the transformation engine.
+    /// </summary>
     public interface ITransformedVhdlManifestBuilder : IDependency
     {
-        Task<ITransformedVhdlManifest> BuildManifestAsync(ITransformationContext transformationContext);
+        /// <summary>
+        /// Performs some member transformations and creates a new VHDL manifest.
+        /// </summary>
+        Task<TransformedVhdlManifest> BuildManifestAsync(ITransformationContext transformationContext);
     }
 }
