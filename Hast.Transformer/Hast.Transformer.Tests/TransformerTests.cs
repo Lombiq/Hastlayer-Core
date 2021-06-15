@@ -38,7 +38,7 @@ namespace Hast.Transformer.Vhdl.Tests
             _mocker.Use<IMemberSuitabilityChecker>(_mocker.CreateInstance<MemberSuitabilityChecker>());
             _mocker.Use<ITypeDeclarationLookupTableFactory>(_mocker.CreateInstance<TypeDeclarationLookupTableFactory>());
             _mocker.Use<ISyntaxTreeCleaner>(_mocker.CreateInstance<SyntaxTreeCleaner>());
-            _mocker.Use<IMemberIdentifiersFixer>(_mocker.CreateInstance<MemberIdentifiersFixer>());
+            _mocker.Use<IConverter>(_mocker.CreateInstance<MemberIdentifiersFixer>());
 
             // Moq has a problem with resolving IEnumerable<Tservice> in the constructor even when Tservice is already
             // registered, so these have to be added manually. See: https://github.com/moq/Moq.AutoMocker/issues/76
