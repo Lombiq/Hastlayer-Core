@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
@@ -10,6 +10,9 @@ namespace Hast.Transformer.Services
     /// </summary>
     public interface IInvocationInstanceCountAdjuster : IDependency
     {
+        /// <summary>
+        /// Updates the instance count of invoked members.
+        /// </summary>
         void AdjustInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
     }
 }

@@ -1,17 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using Hast.Common.Interfaces;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 
 namespace Hast.Transformer.Services
 {
-    public interface ITypeDeclarationLookupTableFactory : IDependency
-    {
-        ITypeDeclarationLookupTable Create(SyntaxTree syntaxTree);
-    }
-
     public class TypeDeclarationLookupTableFactory : ITypeDeclarationLookupTableFactory
     {
         public ITypeDeclarationLookupTable Create(SyntaxTree syntaxTree)

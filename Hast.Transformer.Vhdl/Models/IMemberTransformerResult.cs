@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.Models
@@ -7,12 +7,22 @@ namespace Hast.Transformer.Vhdl.Models
     /// The result that member transformers return.
     /// </summary>
     /// <remarks>
-    /// <para>Declarations and Body wouldn't be needed, since they can be generated from the state machine. However by
-    /// requiring transformers to build them the process can be parallelized better.</para>
+    /// <para>
+    /// Declarations and Body wouldn't be needed, since they can be generated from the state
+    /// machine. However by requiring transformers to build them the process can be parallelized better.
+    /// </para>
     /// </remarks>
     public interface IMemberTransformerResult
     {
+        /// <summary>
+        /// Gets the member that was transformed.
+        /// </summary>
         EntityDeclaration Member { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether this member is an entry point or one invoked directly or
+        /// indirectly by the entry point.
+        /// </summary>
         bool IsHardwareEntryPointMember { get; }
         IEnumerable<IArchitectureComponentResult> ArchitectureComponentResults { get; }
     }

@@ -1,7 +1,10 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
+    /// <summary>
+    /// Creates new <see cref="IMemberStateMachine"/> objects.
+    /// </summary>
     public interface IMemberStateMachineFactory : IDependency
     {
         /// <summary>

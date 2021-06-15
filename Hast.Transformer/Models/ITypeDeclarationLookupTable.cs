@@ -1,7 +1,10 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Models
 {
+    /// <summary>
+    /// Retrieves the type declaration, given the type's full name.
+    /// </summary>
     public interface ITypeDeclarationLookupTable
     {
         /// <summary>
