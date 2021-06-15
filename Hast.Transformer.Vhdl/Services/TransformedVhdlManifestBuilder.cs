@@ -1,4 +1,3 @@
-using Hast.Common.Extensions;
 using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
@@ -15,7 +14,6 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -23,53 +21,37 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Attribute = Hast.VhdlBuilder.Representation.Declaration.Attribute;
+using Module = Hast.VhdlBuilder.Representation.Declaration.Module;
 
 namespace Hast.Transformer.Vhdl.Services
 {
     public class TransformedVhdlManifestBuilder : ITransformedVhdlManifestBuilder
     {
-        private readonly ICompilerGeneratedClassesVerifier _compilerGeneratedClassesVerifier;
-        private readonly IHardwareEntryPointsVerifier _hardwareEntryPointsVerifier;
+        private readonly IEnumerable<IVerifyer> _verifyers;
         private readonly IClock _clock;
-        private readonly IArrayTypesCreator _arrayTypesCreator;
-        private readonly IMethodTransformer _methodTransformer;
-        private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
-        private readonly IExternalInvocationProxyBuilder _externalInvocationProxyBuilder;
-        private readonly IInternalInvocationProxyBuilder _internalInvocationProxyBuilder;
+        private readonly IInvocationProxyBuilder _invocationProxyBuilder;
         private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
-        private readonly IEnumTypesCreator _enumTypesCreator;
-        private readonly IPocoTransformer _pocoTransformer;
         private readonly IRemainderOperatorExpressionsExpander _remainderOperatorExpressionsExpander;
-        private readonly IUnsupportedConstructsVerifier _unsupportedConstructsVerifier;
+        private readonly IMemberTransformer _memberTransformer;
+        private readonly ITypesCreator _typesCreator;
 
         public TransformedVhdlManifestBuilder(
-            ICompilerGeneratedClassesVerifier compilerGeneratedClassesVerifier,
-            IHardwareEntryPointsVerifier hardwareEntryPointsVerifier,
+            IEnumerable<IVerifyer> verifyers,
             IClock clock,
-            IArrayTypesCreator arrayTypesCreator,
-            IMethodTransformer methodTransformer,
-            IDisplayClassFieldTransformer displayClassFieldTransformer,
-            IExternalInvocationProxyBuilder externalInvocationProxyBuilder,
-            IInternalInvocationProxyBuilder internalInvocationProxyBuilder,
+            IInvocationProxyBuilder invocationProxyBuilder,
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
-            IEnumTypesCreator enumTypesCreator,
-            IPocoTransformer pocoTransformer,
             IRemainderOperatorExpressionsExpander remainderOperatorExpressionsExpander,
-            IUnsupportedConstructsVerifier unsupportedConstructsVerifier)
+            IMemberTransformer memberTransformer,
+            ITypesCreator typesCreator)
         {
-            _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
-            _hardwareEntryPointsVerifier = hardwareEntryPointsVerifier;
+            _verifyers = verifyers;
             _clock = clock;
-            _arrayTypesCreator = arrayTypesCreator;
-            _methodTransformer = methodTransformer;
-            _displayClassFieldTransformer = displayClassFieldTransformer;
-            _externalInvocationProxyBuilder = externalInvocationProxyBuilder;
-            _internalInvocationProxyBuilder = internalInvocationProxyBuilder;
+            _invocationProxyBuilder = invocationProxyBuilder;
             _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
-            _enumTypesCreator = enumTypesCreator;
-            _pocoTransformer = pocoTransformer;
             _remainderOperatorExpressionsExpander = remainderOperatorExpressionsExpander;
-            _unsupportedConstructsVerifier = unsupportedConstructsVerifier;
+            _memberTransformer = memberTransformer;
+            _typesCreator = typesCreator;
         }
 
         public async Task<ITransformedVhdlManifest> BuildManifestAsync(ITransformationContext transformationContext)
@@ -77,9 +59,7 @@ namespace Hast.Transformer.Vhdl.Services
             var syntaxTree = transformationContext.SyntaxTree;
 
             // Running verifications.
-            _unsupportedConstructsVerifier.ThrowIfUnsupportedConstructsFound(syntaxTree);
-            _compilerGeneratedClassesVerifier.VerifyCompilerGeneratedClasses(syntaxTree);
-            _hardwareEntryPointsVerifier.VerifyHardwareEntryPoints(syntaxTree, transformationContext.TypeDeclarationLookupTable);
+            foreach (var verifyer in _verifyers) verifyer.Verify(syntaxTree, transformationContext);
 
             // Running AST changes.
             _remainderOperatorExpressionsExpander.ExpandRemainderOperatorExpressions(syntaxTree);
@@ -88,7 +68,7 @@ namespace Hast.Transformer.Vhdl.Services
             var useSimpleMemory = transformationContext.GetTransformerConfiguration().UseSimpleMemory;
 
             var hastIpArchitecture = new Architecture { Name = "Imp" };
-            var hastIpModule = new VhdlBuilder.Representation.Declaration.Module { Architecture = hastIpArchitecture };
+            var hastIpModule = new Module { Architecture = hastIpArchitecture };
 
             // Adding libraries
             hastIpModule.Libraries.Add(new Library(
@@ -112,29 +92,15 @@ namespace Hast.Transformer.Vhdl.Services
 
             var dependentTypesTables = new List<DependentTypesTable>();
 
-            // Adding array types for any arrays created in code.
-            // This is necessary in a separate step because in VHDL the array types themselves should be created too
-            // (like in C# we'd need to first define what an int[] is before being able to create one).
-            var arrayTypeDependentTypes = new DependentTypesTable();
-            foreach (var arrayDeclaration in _arrayTypesCreator.CreateArrayTypes(syntaxTree, vhdlTransformationContext))
-            {
-                arrayTypeDependentTypes.AddDependency(arrayDeclaration, arrayDeclaration.ElementType.Name);
-            }
-
-            arrayTypeDependentTypes.AddToIfNotEmpty(dependentTypesTables);
-
-            // Adding enum types.
-            var enumDeclarations = _enumTypesCreator.CreateEnumTypes(syntaxTree);
-            if (enumDeclarations.Any())
-            {
-                var enumDeclarationsBlock = new LogicalBlock(new LineComment("Enum declarations start"));
-                enumDeclarationsBlock.Body.AddRange(enumDeclarations);
-                enumDeclarationsBlock.Add(new LineComment("Enum declarations end"));
-                hastIpArchitecture.Declarations.Add(enumDeclarationsBlock);
-            }
+            _typesCreator.CreateTypes(
+                syntaxTree,
+                vhdlTransformationContext,
+                dependentTypesTables,
+                hastIpArchitecture);
 
             // Doing transformations.
-            var transformerResults = await Task.WhenAll(TransformMembers(transformationContext.SyntaxTree, vhdlTransformationContext));
+            var transformerResults = await Task.WhenAll(
+                _memberTransformer.TransformMembers(transformationContext.SyntaxTree, vhdlTransformationContext));
             var warnings = new List<ITransformationWarning>();
             var potentiallyInvokingArchitectureComponents = transformerResults
                 .SelectMany(result => result
@@ -194,33 +160,12 @@ namespace Hast.Transformer.Vhdl.Services
                 hastIpArchitecture.Add(architectureComponentResult.Body);
             }
 
-            // Proxying external invocations.
-            var hardwareEntryPointMemberResults = transformerResults
-                .Where(result => result.IsHardwareEntryPointMember)
-                .ToList();
-            if (!hardwareEntryPointMemberResults.Any())
-            {
-                throw new InvalidOperationException(
-                    "There aren't any hardware entry point members, however at least one is needed to execute " +
-                    "anything on hardware. Did you forget to pass all the assemblies to Hastlayer? Are there " +
-                    "methods suitable as hardware entry points (see the documentation)?");
-            }
-
-            var memberIdTable = BuildMemberIdTable(hardwareEntryPointMemberResults);
-            var externalInvocationProxy = _externalInvocationProxyBuilder.BuildProxy(hardwareEntryPointMemberResults, memberIdTable);
-            potentiallyInvokingArchitectureComponents.Add(externalInvocationProxy);
-            hastIpArchitecture.Declarations.Add(externalInvocationProxy.BuildDeclarations());
-            hastIpArchitecture.Add(externalInvocationProxy.BuildBody());
-
-            // Proxying internal invocations.
-            var internaInvocationProxies = _internalInvocationProxyBuilder.BuildProxy(
+            // Proxying invocations.
+            var (hardwareEntryPointMemberResults, memberIdTable) = _invocationProxyBuilder.GetHardwareEntryPoints(
+                transformerResults,
                 potentiallyInvokingArchitectureComponents,
+                hastIpArchitecture,
                 vhdlTransformationContext);
-            foreach (var proxy in internaInvocationProxies)
-            {
-                hastIpArchitecture.Declarations.Add(proxy.BuildDeclarations());
-                hastIpArchitecture.Add(proxy.BuildBody());
-            }
 
             // Proxying SimpleMemory operations.
             if (useSimpleMemory)
@@ -346,7 +291,7 @@ namespace Hast.Transformer.Vhdl.Services
 
             if (anyMultiCycleOperations)
             {
-                var alteraAttribute = new VhdlBuilder.Representation.Declaration.Attribute
+                var alteraAttribute = new Attribute
                 {
                     Name = "altera_attribute",
                     ValueType = KnownDataTypes.UnrangedString,
@@ -366,133 +311,16 @@ namespace Hast.Transformer.Vhdl.Services
             }
         }
 
-        private IEnumerable<Task<IMemberTransformerResult>> TransformMembers(
-            AstNode node,
-            VhdlTransformationContext transformationContext,
-            List<Task<IMemberTransformerResult>> memberTransformerTasks = null)
-        {
-            memberTransformerTasks ??= new List<Task<IMemberTransformerResult>>();
-
-            var traverseTo = node.Children;
-
-            // If for debugging you want to make the below processing serial instead of it running in parallel then
-            // add .Result to every transformation call and wrap them into Task.FromResult() methods.
-            return node.NodeType switch
-            {
-                NodeType.Member =>
-                    TransformSingleMember(node, memberTransformerTasks, traverseTo, transformationContext),
-                NodeType.TypeDeclaration =>
-                    TransformTypeDeclaration(node, memberTransformerTasks, traverseTo, transformationContext),
-                _ => TransformChildMembers(memberTransformerTasks, traverseTo, transformationContext),
-            };
-        }
-
-        private IEnumerable<Task<IMemberTransformerResult>> TransformSingleMember(
-            AstNode node,
-            List<Task<IMemberTransformerResult>> memberTransformerTasks,
-            IEnumerable<AstNode> traverseTo,
-            VhdlTransformationContext transformationContext)
-        {
-            if (node is MethodDeclaration methodDeclaration)
-            {
-                memberTransformerTasks
-                    .Add(_methodTransformer.TransformAsync(methodDeclaration, transformationContext));
-            }
-            else if (node is FieldDeclaration fieldDeclaration &&
-                     _displayClassFieldTransformer.IsDisplayClassField(fieldDeclaration))
-            {
-                memberTransformerTasks
-                    .Add(_displayClassFieldTransformer.TransformAsync(fieldDeclaration, transformationContext));
-            }
-            else if (!_pocoTransformer.IsSupportedMember(node))
-            {
-                throw new NotSupportedException($"The member {node} is not supported for transformation.");
-            }
-
-            return TransformChildMembers(memberTransformerTasks, traverseTo, transformationContext);
-        }
-
-        private IEnumerable<Task<IMemberTransformerResult>> TransformTypeDeclaration(
-            AstNode node,
-            List<Task<IMemberTransformerResult>> memberTransformerTasks,
-            IEnumerable<AstNode> traverseTo,
-            VhdlTransformationContext transformationContext)
-        {
-            var typeDeclaration = node as TypeDeclaration;
-            switch (typeDeclaration?.ClassType)
-            {
-                case ClassType.Class:
-                case ClassType.Struct:
-                    if (typeDeclaration.BaseTypes.Any(baseType => baseType.GetActualType().Kind != TypeKind.Interface))
-                    {
-                        throw new NotSupportedException(
-                            "Class inheritance is not supported. Affected class: " + node.GetFullName() + ".");
-                    }
-
-                    // Records need to be created only for those types that are neither display classes, nor
-                    // hardware entry point types or static types
-                    if (!typeDeclaration.GetFullName().IsDisplayOrClosureClassName() &&
-                        !typeDeclaration.Members.Any(member => member.IsHardwareEntryPointMember()) &&
-                        !typeDeclaration.Modifiers.HasFlag(Modifiers.Static))
-                    {
-                        memberTransformerTasks.Add(_pocoTransformer.TransformAsync(typeDeclaration, transformationContext));
-                    }
-
-                    traverseTo = traverseTo.Where(n => n.NodeType is NodeType.Member or NodeType.TypeDeclaration);
-                    return TransformChildMembers(memberTransformerTasks, traverseTo, transformationContext);
-                case ClassType.Enum:
-                    return memberTransformerTasks; // Enums are transformed separately.
-                case ClassType.Interface:
-                    return memberTransformerTasks; // Interfaces are irrelevant here.
-                case ClassType.RecordClass:
-                default:
-                    return TransformChildMembers(memberTransformerTasks, traverseTo, transformationContext);
-            }
-        }
-
-        private List<Task<IMemberTransformerResult>> TransformChildMembers(
-            List<Task<IMemberTransformerResult>> memberTransformerTasks,
-            IEnumerable<AstNode> traverseTo,
-            VhdlTransformationContext transformationContext)
-        {
-            foreach (var target in traverseTo)
-            {
-                TransformMembers(target, transformationContext, memberTransformerTasks);
-            }
-
-            return memberTransformerTasks;
-        }
-
-        private static MemberIdTable BuildMemberIdTable(IEnumerable<IMemberTransformerResult> hardwareEntryPointMemberResults)
-        {
-            var memberIdTable = new MemberIdTable();
-            var memberId = 0;
-
-            foreach (var interfaceMemberResult in hardwareEntryPointMemberResults)
-            {
-                var methodFullName = interfaceMemberResult.Member.GetFullName();
-                memberIdTable.SetMapping(methodFullName, memberId);
-                foreach (var methodNameAlternate in methodFullName.GetMemberNameAlternates())
-                {
-                    memberIdTable.SetMapping(methodNameAlternate, memberId);
-                }
-
-                memberId++;
-            }
-
-            return memberIdTable;
-        }
-
         private static void ReadAndAddEmbedLibrary(
             string libraryName,
             VhdlManifest manifest,
-            VhdlBuilder.Representation.Declaration.Module hastIpModule)
+            Module hastIpModule)
         {
             var resourceName = "Hast.Transformer.Vhdl.VhdlLibraries." + libraryName + ".vhd";
 #pragma warning disable S3902 // "Assembly.GetExecutingAssembly" should not be called. Except we are in a library.
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
 #pragma warning restore S3902 // "Assembly.GetExecutingAssembly" should not be called. Except we are in a library.
-            using (var reader = new StreamReader(stream))
+            using (var reader = new StreamReader(stream!))
             {
                 manifest.Modules.Add(new LogicalBlock(new Raw(reader.ReadToEnd())));
             }

@@ -6,13 +6,23 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.Verifiers
 {
-    public class HardwareEntryPointsVerifier : IHardwareEntryPointsVerifier
+    /// <summary>
+    /// Checks if hardware entry point types are suitable for transforming.
+    /// </summary>
+    public class HardwareEntryPointsVerifier : IVerifyer
     {
         private readonly IMemberSuitabilityChecker _memberSuitabilityChecker;
 
-        public HardwareEntryPointsVerifier(IMemberSuitabilityChecker memberSuitabilityChecker) => _memberSuitabilityChecker = memberSuitabilityChecker;
+        public HardwareEntryPointsVerifier(IMemberSuitabilityChecker memberSuitabilityChecker) =>
+            _memberSuitabilityChecker = memberSuitabilityChecker;
 
-        public void VerifyHardwareEntryPoints(SyntaxTree syntaxTree, ITypeDeclarationLookupTable typeDeclarationLookupTable)
+        public void Verify(SyntaxTree syntaxTree, ITransformationContext transformationContext) =>
+            VerifyHardwareEntryPoints(syntaxTree, transformationContext.TypeDeclarationLookupTable);
+
+        /// <summary>
+        /// Checks if hardware entry point types are suitable for transforming.
+        /// </summary>
+        private void VerifyHardwareEntryPoints(SyntaxTree syntaxTree, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             var hardwareEntryPointTypes = syntaxTree
                 .GetTypes()

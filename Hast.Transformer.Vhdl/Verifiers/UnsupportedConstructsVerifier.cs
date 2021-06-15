@@ -1,16 +1,23 @@
+using Hast.Transformer.Models;
 using System;
 using Hast.Transformer.Vhdl.SubTransformers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.Verifiers
 {
-    public class UnsupportedConstructsVerifier : IUnsupportedConstructsVerifier
+    /// <summary>
+    /// Verifies whether unsupported languages constructs not checked for otherwise are present, and if yes, throws
+    /// exceptions. Note: this doesn't check for everything unsupported.
+    /// </summary>
+    public class UnsupportedConstructsVerifier : IVerifyer
     {
         private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
 
-        public UnsupportedConstructsVerifier(IDisplayClassFieldTransformer displayClassFieldTransformer) => _displayClassFieldTransformer = displayClassFieldTransformer;
+        public UnsupportedConstructsVerifier(IDisplayClassFieldTransformer displayClassFieldTransformer) =>
+            _displayClassFieldTransformer = displayClassFieldTransformer;
 
-        public void ThrowIfUnsupportedConstructsFound(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new UnsupportedConstructsFindingVisitor(_displayClassFieldTransformer));
+        public void Verify(SyntaxTree syntaxTree, ITransformationContext transformationContext) =>
+            syntaxTree.AcceptVisitor(new UnsupportedConstructsFindingVisitor(_displayClassFieldTransformer));
 
         private class UnsupportedConstructsFindingVisitor : DepthFirstAstVisitor
         {

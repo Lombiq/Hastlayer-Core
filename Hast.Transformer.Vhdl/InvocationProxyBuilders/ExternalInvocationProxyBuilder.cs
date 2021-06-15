@@ -9,9 +9,9 @@ using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 {
-    public class ExternalInvocationProxyBuilder : IExternalInvocationProxyBuilder
+    public partial class InvocationProxyBuilder : IInvocationProxyBuilder
     {
-        public IArchitectureComponent BuildProxy(
+        public IArchitectureComponent BuildExternalProxy(
             IEnumerable<IMemberTransformerResult> hardwareEntryPointMemberResults,
             MemberIdTable memberIdTable)
         {

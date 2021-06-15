@@ -1,3 +1,4 @@
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using System;
@@ -6,9 +7,18 @@ using System.Linq;
 
 namespace Hast.Transformer.Vhdl.Verifiers
 {
-    public class CompilerGeneratedClassesVerifier : ICompilerGeneratedClassesVerifier
+    /// <summary>
+    /// Verifies compiler-generated classes for transformation, checking for potential issues preventing processing.
+    /// </summary>
+    public class CompilerGeneratedClassesVerifier : IVerifyer
     {
-        public void VerifyCompilerGeneratedClasses(SyntaxTree syntaxTree)
+        public void Verify(SyntaxTree syntaxTree, ITransformationContext transformationContext) =>
+            VerifyCompilerGeneratedClasses(syntaxTree);
+
+        /// <summary>
+        /// Verifies compiler-generated classes for transformation, checking for potential issues preventing processing.
+        /// </summary>
+        private static void VerifyCompilerGeneratedClasses(SyntaxTree syntaxTree)
         {
             var compilerGeneratedClasses = syntaxTree
                 .GetAllTypeDeclarations()
