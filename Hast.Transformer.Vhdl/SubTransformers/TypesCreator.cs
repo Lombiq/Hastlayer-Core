@@ -1,4 +1,3 @@
-﻿using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -39,7 +38,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // Adding enum types (avoid multiple enumerations).
             var enumDeclarations = _enumTypesCreator.CreateEnumTypes(syntaxTree);
-            var listDeclarations = enumDeclarations is IList<IVhdlElement>  list ? list : enumDeclarations.ToList();
+            var listDeclarations = enumDeclarations is IList<IVhdlElement> list ? list : enumDeclarations.ToList();
 
             if (listDeclarations.Any())
             {

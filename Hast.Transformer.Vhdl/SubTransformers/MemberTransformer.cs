@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.Models;
+using Hast.Transformer.Vhdl.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
@@ -24,7 +24,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _displayClassFieldTransformer = displayClassFieldTransformer;
             _pocoTransformer = pocoTransformer;
         }
-
 
         public IEnumerable<Task<IMemberTransformerResult>> TransformMembers(
             AstNode node,

@@ -1,11 +1,11 @@
-﻿using Hast.Common.Extensions;
-using System.Collections.Generic;
+using Hast.Common.Extensions;
 using Hast.Common.Interfaces;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
@@ -70,7 +70,6 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
             return (hardwareEntryPointMemberResults, memberIdTable);
         }
-
 
         private static MemberIdTable BuildMemberIdTable(IEnumerable<IMemberTransformerResult> hardwareEntryPointMemberResults)
         {
