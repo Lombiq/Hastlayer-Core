@@ -30,8 +30,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         }
 
         public IEnumerable<IVhdlElement> TransformParallelBinaryOperatorExpressions(
-              IEnumerable<IPartiallyTransformedBinaryOperatorExpression> partiallyTransformedExpressions,
-              ISubTransformerContext context)
+              IEnumerable<PartiallyTransformedBinaryOperatorExpression> partiallyTransformedExpressions,
+              SubTransformerContext context)
         {
             var resultReferences = new List<IVhdlElement>();
 
@@ -65,8 +65,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         }
 
         public IVhdlElement TransformBinaryOperatorExpression(
-            IPartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
-            ISubTransformerContext context) =>
+            PartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
+            SubTransformerContext context) =>
             TransformBinaryOperatorExpressionInner(
                 partiallyTransformedExpression,
                 true,
@@ -75,11 +75,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 context);
 
         private IVhdlElement TransformBinaryOperatorExpressionInner(
-            IPartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
+            PartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
             bool operationResultDataObjectIsVariable,
             bool isFirstOfSimdOperationsOrIsSingleOperation,
             bool isLastOfSimdOperations,
-            ISubTransformerContext context)
+            SubTransformerContext context)
         {
             var binary = new Binary
             {
@@ -314,7 +314,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             return operationResultDataObjectReference;
         }
 
-        private VhdlTypeInfo GetTypeAndSize(IType type, ISubTransformerContext context, bool allowNullKind)
+        private VhdlTypeInfo GetTypeAndSize(IType type, SubTransformerContext context, bool allowNullKind)
         {
             DataType vhdlType = null;
             var typeSize = 0;
@@ -338,7 +338,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             "S107:Methods should not have too many parameters",
             Justification = "We can make an exception here to avoid illogically segmented ravioli code.")]
         private (bool ShouldResizeResult, IVhdlElement BinaryElement, decimal ClockCyclesNeededForOperation) HandleShift(
-            ISubTransformerContext context,
+            SubTransformerContext context,
             BinaryOperatorExpression expression,
             Binary binary,
             IVhdlElement binaryElement,
@@ -478,7 +478,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         }
 
         private static void HandleSingleCycleOperation(
-            ICurrentBlock currentBlock,
+            CurrentBlock currentBlock,
             IVhdlElement operationResultAssignment,
             bool isFirstOfSimdOperationsOrIsSingleOperation,
             decimal clockCyclesNeededForOperation)

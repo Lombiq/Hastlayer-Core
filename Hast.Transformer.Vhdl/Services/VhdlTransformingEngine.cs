@@ -13,12 +13,12 @@ namespace Hast.Transformer.Vhdl.Services
     {
         private readonly IVhdlHardwareDescriptionCachingService _vhdlHardwareDescriptionCachingService;
         private readonly ITransformedVhdlManifestBuilder _transformedVhdlManifestBuilder;
-        private readonly IEnumerable<EventHandler<ITransformedVhdlManifest>> _vhdlTransformationEventHandler;
+        private readonly IEnumerable<EventHandler<TransformedVhdlManifest>> _vhdlTransformationEventHandler;
 
         public VhdlTransformingEngine(
             IVhdlHardwareDescriptionCachingService vhdlHardwareDescriptionCachingService,
             ITransformedVhdlManifestBuilder transformedVhdlManifestBuilder,
-            IEnumerable<EventHandler<ITransformedVhdlManifest>> vhdlTransformationEventHandler)
+            IEnumerable<EventHandler<TransformedVhdlManifest>> vhdlTransformationEventHandler)
         {
             _vhdlHardwareDescriptionCachingService = vhdlHardwareDescriptionCachingService;
             _transformedVhdlManifestBuilder = transformedVhdlManifestBuilder;

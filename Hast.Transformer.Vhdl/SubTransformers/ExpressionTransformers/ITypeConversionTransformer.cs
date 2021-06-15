@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             BinaryOperatorExpression binaryOperatorExpression,
             DataObjectReference variableReference,
             bool isLeft,
-            ISubTransformerContext context);
+            SubTransformerContext context);
 
         IAssignmentTypeConversionResult ImplementTypeConversionForAssignment(
             DataType fromType,

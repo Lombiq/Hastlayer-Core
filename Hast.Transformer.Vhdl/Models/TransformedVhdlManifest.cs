@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.Models
 {
-    internal class TransformedVhdlManifest : ITransformedVhdlManifest
+    public class TransformedVhdlManifest
     {
         public VhdlManifest Manifest { get; set; }
         public MemberIdTable MemberIdTable { get; set; }

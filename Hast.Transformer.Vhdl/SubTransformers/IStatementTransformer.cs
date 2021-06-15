@@ -6,6 +6,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public interface IStatementTransformer : IDependency
     {
-        void Transform(Statement statement, ISubTransformerContext context);
+        void Transform(Statement statement, SubTransformerContext context);
     }
 }

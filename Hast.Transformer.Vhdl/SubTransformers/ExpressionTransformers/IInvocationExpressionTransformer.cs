@@ -16,7 +16,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         /// </summary>
         IVhdlElement TransformInvocationExpression(
             InvocationExpression expression,
-            ICollection<ITransformedInvocationParameter> transformedParameters,
-            ISubTransformerContext context);
+            ICollection<TransformedInvocationParameter> transformedParameters,
+            SubTransformerContext context);
     }
 }

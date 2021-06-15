@@ -30,9 +30,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         public IBuildInvocationResult BuildInvocation(
             MethodDeclaration targetDeclaration,
-            IEnumerable<ITransformedInvocationParameter> transformedParameters,
+            IEnumerable<TransformedInvocationParameter> transformedParameters,
             int instanceCount,
-            ISubTransformerContext context)
+            SubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
@@ -137,12 +137,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             MethodDeclaration targetDeclaration,
             int instanceCount,
             bool waitForAll,
-            ISubTransformerContext context) => BuildInvocationWait(targetDeclaration, instanceCount, -1, waitForAll, context);
+            SubTransformerContext context) => BuildInvocationWait(targetDeclaration, instanceCount, -1, waitForAll, context);
 
         public IVhdlElement BuildSingleInvocationWait(
             MethodDeclaration targetDeclaration,
             int targetIndex,
-            ISubTransformerContext context) => BuildInvocationWait(targetDeclaration, 1, targetIndex, true, context).Single();
+            SubTransformerContext context) => BuildInvocationWait(targetDeclaration, 1, targetIndex, true, context).Single();
 
         /// <summary>
         /// Be aware that the method can change the current block.
@@ -150,8 +150,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private BuildInvocationBlockResult BuildInvocationBlock(
             MethodDeclaration targetDeclaration,
             string targetMethodName,
-            IEnumerable<ITransformedInvocationParameter> transformedParameters,
-            ISubTransformerContext context,
+            IEnumerable<TransformedInvocationParameter> transformedParameters,
+            SubTransformerContext context,
             int index)
         {
             var scope = context.Scope;
@@ -242,11 +242,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private Assignment CreateParameterAssignment(
             ParameterFlowDirection flowDirection,
-            ITransformedInvocationParameter parameter,
+            TransformedInvocationParameter parameter,
             DataType parameterSignalType,
             string targetMethodName,
             ParameterDeclaration targetParameter,
-            ISubTransformerContext context,
+            SubTransformerContext context,
             int index)
         {
             var parameterReference = parameter.Reference;
@@ -311,7 +311,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             int instanceCount,
             int index,
             bool waitForAll,
-            ISubTransformerContext context)
+            SubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;

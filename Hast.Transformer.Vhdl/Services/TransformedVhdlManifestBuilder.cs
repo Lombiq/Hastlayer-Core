@@ -54,7 +54,7 @@ namespace Hast.Transformer.Vhdl.Services
             _typesCreator = typesCreator;
         }
 
-        public async Task<ITransformedVhdlManifest> BuildManifestAsync(ITransformationContext transformationContext)
+        public async Task<TransformedVhdlManifest> BuildManifestAsync(ITransformationContext transformationContext)
         {
             var syntaxTree = transformationContext.SyntaxTree;
 

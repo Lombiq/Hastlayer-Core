@@ -22,7 +22,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 _typeConverter.ConvertAstType(expression.Type, context),
                 expression.GetStaticLength());
 
-        public IVhdlElement Transform(ArrayCreateExpression expression, ISubTransformerContext context)
+        public IVhdlElement Transform(ArrayCreateExpression expression, SubTransformerContext context)
         {
             if (expression.Arguments.Any() && expression.Arguments.Count != 1)
             {

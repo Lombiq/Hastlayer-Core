@@ -54,7 +54,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _declarableTypeCreator = declarableTypeCreator;
         }
 
-        public IVhdlElement Transform(Expression expression, ISubTransformerContext context) =>
+        public IVhdlElement Transform(Expression expression, SubTransformerContext context) =>
             expression switch
             {
                 AssignmentExpression assignment => TransformAssignment(assignment, context),
@@ -80,7 +80,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     expression.ToString().AddParentEntityName(expression)),
             };
 
-        private IVhdlElement TransformDefaultValue(DefaultValueExpression defaultValueExpression, ISubTransformerContext context)
+        private IVhdlElement TransformDefaultValue(DefaultValueExpression defaultValueExpression, SubTransformerContext context)
         {
             // The only case when a default() will remain in the syntax tree is for composed types. For primitives
             // a constant will be substituted. E.g. instead of default(int) a 0 will be in the AST.
@@ -99,7 +99,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return Empty.Instance;
         }
 
-        private IVhdlElement TransformObjectCreate(ObjectCreateExpression objectCreateExpression, ISubTransformerContext context)
+        private IVhdlElement TransformObjectCreate(ObjectCreateExpression objectCreateExpression, SubTransformerContext context)
         {
             var scope = context.Scope;
             var initiailizationResult = InitializeRecord(objectCreateExpression, objectCreateExpression.Type, context);
@@ -145,7 +145,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return Empty.Instance;
         }
 
-        private IVhdlElement TransformIndexer(IndexerExpression indexerExpression, ISubTransformerContext context)
+        private IVhdlElement TransformIndexer(IndexerExpression indexerExpression, SubTransformerContext context)
         {
             if (Transform(indexerExpression.Target, context) is not IDataObject targetVariableReference)
             {
@@ -174,7 +174,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             };
         }
 
-        private IVhdlElement TransformCast(CastExpression castExpression, ISubTransformerContext context)
+        private IVhdlElement TransformCast(CastExpression castExpression, SubTransformerContext context)
         {
             var scope = context.Scope;
 
@@ -209,7 +209,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return typeConversionResult.ConvertedFromExpression;
         }
 
-        private IVhdlElement TransformIdentifier(IdentifierExpression identifierExpression, ISubTransformerContext context)
+        private IVhdlElement TransformIdentifier(IdentifierExpression identifierExpression, SubTransformerContext context)
         {
             IVhdlElement ImplementTypeConversionForBinaryExpressionParent(DataObjectReference reference)
             {
@@ -232,7 +232,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 : ImplementTypeConversionForBinaryExpressionParent(reference);
         }
 
-        private IVhdlElement TransformUnaryOperator(UnaryOperatorExpression unary, ISubTransformerContext context)
+        private IVhdlElement TransformUnaryOperator(UnaryOperatorExpression unary, SubTransformerContext context)
         {
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
@@ -286,11 +286,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return operationResultDataObjectReference;
         }
 
-        private IVhdlElement TransformInvocation(InvocationExpression invocationExpression, ISubTransformerContext context)
+        private IVhdlElement TransformInvocation(InvocationExpression invocationExpression, SubTransformerContext context)
         {
             if (invocationExpression.IsTaskStart()) return Empty.Instance;
 
-            var transformedParameters = new List<ITransformedInvocationParameter>();
+            var transformedParameters = new List<TransformedInvocationParameter>();
 
             IEnumerable<Expression> arguments = invocationExpression.Arguments;
 
@@ -314,7 +314,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 .TransformInvocationExpression(invocationExpression, transformedParameters, context);
         }
 
-        private IVhdlElement TransformBinaryExpression(BinaryOperatorExpression binaryExpression, ISubTransformerContext context)
+        private IVhdlElement TransformBinaryExpression(BinaryOperatorExpression binaryExpression, SubTransformerContext context)
         {
             IVhdlElement leftTransformed;
             IVhdlElement rightTransformed;
@@ -347,7 +347,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 context);
         }
 
-        private IVhdlElement TransformMemberReference(MemberReferenceExpression memberReference, ISubTransformerContext context)
+        private IVhdlElement TransformMemberReference(MemberReferenceExpression memberReference, SubTransformerContext context)
         {
             var scope = context.Scope;
 
@@ -428,7 +428,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             };
         }
 
-        private IVhdlElement TransformAssignment(AssignmentExpression assignment, ISubTransformerContext context)
+        private IVhdlElement TransformAssignment(AssignmentExpression assignment, SubTransformerContext context)
         {
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
@@ -591,7 +591,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return Empty.Instance;
         }
 
-        private IVhdlElement TransformPrimitiveExpression(PrimitiveExpression primitive, ISubTransformerContext context)
+        private IVhdlElement TransformPrimitiveExpression(PrimitiveExpression primitive, SubTransformerContext context)
         {
             var scope = context.Scope;
             var type = primitive.GetActualType();
@@ -652,7 +652,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private IVhdlElement TransformSimpleAssignmentExpression(
             Expression left,
             Expression right,
-            ISubTransformerContext context,
+            SubTransformerContext context,
             AssignmentExpression assignment,
             IMemberStateMachine stateMachine,
             Expression expression)
@@ -739,7 +739,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             };
         }
 
-        private RecordInitializationResult InitializeRecord(Expression expression, AstType recordAstType, ISubTransformerContext context)
+        private RecordInitializationResult InitializeRecord(Expression expression, AstType recordAstType, SubTransformerContext context)
         {
             // Objects are mimicked with records and those don't need instantiation. However it's useful to initialize
             // all record fields to their default or initial values (otherwise if e.g. a class is instantiated in a
@@ -827,7 +827,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return result;
         }
 
-        private static IVhdlElement TransformTypeReference(TypeReferenceExpression typeReferenceExpression, ISubTransformerContext context)
+        private static IVhdlElement TransformTypeReference(TypeReferenceExpression typeReferenceExpression, SubTransformerContext context)
         {
             var type = typeReferenceExpression.Type;
             var declaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(type);

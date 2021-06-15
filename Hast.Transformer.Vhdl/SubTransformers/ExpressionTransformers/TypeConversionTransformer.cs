@@ -21,7 +21,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             BinaryOperatorExpression binaryOperatorExpression,
             DataObjectReference variableReference,
             bool isLeft,
-            ISubTransformerContext context)
+            SubTransformerContext context)
         {
             // If this some null check then no need for any type conversion.
             if (binaryOperatorExpression.EitherIs<NullReferenceExpression>())

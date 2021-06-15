@@ -14,14 +14,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         /// Transforms binary operator expressions that can be executed in parallel.
         /// </summary>
         IEnumerable<IVhdlElement> TransformParallelBinaryOperatorExpressions(
-              IEnumerable<IPartiallyTransformedBinaryOperatorExpression> partiallyTransformedExpressions,
-              ISubTransformerContext context);
+              IEnumerable<PartiallyTransformedBinaryOperatorExpression> partiallyTransformedExpressions,
+              SubTransformerContext context);
 
         /// <summary>
         /// Transforms regular binary operator expressions.
         /// </summary>
         IVhdlElement TransformBinaryOperatorExpression(
-            IPartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
-            ISubTransformerContext context);
+            PartiallyTransformedBinaryOperatorExpression partiallyTransformedExpression,
+            SubTransformerContext context);
     }
 }

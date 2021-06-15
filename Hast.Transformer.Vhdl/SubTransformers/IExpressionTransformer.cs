@@ -19,6 +19,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         /// multiple state machine states! Even if it's the same expression it should be transformed for each state
         /// separately.
         /// </returns>
-        IVhdlElement Transform(Expression expression, ISubTransformerContext context);
+        IVhdlElement Transform(Expression expression, SubTransformerContext context);
     }
 }

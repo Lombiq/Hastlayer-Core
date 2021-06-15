@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         /// </summary>
         public static int AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(
             this IMemberStateMachine stateMachine,
-            ISubTransformerContext context,
+            SubTransformerContext context,
             decimal clockCyclesNeededForNewOperation)
         {
             var currentBlock = context.Scope.CurrentBlock;
@@ -47,12 +47,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
         public static int AddNewStateAndChangeCurrentBlock(
             this IMemberStateMachine stateMachine,
-            ISubTransformerContext context,
+            SubTransformerContext context,
             IBlockElement newBlock = null) => stateMachine.AddNewStateAndChangeCurrentBlock(context.Scope, newBlock);
 
         public static int AddNewStateAndChangeCurrentBlock(
             this IMemberStateMachine stateMachine,
-            ISubTransformerScope scope,
+            SubTransformerScope scope,
             IBlockElement newBlock = null)
         {
             newBlock ??= new InlineBlock();

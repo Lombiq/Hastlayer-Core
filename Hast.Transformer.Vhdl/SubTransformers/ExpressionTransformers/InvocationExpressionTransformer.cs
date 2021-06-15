@@ -46,8 +46,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         public IVhdlElement TransformInvocationExpression(
             InvocationExpression expression,
-            ICollection<ITransformedInvocationParameter> transformedParameters,
-            ISubTransformerContext context)
+            ICollection<TransformedInvocationParameter> transformedParameters,
+            SubTransformerContext context)
         {
             var targetMemberReference = expression.Target as MemberReferenceExpression;
 
@@ -59,9 +59,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         private IVhdlElement TransformSimpleMemoryInvocation(
             InvocationExpression expression,
-            IEnumerable<ITransformedInvocationParameter> transformedParameters,
+            IEnumerable<TransformedInvocationParameter> transformedParameters,
             MemberReferenceExpression targetMemberReference,
-            ISubTransformerContext context)
+            SubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
@@ -189,10 +189,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         private void TransformSimpleMemoryInvocationWrite(
             InvocationExpression expression,
-            ISubTransformerContext context,
+            SubTransformerContext context,
             bool is4BytesOperation,
-            List<ITransformedInvocationParameter> invocationParameters,
-            ICurrentBlock currentBlock,
+            List<TransformedInvocationParameter> invocationParameters,
+            CurrentBlock currentBlock,
             string operationDataTypeName,
             string memberName)
         {
@@ -258,7 +258,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             IVhdlElement variableToConvert,
             bool directionIsLogicVectorToType,
             string operationDataTypeName,
-            List<ITransformedInvocationParameter> invocationParameters,
+            List<TransformedInvocationParameter> invocationParameters,
             bool is4BytesOperation,
             string memberName)
         {
@@ -320,9 +320,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         private IVhdlElement TransformMemberInvocation(
             InvocationExpression expression,
-            ICollection<ITransformedInvocationParameter> transformedParameters,
+            ICollection<TransformedInvocationParameter> transformedParameters,
             MemberReferenceExpression targetMemberReference,
-            ISubTransformerContext context)
+            SubTransformerContext context)
         {
             var targetMethodName = expression.GetTargetMemberFullName();
 
@@ -395,7 +395,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         private (bool HasResult, InlineBlock ResultBlock) HandleTaskWait(
             string targetMethodName,
             InvocationExpression expression,
-            ISubTransformerContext context)
+            SubTransformerContext context)
         {
             if (targetMethodName != "System.Void System.Threading.Tasks.Task::Wait()") return (false, null);
 
@@ -468,8 +468,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
         private static IVhdlElement TransformArrayCopy(
             InvocationExpression expression,
-            ISubTransformerContext context,
-            ICollection<ITransformedInvocationParameter> transformedParameters)
+            SubTransformerContext context,
+            ICollection<TransformedInvocationParameter> transformedParameters)
         {
             IDataObject sourceArrayReference;
             var targetArrayLength = context.TransformationContext.ArraySizeHolder

@@ -16,6 +16,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         IVhdlElement TransformSpecialOperationInvocation(
             InvocationExpression expression,
             IEnumerable<IVhdlElement> transformedParameters,
-            ISubTransformerContext context);
+            SubTransformerContext context);
     }
 }

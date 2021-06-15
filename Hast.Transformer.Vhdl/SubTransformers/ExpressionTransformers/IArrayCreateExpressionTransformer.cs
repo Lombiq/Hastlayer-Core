@@ -22,6 +22,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
         /// <summary>
         /// Transforms the <see cref="ArrayCreateExpression"/> much like <see cref="IExpressionTransformer.Transform"/>.
         /// </summary>
-        IVhdlElement Transform(ArrayCreateExpression expression, ISubTransformerContext context);
+        IVhdlElement Transform(ArrayCreateExpression expression, SubTransformerContext context);
     }
 }

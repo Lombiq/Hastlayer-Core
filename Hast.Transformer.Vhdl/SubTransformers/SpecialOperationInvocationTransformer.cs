@@ -33,7 +33,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         public IVhdlElement TransformSpecialOperationInvocation(
             InvocationExpression expression,
             IEnumerable<IVhdlElement> transformedParameters,
-            ISubTransformerContext context)
+            SubTransformerContext context)
         {
             if (!IsSpecialOperationInvocation(expression))
             {
@@ -58,7 +58,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var vector1 = (DataObjectReference)transformedParameters.First();
             var vector2 = (DataObjectReference)transformedParameters.Skip(1).First();
-            var binaryOperations = new List<IPartiallyTransformedBinaryOperatorExpression>();
+            var binaryOperations = new List<PartiallyTransformedBinaryOperatorExpression>();
 
             var simdBinaryOperator = simdOperation switch
             {
@@ -146,13 +146,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             return null;
-        }
-
-        private class PartiallyTransformedBinaryOperatorExpression : IPartiallyTransformedBinaryOperatorExpression
-        {
-            public BinaryOperatorExpression BinaryOperatorExpression { get; set; }
-            public IVhdlElement LeftTransformed { get; set; }
-            public IVhdlElement RightTransformed { get; set; }
         }
     }
 }

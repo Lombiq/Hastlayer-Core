@@ -33,9 +33,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _typeConversionTransformer = typeConversionTransformer;
         }
 
-        public void Transform(Statement statement, ISubTransformerContext context) => TransformInner(statement, context);
+        public void Transform(Statement statement, SubTransformerContext context) => TransformInner(statement, context);
 
-        private void TransformInner(Statement statement, ISubTransformerContext context)
+        private void TransformInner(Statement statement, SubTransformerContext context)
         {
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
@@ -128,7 +128,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
         }
 
-        private void TransformVariableStatement(VariableDeclarationStatement variableStatement, ISubTransformerContext context)
+        private void TransformVariableStatement(VariableDeclarationStatement variableStatement, SubTransformerContext context)
         {
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
@@ -167,7 +167,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
         }
 
-        private void TransformSwitchStatement(SwitchStatement switchStatement, ISubTransformerContext context)
+        private void TransformSwitchStatement(SwitchStatement switchStatement, SubTransformerContext context)
         {
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
@@ -241,7 +241,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             currentBlock.ChangeBlockToDifferentState(afterCaseStateBlock, aftercaseStateIndex);
         }
 
-        private void TransformWhileStatement(WhileStatement whileStatement, ISubTransformerContext context)
+        private void TransformWhileStatement(WhileStatement whileStatement, SubTransformerContext context)
         {
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
@@ -302,7 +302,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             GetOrCreateAfterWhileStateIndexStack(context).Pop();
         }
 
-        private void TransformIfElse(IfElseStatement ifElse, ISubTransformerContext context)
+        private void TransformIfElse(IfElseStatement ifElse, SubTransformerContext context)
         {
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
@@ -387,7 +387,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             currentBlock.ChangeBlockToDifferentState(afterIfElseStateBlock, afterIfElseStateIndex);
         }
 
-        private void TransformReturnStatement(ReturnStatement returnStatement, ISubTransformerContext context)
+        private void TransformReturnStatement(ReturnStatement returnStatement, SubTransformerContext context)
         {
             var scope = context.Scope;
             var stateMachine = scope.StateMachine;
@@ -436,7 +436,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         /// Creates a conditional state change to the destination state that will only take place if the state wasn't
         /// already changed in the current state.
         /// </summary>
-        private static IVhdlElement CreateConditionalStateChange(int destinationStateIndex, ISubTransformerContext context)
+        private static IVhdlElement CreateConditionalStateChange(int destinationStateIndex, SubTransformerContext context)
         {
             // We need an if to check whether the state was changed in the logic. If it was then that means that the
             // subroutine was exited so we mustn't overwrite the new state.
@@ -456,7 +456,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         }
 
         // Keeping track of the index of the state after while statements, so this can be used to break out of the loop.
-        private static Stack<int> GetOrCreateAfterWhileStateIndexStack(ISubTransformerContext context)
+        private static Stack<int> GetOrCreateAfterWhileStateIndexStack(SubTransformerContext context)
         {
             const string key = "Hast.Transformer.Vhdl.AfterWhileStateIndexStack";
 

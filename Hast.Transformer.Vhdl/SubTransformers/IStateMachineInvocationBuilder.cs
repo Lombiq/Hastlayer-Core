@@ -11,20 +11,20 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         IBuildInvocationResult BuildInvocation(
             MethodDeclaration targetDeclaration,
-            IEnumerable<ITransformedInvocationParameter> transformedParameters,
+            IEnumerable<TransformedInvocationParameter> transformedParameters,
             int instanceCount,
-            ISubTransformerContext context);
+            SubTransformerContext context);
 
         IEnumerable<IVhdlElement> BuildMultiInvocationWait(
             MethodDeclaration targetDeclaration,
             int instanceCount,
             bool waitForAll,
-            ISubTransformerContext context);
+            SubTransformerContext context);
 
         IVhdlElement BuildSingleInvocationWait(
             MethodDeclaration targetDeclaration,
             int targetIndex,
-            ISubTransformerContext context);
+            SubTransformerContext context);
     }
 
     public interface IBuildInvocationResult
