@@ -1,11 +1,43 @@
+using Hast.Layer;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class UnneededReferenceVariablesRemover : IUnneededReferenceVariablesRemover
+    /// <summary>
+    /// Removes those variables from the syntax tree which are just aliases to another variable and thus unneeded. Due
+    /// to reference behavior such alias variables make hardware generation much more complicated so it's better to get
+    /// rid of them.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// internal KpzKernelsTaskState &lt;ScheduleIterations&gt;b__9_0 (KpzKernelsTaskState rawTaskState)
+    /// {
+    ///     KpzKernelsTaskState kpzKernelsTaskState;
+    ///     kpzKernelsTaskState = rawTaskState;
+    ///     // kpzKernelsTaskState is being used from now on everywhere so better to just use rawTaskState directly.
+    ///     return kpzKernelsTaskState;
+    /// }
+    ///
+    /// // The variable "random" is unneeded here.
+    /// RandomMwc64X random;
+    /// random = array [num4].Random1;
+    /// random.State = (random.State | ((ulong)num8 &lt;&lt; 32));
+    /// </code>
+    /// </example>
+    public class UnneededReferenceVariablesRemover : IConverter
     {
-        public void RemoveUnneededVariables(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new AssignmentsDiscoveringVisitor());
+        // Many other dependencies are just leftovers from the previous linear execution order. However in this case
+        // we know explicitly that RefLocalVariablesRemover must come before UnneededReferenceVariablesRemover.
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(RefLocalVariablesRemover) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new AssignmentsDiscoveringVisitor());
 
         private class AssignmentsDiscoveringVisitor : DepthFirstAstVisitor
         {

@@ -1,7 +1,10 @@
 ﻿using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Transformer.Abstractions;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Services
 {
@@ -11,8 +14,13 @@ namespace Hast.Transformer.Services
     public interface IConverter : IDependency
     {
         /// <summary>
+        /// Gets the type names of dependency services used for topological sorting.
+        /// </summary>
+        IEnumerable<string> Dependencies => Enumerable.Empty<string>();
+
+        /// <summary>
         /// Performs a conversion operation by altering the <paramref name="syntaxTree"/>.
         /// </summary>
-        void Convert(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration);
+        void Convert(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration, IKnownTypeLookupTable knownTypeLookupTable);
     }
 }

@@ -1,7 +1,9 @@
 using Hast.Common.Validation;
+using Hast.Layer;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Models
 {
@@ -46,5 +48,14 @@ namespace Hast.Transformer.Models
         }
 
         public IArraySizeHolder Clone() => new ArraySizeHolder(_arraySizes);
+
+        public static ArraySizeHolder FromConfiguration(IHardwareGenerationConfiguration configuration)
+        {
+            var preConfiguredArrayLengths = configuration
+                .TransformerConfiguration()
+                .ArrayLengths
+                .ToDictionary(kvp => kvp.Key, kvp => (IArraySize)new ArraySize { Length = kvp.Value });
+            return new ArraySizeHolder(preConfiguredArrayLengths);
+        }
     }
 }

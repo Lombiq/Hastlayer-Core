@@ -1,3 +1,4 @@
+using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;
@@ -5,13 +6,40 @@ using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class OptionalParameterFiller : IOptionalParameterFiller
+    /// <summary>
+    /// Arguments for optional method parameters can be omitted. This service fills those too so later processing these
+    /// method calls can be easier. Note that method class include constructors as well.
+    /// </summary>
+    /// <example>
+    /// <para>
+    /// The constructor's signature being:
+    /// </para>
+    /// <code>
+    /// public BitMask(ushort size, bool allOne = false)
+    /// </code>
+    ///
+    /// <para>...the following code:</para>
+    /// <code>
+    /// var resultFractionBits = new BitMask(left._environment.Size);
+    /// </code>
+    ///
+    /// <para>...will be changed into:</para>
+    /// <code>
+    /// var resultFractionBits = new BitMask(left._environment.Size, false);
+    /// </code>
+    /// </example>
+    public class OptionalParameterFiller : IConverter
     {
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(EmbeddedAssignmentExpressionsExpander) };
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
 
         public OptionalParameterFiller(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory) => _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
 
-        public void FillOptionalParamters(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new OptionalParamtersFillingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new OptionalParamtersFillingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
 
         private class OptionalParamtersFillingVisitor : DepthFirstAstVisitor
         {

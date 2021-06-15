@@ -10,6 +10,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
     /// </summary>
     public interface IConstantValuesSubstitutor : IDependency
     {
+        /// <summary>
+        /// Substitutes variables, fields, etc. with constants if they can only ever have a compile-time defined value.
+        /// </summary>
         void SubstituteConstantValues(
             SyntaxTree syntaxTree,
             IArraySizeHolder arraySizeHolder,

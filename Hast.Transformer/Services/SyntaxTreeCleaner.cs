@@ -3,12 +3,15 @@ using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class SyntaxTreeCleaner : ISyntaxTreeCleaner
+    public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
     {
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(FSharpIdiosyncrasiesAdjuster) };
+
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
         private readonly IMemberSuitabilityChecker _memberSuitabilityChecker;
 
@@ -19,6 +22,12 @@ namespace Hast.Transformer.Services
             _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
             _memberSuitabilityChecker = memberSuitabilityChecker;
         }
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            CleanUnusedDeclarations(syntaxTree, configuration);
 
         public void CleanUnusedDeclarations(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {

@@ -1,6 +1,7 @@
 using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
@@ -10,10 +11,21 @@ using System.Runtime.CompilerServices;
 
 namespace Hast.Transformer.Services
 {
-    public class MethodInliner : IMethodInliner
+    /// <summary>
+    /// Inlines suitable methods at the location of their invocation.
+    /// </summary>
+    public class MethodInliner : IConverter
     {
-        public void InlineMethods(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(OptionalParameterFiller) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable)
         {
+            var transformerConfiguration = configuration.TransformerConfiguration();
+            if (!transformerConfiguration.EnableMethodInlining) return;
+
             var additionalInlinableMethodsFullNames = configuration.TransformerConfiguration().AdditionalInlinableMethodsFullNames;
             var inlinableMethods = new Dictionary<string, MethodDeclaration>();
 

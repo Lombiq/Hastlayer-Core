@@ -1,17 +1,29 @@
+using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class FSharpIdiosyncrasiesAdjuster : IFSharpIdiosyncrasiesAdjuster
+    /// <summary>
+    /// Adjusts constructs only coming from F# and changes them into their equivalents usual in a C# AST.
+    /// </summary>
+    public class FSharpIdiosyncrasiesAdjuster : IConverter
     {
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(MemberIdentifiersFixer) };
+
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
 
-        public FSharpIdiosyncrasiesAdjuster(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory) => _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
+        public FSharpIdiosyncrasiesAdjuster(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory) =>
+            _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
 
-        public void AdjustFSharpIdiosyncrasies(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new FSharpIdiosyncrasiesAdjustingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new FSharpIdiosyncrasiesAdjustingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
 
         private class FSharpIdiosyncrasiesAdjustingVisitor : DepthFirstAstVisitor
         {

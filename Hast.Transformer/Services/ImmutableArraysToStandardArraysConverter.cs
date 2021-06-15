@@ -1,3 +1,4 @@
+using Hast.Layer;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
@@ -11,9 +12,14 @@ using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class ImmutableArraysToStandardArraysConverter : IImmutableArraysToStandardArraysConverter
+    public class ImmutableArraysToStandardArraysConverter : IConverter
     {
-        public void ConvertImmutableArraysToStandardArrays(SyntaxTree syntaxTree, IKnownTypeLookupTable knownTypeLookupTable) =>
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(ReadonlyToConstConverter) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
             // Note that ImmutableArrays can only be single-dimensional in themselves so the whole code here is built
             // around that assumption (though it's possible to create ImmutableArrays of ImmutableArrays, but this is
             // not supported yet).

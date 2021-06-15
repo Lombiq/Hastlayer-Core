@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
@@ -9,9 +10,14 @@ using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class ReadonlyToConstConverter : IReadonlyToConstConverter
+    public class ReadonlyToConstConverter : IConverter
     {
-        public void ConvertReadonlyPrimitives(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration) =>
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(SyntaxTreeCleaner) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
             syntaxTree.AcceptVisitor(new ReadonlyToConstVisitor(configuration, syntaxTree));
 
         private class ReadonlyToConstVisitor : DepthFirstAstVisitor

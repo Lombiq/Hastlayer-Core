@@ -1,14 +1,52 @@
-﻿using Hast.Transformer.Helpers;
+﻿using Hast.Layer;
+using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class ObjectVariableTypesConverter : IObjectVariableTypesConverter
+    /// <summary>
+    /// Converts the type of variables of type <c>object</c> to the actual type they'll contain if this can be
+    /// determined.
+    /// </summary>
+    /// <example>
+    /// <para>Currently the following kind of constructs are supported:</para>
+    ///
+    /// <code>
+    /// // The numberObject variable will be converted to uint since apparently it is one.
+    /// internal bool &lt;ParallelizedArePrimeNumbers&gt;b__9_0 (object numberObject)
+    /// {
+    ///     uint num;
+    ///     num = (uint)numberObject;
+    ///     // ...
+    /// }
+    /// </code>
+    ///
+    /// <para>
+    /// Furthermore, casts to the object type corresponding to these variables when in Task starts are also removed,
+    /// like the one for num4 here:
+    /// </para>
+    /// <code>
+    /// Task.Factory.StartNew ((Func&lt;object, bool&gt;)this.&lt;ParallelizedArePrimeNumbers&gt;b__9_0, (object)num4);
+    /// </code>
+    /// </example>
+    /// <remarks>
+    /// <para>This is necessary because unlike an object-typed variable in .NET that due to dynamic memory allocations can
+    /// hold any data in hardware the variable size should be statically determined (like fixed 32b). So compatibility
+    /// with .NET object variables is not complete, thus attempting to close the loop here.</para>
+    /// </remarks>
+    public class ObjectVariableTypesConverter : IConverter
     {
-        public void ConvertObjectVariableTypes(SyntaxTree syntaxTree)
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(GeneratedTaskArraysInliner) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable)
         {
             syntaxTree.AcceptVisitor(new MethodObjectParametersTypeConvertingVisitor());
             syntaxTree.AcceptVisitor(new UnnecessaryObjectCastsRemovingVisitor());

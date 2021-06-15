@@ -1,7 +1,10 @@
-﻿using Hast.Transformer.Helpers;
+﻿using Hast.Layer;
+using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
@@ -9,9 +12,19 @@ namespace Hast.Transformer.Services
     // Maybe this would be better suitable in Hast.Transformer.Vhdl since it might not be interesting for every hardware
     // description language. But then we'd need to run IInstanceMethodsToStaticConverter again to make constructor
     // methods static too.
-    public class ConstructorsToMethodsConverter : IConstructorsToMethodsConverter
+
+    /// <summary>
+    /// Converts constructors to normal method declarations so they're easier to process later.
+    /// </summary>
+    public class ConstructorsToMethodsConverter : IConverter
     {
-        public void ConvertConstructorsToMethods(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new ConstructorConvertingVisitor());
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(ObjectVariableTypesConverter) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new ConstructorConvertingVisitor());
 
         private class ConstructorConvertingVisitor : DepthFirstAstVisitor
         {

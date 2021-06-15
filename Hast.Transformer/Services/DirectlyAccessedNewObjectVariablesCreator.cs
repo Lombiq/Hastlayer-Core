@@ -1,15 +1,37 @@
+using Hast.Layer;
 using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Services
 {
-    public class DirectlyAccessedNewObjectVariablesCreator : IDirectlyAccessedNewObjectVariablesCreator
+    /// <summary>
+    /// If a newly created object's members are accessed directly instead of assigning the object to a variable for
+    /// example, then this service will add an intermediary variable for easier later processing.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// var size = new BitMask(Size).Size;
+    ///
+    /// ...will be converted into the following form:
+    /// var bitMask = new BitMask(Size);
+    /// var size = bitMask.Size;
+    /// </code>
+    /// </example>
+    public class DirectlyAccessedNewObjectVariablesCreator : IConverter
     {
-        public void CreateVariablesForDirectlyAccessedNewObjects(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new DirectlyAccessedNewObjectVariableCreatingVisitor());
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(ConditionalExpressionsToIfElsesConverter) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new DirectlyAccessedNewObjectVariableCreatingVisitor());
 
         private class DirectlyAccessedNewObjectVariableCreatingVisitor : DepthFirstAstVisitor
         {

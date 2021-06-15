@@ -1,15 +1,35 @@
 using Hast.Common.Helpers;
+using Hast.Layer;
 using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class ConditionalExpressionsToIfElsesConverter : IConditionalExpressionsToIfElsesConverter
+    /// <summary>
+    /// Converts a conditional expression, i.e. an expression with a ternary operator into an if-else statement.
+    /// </summary>
+    /// <example>
+    /// The following expression:
+    /// numberOfStepsInIteration = testMode ? 1 : KpzKernels.GridWidth * KpzKernels.GridHeight;
+    ///
+    /// ...will be converted into the below form:
+    /// if (testMode) numberOfStepsInIteration = 1;
+    /// else numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;.
+    /// </example>
+    public class ConditionalExpressionsToIfElsesConverter : IConverter
     {
-        public void ConvertConditionalExpressionsToIfElses(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new ConditionalExpressionsConvertingVisitor());
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(InstanceMethodsToStaticConverter) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new ConditionalExpressionsConvertingVisitor());
 
         private class ConditionalExpressionsConvertingVisitor : DepthFirstAstVisitor
         {

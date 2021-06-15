@@ -1,16 +1,50 @@
+using Hast.Layer;
 using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class CustomPropertiesToMethodsConverter : ICustomPropertiesToMethodsConverter
+    /// <summary>
+    /// Converts customly implemented properties' setters and getters into equivalent methods so it's easier to
+    /// transform them.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// public uint NumberPlusFive
+    /// {
+    ///     get { return Number + 5; }
+    ///     set { Number = value - 5; }
+    /// }
+    /// </code>
+    /// <para>The above property will be converted as below.</para>
+    /// <code>
+    /// uint uint get_NumberPlusFive()
+    /// {
+    ///     return Number + 5u;
+    /// }
+    ///
+    /// void void set_NumberPlusFive(uint value)
+    /// {
+    ///     Number = value - 5u;
+    /// }
+    /// </code>
+    /// </example>
+    public class CustomPropertiesToMethodsConverter : IConverter
     {
-        public void ConvertCustomPropertiesToMethods(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new CustomPropertiesConvertingVisitor(syntaxTree));
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(OperatorsToMethodsConverter) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new CustomPropertiesConvertingVisitor(syntaxTree));
 
         private class CustomPropertiesConvertingVisitor : DepthFirstAstVisitor
         {

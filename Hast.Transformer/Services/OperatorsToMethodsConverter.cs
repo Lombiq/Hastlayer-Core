@@ -1,11 +1,23 @@
-﻿using Hast.Transformer.Helpers;
+﻿using Hast.Layer;
+using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Services
 {
-    public class OperatorsToMethodsConverter : IOperatorsToMethodsConverter
+    /// <summary>
+    /// Converts operator overloads into standard methods.
+    /// </summary>
+    public class OperatorsToMethodsConverter : IConverter
     {
-        public void ConvertOperatorsToMethods(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new OperatorConvertingVisitor());
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(ConstructorsToMethodsConverter) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new OperatorConvertingVisitor());
 
         private class OperatorConvertingVisitor : DepthFirstAstVisitor
         {
