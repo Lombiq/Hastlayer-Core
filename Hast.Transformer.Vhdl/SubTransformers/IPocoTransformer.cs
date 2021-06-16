@@ -8,9 +8,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     /// <summary>
     /// Transformer for processing POCOs (Plain Old C# Object) to handle e.g. properties.
     /// </summary>
-    public interface IPocoTransformer : IDependency
+    public interface IPocoTransformer : IDependency, ISpecificNodeTypeTransformer
     {
-        bool IsSupportedMember(AstNode node);
+        /// <summary>
+        /// Transforms the <paramref name="typeDeclaration"/> of the class into matching member records.
+        /// </summary>
         Task<IMemberTransformerResult> TransformAsync(TypeDeclaration typeDeclaration, IVhdlTransformationContext context);
     }
 }

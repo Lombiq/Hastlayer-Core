@@ -339,7 +339,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             // Handling special operations here.
-            if (_specialOperationInvocationTransformer.IsSpecialOperationInvocation(expression))
+            if (_specialOperationInvocationTransformer.IsSupported(expression))
             {
                 return _specialOperationInvocationTransformer.TransformSpecialOperationInvocation(
                     expression,

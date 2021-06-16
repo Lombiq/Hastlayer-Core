@@ -27,23 +27,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _typeConverter = typeConverter;
         }
 
-        public bool IsSpecialOperationInvocation(InvocationExpression expression) =>
-            TryGetSimdOperation(expression.GetTargetMemberFullName()) != null;
+        public bool IsSupported(AstNode node) =>
+            node is InvocationExpression invocationExpression &&
+            TryGetSimdOperation(invocationExpression.GetTargetMemberFullName()) != null;
 
         public IVhdlElement TransformSpecialOperationInvocation(
             InvocationExpression expression,
             IEnumerable<IVhdlElement> transformedParameters,
             SubTransformerContext context)
         {
-            if (!IsSpecialOperationInvocation(expression))
+            var targetMethodName = expression.GetTargetMemberFullName();
+
+            if (TryGetSimdOperation(targetMethodName) is not { } simdOperation)
             {
                 throw new InvalidOperationException(
                     $"The given {nameof(expression)} ({expression}) is not a special operation invocation.");
             }
-
-            var targetMethodName = expression.GetTargetMemberFullName();
-
-            var simdOperation = TryGetSimdOperation(targetMethodName);
 
             if (string.IsNullOrEmpty(simdOperation))
             {

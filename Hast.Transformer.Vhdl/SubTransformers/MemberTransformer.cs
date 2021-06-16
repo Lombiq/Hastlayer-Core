@@ -63,7 +63,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 memberTransformerTasks
                     .Add(_displayClassFieldTransformer.TransformAsync(fieldDeclaration, transformationContext));
             }
-            else if (!_pocoTransformer.IsSupportedMember(node))
+            else if (!_pocoTransformer.IsSupported(node))
             {
                 throw new NotSupportedException($"The member {node} is not supported for transformation.");
             }

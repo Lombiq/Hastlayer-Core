@@ -22,7 +22,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _declarableTypeCreatorLazy = declarableTypeCreatorLazy;
         }
 
-        public bool IsSupportedRecordMember(AstNode node) => node is PropertyDeclaration or FieldDeclaration;
+        public bool IsSupported(AstNode node) => node is PropertyDeclaration or FieldDeclaration;
 
         public NullableRecord CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
         {
