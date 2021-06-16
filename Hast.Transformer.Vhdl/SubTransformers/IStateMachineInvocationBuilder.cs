@@ -7,6 +7,9 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
+    /// <summary>
+    /// A service for creating the VHDL state machine for method invocations.
+    /// </summary>
     public interface IStateMachineInvocationBuilder : IDependency
     {
         /// <summary>
