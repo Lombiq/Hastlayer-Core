@@ -285,7 +285,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 !(type = node.GetActualType()).IsEnum() &&
                 !(node is NullReferenceExpression))
             {
-                node.ReplaceWith(new PrimitiveExpression(resolveResult.ConstantValue, resolveResult.ConstantValue.ToString())
+                node.ReplaceWith(new PrimitiveExpression(resolveResult.ConstantValue)
                     .WithAnnotation(new ConstantResolveResult(type, resolveResult.ConstantValue)));
             }
 
