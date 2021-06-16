@@ -10,7 +10,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     /// </summary>
     public interface IRecordComposer : IDependency, ISpecificNodeTypeTransformer
     {
-        bool IsSupportedRecordMember(AstNode node);
+        /// <summary>
+        /// Transforms a <paramref name="typeDeclaration"/> into a VHDL record.
+        /// </summary>
         NullableRecord CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context);
     }
 }

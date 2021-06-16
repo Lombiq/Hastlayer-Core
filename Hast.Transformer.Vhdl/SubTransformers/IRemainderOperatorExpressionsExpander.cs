@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
@@ -11,6 +11,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     /// </summary>
     public interface IRemainderOperatorExpressionsExpander : IDependency
     {
+        /// <summary>
+        /// Expands binary operator expressions using the remainder operator (%) to a division-subtraction.
+        /// </summary>
         void ExpandRemainderOperatorExpressions(SyntaxTree syntaxTree);
     }
 }

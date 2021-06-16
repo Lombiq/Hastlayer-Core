@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Hast.Common.Interfaces;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
@@ -27,6 +27,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             SubTransformerContext context);
     }
 
+    /// <summary>
+    /// The result of a <see cref="IStateMachineInvocationBuilder.BuildInvocation"/> call.
+    /// </summary>
     public interface IBuildInvocationResult
     {
         IEnumerable<Assignment> OutParameterBackAssignments { get; }
