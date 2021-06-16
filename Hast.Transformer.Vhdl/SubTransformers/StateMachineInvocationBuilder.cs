@@ -74,75 +74,75 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 return buildInvocationBlockResult;
             }
-            else
+
+            var outParameterBackAssignments = new List<Assignment>();
+            var invocationIndexVariableName = stateMachine.CreateInvocationIndexVariableName(targetMethodName);
+            var invocationIndexVariableType = new RangedDataType(KnownDataTypes.UnrangedInt)
             {
-                var outParameterBackAssignments = new List<Assignment>();
-                var invocationIndexVariableName = stateMachine.CreateInvocationIndexVariableName(targetMethodName);
-                var invocationIndexVariableType = new RangedDataType(KnownDataTypes.UnrangedInt)
-                {
-                    RangeMax = instanceCount - 1,
-                };
-                var invocationIndexVariableReference = invocationIndexVariableName.ToVhdlVariableReference();
-                stateMachine.LocalVariables.AddIfNew(new Variable
-                {
-                    DataType = invocationIndexVariableType,
-                    InitialValue = KnownDataTypes.UnrangedInt.DefaultValue,
-                    Name = invocationIndexVariableName,
-                });
+                RangeMax = instanceCount - 1,
+            };
+            var invocationIndexVariableReference = invocationIndexVariableName.ToVhdlVariableReference();
+            stateMachine.LocalVariables.AddIfNew(new Variable
+            {
+                DataType = invocationIndexVariableType,
+                InitialValue = KnownDataTypes.UnrangedInt.DefaultValue,
+                Name = invocationIndexVariableName,
+            });
 
-                var proxyCase = new Case
-                {
-                    Expression = invocationIndexVariableReference,
-                };
+            var proxyCase = new Case
+            {
+                Expression = invocationIndexVariableReference,
+            };
 
-                for (int i = 0; i < instanceCount; i++)
-                {
-                    var buildInvocationBlockResult = BuildInvocationBlock(
-                        targetDeclaration,
-                        targetMethodName,
-                        transformedParameters,
-                        context,
-                        i);
+            for (int i = 0; i < instanceCount; i++)
+            {
+                var buildInvocationBlockResult = BuildInvocationBlock(
+                    targetDeclaration,
+                    targetMethodName,
+                    transformedParameters,
+                    context,
+                    i);
 
-                    outParameterBackAssignments.AddRange(buildInvocationBlockResult.OutParameterBackAssignments);
+                outParameterBackAssignments.AddRange(buildInvocationBlockResult.OutParameterBackAssignments);
 
-                    proxyCase.Whens.Add(new CaseWhen(
-                        expression: i.ToVhdlValue(invocationIndexVariableType),
-                        body: new List<IVhdlElement>
-                        {
-                            {
-                                buildInvocationBlockResult.InvocationBlock
-                            },
-                        }));
-                }
-
-                AddInvocationStartComment();
-                currentBlock.Add(proxyCase);
-                currentBlock.Add(new Assignment
-                {
-                    AssignTo = invocationIndexVariableReference,
-                    Expression = new Binary
+                proxyCase.Whens.Add(new CaseWhen(
+                    expression: i.ToVhdlValue(invocationIndexVariableType),
+                    body: new List<IVhdlElement>
                     {
-                        Left = invocationIndexVariableReference,
-                        Operator = BinaryOperator.Add,
-                        Right = 1.ToVhdlValue(invocationIndexVariableType),
-                    },
-                });
-
-                return new BuildInvocationResult { OutParameterBackAssignments = outParameterBackAssignments };
+                        {
+                            buildInvocationBlockResult.InvocationBlock
+                        },
+                    }));
             }
+
+            AddInvocationStartComment();
+            currentBlock.Add(proxyCase);
+            currentBlock.Add(new Assignment
+            {
+                AssignTo = invocationIndexVariableReference,
+                Expression = new Binary
+                {
+                    Left = invocationIndexVariableReference,
+                    Operator = BinaryOperator.Add,
+                    Right = 1.ToVhdlValue(invocationIndexVariableType),
+                },
+            });
+
+            return new BuildInvocationResult { OutParameterBackAssignments = outParameterBackAssignments };
         }
 
         public IEnumerable<IVhdlElement> BuildMultiInvocationWait(
             MethodDeclaration targetDeclaration,
             int instanceCount,
             bool waitForAll,
-            SubTransformerContext context) => BuildInvocationWait(targetDeclaration, instanceCount, -1, waitForAll, context);
+            SubTransformerContext context) =>
+            BuildInvocationWait(targetDeclaration, instanceCount, -1, waitForAll, context);
 
         public IVhdlElement BuildSingleInvocationWait(
             MethodDeclaration targetDeclaration,
             int targetIndex,
-            SubTransformerContext context) => BuildInvocationWait(targetDeclaration, 1, targetIndex, true, context).Single();
+            SubTransformerContext context) =>
+            BuildInvocationWait(targetDeclaration, 1, targetIndex, true, context).Single();
 
         /// <summary>
         /// Be aware that the method can change the current block.
