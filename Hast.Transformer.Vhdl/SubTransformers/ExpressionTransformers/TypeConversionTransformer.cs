@@ -246,7 +246,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     result.IsResized = true;
 
                     return false;
-                case { FromSigned: true, ToUnsigned: true } when fromSize < toSize:
+                case { FromSigned: true, ToUnsigned: true }:
                     result.IsLossy = true;
                     result.ConvertedFromExpression = CreateCastInvocationForFromExpression("unsigned");
 

@@ -80,21 +80,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 _ => ConvertTypeInternal(type.GetActualType(), context),
             };
 
-        public DataType ConvertAndDeclareAstType(
-            AstType type,
-            IDeclarableElement declarable,
-            IVhdlTransformationContext context)
-        {
-            var vhdlType = ConvertAstType(type, context);
-
-            if (vhdlType.TypeCategory is DataTypeCategory.Array or DataTypeCategory.Composite)
-            {
-                declarable.Declarations.Add(vhdlType);
-            }
-
-            return vhdlType;
-        }
-
         private static DataType ConvertPrimitive(KnownTypeCode typeCode) =>
             typeCode switch
             {
