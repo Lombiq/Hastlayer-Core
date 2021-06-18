@@ -27,8 +27,6 @@ namespace Hast.Transformer.Vhdl.Tests
         private readonly AutoMocker _mocker;
         private ITransformationContext _producedContext;
 
-        private ITransformer GetTransformer() => _mocker.CreateInstance<DefaultTransformer>();
-
         public TransformerTests()
         {
             _mocker = new AutoMocker();
@@ -38,12 +36,19 @@ namespace Hast.Transformer.Vhdl.Tests
             _mocker.Use<IMemberSuitabilityChecker>(_mocker.CreateInstance<MemberSuitabilityChecker>());
             _mocker.Use<ITypeDeclarationLookupTableFactory>(_mocker.CreateInstance<TypeDeclarationLookupTableFactory>());
             _mocker.Use<ISyntaxTreeCleaner>(_mocker.CreateInstance<SyntaxTreeCleaner>());
-            _mocker.Use<IConverter>(_mocker.CreateInstance<MemberIdentifiersFixer>());
+            _mocker.Use<ITransformationContextCacheService>(_mocker.CreateInstance<TransformationContextCacheService>());
 
             // Moq has a problem with resolving IEnumerable<Tservice> in the constructor even when Tservice is already
             // registered, so these have to be added manually. See: https://github.com/moq/Moq.AutoMocker/issues/76
             _mocker.Use<IEnumerable<EventHandler<ITransformationContext>>>(Array.Empty<EventHandler<ITransformationContext>>());
             _mocker.Use<IDeviceDriverSelector>(new DeviceDriverSelector(new[] { _mocker.CreateInstance<Nexys4DdrDriver>() }));
+
+            _mocker.Use<IEnumerable<IConverter>>(
+                new[]
+                {
+                    _mocker.CreateInstance<MemberIdentifiersFixer>(),
+                    MockConverter<UnneededReferenceVariablesRemover>(),
+                });
 
             _mocker
                 .GetMock<ITransformingEngine>()
@@ -56,6 +61,8 @@ namespace Hast.Transformer.Vhdl.Tests
                         return Task.FromResult<IHardwareDescription>(null);
                     })
                 .Verifiable();
+
+            _mocker.Use<ITransformerPostProcessor>(_mocker.CreateInstance<DefaultTransformerPostProcessor>());
         }
 
         [Fact]
@@ -174,8 +181,17 @@ namespace Hast.Transformer.Vhdl.Tests
                 .ShouldBeTrue();
         }
 
+        private ITransformer GetTransformer() => _mocker.CreateInstance<DefaultTransformer>();
+
         private Dictionary<string, TypeDeclaration> BuildTypeLookup() =>
             _producedContext.SyntaxTree.GetAllTypeDeclarations().ToDictionary(type => type.Name);
+
+        private static IConverter MockConverter<T>() =>
+            new CustomConverter
+            {
+                Name = typeof(T).Name,
+                ConverterAction = (_, _, _) => { },
+            };
 
         private static HardwareGenerationConfiguration CreateConfig()
         {

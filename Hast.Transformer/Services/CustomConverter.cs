@@ -10,6 +10,7 @@ namespace Hast.Transformer.Services
     {
         private readonly List<string> _dependencies = new();
 
+        public string Name { get; set; }
         public IEnumerable<string> Dependencies => _dependencies;
 
         public Action<SyntaxTree, IHardwareGenerationConfiguration, IKnownTypeLookupTable> ConverterAction { get; set; }
@@ -27,5 +28,7 @@ namespace Hast.Transformer.Services
             _dependencies.Add(name);
             return this;
         }
+
+        public void AddToDictionary(IDictionary<string, IConverter> dictionary) => dictionary.Add(Name!, this);
     }
 }

@@ -220,10 +220,12 @@ namespace Hast.Transformer
             var knownTypeLookupTable = _knownTypeLookupTableFactory.Create(decompilers.First().TypeSystem);
             var arraySizeHolder = ArraySizeHolder.FromConfiguration(configuration);
 
-            var convertersByName = _converters.ToDictionary(converter => converter.GetType().Name);
-            convertersByName[nameof(ConstantValuesSubstitutor)] = new CustomConverter
+            var convertersByName = _converters.ToDictionary(converter => converter.Name ?? converter.GetType().Name);
+
+            // This one needs additional configuration.
+            new CustomConverter
             {
-                // This one needs additional configuration.
+                Name = nameof(ConstantValuesSubstitutor),
                 ConverterAction = (syntaxTree, configuration, knownTypeLookupTable) =>
                 {
                     if (!transformerConfiguration.EnableConstantSubstitution) return;
@@ -234,7 +236,8 @@ namespace Hast.Transformer
                         knownTypeLookupTable);
                 },
             }
-                .WithDependency<UnneededReferenceVariablesRemover>();
+                .WithDependency<UnneededReferenceVariablesRemover>()
+                .AddToDictionary(convertersByName);
 
             var converters = convertersByName
                 .Values

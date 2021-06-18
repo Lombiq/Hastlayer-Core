@@ -14,6 +14,12 @@ namespace Hast.Transformer.Services
     public interface IConverter : IDependency
     {
         /// <summary>
+        /// Gets the name of the converter. Normally this is the type name and in this case it should not be left as the
+        /// interface implementation.
+        /// </summary>
+        string Name => GetType().Name;
+
+        /// <summary>
         /// Gets the type names of dependency services used for topological sorting.
         /// </summary>
         IEnumerable<string> Dependencies => Enumerable.Empty<string>();
