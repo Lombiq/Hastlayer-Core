@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public class MemberTransformer
-        : IMemberTransformer
+    public class MemberTransformer : IMemberTransformer
     {
         private readonly IMethodTransformer _methodTransformer;
         private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
