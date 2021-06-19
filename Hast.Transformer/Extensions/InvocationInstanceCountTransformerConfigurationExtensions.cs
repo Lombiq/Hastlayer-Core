@@ -30,26 +30,25 @@ namespace Hast.Common.Configuration
             // If there is no IndexedNameHolder then first we need to generate the indices for all lambdas.
             if (indexedNameHolder == null)
             {
-                TypeDeclaration parentType;
+                var parentType = entity.FindFirstParentTypeDeclaration();
                 IEnumerable<EntityDeclaration> compilerGeneratedMembers;
 
-                if (isDisplayClassMember)
+                if (isDisplayClassMember && parentType.FindFirstParentTypeDeclaration() is { } displayClassParent)
                 {
                     // Run the index-setting logic on the members of the parent class.
+                    parentType = displayClassParent;
 
-                    parentType = entity
-                        .FindFirstParentTypeDeclaration() // The DisplayClass.
-                        .FindFirstParentTypeDeclaration(); // The parent type.
-
-                    compilerGeneratedMembers = parentType.Members
-                        .Where(member => member.GetFullName().IsDisplayOrClosureClassName())
+                    compilerGeneratedMembers = parentType
+                        .Members
+                        .Where(member =>
+                            member is TypeDeclaration &&
+                            member.GetFullName().IsDisplayOrClosureClassName())
                         .SelectMany(displayClass => ((TypeDeclaration)displayClass).Members);
                 }
                 else
                 {
-                    parentType = entity.FindFirstParentTypeDeclaration();
-
-                    compilerGeneratedMembers = parentType.Members
+                    compilerGeneratedMembers = parentType
+                        .Members
                         .Where(member => member.GetFullName().IsInlineCompilerGeneratedMethodName());
                 }
 
