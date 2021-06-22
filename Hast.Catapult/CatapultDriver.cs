@@ -18,7 +18,10 @@ namespace Hast.Catapult
             {
                 lock (_timingReportParserLock)
                 {
-                    _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(CatapultDriver)));
+                    _timingReport ??= _timingReportParser.Parse(
+                        ResourceHelper.GetTimingReport(
+                            nameof(CatapultDriver),
+                            typeof(CatapultDriver).Assembly));
 
                     return _timingReport;
                 }
