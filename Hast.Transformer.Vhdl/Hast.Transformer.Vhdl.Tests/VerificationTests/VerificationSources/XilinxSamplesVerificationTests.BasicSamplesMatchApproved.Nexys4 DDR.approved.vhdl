@@ -6,7 +6,7 @@
 -- * System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
--- * System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+-- * System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberSync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
 -- * System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ParallelizedArePrimeNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
@@ -2407,27 +2407,27 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberSync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
     -- State machine states:
-    type \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._States\ is (
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\, 
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_1\, 
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_2\, 
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\, 
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\, 
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\, 
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\, 
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\, 
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\, 
-        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_9\);
+    type \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._States\ is (
+        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_0\, 
+        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_1\, 
+        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_2\, 
+        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_3\, 
+        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_4\, 
+        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_5\, 
+        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_6\, 
+        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_7\, 
+        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_8\, 
+        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_9\);
     -- Signals:
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Finished\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Started\: boolean := false;
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
+    Signal \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Finished\: boolean := false;
+    Signal \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
+    Signal \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
+    Signal \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
+    Signal \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Started\: boolean := false;
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberSync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
     -- System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
@@ -2439,9 +2439,9 @@ architecture Imp of Hast_IP is
         \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_3\);
     -- Signals:
     Signal \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._Finished\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\: boolean := false;
+    Signal \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\: boolean := false;
     Signal \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._Started\: boolean := false;
-    Signal \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\: boolean := false;
+    Signal \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Finished.0\: boolean := false;
     -- System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
@@ -3056,7 +3056,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelAlgorithm::Run(SimpleMemory)._Started.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Started.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Started.0\: boolean := false;
@@ -3073,7 +3073,7 @@ architecture Imp of Hast_IP is
     Signal \Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().ParallelAlgorithm::Run(SimpleMemory)._Finished.0\: boolean := false;
-    Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\: boolean := false;
+    Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Finished.0\: boolean := false;
     Signal \Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Finished.0\: boolean := false;
@@ -18605,74 +18605,74 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.ParallelAlgorithm::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
-    \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._StateMachine\: process (\Clock\) 
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\: \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._States\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\;
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\: boolean := false;
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.9\: boolean := false;
-        attribute dont_touch of \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\: Variable is "true";
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberSync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
+    \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._StateMachine\: process (\Clock\) 
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\: \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._States\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_0\;
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.return_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.9\: boolean := false;
+        attribute dont_touch of \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2\: Variable is "true";
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Finished\ <= false;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\ := (others => '0');
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := false;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\ := false;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 64);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\ := false;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\ := false;
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.8\ := to_signed(0, 64);
-                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.9\ := false;
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Finished\ <= false;
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_0\;
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.dataIn.0\ := (others => '0');
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.return_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := false;
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.1\ := false;
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 64);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.5\ := false;
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.6\ := false;
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.7\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.8\ := to_signed(0, 64);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.9\ := false;
             else 
-                case \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ is 
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\ => 
+                case \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ is 
+                    when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Started\ = true) then 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_2\;
+                        if (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Started\ = true) then 
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_1\ => 
+                    when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Started\ = true) then 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Finished\ <= true;
+                        if (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Started\ = true) then 
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Finished\ <= true;
                         else 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Finished\ <= false;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_0\;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Finished\ <= false;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_2\ => 
+                    when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_2\ => 
                         -- The following section was transformed from the .NET statement below:
                         -- uint number;
                         -- 
@@ -18681,24 +18681,24 @@ begin
                         -- // Starting inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                         -- 
                         -- Begin SimpleMemory read.
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\ => 
+                    when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_3\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.dataIn.0\);
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.dataIn.0\ := \DataIn\;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- uint number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 = number;
                             -- 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number\;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number\;
                             -- The following section was transformed from the .NET statement below:
                             -- bool return_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393;
                             -- 
@@ -18708,69 +18708,69 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 = number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 / 2u;
                             -- 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ / to_unsigned(2, 32);
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.0\;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ / to_unsigned(2, 32);
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- uint num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 = 2u;
                             -- 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := to_unsigned(2, 32);
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := to_unsigned(2, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 <= num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 && (long)(number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 - number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 / num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 * num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393) != 0L) {
                             -- 	num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 = (uint)((long)(num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393) + 1L);
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1238
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\ => 
-                        -- Repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\.
+                    when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_4\ => 
+                        -- Repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_3\.
                         -- The while loop's condition:
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ <= \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\;
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.1\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ <= \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\ => 
-                        -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\.
+                    when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_5\ => 
+                        -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- return_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 = (long)(num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393) == (long)(num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393) + 1L;
                         -- // Ending inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                         -- 
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.8\ := signed(SmartResize((\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\), 64)) + to_signed(1, 64);
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.9\ := signed(SmartResize((\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\), 64)) = \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.8\;
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.9\;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.8\ := signed(SmartResize((\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\), 64)) + to_signed(1, 64);
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.9\ := signed(SmartResize((\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\), 64)) = \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.8\;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.return_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
                         -- memory.WriteBoolean (0, return_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393);
                         -- 
                         -- Begin SimpleMemory write.
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.return_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\);
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_9\;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.return_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\);
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.6715
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_6\ => 
-                        -- Waiting for the result to appear in \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ (have to wait 9 clock cycles in this state).
+                    when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_6\ => 
+                        -- Waiting for the result to appear in \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2\ (have to wait 9 clock cycles in this state).
                         -- The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target.
-                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
+                        if (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ >= to_signed(9, 32)) then 
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_7\;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
                         else 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ / \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ / \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\;
                         -- Clock cycles needed to complete this state (approximation): 9
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_7\ => 
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\ := SmartResize(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2\ * \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\, 32);
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\ := signed(SmartResize(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ - \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.3\, 64));
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\;
+                    when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_7\ => 
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.3\ := SmartResize(\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2\ * \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\, 32);
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.4\ := signed(SmartResize(\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ - \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.3\, 64));
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.7471
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\ => 
+                    when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\ := (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.4\) /= to_signed(0, 64);
-                        \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.1\ and \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.5\;
-                        if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.6\) then 
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.5\ := (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.4\) /= to_signed(0, 64);
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.6\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.1\ and \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.5\;
+                        if (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.6\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 = (uint)((long)(num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393) + 1L);
@@ -18779,29 +18779,29 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393 = (uint)((long)(num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393) + 1L);
                             -- 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\), 64)) + to_signed(1, 64)), 32);
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.7\);
-                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
-                            if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ = \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_8\) then 
-                                \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_4\;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\), 64)) + to_signed(1, 64)), 32);
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_0011a6fc5c306e366d75853fbcd326d29f3dc0876173f5a7d29d616c7ca84393\ := (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.7\);
+                            -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
+                            if (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ = \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_8\) then 
+                                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_4\;
                             end if;
                         else 
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_5\;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7953
-                    when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_9\ => 
+                    when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_9\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._State_1\;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
+    -- System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberSync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
     -- System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
@@ -18812,7 +18812,7 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._Finished\ <= false;
-                \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= false;
+                \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\ <= false;
                 \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_0\;
             else 
                 case \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State\ is 
@@ -18835,16 +18835,16 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_2\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- this.IsPrimeNumber (memory);
+                        -- this.IsPrimeNumberSync (memory);
                         -- 
-                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
-                        \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberSync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+                        \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\ <= true;
                         \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
-                        if (\PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ = \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\) then 
-                            \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= false;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberSync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+                        if (\PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\ = \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Finished.0\) then 
+                            \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
                             -- return Task.CompletedTask;
                             -- 
@@ -22398,7 +22398,7 @@ begin
                 \Hast::ExternalInvocationProxy().MonteCarloPiEstimator::EstimatePi(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ObjectOrientedShowcase::Run(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().ParallelAlgorithm::Run(SimpleMemory)._Started.0\ <= false;
-                \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= false;
+                \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberAsync(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().PrimeCalculator::ArePrimeNumbers(SimpleMemory)._Started.0\ <= false;
                 \Hast::ExternalInvocationProxy().PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory)._Started.0\ <= false;
@@ -22462,10 +22462,10 @@ begin
                                 \FinishedInternal\ <= true;
                             end if;
                         when 7 => 
-                            if (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ = false) then 
-                                \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= true;
-                            elsif (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\) then 
-                                \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ <= false;
+                            if (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\ = false) then 
+                                \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\ <= true;
+                            elsif (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\ = \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Finished.0\) then 
+                                \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\ <= false;
                                 \FinishedInternal\ <= true;
                             end if;
                         when 8 => 
@@ -23168,81 +23168,81 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.SampleAssembly.ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(System.Object) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
-    \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).Hast::ExternalInvocationProxy().runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).Hast::ExternalInvocationProxy().runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberSync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) start
+    \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)\: process (\Clock\) 
+        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).Hast::ExternalInvocationProxy().runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).Hast::ExternalInvocationProxy().runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
-                \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\ <= false;
-                \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\ <= false;
+                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
+                \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Finished.0\ <= false;
+                \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Finished.0\ <= false;
             else 
 
                 -- Invocation handler #0 out of 1 corresponding to System.Threading.Tasks.Task Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberAsync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0
-                case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\ is 
+                case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\) then 
-                            \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningIndex.0\ := 0;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Started\ <= true;
+                        if (\PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\) then 
+                            \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningIndex.0\ := 0;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Started\ <= true;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningIndex.0\ is 
                             when 0 => 
-                                if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\ := AfterFinished;
-                                    \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\ <= true;
-                                    \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Started\ <= false;
+                                if (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\ := AfterFinished;
+                                    \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Finished.0\ <= true;
+                                    \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Started\ <= false;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\ := WaitingForStarted;
-                            \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\ <= false;
+                        if (\PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.runningState.0\ := WaitingForStarted;
+                            \PrimeCalculator::IsPrimeNumberAsync(SimpleMemory).0.PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Finished.0\ <= false;
                         end if;
                 end case;
 
 
                 -- Invocation handler #0 out of 1 corresponding to System.Void Hast::ExternalInvocationProxy()
-                case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).Hast::ExternalInvocationProxy().runningState.0\ is 
+                case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).Hast::ExternalInvocationProxy().runningState.0\ is 
                     when WaitingForStarted => 
-                        if (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\) then 
-                            \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
-                            \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Started\ <= true;
+                        if (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\) then 
+                            \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).Hast::ExternalInvocationProxy().runningIndex.0\ := 0;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Started\ <= true;
                         end if;
                     when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).Hast::ExternalInvocationProxy().runningIndex.0\ is 
+                        case \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).Hast::ExternalInvocationProxy().runningIndex.0\ is 
                             when 0 => 
-                                if (\PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
-                                    \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\ <= true;
-                                    \PrimeCalculator::IsPrimeNumber(SimpleMemory).0._Started\ <= false;
+                                if (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).Hast::ExternalInvocationProxy().runningState.0\ := AfterFinished;
+                                    \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Finished.0\ <= true;
+                                    \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._Started\ <= false;
                                 end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
-                        if (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
-                            \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumber(SimpleMemory)._Finished.0\ <= false;
+                        if (\Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory).Hast::ExternalInvocationProxy().runningState.0\ := WaitingForStarted;
+                            \Hast::ExternalInvocationProxy().PrimeCalculator::IsPrimeNumberSync(SimpleMemory)._Finished.0\ <= false;
                         end if;
                 end case;
 
             end if;
         end if;
     end process;
-    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
+    -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberSync(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(System.Object) start
@@ -23570,10 +23570,10 @@ begin
 
 
     -- System.Void Hast::SimpleMemoryOperationProxy() start
-    \CellIndex\ <= to_integer(\GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\) when \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.CellIndex\) when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ else to_integer(\GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\) when \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\) when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\Loopback::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MemoryContainer::GetInput().0.SimpleMemory.CellIndex\) when \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else to_integer(\MemoryTest::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \MemoryTest::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MemoryTest::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.CellIndex\) when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\) when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else 0;
-    \DataOut\ <= \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.DataOut\ when \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ else \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.DataOut\ when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ else \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.DataOut\ when \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\ when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MemoryContainer::GetInput().0.SimpleMemory.DataOut\ when \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else \MemoryTest::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \MemoryTest::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\ when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\ when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else (others => '0');
-    \ReadEnable\ <= \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \MemoryTest::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\;
-    \WriteEnable\ <= \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ or \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ or \MemoryTest::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::IsPrimeNumber(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ or \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\;
+    \CellIndex\ <= to_integer(\GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\) when \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.CellIndex\) when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ else to_integer(\GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\) when \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.CellIndex\) when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\Loopback::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MemoryContainer::GetInput().0.SimpleMemory.CellIndex\) when \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else to_integer(\MemoryTest::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \MemoryTest::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MemoryTest::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.CellIndex\) when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.CellIndex\) when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\) when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else to_integer(\RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.CellIndex\) when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else to_integer(\SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.CellIndex\) when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else 0;
+    \DataOut\ <= \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.DataOut\ when \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ else \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.DataOut\ when \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ else \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.DataOut\ when \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.DataOut\ when \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ else \Loopback::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MemoryContainer::GetInput().0.SimpleMemory.DataOut\ when \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ else \MemoryTest::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \MemoryTest::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\ when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.DataOut\ when \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ when \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ else \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.DataOut\ when \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ else \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.DataOut\ when \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ else (others => '0');
+    \ReadEnable\ <= \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.ReadEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.ReadEnable\ or \MemoryTest::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.ReadEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.ReadEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.ReadEnable\ or \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.ReadEnable\;
+    \WriteEnable\ <= \GenomeMatcher::FillCell(SimpleMemory,UInt16,UInt16,UInt16,UInt16,UInt16,UInt16).0.SimpleMemory.WriteEnable\ or \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ImageContrastModifier::ChangeContrast(SimpleMemory).0.SimpleMemory.WriteEnable\ or \Loopback::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MemoryContainer::GetInput().0.SimpleMemory.WriteEnable\ or \MemoryTest::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \ParallelAlgorithm::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \PrimeCalculator::ParallelizedArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFibonacchiSeries(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::CalculateFactorial(SimpleMemory).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFibonacchiSeries(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).0.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).1.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).2.SimpleMemory.WriteEnable\ or \RecursiveAlgorithms::RecursivelyCalculateFactorial(SimpleMemory,Int16).3.SimpleMemory.WriteEnable\ or \SimdCalculator::RunSimdOperation(SimpleMemory,SimdOperation).0.SimpleMemory.WriteEnable\ or \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\;
     -- System.Void Hast::SimpleMemoryOperationProxy() end
 
 end Imp;
@@ -23735,8 +23735,8 @@ set_multicycle_path 10 -setup -to [get_cells -hierarchical {*ImageContrastModifi
 set_multicycle_path 9 -hold -to [get_cells -hierarchical {*ImageContrastModifier::ChangePixelValue(Byte,Int32).24.binaryOperationResult.7*}]
 set_multicycle_path 27 -setup -to [get_cells -hierarchical {*MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0*}]
 set_multicycle_path 26 -hold -to [get_cells -hierarchical {*MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0*}]
-set_multicycle_path 9 -setup -to [get_cells -hierarchical {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]
-set_multicycle_path 8 -hold -to [get_cells -hierarchical {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]
+set_multicycle_path 9 -setup -to [get_cells -hierarchical {*PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2*}]
+set_multicycle_path 8 -hold -to [get_cells -hierarchical {*PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2*}]
 set_multicycle_path 9 -setup -to [get_cells -hierarchical {*PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4*}]
 set_multicycle_path 8 -hold -to [get_cells -hierarchical {*PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4*}]
 set_multicycle_path 9 -setup -to [get_cells -hierarchical {*PrimeCalculator::<ParallelizedArePrimeNumbers>b__9_0(Object).0.binaryOperationResult.2*}]
