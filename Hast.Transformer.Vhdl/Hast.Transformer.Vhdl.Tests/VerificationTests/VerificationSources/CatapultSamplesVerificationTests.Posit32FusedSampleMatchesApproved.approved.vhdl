@@ -1161,7 +1161,6 @@ begin
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.7\: boolean := false;
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.9\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\: boolean := false;
@@ -1431,11 +1430,7 @@ begin
                             
                             
                             
-                            
-                            
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\ := to_signed(0, 32);
-                            
-                            
                             
                             
                             
@@ -1492,11 +1487,6 @@ begin
                             
                             
                             
-                            
-                            
-                            
-                            
-                            
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ * to_signed(160, 32), 32);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_17\;
                         else 
@@ -1528,7 +1518,7 @@ begin
                         
                         
 
-                        if ((\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\)) then 
+                        if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_20\;
                         else 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_24\;
@@ -1536,10 +1526,6 @@ begin
                         
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\ => 
                         
-                        
-                        
-                        
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\);
                         
                         
                         
@@ -1561,8 +1547,8 @@ begin
                         
                         
                         
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\PositBits\ := to_unsigned(0, 32);
                         
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ * to_signed(160, 32), 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.12\ := to_signed(1, 32) + \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.11\;
@@ -1583,7 +1569,7 @@ begin
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\));
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -1594,7 +1580,7 @@ begin
                         
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             
                             if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_23\) then 
                                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\;
@@ -1612,11 +1598,11 @@ begin
                         
                         
                         
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\PositBits\ := to_unsigned(0, 32);
                         
                         
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\));
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_25\;
@@ -1625,7 +1611,7 @@ begin
                         
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.In.0\;
                             
                             if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_25\) then 
                                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\;
@@ -9862,7 +9848,6 @@ begin
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.7\: boolean := false;
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.9\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\: boolean := false;
@@ -10086,8 +10071,6 @@ begin
                         
                         
                         
-                        
-                        
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_13\;
                         
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_12\ => 
@@ -10134,11 +10117,7 @@ begin
                             
                             
                             
-                            
-                            
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\ := to_signed(0, 32);
-                            
-                            
                             
                             
                             
@@ -10195,11 +10174,6 @@ begin
                             
                             
                             
-                            
-                            
-                            
-                            
-                            
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ * to_signed(160, 32), 32);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_17\;
                         else 
@@ -10231,7 +10205,7 @@ begin
                         
                         
 
-                        if ((\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\)) then 
+                        if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_20\;
                         else 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_24\;
@@ -10239,10 +10213,6 @@ begin
                         
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\ => 
                         
-                        
-                        
-                        
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\);
                         
                         
                         
@@ -10264,8 +10234,8 @@ begin
                         
                         
                         
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\PositBits\ := to_unsigned(0, 32);
                         
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ * to_signed(160, 32), 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.12\ := to_signed(1, 32) + \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.11\;
@@ -10286,7 +10256,7 @@ begin
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\));
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -10297,7 +10267,7 @@ begin
                         
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             
                             if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_23\) then 
                                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\;
@@ -10315,11 +10285,11 @@ begin
                         
                         
                         
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\PositBits\ := to_unsigned(0, 32);
                         
                         
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\));
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_25\;
@@ -10328,7 +10298,7 @@ begin
                         
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.In.0\;
                             
                             if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_25\) then 
                                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\;
