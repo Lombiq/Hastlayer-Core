@@ -11,19 +11,19 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
     public abstract class VerificationTestFixtureBase : VhdlTransformingTestFixtureBase
     {
-        // Uncomment to make Shouldly open the KDiff version bundled with TortoiseHg.
+        // Uncomment to make Shouldly open KDiff for diffing.
         //static VerificationTestFixtureBase()
         //{
-        //    var kDiffTortoiseHg = new DiffTool(
-        //        "KDiffTortoiseHg",
-        //        @"C:\Program Files\TortoiseHg\lib\kdiff3.exe",
+        //    var kDiff = new Shouldly.Configuration.DiffTool(
+        //        "KDiff3",
+        //        @"C:\Program Files\kdiff3\bin\kdiff3.exe",
         //        (received, approved, approvedExists) =>
         //            approvedExists ?
         //                $"\"{received}\" \"{approved}\" -o \"{approved}\"" :
         //                $"\"{received}\" -o \"{approved}\"");
-        //    ShouldlyConfiguration.DiffTools.RegisterDiffTool(kDiffTortoiseHg);
+        //    Shouldly.ShouldlyConfiguration.DiffTools.RegisterDiffTool(kDiff);
 
-        //    ShouldlyConfiguration.DiffTools.SetDiffToolPriorities(kDiffTortoiseHg);
+        //    Shouldly.ShouldlyConfiguration.DiffTools.SetDiffToolPriorities(kDiff);
         //}
 
         protected override Task<VhdlHardwareDescription> TransformAssembliesToVhdl(

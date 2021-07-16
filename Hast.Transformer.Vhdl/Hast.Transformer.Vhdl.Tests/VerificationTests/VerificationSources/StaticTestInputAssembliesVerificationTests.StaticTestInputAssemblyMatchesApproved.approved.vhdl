@@ -1281,7 +1281,7 @@ begin
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\: boolean := false;
-        Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -1295,7 +1295,7 @@ begin
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ := to_signed(0, 64);
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.3\ := false;
-                \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\ := to_unsigned(0, 32);
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.5\ := to_unsigned(0, 32);
             else 
                 case \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ is 
@@ -1350,11 +1350,11 @@ begin
                     when \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_3\ => 
                         -- State after the if-else which was started in state \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.ArrayLength = (uint)((int)(size >> 5) + (conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c));
+                        -- @this.ArrayLength = (size >> 5) + (uint)(conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c);
                         -- 
-                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\ := signed(shift_right(\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111"))));
-                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.5\ := SmartResize(unsigned((\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\) + (\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c\)), 32);
-                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.this\.\ArrayLength\ := (\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.5\);
+                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\ := shift_right(\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
+                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.5\ := (\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\) + unsigned((\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c\));
+                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.this\.\ArrayLength\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.5\;
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.6395
                     when \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_4\ => 
@@ -2440,9 +2440,7 @@ begin
                         -- MyClass myClass;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- myClass = new MyClass {
-                        -- 
-                        -- };
+                        -- myClass = new MyClass { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ObjectUsingCases::NullUsage().0.myClass\.\IsNull\ := false;
@@ -2576,9 +2574,7 @@ begin
                         -- MyClass myClass;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- myClass = new MyClass {
-                        -- 
-                        -- };
+                        -- myClass = new MyClass { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ObjectUsingCases::VoidReturn(Int32).0.myClass\.\IsNull\ := false;
@@ -2651,9 +2647,7 @@ begin
                         -- MyClass myClass;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- myClass = new MyClass {
-                        -- 
-                        -- };
+                        -- myClass = new MyClass { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ObjectUsingCases::ReferenceAssignment(Int32).0.myClass\.\IsNull\ := false;
@@ -3504,9 +3498,7 @@ begin
                         -- Calculator object2362ac40ded77a801d829ea2da526c77dbb683b9bce3f8717c510bb185b4b49d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object2362ac40ded77a801d829ea2da526c77dbb683b9bce3f8717c510bb185b4b49d = new Calculator {
-                        -- 
-                        -- };
+                        -- object2362ac40ded77a801d829ea2da526c77dbb683b9bce3f8717c510bb185b4b49d = new Calculator { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object2362ac40ded77a801d829ea2da526c77dbb683b9bce3f8717c510bb185b4b49d\.\IsNull\ := false;
@@ -3597,9 +3589,7 @@ begin
                         -- Calculator object2362ac40ded77a801d829ea2da526c77dbb683b9bce3f8717c510bb185b4b49d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object2362ac40ded77a801d829ea2da526c77dbb683b9bce3f8717c510bb185b4b49d = new Calculator {
-                        -- 
-                        -- };
+                        -- object2362ac40ded77a801d829ea2da526c77dbb683b9bce3f8717c510bb185b4b49d = new Calculator { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object2362ac40ded77a801d829ea2da526c77dbb683b9bce3f8717c510bb185b4b49d\.\IsNull\ := false;
@@ -3690,9 +3680,7 @@ begin
                         -- Calculator object2362ac40ded77a801d829ea2da526c77dbb683b9bce3f8717c510bb185b4b49d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object2362ac40ded77a801d829ea2da526c77dbb683b9bce3f8717c510bb185b4b49d = new Calculator {
-                        -- 
-                        -- };
+                        -- object2362ac40ded77a801d829ea2da526c77dbb683b9bce3f8717c510bb185b4b49d = new Calculator { };
                         -- 
                         -- Initializing record fields to their defaults.
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object2362ac40ded77a801d829ea2da526c77dbb683b9bce3f8717c510bb185b4b49d\.\IsNull\ := false;
