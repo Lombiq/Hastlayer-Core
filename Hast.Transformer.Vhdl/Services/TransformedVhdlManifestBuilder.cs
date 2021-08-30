@@ -168,7 +168,8 @@ namespace Hast.Transformer.Vhdl.Services
 
 
             XdcFile xdcFile = null;
-            if (transformationContext.DeviceDriver.DeviceManifest.ToolChainName == CommonToolChainNames.QuartusPrime)
+            var deviceManifest = transformationContext.DeviceDriver.DeviceManifest;
+            if (deviceManifest.GetBaseToolChainName() is CommonToolChainNames.QuartusPrime)
             {
                 // Adding multi-cycle path constraints for Quartus.
 
@@ -212,7 +213,7 @@ namespace Hast.Transformer.Vhdl.Services
                         }));
                 }
             }
-            else if (transformationContext.DeviceDriver.DeviceManifest.UsesVivadoInToolChain())
+            else if (deviceManifest.UsesVivadoInToolChain())
             {
                 // Adding multi-cycle path constraints for Vivado.
 
