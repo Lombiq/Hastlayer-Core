@@ -296,6 +296,8 @@ namespace Hast.Transformer
             // Adding the device name to ensure different a cached program for a different hardware doesn't get used.
             transformationIdComponents.Add(configuration.DeviceName);
 
+            if (!string.IsNullOrWhiteSpace(configuration.Label)) transformationIdComponents.Add(configuration.Label);
+
             foreach (var transformationIdComponent in transformationIdComponents)
             {
                 _logger.LogTrace(
@@ -387,7 +389,7 @@ namespace Hast.Transformer
                 TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
                 KnownTypeLookupTable = knownTypeLookupTable,
                 ArraySizeHolder = arraySizeHolder,
-                DeviceDriver = deviceDriver
+                DeviceDriver = deviceDriver,
             };
 
             foreach (var eventHandler in _eventHandlers) eventHandler?.Invoke(this, context);
