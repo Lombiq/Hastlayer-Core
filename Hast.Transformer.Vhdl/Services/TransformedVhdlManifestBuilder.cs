@@ -1,7 +1,7 @@
 ﻿using Hast.Common.Extensions;
 using Hast.Common.Services;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Abstractions;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
@@ -14,7 +14,6 @@ using Hast.Transformer.Vhdl.Verifiers;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
-using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
@@ -23,6 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Module = Hast.VhdlBuilder.Representation.Declaration.Module;
 
 namespace Hast.Transformer.Vhdl.Services
 {
@@ -41,6 +41,7 @@ namespace Hast.Transformer.Vhdl.Services
         private readonly IPocoTransformer _pocoTransformer;
         private readonly IRemainderOperatorExpressionsExpander _remainderOperatorExpressionsExpander;
         private readonly IUnsupportedConstructsVerifier _unsupportedConstructsVerifier;
+        private readonly IEnumerable<IXdcFileBuilder> _xdcFileBuilders;
 
 
         public TransformedVhdlManifestBuilder(
@@ -56,7 +57,8 @@ namespace Hast.Transformer.Vhdl.Services
             IEnumTypesCreator enumTypesCreator,
             IPocoTransformer pocoTransformer,
             IRemainderOperatorExpressionsExpander remainderOperatorExpressionsExpander,
-            IUnsupportedConstructsVerifier unsupportedConstructsVerifier)
+            IUnsupportedConstructsVerifier unsupportedConstructsVerifier,
+            IEnumerable<IXdcFileBuilder> xdcFileBuilders)
         {
             _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
             _hardwareEntryPointsVerifier = hardwareEntryPointsVerifier;
@@ -71,6 +73,7 @@ namespace Hast.Transformer.Vhdl.Services
             _pocoTransformer = pocoTransformer;
             _remainderOperatorExpressionsExpander = remainderOperatorExpressionsExpander;
             _unsupportedConstructsVerifier = unsupportedConstructsVerifier;
+            _xdcFileBuilders = xdcFileBuilders;
         }
 
 
@@ -90,7 +93,7 @@ namespace Hast.Transformer.Vhdl.Services
             var useSimpleMemory = transformationContext.GetTransformerConfiguration().UseSimpleMemory;
 
             var hastIpArchitecture = new Architecture { Name = "Imp" };
-            var hastIpModule = new VhdlBuilder.Representation.Declaration.Module { Architecture = hastIpArchitecture };
+            var hastIpModule = new Module { Architecture = hastIpArchitecture };
 
 
             // Adding libraries
@@ -157,7 +160,9 @@ namespace Hast.Transformer.Vhdl.Services
                         })
                         .Cast<IArchitectureComponent>())
                 .ToList();
-            var architectureComponentResults = transformerResults.SelectMany(transformerResult => transformerResult.ArchitectureComponentResults);
+            var architectureComponentResults = transformerResults
+                .SelectMany(transformerResult => transformerResult.ArchitectureComponentResults)
+                .ToList();
             foreach (var architectureComponentResult in architectureComponentResults)
             {
                 if (architectureComponentResult.ArchitectureComponent.DependentTypesTable.GetTypes().Any())
@@ -166,79 +171,14 @@ namespace Hast.Transformer.Vhdl.Services
                 }
             }
 
-
-            XdcFile xdcFile = null;
             var deviceManifest = transformationContext.DeviceDriver.DeviceManifest;
-            if (deviceManifest.GetBaseToolChainName() is CommonToolChainNames.QuartusPrime)
-            {
-                // Adding multi-cycle path constraints for Quartus.
-
-                var anyMultiCycleOperations = false;
-                var sdcExpression = new MultiCycleSdcStatementsAttributeExpression();
-
-                foreach (var architectureComponentResult in architectureComponentResults)
-                {
-                    foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
-                    {
-                        sdcExpression.AddPath(
-                            // If the path is through a global signal (i.e. that doesn't have a parent process) then
-                            // the parent should be empty.
-                            operation.OperationResultReference.DataObjectKind == DataObjectKind.Variable ?
-                                ProcessUtility.FindProcesses(new[] { architectureComponentResult.Body }).Single().Name :
-                                string.Empty,
-                            operation.OperationResultReference,
-                            operation.RequiredClockCyclesCeiling);
-
-                        anyMultiCycleOperations = true;
-                    }
-                }
-
-                if (anyMultiCycleOperations)
-                {
-                    var alteraAttribute = new VhdlBuilder.Representation.Declaration.Attribute
-                    {
-                        Name = "altera_attribute",
-                        ValueType = KnownDataTypes.UnrangedString
-                    };
-
-                    hastIpArchitecture.Declarations.Add(new LogicalBlock(
-                        new LineComment("Adding multi-cycle path constraints for Quartus Prime. See: https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/solutions/rd05162013_635.html"),
-                        alteraAttribute,
-                        new AttributeSpecification
-                        {
-                            Attribute = alteraAttribute,
-                            Of = hastIpArchitecture.ToReference(),
-                            ItemClass = "architecture",
-                            Expression = sdcExpression
-                        }));
-                }
-            }
-            else if (deviceManifest.UsesVivadoInToolChain())
-            {
-                // Adding multi-cycle path constraints for Vivado.
-
-                xdcFile = new XdcFile();
-
-                var anyMultiCycleOperations = false;
-
-                foreach (var architectureComponentResult in architectureComponentResults)
-                {
-                    foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
-                    {
-                        xdcFile.AddPath(operation.OperationResultReference, operation.RequiredClockCyclesCeiling, true);
-                        anyMultiCycleOperations = true;
-                    }
-                }
-
-                // attribute dont_touch : string;
-                if (anyMultiCycleOperations)
-                {
-                    hastIpArchitecture.Declarations.Add(new LogicalBlock(
-                        new LineComment("When put on variables and signals this attribute instructs Vivado not to merge them, thus allowing us to define multi-cycle paths properly."),
-                        KnownDataTypes.DontTouchAttribute));
-                }
-            }
-
+            var xdcFileBuilders = _xdcFileBuilders
+                .Where(builder => builder.IsTargetType(deviceManifest))
+                .ToList();
+            xdcFileBuilders.Sort();
+            var xdcFile = xdcFileBuilders.LastOrDefault() is { } deepestXdcProvider
+                ? await deepestXdcProvider.BuildManifestAsync(architectureComponentResults, hastIpArchitecture)
+                : null;
 
             // Processing inter-dependent types. In VHDL if a type depends another type (e.g. an array stores elements
             // of a record type) than the type depending on the other one should come after the other one in the code
@@ -361,7 +301,7 @@ namespace Hast.Transformer.Vhdl.Services
                 Manifest = manifest,
                 MemberIdTable = memberIdTable,
                 Warnings = warnings,
-                XdcFile = xdcFile
+                XdcFile = xdcFile,
             };
         }
 
@@ -480,7 +420,7 @@ namespace Hast.Transformer.Vhdl.Services
         private static void ReadAndAddEmbedLibrary(
             string libraryName,
             VhdlManifest manifest,
-            VhdlBuilder.Representation.Declaration.Module hastIpModule)
+            Module hastIpModule)
         {
             var resourceName = "Hast.Transformer.Vhdl.VhdlLibraries." + libraryName + ".vhd";
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
