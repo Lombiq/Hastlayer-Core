@@ -4,14 +4,13 @@ rem Worker Daemon. Will use conventional folder names.
 
 if not exist "HastlayerRemoteWorkerDaemonNew" mkdir HastlayerRemoteWorkerDaemonNew
 
-echo The HastlayerRemoteWorkerDaemonNew folder created. Now copy the Daemon's Release folder's content there and press enter.
+echo The HastlayerRemoteWorkerDaemonNew folder created. Now copy the Daemon's Release folder's content (from within the runtime's folder, e.g. win-x64) there and press enter.
 
 pause > nul
 
 echo Copying config files from the original installation.
 
-copy /Y HastlayerRemoteWorkerDaemon\Hast.Remote.Worker.Daemon.exe.config HastlayerRemoteWorkerDaemonNew\Hast.Remote.Worker.Daemon.exe.config
-copy /Y HastlayerRemoteWorkerDaemon\ApplicationInsights.config HastlayerRemoteWorkerDaemonNew\ApplicationInsights.config
+copy /Y HastlayerRemoteWorkerDaemon\appsettings.json HastlayerRemoteWorkerDaemonNew\appsettings.json
 
 echo Config files from the original installation copied. Change them now if necessary. Then press enter when you're done and the service instances will be swapped out.
 
