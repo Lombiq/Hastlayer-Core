@@ -5,12 +5,12 @@ using System.ServiceProcess;
 
 namespace Hast.Remote.Worker.Daemon
 {
-    static class Program
+    public static class Program
     {
-        static void Main()
+        public static void Main()
         {
             // Below code taken mostly from http://www.codeproject.com/Articles/27112/Installing-NET-Windows-Services-the-easiest-way
-            var service = ServiceController.GetServices().Where(controller => controller.ServiceName == Service.Name).SingleOrDefault();
+            var service = ServiceController.GetServices().SingleOrDefault(controller => controller.ServiceName == Service.Name);
 
             // Service not installed
             if (service == null)
@@ -25,15 +25,14 @@ namespace Hast.Remote.Worker.Daemon
             // Started from the SCM
             else
             {
-                ServiceBase[] servicesToRun;
-                servicesToRun = new ServiceBase[] { new Service() };
+                var servicesToRun = new ServiceBase[] { new Service() };
                 ServiceBase.Run(servicesToRun);
             }
         }
     }
 
 
-    static class SelfInstaller
+    internal static class SelfInstaller
     {
         private static readonly string _exePath = Assembly.GetExecutingAssembly().Location;
 
@@ -42,7 +41,7 @@ namespace Hast.Remote.Worker.Daemon
         {
             try
             {
-                ManagedInstallerClass.InstallHelper(new string[] { _exePath });
+                ManagedInstallerClass.InstallHelper(new[] { _exePath });
             }
             catch
             {
@@ -56,7 +55,7 @@ namespace Hast.Remote.Worker.Daemon
         {
             try
             {
-                ManagedInstallerClass.InstallHelper(new string[] { "/u", _exePath });
+                ManagedInstallerClass.InstallHelper(new[] { "/u", _exePath });
             }
             catch
             {

@@ -37,9 +37,9 @@ namespace Hast.Remote.Worker
         private readonly IHastlayer _hastlayer;
         private readonly CloudBlobContainer _container;
         private readonly TelemetryClient _telemetryClient;
-        private readonly ConcurrentDictionary<string, Task> _transformationTasks = new ConcurrentDictionary<string, Task>();
+        private readonly ConcurrentDictionary<string, Task> _transformationTasks = new();
 
-        private int _restartCount = 0;
+        private int _restartCount;
         private System.Timers.Timer _oldResultBlobsCleanerTimer;
 
 
@@ -63,7 +63,7 @@ namespace Hast.Remote.Worker
             _telemetryClient = telemetryClient;
 
             _oldResultBlobsCleanerTimer = new System.Timers.Timer(TimeSpan.FromHours(3).TotalMilliseconds);
-            _oldResultBlobsCleanerTimer.Elapsed += async (_, e) =>
+            _oldResultBlobsCleanerTimer.Elapsed += async (_, _) =>
             {
                 try
                 {
@@ -110,13 +110,13 @@ namespace Hast.Remote.Worker
                             var telemetry = new TransformationTelemetry
                             {
                                 JobName = blob.Name,
-                                StartTimeUtc = _clock.UtcNow
+                                StartTimeUtc = _clock.UtcNow,
                             };
 
                             try
                             {
                                 var leaseTimeSpan = TimeSpan.FromSeconds(15);
-                                AccessCondition accessCondition = null;
+                                AccessCondition accessCondition;
                                 try
                                 {
                                     // If in the short time between the blob listing and this line some other Task
@@ -176,9 +176,9 @@ namespace Hast.Remote.Worker
 
                                             var result = new TransformationJobResult
                                             {
-                                                RemoteHastlayerVersion = GetType().Assembly.GetName().Version.ToString(),
+                                                RemoteHastlayerVersion = GetType().Assembly.GetName().Version?.ToString(),
                                                 Token = job.Token,
-                                                AppId = job.AppId
+                                                AppId = job.AppId,
                                             };
 
                                             IHardwareRepresentation hardwareRepresentation;
@@ -192,7 +192,7 @@ namespace Hast.Remote.Worker
                                                         EnableCaching = true,
                                                         HardwareEntryPointMemberFullNames = job.Configuration.HardwareEntryPointMemberFullNames,
                                                         HardwareEntryPointMemberNamePrefixes = job.Configuration.HardwareEntryPointMemberNamePrefixes,
-                                                        EnableHardwareImplementationComposition = false
+                                                        EnableHardwareImplementationComposition = false,
                                                     });
 
                                                 cancellationToken.ThrowIfCancellationRequested();
@@ -203,13 +203,13 @@ namespace Hast.Remote.Worker
                                                     result.HardwareDescription = new HardwareDescription
                                                     {
                                                         Language = hardwareRepresentation.HardwareDescription.Language,
-                                                        SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray())
+                                                        SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray()),
                                                     };
                                                 }
                                             }
                                             catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
                                             {
-                                                // We don't want to show the stack trace to the user, just exception 
+                                                // We don't want to show the stack trace to the user, just exception
                                                 // message, so building one by iterating all the nested exceptions.
 
                                                 var currentException = ex;
@@ -296,7 +296,7 @@ namespace Hast.Remote.Worker
 
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    // Waiting a bit between cycles not to have excessive Blob Storage usage due to polling (otherwise 
+                    // Waiting a bit between cycles not to have excessive Blob Storage usage due to polling (otherwise
                     // it's not an issue, this loop barely uses any CPU).
                     await Task.Delay(1000);
                     _restartCount = 0;
@@ -386,7 +386,7 @@ namespace Hast.Remote.Worker
                     services.AddSingleton<ITransformationWorker, TransformationWorker>();
 
                     onServiceRegistration?.Invoke(sender, services);
-                }
+                },
             };
 
             cancellationToken.ThrowIfCancellationRequested();

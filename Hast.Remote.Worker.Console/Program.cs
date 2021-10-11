@@ -12,7 +12,7 @@ namespace Hast.Remote.Worker.Console
         {
             var configuration = new TransformationWorkerConfiguration
             {
-                StorageConnectionString = "UseDevelopmentStorage=true"
+                StorageConnectionString = "UseDevelopmentStorage=true",
             };
 
             using var host = (Hastlayer)await TransformationWorker.CreateHastlayerAsync(configuration);
@@ -27,10 +27,11 @@ namespace Hast.Remote.Worker.Console
 #endif
 
             var cancellationTokenSource = new CancellationTokenSource();
-            System.Console.CancelKeyPress += (sender, eventArgs) =>
+            System.Console.CancelKeyPress += (_, eventArgs) =>
             {
                 eventArgs.Cancel = true;
-                System.Console.WriteLine("Application cancelled via SIGINT, attempting graceful shutdown. Please allow at least 10 seconds for this...");
+                System.Console.WriteLine("Application cancelled via SIGINT, attempting graceful shutdown.");
+                System.Console.WriteLine("Please allow at least 10 seconds for this...");
                 cancellationTokenSource.Cancel();
             };
             System.Console.WriteLine("Press Ctrl + C to cleanly terminate the application.");
