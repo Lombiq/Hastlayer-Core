@@ -370,7 +370,8 @@ namespace Hast.Remote.Worker
                     typeof(VhdlTransformingEngine).Assembly,
                     typeof(NexysA7Driver).Assembly,
                     typeof(TimingReportParser).Assembly,
-                    typeof(CatapultDriver).Assembly
+                    typeof(CatapultDriver).Assembly,
+                    typeof(ApplicationInsightsTelemetryManager).Assembly,
                 },
                 ConfigureLogging = builder =>
                 {
