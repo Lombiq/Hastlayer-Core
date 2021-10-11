@@ -36,7 +36,7 @@ namespace Hast.Remote.Worker.Console
             };
             System.Console.WriteLine("Press Ctrl + C to cleanly terminate the application.");
 
-            await host.RunAsync<ITransformationWorker>(worker => worker.Work(cancellationTokenSource.Token));
+            await host.RunAsync<ITransformationWorker>(worker => worker.WorkAsync(cancellationTokenSource.Token));
         }
     }
 }

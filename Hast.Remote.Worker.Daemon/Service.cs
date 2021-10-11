@@ -17,9 +17,9 @@ namespace Hast.Remote.Worker.Daemon
         public const string DisplayName = "Hastlayer Remote Worker Daemon";
 
         private readonly EventLog _eventLog;
-        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private readonly CancellationTokenSource _cancellationTokenSource = new();
         private Task _workerTask;
-        private int _restartCount = 0;
+        private int _restartCount;
 
 
         public Service()
@@ -28,7 +28,7 @@ namespace Hast.Remote.Worker.Daemon
             {
                 Log = DisplayName,
                 // The EventLog source can't contain dots like the service's technical name.
-                Source = "HastRemoteWorkerDaemon"
+                Source = "HastRemoteWorkerDaemon",
             };
 
             ServiceName = Name;
@@ -58,52 +58,49 @@ namespace Hast.Remote.Worker.Daemon
                 var appSettings = Hastlayer.BuildConfiguration();
                 var configuration = new TransformationWorkerConfiguration
                 {
-                    StorageConnectionString = appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey)
+                    StorageConnectionString = appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey),
                 };
 
-                using (var host = (Hastlayer) await TransformationWorker.CreateHastlayerAsync(
-                    configuration, cancellationToken: _cancellationTokenSource.Token))
+                using var host = (Hastlayer) await TransformationWorker.CreateHastlayerAsync(
+                    configuration, cancellationToken: _cancellationTokenSource.Token);
+                try
                 {
-                    try
+                    await host.RunAsync<IServiceProvider>(serviceProvider =>
                     {
-                        await host.RunAsync<IServiceProvider>(serviceProvider =>
-                        {
-                            var worker = serviceProvider.GetService<ITransformationWorker>();
-                            var configurationAccessor = serviceProvider.GetService<IConfiguration>();
+                        var worker = serviceProvider.GetService<ITransformationWorker>();
 
-                            // Only counting startup crashes.
-                            _restartCount = 0;
+                        // Only counting startup crashes.
+                        _restartCount = 0;
 
-                            return worker.Work(_cancellationTokenSource.Token);
-                        });
-                    }
-                    catch (Exception ex) when (!ex.IsFatal())
+                        return worker.WorkAsync(_cancellationTokenSource.Token);
+                    });
+                }
+                catch (Exception ex) when (!ex.IsFatal())
+                {
+                    await host.RunAsync<ILogger<Service>>(logger =>
                     {
-                        await host.RunAsync<ILogger<Service>>(logger =>
+                        logger.LogError(ex, DisplayName + " crashed with an unhandled exception. Restarting...");
+
+                        if (_restartCount < 10)
                         {
-                            logger.LogError(ex, DisplayName + " crashed with an unhandled exception. Restarting...");
+                            _restartCount++;
 
-                            if (_restartCount < 10)
-                            {
-                                _restartCount++;
+                            // Not exactly the nicest way to restart the worker, and increases memory usage with each
+                            // restart. But such restarts should be extremely rare, this should be just a last resort.
+                            _workerTask = null;
+                            RunStopTasks();
+                            RunStartTasks();
+                        }
+                        else
+                        {
+                            logger.LogCritical(
+                                ex,
+                                DisplayName + " crashed with an unhandled exception and was restarted " +
+                                _restartCount + " times. It won't be restarted again.");
+                        }
 
-                                // Not exactly the nicest way to restart the worker, and increases memory usage with each
-                                // restart. But such restarts should be extremely rare, this should be just a last resort.
-                                _workerTask = null;
-                                RunStopTasks();
-                                RunStartTasks();
-                            }
-                            else
-                            {
-                                logger.LogCritical(
-                                    ex,
-                                    DisplayName + " crashed with an unhandled exception and was restarted " +
-                                    _restartCount + " times. It won't be restarted again.");
-                            }
-
-                            return Task.CompletedTask;
-                        });
-                    }
+                        return Task.CompletedTask;
+                    });
                 }
             });
 

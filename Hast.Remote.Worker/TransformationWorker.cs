@@ -88,7 +88,7 @@ namespace Hast.Remote.Worker
         }
 
 
-        public async Task Work(CancellationToken cancellationToken)
+        public async Task WorkAsync(CancellationToken cancellationToken)
         {
             try
             {
@@ -102,203 +102,24 @@ namespace Hast.Remote.Worker
 
                     foreach (var jobBlob in jobBlobs)
                     {
+
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        _transformationTasks[jobBlob.Name] = Task.Factory.StartNew(async blobObject =>
-                        {
-                            var blob = (CloudBlockBlob)blobObject;
-                            var telemetry = new TransformationTelemetry
-                            {
-                                JobName = blob.Name,
-                                StartTimeUtc = _clock.UtcNow,
-                            };
-
-                            try
-                            {
-                                var leaseTimeSpan = TimeSpan.FromSeconds(15);
-                                AccessCondition accessCondition;
-                                try
-                                {
-                                    // If in the short time between the blob listing and this line some other Task
-                                    // started to work then nothing to do.
-                                    if (blob.Properties.LeaseStatus != LeaseStatus.Unlocked) return;
-
-                                    var leaseId = await blob.AcquireLeaseAsync(leaseTimeSpan);
-                                    accessCondition = new AccessCondition { LeaseId = leaseId };
-                                }
-                                catch (StorageException ex)
-                                {
-                                    // If the lease was already acquired or some other Task deleted even finished it
-                                    // then we get these exceptions, nothing to do.
-                                    if (HasHttpStatus(ex, HttpStatusCode.Conflict) ||
-                                        HasHttpStatus(ex, HttpStatusCode.NotFound))
-                                    {
-                                        return;
-                                    }
-
-                                    throw;
-                                }
-
-                                var processingTask = Task.Run(async () =>
-                                {
-                                    try
-                                    {
-                                        TransformationJob job;
-
-                                        using (var stream = await blob.OpenReadAsync(null, null, null, cancellationToken))
-                                        using (var streamReader = new StreamReader(stream))
-                                        {
-                                            job = _jsonConverter
-                                                .Deserialize<TransformationJob>(await streamReader.ReadToEndAsync());
-                                        }
-
-                                        telemetry.AppId = job.AppId;
-                                        var jobFolder = _appDataFolder.Combine("Hastlayer", "RemoteWorker", job.Token);
-
-                                        var assemblyPaths = new List<string>();
-
-                                        try
-                                        {
-                                            foreach (var assembly in job.Assemblies)
-                                            {
-                                                cancellationToken.ThrowIfCancellationRequested();
-
-                                                var path = _appDataFolder.Combine(jobFolder, assembly.Name + ".dll");
-
-                                                assemblyPaths.Add(_appDataFolder.MapPath(path));
-
-                                                using (var memoryStream = new MemoryStream(assembly.FileContent))
-                                                using (var fileStream = _appDataFolder.CreateFile(path))
-                                                    await memoryStream.CopyToAsync(fileStream);
-                                            }
-
-                                            cancellationToken.ThrowIfCancellationRequested();
-
-                                            var result = new TransformationJobResult
-                                            {
-                                                RemoteHastlayerVersion = GetType().Assembly.GetName().Version?.ToString(),
-                                                Token = job.Token,
-                                                AppId = job.AppId,
-                                            };
-
-                                            IHardwareRepresentation hardwareRepresentation;
-                                            try
-                                            {
-                                                hardwareRepresentation = await _hastlayer.GenerateHardware(
-                                                    assemblyPaths,
-                                                    new Layer.HardwareGenerationConfiguration(job.Configuration.DeviceName, null)
-                                                    {
-                                                        CustomConfiguration = job.Configuration.CustomConfiguration,
-                                                        EnableCaching = true,
-                                                        HardwareEntryPointMemberFullNames = job.Configuration.HardwareEntryPointMemberFullNames,
-                                                        HardwareEntryPointMemberNamePrefixes = job.Configuration.HardwareEntryPointMemberNamePrefixes,
-                                                        EnableHardwareImplementationComposition = false,
-                                                    });
-
-                                                cancellationToken.ThrowIfCancellationRequested();
-
-                                                using (var memoryStream = new MemoryStream())
-                                                {
-                                                    await hardwareRepresentation.HardwareDescription.Serialize(memoryStream);
-                                                    result.HardwareDescription = new HardwareDescription
-                                                    {
-                                                        Language = hardwareRepresentation.HardwareDescription.Language,
-                                                        SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray()),
-                                                    };
-                                                }
-                                            }
-                                            catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
-                                            {
-                                                // We don't want to show the stack trace to the user, just exception
-                                                // message, so building one by iterating all the nested exceptions.
-
-                                                var currentException = ex;
-                                                var message = string.Empty;
-
-                                                while (currentException != null)
-                                                {
-                                                    message += currentException.Message + Environment.NewLine;
-                                                    currentException = currentException.InnerException;
-                                                }
-
-                                                result.Errors = new[] { message };
-                                            }
-
-                                            cancellationToken.ThrowIfCancellationRequested();
-
-                                            var resultBlob = _container.GetBlockBlobReference("results/" + job.Token);
-
-                                            using (var blobStream = await resultBlob.OpenWriteAsync(null, null, null, cancellationToken))
-                                            using (var streamWriter = new StreamWriter(blobStream))
-                                            {
-                                                await streamWriter.WriteAsync(_jsonConverter.Serialize(result));
-                                            }
-
-                                            await blob.DeleteAsync(
-                                                DeleteSnapshotsOption.None,
-                                                accessCondition,
-                                                new BlobRequestOptions(),
-                                                new OperationContext());
-                                        }
-                                        finally
-                                        {
-                                            foreach (var assemblyPath in assemblyPaths)
-                                            {
-                                                _appDataFolder.DeleteFile(assemblyPath);
-                                            }
-
-                                            _appDataFolder.DeleteFile(jobFolder);
-                                        }
-                                    }
-                                    catch
-                                    {
-                                        await blob.ReleaseLeaseAsync(accessCondition);
-                                        throw;
-                                    }
-                                });
-
-                                // Repeatedly renewing the lease until the processing completes.
-                                while (!processingTask.IsCompleted)
-                                {
-                                    try
-                                    {
-                                        await blob.RenewLeaseAsync(accessCondition);
-                                    }
-                                    catch (StorageException ex)
-                                    {
-                                        // If in the meantime the Task finished and removed the blob then nothing to do.
-                                        if (HasHttpStatus(ex, HttpStatusCode.NotFound)) return;
-
-                                        throw;
-                                    }
-
-                                    // Task.Delay() waits for 1 second less so the lease is renewed for sure before it
-                                    // expires.
-                                    await Task.WhenAny(processingTask, Task.Delay(leaseTimeSpan - TimeSpan.FromSeconds(1)));
-                                }
-
-                                // This is so if there was an exception in the Task that will be thrown with its original
-                                // stack trace. Otherwise Task.WhenAny() isn't throwing exceptions from its arguments.
-                                await processingTask;
-                                telemetry.IsSuccess = true;
-                            }
-                            catch (Exception ex) when (!ex.IsFatal())
-                            {
-                                _logger.LogError(ex, "Processing the job blob {0} failed.", blob.Name);
-                            }
-
-                            telemetry.FinishTimeUtc = _clock.UtcNow;
-                            _applicationInsightsTelemetryManager.TrackTransformation(telemetry);
-                        }, jobBlob, cancellationToken)
-                        .ContinueWith((task, blobNameObject) =>
-                            _transformationTasks.TryRemove((string)blobNameObject, out _), jobBlob.Name);
+                        _transformationTasks[jobBlob.Name] = Task.Factory.StartNew(
+                            blobObject => WorkInnerAsync(blobObject, cancellationToken),
+                            jobBlob,
+                            cancellationToken)
+                            .ContinueWith(
+                                (task, blobNameObject) => _transformationTasks.TryRemove((string)blobNameObject, out _),
+                                jobBlob.Name,
+                                cancellationToken);
                     }
 
                     cancellationToken.ThrowIfCancellationRequested();
 
                     // Waiting a bit between cycles not to have excessive Blob Storage usage due to polling (otherwise
                     // it's not an issue, this loop barely uses any CPU).
-                    await Task.Delay(1000);
+                    await Task.Delay(1000, cancellationToken);
                     _restartCount = 0;
                 }
             }
@@ -318,9 +139,9 @@ namespace Hast.Remote.Worker
                     _restartCount++;
 
                     // Waiting a bit for transient errors to go away.
-                    await Task.Delay(10000);
+                    await Task.Delay(10000, cancellationToken);
 
-                    await Work(cancellationToken);
+                    await WorkAsync(cancellationToken);
                 }
                 else
                 {
@@ -330,6 +151,193 @@ namespace Hast.Remote.Worker
                         _restartCount + " times. It won't be restarted again.");
                     _telemetryClient.Flush();
                 }
+            }
+        }
+
+        private async Task WorkInnerAsync(object blobObject, CancellationToken cancellationToken)
+        {
+            var blob = (CloudBlockBlob)blobObject;
+            var telemetry = new TransformationTelemetry
+            {
+                JobName = blob.Name,
+                StartTimeUtc = _clock.UtcNow,
+            };
+
+            try
+            {
+                var leaseTimeSpan = TimeSpan.FromSeconds(15);
+                AccessCondition accessCondition;
+                try
+                {
+                    // If in the short time between the blob listing and this line some other Task
+                    // started to work then nothing to do.
+                    if (blob.Properties.LeaseStatus != LeaseStatus.Unlocked) return;
+
+                    var leaseId = await blob.AcquireLeaseAsync(leaseTimeSpan);
+                    accessCondition = new AccessCondition { LeaseId = leaseId };
+                }
+                catch (StorageException ex)
+                {
+                    // If the lease was already acquired or some other Task deleted even finished it
+                    // then we get these exceptions, nothing to do.
+                    if (HasHttpStatus(ex, HttpStatusCode.Conflict) ||
+                        HasHttpStatus(ex, HttpStatusCode.NotFound))
+                    {
+                        return;
+                    }
+
+                    throw;
+                }
+
+                var processingTask = Task.Run(
+                    () => ProcessTaskAsync(blob, telemetry, accessCondition, cancellationToken),
+                    cancellationToken);
+
+                // Repeatedly renewing the lease until the processing completes.
+                while (!processingTask.IsCompleted)
+                {
+                    try
+                    {
+                        await blob.RenewLeaseAsync(accessCondition, cancellationToken);
+                    }
+                    catch (StorageException ex)
+                    {
+                        // If in the meantime the Task finished and removed the blob then nothing to do.
+                        if (HasHttpStatus(ex, HttpStatusCode.NotFound)) return;
+
+                        throw;
+                    }
+
+                    // Task.Delay() waits for 1 second less so the lease is renewed for sure before it
+                    // expires.
+                    await Task.WhenAny(
+                        processingTask,
+                        Task.Delay(leaseTimeSpan - TimeSpan.FromSeconds(1), cancellationToken));
+                }
+
+                // This is so if there was an exception in the Task that will be thrown with its original
+                // stack trace. Otherwise Task.WhenAny() isn't throwing exceptions from its arguments.
+                await processingTask;
+                telemetry.IsSuccess = true;
+            }
+            catch (Exception ex) when (!ex.IsFatal())
+            {
+                _logger.LogError(ex, "Processing the job blob {0} failed.", blob.Name);
+            }
+
+            telemetry.FinishTimeUtc = _clock.UtcNow;
+            _applicationInsightsTelemetryManager.TrackTransformation(telemetry);
+        }
+
+        private async Task ProcessTaskAsync(
+            CloudBlob blob,
+            TransformationTelemetry telemetry,
+            AccessCondition accessCondition,
+            CancellationToken cancellationToken)
+        {
+            try
+            {
+                TransformationJob job;
+
+                await using (var stream = await blob.OpenReadAsync(null, null, null, cancellationToken))
+                using (var streamReader = new StreamReader(stream))
+                {
+                    job = _jsonConverter.Deserialize<TransformationJob>(await streamReader.ReadToEndAsync());
+                }
+
+                telemetry.AppId = job.AppId;
+                var jobFolder = _appDataFolder.Combine("Hastlayer", "RemoteWorker", job.Token);
+
+                var assemblyPaths = new List<string>();
+
+                try
+                {
+                    foreach (var assembly in job.Assemblies)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+
+                        var path = _appDataFolder.Combine(jobFolder, assembly.Name + ".dll");
+
+                        assemblyPaths.Add(_appDataFolder.MapPath(path));
+
+                        await using var memoryStream = new MemoryStream(assembly.FileContent);
+                        await using var fileStream = _appDataFolder.CreateFile(path);
+                        await memoryStream.CopyToAsync(fileStream, cancellationToken);
+                    }
+
+                    cancellationToken.ThrowIfCancellationRequested();
+
+                    var result = new TransformationJobResult { RemoteHastlayerVersion = GetType().Assembly.GetName().Version?.ToString(), Token = job.Token, AppId = job.AppId, };
+
+                    IHardwareRepresentation hardwareRepresentation;
+                    try
+                    {
+                        hardwareRepresentation = await _hastlayer.GenerateHardware(assemblyPaths, new Layer.HardwareGenerationConfiguration(job.Configuration.DeviceName, null)
+                        {
+                            CustomConfiguration = job.Configuration.CustomConfiguration,
+                            EnableCaching = true,
+                            HardwareEntryPointMemberFullNames = job.Configuration.HardwareEntryPointMemberFullNames,
+                            HardwareEntryPointMemberNamePrefixes = job.Configuration.HardwareEntryPointMemberNamePrefixes,
+                            EnableHardwareImplementationComposition = false,
+                        });
+
+                        cancellationToken.ThrowIfCancellationRequested();
+
+                        await using var memoryStream = new MemoryStream();
+                        await hardwareRepresentation.HardwareDescription.Serialize(memoryStream);
+                        result.HardwareDescription = new HardwareDescription { Language = hardwareRepresentation.HardwareDescription.Language, SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray()), };
+                    }
+                    catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
+                    {
+                        // We don't want to show the stack trace to the user, just exception
+                        // message, so building one by iterating all the nested exceptions.
+
+                        var currentException = ex;
+                        var message = string.Empty;
+
+                        while (currentException != null)
+                        {
+                            message += currentException.Message + Environment.NewLine;
+                            currentException = currentException.InnerException;
+                        }
+
+                        result.Errors = new[]
+                        {
+                            message,
+                        };
+                    }
+
+                    cancellationToken.ThrowIfCancellationRequested();
+
+                    var resultBlob = _container.GetBlockBlobReference("results/" + job.Token);
+
+                    await using (var blobStream = await resultBlob.OpenWriteAsync(null, null, null, cancellationToken))
+                    await using (var streamWriter = new StreamWriter(blobStream))
+                    {
+                        await streamWriter.WriteAsync(_jsonConverter.Serialize(result));
+                    }
+
+                    await blob.DeleteAsync(
+                        DeleteSnapshotsOption.None,
+                        accessCondition,
+                        new BlobRequestOptions(),
+                        new OperationContext(),
+                        cancellationToken);
+                }
+                finally
+                {
+                    foreach (var assemblyPath in assemblyPaths)
+                    {
+                        _appDataFolder.DeleteFile(assemblyPath);
+                    }
+
+                    _appDataFolder.DeleteFile(jobFolder);
+                }
+            }
+            catch
+            {
+                await blob.ReleaseLeaseAsync(accessCondition, cancellationToken);
+                throw;
             }
         }
 

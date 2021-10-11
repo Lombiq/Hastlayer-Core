@@ -7,6 +7,6 @@ namespace Hast.Remote.Worker
     // and all DLLs are in a single folder.
     public interface ITransformationWorker
     {
-        Task Work(CancellationToken cancellationToken);
+        Task WorkAsync(CancellationToken cancellationToken);
     }
 }
