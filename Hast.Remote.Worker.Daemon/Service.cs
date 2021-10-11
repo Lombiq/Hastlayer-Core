@@ -28,7 +28,7 @@ namespace Hast.Remote.Worker.Daemon
             {
                 Log = DisplayName,
                 // The EventLog source can't contain dots like the service's technical name.
-                Source = "HastRemoteWorkerDaemon",
+                Source = Name.Replace(".", string.Empty),
             };
 
             ServiceName = Name;
@@ -55,14 +55,8 @@ namespace Hast.Remote.Worker.Daemon
         {
             _workerTask = Task.Run(async () =>
             {
-                var appSettings = Hastlayer.BuildConfiguration();
-                var configuration = new TransformationWorkerConfiguration
-                {
-                    StorageConnectionString = appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey),
-                };
+                using var host = await CreateHostAsync();
 
-                using var host = (Hastlayer) await TransformationWorker.CreateHastlayerAsync(
-                    configuration, cancellationToken: _cancellationTokenSource.Token);
                 try
                 {
                     await host.RunAsync<IServiceProvider>(serviceProvider =>
@@ -105,6 +99,29 @@ namespace Hast.Remote.Worker.Daemon
             });
 
             _eventLog.WriteEntry(DisplayName + " started.");
+        }
+
+        private async Task<Hastlayer> CreateHostAsync()
+        {
+            try
+            {
+                var appSettings = Hastlayer.BuildConfiguration();
+                var configuration = new TransformationWorkerConfiguration
+                {
+                    StorageConnectionString =
+                        appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey),
+                };
+
+                return (Hastlayer)await TransformationWorker.CreateHastlayerAsync(
+                    configuration,
+                    cancellationToken: _cancellationTokenSource.Token);
+            }
+            catch (Exception exception)
+            {
+                NoDependencyFatalExceptionLogger.Log(exception);
+                Environment.Exit(-1);
+                return null;
+            }
         }
 
         private void RunStopTasks()

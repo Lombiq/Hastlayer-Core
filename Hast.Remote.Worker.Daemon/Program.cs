@@ -1,4 +1,5 @@
-﻿using System.Configuration.Install;
+﻿using System;
+using System.Configuration.Install;
 using System.Linq;
 using System.Reflection;
 using System.ServiceProcess;
@@ -10,7 +11,9 @@ namespace Hast.Remote.Worker.Daemon
         public static void Main()
         {
             // Below code taken mostly from http://www.codeproject.com/Articles/27112/Installing-NET-Windows-Services-the-easiest-way
-            var service = ServiceController.GetServices().SingleOrDefault(controller => controller.ServiceName == Service.Name);
+            var service = ServiceController
+                .GetServices()
+                .SingleOrDefault(controller => controller.ServiceName == Service.Name);
 
             // Service not installed
             if (service == null)
@@ -43,8 +46,9 @@ namespace Hast.Remote.Worker.Daemon
             {
                 ManagedInstallerClass.InstallHelper(new[] { _exePath });
             }
-            catch
+            catch(Exception exception)
             {
+                NoDependencyFatalExceptionLogger.Log(exception);
                 return false;
             }
 
@@ -57,8 +61,9 @@ namespace Hast.Remote.Worker.Daemon
             {
                 ManagedInstallerClass.InstallHelper(new[] { "/u", _exePath });
             }
-            catch
+            catch(Exception exception)
             {
+                NoDependencyFatalExceptionLogger.Log(exception);
                 return false;
             }
 

@@ -24,6 +24,9 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using HardwareGenerationConfiguration = Hast.Layer.HardwareGenerationConfiguration;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
+using Timer = System.Timers.Timer;
 
 namespace Hast.Remote.Worker
 {
@@ -40,7 +43,7 @@ namespace Hast.Remote.Worker
         private readonly ConcurrentDictionary<string, Task> _transformationTasks = new();
 
         private int _restartCount;
-        private System.Timers.Timer _oldResultBlobsCleanerTimer;
+        private Timer _oldResultBlobsCleanerTimer;
 
 
         public TransformationWorker(
@@ -62,7 +65,7 @@ namespace Hast.Remote.Worker
             _container = container;
             _telemetryClient = telemetryClient;
 
-            _oldResultBlobsCleanerTimer = new System.Timers.Timer(TimeSpan.FromHours(3).TotalMilliseconds);
+            _oldResultBlobsCleanerTimer = new Timer(TimeSpan.FromHours(3).TotalMilliseconds);
             _oldResultBlobsCleanerTimer.Elapsed += async (_, _) =>
             {
                 try
@@ -272,7 +275,7 @@ namespace Hast.Remote.Worker
                     IHardwareRepresentation hardwareRepresentation;
                     try
                     {
-                        hardwareRepresentation = await _hastlayer.GenerateHardware(assemblyPaths, new Layer.HardwareGenerationConfiguration(job.Configuration.DeviceName, null)
+                        hardwareRepresentation = await _hastlayer.GenerateHardware(assemblyPaths, new HardwareGenerationConfiguration(job.Configuration.DeviceName, null)
                         {
                             CustomConfiguration = job.Configuration.CustomConfiguration,
                             EnableCaching = true,
@@ -379,12 +382,12 @@ namespace Hast.Remote.Worker
                     typeof(NexysA7Driver).Assembly,
                     typeof(TimingReportParser).Assembly,
                     typeof(CatapultDriver).Assembly,
-                    typeof(ApplicationInsightsTelemetryManager).Assembly,
+                    //typeof(ApplicationInsightsTelemetryManager).Assembly,
                 },
                 ConfigureLogging = builder =>
                 {
                     builder
-                        .AddFilter<ApplicationInsightsLoggerProvider>("", Microsoft.Extensions.Logging.LogLevel.Trace)
+                        .AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Trace)
                         .AddApplicationInsights(ApplicationInsightsTelemetryManager.GetInstrumentationKey())
                         .AddNLog("NLog.config");
                 },
@@ -419,7 +422,6 @@ namespace Hast.Remote.Worker
 
         private static bool HasHttpStatus(StorageException exception, HttpStatusCode statusCode) =>
             ((exception.InnerException as WebException)?.Response as HttpWebResponse)?.StatusCode == statusCode;
-
 
         private class TransformationTelemetry : ITransformationTelemetry
         {
