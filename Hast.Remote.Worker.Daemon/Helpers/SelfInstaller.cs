@@ -10,16 +10,21 @@ namespace Hast.Remote.Worker.Daemon.Helpers
         private static readonly string _exePath = Assembly.GetExecutingAssembly().Location;
 
 
-        public static void InstallMe() => ManagedInstallerClass.InstallHelper(new[] { _exePath });
+        public static void InstallMe()
+        {
+            Console.WriteLine("Installing service...");
+            ManagedInstallerClass.InstallHelper(new[] { _exePath });
+        }
 
         public static void UninstallMe()
         {
-            var s = new ServiceInstaller
+            Console.WriteLine("Uninstalling service...");
+            var serviceInstaller = new ServiceInstaller
             {
                 Context = new InstallContext(),
                 ServiceName = Service.Name,
             };
-            s.Uninstall(null);
+            serviceInstaller.Uninstall(null);
         }
 
         public static void Evaluate(DaemonOperation operation)
@@ -32,7 +37,7 @@ namespace Hast.Remote.Worker.Daemon.Helpers
                 case DaemonOperation.Uninstall:
                     UninstallMe();
                     break;
-                case DaemonOperation.StartFromScm:
+                case DaemonOperation.Start:
                     var servicesToRun = new ServiceBase[] { new Service() };
                     ServiceBase.Run(servicesToRun);
                     break;

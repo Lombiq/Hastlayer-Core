@@ -7,22 +7,28 @@ namespace Hast.Remote.Worker.Daemon
 {
     public static class Program
     {
-        public static int Main()
+        public static int Main(string[] args)
         {
             int errorCode = -1;
 
             try
             {
-                var service = ServiceController
+                var serviceStatus = ServiceController
                     .GetServices()
-                    .SingleOrDefault(controller => controller.ServiceName == Service.Name);
+                    .SingleOrDefault(controller => controller.ServiceName == Service.Name)?
+                    .Status;
 
-                var operation = service?.Status switch
-                {
-                    null => DaemonOperation.Install,
-                    ServiceControllerStatus.StartPending => DaemonOperation.StartFromScm,
-                    _ => DaemonOperation.Uninstall,
-                };
+                var operation =
+                    args.Length > 0 &&
+                    Enum.TryParse(typeof(DaemonOperation), args[0], ignoreCase: true, out var enumObject)
+                        ? (DaemonOperation)enumObject!
+                        : serviceStatus switch
+                        {
+                            null => DaemonOperation.Install,
+                            ServiceControllerStatus.StartPending => DaemonOperation.Start,
+                            _ => DaemonOperation.Uninstall,
+                        };
+
                 errorCode = (int)operation;
 
                 SelfInstaller.Evaluate(operation);

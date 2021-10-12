@@ -4,6 +4,6 @@
     {
         Install = 1,
         Uninstall,
-        StartFromScm,
+        Start,
     }
 }

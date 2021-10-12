@@ -91,8 +91,9 @@ namespace Hast.Remote.Worker.Daemon
                         {
                             logger.LogCritical(
                                 ex,
-                                DisplayName + " crashed with an unhandled exception and was restarted " +
-                                _restartCount + " times. It won't be restarted again.");
+                                "{0} crashed with an unhandled exception and was restarted {1} times. It won't be restarted again.",
+                                DisplayName,
+                                _restartCount);
                         }
 
                         return Task.CompletedTask;
