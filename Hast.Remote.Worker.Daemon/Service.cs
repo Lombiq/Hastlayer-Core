@@ -1,5 +1,7 @@
 ﻿using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
+using Hast.Remote.Worker.Daemon.Constants;
+using Hast.Remote.Worker.Daemon.Helpers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -118,7 +120,7 @@ namespace Hast.Remote.Worker.Daemon
             }
             catch (Exception exception)
             {
-                NoDependencyFatalExceptionLogger.Log(exception);
+                NoDependencyFatalErrorLogger.Log(exception);
                 Environment.Exit(-1);
                 return null;
             }

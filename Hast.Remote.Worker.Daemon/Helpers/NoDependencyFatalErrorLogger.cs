@@ -1,11 +1,16 @@
-﻿using System;
+﻿using Hast.Layer;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace Hast.Remote.Worker.Daemon
+namespace Hast.Remote.Worker.Daemon.Helpers
 {
-    public class NoDependencyFatalExceptionLogger
+    /// <summary>
+    /// This helper is used when an exception gets thrown before we get the <see cref="Hastlayer"/> instance, so normal
+    /// loggers can't be acquired.
+    /// </summary>
+    public static class NoDependencyFatalErrorLogger
     {
         public static void Log(Exception exception)
         {
