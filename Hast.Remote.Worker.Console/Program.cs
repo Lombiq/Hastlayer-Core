@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
+using Hast.Remote.Worker.Services;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;

@@ -3,7 +3,6 @@ using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Remote.Worker.Configuration;
-using Hast.Remote.Worker.Services;
 using Hast.Synthesis.Services;
 using Hast.Transformer;
 using Hast.Transformer.Vhdl.Services;
@@ -28,7 +27,7 @@ using HardwareGenerationConfiguration = Hast.Layer.HardwareGenerationConfigurati
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 using Timer = System.Timers.Timer;
 
-namespace Hast.Remote.Worker
+namespace Hast.Remote.Worker.Services
 {
     public sealed class TransformationWorker : ITransformationWorker, IDisposable
     {

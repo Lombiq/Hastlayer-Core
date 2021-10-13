@@ -2,6 +2,7 @@ using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
 using Hast.Remote.Worker.Daemon.Constants;
 using Hast.Remote.Worker.Daemon.Helpers;
+using Hast.Remote.Worker.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
