@@ -377,11 +377,12 @@ namespace Hast.Remote.Worker.Services
                 Extensions = new[]
                 {
                     typeof(DefaultTransformer).Assembly,
+                    typeof(DefaultJsonConverter).Assembly,
                     typeof(VhdlTransformingEngine).Assembly,
                     typeof(NexysA7Driver).Assembly,
                     typeof(TimingReportParser).Assembly,
                     typeof(CatapultDriver).Assembly,
-                    //typeof(ApplicationInsightsTelemetryManager).Assembly,
+                    typeof(ApplicationInsightsTelemetryManager).Assembly,
                 },
                 ConfigureLogging = builder =>
                 {
