@@ -16,14 +16,16 @@ namespace Hast.Remote.Worker.Console
                 StorageConnectionString = "UseDevelopmentStorage=true",
             };
 
-            using var host = (Hastlayer)await TransformationWorker.CreateHastlayerAsync(configuration);
+            var hastlayerConfiguration =
+                await new TransformationWorkerHastlayerConfigurationProvider().GetConfiguration(configuration);
+            using var host = (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
 
 #if DEBUG
             var logger = host.GetLogger<Program>();
             for (int i = 0; i < (int)LogLevel.None; i++)
             {
                 var logLevel = (LogLevel)i;
-                logger.Log(logLevel, $"{logLevel} testing");
+                logger.Log(logLevel, "{0} testing", logLevel.ToString());
             }
 #endif
 

@@ -1,19 +1,10 @@
-using Hast.Catapult;
 using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
-using Hast.Remote.Worker.Configuration;
-using Hast.Synthesis.Services;
-using Hast.Transformer;
-using Hast.Transformer.Vhdl.Services;
-using Hast.Xilinx;
 using Microsoft.ApplicationInsights;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.ApplicationInsights;
-using NLog.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -24,7 +15,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using HardwareGenerationConfiguration = Hast.Layer.HardwareGenerationConfiguration;
-using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 using Timer = System.Timers.Timer;
 
 namespace Hast.Remote.Worker.Services
@@ -355,56 +345,6 @@ namespace Hast.Remote.Worker.Services
 
             _telemetryClient.Flush();
             Task.Delay(10000).Wait();
-        }
-
-
-        public static async Task<IHastlayer> CreateHastlayerAsync(
-            ITransformationWorkerConfiguration configuration,
-            Action<IHastlayerConfiguration, IServiceCollection> onServiceRegistration = null,
-            CancellationToken cancellationToken = default)
-        {
-            var container = CloudStorageAccount
-                .Parse(configuration.StorageConnectionString)
-                .CreateCloudBlobClient()
-                .GetContainerReference("transformation");
-            await container.CreateIfNotExistsAsync(BlobContainerPublicAccessType.Off, null, null, cancellationToken);
-
-            var hastlayerConfiguration = new HastlayerConfiguration
-            {
-                Flavor = HastlayerFlavor.Developer,
-                // These extensions need to be added explicitly because when deployed as a flat folder of binaries they
-                // won't be automatically found under the Hast.Core and Hast.Abstractions folders.
-                Extensions = new[]
-                {
-                    typeof(DefaultTransformer).Assembly,
-                    typeof(DefaultJsonConverter).Assembly,
-                    typeof(VhdlTransformingEngine).Assembly,
-                    typeof(NexysA7Driver).Assembly,
-                    typeof(TimingReportParser).Assembly,
-                    typeof(CatapultDriver).Assembly,
-                    typeof(ApplicationInsightsTelemetryManager).Assembly,
-                },
-                ConfigureLogging = builder =>
-                {
-                    builder
-                        .AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Trace)
-                        .AddApplicationInsights(ApplicationInsightsTelemetryManager.GetInstrumentationKey())
-                        .AddNLog("NLog.config");
-                },
-                OnServiceRegistration = (sender, services) =>
-                {
-                    services.AddSingleton(configuration);
-                    services.AddSingleton(container);
-                    services.AddSingleton<ITransformationWorker, TransformationWorker>();
-
-                    onServiceRegistration?.Invoke(sender, services);
-                },
-            };
-
-            cancellationToken.ThrowIfCancellationRequested();
-
-            var hastlayer = Hastlayer.Create(hastlayerConfiguration);
-            return hastlayer;
         }
 
         private static async Task<List<IListBlobItem>> GetBlobs(CloudBlobContainer container, string prefix)

@@ -94,9 +94,9 @@ namespace Hast.Remote.Worker.Daemon.Services
                         appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey),
                 };
 
-                return (Hastlayer)await TransformationWorker.CreateHastlayerAsync(
-                    configuration,
-                    cancellationToken: cancellationToken);
+                var hastlayerConfiguration = await new TransformationWorkerHastlayerConfigurationProvider()
+                    .GetConfiguration(configuration, cancellationToken);
+                return (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
             }
             catch (Exception exception)
             {
