@@ -19,19 +19,39 @@ namespace Hast.Remote.Worker.Daemon.Services
         private const int MaxTries = 10;
 
         private readonly IEventLogger _eventLogger;
+        private readonly ILogger<Worker> _logger;
 
-        public Worker(IEventLogger eventLogger) => _eventLogger = eventLogger;
+        public Worker(IEventLogger eventLogger, ILogger<Worker> logger)
+        {
+            _eventLogger = eventLogger;
+            _logger = logger;
+        }
 
         public async override Task StartAsync(CancellationToken cancellationToken)
         {
-            await base.StartAsync(cancellationToken);
-            _eventLogger.UpdateStatus("started");
+            try
+            {
+                await base.StartAsync(cancellationToken);
+                _eventLogger.UpdateStatus("started");
+            }
+            catch (Exception exception) when (exception is not TaskCanceledException)
+            {
+                _logger.LogError(exception, "Failed to start {0}", Name);
+                await StopAsync(cancellationToken);
+            }
         }
 
         public async override Task StopAsync(CancellationToken cancellationToken)
         {
-            await base.StopAsync(cancellationToken);
-            _eventLogger.UpdateStatus("stopped");
+            try
+            {
+                await base.StopAsync(cancellationToken);
+                _eventLogger.UpdateStatus("stopped");
+            }
+            catch (Exception exception) when (exception is not TaskCanceledException)
+            {
+                _logger.LogError(exception, "Failed to stop {0}", Name);
+            }
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken) =>
