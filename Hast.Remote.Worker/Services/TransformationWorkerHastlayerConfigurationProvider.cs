@@ -33,7 +33,14 @@ namespace Hast.Remote.Worker.Services
                 .Parse(configuration.StorageConnectionString)
                 .CreateCloudBlobClient()
                 .GetContainerReference("transformation");
-            await container.CreateIfNotExistsAsync(BlobContainerPublicAccessType.Off, null, null, cancellationToken);
+            if (!await container.ExistsAsync(cancellationToken))
+            {
+                await container.CreateAsync(
+                    BlobContainerPublicAccessType.Off,
+                    options: null,
+                    operationContext: null,
+                    cancellationToken);
+            }
 
             _configuration = new HastlayerConfiguration
             {

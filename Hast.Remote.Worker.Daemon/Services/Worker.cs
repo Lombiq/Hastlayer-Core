@@ -1,7 +1,6 @@
 using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
 using Hast.Remote.Worker.Daemon.Constants;
-using Hast.Remote.Worker.Daemon.Helpers;
 using Hast.Remote.Worker.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,11 +17,13 @@ namespace Hast.Remote.Worker.Daemon.Services
     {
         private const int MaxTries = 10;
 
+        private readonly IHost _host;
         private readonly IEventLogger _eventLogger;
         private readonly ILogger<Worker> _logger;
 
-        public Worker(IEventLogger eventLogger, ILogger<Worker> logger)
+        public Worker(IHost host, IEventLogger eventLogger, ILogger<Worker> logger)
         {
+            _host = host;
             _eventLogger = eventLogger;
             _logger = logger;
         }
@@ -34,7 +35,7 @@ namespace Hast.Remote.Worker.Daemon.Services
                 await base.StartAsync(cancellationToken);
                 _eventLogger.UpdateStatus("started");
             }
-            catch (Exception exception) when (exception is not TaskCanceledException)
+            catch (Exception exception) when (exception is not OperationCanceledException)
             {
                 _logger.LogError(exception, "Failed to start {0}", Name);
                 await StopAsync(cancellationToken);
@@ -48,7 +49,7 @@ namespace Hast.Remote.Worker.Daemon.Services
                 await base.StopAsync(cancellationToken);
                 _eventLogger.UpdateStatus("stopped");
             }
-            catch (Exception exception) when (exception is not TaskCanceledException)
+            catch (Exception exception) when (exception is not OperationCanceledException)
             {
                 _logger.LogError(exception, "Failed to stop {0}", Name);
             }
@@ -60,6 +61,13 @@ namespace Hast.Remote.Worker.Daemon.Services
         private async Task ExecuteAsync(int tries, CancellationToken stoppingToken)
         {
             using var host = await CreateHostAsync(stoppingToken);
+            if (host == null)
+            {
+                await StopAsync(stoppingToken);
+                await _host.StopAsync(stoppingToken);
+                return;
+            }
+
             var isStartupCrash = false;
 
             try
@@ -120,8 +128,9 @@ namespace Hast.Remote.Worker.Daemon.Services
             }
             catch (Exception exception)
             {
-                NoDependencyFatalErrorLogger.Log(exception);
-                Environment.Exit(-1);
+                _logger.LogCritical(exception, "failed to initialize Hastlayer");
+                Program.ExitCode = ExitCode.FailedToInitializeHastlayer;
+
                 return null;
             }
         }
