@@ -50,13 +50,7 @@ namespace Hast.Remote.Worker.Services
                     typeof(CatapultDriver).Assembly,
                     typeof(ApplicationInsightsTelemetryManager).Assembly,
                 },
-                ConfigureLogging = builder =>
-                {
-                    builder
-                        .AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Trace)
-                        .AddApplicationInsights(ApplicationInsightsTelemetryManager.GetInstrumentationKey())
-                        .AddNLog("NLog.config");
-                },
+                ConfigureLogging = ConfigureLogging,
                 OnServiceRegistration = (_, services) =>
                 {
                     services.AddSingleton(configuration);
@@ -67,5 +61,11 @@ namespace Hast.Remote.Worker.Services
 
             return _configuration;
         }
+
+        public static void ConfigureLogging(ILoggingBuilder builder) =>
+            builder
+                .AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Trace)
+                .AddApplicationInsights(ApplicationInsightsTelemetryManager.GetInstrumentationKey())
+                .AddNLog("NLog.config");
     }
 }
