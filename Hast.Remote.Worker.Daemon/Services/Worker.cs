@@ -54,15 +54,18 @@ namespace Hast.Remote.Worker.Daemon.Services
 
                 await base.StopAsync(cancellationToken);
 
-                _disposableContainer?.Dispose();
-                _hastlayer?.Dispose();
-
                 _eventLogger.UpdateStatus("stopped");
             }
             catch (Exception exception) when (exception is not OperationCanceledException)
             {
                 _logger.LogError(exception, "Failed to stop {0}", Name);
             }
+        }
+
+        public override void Dispose()
+        {
+            _disposableContainer?.Dispose();
+            _hastlayer?.Dispose();
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken) =>
@@ -75,6 +78,7 @@ namespace Hast.Remote.Worker.Daemon.Services
             {
                 await StopAsync(cancellationToken);
                 await _host.StopAsync(cancellationToken);
+                Dispose();
                 return;
             }
 
