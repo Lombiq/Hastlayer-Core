@@ -3,7 +3,6 @@ using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
 using Hast.Remote.Worker.Daemon.Constants;
 using Hast.Remote.Worker.Services;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,7 +20,6 @@ namespace Hast.Remote.Worker.Daemon.Services
         private readonly IEventLogger _eventLogger;
         private ILogger _logger;
         private DisposableContainer<ITransformationWorker> _disposableContainer;
-        private Task _workerTask;
         private Hastlayer _hastlayer;
 
         public Worker(IHost host, IEventLogger eventLogger, ILogger<Worker> logger)
@@ -49,9 +47,6 @@ namespace Hast.Remote.Worker.Daemon.Services
         {
             try
             {
-                // Wait until the task completes or the stop token triggers. Same as in base.StopAsync().
-                await Task.WhenAny(_workerTask, Task.Delay(Timeout.Infinite, cancellationToken)).ConfigureAwait(false);
-
                 await base.StopAsync(cancellationToken);
 
                 _eventLogger.UpdateStatus("stopped");
@@ -100,7 +95,9 @@ namespace Hast.Remote.Worker.Daemon.Services
                 _logger = _hastlayer.GetLogger<Worker>();
                 _eventLogger.Logger = _hastlayer.GetLogger<EventLogger>();
 
-                _workerTask = _disposableContainer.Value.WorkAsync(cancellationToken);
+                var workerTask = _disposableContainer.Value.WorkAsync(cancellationToken);
+                // Wait until the task completes or the stop token triggers. Same as in base.StopAsync().
+                await Task.WhenAny(workerTask, Task.Delay(Timeout.Infinite, cancellationToken)).ConfigureAwait(false);
                 return;
             }
             catch (Exception exception) when (isStartupCrash && !exception.IsFatal())
