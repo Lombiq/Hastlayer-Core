@@ -1,9 +1,9 @@
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
 using Hast.Remote.Worker.Daemon.Constants;
 using Hast.Remote.Worker.Services;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -19,7 +19,9 @@ namespace Hast.Remote.Worker.Daemon.Services
 
         private readonly IHost _host;
         private readonly IEventLogger _eventLogger;
-        private readonly ILogger<Worker> _logger;
+        private ILogger _logger;
+        private DisposableContainer<ITransformationWorker> _disposableContainer;
+        private Task _workerTask;
 
         public Worker(IHost host, IEventLogger eventLogger, ILogger<Worker> logger)
         {
@@ -46,7 +48,11 @@ namespace Hast.Remote.Worker.Daemon.Services
         {
             try
             {
+                // Wait until the task completes or the stop token triggers. Same as in base.StopAsync().
+                await Task.WhenAny(_workerTask, Task.Delay(Timeout.Infinite, cancellationToken)).ConfigureAwait(false);
+
                 await base.StopAsync(cancellationToken);
+                _disposableContainer?.Dispose();
                 _eventLogger.UpdateStatus("stopped");
             }
             catch (Exception exception) when (exception is not OperationCanceledException)
@@ -56,15 +62,15 @@ namespace Hast.Remote.Worker.Daemon.Services
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken) =>
-            ExecuteAsync(MaxTries - 1, stoppingToken);
+            ExecuteInnerAsync(MaxTries - 1, stoppingToken);
 
-        private async Task ExecuteAsync(int tries, CancellationToken stoppingToken)
+        private async Task ExecuteInnerAsync(int tries, CancellationToken cancellationToken)
         {
-            using var host = await CreateHostAsync(stoppingToken);
+            using var host = await CreateHostAsync(cancellationToken);
             if (host == null)
             {
-                await StopAsync(stoppingToken);
-                await _host.StopAsync(stoppingToken);
+                await StopAsync(cancellationToken);
+                await _host.StopAsync(cancellationToken);
                 return;
             }
 
@@ -72,21 +78,21 @@ namespace Hast.Remote.Worker.Daemon.Services
 
             try
             {
-                await host.RunAsync<IServiceProvider>(serviceProvider =>
+                try
                 {
-                    ITransformationWorker worker;
-                    try
-                    {
-                        worker = serviceProvider.GetRequiredService<ITransformationWorker>();
-                    }
-                    catch
-                    {
-                        isStartupCrash = true;
-                        throw;
-                    }
+                    _disposableContainer = host.GetService<ITransformationWorker>();
+                }
+                catch
+                {
+                    isStartupCrash = true;
+                    throw;
+                }
 
-                    return worker.WorkAsync(stoppingToken);
-                });
+                // Overwrite these loggers with the Application Insights enabled versions from inside the Hastlayer DI.
+                _logger = host.GetLogger<Worker>();
+                _eventLogger.Logger = host.GetLogger<EventLogger>();
+
+                _workerTask = _disposableContainer.Value.WorkAsync(cancellationToken);
                 return;
             }
             catch (Exception exception) when (isStartupCrash && !exception.IsFatal())
@@ -108,7 +114,7 @@ namespace Hast.Remote.Worker.Daemon.Services
                 });
             }
 
-            if (tries > 0) await ExecuteAsync(tries - 1, stoppingToken);
+            if (tries > 0) await ExecuteInnerAsync(tries - 1, cancellationToken);
         }
 
         private async Task<Hastlayer> CreateHostAsync(CancellationToken cancellationToken)

@@ -6,7 +6,7 @@ namespace Hast.Remote.Worker.Daemon.Services
 {
     public class EventLogger : IEventLogger
     {
-        private readonly ILogger _logger;
+        public ILogger Logger { get; set; }
 
         private readonly EventLog _eventLog = new()
         {
@@ -15,7 +15,7 @@ namespace Hast.Remote.Worker.Daemon.Services
             Source = Name.Replace(".", string.Empty),
         };
 
-        public EventLogger(ILogger<EventLogger> logger) => _logger = logger;
+        public EventLogger(ILogger<EventLogger> logger) => Logger = logger;
 
         public void UpdateStatus(string statusText)
         {
@@ -25,7 +25,7 @@ namespace Hast.Remote.Worker.Daemon.Services
             }
 
             _eventLog.WriteEntry($"{DisplayName} {statusText}.");
-            _logger.LogInformation("{0}: {1}", DisplayName, statusText);
+            Logger.LogInformation("{0}: {1}", DisplayName, statusText);
         }
     }
 }
