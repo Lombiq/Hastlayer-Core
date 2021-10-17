@@ -125,7 +125,8 @@ namespace Hast.Remote.Worker.Daemon.Services
                 var configuration = new TransformationWorkerConfiguration
                 {
                     StorageConnectionString =
-                        appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey),
+                        appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey) ??
+                        appSettings.GetSection("STORAGE_CONNECTIONSTRING").Value,
                 };
 
                 var hastlayerConfiguration = await new TransformationWorkerHastlayerConfigurationProvider()
