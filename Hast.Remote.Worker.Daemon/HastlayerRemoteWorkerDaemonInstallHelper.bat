@@ -17,7 +17,7 @@ echo Config files from the original installation copied. Change them now if nece
 pause > nul
 
 @echo on
-net stop "Hast.Remote.Worker.Daemon"
+sc stop "Hast.Remote.Worker.Daemon"
 @echo off
 
 echo Swapping service instances.
@@ -25,6 +25,6 @@ rename HastlayerRemoteWorkerDaemon HastlayerRemoteWorkerDaemonOld
 rename HastlayerRemoteWorkerDaemonNew HastlayerRemoteWorkerDaemon
 
 @echo on
-net start "Hast.Remote.Worker.Daemon"
+sc start "Hast.Remote.Worker.Daemon"
 
 @echo Service instances swapped and the new instance started. If you want to swap back just rename the HastlayerRemoteWorkerDaemonOld folder to HastlayerRemoteWorkerDaemonNew and run this script again. Now check the new service instance's logs to see if everything is all right and test the service.
