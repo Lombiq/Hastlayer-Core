@@ -14,6 +14,6 @@ namespace Hast.Remote.Worker.Constants
         /// The appsettings path for the Application Insights Instrumentation key. Needed to set up the <see
         /// cref="ApplicationInsightsTelemetryManager"/>.
         /// </summary>
-        public const string ApplicationInsightsInstrumentationKeyPath = "ApplicationInsights::InstrumentationKey";
+        public const string ApplicationInsightsInstrumentationKeyPath = "ApplicationInsights:InstrumentationKey";
     }
 }

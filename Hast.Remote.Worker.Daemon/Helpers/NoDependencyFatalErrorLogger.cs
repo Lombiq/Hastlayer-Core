@@ -1,7 +1,6 @@
 ﻿using Hast.Layer;
 using System;
 using System.IO;
-using System.Reflection;
 using System.Text;
 
 namespace Hast.Remote.Worker.Daemon.Helpers
@@ -15,7 +14,7 @@ namespace Hast.Remote.Worker.Daemon.Helpers
         public static void Log(Exception exception)
         {
             var fileName = $"hastlayer-log-{DateTime.UtcNow:yyyy-MM-dd}.log";
-            var applicationDirectoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var applicationDirectoryName = Path.GetDirectoryName(typeof(Program).Assembly.Location);
             var logsPath = Path.Combine(applicationDirectoryName ?? string.Empty, "App_Data", "logs");
 
             try

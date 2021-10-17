@@ -5,5 +5,6 @@
         Success,
         StartupException,
         FailedToInitializeHastlayer,
+        ServiceControlError,
     }
 }
