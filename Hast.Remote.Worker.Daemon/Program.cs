@@ -18,11 +18,36 @@ namespace Hast.Remote.Worker.Daemon
 
         public static ExitCode ExitCode { get; set; } = ExitCode.Success;
 
-        public static int Main(string[] args)
+        public static async Task<int> Main(string[] args) =>
+            (int)await MainAsync(args);
+
+        private static async Task<ExitCode> MainAsync(string[] args)
         {
+            // Ensure the service is operating from the correct location.
+            Directory.SetCurrentDirectory(ApplicationDirectory);
+
+            IInstaller installer = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? new WindowsInstaller()
+                : null; // No Linux/systemd installer as of now, because it's poorly documented on Microsoft's side.
+
+            if (installer != null && args.Length >= 2 && args[0].ToUpperInvariant() == "CLI")
+            {
+                switch (args[1].ToUpperInvariant())
+                {
+                    case "INSTALL":
+                        return await installer.InstallAsync();
+                    case "START":
+                        return await installer.StartAsync();
+                    case "STOP":
+                        return await installer.StopAsync();
+                    case "UNINSTALL":
+                        return await installer.UninstallAsync();
+                }
+            }
+
             try
             {
-                Host.CreateDefaultBuilder(args)
+                await Host.CreateDefaultBuilder(args)
                     .UseWindowsService(options => options.ServiceName = ServiceProperties.Name)
                     .ConfigureServices((_, services) =>
                     {
@@ -33,7 +58,7 @@ namespace Hast.Remote.Worker.Daemon
                             HastlayerConfigurationProvider.ConfigureLogging);
                     })
                     .Build()
-                    .Run();
+                    .RunAsync();
             }
             catch (OperationCanceledException)
             {
@@ -42,10 +67,10 @@ namespace Hast.Remote.Worker.Daemon
             catch(Exception exception)
             {
                 NoDependencyFatalErrorLogger.Log(exception);
-                ExitCode = ExitCode.StartupException;
+                return ExitCode.StartupException;
             }
 
-            return (int)ExitCode;
+            return ExitCode;
         }
     }
 }
