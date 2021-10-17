@@ -13,8 +13,7 @@ namespace Hast.Remote.Worker.Console
         {
             var configuration = TransformationWorkerConfiguration.Create();
 
-            var hastlayerConfiguration =
-                await new TransformationWorkerHastlayerConfigurationProvider().GetConfiguration(configuration);
+            var hastlayerConfiguration = await new HastlayerConfigurationProvider().GetConfiguration(configuration);
             using var host = (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
 
 #if DEBUG

@@ -10,7 +10,7 @@ namespace Hast.Remote.Worker.Services
     /// of <see cref="Hastlayer"/>'s root dependency injection scope in case it's constructed with the help of an outer
     /// service provider.
     /// </summary>
-    public interface ITransformationWorkerHastlayerConfigurationProvider
+    public interface IHastlayerConfigurationProvider
     {
         /// <summary>
         /// Gets or creates a <see cref="IHastlayerConfiguration"/>.

@@ -18,8 +18,7 @@ using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace Hast.Remote.Worker.Services
 {
-    public class TransformationWorkerHastlayerConfigurationProvider
-        : ITransformationWorkerHastlayerConfigurationProvider
+    public class HastlayerConfigurationProvider : IHastlayerConfigurationProvider
     {
         private IHastlayerConfiguration _configuration;
 

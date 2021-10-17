@@ -25,7 +25,7 @@ namespace Hast.Remote.Worker.Daemon
                         services.AddHostedService<Services.Worker>();
                         Hastlayer.ConfigureLogging(
                             services,
-                            TransformationWorkerHastlayerConfigurationProvider.ConfigureLogging);
+                            HastlayerConfigurationProvider.ConfigureLogging);
                     })
                     .Build()
                     .Run();
