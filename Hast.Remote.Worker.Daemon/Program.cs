@@ -11,15 +11,14 @@ namespace Hast.Remote.Worker.Daemon
 {
     public static class Program
     {
-        public static ExitCode ExitCode { get; set; }
+        public static ExitCode ExitCode { get; set; } = ExitCode.Success;
 
         public static int Main(string[] args)
         {
             try
             {
                 Host.CreateDefaultBuilder(args)
-                    .UseSystemd()
-                    .UseWindowsService()
+                    .UseWindowsService(options => options.ServiceName = ServiceProperties.Name)
                     .ConfigureServices((_, services) =>
                     {
                         services.AddSingleton<IEventLogger, EventLogger>();
