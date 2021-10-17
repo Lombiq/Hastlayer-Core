@@ -6,11 +6,16 @@ using Hast.Remote.Worker.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Hast.Remote.Worker.Daemon
 {
     public static class Program
     {
+        public static string ApplicationDirectory { get; } = Path.GetDirectoryName(typeof(Program).Assembly.Location);
+
         public static ExitCode ExitCode { get; set; } = ExitCode.Success;
 
         public static int Main(string[] args)

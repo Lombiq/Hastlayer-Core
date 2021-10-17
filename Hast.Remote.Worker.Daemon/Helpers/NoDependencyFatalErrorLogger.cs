@@ -14,8 +14,7 @@ namespace Hast.Remote.Worker.Daemon.Helpers
         public static void Log(Exception exception)
         {
             var fileName = $"hastlayer-log-{DateTime.UtcNow:yyyy-MM-dd}.log";
-            var applicationDirectoryName = Path.GetDirectoryName(typeof(Program).Assembly.Location);
-            var logsPath = Path.Combine(applicationDirectoryName ?? string.Empty, "App_Data", "logs");
+            var logsPath = Path.Combine(Program.ApplicationDirectory, "App_Data", "logs");
 
             try
             {
