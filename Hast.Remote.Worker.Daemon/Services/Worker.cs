@@ -125,15 +125,9 @@ namespace Hast.Remote.Worker.Daemon.Services
         {
             try
             {
-                var appSettings = Hastlayer.BuildConfiguration();
-                var configuration = new TransformationWorkerConfiguration
-                {
-                    StorageConnectionString =
-                        appSettings.GetConnectionString(ConfigurationKeys.StorageConnectionStringKey) ??
-                        appSettings.GetSection("STORAGE_CONNECTIONSTRING").Value,
-                };
+                var configuration = TransformationWorkerConfiguration.Create();
 
-                var hastlayerConfiguration = await new TransformationWorkerHastlayerConfigurationProvider()
+                var hastlayerConfiguration = await new HastlayerConfigurationProvider()
                     .GetConfiguration(configuration, cancellationToken);
                 return (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
             }

@@ -11,10 +11,7 @@ namespace Hast.Remote.Worker.Console
     {
         private static async Task Main()
         {
-            var configuration = new TransformationWorkerConfiguration
-            {
-                StorageConnectionString = "UseDevelopmentStorage=true",
-            };
+            var configuration = TransformationWorkerConfiguration.Create();
 
             var hastlayerConfiguration =
                 await new TransformationWorkerHastlayerConfigurationProvider().GetConfiguration(configuration);
