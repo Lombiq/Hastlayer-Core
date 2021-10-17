@@ -22,6 +22,7 @@ namespace Hast.Remote.Worker.Daemon.Services
         private ILogger _logger;
         private DisposableContainer<ITransformationWorker> _disposableContainer;
         private Task _workerTask;
+        private Hastlayer _hastlayer;
 
         public Worker(IHost host, IEventLogger eventLogger, ILogger<Worker> logger)
         {
@@ -52,7 +53,10 @@ namespace Hast.Remote.Worker.Daemon.Services
                 await Task.WhenAny(_workerTask, Task.Delay(Timeout.Infinite, cancellationToken)).ConfigureAwait(false);
 
                 await base.StopAsync(cancellationToken);
+
                 _disposableContainer?.Dispose();
+                _hastlayer?.Dispose();
+
                 _eventLogger.UpdateStatus("stopped");
             }
             catch (Exception exception) when (exception is not OperationCanceledException)
@@ -66,8 +70,8 @@ namespace Hast.Remote.Worker.Daemon.Services
 
         private async Task ExecuteInnerAsync(int tries, CancellationToken cancellationToken)
         {
-            using var host = await CreateHostAsync(cancellationToken);
-            if (host == null)
+            _hastlayer = await CreateHostAsync(cancellationToken);
+            if (_hastlayer == null)
             {
                 await StopAsync(cancellationToken);
                 await _host.StopAsync(cancellationToken);
@@ -80,7 +84,7 @@ namespace Hast.Remote.Worker.Daemon.Services
             {
                 try
                 {
-                    _disposableContainer = host.GetService<ITransformationWorker>();
+                    _disposableContainer = _hastlayer.GetService<ITransformationWorker>();
                 }
                 catch
                 {
@@ -89,15 +93,15 @@ namespace Hast.Remote.Worker.Daemon.Services
                 }
 
                 // Overwrite these loggers with the Application Insights enabled versions from inside the Hastlayer DI.
-                _logger = host.GetLogger<Worker>();
-                _eventLogger.Logger = host.GetLogger<EventLogger>();
+                _logger = _hastlayer.GetLogger<Worker>();
+                _eventLogger.Logger = _hastlayer.GetLogger<EventLogger>();
 
                 _workerTask = _disposableContainer.Value.WorkAsync(cancellationToken);
                 return;
             }
             catch (Exception exception) when (isStartupCrash && !exception.IsFatal())
             {
-                await host.RunAsync<ILogger<Worker>>(logger =>
+                await _hastlayer.RunAsync<ILogger<Worker>>(logger =>
                 {
                     logger.LogError(exception, DisplayName + " crashed with an unhandled exception. Restarting...");
 
