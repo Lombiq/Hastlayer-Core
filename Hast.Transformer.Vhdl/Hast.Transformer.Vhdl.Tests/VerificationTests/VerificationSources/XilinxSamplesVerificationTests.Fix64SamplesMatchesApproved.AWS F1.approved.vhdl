@@ -178,6 +178,7 @@ architecture Imp of Hast_IP is
     -- * The InternalInvocationProxy processes dispatch invocations between state machines.
 
     -- Custom inter-dependent type declarations start
+    type \unsigned8_Array\ is array (integer range <>) of unsigned(7 downto 0);
     type \signed32_Array\ is array (integer range <>) of signed(31 downto 0);
     type \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\ is record 
         \IsNull\: boolean;

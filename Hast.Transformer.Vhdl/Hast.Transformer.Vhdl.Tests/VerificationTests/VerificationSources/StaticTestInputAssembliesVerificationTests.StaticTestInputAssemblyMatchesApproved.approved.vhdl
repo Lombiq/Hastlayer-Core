@@ -114,6 +114,7 @@ architecture Imp of Hast_IP is
     -- Custom inter-dependent type declarations start
     type \signed32_Array\ is array (integer range <>) of signed(31 downto 0);
     type \unsigned32_Array\ is array (integer range <>) of unsigned(31 downto 0);
+    type \unsigned8_Array\ is array (integer range <>) of unsigned(7 downto 0);
     type \boolean_Array\ is array (integer range <>) of boolean;
     type \Hast.TestInputs.Static.ArrayUsingCases+ArrayHolder\ is record 
         \IsNull\: boolean;
