@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using static Hast.Remote.Worker.Daemon.Constants.ServiceProperties;
 
 namespace Hast.Remote.Worker.Daemon.Services
@@ -8,24 +9,34 @@ namespace Hast.Remote.Worker.Daemon.Services
     {
         public ILogger Logger { get; set; }
 
-        private readonly EventLog _eventLog = new()
-        {
-            Log = DisplayName,
-            // The EventLog source can't contain dots like the service's technical name.
-            Source = Name.Replace(".", string.Empty),
-        };
+        private readonly EventLog _eventLog;
 
-        public EventLogger(ILogger<EventLogger> logger) => Logger = logger;
+        public EventLogger(ILogger<EventLogger> logger)
+        {
+            Logger = logger;
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                _eventLog = new()
+                {
+                    Log = DisplayName,
+                    // The EventLog source can't contain dots like the service's technical name.
+                    Source = Name.Replace(".", string.Empty),
+                };
+            }
+        }
 
         public void UpdateStatus(string statusText)
         {
+            Logger.LogInformation("{0}: {1}", DisplayName, statusText);
+            if (_eventLog == null) return;
+
             if (!EventLog.Exists(_eventLog.Log))
             {
                 EventLog.CreateEventSource(new EventSourceCreationData(_eventLog.Source, _eventLog.Log));
             }
 
             _eventLog.WriteEntry($"{DisplayName} {statusText}.");
-            Logger.LogInformation("{0}: {1}", DisplayName, statusText);
         }
     }
 }
