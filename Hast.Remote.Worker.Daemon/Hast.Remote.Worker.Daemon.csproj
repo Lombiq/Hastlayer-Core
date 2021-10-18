@@ -4,6 +4,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <UserSecretsId>6e4bb2e7-575d-4e6d-aa5c-017b2128fe55</UserSecretsId>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
   </PropertyGroup>
   
   <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">

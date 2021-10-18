@@ -3,14 +3,13 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Hast.Remote.Worker.Daemon/Hast.Remote.Worker.Daemon.csproj", "Hast.Remote.Worker.Daemon/"]
-RUN dotnet restore "Hast.Remote.Worker.Daemon/Hast.Remote.Worker.Daemon.csproj"
 COPY . .
-WORKDIR "/src/Hast.Remote.Worker.Daemon"
-RUN dotnet build "Hast.Remote.Worker.Daemon.csproj" -c Release -o /app/build
+RUN rm Hastlayer.SDK.Client.sln Hastlayer.SDK.sln
+RUN dotnet restore
+RUN dotnet build Hast.Core/Hast.Remote.Worker.Daemon/Hast.Remote.Worker.Daemon.csproj -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Hast.Remote.Worker.Daemon.csproj" -c Release -o /app/publish
+RUN dotnet publish Hast.Core/Hast.Remote.Worker.Daemon/Hast.Remote.Worker.Daemon.csproj -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

@@ -43,6 +43,13 @@ Now that you have a clean slate:
 You can install, uninstall, start and stop the service by typing `Hast.Remote.Worker.Daemon.exe cli [command]`. The install and uninstall also starts and stops the service respectively.
 
 
+### Docker Installation
+
+1. Edit the source _appsettings.json_ file in the project directory.
+2. Type `docker build -t hast-remote-worker-daemon -f Hast.Core/Hast.Remote.Worker.Daemon/Dockerfile .` into bash or powershell.
+3. Create a container using [`docker run`](https://docs.docker.com/engine/reference/run/) (or a frontend such as [Docker Desktop](https://www.docker.com/products/docker-desktop) or [DockStation](https://dockstation.io/))
+4. If you run on a remote server [export](https://docs.docker.com/engine/reference/commandline/export/) the container so you can deploy it on your target machine.
+
 ## Logging
 
 The service writes log messages during start and stop to the Windows event log. You can view the entries in the Windows Event Viewer under "Applications and Services Logs" in the log "Hastlayer Remote Worker Daemon". Once the service is running the standard `Microsoft.Extensions.Logging` logs will be used.
