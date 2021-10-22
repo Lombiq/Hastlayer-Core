@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Remote.Worker.Daemon.Constants;
 using Hast.Remote.Worker.Daemon.Helpers;
 using Hast.Remote.Worker.Daemon.Services;
@@ -66,7 +66,7 @@ namespace Hast.Remote.Worker.Daemon
             {
                 // Nothing to do here.
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 NoDependencyFatalErrorLogger.Log(exception);
                 return ExitCode.StartupException;

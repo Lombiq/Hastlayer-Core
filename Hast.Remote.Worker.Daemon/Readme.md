@@ -37,7 +37,8 @@ Now that you have a clean slate:
 1. Publish the project in Release mode.
 2. Copy the folder with the service executable onto the server in a desired location (e.g. _C:\HastlayerRemoteWorkerDaemon_).
 3. Open a terminal as administrator and go to the same folder. 
-4. Type `Hast.Remote.Worker.Daemon.exe cli uninstall`. This will install and start the service. Verify that the installation was successful by checking Services.
+4. Type `Hast.Remote.Worker.Daemon.exe cli install`. This will install and start the service. Verify that the installation was successful by checking Services.
+
 5. Check the logs for any issues.
 
 You can install, uninstall, start and stop the service by typing `Hast.Remote.Worker.Daemon.exe cli [command]`. The install and uninstall also starts and stops the service respectively.
