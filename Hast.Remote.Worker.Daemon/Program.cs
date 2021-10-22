@@ -23,7 +23,9 @@ namespace Hast.Remote.Worker.Daemon
 
         private static async Task<ExitCode> MainAsync(string[] args)
         {
-            // Ensure the service is operating from the correct location.
+            // Ensure the service is operating from the correct location. Normally services are started from the home
+            // path of the service user as the working directory. For example on Windows services start in either
+            // %WinDir%\System32 or %WinDir%\SysWOW64.
             Directory.SetCurrentDirectory(ApplicationDirectory);
 
             IInstaller installer = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
