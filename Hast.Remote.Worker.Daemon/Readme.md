@@ -23,7 +23,7 @@ To use environment variables first you have to delete the _appsettings.json_ fil
 - On Linux you have to edit the service after it's created by appending `Environment=` lines as described [here](https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment=).
 
 Note that you don't need the entire Application Insights connection string, just the GUID in the _InstrumentationKey_ field.
-For further documentation take a look at the `ConfigurationKeys` class.
+For further documentation take a look at the `ConfigurationPaths` class.
 
 
 ### Installation

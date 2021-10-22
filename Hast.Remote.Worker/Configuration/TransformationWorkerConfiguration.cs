@@ -1,7 +1,6 @@
 ﻿using Hast.Layer;
-using Microsoft.Extensions.Configuration;
+using Hast.Remote.Worker.Constants;
 using System;
-using static Hast.Remote.Worker.Constants.ConfigurationKeys;
 
 namespace Hast.Remote.Worker.Configuration
 {
@@ -15,9 +14,9 @@ namespace Hast.Remote.Worker.Configuration
         /// </summary>
         public static TransformationWorkerConfiguration Create()
         {
-            var appSettings = Hastlayer.BuildConfiguration();
+            var configuration = Hastlayer.BuildConfiguration();
 
-            var connectionString = appSettings.GetConnectionString(StorageConnectionStringKey);
+            var connectionString = configuration.GetSection(ConfigurationPaths.StorageConnectionString).Value;
             if (connectionString?.Contains("insert your instrumentation", StringComparison.OrdinalIgnoreCase) == true)
             {
                 connectionString = null;
@@ -27,7 +26,7 @@ namespace Hast.Remote.Worker.Configuration
             {
                 StorageConnectionString =
                     connectionString ??
-                    appSettings.GetSection("STORAGE_CONNECTIONSTRING").Value ??
+                    configuration.GetSection("STORAGE_CONNECTIONSTRING").Value ??
                     "UseDevelopmentStorage=true",
             };
         }
