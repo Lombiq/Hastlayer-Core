@@ -12,8 +12,8 @@ You can edit the _appsettings.json_ file after build if you wish. When calling t
 
 To add user secrets go to the project directory and type commands below with the correct values. If are using [Azurite](https://github.com/Azure/Azurite) for local Azure Storage emulation you can omit the second line.
 ```shell
-dotnet user-secrets set "ApplicationInsights:InstrumentationKey" "YOUR AI INSTRUMENTATION KEY"
-dotnet user-secrets set "ConnectionStrings:Hast.Remote.Worker.Daemon.StorageConnectionString" "YOUR STORAGE CONNECTION STRING"
+dotnet user-secrets set "Hast:Remote_Worker:ApplicationInsights_InstrumentationKey" "YOUR AI INSTRUMENTATION KEY"
+dotnet user-secrets set "Hast:Remote_Worker:Storage_ConnectionString" "YOUR STORAGE CONNECTION STRING"
 ```
 
 To use environment variables first you have to delete the _appsettings.json_ file (or at least these two corresponding entries).
