@@ -29,7 +29,7 @@ namespace Hast.Remote.Worker.Daemon.Helpers
             }
 
             using var textWriter = CreateFatalLogger(Path.Combine(logsPath, fileName), fileName);
-            textWriter.WriteLine(exception);
+            textWriter.WriteLine("Exception: {0}", exception);
             textWriter.WriteLine();
         }
 
@@ -42,6 +42,13 @@ namespace Hast.Remote.Worker.Daemon.Helpers
                 {
                     writer = new StreamWriter(path, append: true, Encoding.UTF8);
                     writer.WriteLine("FATAL ERROR BEFORE OR DURING HASTLAYER INSTANCE CREATION!");
+                    writer.WriteLine("Current Directory: {0}", Directory.GetCurrentDirectory());
+                    writer.WriteLine(
+                        "The {0} file: {1}",
+                        Hastlayer.AppsettingsJsonFileName,
+                        File.Exists(Hastlayer.AppsettingsJsonFileName)
+                            ? "\n" + File.ReadAllText(Hastlayer.AppsettingsJsonFileName)?.Trim()
+                            : "doesn't exist.");
                     return writer;
                 }
                 catch
