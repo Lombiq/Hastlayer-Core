@@ -28,7 +28,8 @@ For further documentation take a look at the `ConfigurationPaths` class.
 
 ### Installation
 
-If you're upgrading from an existing version, do the following. On Windows you can copy the _HastlayerRemoteWorkerDaemonInstallHelper.bat_ script to the installation folder (i.e. the root folder where you want the Daemon's folder to be created, e.g. *C:\\*) and run it to quickly swap to a newer directory without following the rest of the Installation section. If not, you can skip these.
+If you're upgrading from an existing version, do the following. On Windows you can copy the _HastlayerRemoteWorkerDaemonInstallHelper.bat_ script to the installation folder (i.e. the root folder where you want the Daemon's folder to be created, e.g. *C:\\*) and run it to quickly swap to a newer directory without following the rest of the Installation section, just follow the instructions provided by the scrip. Then, you can skip the below steps.
+
 1. Make sure that the Services window is closed (otherwise you'll get the "The specified service has been marked for deletion." error).
 2. Type `Hast.Remote.Worker.Daemon.exe cli uninstall`. (You could use stop instead of uninstall too, but the service install/uninstall is really fast so it's not worth it.)
 3. Delete the application's directory or move it to a new location for archival. If you get an error that it's in use, wait until the service fully terminates.
