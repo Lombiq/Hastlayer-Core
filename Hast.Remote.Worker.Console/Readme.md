@@ -1,4 +1,4 @@
-﻿# Hastlayer - Remote Worker Console
+# Hastlayer - Remote Worker Console
 
 Simple console app to run the Hastlayer Worker.
 
@@ -6,7 +6,7 @@ Simple console app to run the Hastlayer Worker.
 ## Requirements
 
 * An [Azure Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/create-new-resource) app.
-* [Azurite](https://github.com/azure/azurite) which works on any platform with [node](https://nodejs.org/) or [Docker](https://hub.docker.com/_/microsoft-azure-storage-azurite). (Note: the formerly official [Azure Storage Emulator](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator) has been deprecated-)
+* [Azurite](https://github.com/azure/azurite) which works on any platform with [node](https://nodejs.org/) or [Docker](https://hub.docker.com/_/microsoft-azure-storage-azurite). (Note: the formerly official [Azure Storage Emulator](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator) has been deprecated.)
 
 
 
