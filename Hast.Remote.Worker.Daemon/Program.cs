@@ -1,69 +1,78 @@
-﻿using System.Configuration.Install;
-using System.Linq;
-using System.Reflection;
-using System.ServiceProcess;
+using Hast.Layer;
+using Hast.Remote.Worker.Daemon.Constants;
+using Hast.Remote.Worker.Daemon.Helpers;
+using Hast.Remote.Worker.Daemon.Services;
+using Hast.Remote.Worker.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Hast.Remote.Worker.Daemon
 {
-    static class Program
+    public static class Program
     {
-        static void Main()
+        public static string ApplicationDirectory { get; } = Path.GetDirectoryName(typeof(Program).Assembly.Location);
+
+        public static ExitCode ExitCode { get; set; } = ExitCode.Success;
+
+        public static async Task<int> Main(string[] args) =>
+            (int)await MainAsync(args);
+
+        private static async Task<ExitCode> MainAsync(string[] args)
         {
-            // Below code taken mostly from http://www.codeproject.com/Articles/27112/Installing-NET-Windows-Services-the-easiest-way
-            var service = ServiceController.GetServices().Where(controller => controller.ServiceName == Service.Name).SingleOrDefault();
+            // Ensure the service is operating from the correct location. Normally services are started from the home
+            // path of the service user as the working directory. For example on Windows services start in either
+            // %WinDir%\System32 or %WinDir%\SysWOW64.
+            Directory.SetCurrentDirectory(ApplicationDirectory);
 
-            // Service not installed
-            if (service == null)
+            IInstaller installer = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? new WindowsInstaller()
+                : null; // No Linux/systemd installer as of now, because it's poorly documented on Microsoft's side.
+
+            if (installer != null && args.Length >= 2 && args[0].ToUpperInvariant() == "CLI")
             {
-                SelfInstaller.InstallMe();
+                switch (args[1].ToUpperInvariant())
+                {
+                    case "INSTALL":
+                        return await installer.InstallAsync();
+                    case "START":
+                        return await installer.StartAsync();
+                    case "STOP":
+                        return await installer.StopAsync();
+                    case "UNINSTALL":
+                        return await installer.UninstallAsync();
+                }
             }
-            // Service is not starting
-            else if (service.Status != ServiceControllerStatus.StartPending)
-            {
-                SelfInstaller.UninstallMe();
-            }
-            // Started from the SCM
-            else
-            {
-                ServiceBase[] servicesToRun;
-                servicesToRun = new ServiceBase[] { new Service() };
-                ServiceBase.Run(servicesToRun);
-            }
-        }
-    }
 
-
-    static class SelfInstaller
-    {
-        private static readonly string _exePath = Assembly.GetExecutingAssembly().Location;
-
-
-        public static bool InstallMe()
-        {
             try
             {
-                ManagedInstallerClass.InstallHelper(new string[] { _exePath });
+                await Host.CreateDefaultBuilder(args)
+                    .UseWindowsService(options => options.ServiceName = ServiceProperties.Name)
+                    .ConfigureServices((_, services) =>
+                    {
+                        services.AddSingleton<IEventLogger, EventLogger>();
+                        services.AddHostedService<Services.Worker>();
+                        Hastlayer.ConfigureLogging(
+                            services,
+                            HastlayerConfigurationProvider.ConfigureLogging);
+                    })
+                    .Build()
+                    .RunAsync();
             }
-            catch
+            catch (OperationCanceledException)
             {
-                return false;
+                // Nothing to do here.
+            }
+            catch (Exception exception)
+            {
+                NoDependencyFatalErrorLogger.Log(exception);
+                return ExitCode.StartupException;
             }
 
-            return true;
-        }
-
-        public static bool UninstallMe()
-        {
-            try
-            {
-                ManagedInstallerClass.InstallHelper(new string[] { "/u", _exePath });
-            }
-            catch
-            {
-                return false;
-            }
-
-            return true;
+            return ExitCode;
         }
     }
 }
