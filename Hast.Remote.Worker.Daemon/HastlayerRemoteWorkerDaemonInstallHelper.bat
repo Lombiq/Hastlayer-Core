@@ -2,7 +2,8 @@
 rem Script for automating the folder creation/rename, service start/stop workflow of installing the Hastlayer Remote
 rem Worker Daemon. Will use conventional folder names.
 
-if not exist "HastlayerRemoteWorkerDaemonNew" mkdir HastlayerRemoteWorkerDaemonNew
+if exist "HastlayerRemoteWorkerDaemonNew" rmdir HastlayerRemoteWorkerDaemonNew /s /q
+mkdir HastlayerRemoteWorkerDaemonNew
 
 echo The HastlayerRemoteWorkerDaemonNew folder created. Now copy the Daemon's Release folder's content (from within the runtime's folder, e.g. win-x64) there and press enter.
 
@@ -21,6 +22,7 @@ sc stop "Hast.Remote.Worker.Daemon"
 @echo off
 
 echo Swapping service instances.
+if exist "HastlayerRemoteWorkerDaemonOld" rmdir HastlayerRemoteWorkerDaemonOld /s /q
 rename HastlayerRemoteWorkerDaemon HastlayerRemoteWorkerDaemonOld
 rename HastlayerRemoteWorkerDaemonNew HastlayerRemoteWorkerDaemon
 
