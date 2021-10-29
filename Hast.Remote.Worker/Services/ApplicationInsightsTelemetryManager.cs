@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using Microsoft.Extensions.Logging;
-
+using static Hast.Remote.Worker.Constants.ConfigurationPaths;
 
 namespace Hast.Remote.Worker.Services
 {
@@ -53,8 +53,10 @@ namespace Hast.Remote.Worker.Services
         public static string GetInstrumentationKey()
         {
             var configuration = Hastlayer.BuildConfiguration();
-            var key = configuration.GetSection("ApplicationInsights").GetSection("InstrumentationKey").Value ??
-                configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY").Value;
+            var key = configuration.GetSection(ApplicationInsightsInstrumentationKey).Value;
+            if (key.StartsWith("Insert your instrumentation key", StringComparison.OrdinalIgnoreCase)) key = null;
+            key ??= configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY").Value;
+
             if (string.IsNullOrEmpty(key))
             {
                 throw new MissingInstrumentationKeyException(
