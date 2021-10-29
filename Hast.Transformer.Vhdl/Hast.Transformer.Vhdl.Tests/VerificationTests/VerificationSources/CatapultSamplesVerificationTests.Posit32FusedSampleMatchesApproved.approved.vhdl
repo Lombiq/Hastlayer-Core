@@ -4367,7 +4367,7 @@ begin
         Variable \Posit32::FractionSize().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSize().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionSize().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionSize().0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionSize().0.binaryOperationResult.3\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -4386,7 +4386,7 @@ begin
                 \Posit32::FractionSize().0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32::FractionSize().0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::FractionSize().0.binaryOperationResult.2\ := to_signed(0, 32);
-                \Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\ := to_signed(0, 32);
+                \Posit32::FractionSize().0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1\ := to_unsigned(0, 32);
                 \Posit32::FractionSize().0.binaryOperationResult.3\ := false;
             else 
                 case \Posit32::FractionSize().0._State\ is 
@@ -4450,13 +4450,13 @@ begin
                         \Posit32::FractionSize().0.binaryOperationResult.2\ := to_signed(32, 32) - (\Posit32::FractionSize().0.binaryOperationResult.1\);
                         \Posit32::FractionSize().0.num\ := \Posit32::FractionSize().0.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c;
+                        -- uint conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((num > 0)) {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = num;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1 = ((uint)num);
                         -- } else {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = 0;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1 = 0u;
                         -- }
                         -- 
                         \Posit32::FractionSize().0.binaryOperationResult.3\ := \Posit32::FractionSize().0.num\ > to_signed(0, 32);
@@ -4475,22 +4475,22 @@ begin
                     when \Posit32::FractionSize().0._State_5\ => 
                         -- State after the if-else which was started in state \Posit32::FractionSize().0._State_4\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (uint)(conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c);
+                        -- return conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1;
                         -- 
-                        \Posit32::FractionSize().0.return\ <= unsigned((\Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\));
+                        \Posit32::FractionSize().0.return\ <= \Posit32::FractionSize().0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1\;
                         \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::FractionSize().0._State_6\ => 
                         -- True branch of the if-else started in state \Posit32::FractionSize().0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = num;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1 = ((uint)num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = num;
+                        -- conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1 = ((uint)num);
                         -- 
-                        \Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\ := \Posit32::FractionSize().0.num\;
+                        \Posit32::FractionSize().0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1\ := (unsigned(\Posit32::FractionSize().0.num\));
                         -- Going to the state after the if-else which was started in state \Posit32::FractionSize().0._State_4\.
                         if (\Posit32::FractionSize().0._State\ = \Posit32::FractionSize().0._State_6\) then 
                             \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_5\;
@@ -4500,13 +4500,13 @@ begin
                         -- False branch of the if-else started in state \Posit32::FractionSize().0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = 0;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1 = 0u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c = 0;
+                        -- conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1 = 0u;
                         -- 
-                        \Posit32::FractionSize().0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c\ := to_signed(0, 32);
+                        \Posit32::FractionSize().0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \Posit32::FractionSize().0._State_4\.
                         if (\Posit32::FractionSize().0._State\ = \Posit32::FractionSize().0._State_7\) then 
                             \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_5\;
@@ -4828,7 +4828,7 @@ begin
         Variable \Posit32::SetOne(UInt32,UInt16).0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::SetOne(UInt32,UInt16).0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::SetOne(UInt32,UInt16).0.index\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -4839,7 +4839,7 @@ begin
                 \Posit32::SetOne(UInt32,UInt16).0._State\ := \Posit32::SetOne(UInt32,UInt16).0._State_0\;
                 \Posit32::SetOne(UInt32,UInt16).0.bits\ := to_unsigned(0, 32);
                 \Posit32::SetOne(UInt32,UInt16).0.index\ := to_unsigned(0, 16);
-                \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\ := to_unsigned(0, 32);
             else 
                 case \Posit32::SetOne(UInt32,UInt16).0._State\ is 
@@ -4865,11 +4865,11 @@ begin
                         \Posit32::SetOne(UInt32,UInt16).0.bits\ := \Posit32::SetOne(UInt32,UInt16).0.bits.parameter.In\;
                         \Posit32::SetOne(UInt32,UInt16).0.index\ := \Posit32::SetOne(UInt32,UInt16).0.index.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return (uint)((int)bits | (1 << (int)index));
+                        -- return bits | (uint)(1 << (int)index);
                         -- 
-                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::SetOne(UInt32,UInt16).0.index\, 32)), 5))));
-                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\ := unsigned(signed(\Posit32::SetOne(UInt32,UInt16).0.bits\) or (\Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\));
-                        \Posit32::SetOne(UInt32,UInt16).0.return\ <= (\Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\);
+                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := unsigned(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::SetOne(UInt32,UInt16).0.index\, 32)), 5)))));
+                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\ := \Posit32::SetOne(UInt32,UInt16).0.bits\ or (\Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\);
+                        \Posit32::SetOne(UInt32,UInt16).0.return\ <= \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\;
                         \Posit32::SetOne(UInt32,UInt16).0._State\ := \Posit32::SetOne(UInt32,UInt16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.5685
                 end case;
@@ -4922,12 +4922,12 @@ begin
                         \Posit32::SetZero(UInt32,UInt16).0.bits\ := \Posit32::SetZero(UInt32,UInt16).0.bits.parameter.In\;
                         \Posit32::SetZero(UInt32,UInt16).0.index\ := \Posit32::SetZero(UInt32,UInt16).0.index.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return (uint)((int)bits & ~(1 << (int)index));
+                        -- return bits & (uint)(~(1 << (int)index));
                         -- 
                         \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.0\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::SetZero(UInt32,UInt16).0.index\, 32)), 5))));
                         \Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\ := not((\Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.0\));
-                        \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\ := unsigned(signed(\Posit32::SetZero(UInt32,UInt16).0.bits\) and \Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\);
-                        \Posit32::SetZero(UInt32,UInt16).0.return\ <= (\Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\);
+                        \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\ := \Posit32::SetZero(UInt32,UInt16).0.bits\ and unsigned((\Posit32::SetZero(UInt32,UInt16).0.unaryOperationResult.0\));
+                        \Posit32::SetZero(UInt32,UInt16).0.return\ <= \Posit32::SetZero(UInt32,UInt16).0.binaryOperationResult.1\;
                         \Posit32::SetZero(UInt32,UInt16).0._State\ := \Posit32::SetZero(UInt32,UInt16).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.68865
                 end case;
@@ -4945,7 +4945,7 @@ begin
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num2\: signed(31 downto 0) := to_signed(0, 32);
@@ -4968,7 +4968,7 @@ begin
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.b\ := to_unsigned(0, 8);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\ := to_unsigned(0, 32);
-                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := to_signed(0, 64);
+                \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.3\ := to_unsigned(0, 32);
                 \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num2\ := to_signed(0, 32);
@@ -5017,11 +5017,11 @@ begin
                         -- uint num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = ((uint)((long)((bits >> 31)) & 1L));
+                        -- num = (bits >> 31) & 1u;
                         -- 
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := signed(SmartResize(shift_right(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111"))), 64));
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\ := SmartResize(unsigned(signed(SmartResize(((\Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\)), 64)) and to_signed(1, 64)), 32);
-                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\ := ((\Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\));
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := shift_right(\Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\ := (\Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\) and to_unsigned(1, 32);
+                        \Posit32::LengthOfRunOfBits(UInt32,Byte).0.num\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
                         -- bits = bits << 1;
                         -- 
@@ -5043,7 +5043,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State\ := \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8457
+                        -- Clock cycles needed to complete this state (approximation): 0.7524
                     when \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \Posit32::LengthOfRunOfBits(UInt32,Byte).0._State_2\.
                         -- The while loop's condition:
@@ -5455,7 +5455,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.x\: \Lombiq.Arithmetics.Posit32\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.left\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.quire\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.2\: signed(15 downto 0) := to_signed(0, 16);
@@ -5524,19 +5524,19 @@ begin
                             \Quire Posit32::op_Explicit(Posit32).0.return.0\ := \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().return.0\;
                             \Quire Posit32::op_Explicit(Posit32).0.array\(to_integer(to_signed(0, 32))) := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.return.0\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- Quire left;
+                            -- Quire quire;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- left = new Quire (array, 0);
+                            -- quire = new Quire (array, 0);
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Quire Posit32::op_Explicit(Posit32).0.left\.\IsNull\ := false;
-                            \Quire Posit32::op_Explicit(Posit32).0.left\.\Size\ := to_unsigned(0, 16);
-                            \Quire Posit32::op_Explicit(Posit32).0.left\.\SegmentCount\ := to_unsigned(0, 16);
-                            \Quire Posit32::op_Explicit(Posit32).0.left\.\Segments\ := (others => to_unsigned(0, 64));
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\.\IsNull\ := false;
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\.\Size\ := to_unsigned(0, 16);
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\.\SegmentCount\ := to_unsigned(0, 16);
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\.\Segments\ := (others => to_unsigned(0, 64));
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.left\;
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.array\;
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
@@ -5547,10 +5547,10 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Posit32::op_Explicit(Posit32).0.left\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Posit32::op_Explicit(Posit32).0.array\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- left = Quire.op_LeftShift (left, (int)(240L - (long)(Lombiq.Arithmetics.Posit32.FractionSize (x)) + (long)(Lombiq.Arithmetics.Posit32.CalculateScaleFactor (x))));
+                            -- quire = Quire.op_LeftShift (quire, (int)(240L - (long)(Lombiq.Arithmetics.Posit32.FractionSize (x)) + (long)(Lombiq.Arithmetics.Posit32.CalculateScaleFactor (x))));
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
                             \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize().this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.x\;
@@ -5577,7 +5577,7 @@ begin
                             \Quire Posit32::op_Explicit(Posit32).0.return.2\ := \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor().return.0\;
                             \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ + SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return.2\), 64), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_LeftShift(Lombiq.Arithmetics.Quire,System.Int32)
-                            \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.left\;
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).right.parameter.Out.0\ <= (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\);
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= true;
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_7\;
@@ -5588,12 +5588,12 @@ begin
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= false;
                             \Quire Posit32::op_Explicit(Posit32).0.return.3\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).return.0\;
-                            \Quire Posit32::op_Explicit(Posit32).0.left\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\;
-                            \Quire Posit32::op_Explicit(Posit32).0.left\ := \Quire Posit32::op_Explicit(Posit32).0.return.3\;
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.return.3\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return left;
+                            -- return quire;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.left\;
+                            \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5950,7 +5950,7 @@ begin
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\: boolean := false;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\: boolean := false;
@@ -5995,7 +5995,7 @@ begin
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\ := to_unsigned(0, 8);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\ := to_signed(0, 32);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\ := false;
-                \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := to_signed(0, 64);
+                \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ := to_signed(0, 32);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\ := false;
@@ -6089,9 +6089,9 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- while ((int)(num3) < (int)((int)(left.SegmentCount) << 6)) {
                         -- 	bool flag2;
-                        -- 	flag2 = (((left.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                        -- 	flag2 = ((left.Segments [num] >> (int)num2) & 1uL) == 1uL;
                         -- 	bool flag3;
-                        -- 	flag3 = (((right.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                        -- 	flag3 = ((right.Segments [num] >> (int)num2) & 1uL) == 1uL;
                         -- 	byte b;
                         -- 	int conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba;
                         -- 	if (flag2) {
@@ -6113,9 +6113,9 @@ begin
                         -- 	}
                         -- 	b = (byte)((conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba) + (conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49) + (conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70));
                         -- 	if (((int)(b) & 1) == 1) {
-                        -- 		array [num] = (ulong)((long)array [num] + (1L << (int)num2));
+                        -- 		array [num] = array [num] + (ulong)(1L << (int)num2);
                         -- 	}
-                        -- 	flag = ((int)(b) >> 1 == 1);
+                        -- 	flag = (int)(b) >> 1 == 1;
                         -- 	num2 = (ushort)((int)(num2) + 1);
                         -- 	if ((int)(num2) >> 6 == 1) {
                         -- 		num2 = 0;
@@ -6153,9 +6153,9 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	bool flag2;
-                            -- 	flag2 = (((left.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                            -- 	flag2 = ((left.Segments [num] >> (int)num2) & 1uL) == 1uL;
                             -- 	bool flag3;
-                            -- 	flag3 = (((right.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                            -- 	flag3 = ((right.Segments [num] >> (int)num2) & 1uL) == 1uL;
                             -- 	byte b;
                             -- 	int conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba;
                             -- 	if (flag2) {
@@ -6177,9 +6177,9 @@ begin
                             -- 	}
                             -- 	b = (byte)((conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba) + (conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49) + (conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70));
                             -- 	if (((int)(b) & 1) == 1) {
-                            -- 		array [num] = (ulong)((long)array [num] + (1L << (int)num2));
+                            -- 		array [num] = array [num] + (ulong)(1L << (int)num2);
                             -- 	}
-                            -- 	flag = ((int)(b) >> 1 == 1);
+                            -- 	flag = (int)(b) >> 1 == 1;
                             -- 	num2 = (ushort)((int)(num2) + 1);
                             -- 	if ((int)(num2) >> 6 == 1) {
                             -- 		num2 = 0;
@@ -6192,7 +6192,7 @@ begin
                             -- bool flag2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- flag2 = (((left.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                            -- flag2 = ((left.Segments [num] >> (int)num2) & 1uL) == 1uL;
                             -- 
                             \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_7\;
                         else 
@@ -6229,12 +6229,12 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.6\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.5\) and to_unsigned(1, 64);
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.7\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.6\) = to_unsigned(1, 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag2\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.7\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.flag2\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- bool flag3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- flag3 = (((right.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                        -- flag3 = ((right.Segments [num] >> (int)num2) & 1uL) == 1uL;
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.66
@@ -6247,7 +6247,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.9\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.8\) and to_unsigned(1, 64);
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.10\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.9\) = to_unsigned(1, 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag3\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.10\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.flag3\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.10\;
                         -- The following section was transformed from the .NET statement below:
                         -- byte b;
                         -- 
@@ -6395,7 +6395,7 @@ begin
                         \Quire Quire::op_Addition(Quire,Quire).0.b\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\);
                         -- The following section was transformed from the .NET statement below:
                         -- if (((int)(b) & 1) == 1) {
-                        -- 	array [num] = (ulong)((long)array [num] + (1L << (int)num2));
+                        -- 	array [num] = array [num] + (ulong)(1L << (int)num2);
                         -- }
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\ := signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.b\), 32)) and to_signed(1, 32);
@@ -6451,11 +6451,11 @@ begin
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_21\ => 
                         -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = ((int)(b) >> 1 == 1);
+                        -- flag = (int)(b) >> 1 == 1;
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ := shift_right(signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.b\), 32)), to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ = to_signed(1, 32);
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.flag\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\;
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (ushort)((int)(num2) + 1);
                         -- 
@@ -6465,19 +6465,19 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [num] = (ulong)((long)array [num] + (1L << (int)num2));
+                        -- 	array [num] = array [num] + (ulong)(1L << (int)num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [num] = (ulong)((long)array [num] + (1L << (int)num2));
+                        -- array [num] = array [num] + (ulong)(1L << (int)num2);
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := SmartResize(shift_left(to_signed(1, 64), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num2\, 32)), 6)))), 64);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := SmartResize(unsigned(shift_left(to_signed(1, 64), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num2\, 32)), 6))))), 64);
                         \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_23\;
                         -- Clock cycles needed to complete this state (approximation): 0.61905
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_23\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := SmartResize(unsigned(signed(\Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\))) + (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\)), 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\)) := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := \Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\)) + (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\)) := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\;
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_23\) then 
                             \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_21\;
@@ -7028,7 +7028,7 @@ begin
                         \Quire Quire::op_RightShift(Quire,Int32).0.left\ := \Quire Quire::op_RightShift(Quire,Int32).0.left.parameter.In\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- right = (right & ((1 << (int)(left.SegmentCount) * 6) - 1));
+                        -- right = right & ((1 << (int)(left.SegmentCount) * 6) - 1);
                         -- 
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.left\.\SegmentCount\), 32)) * to_signed(6, 32), 32);
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\, 5))));
@@ -7038,7 +7038,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\) - to_signed(1, 32);
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := \Quire Quire::op_RightShift(Quire,Int32).0.right\ and (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.right\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
                         -- ulong num;
                         -- 
@@ -7075,10 +7075,10 @@ begin
                         -- 		ushort num4;
                         -- 		num4 = (ushort)(8 - (int)(num3));
                         -- 		bool flag2;
-                        -- 		flag2 = ((array [num4] & 1uL) == 1uL);
+                        -- 		flag2 = (array [num4] & 1uL) == 1uL;
                         -- 		array [num4] = array [num4] >> 1;
                         -- 		if (flag) {
-                        -- 			array [num4] = (array [num4] | num);
+                        -- 			array [num4] = array [num4] | num;
                         -- 		}
                         -- 		flag = flag2;
                         -- 		num3 = (ushort)((int)(num3) + 1);
@@ -7104,10 +7104,10 @@ begin
                             -- 		ushort num4;
                             -- 		num4 = (ushort)(8 - (int)(num3));
                             -- 		bool flag2;
-                            -- 		flag2 = ((array [num4] & 1uL) == 1uL);
+                            -- 		flag2 = (array [num4] & 1uL) == 1uL;
                             -- 		array [num4] = array [num4] >> 1;
                             -- 		if (flag) {
-                            -- 			array [num4] = (array [num4] | num);
+                            -- 			array [num4] = array [num4] | num;
                             -- 		}
                             -- 		flag = flag2;
                             -- 		num3 = (ushort)((int)(num3) + 1);
@@ -7134,10 +7134,10 @@ begin
                             -- 	ushort num4;
                             -- 	num4 = (ushort)(8 - (int)(num3));
                             -- 	bool flag2;
-                            -- 	flag2 = ((array [num4] & 1uL) == 1uL);
+                            -- 	flag2 = (array [num4] & 1uL) == 1uL;
                             -- 	array [num4] = array [num4] >> 1;
                             -- 	if (flag) {
-                            -- 		array [num4] = (array [num4] | num);
+                            -- 		array [num4] = array [num4] | num;
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num3 = (ushort)((int)(num3) + 1);
@@ -7180,10 +7180,10 @@ begin
                             -- 	ushort num4;
                             -- 	num4 = (ushort)(8 - (int)(num3));
                             -- 	bool flag2;
-                            -- 	flag2 = ((array [num4] & 1uL) == 1uL);
+                            -- 	flag2 = (array [num4] & 1uL) == 1uL;
                             -- 	array [num4] = array [num4] >> 1;
                             -- 	if (flag) {
-                            -- 		array [num4] = (array [num4] | num);
+                            -- 		array [num4] = array [num4] | num;
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num3 = (ushort)((int)(num3) + 1);
@@ -7201,7 +7201,7 @@ begin
                             -- bool flag2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- flag2 = ((array [num4] & 1uL) == 1uL);
+                            -- flag2 = (array [num4] & 1uL) == 1uL;
                             -- 
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_8\;
                         else 
@@ -7224,7 +7224,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) and to_unsigned(1, 64);
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\) = to_unsigned(1, 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\;
                         -- The following section was transformed from the .NET statement below:
                         -- array [num4] = array [num4] >> 1;
                         -- 
@@ -7236,7 +7236,7 @@ begin
                         \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
-                        -- 	array [num4] = (array [num4] | num);
+                        -- 	array [num4] = array [num4] | num;
                         -- }
                         -- 
 
@@ -7271,14 +7271,14 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [num4] = (array [num4] | num);
+                        -- 	array [num4] = array [num4] | num;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [num4] = (array [num4] | num);
+                        -- array [num4] = array [num4] | num;
                         -- 
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) or \Quire Quire::op_RightShift(Quire,Int32).0.num\;
-                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\;
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
                         if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_11\) then 
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_10\;
@@ -7377,10 +7377,10 @@ begin
                         \Quire Quire::op_LeftShift(Quire,Int32).0.left\ := \Quire Quire::op_LeftShift(Quire,Int32).0.left.parameter.In\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- right = (right & 65535);
+                        -- right = right & 65535;
                         -- 
                         \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right\ and to_signed(65535, 32);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- ulong num;
                         -- 
@@ -7422,10 +7422,10 @@ begin
                         -- 	num4 = 0;
                         -- 	while ((int)(num4) < 8) {
                         -- 		bool flag2;
-                        -- 		flag2 = ((array [num4] & num) == num);
+                        -- 		flag2 = (array [num4] & num) == num;
                         -- 		array [num4] = array [num4] << 1;
                         -- 		if (flag) {
-                        -- 			array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                        -- 			array [num4] = (ulong)(array [num4] | (ulong)(num2));
                         -- 		}
                         -- 		flag = flag2;
                         -- 		num4 = (ushort)((int)(num4) + 1);
@@ -7449,10 +7449,10 @@ begin
                             -- 	num4 = 0;
                             -- 	while ((int)(num4) < 8) {
                             -- 		bool flag2;
-                            -- 		flag2 = ((array [num4] & num) == num);
+                            -- 		flag2 = (array [num4] & num) == num;
                             -- 		array [num4] = array [num4] << 1;
                             -- 		if (flag) {
-                            -- 			array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                            -- 			array [num4] = (ulong)(array [num4] | (ulong)(num2));
                             -- 		}
                             -- 		flag = flag2;
                             -- 		num4 = (ushort)((int)(num4) + 1);
@@ -7477,10 +7477,10 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- while ((int)(num4) < 8) {
                             -- 	bool flag2;
-                            -- 	flag2 = ((array [num4] & num) == num);
+                            -- 	flag2 = (array [num4] & num) == num;
                             -- 	array [num4] = array [num4] << 1;
                             -- 	if (flag) {
-                            -- 		array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                            -- 		array [num4] = (ulong)(array [num4] | (ulong)(num2));
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num4 = (ushort)((int)(num4) + 1);
@@ -7521,10 +7521,10 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	bool flag2;
-                            -- 	flag2 = ((array [num4] & num) == num);
+                            -- 	flag2 = (array [num4] & num) == num;
                             -- 	array [num4] = array [num4] << 1;
                             -- 	if (flag) {
-                            -- 		array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                            -- 		array [num4] = (ulong)(array [num4] | (ulong)(num2));
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num4 = (ushort)((int)(num4) + 1);
@@ -7534,7 +7534,7 @@ begin
                             -- bool flag2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- flag2 = ((array [num4] & num) == num);
+                            -- flag2 = (array [num4] & num) == num;
                             -- 
                             \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\ := \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) and \Quire Quire::op_LeftShift(Quire,Int32).0.num\;
                             \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_7\;
@@ -7557,7 +7557,7 @@ begin
                     when \Quire Quire::op_LeftShift(Quire,Int32).0._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\) = \Quire Quire::op_LeftShift(Quire,Int32).0.num\;
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\ := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- array [num4] = array [num4] << 1;
                         -- 
@@ -7565,7 +7565,7 @@ begin
                         \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
-                        -- 	array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                        -- 	array [num4] = (ulong)(array [num4] | (ulong)(num2));
                         -- }
                         -- 
 
@@ -7600,14 +7600,14 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                        -- 	array [num4] = (ulong)(array [num4] | (ulong)(num2));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                        -- array [num4] = (ulong)(array [num4] | (ulong)(num2));
                         -- 
                         \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\ := \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) or SmartResize((\Quire Quire::op_LeftShift(Quire,Int32).0.num2\), 64);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) := ((\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\));
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\);
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_7\.
                         if (\Quire Quire::op_LeftShift(Quire,Int32).0._State\ = \Quire Quire::op_LeftShift(Quire,Int32).0._State_9\) then 
                             \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_8\;
@@ -11095,7 +11095,7 @@ begin
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b\: signed(31 downto 0) := to_signed(0, 32);
@@ -11218,7 +11218,7 @@ begin
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\ := to_signed(0, 64);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b\ := to_signed(0, 32);
@@ -11418,7 +11418,7 @@ begin
                         -- uint num_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b = ((uint)((long)((bits_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b >> 31)) & 1L));
+                        -- num_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b = (bits_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b >> 31) & 1u;
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0.7953
@@ -11563,9 +11563,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\ := signed(SmartResize(shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111"))), 64));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\ := SmartResize(unsigned(signed(SmartResize(((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\)), 64)) and to_signed(1, 64)), 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b\ := ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\) and to_unsigned(1, 32);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\;
                         -- The following section was transformed from the .NET statement below:
                         -- bits_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b = bits_1a2fe290ae47b1ef7ded540ce3403c2e5603c310223a0b07c1ac70a272d6301b << 1;
                         -- 
@@ -11587,7 +11587,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6936
+                        -- Clock cycles needed to complete this state (approximation): 0.6003
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\ => 
                         -- Repeated state of the while loop which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\.
                         -- The while loop's condition:
@@ -12306,7 +12306,7 @@ begin
                         -- uint return_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc = (uint)((int)bits_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc & ~(1 << (int)index_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc));
+                        -- return_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc = bits_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc & (uint)(~(1 << (int)index_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc));
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetZero(System.UInt32,System.UInt16).
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.45\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.index_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc\, 32)), 5))));
@@ -12324,8 +12324,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.46\ := unsigned(signed(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc\) and \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.4\);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.46\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc\ and unsigned((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.4\));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.46\;
                         -- The following section was transformed from the .NET statement below:
                         -- fractionBits = return_1f023f1605903ad9d771877041978dfe685eea174a0d8f4cd7264316130e8abc;
                         -- 
@@ -13092,7 +13092,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: \Lombiq.Arithmetics.Posit32\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.bits_c8598ebe73f9f5bfb88d0df855ee308f9c4caf4ef5760e9d645383f544733d31_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_c8598ebe73f9f5bfb88d0df855ee308f9c4caf4ef5760e9d645383f544733d31_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -13106,7 +13106,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.num2_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: signed(31 downto 0) := to_signed(0, 32);
@@ -13120,13 +13120,13 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.19\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.num2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.conditionalec88d618fdb8d955a353066f43af5ab5cc70c1913e02ecac14c3590c5ee9802e_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.this_21b5a692eb0046a4533a6168005ecc761e6f077932e1ccbe536f04342ca83a96_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: \Lombiq.Arithmetics.Posit32\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_21b5a692eb0046a4533a6168005ecc761e6f077932e1ccbe536f04342ca83a96_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.bits_0f83a95a96264a09c6a0ba9cb9c99ad3bd58dcf2757ca4c9081ded388086ca02_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_0f83a95a96264a09c6a0ba9cb9c99ad3bd58dcf2757ca4c9081ded388086ca02_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -13143,16 +13143,16 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.left\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.quire\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.this_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\: \Lombiq.Arithmetics.Posit32\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.bits_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\: \Lombiq.Arithmetics.Posit32\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.bits_c8598ebe73f9f5bfb88d0df855ee308f9c4caf4ef5760e9d645383f544733d31_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_c8598ebe73f9f5bfb88d0df855ee308f9c4caf4ef5760e9d645383f544733d31_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -13166,7 +13166,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.33\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.34\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.37\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.num2_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\: signed(31 downto 0) := to_signed(0, 32);
@@ -13180,7 +13180,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.45\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.46\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.47\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.48\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.this_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\: \Lombiq.Arithmetics.Posit32\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\: signed(15 downto 0) := to_signed(0, 16);
@@ -13191,7 +13191,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.conditional054ffdc2634715c514e630840f155e53d1c8ffe0be53ec06d4c21ba08ad2b716_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.this_7c713771ddbe04c4c2ff20ebfa1dae4044757c440fe5b46ea759182bcfb4b09b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\: \Lombiq.Arithmetics.Posit32\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_7c713771ddbe04c4c2ff20ebfa1dae4044757c440fe5b46ea759182bcfb4b09b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.50\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.bits_6618db8f62e3464b32c8cc3e2209d7d35e6f677ff842c32f9130d90de0560ee2_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_6618db8f62e3464b32c8cc3e2209d7d35e6f677ff842c32f9130d90de0560ee2_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -13205,7 +13205,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.52\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.53\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.num_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.56\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.num2_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\: signed(31 downto 0) := to_signed(0, 32);
@@ -13229,7 +13229,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.conditional880d0f3a8d33b2428fb4e8a62e4174f93b0cc01cc9b8d6d16563b7d2d4e90992_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2\: \Lombiq.Arithmetics.Posit32\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.bits_c6f8839606b9f7c5e666e7f8d7c6eeb396a41e4838bd7ee0d04170e34ce7b814\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_c6f8839606b9f7c5e666e7f8d7c6eeb396a41e4838bd7ee0d04170e34ce7b814\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -13242,7 +13242,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.conditional85ca8d8893aa24483d9e74ed87417b722b6d33d6069def85ee5195c77759eab3_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\: \Lombiq.Arithmetics.Posit32\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.72\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.bits_3465d1fb5b2deaf339333582b5a596bf893ed003380b440bf76067c5451863a3_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_3465d1fb5b2deaf339333582b5a596bf893ed003380b440bf76067c5451863a3_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -13256,7 +13256,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.74\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.75\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.78\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.num2_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\: signed(31 downto 0) := to_signed(0, 32);
@@ -13283,7 +13283,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\: \Lombiq.Arithmetics.Posit32\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.96\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.bits_c8598ebe73f9f5bfb88d0df855ee308f9c4caf4ef5760e9d645383f544733d31_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_c8598ebe73f9f5bfb88d0df855ee308f9c4caf4ef5760e9d645383f544733d31_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -13297,7 +13297,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.98\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.99\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.101\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.102\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.num2_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\: signed(31 downto 0) := to_signed(0, 32);
@@ -13311,7 +13311,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.110\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.111\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.112\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.113\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.114\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.115\: signed(31 downto 0) := to_signed(0, 32);
@@ -13326,7 +13326,7 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.1\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.this_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0\: \Lombiq.Arithmetics.Posit32\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.123\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.123\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.124\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.2\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.3\: \Lombiq.Arithmetics.Quire\;
@@ -13356,7 +13356,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.bits_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := to_signed(0, 64);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.bits_c8598ebe73f9f5bfb88d0df855ee308f9c4caf4ef5760e9d645383f544733d31_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_c8598ebe73f9f5bfb88d0df855ee308f9c4caf4ef5760e9d645383f544733d31_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
@@ -13370,7 +13370,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.4\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.8\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.num2_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_signed(0, 32);
@@ -13384,12 +13384,12 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.16\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.17\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.18\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.19\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.num2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.conditionalec88d618fdb8d955a353066f43af5ab5cc70c1913e02ecac14c3590c5ee9802e_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_21b5a692eb0046a4533a6168005ecc761e6f077932e1ccbe536f04342ca83a96_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\ := to_signed(0, 64);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.bits_0f83a95a96264a09c6a0ba9cb9c99ad3bd58dcf2757ca4c9081ded388086ca02_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_0f83a95a96264a09c6a0ba9cb9c99ad3bd58dcf2757ca4c9081ded388086ca02_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
@@ -13405,13 +13405,13 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 16);
                 \Quire Posit32::op_Explicit(Posit32).0.return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.bits_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\ := to_signed(0, 64);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.bits_c8598ebe73f9f5bfb88d0df855ee308f9c4caf4ef5760e9d645383f544733d31_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_c8598ebe73f9f5bfb88d0df855ee308f9c4caf4ef5760e9d645383f544733d31_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := to_unsigned(0, 32);
@@ -13425,7 +13425,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.33\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.34\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.37\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.num2_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := to_signed(0, 32);
@@ -13439,7 +13439,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.45\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.46\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.47\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.48\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.return_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := to_signed(0, 16);
                 \Quire Posit32::op_Explicit(Posit32).0.regimeKValue_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := to_signed(0, 8);
@@ -13447,7 +13447,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.num_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.conditional054ffdc2634715c514e630840f155e53d1c8ffe0be53ec06d4c21ba08ad2b716_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_7c713771ddbe04c4c2ff20ebfa1dae4044757c440fe5b46ea759182bcfb4b09b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\ := to_signed(0, 64);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.50\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.bits_6618db8f62e3464b32c8cc3e2209d7d35e6f677ff842c32f9130d90de0560ee2_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_6618db8f62e3464b32c8cc3e2209d7d35e6f677ff842c32f9130d90de0560ee2_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := to_unsigned(0, 32);
@@ -13461,7 +13461,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.52\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.53\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.num_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.56\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.num2_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := to_signed(0, 32);
@@ -13483,7 +13483,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.num_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.conditional880d0f3a8d33b2428fb4e8a62e4174f93b0cc01cc9b8d6d16563b7d2d4e90992_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\ := to_signed(0, 64);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.bits_c6f8839606b9f7c5e666e7f8d7c6eeb396a41e4838bd7ee0d04170e34ce7b814\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_c6f8839606b9f7c5e666e7f8d7c6eeb396a41e4838bd7ee0d04170e34ce7b814\ := to_unsigned(0, 32);
@@ -13494,7 +13494,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.bits_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.conditional85ca8d8893aa24483d9e74ed87417b722b6d33d6069def85ee5195c77759eab3_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\ := to_signed(0, 64);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.72\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.bits_3465d1fb5b2deaf339333582b5a596bf893ed003380b440bf76067c5451863a3_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_3465d1fb5b2deaf339333582b5a596bf893ed003380b440bf76067c5451863a3_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\ := to_unsigned(0, 32);
@@ -13508,7 +13508,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.74\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.75\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.78\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.num2_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\ := to_signed(0, 32);
@@ -13533,7 +13533,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.bits_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\ := to_signed(0, 64);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.96\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.bits_c8598ebe73f9f5bfb88d0df855ee308f9c4caf4ef5760e9d645383f544733d31_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_c8598ebe73f9f5bfb88d0df855ee308f9c4caf4ef5760e9d645383f544733d31_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := to_unsigned(0, 32);
@@ -13547,7 +13547,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.98\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.99\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.101\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.102\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.num2_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := to_signed(0, 32);
@@ -13561,7 +13561,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.110\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.111\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.112\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.113\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.114\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.115\ := to_signed(0, 32);
@@ -13574,7 +13574,7 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.121\ := to_signed(0, 64);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.122\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.123\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.123\ := to_signed(0, 64);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.124\ := false;
             else 
                 case \Quire Posit32::op_Explicit(Posit32).0._State\ is 
@@ -13672,11 +13672,12 @@ begin
                         -- bool return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = ((int)this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4.PositBits & -2147483648) == 0;
+                        -- return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = (long)((this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4.PositBits & 0x80000000u)) == 0L;
                         -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\ := signed(\Quire Posit32::op_Explicit(Posit32).0.this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\.\PositBits\) and to_signed(-2147483648, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.96\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\) = to_signed(0, 32);
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.96\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\)), 64)) = to_signed(0, 64);
                         \Quire Posit32::op_Explicit(Posit32).0.return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.96\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4) {
@@ -13703,7 +13704,7 @@ begin
                         else 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_75\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4632
+                        -- Clock cycles needed to complete this state (approximation): 0.5667
                     when \Quire Posit32::op_Explicit(Posit32).0._State_4\ => 
                         -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -13756,11 +13757,12 @@ begin
                         -- bool return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = ((int)this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d.PositBits & -2147483648) == 0;
+                        -- return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (long)((this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d.PositBits & 0x80000000u)) == 0L;
                         -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := signed(\Quire Posit32::op_Explicit(Posit32).0.this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\.\PositBits\) and to_signed(-2147483648, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\) = to_signed(0, 32);
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\)), 64)) = to_signed(0, 64);
                         \Quire Posit32::op_Explicit(Posit32).0.return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d) {
@@ -13787,7 +13789,7 @@ begin
                         else 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_10\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4632
+                        -- Clock cycles needed to complete this state (approximation): 0.5667
                     when \Quire Posit32::op_Explicit(Posit32).0._State_5\ => 
                         -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -13889,7 +13891,7 @@ begin
                         -- uint num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = ((uint)((long)((bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d >> 31)) & 1L));
+                        -- num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d >> 31) & 1u;
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0.7953
@@ -13955,9 +13957,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.6201
                     when \Quire Posit32::op_Explicit(Posit32).0._State_11\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\ := signed(SmartResize(shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111"))), 64));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\)), 64)) and to_signed(1, 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\) and to_unsigned(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d << 1;
                         -- 
@@ -13979,7 +13981,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_12\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6936
+                        -- Clock cycles needed to complete this state (approximation): 0.6003
                     when \Quire Posit32::op_Explicit(Posit32).0._State_12\ => 
                         -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_11\.
                         -- The while loop's condition:
@@ -14045,13 +14047,13 @@ begin
                         \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.18\ := to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.17\);
                         \Quire Posit32::op_Explicit(Posit32).0.num_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.18\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- uint conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((num_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d > 0)) {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = num_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = ((uint)num_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
                         -- } else {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = 0;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = 0u;
                         -- }
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.19\ := \Quire Posit32::op_Explicit(Posit32).0.num_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ > to_signed(0, 32);
@@ -14070,10 +14072,10 @@ begin
                     when \Quire Posit32::op_Explicit(Posit32).0._State_17\ => 
                         -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_16\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (uint)(conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
+                        -- return_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := unsigned((\Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\));
+                        \Quire Posit32::op_Explicit(Posit32).0.return_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\;
                         -- The following section was transformed from the .NET statement below:
                         -- num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = return_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
@@ -14096,11 +14098,12 @@ begin
                         -- bool return_21b5a692eb0046a4533a6168005ecc761e6f077932e1ccbe536f04342ca83a96_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_21b5a692eb0046a4533a6168005ecc761e6f077932e1ccbe536f04342ca83a96_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = ((int)this_21b5a692eb0046a4533a6168005ecc761e6f077932e1ccbe536f04342ca83a96_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d.PositBits & -2147483648) == 0;
+                        -- return_21b5a692eb0046a4533a6168005ecc761e6f077932e1ccbe536f04342ca83a96_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (long)((this_21b5a692eb0046a4533a6168005ecc761e6f077932e1ccbe536f04342ca83a96_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d.PositBits & 0x80000000u)) == 0L;
                         -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\ := signed(\Quire Posit32::op_Explicit(Posit32).0.this_21b5a692eb0046a4533a6168005ecc761e6f077932e1ccbe536f04342ca83a96_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\.\PositBits\) and to_signed(-2147483648, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\) = to_signed(0, 32);
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_21b5a692eb0046a4533a6168005ecc761e6f077932e1ccbe536f04342ca83a96_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\)), 64)) = to_signed(0, 64);
                         \Quire Posit32::op_Explicit(Posit32).0.return_21b5a692eb0046a4533a6168005ecc761e6f077932e1ccbe536f04342ca83a96_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (return_21b5a692eb0046a4533a6168005ecc761e6f077932e1ccbe536f04342ca83a96_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d) {
@@ -14127,18 +14130,18 @@ begin
                         else 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_22\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4632
+                        -- Clock cycles needed to complete this state (approximation): 0.5667
                     when \Quire Posit32::op_Explicit(Posit32).0._State_18\ => 
                         -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_16\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = num_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = ((uint)num_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = num_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = ((uint)num_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.num_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := (unsigned(\Quire Posit32::op_Explicit(Posit32).0.num_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\));
                         -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_16\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_18\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_17\;
@@ -14148,13 +14151,13 @@ begin
                         -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_16\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = 0;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = 0u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = 0;
+                        -- conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = 0u;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_signed(0, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_c19fcd84e7300e48def129d35eb60d7e89695194c445b7224655f2d93aee9a18_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_16\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_19\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_17\;
@@ -14261,7 +14264,7 @@ begin
                         -- 	ushort index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 	index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (ushort)num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 	uint return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (uint)((int)bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d | (1 << (int)index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d));
+                        -- 	return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d | (uint)(1 << (int)index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
                         -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- }
@@ -14295,20 +14298,20 @@ begin
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0.array\(to_integer(to_signed(0, 32))) := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.return_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\, 64);
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire left;
+                        -- Quire quire;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- left = new Quire (array, 0);
+                        -- quire = new Quire (array, 0);
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Posit32::op_Explicit(Posit32).0.left\.\IsNull\ := false;
-                        \Quire Posit32::op_Explicit(Posit32).0.left\.\Size\ := to_unsigned(0, 16);
-                        \Quire Posit32::op_Explicit(Posit32).0.left\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Posit32::op_Explicit(Posit32).0.left\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.quire\.\IsNull\ := false;
+                        \Quire Posit32::op_Explicit(Posit32).0.quire\.\Size\ := to_unsigned(0, 16);
+                        \Quire Posit32::op_Explicit(Posit32).0.quire\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Posit32::op_Explicit(Posit32).0.quire\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.left\;
+                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
                         \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.array\;
                         \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
@@ -14343,7 +14346,7 @@ begin
                         -- 	ushort index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 	index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (ushort)num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 	uint return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (uint)((int)bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d | (1 << (int)index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d));
+                        -- 	return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d | (uint)(1 << (int)index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
                         -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- }
@@ -14377,12 +14380,12 @@ begin
                         -- uint return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (uint)((int)bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d | (1 << (int)index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d));
+                        -- return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d | (uint)(1 << (int)index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\, 32)), 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\ := unsigned(signed(\Quire Posit32::op_Explicit(Posit32).0.bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\) or (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\));
-                        \Quire Posit32::op_Explicit(Posit32).0.return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\ := unsigned(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\, 32)), 5)))));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\ := \Quire Posit32::op_Explicit(Posit32).0.bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ or (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\;
                         -- The following section was transformed from the .NET statement below:
                         -- conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
@@ -14396,7 +14399,7 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Posit32::op_Explicit(Posit32).0.left\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Posit32::op_Explicit(Posit32).0.array\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- Lombiq.Arithmetics.Posit32 this_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02;
@@ -14426,11 +14429,12 @@ begin
                             -- bool return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = ((int)this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02.PositBits & -2147483648) == 0;
+                            -- return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = (long)((this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02.PositBits & 0x80000000u)) == 0L;
                             -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\ := signed(\Quire Posit32::op_Explicit(Posit32).0.this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\.\PositBits\) and to_signed(-2147483648, 32);
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\) = to_signed(0, 32);
+                            -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\.\PositBits\ and "10000000000000000000000000000000", 64));
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\)), 64)) = to_signed(0, 64);
                             \Quire Posit32::op_Explicit(Posit32).0.return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02) {
@@ -14458,7 +14462,7 @@ begin
                                 \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_32\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4632
+                        -- Clock cycles needed to complete this state (approximation): 0.5667
                     when \Quire Posit32::op_Explicit(Posit32).0._State_30\ => 
                         -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_29\.
                         -- The following section was transformed from the .NET statement below:
@@ -14503,7 +14507,7 @@ begin
                         -- uint num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = ((uint)((long)((bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 >> 31)) & 1L));
+                        -- num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = (bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 >> 31) & 1u;
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_33\;
                         -- Clock cycles needed to complete this state (approximation): 0.7953
@@ -14569,9 +14573,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.6201
                     when \Quire Posit32::op_Explicit(Posit32).0._State_33\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\ := signed(SmartResize(shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111"))), 64));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\ := SmartResize(unsigned(signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\)), 64)) and to_signed(1, 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\) and to_unsigned(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\;
                         -- The following section was transformed from the .NET statement below:
                         -- bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 << 1;
                         -- 
@@ -14593,7 +14597,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_34\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6936
+                        -- Clock cycles needed to complete this state (approximation): 0.6003
                     when \Quire Posit32::op_Explicit(Posit32).0._State_34\ => 
                         -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_33\.
                         -- The while loop's condition:
@@ -14659,13 +14663,13 @@ begin
                         \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.47\ := to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.46\);
                         \Quire Posit32::op_Explicit(Posit32).0.num_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.47\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02;
+                        -- uint conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((num_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 > 0)) {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = num_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = ((uint)num_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02);
                         -- } else {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = 0;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = 0u;
                         -- }
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.48\ := \Quire Posit32::op_Explicit(Posit32).0.num_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ > to_signed(0, 32);
@@ -14684,11 +14688,11 @@ begin
                     when \Quire Posit32::op_Explicit(Posit32).0._State_39\ => 
                         -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_38\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = (uint)(conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02);
+                        -- return_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02;
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
                         -- // Starting inlined block of the method System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := unsigned((\Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\));
+                        \Quire Posit32::op_Explicit(Posit32).0.return_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\;
                         -- The following section was transformed from the .NET statement below:
                         -- Lombiq.Arithmetics.Posit32 this_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28;
                         -- 
@@ -14731,11 +14735,12 @@ begin
                         -- bool return_7c713771ddbe04c4c2ff20ebfa1dae4044757c440fe5b46ea759182bcfb4b09b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_7c713771ddbe04c4c2ff20ebfa1dae4044757c440fe5b46ea759182bcfb4b09b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 = ((int)this_7c713771ddbe04c4c2ff20ebfa1dae4044757c440fe5b46ea759182bcfb4b09b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28.PositBits & -2147483648) == 0;
+                        -- return_7c713771ddbe04c4c2ff20ebfa1dae4044757c440fe5b46ea759182bcfb4b09b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 = (long)((this_7c713771ddbe04c4c2ff20ebfa1dae4044757c440fe5b46ea759182bcfb4b09b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28.PositBits & 0x80000000u)) == 0L;
                         -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\ := signed(\Quire Posit32::op_Explicit(Posit32).0.this_7c713771ddbe04c4c2ff20ebfa1dae4044757c440fe5b46ea759182bcfb4b09b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\.\PositBits\) and to_signed(-2147483648, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.50\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\) = to_signed(0, 32);
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_7c713771ddbe04c4c2ff20ebfa1dae4044757c440fe5b46ea759182bcfb4b09b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.50\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\)), 64)) = to_signed(0, 64);
                         \Quire Posit32::op_Explicit(Posit32).0.return_7c713771ddbe04c4c2ff20ebfa1dae4044757c440fe5b46ea759182bcfb4b09b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.50\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (return_7c713771ddbe04c4c2ff20ebfa1dae4044757c440fe5b46ea759182bcfb4b09b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28) {
@@ -14762,18 +14767,18 @@ begin
                         else 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_44\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4632
+                        -- Clock cycles needed to complete this state (approximation): 0.5667
                     when \Quire Posit32::op_Explicit(Posit32).0._State_40\ => 
                         -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_38\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = num_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = ((uint)num_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = num_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02;
+                        -- conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = ((uint)num_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02);
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := \Quire Posit32::op_Explicit(Posit32).0.num_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := (unsigned(\Quire Posit32::op_Explicit(Posit32).0.num_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\));
                         -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_38\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_40\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_39\;
@@ -14783,13 +14788,13 @@ begin
                         -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_38\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = 0;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = 0u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = 0;
+                        -- conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02 = 0u;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := to_signed(0, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_38\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_41\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_39\;
@@ -14839,7 +14844,7 @@ begin
                         -- uint num_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 = ((uint)((long)((bits_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 >> 31)) & 1L));
+                        -- num_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 = (bits_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 >> 31) & 1u;
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_45\;
                         -- Clock cycles needed to complete this state (approximation): 0.7953
@@ -14905,9 +14910,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.6201
                     when \Quire Posit32::op_Explicit(Posit32).0._State_45\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\ := signed(SmartResize(shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111"))), 64));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\ := SmartResize(unsigned(signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\)), 64)) and to_signed(1, 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\) and to_unsigned(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\;
                         -- The following section was transformed from the .NET statement below:
                         -- bits_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 = bits_99370110dae22db8631ca471eb437acc86c558e498739532bd9c0197bd7b376b_832c1453bf6766412ab7d49a3bfbb4a30fb5f9d2e99fd33b1e1f82b95af141f7_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 << 1;
                         -- 
@@ -14929,7 +14934,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_46\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6936
+                        -- Clock cycles needed to complete this state (approximation): 0.6003
                     when \Quire Posit32::op_Explicit(Posit32).0._State_46\ => 
                         -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_45\.
                         -- The while loop's condition:
@@ -15038,7 +15043,7 @@ begin
                         -- 	Lombiq.Arithmetics.Posit32 this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2;
                         -- 	this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2 = this_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28;
                         -- 	bool return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2;
-                        -- 	return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2 = ((int)this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2.PositBits & -2147483648) == 0;
+                        -- 	return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2 = (long)((this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2.PositBits & 0x80000000u)) == 0L;
                         -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 	if (return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2) {
                         -- 		conditional880d0f3a8d33b2428fb4e8a62e4174f93b0cc01cc9b8d6d16563b7d2d4e90992_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 = this_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28.PositBits;
@@ -15064,7 +15069,7 @@ begin
                         -- 	Lombiq.Arithmetics.Posit32 this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a;
                         -- 	this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = this_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a;
                         -- 	bool return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a;
-                        -- 	return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = ((int)this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a.PositBits & -2147483648) == 0;
+                        -- 	return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = (long)((this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a.PositBits & 0x80000000u)) == 0L;
                         -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 	if (return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a) {
                         -- 		conditional85ca8d8893aa24483d9e74ed87417b722b6d33d6069def85ee5195c77759eab3_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = this_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a.PositBits;
@@ -15090,7 +15095,7 @@ begin
                         -- 	b_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = 1;
                         -- 	bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a << 32 - (int)(startingPosition_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a);
                         -- 	uint num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a;
-                        -- 	num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = ((uint)((long)((bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a >> 31)) & 1L));
+                        -- 	num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = (bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a >> 31) & 1u;
                         -- 	bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a << 1;
                         -- 	int num2_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a;
                         -- 	num2_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = 0;
@@ -15126,7 +15131,7 @@ begin
                         -- 	Lombiq.Arithmetics.Posit32 this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 	this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = this_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 	bool return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
-                        -- 	return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = ((int)this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4.PositBits & -2147483648) == 0;
+                        -- 	return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = (long)((this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4.PositBits & 0x80000000u)) == 0L;
                         -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 	if (return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4) {
                         -- 		conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = this_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4.PositBits;
@@ -15152,7 +15157,7 @@ begin
                         -- 	b_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 1;
                         -- 	bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 << 32 - (int)(startingPosition_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4);
                         -- 	uint num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
-                        -- 	num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = ((uint)((long)((bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 >> 31)) & 1L));
+                        -- 	num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = (bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 >> 31) & 1u;
                         -- 	bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 << 1;
                         -- 	int num2_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 	num2_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 0;
@@ -15164,13 +15169,13 @@ begin
                         -- 	return_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = b_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
                         -- 	num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 32 - ((int)(return_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4) + 2 + 2);
-                        -- 	int conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
+                        -- 	uint conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 	if ((num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 > 0)) {
-                        -- 		conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
+                        -- 		conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = ((uint)num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4);
                         -- 	} else {
-                        -- 		conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 0;
+                        -- 		conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 0u;
                         -- 	}
-                        -- 	return_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = (uint)(conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4);
+                        -- 	return_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
                         -- 	num_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 = num_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 >> (int)return_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 << 32 - (int)(b_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28) >> 30;
                         -- 	uint conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28;
@@ -15241,13 +15246,13 @@ begin
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0.return_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\ := SmartResize((\Quire Posit32::op_Explicit(Posit32).0.conditional1aa95b35288eb627929161a1ee637479589960934567100c958634e64afb13de_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- left = Quire.op_LeftShift (left, (int)(240L - (long)(return_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02) + (long)(return_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28)));
+                        -- quire = Quire.op_LeftShift (quire, (int)(240L - (long)(return_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02) + (long)(return_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28)));
                         -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.121\ := to_signed(240, 64) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\), 64));
                         \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.122\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.121\ + SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28\), 64), 32);
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_LeftShift(Lombiq.Arithmetics.Quire,System.Int32)
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.left\;
+                        \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
                         \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).right.parameter.Out.0\ <= (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.122\);
                         \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= true;
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_91\;
@@ -15267,7 +15272,7 @@ begin
                         -- 	Lombiq.Arithmetics.Posit32 this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2;
                         -- 	this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2 = this_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28;
                         -- 	bool return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2;
-                        -- 	return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2 = ((int)this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2.PositBits & -2147483648) == 0;
+                        -- 	return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2 = (long)((this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2.PositBits & 0x80000000u)) == 0L;
                         -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 	if (return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2) {
                         -- 		conditional880d0f3a8d33b2428fb4e8a62e4174f93b0cc01cc9b8d6d16563b7d2d4e90992_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 = this_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28.PositBits;
@@ -15293,7 +15298,7 @@ begin
                         -- 	Lombiq.Arithmetics.Posit32 this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a;
                         -- 	this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = this_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a;
                         -- 	bool return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a;
-                        -- 	return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = ((int)this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a.PositBits & -2147483648) == 0;
+                        -- 	return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = (long)((this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a.PositBits & 0x80000000u)) == 0L;
                         -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 	if (return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a) {
                         -- 		conditional85ca8d8893aa24483d9e74ed87417b722b6d33d6069def85ee5195c77759eab3_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = this_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a.PositBits;
@@ -15319,7 +15324,7 @@ begin
                         -- 	b_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = 1;
                         -- 	bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a << 32 - (int)(startingPosition_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a);
                         -- 	uint num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a;
-                        -- 	num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = ((uint)((long)((bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a >> 31)) & 1L));
+                        -- 	num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = (bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a >> 31) & 1u;
                         -- 	bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a << 1;
                         -- 	int num2_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a;
                         -- 	num2_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = 0;
@@ -15355,7 +15360,7 @@ begin
                         -- 	Lombiq.Arithmetics.Posit32 this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 	this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = this_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 	bool return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
-                        -- 	return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = ((int)this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4.PositBits & -2147483648) == 0;
+                        -- 	return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = (long)((this_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4.PositBits & 0x80000000u)) == 0L;
                         -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 	if (return_092f045227f64eda72b3fc95be3c3637705914add72214a343e55185cfa65c10_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4) {
                         -- 		conditional963d17004b6788ad55358cce58986fa179ec1b5dc039dfede93d706448099e92_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = this_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4.PositBits;
@@ -15381,7 +15386,7 @@ begin
                         -- 	b_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 1;
                         -- 	bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 << 32 - (int)(startingPosition_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4);
                         -- 	uint num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
-                        -- 	num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = ((uint)((long)((bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 >> 31)) & 1L));
+                        -- 	num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = (bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 >> 31) & 1u;
                         -- 	bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 << 1;
                         -- 	int num2_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 	num2_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 0;
@@ -15393,13 +15398,13 @@ begin
                         -- 	return_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = b_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
                         -- 	num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 32 - ((int)(return_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4) + 2 + 2);
-                        -- 	int conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
+                        -- 	uint conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 	if ((num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 > 0)) {
-                        -- 		conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
+                        -- 		conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = ((uint)num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4);
                         -- 	} else {
-                        -- 		conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 0;
+                        -- 		conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 0u;
                         -- 	}
-                        -- 	return_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = (uint)(conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4);
+                        -- 	return_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
                         -- 	num_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 = num_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 >> (int)return_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 << 32 - (int)(b_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28) >> 30;
                         -- 	uint conditionala233560fe7dfff22c231bec46671f442fee11494dc774056e64d669ec36cdb00_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28;
@@ -15445,11 +15450,12 @@ begin
                         -- bool return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2 = ((int)this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2.PositBits & -2147483648) == 0;
+                        -- return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2 = (long)((this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2.PositBits & 0x80000000u)) == 0L;
                         -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\ := signed(\Quire Posit32::op_Explicit(Posit32).0.this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2\.\PositBits\) and to_signed(-2147483648, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\) = to_signed(0, 32);
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\)), 64)) = to_signed(0, 64);
                         \Quire Posit32::op_Explicit(Posit32).0.return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (return_4d92f321cba6244b5bb71509cbad78bd467f0d9f83f5164197b9be70bc739dc2) {
@@ -15476,7 +15482,7 @@ begin
                         else 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_57\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4632
+                        -- Clock cycles needed to complete this state (approximation): 0.5667
                     when \Quire Posit32::op_Explicit(Posit32).0._State_55\ => 
                         -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_54\.
                         -- The following section was transformed from the .NET statement below:
@@ -15515,11 +15521,12 @@ begin
                         -- bool return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = ((int)this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a.PositBits & -2147483648) == 0;
+                        -- return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = (long)((this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a.PositBits & 0x80000000u)) == 0L;
                         -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\ := signed(\Quire Posit32::op_Explicit(Posit32).0.this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\.\PositBits\) and to_signed(-2147483648, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.72\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\) = to_signed(0, 32);
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.72\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\)), 64)) = to_signed(0, 64);
                         \Quire Posit32::op_Explicit(Posit32).0.return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.72\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (return_8ccfdac761d94cefabb354727c4eec638b4b892c15d704db2d4988c8e2e41cd8_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a) {
@@ -15546,7 +15553,7 @@ begin
                         else 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_60\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4632
+                        -- Clock cycles needed to complete this state (approximation): 0.5667
                     when \Quire Posit32::op_Explicit(Posit32).0._State_56\ => 
                         -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_54\.
                         -- The following section was transformed from the .NET statement below:
@@ -15651,7 +15658,7 @@ begin
                         -- uint num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = ((uint)((long)((bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a >> 31)) & 1L));
+                        -- num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = (bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a >> 31) & 1u;
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_61\;
                         -- Clock cycles needed to complete this state (approximation): 0.7953
@@ -15717,9 +15724,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.6201
                     when \Quire Posit32::op_Explicit(Posit32).0._State_61\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\ := signed(SmartResize(shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111"))), 64));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\ := SmartResize(unsigned(signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\)), 64)) and to_signed(1, 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\ := ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\) and to_unsigned(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\;
                         -- The following section was transformed from the .NET statement below:
                         -- bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a = bits_f9d1c0948957a79ca7758767cdb551a2fd521596e0a020604db70bc0313c407b_fa5c7efa4c67d060a70b49e02aabb5ee02fd5c8b1d6e04e5196ceda62f23fe5a << 1;
                         -- 
@@ -15741,7 +15748,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_62\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6936
+                        -- Clock cycles needed to complete this state (approximation): 0.6003
                     when \Quire Posit32::op_Explicit(Posit32).0._State_62\ => 
                         -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_61\.
                         -- The while loop's condition:
@@ -15977,7 +15984,7 @@ begin
                         -- uint num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = ((uint)((long)((bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 >> 31)) & 1L));
+                        -- num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = (bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 >> 31) & 1u;
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_76\;
                         -- Clock cycles needed to complete this state (approximation): 0.7953
@@ -16043,9 +16050,9 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.6201
                     when \Quire Posit32::op_Explicit(Posit32).0._State_76\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\ := signed(SmartResize(shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111"))), 64));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.101\ := SmartResize(unsigned(signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\)), 64)) and to_signed(1, 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.101\));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.101\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\) and to_unsigned(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.101\;
                         -- The following section was transformed from the .NET statement below:
                         -- bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = bits_aa1887a732f44ab7933da762327f79580f968b608eddfcba10dec20b0026fde4_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 << 1;
                         -- 
@@ -16067,7 +16074,7 @@ begin
                         -- 
                         -- Starting a while loop.
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_77\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6936
+                        -- Clock cycles needed to complete this state (approximation): 0.6003
                     when \Quire Posit32::op_Explicit(Posit32).0._State_77\ => 
                         -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_76\.
                         -- The while loop's condition:
@@ -16133,13 +16140,13 @@ begin
                         \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.112\ := to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.111\);
                         \Quire Posit32::op_Explicit(Posit32).0.num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.112\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
+                        -- uint conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 > 0)) {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = ((uint)num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4);
                         -- } else {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 0;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 0u;
                         -- }
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.113\ := \Quire Posit32::op_Explicit(Posit32).0.num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ > to_signed(0, 32);
@@ -16158,10 +16165,10 @@ begin
                     when \Quire Posit32::op_Explicit(Posit32).0._State_82\ => 
                         -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_81\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = (uint)(conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4);
+                        -- return_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := unsigned((\Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\));
+                        \Quire Posit32::op_Explicit(Posit32).0.return_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\;
                         -- The following section was transformed from the .NET statement below:
                         -- num_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 = num_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28 >> (int)return_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 << 32 - (int)(b_b30c7cf04e18e8e1d9326fda65a98f3e6ce2cb9a087dd14bb74739b64c0a2a6c_5547e2b2a08e312134cbdc7a0930a7319e6155fa1d1d0c7cedcf0662fda61e28) >> 30;
                         -- 
@@ -16173,13 +16180,13 @@ begin
                         -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_81\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = ((uint)num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4;
+                        -- conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = ((uint)num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4);
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := \Quire Posit32::op_Explicit(Posit32).0.num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := (unsigned(\Quire Posit32::op_Explicit(Posit32).0.num_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\));
                         -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_81\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_83\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_82\;
@@ -16189,13 +16196,13 @@ begin
                         -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_81\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 0;
+                        -- 	conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 0u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 0;
+                        -- conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4 = 0u;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional0263c899340b21e9443b35300bcea721159c8095e49cb777f5e0fb5ab3e29d2c_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := to_signed(0, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.conditionalf2eba7c459dd057c9270f346c2a9013399b4309fc21683746ef1be47061f03f1_94bef725a1b90b0f1b2e9d5058b7a34e74ecdb8cab8ec5897a685559b4937cd4\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_81\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_84\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_82\;
@@ -16304,8 +16311,8 @@ begin
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= false;
                             \Quire Posit32::op_Explicit(Posit32).0.return.1\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).return.0\;
-                            \Quire Posit32::op_Explicit(Posit32).0.left\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\;
-                            \Quire Posit32::op_Explicit(Posit32).0.left\ := \Quire Posit32::op_Explicit(Posit32).0.return.1\;
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
                             -- Lombiq.Arithmetics.Posit32 this_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0;
                             -- 
@@ -16317,15 +16324,16 @@ begin
                             -- bool return_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- return_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0 = ((int)this_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0.PositBits & -2147483648) == 0;
+                            -- return_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0 = (long)((this_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0.PositBits & 0x80000000u)) == 0L;
                             -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.123\ := signed(\Quire Posit32::op_Explicit(Posit32).0.this_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0\.\PositBits\) and to_signed(-2147483648, 32);
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.124\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.123\) = to_signed(0, 32);
+                            -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.123\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0\.\PositBits\ and "10000000000000000000000000000000", 64));
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.124\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.123\)), 64)) = to_signed(0, 64);
                             \Quire Posit32::op_Explicit(Posit32).0.return_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.124\;
                             -- The following section was transformed from the .NET statement below:
                             -- if (return_5204dd194817ce0e22c54ac6e6fe7dc0a0e40352e5a5fed887c54294684dded0) {
-                            -- 	return left;
+                            -- 	return quire;
                             -- }
                             -- 
 
@@ -16340,14 +16348,14 @@ begin
                                 \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_92\;
                             end if;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4632
+                        -- Clock cycles needed to complete this state (approximation): 0.5667
                     when \Quire Posit32::op_Explicit(Posit32).0._State_92\ => 
                         -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_91\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return Quire.op_Addition (Quire.op_OnesComplement (left), 1u);
+                        -- return Quire.op_Addition (Quire.op_OnesComplement (quire), 1u);
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_OnesComplement(Lombiq.Arithmetics.Quire)
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire).q.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.left\;
+                        \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire).q.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
                         \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire)._Started.0\ <= true;
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_94\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -16355,13 +16363,13 @@ begin
                         -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_91\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	return left;
+                        -- 	return quire;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return left;
+                        -- return quire;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.left\;
+                        \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_91\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_93\) then 
@@ -16373,7 +16381,7 @@ begin
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire)._Started.0\ <= false;
                             \Quire Posit32::op_Explicit(Posit32).0.return.2\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire).return.0\;
-                            \Quire Posit32::op_Explicit(Posit32).0.left\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire).q.parameter.In.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire).q.parameter.In.0\;
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_Addition(Lombiq.Arithmetics.Quire,System.UInt32)
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_Addition(Quire,UInt32).left.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.return.2\;
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_Addition(Quire,UInt32).right.parameter.Out.0\ <= to_unsigned(1, 32);
@@ -16744,7 +16752,7 @@ begin
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\: boolean := false;
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\: boolean := false;
@@ -16789,7 +16797,7 @@ begin
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\ := to_unsigned(0, 8);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\ := to_signed(0, 32);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.14\ := false;
-                \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := to_signed(0, 64);
+                \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := to_unsigned(0, 64);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ := to_signed(0, 32);
                 \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\ := false;
@@ -16883,9 +16891,9 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- while ((int)(num3) < (int)((int)(left.SegmentCount) << 6)) {
                         -- 	bool flag2;
-                        -- 	flag2 = (((left.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                        -- 	flag2 = ((left.Segments [num] >> (int)num2) & 1uL) == 1uL;
                         -- 	bool flag3;
-                        -- 	flag3 = (((right.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                        -- 	flag3 = ((right.Segments [num] >> (int)num2) & 1uL) == 1uL;
                         -- 	byte b;
                         -- 	int conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba;
                         -- 	if (flag2) {
@@ -16907,9 +16915,9 @@ begin
                         -- 	}
                         -- 	b = (byte)((conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba) + (conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49) + (conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70));
                         -- 	if (((int)(b) & 1) == 1) {
-                        -- 		array [num] = (ulong)((long)array [num] + (1L << (int)num2));
+                        -- 		array [num] = array [num] + (ulong)(1L << (int)num2);
                         -- 	}
-                        -- 	flag = ((int)(b) >> 1 == 1);
+                        -- 	flag = (int)(b) >> 1 == 1;
                         -- 	num2 = (ushort)((int)(num2) + 1);
                         -- 	if ((int)(num2) >> 6 == 1) {
                         -- 		num2 = 0;
@@ -16947,9 +16955,9 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	bool flag2;
-                            -- 	flag2 = (((left.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                            -- 	flag2 = ((left.Segments [num] >> (int)num2) & 1uL) == 1uL;
                             -- 	bool flag3;
-                            -- 	flag3 = (((right.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                            -- 	flag3 = ((right.Segments [num] >> (int)num2) & 1uL) == 1uL;
                             -- 	byte b;
                             -- 	int conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba;
                             -- 	if (flag2) {
@@ -16971,9 +16979,9 @@ begin
                             -- 	}
                             -- 	b = (byte)((conditional746a1c636f616ff3623be4e48942688719382078a087cbdab0e2c998303da9ba) + (conditionalc042a0f1121d35344a49419953dc5f52591ee75c13d7b4714794eeff7d14bf49) + (conditionalae2b32de30beca2038d02dc985eb3cd14f87df2ffaa1520711b83d6b5e0acd70));
                             -- 	if (((int)(b) & 1) == 1) {
-                            -- 		array [num] = (ulong)((long)array [num] + (1L << (int)num2));
+                            -- 		array [num] = array [num] + (ulong)(1L << (int)num2);
                             -- 	}
-                            -- 	flag = ((int)(b) >> 1 == 1);
+                            -- 	flag = (int)(b) >> 1 == 1;
                             -- 	num2 = (ushort)((int)(num2) + 1);
                             -- 	if ((int)(num2) >> 6 == 1) {
                             -- 		num2 = 0;
@@ -16986,7 +16994,7 @@ begin
                             -- bool flag2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- flag2 = (((left.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                            -- flag2 = ((left.Segments [num] >> (int)num2) & 1uL) == 1uL;
                             -- 
                             \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_7\;
                         else 
@@ -17023,12 +17031,12 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.6\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.5\) and to_unsigned(1, 64);
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.7\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.6\) = to_unsigned(1, 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag2\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.7\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.flag2\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.7\;
                         -- The following section was transformed from the .NET statement below:
                         -- bool flag3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- flag3 = (((right.Segments [num] >> (int)num2) & 1uL) == 1uL);
+                        -- flag3 = ((right.Segments [num] >> (int)num2) & 1uL) == 1uL;
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.66
@@ -17041,7 +17049,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.9\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.8\) and to_unsigned(1, 64);
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.10\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.9\) = to_unsigned(1, 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag3\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.10\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.flag3\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.10\;
                         -- The following section was transformed from the .NET statement below:
                         -- byte b;
                         -- 
@@ -17189,7 +17197,7 @@ begin
                         \Quire Quire::op_Addition(Quire,Quire).0.b\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.12\);
                         -- The following section was transformed from the .NET statement below:
                         -- if (((int)(b) & 1) == 1) {
-                        -- 	array [num] = (ulong)((long)array [num] + (1L << (int)num2));
+                        -- 	array [num] = array [num] + (ulong)(1L << (int)num2);
                         -- }
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.13\ := signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.b\), 32)) and to_signed(1, 32);
@@ -17245,11 +17253,11 @@ begin
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_21\ => 
                         -- State after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
-                        -- flag = ((int)(b) >> 1 == 1);
+                        -- flag = (int)(b) >> 1 == 1;
                         -- 
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ := shift_right(signed(SmartResize((\Quire Quire::op_Addition(Quire,Quire).0.b\), 32)), to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
                         \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.17\ = to_signed(1, 32);
-                        \Quire Quire::op_Addition(Quire,Quire).0.flag\ := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.flag\ := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.18\;
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (ushort)((int)(num2) + 1);
                         -- 
@@ -17259,19 +17267,19 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [num] = (ulong)((long)array [num] + (1L << (int)num2));
+                        -- 	array [num] = array [num] + (ulong)(1L << (int)num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [num] = (ulong)((long)array [num] + (1L << (int)num2));
+                        -- array [num] = array [num] + (ulong)(1L << (int)num2);
                         -- 
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := SmartResize(shift_left(to_signed(1, 64), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num2\, 32)), 6)))), 64);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\ := SmartResize(unsigned(shift_left(to_signed(1, 64), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Quire::op_Addition(Quire,Quire).0.num2\, 32)), 6))))), 64);
                         \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_23\;
                         -- Clock cycles needed to complete this state (approximation): 0.61905
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_23\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := SmartResize(unsigned(signed(\Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\))) + (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\)), 64);
-                        \Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\)) := (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\ := \Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\)) + (\Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.15\);
+                        \Quire Quire::op_Addition(Quire,Quire).0.array\(to_integer(\Quire Quire::op_Addition(Quire,Quire).0.num\)) := \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.16\;
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_20\.
                         if (\Quire Quire::op_Addition(Quire,Quire).0._State\ = \Quire Quire::op_Addition(Quire,Quire).0._State_23\) then 
                             \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_21\;
@@ -17822,7 +17830,7 @@ begin
                         \Quire Quire::op_RightShift(Quire,Int32).0.left\ := \Quire Quire::op_RightShift(Quire,Int32).0.left.parameter.In\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- right = (right & ((1 << (int)(left.SegmentCount) * 6) - 1));
+                        -- right = right & ((1 << (int)(left.SegmentCount) * 6) - 1);
                         -- 
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.left\.\SegmentCount\), 32)) * to_signed(6, 32), 32);
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\, 5))));
@@ -17832,7 +17840,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\) - to_signed(1, 32);
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := \Quire Quire::op_RightShift(Quire,Int32).0.right\ and (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.right\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
                         -- ulong num;
                         -- 
@@ -17869,10 +17877,10 @@ begin
                         -- 		ushort num4;
                         -- 		num4 = (ushort)(8 - (int)(num3));
                         -- 		bool flag2;
-                        -- 		flag2 = ((array [num4] & 1uL) == 1uL);
+                        -- 		flag2 = (array [num4] & 1uL) == 1uL;
                         -- 		array [num4] = array [num4] >> 1;
                         -- 		if (flag) {
-                        -- 			array [num4] = (array [num4] | num);
+                        -- 			array [num4] = array [num4] | num;
                         -- 		}
                         -- 		flag = flag2;
                         -- 		num3 = (ushort)((int)(num3) + 1);
@@ -17898,10 +17906,10 @@ begin
                             -- 		ushort num4;
                             -- 		num4 = (ushort)(8 - (int)(num3));
                             -- 		bool flag2;
-                            -- 		flag2 = ((array [num4] & 1uL) == 1uL);
+                            -- 		flag2 = (array [num4] & 1uL) == 1uL;
                             -- 		array [num4] = array [num4] >> 1;
                             -- 		if (flag) {
-                            -- 			array [num4] = (array [num4] | num);
+                            -- 			array [num4] = array [num4] | num;
                             -- 		}
                             -- 		flag = flag2;
                             -- 		num3 = (ushort)((int)(num3) + 1);
@@ -17928,10 +17936,10 @@ begin
                             -- 	ushort num4;
                             -- 	num4 = (ushort)(8 - (int)(num3));
                             -- 	bool flag2;
-                            -- 	flag2 = ((array [num4] & 1uL) == 1uL);
+                            -- 	flag2 = (array [num4] & 1uL) == 1uL;
                             -- 	array [num4] = array [num4] >> 1;
                             -- 	if (flag) {
-                            -- 		array [num4] = (array [num4] | num);
+                            -- 		array [num4] = array [num4] | num;
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num3 = (ushort)((int)(num3) + 1);
@@ -17974,10 +17982,10 @@ begin
                             -- 	ushort num4;
                             -- 	num4 = (ushort)(8 - (int)(num3));
                             -- 	bool flag2;
-                            -- 	flag2 = ((array [num4] & 1uL) == 1uL);
+                            -- 	flag2 = (array [num4] & 1uL) == 1uL;
                             -- 	array [num4] = array [num4] >> 1;
                             -- 	if (flag) {
-                            -- 		array [num4] = (array [num4] | num);
+                            -- 		array [num4] = array [num4] | num;
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num3 = (ushort)((int)(num3) + 1);
@@ -17995,7 +18003,7 @@ begin
                             -- bool flag2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- flag2 = ((array [num4] & 1uL) == 1uL);
+                            -- flag2 = (array [num4] & 1uL) == 1uL;
                             -- 
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_8\;
                         else 
@@ -18018,7 +18026,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) and to_unsigned(1, 64);
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\) = to_unsigned(1, 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\;
                         -- The following section was transformed from the .NET statement below:
                         -- array [num4] = array [num4] >> 1;
                         -- 
@@ -18030,7 +18038,7 @@ begin
                         \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
-                        -- 	array [num4] = (array [num4] | num);
+                        -- 	array [num4] = array [num4] | num;
                         -- }
                         -- 
 
@@ -18065,14 +18073,14 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [num4] = (array [num4] | num);
+                        -- 	array [num4] = array [num4] | num;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [num4] = (array [num4] | num);
+                        -- array [num4] = array [num4] | num;
                         -- 
                         \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) or \Quire Quire::op_RightShift(Quire,Int32).0.num\;
-                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num4\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\;
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
                         if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_11\) then 
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_10\;
@@ -18171,10 +18179,10 @@ begin
                         \Quire Quire::op_LeftShift(Quire,Int32).0.left\ := \Quire Quire::op_LeftShift(Quire,Int32).0.left.parameter.In\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- right = (right & 65535);
+                        -- right = right & 65535;
                         -- 
                         \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right\ and to_signed(65535, 32);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- ulong num;
                         -- 
@@ -18216,10 +18224,10 @@ begin
                         -- 	num4 = 0;
                         -- 	while ((int)(num4) < 8) {
                         -- 		bool flag2;
-                        -- 		flag2 = ((array [num4] & num) == num);
+                        -- 		flag2 = (array [num4] & num) == num;
                         -- 		array [num4] = array [num4] << 1;
                         -- 		if (flag) {
-                        -- 			array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                        -- 			array [num4] = (ulong)(array [num4] | (ulong)(num2));
                         -- 		}
                         -- 		flag = flag2;
                         -- 		num4 = (ushort)((int)(num4) + 1);
@@ -18243,10 +18251,10 @@ begin
                             -- 	num4 = 0;
                             -- 	while ((int)(num4) < 8) {
                             -- 		bool flag2;
-                            -- 		flag2 = ((array [num4] & num) == num);
+                            -- 		flag2 = (array [num4] & num) == num;
                             -- 		array [num4] = array [num4] << 1;
                             -- 		if (flag) {
-                            -- 			array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                            -- 			array [num4] = (ulong)(array [num4] | (ulong)(num2));
                             -- 		}
                             -- 		flag = flag2;
                             -- 		num4 = (ushort)((int)(num4) + 1);
@@ -18271,10 +18279,10 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- while ((int)(num4) < 8) {
                             -- 	bool flag2;
-                            -- 	flag2 = ((array [num4] & num) == num);
+                            -- 	flag2 = (array [num4] & num) == num;
                             -- 	array [num4] = array [num4] << 1;
                             -- 	if (flag) {
-                            -- 		array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                            -- 		array [num4] = (ulong)(array [num4] | (ulong)(num2));
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num4 = (ushort)((int)(num4) + 1);
@@ -18315,10 +18323,10 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	bool flag2;
-                            -- 	flag2 = ((array [num4] & num) == num);
+                            -- 	flag2 = (array [num4] & num) == num;
                             -- 	array [num4] = array [num4] << 1;
                             -- 	if (flag) {
-                            -- 		array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                            -- 		array [num4] = (ulong)(array [num4] | (ulong)(num2));
                             -- 	}
                             -- 	flag = flag2;
                             -- 	num4 = (ushort)((int)(num4) + 1);
@@ -18328,7 +18336,7 @@ begin
                             -- bool flag2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- flag2 = ((array [num4] & num) == num);
+                            -- flag2 = (array [num4] & num) == num;
                             -- 
                             \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\ := \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) and \Quire Quire::op_LeftShift(Quire,Int32).0.num\;
                             \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_7\;
@@ -18351,7 +18359,7 @@ begin
                     when \Quire Quire::op_LeftShift(Quire,Int32).0._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.3\) = \Quire Quire::op_LeftShift(Quire,Int32).0.num\;
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\ := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.flag2\ := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- array [num4] = array [num4] << 1;
                         -- 
@@ -18359,7 +18367,7 @@ begin
                         \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.5\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
-                        -- 	array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                        -- 	array [num4] = (ulong)(array [num4] | (ulong)(num2));
                         -- }
                         -- 
 
@@ -18394,14 +18402,14 @@ begin
                         -- True branch of the if-else started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                        -- 	array [num4] = (ulong)(array [num4] | (ulong)(num2));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [num4] = ((ulong)(array [num4] | (ulong)(num2)));
+                        -- array [num4] = (ulong)(array [num4] | (ulong)(num2));
                         -- 
                         \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\ := \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) or SmartResize((\Quire Quire::op_LeftShift(Quire,Int32).0.num2\), 64);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) := ((\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\));
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_LeftShift(Quire,Int32).0.num4\)) := (\Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\);
                         -- Going to the state after the if-else which was started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_7\.
                         if (\Quire Quire::op_LeftShift(Quire,Int32).0._State\ = \Quire Quire::op_LeftShift(Quire,Int32).0._State_9\) then 
                             \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_8\;
