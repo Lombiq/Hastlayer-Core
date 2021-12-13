@@ -22,9 +22,4 @@
     <PackageReference Include="Microsoft.Extensions.Localization" Version="5.0.6" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
-  <ItemGroup>
-    <None Update="NLog.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>
