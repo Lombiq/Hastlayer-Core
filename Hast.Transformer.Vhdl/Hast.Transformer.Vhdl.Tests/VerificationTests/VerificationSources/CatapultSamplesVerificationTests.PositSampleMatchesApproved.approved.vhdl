@@ -13773,10 +13773,10 @@ begin
         Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit::op_Explicit(Posit).0.return.7\: \Lombiq.Arithmetics.BitMask\;
         Variable \Int32 Posit::op_Explicit(Posit).0.return.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit::op_Explicit(Posit).0.conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Int32 Posit::op_Explicit(Posit).0.conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit::op_Explicit(Posit).0.return.9\: boolean := false;
         Variable \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Int32 Posit::op_Explicit(Posit).0.conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Int32 Posit::op_Explicit(Posit).0.conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit::op_Explicit(Posit).0.return.10\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -13808,10 +13808,10 @@ begin
                 \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.6\ := to_signed(0, 32);
                 \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.7\ := to_signed(0, 32);
                 \Int32 Posit::op_Explicit(Posit).0.return.8\ := to_unsigned(0, 32);
-                \Int32 Posit::op_Explicit(Posit).0.conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a\ := to_signed(0, 64);
+                \Int32 Posit::op_Explicit(Posit).0.conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585\ := to_signed(0, 64);
                 \Int32 Posit::op_Explicit(Posit).0.return.9\ := false;
                 \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\ := to_signed(0, 64);
-                \Int32 Posit::op_Explicit(Posit).0.conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f\ := to_signed(0, 32);
+                \Int32 Posit::op_Explicit(Posit).0.conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b\ := to_signed(0, 32);
                 \Int32 Posit::op_Explicit(Posit).0.return.10\ := false;
             else 
                 case \Int32 Posit::op_Explicit(Posit).0._State\ is 
@@ -13838,13 +13838,13 @@ begin
                         -- if ((long)(Lombiq.Arithmetics.Posit.GetRegimeKValue (x) * 8) + (long)(Lombiq.Arithmetics.Posit.GetExponentValue (x)) + 1L < 31L) {
                         -- 	uint lowest32Bits;
                         -- 	lowest32Bits = Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x), (int)((int)((long)(Lombiq.Arithmetics.Posit.GetRegimeKValue (x) * 8) + (long)(Lombiq.Arithmetics.Posit.GetExponentValue (x)))) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x))) + 1));
-                        -- 	long conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a;
+                        -- 	long conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585;
                         -- 	if (Lombiq.Arithmetics.Posit.IsPositive (x)) {
-                        -- 		conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a = lowest32Bits;
+                        -- 		conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585 = lowest32Bits;
                         -- 	} else {
-                        -- 		conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a = (0L - (long)lowest32Bits);
+                        -- 		conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585 = (0L - (long)lowest32Bits);
                         -- 	}
-                        -- 	return (int)(conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a);
+                        -- 	return (int)(conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Int32 Lombiq.Arithmetics.Posit::GetRegimeKValue()
@@ -13892,13 +13892,13 @@ begin
                     when \Int32 Posit::op_Explicit(Posit).0._State_6\ => 
                         -- State after the if-else which was started in state \Int32 Posit::op_Explicit(Posit).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f;
+                        -- int conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit.IsPositive (x)) {
-                        -- 	conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f = 2147483647;
+                        -- 	conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b = 2147483647;
                         -- } else {
-                        -- 	conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f = -2147483648;
+                        -- 	conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b = -2147483648;
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit::IsPositive()
@@ -13912,13 +13912,13 @@ begin
                         -- {
                         -- 	uint lowest32Bits;
                         -- 	lowest32Bits = Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_LeftShift (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x), (int)((int)((long)(Lombiq.Arithmetics.Posit.GetRegimeKValue (x) * 8) + (long)(Lombiq.Arithmetics.Posit.GetExponentValue (x)))) - (int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit.FractionWithHiddenBit (x))) + 1));
-                        -- 	long conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a;
+                        -- 	long conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585;
                         -- 	if (Lombiq.Arithmetics.Posit.IsPositive (x)) {
-                        -- 		conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a = lowest32Bits;
+                        -- 		conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585 = lowest32Bits;
                         -- 	} else {
-                        -- 		conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a = (0L - (long)lowest32Bits);
+                        -- 		conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585 = (0L - (long)lowest32Bits);
                         -- 	}
-                        -- 	return (int)(conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a);
+                        -- 	return (int)(conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -14010,13 +14010,13 @@ begin
                             \Int32 Posit::op_Explicit(Posit).0.return.8\ := \Int32 Posit::op_Explicit(Posit).0.BitMask::GetLowest32Bits().return.0\;
                             \Int32 Posit::op_Explicit(Posit).0.lowest32Bits\ := \Int32 Posit::op_Explicit(Posit).0.return.8\;
                             -- The following section was transformed from the .NET statement below:
-                            -- long conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a;
+                            -- long conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if (Lombiq.Arithmetics.Posit.IsPositive (x)) {
-                            -- 	conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a = lowest32Bits;
+                            -- 	conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585 = lowest32Bits;
                             -- } else {
-                            -- 	conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a = (0L - (long)lowest32Bits);
+                            -- 	conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585 = (0L - (long)lowest32Bits);
                             -- }
                             -- 
                             -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit::IsPositive()
@@ -14046,9 +14046,9 @@ begin
                     when \Int32 Posit::op_Explicit(Posit).0._State_16\ => 
                         -- State after the if-else which was started in state \Int32 Posit::op_Explicit(Posit).0._State_15\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (int)(conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a);
+                        -- return (int)(conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585);
                         -- 
-                        \Int32 Posit::op_Explicit(Posit).0.return\ <= SmartResize((\Int32 Posit::op_Explicit(Posit).0.conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a\), 32);
+                        \Int32 Posit::op_Explicit(Posit).0.return\ <= SmartResize((\Int32 Posit::op_Explicit(Posit).0.conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585\), 32);
                         \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Int32 Posit::op_Explicit(Posit).0._State_5\.
                         if (\Int32 Posit::op_Explicit(Posit).0._State\ = \Int32 Posit::op_Explicit(Posit).0._State_16\) then 
@@ -14059,13 +14059,13 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit::op_Explicit(Posit).0._State_15\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a = lowest32Bits;
+                        -- 	conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585 = lowest32Bits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a = lowest32Bits;
+                        -- conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585 = lowest32Bits;
                         -- 
-                        \Int32 Posit::op_Explicit(Posit).0.conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a\ := signed(SmartResize(\Int32 Posit::op_Explicit(Posit).0.lowest32Bits\, 64));
+                        \Int32 Posit::op_Explicit(Posit).0.conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585\ := signed(SmartResize(\Int32 Posit::op_Explicit(Posit).0.lowest32Bits\, 64));
                         -- Going to the state after the if-else which was started in state \Int32 Posit::op_Explicit(Posit).0._State_15\.
                         if (\Int32 Posit::op_Explicit(Posit).0._State\ = \Int32 Posit::op_Explicit(Posit).0._State_17\) then 
                             \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_16\;
@@ -14075,14 +14075,14 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit::op_Explicit(Posit).0._State_15\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a = (0L - (long)lowest32Bits);
+                        -- 	conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585 = (0L - (long)lowest32Bits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a = (0L - (long)lowest32Bits);
+                        -- conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585 = (0L - (long)lowest32Bits);
                         -- 
                         \Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\ := to_signed(0, 64) - signed(SmartResize(\Int32 Posit::op_Explicit(Posit).0.lowest32Bits\, 64));
-                        \Int32 Posit::op_Explicit(Posit).0.conditional206ba6b0e06d9945b8c7d5a07fe18a74fe22eaac1fadb10572f9a78d1b51437a\ := (\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\);
+                        \Int32 Posit::op_Explicit(Posit).0.conditionalb528e763cf134df6b78e000c2244008f7f27b1df3861a9297d8492451eb3d585\ := (\Int32 Posit::op_Explicit(Posit).0.binaryOperationResult.8\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit::op_Explicit(Posit).0._State_15\.
                         if (\Int32 Posit::op_Explicit(Posit).0._State\ = \Int32 Posit::op_Explicit(Posit).0._State_18\) then 
                             \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_16\;
@@ -14109,22 +14109,22 @@ begin
                     when \Int32 Posit::op_Explicit(Posit).0._State_20\ => 
                         -- State after the if-else which was started in state \Int32 Posit::op_Explicit(Posit).0._State_19\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f;
+                        -- return conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b;
                         -- 
-                        \Int32 Posit::op_Explicit(Posit).0.return\ <= \Int32 Posit::op_Explicit(Posit).0.conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f\;
+                        \Int32 Posit::op_Explicit(Posit).0.return\ <= \Int32 Posit::op_Explicit(Posit).0.conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b\;
                         \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Int32 Posit::op_Explicit(Posit).0._State_21\ => 
                         -- True branch of the if-else started in state \Int32 Posit::op_Explicit(Posit).0._State_19\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f = 2147483647;
+                        -- 	conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b = 2147483647;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f = 2147483647;
+                        -- conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b = 2147483647;
                         -- 
-                        \Int32 Posit::op_Explicit(Posit).0.conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f\ := to_signed(2147483647, 32);
+                        \Int32 Posit::op_Explicit(Posit).0.conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b\ := to_signed(2147483647, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit::op_Explicit(Posit).0._State_19\.
                         if (\Int32 Posit::op_Explicit(Posit).0._State\ = \Int32 Posit::op_Explicit(Posit).0._State_21\) then 
                             \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_20\;
@@ -14134,13 +14134,13 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit::op_Explicit(Posit).0._State_19\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f = -2147483648;
+                        -- 	conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b = -2147483648;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f = -2147483648;
+                        -- conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b = -2147483648;
                         -- 
-                        \Int32 Posit::op_Explicit(Posit).0.conditionalce0979d1ec0a195cf069ddd7a259260cfd4c174f54a93a4bd5eb230513f0120f\ := to_signed(-2147483648, 32);
+                        \Int32 Posit::op_Explicit(Posit).0.conditionalec28f17fb03e12897b1f9e2ac948a27e39cac50ebd6a3f6f0b40ef4dde8e087b\ := to_signed(-2147483648, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit::op_Explicit(Posit).0._State_19\.
                         if (\Int32 Posit::op_Explicit(Posit).0._State\ = \Int32 Posit::op_Explicit(Posit).0._State_22\) then 
                             \Int32 Posit::op_Explicit(Posit).0._State\ := \Int32 Posit::op_Explicit(Posit).0._State_20\;
