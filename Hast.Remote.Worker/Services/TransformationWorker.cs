@@ -253,7 +253,7 @@ namespace Hast.Remote.Worker.Services
 
                         assemblyPaths.Add(_appDataFolder.MapPath(path));
 
-                        await using var memoryStream = new MemoryStream(assembly.FileContent);
+                        await using var memoryStream = new MemoryStream(assembly.GetFileContent());
                         await using var fileStream = _appDataFolder.CreateFile(path);
                         await memoryStream.CopyToAsync(fileStream, cancellationToken);
                     }
