@@ -14309,9 +14309,9 @@ begin
     -- System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \InlinedCases::InlinedMultiReturn(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\: \InlinedCases::InlinedMultiReturn(SimpleMemory).0._States\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\;
-        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\: signed(31 downto 0) := to_signed(0, 32);
         Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\: signed(31 downto 0) := to_signed(0, 32);
         Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -14323,9 +14323,9 @@ begin
                 \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\;
-                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\ := to_signed(0, 32);
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(0, 32);
                 \InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\ := (others => '0');
-                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\ := to_signed(0, 32);
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(0, 32);
                 \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := false;
             else 
                 case \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ is 
@@ -14352,10 +14352,10 @@ begin
                         -- // Starting inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092;
+                        -- int input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092 = memory.ReadInt32 (0);
+                        -- input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
@@ -14363,14 +14363,14 @@ begin
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\ => 
-                        -- State for the label Exit_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092.
+                        -- State for the label Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49.
                         -- The following section was transformed from the .NET statement below:
-                        -- memory.WriteInt32 (0, return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092);
+                        -- memory.WriteInt32 (0, return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49);
                         -- 
                         -- Begin SimpleMemory write.
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\);
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\ => 
@@ -14379,17 +14379,17 @@ begin
                             -- SimpleMemory read finished.
                             \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\ := ConvertStdLogicVectorToInt32(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\);
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := ConvertStdLogicVectorToInt32(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- int return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092;
+                            -- int return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if (input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092 > 0) {
-                            -- 	return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092 = 1;
-                            -- 	goto Exit_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092;
+                            -- if (input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 > 0) {
+                            -- 	return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = 1;
+                            -- 	goto Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
                             -- }
                             -- 
-                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\ > to_signed(0, 32);
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ > to_signed(0, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_6\ and ends in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_7\.
@@ -14406,11 +14406,11 @@ begin
                     when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_5\ => 
                         -- State after the if-else which was started in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092 = 2;
+                        -- return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = 2;
                         -- 
-                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\ := to_signed(2, 32);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- Exit_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092:
+                        -- Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49:
                         -- // Ending inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                         -- 
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\;
@@ -14419,16 +14419,16 @@ begin
                         -- True branch of the if-else started in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092 = 1;
-                        -- 	goto Exit_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092;
+                        -- 	return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = 1;
+                        -- 	goto Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092 = 1;
+                        -- return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49 = 1;
                         -- 
-                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\ := to_signed(1, 32);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49\ := to_signed(1, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- goto Exit_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092;
+                        -- goto Exit_a9b345d81d67e131835798908b3d9a90a3253e5f40585dc3c33d469e5d307f49;
                         -- 
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14456,14 +14456,14 @@ begin
     -- System.Void Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\: \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._States\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_0\;
-        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\: signed(31 downto 0) := to_signed(0, 32);
         Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
-        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\: signed(31 downto 0) := to_signed(0, 32);
         Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -14476,14 +14476,14 @@ begin
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_0\;
-                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\ := to_signed(0, 32);
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\ := (others => '0');
-                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\ := to_signed(0, 32);
-                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ := to_signed(0, 32);
-                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ := to_signed(0, 32);
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := false;
-                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\ := to_signed(0, 32);
-                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\ := to_signed(0, 32);
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.1\ := false;
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
             else 
@@ -14511,10 +14511,10 @@ begin
                         -- // Starting inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturnInternal(System.Int32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c;
+                        -- int input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c = memory.ReadInt32 (0);
+                        -- input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221 = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
@@ -14522,24 +14522,24 @@ begin
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\ => 
-                        -- State for the label Exit_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73.
+                        -- State for the label Exit_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1.
                         -- The following section was transformed from the .NET statement below:
-                        -- int input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81;
+                        -- int input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81 = input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c;
+                        -- input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa = input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221;
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\;
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81;
+                        -- int return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81 > 0) {
-                        -- 	return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81 = 1;
-                        -- 	goto Exit_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81;
+                        -- if (input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa > 0) {
+                        -- 	return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa = 1;
+                        -- 	goto Exit_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa;
                         -- }
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.1\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\ > to_signed(0, 32);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.1\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\ > to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_10\ and ends in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_11\.
@@ -14553,20 +14553,20 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
                     when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_4\ => 
-                        -- State for the label Exit_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81.
+                        -- State for the label Exit_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c = return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 + return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81;
+                        -- return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221 = return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 + return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa;
                         -- // Ending inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturnInternal(System.Int32).
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ + \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\;
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\;
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ + \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\;
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
-                        -- memory.WriteInt32 (0, return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c);
+                        -- memory.WriteInt32 (0, return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221);
                         -- 
                         -- Begin SimpleMemory write.
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\);
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\ => 
@@ -14575,28 +14575,28 @@ begin
                             -- SimpleMemory read finished.
                             \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\ := ConvertStdLogicVectorToInt32(\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\);
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\ := ConvertStdLogicVectorToInt32(\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- int return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c;
+                            -- int return_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221;
                             -- // Starting inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- int input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73;
+                            -- int input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 = input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c;
+                            -- input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 = input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221;
                             -- 
-                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\;
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_588a38673be84b6b7990f18d7c1f7bf03bed9ef8638a80382598f346faf97221\;
                             -- The following section was transformed from the .NET statement below:
-                            -- int return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73;
+                            -- int return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if (input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 > 0) {
-                            -- 	return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 = 1;
-                            -- 	goto Exit_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73;
+                            -- if (input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 > 0) {
+                            -- 	return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 = 1;
+                            -- 	goto Exit_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1;
                             -- }
                             -- 
-                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ > to_signed(0, 32);
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ > to_signed(0, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_7\ and ends in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_8\.
@@ -14613,11 +14613,11 @@ begin
                     when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_6\ => 
                         -- State after the if-else which was started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 = 2;
+                        -- return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 = 2;
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ := to_signed(2, 32);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- Exit_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73:
+                        -- Exit_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1:
                         -- // Ending inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                         -- // Starting inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                         -- 
@@ -14627,16 +14627,16 @@ begin
                         -- True branch of the if-else started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 = 1;
-                        -- 	goto Exit_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73;
+                        -- 	return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 = 1;
+                        -- 	goto Exit_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 = 1;
+                        -- return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1 = 1;
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ := to_signed(1, 32);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1\ := to_signed(1, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- goto Exit_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73;
+                        -- goto Exit_07ab6b6cb77e3bfd11170db53c06714b1d390600e9c8f900358c3dcb0cce88e1;
                         -- 
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14649,11 +14649,11 @@ begin
                     when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_9\ => 
                         -- State after the if-else which was started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81 = 2;
+                        -- return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa = 2;
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\ := to_signed(2, 32);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- Exit_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81:
+                        -- Exit_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa:
                         -- // Ending inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                         -- 
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_4\;
@@ -14662,16 +14662,16 @@ begin
                         -- True branch of the if-else started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81 = 1;
-                        -- 	goto Exit_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81;
+                        -- 	return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa = 1;
+                        -- 	goto Exit_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81 = 1;
+                        -- return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa = 1;
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\ := to_signed(1, 32);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa\ := to_signed(1, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- goto Exit_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81;
+                        -- goto Exit_39fa9186c20c9e3428762221928c89754794c0e1faa8b71986628f6b92271baa;
                         -- 
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_4\;
                         -- Clock cycles needed to complete this state (approximation): 0
