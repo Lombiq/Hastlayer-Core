@@ -79,7 +79,9 @@ namespace Hast.Transformer.Vhdl.Tests
 
             _producedContext.Id.ShouldNotBeNullOrEmpty();
             _producedContext.SyntaxTree.ShouldNotBeNull();
-            configuration.ShouldBe(_producedContext.HardwareGenerationConfiguration, "The input hardware generation configuration was not properly passed on to the transformation context.");
+            configuration.ShouldBe(
+                _producedContext.HardwareGenerationConfiguration,
+                "The input hardware generation configuration was not properly passed on to the transformation context.");
             _producedContext.TypeDeclarationLookupTable.ShouldNotBeNull();
         }
 
@@ -92,7 +94,9 @@ namespace Hast.Transformer.Vhdl.Tests
             await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             var firstId = _producedContext.Id;
             await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, config);
-            firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of assemblies transformed being different.");
+            firstId.ShouldNotBe(
+                _producedContext.Id,
+                "The transformation context ID isn't different despite the set of assemblies transformed being different.");
 
             config.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                 new MemberInvocationInstanceCountConfiguration("Hast.TestInputs.ClassStructure1.RootClass.VirtualMethod")
@@ -103,21 +107,27 @@ namespace Hast.Transformer.Vhdl.Tests
             firstId = _producedContext.Id;
             config.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Single().MaxDegreeOfParallelism = 15;
             await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
-            firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the max degree of parallelism being different.");
+            firstId.ShouldNotBe(
+                _producedContext.Id,
+                "The transformation context ID isn't different despite the max degree of parallelism being different.");
 
             config.HardwareEntryPointMemberFullNames.Add("aaa");
             await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
             config.HardwareEntryPointMemberFullNames.Add("bbb");
             await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
-            firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members being different.");
+            firstId.ShouldNotBe(
+                _producedContext.Id,
+                "The transformation context ID isn't different despite the set of included members being different.");
 
             config.HardwareEntryPointMemberNamePrefixes.Add("aaa");
             await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
             firstId = _producedContext.Id;
             config.HardwareEntryPointMemberNamePrefixes.Add("bbb");
             await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
-            firstId.ShouldNotBe(_producedContext.Id, "The transformation context ID isn't different despite the set of included members prefixed being different.");
+            firstId.ShouldNotBe(
+                _producedContext.Id,
+                "The transformation context ID isn't different despite the set of included members prefixed being different.");
         }
 
         [Fact]
@@ -141,7 +151,8 @@ namespace Hast.Transformer.Vhdl.Tests
             configuration.HardwareEntryPointMemberFullNames
                 .Add($"System.Void {typeof(RootClass).FullName}::{nameof(RootClass.VirtualMethod)}(System.Int32)");
             configuration.HardwareEntryPointMemberFullNames
-                .Add($"System.Void {typeof(ComplexTypeHierarchy).FullName}::{typeof(IInterface1).FullName}.{nameof(IInterface1.Interface1Method1)}()");
+                .Add($"System.Void {typeof(ComplexTypeHierarchy).FullName}::" +
+                     $"{typeof(IInterface1).FullName}.{nameof(IInterface1.Interface1Method1)}()");
             var transformer = GetTransformer();
 
             await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
@@ -177,7 +188,16 @@ namespace Hast.Transformer.Vhdl.Tests
             typeLookup[nameof(ComplexTypeHierarchy)].Members.Count.ShouldBe(7);
             typeLookup[nameof(ComplexTypeHierarchy)].Members
                 .Select(member => member.Name)
-                .SequenceEqual(new[] { "Interface1Method1", "Interface1Method2", "Interface2Method1", "BaseInterfaceMethod1", "BaseInterfaceMethod2", "PrivateMethod", "StaticMethod" })
+                .SequenceEqual(new[]
+                {
+                    "Interface1Method1",
+                    "Interface1Method2",
+                    "Interface2Method1",
+                    "BaseInterfaceMethod1",
+                    "BaseInterfaceMethod2",
+                    "PrivateMethod",
+                    "StaticMethod",
+                })
                 .ShouldBeTrue();
         }
 
