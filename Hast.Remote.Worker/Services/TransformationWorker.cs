@@ -2,13 +2,16 @@ using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Remote.Worker.Models;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using Microsoft.ApplicationInsights;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualStudio.Threading;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -35,7 +38,11 @@ namespace Hast.Remote.Worker.Services
         private int _restartCount;
         private Timer _oldResultBlobsCleanerTimer;
 
-
+        [SuppressMessage(
+            "Major Code Smell",
+            "S107",
+            MessageId = "Methods should not have too many parameters",
+            Justification = "All are necessary for this service.")]
         public TransformationWorker(
             IJsonConverter jsonConverter,
             IAppDataFolder appDataFolder,
@@ -56,13 +63,20 @@ namespace Hast.Remote.Worker.Services
             _telemetryClient = telemetryClient;
 
             _oldResultBlobsCleanerTimer = new Timer(TimeSpan.FromHours(3).TotalMilliseconds);
+            var timerIsBusy = false;
+
+            // The API doesn't make it possible, however the state is handled manually.
+#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
+#pragma warning disable VSTHRD101 // Avoid unsupported async delegates
             _oldResultBlobsCleanerTimer.Elapsed += async (_, _) =>
             {
+                if (timerIsBusy) return;
+
                 try
                 {
                     // Removing those result blobs that weren't deleted somehow (like the client exited while waiting
                     // for the result to appear, thus never requesting it hence it never getting deleted).
-                    var oldResultBlobs = (await GetBlobs(container, "results/"))
+                    var oldResultBlobs = (await GetBlobsAsync(container, "results/"))
                         .Cast<CloudBlockBlob>()
                         .Where(blob => blob.Properties.LastModified < _clock.UtcNow.AddHours(-1));
 
@@ -74,12 +88,18 @@ namespace Hast.Remote.Worker.Services
                 catch (Exception ex) when (!ex.IsFatal())
                 {
                     // If an exception escapes here it'll take down the whole process, so need to handle them.
-                    _logger.LogError(ex, "Error during cleaning up old result blobs.");
+                    _logger.LogError(ex, "error during cleaning up old result blobs");
+                }
+                finally
+                {
+                    timerIsBusy = false;
                 }
             };
+#pragma warning restore VSTHRD101 // Avoid unsupported async delegates
+#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
+
             _oldResultBlobsCleanerTimer.Enabled = true;
         }
-
 
         public async Task WorkAsync(CancellationToken cancellationToken)
         {
@@ -88,24 +108,31 @@ namespace Hast.Remote.Worker.Services
                 while (true)
                 {
                     _telemetryClient.Flush();
-                    var jobBlobs = (await GetBlobs(_container, "jobs/"))
-                        .Where(blob => !blob.StorageUri.PrimaryUri.ToString().Contains("$$$ORCHARD$$$.$$$"))
+                    var jobBlobs = (await GetBlobsAsync(_container, "jobs/"))
+                        .Where(blob => !blob
+                            .StorageUri
+                            .PrimaryUri
+                            .ToString()
+                            .Contains("$$$ORCHARD$$$.$$$", StringComparison.Ordinal))
                         .Cast<CloudBlockBlob>()
                         .Where(blob => blob.Properties.LeaseStatus == LeaseStatus.Unlocked && blob.Properties.Length != 0);
 
                     foreach (var jobBlob in jobBlobs)
                     {
-
                         cancellationToken.ThrowIfCancellationRequested();
 
                         _transformationTasks[jobBlob.Name] = Task.Factory.StartNew(
                             blobObject => WorkInnerAsync(blobObject, cancellationToken),
                             jobBlob,
-                            cancellationToken)
+                            cancellationToken,
+                            TaskCreationOptions.None,
+                            TaskScheduler.Current)
                             .ContinueWith(
                                 (task, blobNameObject) => _transformationTasks.TryRemove((string)blobNameObject, out _),
                                 jobBlob.Name,
-                                cancellationToken);
+                                cancellationToken,
+                                TaskContinuationOptions.None,
+                                TaskScheduler.Current);
                     }
 
                     cancellationToken.ThrowIfCancellationRequested();
@@ -118,7 +145,7 @@ namespace Hast.Remote.Worker.Services
             }
             catch (OperationCanceledException)
             {
-                _logger.LogInformation($"Cancelling {_transformationTasks.Count} tasks.");
+                _logger.LogInformation("cancelling {0} tasks", _transformationTasks.Count);
                 await Task.WhenAll(_transformationTasks.Values);
                 Dispose();
             }
@@ -140,8 +167,9 @@ namespace Hast.Remote.Worker.Services
                 {
                     _logger.LogCritical(
                         ex,
-                        "Transformation Worker crashed with an unhandled exception and was restarted " +
-                        _restartCount + " times. It won't be restarted again.");
+                        nameof(TransformationWorker) + " crashed with an unhandled exception and was restarted {0} " +
+                        "times and it won't be restarted again",
+                        _restartCount);
                     _telemetryClient.Flush();
                 }
             }
@@ -156,6 +184,8 @@ namespace Hast.Remote.Worker.Services
                 StartTimeUtc = _clock.UtcNow,
             };
 
+            using var taskContext = new JoinableTaskContext();
+
             try
             {
                 var leaseTimeSpan = TimeSpan.FromSeconds(15);
@@ -166,7 +196,7 @@ namespace Hast.Remote.Worker.Services
                     // started to work then nothing to do.
                     if (blob.Properties.LeaseStatus != LeaseStatus.Unlocked) return;
 
-                    var leaseId = await blob.AcquireLeaseAsync(leaseTimeSpan);
+                    var leaseId = await blob.AcquireLeaseAsync(leaseTimeSpan, null, cancellationToken);
                     accessCondition = new AccessCondition { LeaseId = leaseId };
                 }
                 catch (StorageException ex)
@@ -182,31 +212,10 @@ namespace Hast.Remote.Worker.Services
                     throw;
                 }
 
-                var processingTask = Task.Run(
-                    () => ProcessTaskAsync(blob, telemetry, accessCondition, cancellationToken),
-                    cancellationToken);
+                var processingTask = taskContext.Factory.RunAsync(
+                    () => ProcessTaskAsync(blob, telemetry, accessCondition, cancellationToken));
 
-                // Repeatedly renewing the lease until the processing completes.
-                while (!processingTask.IsCompleted)
-                {
-                    try
-                    {
-                        await blob.RenewLeaseAsync(accessCondition, cancellationToken);
-                    }
-                    catch (StorageException ex)
-                    {
-                        // If in the meantime the Task finished and removed the blob then nothing to do.
-                        if (HasHttpStatus(ex, HttpStatusCode.NotFound)) return;
-
-                        throw;
-                    }
-
-                    // Task.Delay() waits for 1 second less so the lease is renewed for sure before it
-                    // expires.
-                    await Task.WhenAny(
-                        processingTask,
-                        Task.Delay(leaseTimeSpan - TimeSpan.FromSeconds(1), cancellationToken));
-                }
+                await RenewLeaseUntilCompleteAsync(processingTask, blob, accessCondition, leaseTimeSpan, cancellationToken);
 
                 // This is so if there was an exception in the Task that will be thrown with its original
                 // stack trace. Otherwise Task.WhenAny() isn't throwing exceptions from its arguments.
@@ -215,7 +224,7 @@ namespace Hast.Remote.Worker.Services
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
-                _logger.LogError(ex, "Processing the job blob {0} failed.", blob.Name);
+                _logger.LogError(ex, "processing the job blob {0} failed", blob.Name);
             }
 
             telemetry.FinishTimeUtc = _clock.UtcNow;
@@ -260,49 +269,10 @@ namespace Hast.Remote.Worker.Services
 
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    var result = new TransformationJobResult { RemoteHastlayerVersion = GetType().Assembly.GetName().Version?.ToString(), Token = job.Token, AppId = job.AppId, };
-
-                    IHardwareRepresentation hardwareRepresentation;
-                    try
-                    {
-                        hardwareRepresentation = await _hastlayer.GenerateHardwareAsync(
-                            assemblyPaths,
-                            new HardwareGenerationConfiguration(
-                                job.Configuration.DeviceName,
-                                null,
-                                job.Configuration.CustomConfiguration,
-                                job.Configuration.HardwareEntryPointMemberFullNames,
-                                job.Configuration.HardwareEntryPointMemberNamePrefixes)
-                            {
-                                EnableCaching = true,
-                                EnableHardwareImplementationComposition = false,
-                            });
-
-                        cancellationToken.ThrowIfCancellationRequested();
-
-                        await using var memoryStream = new MemoryStream();
-                        await hardwareRepresentation.HardwareDescription.SerializeAsync(memoryStream);
-                        result.HardwareDescription = new HardwareDescription { Language = hardwareRepresentation.HardwareDescription.Language, SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray()), };
-                    }
-                    catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
-                    {
-                        // We don't want to show the stack trace to the user, just exception
-                        // message, so building one by iterating all the nested exceptions.
-
-                        var currentException = ex;
-                        var message = string.Empty;
-
-                        while (currentException != null)
-                        {
-                            message += currentException.Message + Environment.NewLine;
-                            currentException = currentException.InnerException;
-                        }
-
-                        result.Errors = new[]
-                        {
-                            message,
-                        };
-                    }
+                    var result = await GenerateHardwareRepresentationAsync(
+                        assemblyPaths,
+                        job,
+                        cancellationToken);
 
                     cancellationToken.ThrowIfCancellationRequested();
 
@@ -338,6 +308,66 @@ namespace Hast.Remote.Worker.Services
             }
         }
 
+        private async Task<TransformationJobResult> GenerateHardwareRepresentationAsync(
+            IEnumerable<string> assemblyPaths,
+            TransformationJob job,
+            CancellationToken cancellationToken)
+        {
+            var result = new TransformationJobResult
+            {
+                RemoteHastlayerVersion = GetType().Assembly.GetName().Version?.ToString(),
+                Token = job.Token,
+                AppId = job.AppId,
+            };
+
+            try
+            {
+                var hardwareRepresentation = await _hastlayer.GenerateHardwareAsync(
+                    assemblyPaths,
+                    new HardwareGenerationConfiguration(
+                        job.Configuration.DeviceName,
+                        null,
+                        job.Configuration.CustomConfiguration,
+                        job.Configuration.HardwareEntryPointMemberFullNames,
+                        job.Configuration.HardwareEntryPointMemberNamePrefixes)
+                    {
+                        EnableCaching = true,
+                        EnableHardwareImplementationComposition = false,
+                    });
+
+                cancellationToken.ThrowIfCancellationRequested();
+
+                await using var memoryStream = new MemoryStream();
+                await hardwareRepresentation.HardwareDescription.SerializeAsync(memoryStream);
+                result.HardwareDescription = new HardwareDescription
+                {
+                    Language = hardwareRepresentation.HardwareDescription.Language,
+                    SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray()),
+                };
+            }
+            catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
+            {
+                // We don't want to show the stack trace to the user, just exception
+                // message, so building one by iterating all the nested exceptions.
+
+                var currentException = ex;
+                var message = new StringBuilder();
+
+                while (currentException != null)
+                {
+                    message.AppendLine(currentException.Message);
+                    currentException = currentException.InnerException;
+                }
+
+                result.Errors = new[]
+                {
+                    message.ToString(),
+                };
+            }
+
+            return result;
+        }
+
         public void Dispose()
         {
             if (_oldResultBlobsCleanerTimer != null)
@@ -352,7 +382,7 @@ namespace Hast.Remote.Worker.Services
             Task.Delay(10000).Wait();
         }
 
-        private static async Task<List<IListBlobItem>> GetBlobs(CloudBlobContainer container, string prefix)
+        private static async Task<List<IListBlobItem>> GetBlobsAsync(CloudBlobContainer container, string prefix)
         {
             var segment = await container.ListBlobsSegmentedAsync(prefix, null);
             var list = new List<IListBlobItem>();
@@ -368,5 +398,32 @@ namespace Hast.Remote.Worker.Services
 
         private static bool HasHttpStatus(StorageException exception, HttpStatusCode statusCode) =>
             ((exception.InnerException as WebException)?.Response as HttpWebResponse)?.StatusCode == statusCode;
+
+        private static async Task RenewLeaseUntilCompleteAsync(
+            JoinableTask processingTask,
+            CloudBlockBlob blob,
+            AccessCondition accessCondition,
+            TimeSpan leaseTimeSpan,
+            CancellationToken cancellationToken)
+        {
+            while (!processingTask.IsCompleted)
+            {
+                try
+                {
+                    await blob.RenewLeaseAsync(accessCondition, cancellationToken);
+                }
+                catch (StorageException ex)
+                {
+                    // If in the meantime the Task finished and removed the blob then nothing to do.
+                    if (HasHttpStatus(ex, HttpStatusCode.NotFound)) return;
+
+                    throw;
+                }
+
+                // Task.Delay() waits for 1 second less so the lease is renewed for sure before it
+                // expires.
+                await processingTask.Task.WithTimeoutAsync(leaseTimeSpan - TimeSpan.FromSeconds(1), cancellationToken);
+            }
+        }
     }
 }
