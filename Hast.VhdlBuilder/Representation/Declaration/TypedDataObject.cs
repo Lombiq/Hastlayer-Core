@@ -9,7 +9,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         private Value _initialValue;
 
         /// <summary>
-        /// Gets or sets the initial value. If specified, this value will be set for the object when the hardware is initialized. Otherwise the data type's default value will be used.
+        /// Gets or sets the initial value. If specified, this value will be set for the object when the hardware is
+        /// initialized. Otherwise the data type's default value will be used.
         /// </summary>
         public Value InitialValue
         {

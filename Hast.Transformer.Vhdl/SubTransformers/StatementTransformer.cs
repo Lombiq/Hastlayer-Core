@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
@@ -287,8 +287,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 scope.Warnings.AddWarning(
                     "ThrowStatementOmitted",
-                    "The exception throw statement \"" + statement.ToString() +
-                    "\" was omitted during transformation to be able to transform the code. However this can cause issues for certain algorithms; if it is an issue for this one then this code can't be transformed.");
+                    $"The exception throw statement \"{statement}\" was omitted during transformation to be able to " +
+                    $"transform the code. However this can cause issues for certain algorithms; if it is an issue " +
+                    $"for this one then this code can't be transformed.");
 
                 currentBlock.Add(new LineComment("A throw statement was here, which was omitted during transformation."));
             }

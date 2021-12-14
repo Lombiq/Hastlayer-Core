@@ -10,8 +10,9 @@ namespace Hast.Transformer.Vhdl.Constants
         /// <summary>
         /// Comment added just before VHDL libraries.
         /// </summary>
-        public const string Libraries =
-@"VHDL libraries necessary for the generated code to work. These libraries are included here instead of being managed separately in the Hardware Framework so they can be more easily updated.";
+        public const string Libraries = "VHDL libraries necessary for the generated code to work. These libraries " +
+            "are included here instead of being managed separately in the Hardware Framework so they can be more " +
+            "easily updated.";
 
         /// <summary>
         /// Comment describing how the ports of the generated hardware component behave.

@@ -21,10 +21,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             var name = vhdlGenerationOptions.ShortenName(Name);
             return Terminated.Terminate(
-                "architecture " + name + " of " + vhdlGenerationOptions.ShortenName(Entity.Name) + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
-                    Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                $"architecture {name} of {vhdlGenerationOptions.ShortenName(Entity.Name)} is " +
+                vhdlGenerationOptions.NewLineIfShouldFormat() +
+                Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
-                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "end " + name,
                 vhdlGenerationOptions);
         }

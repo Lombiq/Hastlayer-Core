@@ -125,7 +125,8 @@ namespace Hast.Transformer.Services
 
             private readonly IKnownTypeLookupTable _knownTypeLookupTable;
 
-            public BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor(IKnownTypeLookupTable knownTypeLookupTable) => _knownTypeLookupTable = knownTypeLookupTable;
+            public BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor(IKnownTypeLookupTable knownTypeLookupTable) =>
+                _knownTypeLookupTable = knownTypeLookupTable;
 
             // Adding implicit casts as explained here:
             // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions
@@ -219,7 +220,9 @@ namespace Hast.Transformer.Services
                 var isCast = unaryOperatorExpression.Expression is CastExpression;
                 var expectedType = unaryOperatorExpression.Expression.GetActualType();
 
-                void Replace(IType newType) => unaryOperatorExpression.Expression.ReplaceWith(CreateCast(newType, unaryOperatorExpression.Expression, out var _));
+                void Replace(IType newType) =>
+                    unaryOperatorExpression.Expression.ReplaceWith(
+                        CreateCast(newType, unaryOperatorExpression.Expression, out var _));
 
                 if (_typesConvertedToIntInUnaryOperations.Contains(type.GetFullName()) &&
                     (!isCast || expectedType.GetFullName() != typeof(int).FullName))

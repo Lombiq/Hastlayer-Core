@@ -111,7 +111,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var currentBlock = context.Scope.CurrentBlock;
             if (stateMachine.States[currentBlock.StateMachineStateIndex].Body.Body.Any())
             {
-                currentBlock.Add(new LineComment("A SIMD operation's results should always be read out in the next clock cycle at earliest, so closing the current state."));
+                currentBlock.Add(new LineComment(
+                    "A SIMD operation's results should always be read out in the next clock cycle at earliest, so closing the current state."));
                 stateMachine.AddNewStateAndChangeCurrentBlock(context);
             }
 

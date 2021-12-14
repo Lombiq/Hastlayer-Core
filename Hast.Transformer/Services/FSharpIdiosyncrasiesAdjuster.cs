@@ -29,7 +29,8 @@ namespace Hast.Transformer.Services
         {
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
 
-            public FSharpIdiosyncrasiesAdjustingVisitor(ITypeDeclarationLookupTable typeDeclarationLookupTable) => _typeDeclarationLookupTable = typeDeclarationLookupTable;
+            public FSharpIdiosyncrasiesAdjustingVisitor(ITypeDeclarationLookupTable typeDeclarationLookupTable) =>
+                _typeDeclarationLookupTable = typeDeclarationLookupTable;
 
             public override void VisitInvocationExpression(InvocationExpression invocationExpression)
             {
@@ -97,8 +98,8 @@ namespace Hast.Transformer.Services
 
                     // Getting the member reference like: new NameOfTaskStartingMethod@35 (input).Invoke
                     MemberReferenceExpression invocationMemberReference;
-                    if ((invocationMemberReference = invocationExpression.Arguments.First().FindFirstChildOfType<MemberReferenceExpression>()) != null &&
-                        invocationMemberReference.MemberName == "Invoke" &&
+                    invocationMemberReference = invocationExpression.Arguments.First().FindFirstChildOfType<MemberReferenceExpression>();
+                    if (invocationMemberReference?.MemberName == "Invoke" &&
                         invocationMemberReference.Target.GetFullName().IsClosureClassName())
                     {
                         invocationExpression.Arguments

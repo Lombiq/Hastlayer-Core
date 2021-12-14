@@ -1,4 +1,5 @@
 using Hast.Transformer.Abstractions.SimpleMemory;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace Hast.TestInputs.Dynamic
@@ -22,7 +23,8 @@ namespace Hast.TestInputs.Dynamic
             return memory.ReadInt32(0);
         }
 
-        public virtual void NestedInlinedMultiReturn(SimpleMemory memory) => memory.WriteInt32(0, NestedInlinedMultiReturnInternal(memory.ReadInt32(0)));
+        public virtual void NestedInlinedMultiReturn(SimpleMemory memory) =>
+            memory.WriteInt32(0, NestedInlinedMultiReturnInternal(memory.ReadInt32(0)));
 
         public int NestedInlinedMultiReturn(int input)
         {
@@ -37,7 +39,7 @@ namespace Hast.TestInputs.Dynamic
             InlinedMultiReturnInternal(input) + InlinedMultiReturnInternal(input);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Static methods are not supported.")]
+        [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Static methods are not supported.")]
         private int InlinedMultiReturnInternal(int input)
         {
             int output;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Vhdl.Helpers;
@@ -48,11 +48,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 context.Scope.Warnings.AddWarning(
                     "NonPrimitiveArrayTooLarge",
-                    "You've created a large array (length: " +
-                        length +
-                        ") with non-primitive items (type: " +
-                        elementType.GetFullName() +
-                        "). The resulting hardware implementation might not fit on the FPGA and/or will take a very long time to complete. Consider using a smaller array (below 500 items)."
+                    $"You've created a large array (length: {length}) with non-primitive items (type: " +
+                    $"{elementType.GetFullName()}). The resulting hardware implementation might not fit on the FPGA " +
+                    $"and/or will take a very long time to complete. Consider using a smaller array (below 500 items)."
                         .AddParentEntityName(expression));
             }
 

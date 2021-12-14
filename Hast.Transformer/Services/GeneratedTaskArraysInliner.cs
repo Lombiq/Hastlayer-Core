@@ -36,6 +36,8 @@ namespace Hast.Transformer.Services
     /// </example>
     public class GeneratedTaskArraysInliner : IConverter
     {
+        private const string TaskStart = "System.Threading.Tasks.Task`1<";
+
         public IEnumerable<string> Dependencies { get; } = new[] { nameof(BinaryAndUnaryOperatorExpressionsCastAdjuster) };
 
         public void Convert(
@@ -48,6 +50,9 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new InlinableTaskArraysInliningVisitor(inlinableTaskArraysFindingVisitor.InlinableVariableMapping));
         }
 
+        private static bool IsTask(Expression expression) =>
+            expression.GetActualTypeFullName().StartsWith(TaskStart, StringComparison.Ordinal);
+
         private class InlinableTaskArraysFindingVisitor : DepthFirstAstVisitor
         {
             public Dictionary<string, string> InlinableVariableMapping { get; set; } = new Dictionary<string, string>();
@@ -56,7 +61,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitAssignmentExpression(assignmentExpression);
 
-                // AssigmentExpression, Left = arg_*, Right.GetActualTypeFullName().StartsWith("System.Threading.Tasks.Task`1<")
+                // AssigmentExpression, Left = arg_*, IsTask(Right)
 
                 var compilerGeneratedVariableName = string.Empty;
                 if (assignmentExpression.Left.Is<IdentifierExpression>(identifier =>
@@ -64,7 +69,7 @@ namespace Hast.Transformer.Services
                         compilerGeneratedVariableName = identifier.Identifier;
                         return compilerGeneratedVariableName.StartsWith("arg_", StringComparison.Ordinal);
                     }) &&
-                    assignmentExpression.Right.GetActualTypeFullName().StartsWith("System.Threading.Tasks.Task`1<", StringComparison.InvariantCulture))
+                    IsTask(assignmentExpression.Right))
                 {
                     InlinableVariableMapping[compilerGeneratedVariableName] =
                         ((IdentifierExpression)assignmentExpression.Right).Identifier;
@@ -76,7 +81,8 @@ namespace Hast.Transformer.Services
         {
             private readonly Dictionary<string, string> _inlinableVariableMappings;
 
-            public InlinableTaskArraysInliningVisitor(Dictionary<string, string> inlinableVariableMappings) => _inlinableVariableMappings = inlinableVariableMappings;
+            public InlinableTaskArraysInliningVisitor(Dictionary<string, string> inlinableVariableMappings) =>
+                _inlinableVariableMappings = inlinableVariableMappings;
 
             public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
             {
@@ -88,7 +94,7 @@ namespace Hast.Transformer.Services
                     // If this is in an arg_9C_0 = array; kind of assignment, then remove the whole assignment's statement.
                     if (parentAssignment != null &&
                         parentAssignment.Left == identifierExpression &&
-                        parentAssignment.Right.GetActualTypeFullName().StartsWith("System.Threading.Tasks.Task`1<", StringComparison.InvariantCulture))
+                        IsTask(parentAssignment.Right))
                     {
                         parentAssignment.FindFirstParentOfType<ExpressionStatement>().Remove();
                     }
@@ -109,7 +115,8 @@ namespace Hast.Transformer.Services
                 }
             }
 
-            private bool IsInlinableVariableIdentifier(IdentifierExpression identifierExpression) => _inlinableVariableMappings.ContainsKey(identifierExpression.Identifier);
+            private bool IsInlinableVariableIdentifier(IdentifierExpression identifierExpression) =>
+                _inlinableVariableMappings.ContainsKey(identifierExpression.Identifier);
         }
     }
 }

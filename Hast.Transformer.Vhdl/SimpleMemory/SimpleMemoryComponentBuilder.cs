@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using System.Collections.Generic;
@@ -9,7 +9,8 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
     {
         private readonly ISimpleMemoryOperationProxyBuilder _simpleMemoryOperationProxyBuilder;
 
-        public SimpleMemoryComponentBuilder(ISimpleMemoryOperationProxyBuilder simpleMemoryOperationProxyBuilder) => _simpleMemoryOperationProxyBuilder = simpleMemoryOperationProxyBuilder;
+        public SimpleMemoryComponentBuilder(ISimpleMemoryOperationProxyBuilder simpleMemoryOperationProxyBuilder) =>
+            _simpleMemoryOperationProxyBuilder = simpleMemoryOperationProxyBuilder;
 
         public void AddSimpleMemoryComponentsToArchitecture(
             IEnumerable<IArchitectureComponent> invokingComponents,

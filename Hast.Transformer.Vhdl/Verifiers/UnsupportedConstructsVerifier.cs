@@ -23,7 +23,8 @@ namespace Hast.Transformer.Vhdl.Verifiers
         {
             private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
 
-            public UnsupportedConstructsFindingVisitor(IDisplayClassFieldTransformer displayClassFieldTransformer) => _displayClassFieldTransformer = displayClassFieldTransformer;
+            public UnsupportedConstructsFindingVisitor(IDisplayClassFieldTransformer displayClassFieldTransformer) =>
+                _displayClassFieldTransformer = displayClassFieldTransformer;
 
             public override void VisitFieldDeclaration(FieldDeclaration fieldDeclaration)
             {

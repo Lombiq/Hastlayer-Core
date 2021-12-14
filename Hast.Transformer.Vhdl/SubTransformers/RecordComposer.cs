@@ -58,8 +58,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         // dependency.
                         var fieldDataType = member.ReturnType.GetFullName() == typeFullName
                             ? throw new NotSupportedException(
-                                "A type referencing itself in its properties or fields (like in a linked list implementation) is not supported. The member " +
-                                member.GetFullName() + " references its parent type.".AddParentEntityName(member))
+                                "A type referencing itself in its properties or fields (like in a linked list " +
+                                "implementation) is not supported. The member " + member.GetFullName() +
+                                " references its parent type.".AddParentEntityName(member))
                             : _declarableTypeCreatorLazy.Value.CreateDeclarableType(member, member.ReturnType, context);
 
                         return new RecordField

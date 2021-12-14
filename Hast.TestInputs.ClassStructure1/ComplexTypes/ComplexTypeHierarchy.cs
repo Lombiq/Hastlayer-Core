@@ -14,7 +14,10 @@ namespace Hast.TestInputs.ClassStructure1.ComplexTypes
         void IInterface1.Interface1Method1() => PrivateMethod();
 
         // Implicit interface implementation.
-        [SuppressMessage("Major Bug", "S1145:Useless \"if(true) {...}\" and \"if(false){...}\" blocks should be removed", Justification = ThatsThePoint)]
+        [SuppressMessage(
+            "Major Bug",
+            "S1145:Useless \"if(true) {...}\" and \"if(false){...}\" blocks should be removed",
+            Justification = ThatsThePoint)]
         public void Interface1Method2()
         {
             //// var x = BaseClassMethod1(4);

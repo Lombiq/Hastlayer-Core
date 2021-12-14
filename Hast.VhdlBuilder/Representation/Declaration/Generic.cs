@@ -10,12 +10,16 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public List<GenericItem> Items { get; } = new List<GenericItem>();
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-            Terminated.Terminate(
-                "generic (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
-                    (Items != null ? Items.ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions)).IndentLinesIfShouldFormat(vhdlGenerationOptions) : string.Empty) +
-                ")",
-                vhdlGenerationOptions);
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            var values = Items != null
+                ? Items.ToVhdl(
+                    vhdlGenerationOptions,
+                    Terminated.Terminator(vhdlGenerationOptions)).IndentLinesIfShouldFormat(vhdlGenerationOptions)
+                : string.Empty;
+            return Terminated.Terminate(
+                $"generic ({vhdlGenerationOptions.NewLineIfShouldFormat()}{values})", vhdlGenerationOptions);
+        }
     }
 
     public class GenericItem : DataObjectBase

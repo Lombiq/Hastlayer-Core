@@ -62,9 +62,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     "-name SDC_STATEMENT \"\"set_multicycle_path " + ClockCycles + " -" + Type + " -to {*" +
                     // The config should contain the path's name without backslashes even if the original name is an
                     // extended identifier. Spaces need to be escaped with a slash.
-                    (string.IsNullOrEmpty(ParentName) ?
-                        string.Empty :
-                        vhdlGenerationOptions.NameShortener(ParentName.TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ", StringComparison.Ordinal)) + ":") +
+                    (string.IsNullOrEmpty(ParentName)
+                        ? string.Empty
+                        : vhdlGenerationOptions
+                            .NameShortener(ParentName.TrimExtendedVhdlIdDelimiters()
+                            .Replace(" ", "\\ ", StringComparison.Ordinal)) + ":") +
                     PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ", StringComparison.Ordinal) +
                     "[*]}\"\"";
         }

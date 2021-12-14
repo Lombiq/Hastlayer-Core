@@ -33,7 +33,8 @@ namespace Hast.Transformer.Services
         public IEnumerable<string> Dependencies { get; } = new[] { nameof(EmbeddedAssignmentExpressionsExpander) };
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
 
-        public OptionalParameterFiller(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory) => _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
+        public OptionalParameterFiller(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory) =>
+            _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
 
         public void Convert(
             SyntaxTree syntaxTree,
@@ -45,7 +46,8 @@ namespace Hast.Transformer.Services
         {
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
 
-            public OptionalParamtersFillingVisitor(ITypeDeclarationLookupTable typeDeclarationLookupTable) => _typeDeclarationLookupTable = typeDeclarationLookupTable;
+            public OptionalParamtersFillingVisitor(ITypeDeclarationLookupTable typeDeclarationLookupTable) =>
+                _typeDeclarationLookupTable = typeDeclarationLookupTable;
 
             public override void VisitInvocationExpression(InvocationExpression invocationExpression)
             {

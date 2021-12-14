@@ -11,15 +11,15 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (binaryOperatorExpression.Left is not PrimitiveExpression)
             {
                 throw new NotSupportedException(
-                    "Evaluating only binary operator expressions where both operands are primitive expressions are supported. The left expression was: " +
-                    binaryOperatorExpression.Left + ".");
+                    "Evaluating only binary operator expressions where both operands are primitive expressions are " +
+                    "supported. The left expression was: " + binaryOperatorExpression.Left + ".");
             }
 
             if (binaryOperatorExpression.Right is not PrimitiveExpression)
             {
                 throw new NotSupportedException(
-                    "Evaluating only binary operator expressions where both operands are primitive expressions are supported. The right expression was: " +
-                    binaryOperatorExpression.Right + ".");
+                    "Evaluating only binary operator expressions where both operands are primitive expressions are " +
+                    "supported. The right expression was: " + binaryOperatorExpression.Right + ".");
             }
 
             dynamic leftValue = ((PrimitiveExpression)binaryOperatorExpression.Left).Value;

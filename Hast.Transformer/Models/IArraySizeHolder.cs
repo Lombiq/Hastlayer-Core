@@ -45,8 +45,9 @@ namespace Hast.Transformer.Models
             {
                 throw new NotSupportedException(
                     "The length of the array holder " + arrayHolder.GetFullName() +
-                    " couldn't be statically determined. Only arrays with dimensions defined at compile-time are supported. " +
-                    "If the array size is actually static just Hastlayer can't figure it out for some reason then you can configure it manually via TransformerConfiguration.");
+                    " couldn't be statically determined. Only arrays with dimensions defined at compile-time are " +
+                    "supported. If the array size is actually static just Hastlayer can't figure it out for some " +
+                    "reason then you can configure it manually via TransformerConfiguration.");
             }
 
             return size;

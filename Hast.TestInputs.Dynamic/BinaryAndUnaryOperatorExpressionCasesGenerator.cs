@@ -76,8 +76,15 @@ namespace Hast.TestInputs.Dynamic
             var left = leftType + "Left";
             var right = rightType + "Right";
 
+            var rightValue =
+                rightType != "int" ||
+                leftType.Contains(Long, StringComparison.InvariantCulture) ||
+                leftType == UInt
+                    ? $"({rightType})"
+                    : string.Empty;
+
             codeBuilder.AppendLine($@"
-                        var {right} = {(rightType != "int" || leftType.Contains(Long, StringComparison.InvariantCulture) || leftType == UInt ? $"({rightType})" : string.Empty)}input;");
+                var {right} = {rightValue}input;");
 
             var shiftRightOperandCast = _needsShiftCastTypes.Contains(rightType) ? "(int)" : string.Empty;
 
@@ -131,8 +138,8 @@ namespace Hast.TestInputs.Dynamic
             // good enough.
             // Awkward indentation is so the generated code can be properly formatted.
             return $@"SaveResult(
-                memory, 
-                {originalMemoryIndex}, 
+                memory,
+                {originalMemoryIndex},
                 (long)({code0}), // {originalMemoryIndex}
                 (long)({code1}), // {originalMemoryIndex + 2}
                 (long)({code2}), // {originalMemoryIndex + 4}
@@ -145,10 +152,11 @@ namespace Hast.TestInputs.Dynamic
 
         private static void AddMethodStart(string nameSuffix, StringBuilder codeBuilder, string leftType)
         {
+            var namePrefix = leftType.ToUpperInvariant()[0] + leftType[1..];
             var left = leftType + "Left";
             codeBuilder.AppendLine($@"
-                        public virtual void {leftType.ToUpperInvariant()[0]}{leftType[1..]}BinaryOperatorExpressionVariations{nameSuffix}(SimpleMemory memory)
-                        {{");
+                public virtual void {namePrefix}BinaryOperatorExpressionVariations{nameSuffix}(SimpleMemory memory)
+                {{");
 
             if (leftType is Long or ULong)
             {
@@ -173,7 +181,8 @@ namespace Hast.TestInputs.Dynamic
             memoryIndex += 2;
             // The long cast will be unnecessary most of the time but determining when it's needed is complex so
             // good enough.
-            return $@"SaveResult(memory, {originalMemoryIndex}, {(addLongCast ? "(long)(" : string.Empty)}{code}{(addLongCast ? ")" : string.Empty)});";
+            if (addLongCast) code = $"(long)({code})";
+            return $@"SaveResult(memory, {originalMemoryIndex}, {code});";
         }
     }
 }

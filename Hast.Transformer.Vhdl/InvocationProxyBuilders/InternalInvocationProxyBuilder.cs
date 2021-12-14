@@ -174,7 +174,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 });
 
                 bodyBlock.Add(new LineComment(
-                    "Building a boolean array where each of the elements will indicate whether the component with the given index should be started next."));
+                    "Building a boolean array where each of the elements will indicate whether the component with " +
+                    "the given index should be started next."));
 
                 for (int c = 0; c < targetComponentCount; c++)
                 {
@@ -527,7 +528,10 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
         /// <summary>
         /// Check if the component would invoke itself. This can happen with recursive calls.
         /// </summary>
-        private static IVhdlElement CreateNullOperationIfTargetComponentEqualsInvokingComponent(int index, string targetMemberName, string invokerName)
+        private static IVhdlElement CreateNullOperationIfTargetComponentEqualsInvokingComponent(
+            int index,
+            string targetMemberName,
+            string invokerName)
         {
             if (GetTargetMemberComponentName(index, targetMemberName) != invokerName) return null;
 
@@ -602,7 +606,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                                 .CreateStartedSignalReference(invokerName, targetMemberName, invokerIndex),
                     });
 
-                    signalConnectionsBlock.Body.AddRange(BuildInParameterAssignments(invokerName, invokerIndex, targetIndex, componentsByName, targetMemberName));
+                    signalConnectionsBlock.Body.AddRange(
+                        BuildInParameterAssignments(invokerName, invokerIndex, targetIndex, componentsByName, targetMemberName));
 
                     signalConnectionsBlock.Add(new Assignment
                     {
@@ -615,12 +620,18 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                     var returnAssignment = BuildReturnAssigment(invokerName, invokerIndex, targetIndex, targetMemberName, componentsByName);
                     if (returnAssignment != null) signalConnectionsBlock.Add(returnAssignment);
-                    signalConnectionsBlock.Body.AddRange(BuildOutParameterAssignments(invokerName, invokerIndex, targetIndex, targetMemberName, componentsByName));
+                    signalConnectionsBlock.Body.AddRange(
+                        BuildOutParameterAssignments(invokerName, invokerIndex, targetIndex, targetMemberName, componentsByName));
                 }
             }
         }
 
-        public static IVhdlElement BuildReturnAssigment(string invokerName, int invokerIndex, int targetIndex, string targetMemberName, Dictionary<string, IArchitectureComponent> componentsByName)
+        public static IVhdlElement BuildReturnAssigment(
+            string invokerName,
+            int invokerIndex,
+            int targetIndex,
+            string targetMemberName,
+            Dictionary<string, IArchitectureComponent> componentsByName)
         {
             // Does the target have a return value?
             var targetComponentName = ArchitectureComponentNameHelper

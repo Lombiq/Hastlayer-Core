@@ -108,11 +108,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 BinaryOperatorType.InEquality => BinaryOperator.InEquality,
                 BinaryOperatorType.LessThan => BinaryOperator.LessThan,
                 BinaryOperatorType.LessThanOrEqual => BinaryOperator.LessThanOrEqual,
-                BinaryOperatorType.Modulus => BinaryOperator.Remainder, // The % operator in .NET, called modulus in the AST, is in reality a different remainder operator.
+                // The % operator in .NET, called modulus in the AST, is in reality a different remainder operator.
+                BinaryOperatorType.Modulus => BinaryOperator.Remainder,
                 BinaryOperatorType.Multiply => BinaryOperator.Multiply,
                 // Left and right shift for numerical types is a function call in VHDL, so handled separately. See
                 // below. The sll/srl or sra/sla operators shouldn't be used, see:
-                // https://www.nandland.com/vhdl/examples/example-shifts.html and https://stackoverflow.com/questions/9018087/shift-a-std-logic-vector-of-n-bit-to-right-or-left
+                // https://www.nandland.com/vhdl/examples/example-shifts.html and
+                // https://stackoverflow.com/questions/9018087/shift-a-std-logic-vector-of-n-bit-to-right-or-left
                 BinaryOperatorType.ShiftLeft or BinaryOperatorType.ShiftRight => binary.Operator,
                 BinaryOperatorType.Subtract => BinaryOperator.Subtract,
                 _ => throw new NotSupportedException("Binary operator " + expression.Operator + " is not supported."),
@@ -433,7 +435,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             return (shouldResizeResult, newBinaryElement, clockCyclesNeededForOperation);
         }
 
-        private static bool ShouldResize(bool isMultiplication, VhdlTypeInfo left, VhdlTypeInfo right, IType resultType, int resultTypeSize, BinaryOperatorExpression expression)
+        private static bool ShouldResize(
+            bool isMultiplication,
+            VhdlTypeInfo left,
+            VhdlTypeInfo right,
+            IType resultType,
+            int resultTypeSize,
+            BinaryOperatorExpression expression)
         {
             var shouldResizeResult =
                 isMultiplication &&

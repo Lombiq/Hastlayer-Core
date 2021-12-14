@@ -82,7 +82,8 @@ namespace Hast.Transformer.Vhdl.Verifiers
         {
             private readonly Action<MemberReferenceExpression> _expressionProcessor;
 
-            public MemberReferenceExpressionVisitingVisitor(Action<MemberReferenceExpression> expressionProcessor) => _expressionProcessor = expressionProcessor;
+            public MemberReferenceExpressionVisitingVisitor(Action<MemberReferenceExpression> expressionProcessor) =>
+                _expressionProcessor = expressionProcessor;
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {

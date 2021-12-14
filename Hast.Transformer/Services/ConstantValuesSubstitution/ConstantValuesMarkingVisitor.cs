@@ -133,7 +133,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         MemberReferenceHandler = memberReference =>
                         {
                             var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
-                                .FindMemberReferenceInConstructor(constructorReference.Constructor, memberReference.GetMemberFullName(), _typeDeclarationLookupTable);
+                                .FindMemberReferenceInConstructor(
+                                    constructorReference.Constructor,
+                                    memberReference.GetMemberFullName(),
+                                    _typeDeclarationLookupTable);
 
                             if (memberReferenceExpressionInConstructor != null &&
                                 _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings

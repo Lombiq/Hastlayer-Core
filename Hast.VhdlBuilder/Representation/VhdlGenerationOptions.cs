@@ -55,8 +55,11 @@ namespace Hast.VhdlBuilder.Representation
                 newName = Regex.Replace(
                     newName,
                     // Detects names in the following patterns:
-                    // System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory)
-                    // \System.Void Hast::ExternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.SimpleMemory.SimpleMemory)._Finished.0\
+                    // System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(
+                    //     Hast.Transformer.SimpleMemory.SimpleMemory)
+                    // \System.Void Hast::ExternalInvocationProxy().System.Void
+                    //     Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(
+                    //     Hast.Transformer.SimpleMemory.SimpleMemory)._Finished.0\
                     // Will also replace names in names.
                     @"\\?\S+\.\S+ [^\s:]+::[^\s(]+\(\S*?\)(\.\d+)?\\?",
                     NameShortenerMatch,

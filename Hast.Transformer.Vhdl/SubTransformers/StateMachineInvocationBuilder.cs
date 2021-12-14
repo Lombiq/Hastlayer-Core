@@ -188,7 +188,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 finishedComponents.Contains(indexedStateMachineName))
             {
                 scope.CurrentBlock.Add(new LineComment(
-                    "The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state."));
+                    "The last invocation for the target state machine finished in the previous state, so need to " +
+                    "start the next one in the next state."));
                 stateMachine.AddNewStateAndChangeCurrentBlock(scope);
             }
 
@@ -285,8 +286,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (parameter.DataType != parameterSignalType)
             {
                 IAssignmentTypeConversionResult conversionResult;
-                conversionResult = flowDirection == ParameterFlowDirection.Out ? _typeConversionTransformer
-                        .ImplementTypeConversionForAssignment(parameter.DataType, parameterSignalType, parameterReference, assignTo) : _typeConversionTransformer
+                conversionResult = flowDirection == ParameterFlowDirection.Out
+                    ? _typeConversionTransformer
+                        .ImplementTypeConversionForAssignment(parameter.DataType, parameterSignalType, parameterReference, assignTo)
+                    : _typeConversionTransformer
                         .ImplementTypeConversionForAssignment(parameterSignalType, parameter.DataType, parameterSignalReference, assignTo);
 
                 assignTo = conversionResult.ConvertedToDataObject;

@@ -24,6 +24,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             metadata.IsHardwareEntryPointMember = true;
         }
 
-        internal static HardwareEntryPointMemberMetadata GetHardwareEntryPointMemberMetadata(this EntityDeclaration member) => member.Annotation<HardwareEntryPointMemberMetadata>();
+        internal static HardwareEntryPointMemberMetadata GetHardwareEntryPointMemberMetadata(
+            this EntityDeclaration member) =>
+            member.Annotation<HardwareEntryPointMemberMetadata>();
     }
 }

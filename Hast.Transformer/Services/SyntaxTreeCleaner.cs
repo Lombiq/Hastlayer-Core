@@ -1,4 +1,4 @@
-﻿using Hast.Common.Extensions;
+using Hast.Common.Extensions;
 using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -32,7 +32,8 @@ namespace Hast.Transformer.Services
         public void CleanUnusedDeclarations(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
         {
             var typeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree);
-            var noIncludedMembers = !configuration.HardwareEntryPointMemberFullNames.Any() && !configuration.HardwareEntryPointMemberNamePrefixes.Any();
+            var noIncludedMembers = !configuration.HardwareEntryPointMemberFullNames.Any() &&
+                !configuration.HardwareEntryPointMemberNamePrefixes.Any();
             var referencedNodesFlaggingVisitor = new ReferencedNodesFlaggingVisitor(typeDeclarationLookupTable, configuration);
 
             // Starting with hardware entry point members we walk through the references to see which declarations are

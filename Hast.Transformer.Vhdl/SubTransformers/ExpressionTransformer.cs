@@ -434,6 +434,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var stateMachine = scope.StateMachine;
 
 #pragma warning disable S125 // Sections of code should not be commented out
+#pragma warning disable S103 // Lines should not be too long
             /*
             Task.Factory.StartNew(lambda => here) calls are compiled into one of the two version:
             * If the lambda is a closure on local variables then a DisplayClass with fields for all local variables
@@ -461,6 +462,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             Both of these are then awaited as:
                 Task.WhenAll(array).Wait();
             */
+#pragma warning restore S103 // Lines should not be too long
 #pragma warning restore S125 // Sections of code should not be commented out
 
             string GetTaskVariableIdentifier() =>
@@ -551,9 +553,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     stateMachine,
                     assignment);
 
+#pragma warning disable S103 // Lines should not be too long
             //// Handling Task starts like:
             //// array[i] = Task.Factory.StartNew(<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<NameOfTaskStartingMethod>b__0), inputArgument);
             //// array[i] = Task.Factory.StartNew((Func<object, OutputType>)this.<NameOfTaskStartingMethod>b__6_0, (object) inputArgument);
+#pragma warning restore S103 // Lines should not be too long
             var firstArgument = rightInvocationExpression.Arguments.First();
 
             // Is this the first type of Task starts?

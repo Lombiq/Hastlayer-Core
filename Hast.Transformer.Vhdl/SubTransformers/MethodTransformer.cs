@@ -141,35 +141,34 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 // If the parameter can be modified inside and those changes should be passed back then we need to
                 // write the local variables back to parameters.
-                if (parameter.IsOutFlowing())
+                if (!parameter.IsOutFlowing()) continue;
+
+                if (isFirstOutFlowingParameter)
                 {
-                    if (isFirstOutFlowingParameter)
-                    {
-                        isFirstOutFlowingParameter = false;
+                    isFirstOutFlowingParameter = false;
 
-                        stateMachine.States[1].Body.Add(new LineComment(
-                            "Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too."));
-                    }
-
-                    var outParameterSignalReference = stateMachine
-                        .CreateParameterSignalReference(parameter.Name, ParameterFlowDirection.Out);
-
-                    stateMachine.InternallyDrivenSignals.Add(new ParameterSignal(
-                        methodFullName,
-                        parameter.Name,
-                        0,
-                        true)
-                    {
-                        DataType = parameterDataType,
-                        Name = outParameterSignalReference.Name,
-                    });
-
-                    stateMachine.States[1].Body.Add(new Assignment
-                    {
-                        AssignTo = outParameterSignalReference,
-                        Expression = parameterLocalVariableReference,
-                    });
+                    stateMachine.States[1].Body.Add(new LineComment(
+                        "Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too."));
                 }
+
+                var outParameterSignalReference = stateMachine
+                    .CreateParameterSignalReference(parameter.Name, ParameterFlowDirection.Out);
+
+                stateMachine.InternallyDrivenSignals.Add(new ParameterSignal(
+                    methodFullName,
+                    parameter.Name,
+                    0,
+                    true)
+                {
+                    DataType = parameterDataType,
+                    Name = outParameterSignalReference.Name,
+                });
+
+                stateMachine.States[1].Body.Add(new Assignment
+                {
+                    AssignTo = outParameterSignalReference,
+                    Expression = parameterLocalVariableReference,
+                });
             }
 
             // Processing method body.

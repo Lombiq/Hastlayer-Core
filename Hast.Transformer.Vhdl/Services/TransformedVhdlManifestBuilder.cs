@@ -256,7 +256,9 @@ namespace Hast.Transformer.Vhdl.Services
             if (anyMultiCycleOperations)
             {
                 hastIpArchitecture.Declarations.Add(new LogicalBlock(
-                    new LineComment("When put on variables and signals this attribute instructs Vivado not to merge them, thus allowing us to define multi-cycle paths properly."),
+                    new LineComment(
+                        "When put on variables and signals this attribute instructs Vivado not to merge them, thus " +
+                        "allowing us to define multi-cycle paths properly."),
                     KnownDataTypes.DontTouchAttribute));
             }
 

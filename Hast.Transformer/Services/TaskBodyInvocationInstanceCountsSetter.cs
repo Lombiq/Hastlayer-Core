@@ -94,7 +94,8 @@ namespace Hast.Transformer.Services
                     {
                         // In code decopmiled from F# it can happen that the expression will be decompiled into
                         // "1 + actual number"... Taking care of that here.
-                        primitiveExpression = innerCondition.Right as PrimitiveExpression ?? innerCondition.Right.FindFirstChildOfType<PrimitiveExpression>();
+                        primitiveExpression = innerCondition.Right as PrimitiveExpression ??
+                            innerCondition.Right.FindFirstChildOfType<PrimitiveExpression>();
                     }
                 }
 

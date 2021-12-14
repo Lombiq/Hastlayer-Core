@@ -80,8 +80,13 @@ namespace Hast.Transformer.Services
             }
         }
 
-        private static string SuffixMethodIdentifier(string identifier, string methodIdentifierNameSuffix) =>
-            identifier.EndsWith("_" + methodIdentifierNameSuffix, StringComparison.InvariantCulture) ? identifier : identifier + "_" + methodIdentifierNameSuffix;
+        private static string SuffixMethodIdentifier(string identifier, string methodIdentifierNameSuffix)
+        {
+            var suffix = "_" + methodIdentifierNameSuffix;
+            return identifier.EndsWith(suffix, StringComparison.InvariantCulture)
+                ? identifier
+                : identifier + suffix;
+        }
 
         private class MethodCallChangingVisitor : DepthFirstAstVisitor
         {

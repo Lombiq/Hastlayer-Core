@@ -6,7 +6,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public class RemainderOperatorExpressionsExpander : IRemainderOperatorExpressionsExpander
     {
-        public void ExpandRemainderOperatorExpressions(SyntaxTree syntaxTree) => syntaxTree.AcceptVisitor(new RemainderOperatorExpressionsExpanderVisitor());
+        public void ExpandRemainderOperatorExpressions(SyntaxTree syntaxTree) =>
+            syntaxTree.AcceptVisitor(new RemainderOperatorExpressionsExpanderVisitor());
 
         private class RemainderOperatorExpressionsExpanderVisitor : DepthFirstAstVisitor
         {

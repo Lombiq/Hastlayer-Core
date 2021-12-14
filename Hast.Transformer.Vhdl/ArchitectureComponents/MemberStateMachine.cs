@@ -87,11 +87,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return _states.Count - 1;
         }
 
-        public void RecordMultiCycleOperation(IDataObject operationResultReference, int requiredClockCyclesCeiling) => _multiCycleOperations.Add(new MultiCycleOperation
-        {
-            OperationResultReference = operationResultReference,
-            RequiredClockCyclesCeiling = requiredClockCyclesCeiling,
-        });
+        public void RecordMultiCycleOperation(IDataObject operationResultReference, int requiredClockCyclesCeiling) =>
+            _multiCycleOperations.Add(new MultiCycleOperation
+            {
+                OperationResultReference = operationResultReference,
+                RequiredClockCyclesCeiling = requiredClockCyclesCeiling,
+            });
 
         public override IVhdlElement BuildDeclarations()
         {

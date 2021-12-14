@@ -72,7 +72,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             // other state machines, since we don't want to directly set other state machines' states.
             ArchitectureComponentNameHelper.CreatePrefixedObjectName(stateMachine.Name, "_State_" + index);
 
-        public static string CreateStateVariableName(this IMemberStateMachine stateMachine) => ArchitectureComponentNameHelper.CreatePrefixedObjectName(stateMachine.Name, "_State");
+        public static string CreateStateVariableName(this IMemberStateMachine stateMachine) =>
+            ArchitectureComponentNameHelper.CreatePrefixedObjectName(stateMachine.Name, "_State");
 
         public static string CreateInvocationIndexVariableName(this IMemberStateMachine stateMachine, string targetMethodName) =>
             stateMachine.CreatePrefixedSegmentedObjectName(targetMethodName, "invocationIndex");

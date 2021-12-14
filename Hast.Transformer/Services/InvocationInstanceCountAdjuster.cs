@@ -13,9 +13,13 @@ namespace Hast.Transformer.Services
     {
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
 
-        public InvocationInstanceCountAdjuster(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory) => _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
+        public InvocationInstanceCountAdjuster(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory) =>
+            _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
 
-        public void AdjustInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration) => syntaxTree.AcceptVisitor(new InvocationInstanceCountAdjustingVisitor(
+        public void AdjustInvocationInstanceCounts(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration) =>
+            syntaxTree.AcceptVisitor(new InvocationInstanceCountAdjustingVisitor(
                 _typeDeclarationLookupTableFactory.Create(syntaxTree),
                 configuration));
 
@@ -90,33 +94,34 @@ namespace Hast.Transformer.Services
             }
 
             private void AdjustMaxDegreeOfParallelism(
-                MemberInvocationInstanceCountConfiguration invokingMemberMaxInvocationConfiguration,
-                MemberInvocationInstanceCountConfiguration referencedMemberMaxInvocationConfiguration,
+                MemberInvocationInstanceCountConfiguration invoking,
+                MemberInvocationInstanceCountConfiguration referenced,
                 EntityDeclaration referencedMember,
                 string referencedMemberFullName)
             {
-                if (invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism > referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism)
+                if (invoking.MaxDegreeOfParallelism > referenced.MaxDegreeOfParallelism)
                 {
-                    referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism = invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism;
+                    referenced.MaxDegreeOfParallelism = invoking.MaxDegreeOfParallelism;
 
                     // Was the referenced member invoked both from a parallelized member and from a non-parallelized
                     // one? Then let's increase MaxDegreeOfParallelism so there is no large multiplexing logic needed,
                     // instances of the referenced and invoking members can be paired.
                     if (_membersInvokedFromNonParallel.Contains(referencedMember))
                     {
-                        referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism++;
+                        referenced.MaxDegreeOfParallelism++;
                     }
                 }
-                else if (invokingMemberMaxInvocationConfiguration.MaxDegreeOfParallelism == 1 &&
-                         !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
+                else if (invoking.MaxDegreeOfParallelism == 1 &&
+                         !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() ||
+                         referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
                 {
                     _membersInvokedFromNonParallel.Add(referencedMember);
 
                     // Same increment as above. Just needed so it doesn't matter whether the parallelized or the
                     // non-parallelized invoking member is processed first.
-                    if (referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism != 1)
+                    if (referenced.MaxDegreeOfParallelism != 1)
                     {
-                        referencedMemberMaxInvocationConfiguration.MaxDegreeOfParallelism++;
+                        referenced.MaxDegreeOfParallelism++;
                     }
                 }
             }
@@ -138,7 +143,8 @@ namespace Hast.Transformer.Services
                     }
                 }
                 else if (invokingMemberMaxInvocationConfiguration.MaxRecursionDepth == 1 &&
-                         !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() || referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
+                         !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() ||
+                         referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
                 {
                     _membersInvokedFromNonParallel.Add(referencedMember);
 

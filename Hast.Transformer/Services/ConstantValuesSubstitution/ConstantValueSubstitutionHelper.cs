@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Models;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
@@ -30,13 +30,21 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             ObjectCreateExpression objectCreateExpression,
             Expression passedExpression,
             ITypeDeclarationLookupTable typeDeclarationLookupTable) =>
-            FindParameterForExpressionPassedToCall(objectCreateExpression, objectCreateExpression.Arguments, passedExpression, typeDeclarationLookupTable);
+            FindParameterForExpressionPassedToCall(
+                objectCreateExpression,
+                objectCreateExpression.Arguments,
+                passedExpression,
+                typeDeclarationLookupTable);
 
         public static ParameterDeclaration FindMethodParameterForPassedExpression(
             InvocationExpression invocationExpression,
             Expression passedExpression,
             ITypeDeclarationLookupTable typeDeclarationLookupTable) =>
-            FindParameterForExpressionPassedToCall(invocationExpression, invocationExpression.Arguments, passedExpression, typeDeclarationLookupTable);
+            FindParameterForExpressionPassedToCall(
+                invocationExpression,
+                invocationExpression.Arguments,
+                passedExpression,
+                typeDeclarationLookupTable);
 
         // This could be optimized not to look up everything every time when called from VisitObjectCreateExpression()
         // and VisitInvocationExpression().

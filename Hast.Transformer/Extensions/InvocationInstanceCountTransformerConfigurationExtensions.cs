@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Abstractions.Configuration;
+using Hast.Transformer.Abstractions.Configuration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
@@ -79,7 +79,8 @@ namespace Hast.Common.Configuration
             private readonly Dictionary<string, EntityDeclaration> _compilerGeneratedMembers;
             private readonly Dictionary<EntityDeclaration, int> _lambdaCounts = new();
 
-            public IndexedNameHolderSettingVisitor(Dictionary<string, EntityDeclaration> compilerGeneratedMembers) => _compilerGeneratedMembers = compilerGeneratedMembers;
+            public IndexedNameHolderSettingVisitor(Dictionary<string, EntityDeclaration> compilerGeneratedMembers) =>
+                _compilerGeneratedMembers = compilerGeneratedMembers;
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {

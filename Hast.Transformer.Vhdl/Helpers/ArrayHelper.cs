@@ -34,8 +34,9 @@ namespace Hast.Transformer.Vhdl.Helpers
             if (expression.GetActualType().IsArray())
             {
                 throw new NotSupportedException(
-                    "Arrays, unlike other objects, can't be compared to null and array references can't be assigned null (see: https://github.com/Lombiq/Hastlayer-SDK/issues/16). " +
-                    "Affected expression: " + expression.ToString().AddParentEntityName(expression));
+                    "Arrays, unlike other objects, can't be compared to null and array references can't be assigned " +
+                    "null (see: https://github.com/Lombiq/Hastlayer-SDK/issues/16). Affected expression: " +
+                    expression.ToString().AddParentEntityName(expression));
             }
         }
     }
