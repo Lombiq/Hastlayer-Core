@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +18,7 @@ namespace Hast.Remote.Worker.Services
         /// <param name="configuration">The <see cref="TransformationWorker"/>'s configuration.</param>
         /// <param name="cancellationToken">Optional cancellation token.</param>
         /// <returns>The existing or new configuration object.</returns>
-        Task<IHastlayerConfiguration> GetConfiguration(
+        Task<IHastlayerConfiguration> GetConfigurationAsync(
             ITransformationWorkerConfiguration configuration,
             CancellationToken cancellationToken = default);
     }

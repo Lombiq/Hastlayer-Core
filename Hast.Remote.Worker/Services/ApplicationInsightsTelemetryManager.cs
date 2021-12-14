@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Remote.Worker.Exceptions;
 using Hast.Remote.Worker.Models;
@@ -10,9 +10,10 @@ using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPuls
 using Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel;
 using Microsoft.ApplicationInsights.WorkerService;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Globalization;
+using System.Linq;
 using static Hast.Remote.Worker.Constants.ConfigurationPaths;
 
 namespace Hast.Remote.Worker.Services
@@ -21,7 +22,6 @@ namespace Hast.Remote.Worker.Services
     public class ApplicationInsightsTelemetryManager : IApplicationInsightsTelemetryManager
     {
         private readonly TelemetryClient _telemetryClient;
-
 
         public ApplicationInsightsTelemetryManager(
             TelemetryConfiguration telemetryConfiguration,
@@ -34,7 +34,6 @@ namespace Hast.Remote.Worker.Services
             _telemetryClient = telemetryClient;
         }
 
-
         public void TrackTransformation(TransformationTelemetry telemetry)
         {
             var requestTelemetry = new RequestTelemetry
@@ -43,10 +42,10 @@ namespace Hast.Remote.Worker.Services
                 Duration = telemetry.FinishTimeUtc - telemetry.StartTimeUtc,
                 Timestamp = telemetry.StartTimeUtc,
                 Success = telemetry.IsSuccess,
-                Url = new Uri(telemetry.JobName, UriKind.Relative)
+                Url = new Uri(telemetry.JobName, UriKind.Relative),
             };
 
-            requestTelemetry.Context.User.AccountId = telemetry.AppId.ToString();
+            requestTelemetry.Context.User.AccountId = telemetry.AppId.ToString(CultureInfo.InvariantCulture);
 
             _telemetryClient.TrackRequest(requestTelemetry);
         }
@@ -64,6 +63,7 @@ namespace Hast.Remote.Worker.Services
                     "Please set up the instrumentation key via appsettings.json or environment variable, see " +
                     "APPINSIGHTS_INSTRUMENTATIONKEY part here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core");
             }
+
             return key;
         }
 
@@ -80,6 +80,7 @@ namespace Hast.Remote.Worker.Services
                 // of issue that warrants crashing the application.
                 services.LogDeferred(LogLevel.Warning, ex.Message);
             }
+
             if (key == null) return;
 
             var options = new ApplicationInsightsServiceOptions

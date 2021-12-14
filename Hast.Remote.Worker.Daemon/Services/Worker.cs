@@ -29,7 +29,7 @@ namespace Hast.Remote.Worker.Daemon.Services
             _logger = logger;
         }
 
-        public async override Task StartAsync(CancellationToken cancellationToken)
+        public override async Task StartAsync(CancellationToken cancellationToken)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace Hast.Remote.Worker.Daemon.Services
             }
         }
 
-        public async override Task StopAsync(CancellationToken cancellationToken)
+        public override async Task StopAsync(CancellationToken cancellationToken)
         {
             try
             {
@@ -59,8 +59,10 @@ namespace Hast.Remote.Worker.Daemon.Services
 
         public override void Dispose()
         {
+            base.Dispose();
             _disposableContainer?.Dispose();
             _hastlayer?.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken) =>
@@ -129,7 +131,7 @@ namespace Hast.Remote.Worker.Daemon.Services
                 var configuration = TransformationWorkerConfiguration.Create();
 
                 var hastlayerConfiguration = await new HastlayerConfigurationProvider()
-                    .GetConfiguration(configuration, cancellationToken);
+                    .GetConfigurationAsync(configuration, cancellationToken);
                 return (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
             }
             catch (Exception exception)

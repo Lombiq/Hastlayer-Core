@@ -1,3 +1,5 @@
+using Hast.Remote.Worker.Services;
+
 namespace Hast.Remote.Worker.Configuration
 {
     /// <summary>

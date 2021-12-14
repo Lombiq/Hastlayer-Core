@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static Hast.Remote.Worker.Daemon.Constants.ServiceProperties;
@@ -21,7 +22,7 @@ namespace Hast.Remote.Worker.Daemon.Services
                 {
                     Log = DisplayName,
                     // The EventLog source can't contain dots like the service's technical name.
-                    Source = Name.Replace(".", string.Empty),
+                    Source = Name.Replace(".", string.Empty, StringComparison.Ordinal),
                 };
             }
         }
