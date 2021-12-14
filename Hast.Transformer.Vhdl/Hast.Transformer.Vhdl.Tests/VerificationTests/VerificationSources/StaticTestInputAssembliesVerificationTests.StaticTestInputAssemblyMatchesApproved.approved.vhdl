@@ -1276,7 +1276,7 @@ begin
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\: \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._States\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_0\;
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.this\: \Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder2\;
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
@@ -1290,7 +1290,7 @@ begin
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._Finished\ <= false;
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_0\;
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size\ := to_unsigned(0, 32);
-                \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c\ := to_signed(0, 32);
+                \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2\ := to_signed(0, 32);
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ := to_signed(0, 64);
@@ -1322,13 +1322,13 @@ begin
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.this\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.this.parameter.In\;
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c;
+                        -- int conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (((long)(size - size / 32u * 32u) != 0L)) {
-                        -- 	conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c = 5;
+                        -- 	conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2 = 5;
                         -- } else {
-                        -- 	conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c = 0;
+                        -- 	conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2 = 0;
                         -- }
                         -- 
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size\ / to_unsigned(32, 32);
@@ -1350,10 +1350,10 @@ begin
                     when \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_3\ => 
                         -- State after the if-else which was started in state \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.ArrayLength = (size >> 5) + (uint)(conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c);
+                        -- @this.ArrayLength = (size >> 5) + (uint)(conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2);
                         -- 
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\ := shift_right(\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
-                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.5\ := (\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\) + unsigned((\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c\));
+                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.5\ := (\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\) + unsigned((\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2\));
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.this\.\ArrayLength\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.5\;
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.6395
@@ -1361,13 +1361,13 @@ begin
                         -- True branch of the if-else started in state \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c = 5;
+                        -- 	conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2 = 5;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c = 5;
+                        -- conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2 = 5;
                         -- 
-                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c\ := to_signed(5, 32);
+                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2\ := to_signed(5, 32);
                         -- Going to the state after the if-else which was started in state \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_2\.
                         if (\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ = \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_4\) then 
                             \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_3\;
@@ -1377,13 +1377,13 @@ begin
                         -- False branch of the if-else started in state \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c = 0;
+                        -- 	conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2 = 0;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c = 0;
+                        -- conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2 = 0;
                         -- 
-                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditional800d74edca9ad66ad0ade64f9f3285641a3c796548fb1f18ffe0d8501307448c\ := to_signed(0, 32);
+                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_2\.
                         if (\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ = \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_5\) then 
                             \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_3\;
