@@ -5,7 +5,6 @@ using Hast.Layer;
 using Hast.Samples.FSharpSampleAssembly;
 using Hast.Samples.Kpz.Algorithms;
 using Hast.Samples.SampleAssembly;
-using Hast.Samples.SampleAssembly.Extensions;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
 using Lombiq.Arithmetics;

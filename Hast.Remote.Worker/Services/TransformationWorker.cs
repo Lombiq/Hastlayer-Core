@@ -1,6 +1,7 @@
 using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
+using Hast.Remote.Worker.Models;
 using Microsoft.ApplicationInsights;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
@@ -264,19 +265,23 @@ namespace Hast.Remote.Worker.Services
                     IHardwareRepresentation hardwareRepresentation;
                     try
                     {
-                        hardwareRepresentation = await _hastlayer.GenerateHardware(assemblyPaths, new HardwareGenerationConfiguration(job.Configuration.DeviceName, null)
-                        {
-                            CustomConfiguration = job.Configuration.CustomConfiguration,
-                            EnableCaching = true,
-                            HardwareEntryPointMemberFullNames = job.Configuration.HardwareEntryPointMemberFullNames,
-                            HardwareEntryPointMemberNamePrefixes = job.Configuration.HardwareEntryPointMemberNamePrefixes,
-                            EnableHardwareImplementationComposition = false,
-                        });
+                        hardwareRepresentation = await _hastlayer.GenerateHardwareAsync(
+                            assemblyPaths,
+                            new HardwareGenerationConfiguration(
+                                job.Configuration.DeviceName,
+                                null,
+                                job.Configuration.CustomConfiguration,
+                                job.Configuration.HardwareEntryPointMemberFullNames,
+                                job.Configuration.HardwareEntryPointMemberNamePrefixes)
+                            {
+                                EnableCaching = true,
+                                EnableHardwareImplementationComposition = false,
+                            });
 
                         cancellationToken.ThrowIfCancellationRequested();
 
                         await using var memoryStream = new MemoryStream();
-                        await hardwareRepresentation.HardwareDescription.Serialize(memoryStream);
+                        await hardwareRepresentation.HardwareDescription.SerializeAsync(memoryStream);
                         result.HardwareDescription = new HardwareDescription { Language = hardwareRepresentation.HardwareDescription.Language, SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray()), };
                     }
                     catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
@@ -357,19 +362,11 @@ namespace Hast.Remote.Worker.Services
                 segment = await container.ListBlobsSegmentedAsync(prefix, segment.ContinuationToken);
                 list.AddRange(segment.Results);
             }
+
             return list;
         }
 
         private static bool HasHttpStatus(StorageException exception, HttpStatusCode statusCode) =>
             ((exception.InnerException as WebException)?.Response as HttpWebResponse)?.StatusCode == statusCode;
-
-        private class TransformationTelemetry : ITransformationTelemetry
-        {
-            public string JobName { get; set; }
-            public int AppId { get; set; }
-            public DateTime StartTimeUtc { get; set; }
-            public DateTime FinishTimeUtc { get; set; }
-            public bool IsSuccess { get; set; }
-        }
     }
 }

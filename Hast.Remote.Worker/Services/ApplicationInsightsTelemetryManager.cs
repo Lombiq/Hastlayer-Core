@@ -1,6 +1,7 @@
 ﻿using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Remote.Worker.Exceptions;
+using Hast.Remote.Worker.Models;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.DependencyCollector;
@@ -34,7 +35,7 @@ namespace Hast.Remote.Worker.Services
         }
 
 
-        public void TrackTransformation(ITransformationTelemetry telemetry)
+        public void TrackTransformation(TransformationTelemetry telemetry)
         {
             var requestTelemetry = new RequestTelemetry
             {
