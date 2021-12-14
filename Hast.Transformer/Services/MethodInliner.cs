@@ -124,7 +124,7 @@ namespace Hast.Transformer.Services
 
                 // Assigning all invocation arguments to newly created local variables which then will be used in the
                 // inlined method's body.
-                var argumentsEnumerator = invocationExpression.Arguments.GetEnumerator();
+                using var argumentsEnumerator = invocationExpression.Arguments.GetEnumerator();
                 foreach (var parameter in method.Parameters)
                 {
                     argumentsEnumerator.MoveNext();

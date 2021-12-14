@@ -195,7 +195,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var invocationBlock = new InlineBlock();
             var outParameterBackAssignments = new List<Assignment>();
 
-            var methodParametersEnumerator = targetDeclaration
+            using var methodParametersEnumerator = targetDeclaration
                 .GetNonSimpleMemoryParameters()
                 .GetEnumerator();
             methodParametersEnumerator.MoveNext();
