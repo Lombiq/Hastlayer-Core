@@ -94,7 +94,9 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                         configuration.AddHardwareEntryPointType<KpzKernelsParallelizedInterface>();
                         configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsParallelizedInterface>(p => p.ScheduleIterations(null), 0)
+                            new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsParallelizedInterface>(
+                                p => p.ScheduleIterations(null),
+                                lambdaExpressionIndex: 0)
                             {
                                 MaxDegreeOfParallelism = 3,
                             });
@@ -108,7 +110,9 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                         configuration.AddHardwareEntryPointType<KpzKernelsParallelizedInterface>();
                         configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                            new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsParallelizedInterface>(p => p.ScheduleIterations(null), 0)
+                            new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsParallelizedInterface>(
+                                p => p.ScheduleIterations(null),
+                                lambdaExpressionIndex: 0)
                             {
                                 MaxDegreeOfParallelism = 3,
                             });
@@ -151,7 +155,9 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.TransformerConfiguration().EnableMethodInlining = false;
 
                     configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                        new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
+                        new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(
+                            p => p.ParallelizedCalculateIntegerSumUpToNumbers(null),
+                            lambdaExpressionIndex: 0)
                         {
                             MaxDegreeOfParallelism = 3,
                         });
@@ -166,7 +172,9 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.AddHardwareEntryPointType<Posit32Calculator>();
 
                     configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                        new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers(null), 0)
+                        new MemberInvocationInstanceCountConfigurationForMethod<Posit32Calculator>(
+                            p => p.ParallelizedCalculateIntegerSumUpToNumbers(null),
+                            lambdaExpressionIndex: 0)
                         {
                             MaxDegreeOfParallelism = 3,
                         });
@@ -217,7 +225,9 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.AddHardwareEntryPointType<Fix64Calculator>();
 
                     configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                        new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(f => f.ParallelizedCalculateIntegerSumUpToNumbers(default), 0)
+                        new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(
+                            f => f.ParallelizedCalculateIntegerSumUpToNumbers(default),
+                            lambdaExpressionIndex: 0)
                         {
                             MaxDegreeOfParallelism = 3,
                         });
@@ -232,7 +242,9 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                     configuration.AddHardwareEntryPointType<FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm>();
 
                     configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                        new MemberInvocationInstanceCountConfigurationForMethod<FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm>(f => f.Run(null), 0)
+                        new MemberInvocationInstanceCountConfigurationForMethod<FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm>(
+                            f => f.Run(null),
+                            lambdaExpressionIndex: 0)
                         {
                             MaxDegreeOfParallelism = 3,
                         });

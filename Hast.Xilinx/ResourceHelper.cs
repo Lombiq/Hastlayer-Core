@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.FileProviders;
-using System;
+using Microsoft.Extensions.FileProviders;
 using System.IO;
 using System.Reflection;
 
