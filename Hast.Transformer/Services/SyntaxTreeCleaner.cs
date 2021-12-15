@@ -14,7 +14,6 @@ namespace Hast.Transformer.Services
         private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
         private readonly IMemberSuitabilityChecker _memberSuitabilityChecker;
 
-
         public SyntaxTreeCleaner(
             ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
             IMemberSuitabilityChecker memberSuitabilityChecker)
@@ -108,12 +107,10 @@ namespace Hast.Transformer.Services
             syntaxTree.AcceptVisitor(new ReferenceMetadataCleanUpVisitor());
         }
 
-
         private class ReferencedNodesFlaggingVisitor : DepthFirstAstVisitor
         {
             private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
             private readonly IHardwareGenerationConfiguration _configuration;
-
 
             public ReferencedNodesFlaggingVisitor(
                 ITypeDeclarationLookupTable typeDeclarationLookupTable,
@@ -122,7 +119,6 @@ namespace Hast.Transformer.Services
                 _typeDeclarationLookupTable = typeDeclarationLookupTable;
                 _configuration = configuration;
             }
-
 
             public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
             {
@@ -175,7 +171,6 @@ namespace Hast.Transformer.Services
             {
                 base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-
                 if (memberReferenceExpression.Target is TypeReferenceExpression)
                 {
                     var typeReferenceExpression = (TypeReferenceExpression)memberReferenceExpression.Target;
@@ -187,7 +182,6 @@ namespace Hast.Transformer.Services
                         return;
                     }
                 }
-
 
                 var member = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
 
@@ -264,7 +258,6 @@ namespace Hast.Transformer.Services
                     member.Remove();
                 }
             }
-
 
             private static void RemoveIfUnreferenced(AstNode node)
             {
