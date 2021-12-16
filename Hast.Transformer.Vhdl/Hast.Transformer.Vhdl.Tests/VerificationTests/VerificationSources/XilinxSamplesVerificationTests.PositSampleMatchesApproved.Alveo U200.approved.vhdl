@@ -1394,10 +1394,7 @@ architecture Imp of Hast_IP is
         \Posit::GetExponentValue().0._State_10\, 
         \Posit::GetExponentValue().0._State_11\, 
         \Posit::GetExponentValue().0._State_12\, 
-        \Posit::GetExponentValue().0._State_13\, 
-        \Posit::GetExponentValue().0._State_14\, 
-        \Posit::GetExponentValue().0._State_15\, 
-        \Posit::GetExponentValue().0._State_16\);
+        \Posit::GetExponentValue().0._State_13\);
     -- Signals:
     Signal \Posit::GetExponentValue().0._Finished\: boolean := false;
     Signal \Posit::GetExponentValue().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -1408,11 +1405,11 @@ architecture Imp of Hast_IP is
     Signal \Posit::GetExponentValue().0.BitMask::GetTwosComplement(UInt16)._Started.0\: boolean := false;
     Signal \Posit::GetExponentValue().0.Posit::FractionSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit\;
     Signal \Posit::GetExponentValue().0.Posit::FractionSize()._Started.0\: boolean := false;
-    Signal \Posit::GetExponentValue().0.Posit::ExponentSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit\;
-    Signal \Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\: boolean := false;
     Signal \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32)._Started.0\: boolean := false;
+    Signal \Posit::GetExponentValue().0.Posit::ExponentSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit\;
+    Signal \Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\: boolean := false;
     Signal \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\: boolean := false;
@@ -1426,10 +1423,10 @@ architecture Imp of Hast_IP is
     Signal \Posit::GetExponentValue().0.BitMask::GetTwosComplement(UInt16).return.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::GetExponentValue().0.Posit::FractionSize()._Finished.0\: boolean := false;
     Signal \Posit::GetExponentValue().0.Posit::FractionSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Posit::GetExponentValue().0.Posit::ExponentSize()._Finished.0\: boolean := false;
-    Signal \Posit::GetExponentValue().0.Posit::ExponentSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32)._Finished.0\: boolean := false;
     Signal \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).return.0\: \Lombiq.Arithmetics.BitMask\;
+    Signal \Posit::GetExponentValue().0.Posit::ExponentSize()._Finished.0\: boolean := false;
+    Signal \Posit::GetExponentValue().0.Posit::ExponentSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Finished.0\: boolean := false;
     Signal \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32).return.0\: \Lombiq.Arithmetics.BitMask\;
     Signal \Posit::GetExponentValue().0.BitMask::GetLowest32Bits()._Finished.0\: boolean := false;
@@ -10350,20 +10347,16 @@ begin
         Variable \Posit::GetExponentValue().0.conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::GetExponentValue().0.return.0\: boolean := false;
         Variable \Posit::GetExponentValue().0.return.1\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::GetExponentValue().0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::GetExponentValue().0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit::GetExponentValue().0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit::GetExponentValue().0.return.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit::GetExponentValue().0.return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit::GetExponentValue().0.return.5\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::GetExponentValue().0.return.3\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::GetExponentValue().0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit::GetExponentValue().0.return.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit::GetExponentValue().0.return.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit::GetExponentValue().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::GetExponentValue().0.return.7\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::GetExponentValue().0.return.5\: \Lombiq.Arithmetics.BitMask\;
         Variable \Posit::GetExponentValue().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit::GetExponentValue().0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit::GetExponentValue().0.return.8\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Posit::GetExponentValue().0.return.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit::GetExponentValue().0.return.6\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Posit::GetExponentValue().0.return.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -10374,25 +10367,21 @@ begin
                 \Posit::GetExponentValue().0.BitMask::GetTwosComplement(UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
                 \Posit::GetExponentValue().0.BitMask::GetTwosComplement(UInt16)._Started.0\ <= false;
                 \Posit::GetExponentValue().0.Posit::FractionSize()._Started.0\ <= false;
-                \Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\ <= false;
                 \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
                 \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= false;
+                \Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\ <= false;
                 \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
                 \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
                 \Posit::GetExponentValue().0.BitMask::GetLowest32Bits()._Started.0\ <= false;
                 \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_0\;
                 \Posit::GetExponentValue().0.return.0\ := false;
-                \Posit::GetExponentValue().0.num\ := to_signed(0, 32);
                 \Posit::GetExponentValue().0.return.2\ := to_unsigned(0, 32);
-                \Posit::GetExponentValue().0.num2\ := to_unsigned(0, 32);
-                \Posit::GetExponentValue().0.return.3\ := to_unsigned(0, 32);
-                \Posit::GetExponentValue().0.return.4\ := to_unsigned(0, 32);
                 \Posit::GetExponentValue().0.binaryOperationResult.0\ := to_signed(0, 64);
-                \Posit::GetExponentValue().0.return.6\ := to_unsigned(0, 32);
+                \Posit::GetExponentValue().0.return.4\ := to_unsigned(0, 32);
                 \Posit::GetExponentValue().0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit::GetExponentValue().0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit::GetExponentValue().0.binaryOperationResult.3\ := to_signed(0, 32);
-                \Posit::GetExponentValue().0.return.9\ := to_unsigned(0, 32);
+                \Posit::GetExponentValue().0.return.7\ := to_unsigned(0, 32);
             else 
                 case \Posit::GetExponentValue().0._State\ is 
                     when \Posit::GetExponentValue().0._State_0\ => 
@@ -10457,10 +10446,7 @@ begin
                         -- 
                         \Posit::GetExponentValue().0.bitMask\ := (\Posit::GetExponentValue().0.conditional1f15bc64716a31018a7c48ea4476814e32189adff048fbe110292717f9d6cc52\);
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = (int)Lombiq.Arithmetics.Posit.FractionSize (@this);
+                        -- return Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_RightShift (BitMask.op_LeftShift (BitMask.op_RightShift (bitMask, (int)Lombiq.Arithmetics.Posit.FractionSize (@this)), (int)((long)((int)(@this.PositBits.SegmentCount) * 32) - (long)(Lombiq.Arithmetics.Posit.ExponentSize (@this)))), (int)((int)((int)(@this.PositBits.SegmentCount) * 32) - 3)));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit::FractionSize()
                         \Posit::GetExponentValue().0.Posit::FractionSize().this.parameter.Out.0\ <= \Posit::GetExponentValue().0.this\;
@@ -10516,106 +10502,69 @@ begin
                         if (\Posit::GetExponentValue().0.Posit::FractionSize()._Started.0\ = \Posit::GetExponentValue().0.Posit::FractionSize()._Finished.0\) then 
                             \Posit::GetExponentValue().0.Posit::FractionSize()._Started.0\ <= false;
                             \Posit::GetExponentValue().0.return.2\ := \Posit::GetExponentValue().0.Posit::FractionSize().return.0\;
-                            \Posit::GetExponentValue().0.num\ := signed(\Posit::GetExponentValue().0.return.2\);
-                            -- The following section was transformed from the .NET statement below:
-                            -- uint num2;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- num2 = Lombiq.Arithmetics.Posit.ExponentSize (@this);
-                            -- 
-                            -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit::ExponentSize()
-                            \Posit::GetExponentValue().0.Posit::ExponentSize().this.parameter.Out.0\ <= \Posit::GetExponentValue().0.this\;
-                            \Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\ <= true;
+                            -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
+                            \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::GetExponentValue().0.bitMask\;
+                            \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= signed(\Posit::GetExponentValue().0.return.2\);
+                            \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= true;
                             \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit::GetExponentValue().0._State_9\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit::ExponentSize()
-                        if (\Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\ = \Posit::GetExponentValue().0.Posit::ExponentSize()._Finished.0\) then 
-                            \Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\ <= false;
-                            \Posit::GetExponentValue().0.return.3\ := \Posit::GetExponentValue().0.Posit::ExponentSize().return.0\;
-                            \Posit::GetExponentValue().0.num2\ := \Posit::GetExponentValue().0.return.3\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- return Lombiq.Arithmetics.BitMask.GetLowest32Bits (BitMask.op_RightShift (BitMask.op_LeftShift (BitMask.op_RightShift (bitMask, (int)Lombiq.Arithmetics.Posit.FractionSize (@this)), (int)((long)((int)(@this.PositBits.SegmentCount) * 32) - (long)(Lombiq.Arithmetics.Posit.ExponentSize (@this)))), (int)((int)((int)(@this.PositBits.SegmentCount) * 32) - 3)));
-                            -- 
-                            -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_10\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit::GetExponentValue().0._State_10\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit::FractionSize()
-                        \Posit::GetExponentValue().0.Posit::FractionSize().this.parameter.Out.0\ <= \Posit::GetExponentValue().0.this\;
-                        \Posit::GetExponentValue().0.Posit::FractionSize()._Started.0\ <= true;
-                        \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_11\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit::GetExponentValue().0._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit::FractionSize()
-                        if (\Posit::GetExponentValue().0.Posit::FractionSize()._Started.0\ = \Posit::GetExponentValue().0.Posit::FractionSize()._Finished.0\) then 
-                            \Posit::GetExponentValue().0.Posit::FractionSize()._Started.0\ <= false;
-                            \Posit::GetExponentValue().0.return.4\ := \Posit::GetExponentValue().0.Posit::FractionSize().return.0\;
-                            -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
-                            \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::GetExponentValue().0.bitMask\;
-                            \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= signed(\Posit::GetExponentValue().0.return.4\);
-                            \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= true;
-                            \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_12\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit::GetExponentValue().0._State_12\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32)._Started.0\ = \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32)._Finished.0\) then 
                             \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= false;
-                            \Posit::GetExponentValue().0.return.5\ := \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).return.0\;
+                            \Posit::GetExponentValue().0.return.3\ := \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).return.0\;
                             \Posit::GetExponentValue().0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Posit::GetExponentValue().0.this\.\PositBits\.\SegmentCount\), 32)) * to_signed(32, 32), 64);
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit::ExponentSize()
                             \Posit::GetExponentValue().0.Posit::ExponentSize().this.parameter.Out.0\ <= \Posit::GetExponentValue().0.this\;
                             \Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\ <= true;
-                            \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_13\;
+                            \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.1221
-                    when \Posit::GetExponentValue().0._State_13\ => 
+                    when \Posit::GetExponentValue().0._State_10\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit::ExponentSize()
                         if (\Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\ = \Posit::GetExponentValue().0.Posit::ExponentSize()._Finished.0\) then 
                             \Posit::GetExponentValue().0.Posit::ExponentSize()._Started.0\ <= false;
-                            \Posit::GetExponentValue().0.return.6\ := \Posit::GetExponentValue().0.Posit::ExponentSize().return.0\;
-                            \Posit::GetExponentValue().0.binaryOperationResult.1\ := SmartResize((\Posit::GetExponentValue().0.binaryOperationResult.0\) - signed(SmartResize((\Posit::GetExponentValue().0.return.6\), 64)), 32);
+                            \Posit::GetExponentValue().0.return.4\ := \Posit::GetExponentValue().0.Posit::ExponentSize().return.0\;
+                            \Posit::GetExponentValue().0.binaryOperationResult.1\ := SmartResize((\Posit::GetExponentValue().0.binaryOperationResult.0\) - signed(SmartResize((\Posit::GetExponentValue().0.return.4\), 64)), 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
-                            \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::GetExponentValue().0.return.5\;
+                            \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::GetExponentValue().0.return.3\;
                             \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::GetExponentValue().0.binaryOperationResult.1\);
                             \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= true;
-                            \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_14\;
+                            \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_11\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3898
-                    when \Posit::GetExponentValue().0._State_14\ => 
+                    when \Posit::GetExponentValue().0._State_11\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ = \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Finished.0\) then 
                             \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32)._Started.0\ <= false;
-                            \Posit::GetExponentValue().0.return.7\ := \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32).return.0\;
+                            \Posit::GetExponentValue().0.return.5\ := \Posit::GetExponentValue().0.BitMask BitMask::op_LeftShift(BitMask,Int32).return.0\;
                             \Posit::GetExponentValue().0.binaryOperationResult.2\ := SmartResize(signed(SmartResize((\Posit::GetExponentValue().0.this\.\PositBits\.\SegmentCount\), 32)) * to_signed(32, 32), 32);
                             \Posit::GetExponentValue().0.binaryOperationResult.3\ := (\Posit::GetExponentValue().0.binaryOperationResult.2\) - to_signed(3, 32);
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
-                            \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::GetExponentValue().0.return.7\;
+                            \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).left.parameter.Out.0\ <= \Posit::GetExponentValue().0.return.5\;
                             \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).right.parameter.Out.0\ <= (\Posit::GetExponentValue().0.binaryOperationResult.3\);
                             \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= true;
-                            \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_15\;
+                            \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4484
-                    when \Posit::GetExponentValue().0._State_15\ => 
+                    when \Posit::GetExponentValue().0._State_12\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32)
                         if (\Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32)._Started.0\ = \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32)._Finished.0\) then 
                             \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32)._Started.0\ <= false;
-                            \Posit::GetExponentValue().0.return.8\ := \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).return.0\;
+                            \Posit::GetExponentValue().0.return.6\ := \Posit::GetExponentValue().0.BitMask BitMask::op_RightShift(BitMask,Int32).return.0\;
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.BitMask::GetLowest32Bits()
-                            \Posit::GetExponentValue().0.BitMask::GetLowest32Bits().this.parameter.Out.0\ <= \Posit::GetExponentValue().0.return.8\;
+                            \Posit::GetExponentValue().0.BitMask::GetLowest32Bits().this.parameter.Out.0\ <= \Posit::GetExponentValue().0.return.6\;
                             \Posit::GetExponentValue().0.BitMask::GetLowest32Bits()._Started.0\ <= true;
-                            \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_16\;
+                            \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_13\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit::GetExponentValue().0._State_16\ => 
+                    when \Posit::GetExponentValue().0._State_13\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.BitMask::GetLowest32Bits()
                         if (\Posit::GetExponentValue().0.BitMask::GetLowest32Bits()._Started.0\ = \Posit::GetExponentValue().0.BitMask::GetLowest32Bits()._Finished.0\) then 
                             \Posit::GetExponentValue().0.BitMask::GetLowest32Bits()._Started.0\ <= false;
-                            \Posit::GetExponentValue().0.return.9\ := \Posit::GetExponentValue().0.BitMask::GetLowest32Bits().return.0\;
-                            \Posit::GetExponentValue().0.return\ <= \Posit::GetExponentValue().0.return.9\;
+                            \Posit::GetExponentValue().0.return.7\ := \Posit::GetExponentValue().0.BitMask::GetLowest32Bits().return.0\;
+                            \Posit::GetExponentValue().0.return\ <= \Posit::GetExponentValue().0.return.7\;
                             \Posit::GetExponentValue().0._State\ := \Posit::GetExponentValue().0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
