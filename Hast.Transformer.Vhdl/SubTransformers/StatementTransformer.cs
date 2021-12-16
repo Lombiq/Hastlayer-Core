@@ -77,7 +77,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         stateMachine.LocalVariables.Add(new Variable
                         {
                             Name = stateMachine.CreatePrefixedObjectName(variableInitializer.Name),
-                            DataType = _declarableTypeCreator.CreateDeclarableType(variableInitializer, variableType, context.TransformationContext)
+                            DataType = _declarableTypeCreator.CreateDeclarableType(variableInitializer, variableType, context.TransformationContext),
                         });
                     }
                 }
@@ -118,7 +118,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     var assigmentElement = new Assignment
                     {
                         AssignTo = returnReference,
-                        Expression = returnExpression
+                        Expression = returnExpression,
                     };
 
                     // If the expression is an assignment we can't assign it to the return signal, so need to split it.
@@ -253,7 +253,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     Condition = conditionResultReference,
                     True = whileStateInnerBody,
-                    Else = stateMachine.CreateStateChange(afterWhileStateIndex)
+                    Else = stateMachine.CreateStateChange(afterWhileStateIndex),
                 });
 
                 currentBlock.ChangeBlock(whileStateInnerBody);
@@ -291,7 +291,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var caseStatement = new Case
                 {
-                    Expression = _expressionTransformer.Transform(switchStatement.Expression, context)
+                    Expression = _expressionTransformer.Transform(switchStatement.Expression, context),
                 };
                 currentBlock.Add(caseStatement);
 
@@ -414,9 +414,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     Left = stateMachine.CreateStateVariableName().ToVhdlVariableReference(),
                     Operator = BinaryOperator.Equality,
-                    Right = stateMachine.CreateStateName(context.Scope.CurrentBlock.StateMachineStateIndex).ToVhdlIdValue()
+                    Right = stateMachine.CreateStateName(context.Scope.CurrentBlock.StateMachineStateIndex).ToVhdlIdValue(),
                 },
-                True = stateMachine.CreateStateChange(destinationStateIndex)
+                True = stateMachine.CreateStateChange(destinationStateIndex),
             };
         }
 
