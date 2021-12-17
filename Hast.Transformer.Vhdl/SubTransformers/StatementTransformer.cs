@@ -51,7 +51,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 var variableType = variableStatement.Type;
                 var variableSimpleType = variableType as SimpleType;
-                var isTaskFactory = false;
 
                 // Filtering out variable declarations that were added by the compiler for multi-threaded code but
                 // which shouldn't be transformed.
@@ -60,13 +59,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     // PrimeCalculator.<>c__DisplayClass9_0 <>c__DisplayClass9_; They are being kept track of when
                     // processing the corresponding ObjectCreateExpressions.
                     variableType.GetFullName().IsDisplayOrClosureClassName() ||
-                    variableSimpleType != null &&
+                    (variableSimpleType != null &&
                     (
-                        // The TaskFactory object is saved to a variable like TaskFactory arg_97_0;
-                        (isTaskFactory = variableSimpleType.Identifier == nameof(TaskFactory)) ||
-                        // Delegates used for the body of Tasks are functions like: Func<object, bool> arg_97_1;
+                        // The TaskFactory object is saved to a variable like "TaskFactory arg_97_0;".
+                        variableSimpleType.Identifier == nameof(TaskFactory) ||
+                        // Delegates used for the body of Tasks are functions like "Func<object, bool> arg_97_1;".
                         variableSimpleType.Identifier == "Func"
-                    );
+                    ));
                 if (!omitStatement)
                 {
                     foreach (var variableInitializer in variableStatement.Variables)
@@ -119,8 +118,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     };
 
                     // If the expression is an assignment we can't assign it to the return signal, so need to split it.
-                    // This happens with lines like:
-                    // return (Number += increaseBy);
+                    // This happens with lines like "return (Number += increaseBy);".
                     if (assigmentElement.Expression is Assignment)
                     {
                         currentBlock.Add(assigmentElement.Expression);
