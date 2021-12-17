@@ -33,10 +33,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _typeConversionTransformer = typeConversionTransformer;
         }
 
-        public void Transform(Statement statement, SubTransformerContext context)
-        {
-            TransformInner(statement, context);
-        }
+        public void Transform(Statement statement, SubTransformerContext context) => TransformInner(statement, context);
 
         private void TransformInner(Statement statement, SubTransformerContext context)
         {
