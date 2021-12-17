@@ -328,7 +328,6 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.Out\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.Out.0\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Started.0\: boolean := false;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.Out.0\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).x.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).y.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Started.0\: boolean := false;
@@ -352,7 +351,6 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().this.parameter.In.0\: \Hast.Algorithms.Random.RandomMwc64X\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32()._Finished.0\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.RandomMwc64X::NextUInt32().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.In.0\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Finished.0\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).this.parameter.In.0\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
@@ -377,9 +375,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0._Finished\: boolean := false;
     Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0.return\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0.this.parameter.Out\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0._Started\: boolean := false;
-    Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0.this.parameter.In\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0.x.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
     Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0.y.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
     -- System.Int32 Hast.Samples.Kpz.Algorithms.KpzKernels::GetIndexFromXY(System.Int32,System.Int32).0 declarations end
@@ -1436,13 +1432,13 @@ begin
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.6\: boolean := false;
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\: boolean := false;
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\: signed(31 downto 0) := to_signed(0, 32);
@@ -1522,13 +1518,13 @@ begin
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.4\ := to_unsigned(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.5\ := to_unsigned(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\ := to_signed(0, 32);
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b\ := to_signed(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.6\ := false;
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num9\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\ := to_signed(0, 32);
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a\ := to_signed(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\ := false;
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\ := to_signed(0, 32);
@@ -1633,10 +1629,9 @@ begin
                             -- int indexFromXY;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- indexFromXY = Hast.Samples.Kpz.Algorithms.KpzKernels.GetIndexFromXY (@this, num2, num3);
+                            -- indexFromXY = KpzKernels.GetIndexFromXY (num2, num3);
                             -- 
                             -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.Kpz.Algorithms.KpzKernels::GetIndexFromXY(System.Int32,System.Int32)
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).x.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).y.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Started.0\ <= true;
@@ -1648,7 +1643,6 @@ begin
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.1\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).return.0\;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
                             -- uint num4;
@@ -1694,13 +1688,13 @@ begin
                             -- int num7;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- int conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b;
+                            -- int conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((num2 < 7)) {
-                            -- 	conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b = (num2 + 1);
+                            -- 	conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160 = (num2 + 1);
                             -- } else {
-                            -- 	conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b = 0;
+                            -- 	conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160 = 0;
                             -- }
                             -- 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.6\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ < to_signed(7, 32);
@@ -1720,9 +1714,9 @@ begin
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\ => 
                         -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num7 = (conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b);
+                        -- num7 = (conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160);
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b\);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160\);
                         -- The following section was transformed from the .NET statement below:
                         -- int num8;
                         -- 
@@ -1741,13 +1735,13 @@ begin
                         -- int num10;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a;
+                        -- int conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((num3 < 7)) {
-                        -- 	conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a = (num3 + 1);
+                        -- 	conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662 = (num3 + 1);
                         -- } else {
-                        -- 	conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a = 0;
+                        -- 	conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662 = 0;
                         -- }
                         -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ < to_signed(7, 32);
@@ -1767,14 +1761,14 @@ begin
                         -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b = (num2 + 1);
+                        -- 	conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160 = (num2 + 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b = (num2 + 1);
+                        -- conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160 = (num2 + 1);
                         -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ + to_signed(1, 32);
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\);
                         -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\;
@@ -1784,13 +1778,13 @@ begin
                         -- False branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b = 0;
+                        -- 	conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160 = 0;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b = 0;
+                        -- conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160 = 0;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b\ := to_signed(0, 32);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_6\.
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\;
@@ -1799,9 +1793,9 @@ begin
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\ => 
                         -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num10 = (conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a);
+                        -- num10 = (conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662);
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a\);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662\);
                         -- The following section was transformed from the .NET statement below:
                         -- int index;
                         -- 
@@ -1838,14 +1832,14 @@ begin
                         -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a = (num3 + 1);
+                        -- 	conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662 = (num3 + 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a = (num3 + 1);
+                        -- conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662 = (num3 + 1);
                         -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ + to_signed(1, 32);
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\);
                         -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\;
@@ -1855,13 +1849,13 @@ begin
                         -- False branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a = 0;
+                        -- 	conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662 = 0;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a = 0;
+                        -- conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662 = 0;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a\ := to_signed(0, 32);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\.
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_12\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\;
@@ -2175,7 +2169,6 @@ begin
     -- System.Int32 Hast.Samples.Kpz.Algorithms.KpzKernels::GetIndexFromXY(System.Int32,System.Int32).0 state machine start
     \KpzKernels::GetIndexFromXY(Int32,Int32).0._StateMachine\: process (\Clock\) 
         Variable \KpzKernels::GetIndexFromXY(Int32,Int32).0._State\: \KpzKernels::GetIndexFromXY(Int32,Int32).0._States\ := \KpzKernels::GetIndexFromXY(Int32,Int32).0._State_0\;
-        Variable \KpzKernels::GetIndexFromXY(Int32,Int32).0.this\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
         Variable \KpzKernels::GetIndexFromXY(Int32,Int32).0.x\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::GetIndexFromXY(Int32,Int32).0.y\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::GetIndexFromXY(Int32,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
@@ -2209,11 +2202,8 @@ begin
                             \KpzKernels::GetIndexFromXY(Int32,Int32).0._Finished\ <= false;
                             \KpzKernels::GetIndexFromXY(Int32,Int32).0._State\ := \KpzKernels::GetIndexFromXY(Int32,Int32).0._State_0\;
                         end if;
-                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
-                        \KpzKernels::GetIndexFromXY(Int32,Int32).0.this.parameter.Out\ <= \KpzKernels::GetIndexFromXY(Int32,Int32).0.this\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::GetIndexFromXY(Int32,Int32).0._State_2\ => 
-                        \KpzKernels::GetIndexFromXY(Int32,Int32).0.this\ := \KpzKernels::GetIndexFromXY(Int32,Int32).0.this.parameter.In\;
                         \KpzKernels::GetIndexFromXY(Int32,Int32).0.x\ := \KpzKernels::GetIndexFromXY(Int32,Int32).0.x.parameter.In\;
                         \KpzKernels::GetIndexFromXY(Int32,Int32).0.y\ := \KpzKernels::GetIndexFromXY(Int32,Int32).0.y.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
@@ -7469,12 +7459,10 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.Algorithms.KpzKernels::GetIndexFromXY(System.Int32,System.Int32) start
     -- Signal connections for System.Void Hast.Samples.Kpz.Algorithms.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
     \KpzKernels::GetIndexFromXY(Int32,Int32).0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Started.0\;
-    \KpzKernels::GetIndexFromXY(Int32,Int32).0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.Out.0\;
     \KpzKernels::GetIndexFromXY(Int32,Int32).0.x.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).x.parameter.Out.0\;
     \KpzKernels::GetIndexFromXY(Int32,Int32).0.y.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).y.parameter.Out.0\;
     \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Finished.0\ <= \KpzKernels::GetIndexFromXY(Int32,Int32).0._Finished\;
     \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).return.0\ <= \KpzKernels::GetIndexFromXY(Int32,Int32).0.return\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.In.0\ <= \KpzKernels::GetIndexFromXY(Int32,Int32).0.this.parameter.Out\;
     -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.Algorithms.KpzKernels::GetIndexFromXY(System.Int32,System.Int32) end
 
 
@@ -7941,7 +7929,6 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0._Finished\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.Out\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.Out.0\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).x.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).y.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Started.0\: boolean := false;
@@ -7962,7 +7949,6 @@ architecture Imp of Hast_IP is
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0._Started\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.this.parameter.In\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.forceSwitch.parameter.In\: boolean := false;
-    Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.In.0\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Finished.0\: boolean := false;
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).return.0\: signed(31 downto 0) := to_signed(0, 32);
     Signal \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetGridDx(Int32).this.parameter.In.0\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
@@ -7987,9 +7973,7 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0._Finished\: boolean := false;
     Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0.return\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0.this.parameter.Out\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0._Started\: boolean := false;
-    Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0.this.parameter.In\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
     Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0.x.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
     Signal \KpzKernels::GetIndexFromXY(Int32,Int32).0.y.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
     -- System.Int32 Hast.Samples.Kpz.Algorithms.KpzKernels::GetIndexFromXY(System.Int32,System.Int32).0 declarations end
@@ -8945,10 +8929,10 @@ begin
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.return_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.return_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -8958,13 +8942,13 @@ begin
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.12\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.14\: boolean := false;
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.16\: boolean := false;
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\: signed(31 downto 0) := to_signed(0, 32);
@@ -9042,10 +9026,10 @@ begin
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.0\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\ := to_unsigned(0, 32);
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.return_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\ := to_unsigned(0, 32);
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\ := to_unsigned(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.return_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\ := to_unsigned(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\ := to_unsigned(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\ := to_unsigned(0, 32);
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\ := to_unsigned(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\ := to_unsigned(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\ := to_signed(0, 64);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\ := to_unsigned(0, 64);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.10\ := to_unsigned(0, 32);
@@ -9055,13 +9039,13 @@ begin
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.12\ := to_unsigned(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.13\ := to_unsigned(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\ := to_signed(0, 32);
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b\ := to_signed(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.14\ := false;
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.15\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num8\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num9\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\ := to_signed(0, 32);
-                \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a\ := to_signed(0, 32);
+                \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.16\ := false;
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.17\ := to_signed(0, 32);
                 \KpzKernels::RandomlySwitchFourCells(Boolean).0.index\ := to_signed(0, 32);
@@ -9199,10 +9183,9 @@ begin
                         -- int indexFromXY;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- indexFromXY = Hast.Samples.Kpz.Algorithms.KpzKernels.GetIndexFromXY (@this, num2, num3);
+                        -- indexFromXY = KpzKernels.GetIndexFromXY (num2, num3);
                         -- 
                         -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.Kpz.Algorithms.KpzKernels::GetIndexFromXY(System.Int32,System.Int32)
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).x.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).y.parameter.Out.0\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\;
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Started.0\ <= true;
@@ -9213,32 +9196,31 @@ begin
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Started.0\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Finished.0\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Started.0\ <= false;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.0\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).return.0\;
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.In.0\;
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.indexFromXY\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- uint num4;
                             -- // Starting inlined block of the method System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- uint return_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575;
+                            -- uint return_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- uint num_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575;
+                            -- uint num_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575 = (uint)(@this.Random2.State >> 32);
+                            -- num_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc = (uint)(@this.Random2.State >> 32);
                             -- 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\ := SmartResize(shift_right(\KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\Random2\.\State\, to_integer(unsigned(SmartResize(to_signed(32, 32), 6) and "111111"))), 32);
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\);
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.7\);
                             -- The following section was transformed from the .NET statement below:
-                            -- uint num2_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575;
+                            -- uint num2_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num2_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575 = (uint)@this.Random2.State;
+                            -- num2_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc = (uint)@this.Random2.State;
                             -- 
-                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\ := SmartResize(\KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\Random2\.\State\, 32);
+                            \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\ := SmartResize(\KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\Random2\.\State\, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- @this.Random2.State = (ulong)((long)num2_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575 * 4294883355L + (long)(num_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575));
+                            -- @this.Random2.State = (ulong)((long)num2_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc * 4294883355L + (long)(num_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc));
                             -- 
                             -- Since the integer literal 4294883355 was out of the VHDL integer range it was substituted with a binary literal (11111111111111101011100000011011).
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\;
@@ -9246,23 +9228,23 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4454
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\ := SmartResize(signed(SmartResize(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num2_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\, 64)) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\ := SmartResize(signed(SmartResize(\KpzKernels::RandomlySwitchFourCells(Boolean).0.num2_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\, 64)) * "0000000000000000000000000000000011111111111111101011100000011011", 64);
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\ := SmartResize(unsigned(\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\ + signed(SmartResize((\KpzKernels::RandomlySwitchFourCells(Boolean).0.num_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\), 64))), 64);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\ := SmartResize(unsigned(\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.8\ + signed(SmartResize((\KpzKernels::RandomlySwitchFourCells(Boolean).0.num_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\), 64))), 64);
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.this\.\Random2\.\State\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.9\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575 = num2_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575 ^ num_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575;
+                        -- return_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc = num2_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc ^ num_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc;
                         -- // Ending inlined block of the method System.UInt32 Hast.Algorithms.Random.RandomMwc64X::NextUInt32().
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.10\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\ xor \KpzKernels::RandomlySwitchFourCells(Boolean).0.num_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\;
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.return_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.10\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.10\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\ xor \KpzKernels::RandomlySwitchFourCells(Boolean).0.num_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.return_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.10\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = return_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575;
+                        -- num4 = return_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return_065f64aff2cf89bbaba74c611a1bfc87444df79d6231de8fd96259a5b33ab575\;
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num4\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.return_d696f3f471658a84033785b23f327b8786bf45be0bb36d30249b70d7f534cacc\;
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
                         -- 
@@ -9288,13 +9270,13 @@ begin
                         -- int num7;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b;
+                        -- int conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((num2 < 7)) {
-                        -- 	conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b = (num2 + 1);
+                        -- 	conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160 = (num2 + 1);
                         -- } else {
-                        -- 	conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b = 0;
+                        -- 	conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160 = 0;
                         -- }
                         -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.14\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ < to_signed(7, 32);
@@ -9313,9 +9295,9 @@ begin
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\ => 
                         -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num7 = (conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b);
+                        -- num7 = (conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160);
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b\);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num7\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160\);
                         -- The following section was transformed from the .NET statement below:
                         -- int num8;
                         -- 
@@ -9334,13 +9316,13 @@ begin
                         -- int num10;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a;
+                        -- int conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((num3 < 7)) {
-                        -- 	conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a = (num3 + 1);
+                        -- 	conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662 = (num3 + 1);
                         -- } else {
-                        -- 	conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a = 0;
+                        -- 	conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662 = 0;
                         -- }
                         -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.16\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ < to_signed(7, 32);
@@ -9360,14 +9342,14 @@ begin
                         -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b = (num2 + 1);
+                        -- 	conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160 = (num2 + 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b = (num2 + 1);
+                        -- conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160 = (num2 + 1);
                         -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.15\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num2\ + to_signed(1, 32);
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.15\);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.15\);
                         -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\.
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_11\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\;
@@ -9377,13 +9359,13 @@ begin
                         -- False branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b = 0;
+                        -- 	conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160 = 0;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b = 0;
+                        -- conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160 = 0;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional012b8159dfb1e029e13e4124bc5f161cbf13d634c298c3413cd0faeac847339b\ := to_signed(0, 32);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional521b37b126928ffbb835044e1f2fa9fcd497f7b28456003c7c2b8c97ad869160\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_9\.
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_12\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\;
@@ -9392,9 +9374,9 @@ begin
                     when \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_13\ => 
                         -- State after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num10 = (conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a);
+                        -- num10 = (conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662);
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a\);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.num10\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662\);
                         -- The following section was transformed from the .NET statement below:
                         -- int index;
                         -- 
@@ -9431,14 +9413,14 @@ begin
                         -- True branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a = (num3 + 1);
+                        -- 	conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662 = (num3 + 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a = (num3 + 1);
+                        -- conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662 = (num3 + 1);
                         -- 
                         \KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.17\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0.num3\ + to_signed(1, 32);
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.17\);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662\ := (\KpzKernels::RandomlySwitchFourCells(Boolean).0.binaryOperationResult.17\);
                         -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\.
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_14\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_13\;
@@ -9448,13 +9430,13 @@ begin
                         -- False branch of the if-else started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a = 0;
+                        -- 	conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662 = 0;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a = 0;
+                        -- conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662 = 0;
                         -- 
-                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditional3041ace4e38b5075dde7ceceb801578d26e8b61794e81012eb6014ac53829d2a\ := to_signed(0, 32);
+                        \KpzKernels::RandomlySwitchFourCells(Boolean).0.conditionalbde904b97bdde5833978e794cb03d40b6f6a1485d7b2c86ac900667628f23662\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_10\.
                         if (\KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ = \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_15\) then 
                             \KpzKernels::RandomlySwitchFourCells(Boolean).0._State\ := \KpzKernels::RandomlySwitchFourCells(Boolean).0._State_13\;
@@ -9768,7 +9750,6 @@ begin
     -- System.Int32 Hast.Samples.Kpz.Algorithms.KpzKernels::GetIndexFromXY(System.Int32,System.Int32).0 state machine start
     \KpzKernels::GetIndexFromXY(Int32,Int32).0._StateMachine\: process (\Clock\) 
         Variable \KpzKernels::GetIndexFromXY(Int32,Int32).0._State\: \KpzKernels::GetIndexFromXY(Int32,Int32).0._States\ := \KpzKernels::GetIndexFromXY(Int32,Int32).0._State_0\;
-        Variable \KpzKernels::GetIndexFromXY(Int32,Int32).0.this\: \Hast.Samples.Kpz.Algorithms.KpzKernels\;
         Variable \KpzKernels::GetIndexFromXY(Int32,Int32).0.x\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::GetIndexFromXY(Int32,Int32).0.y\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernels::GetIndexFromXY(Int32,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
@@ -9802,11 +9783,8 @@ begin
                             \KpzKernels::GetIndexFromXY(Int32,Int32).0._Finished\ <= false;
                             \KpzKernels::GetIndexFromXY(Int32,Int32).0._State\ := \KpzKernels::GetIndexFromXY(Int32,Int32).0._State_0\;
                         end if;
-                        -- Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too.
-                        \KpzKernels::GetIndexFromXY(Int32,Int32).0.this.parameter.Out\ <= \KpzKernels::GetIndexFromXY(Int32,Int32).0.this\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \KpzKernels::GetIndexFromXY(Int32,Int32).0._State_2\ => 
-                        \KpzKernels::GetIndexFromXY(Int32,Int32).0.this\ := \KpzKernels::GetIndexFromXY(Int32,Int32).0.this.parameter.In\;
                         \KpzKernels::GetIndexFromXY(Int32,Int32).0.x\ := \KpzKernels::GetIndexFromXY(Int32,Int32).0.x.parameter.In\;
                         \KpzKernels::GetIndexFromXY(Int32,Int32).0.y\ := \KpzKernels::GetIndexFromXY(Int32,Int32).0.y.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
@@ -14972,12 +14950,10 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.Algorithms.KpzKernels::GetIndexFromXY(System.Int32,System.Int32) start
     -- Signal connections for System.Void Hast.Samples.Kpz.Algorithms.KpzKernels::RandomlySwitchFourCells(System.Boolean).0 (#0):
     \KpzKernels::GetIndexFromXY(Int32,Int32).0._Started\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Started.0\;
-    \KpzKernels::GetIndexFromXY(Int32,Int32).0.this.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.Out.0\;
     \KpzKernels::GetIndexFromXY(Int32,Int32).0.x.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).x.parameter.Out.0\;
     \KpzKernels::GetIndexFromXY(Int32,Int32).0.y.parameter.In\ <= \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).y.parameter.Out.0\;
     \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32)._Finished.0\ <= \KpzKernels::GetIndexFromXY(Int32,Int32).0._Finished\;
     \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).return.0\ <= \KpzKernels::GetIndexFromXY(Int32,Int32).0.return\;
-    \KpzKernels::RandomlySwitchFourCells(Boolean).0.KpzKernels::GetIndexFromXY(Int32,Int32).this.parameter.In.0\ <= \KpzKernels::GetIndexFromXY(Int32,Int32).0.this.parameter.Out\;
     -- System.Void Hast::InternalInvocationProxy().System.Int32 Hast.Samples.Kpz.Algorithms.KpzKernels::GetIndexFromXY(System.Int32,System.Int32) end
 
 
