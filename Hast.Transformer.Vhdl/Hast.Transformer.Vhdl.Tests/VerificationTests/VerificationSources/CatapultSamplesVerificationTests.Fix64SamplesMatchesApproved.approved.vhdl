@@ -192,103 +192,103 @@ architecture Imp of Hast_IP is
     -- Custom inter-dependent type declarations end
 
 
-    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).0 declarations start
+    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).0 declarations start
     -- State machine states:
-    type \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._States\ is (
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_0\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_1\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_2\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_3\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_4\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_5\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_6\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_7\);
+    type \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._States\ is (
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_0\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_1\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_2\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_3\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_4\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_5\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_6\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_7\);
     -- Signals:
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._Finished\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32).this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32)._Started.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers().this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers()._Started.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._Started\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.upToNumberObject.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32).this.parameter.In.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32)._Finished.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers()._Finished.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers().return.0\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).0 declarations end
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._Finished\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.return\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32).this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32)._Started.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers().this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers()._Started.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._Started\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.upToNumberObject.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32).this.parameter.In.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32)._Finished.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers()._Finished.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers().return.0\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
+    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).0 declarations end
 
 
-    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).1 declarations start
+    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).1 declarations start
     -- State machine states:
-    type \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._States\ is (
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_0\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_1\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_2\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_3\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_4\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_5\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_6\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_7\);
+    type \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._States\ is (
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_0\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_1\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_2\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_3\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_4\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_5\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_6\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_7\);
     -- Signals:
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._Finished\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32).this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32)._Started.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers().this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers()._Started.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._Started\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.upToNumberObject.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32).this.parameter.In.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32)._Finished.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers()._Finished.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers().return.0\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).1 declarations end
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._Finished\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.return\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32).this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32)._Started.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers().this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers()._Started.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._Started\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.upToNumberObject.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32).this.parameter.In.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32)._Finished.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers()._Finished.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers().return.0\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
+    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).1 declarations end
 
 
-    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).2 declarations start
+    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).2 declarations start
     -- State machine states:
-    type \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._States\ is (
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_0\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_1\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_2\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_3\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_4\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_5\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_6\, 
-        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_7\);
+    type \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._States\ is (
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_0\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_1\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_2\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_3\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_4\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_5\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_6\, 
+        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_7\);
     -- Signals:
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._Finished\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32).this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32)._Started.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers().this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers()._Started.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._Started\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.upToNumberObject.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32).this.parameter.In.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32)._Finished.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\: \Hast.Algorithms.Fix64\;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers()._Finished.0\: boolean := false;
-    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers().return.0\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).2 declarations end
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._Finished\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.return\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32).this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32).value.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32)._Started.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers().this.parameter.Out.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers()._Started.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._Started\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.upToNumberObject.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32).this.parameter.In.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32)._Finished.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\: \Hast.Algorithms.Fix64\;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers()._Finished.0\: boolean := false;
+    Signal \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers().return.0\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
+    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).2 declarations end
 
 
     -- System.Void Hast.Samples.SampleAssembly.Fix64Calculator::CalculateIntegerSumUpToNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
@@ -351,19 +351,19 @@ architecture Imp of Hast_IP is
     Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).upToNumberObject.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.0\: boolean := false;
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).upToNumberObject.parameter.Out.1\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.1\: boolean := false;
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).upToNumberObject.parameter.Out.2\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.2\: boolean := false;
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).upToNumberObject.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.0\: boolean := false;
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).upToNumberObject.parameter.Out.1\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.1\: boolean := false;
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).upToNumberObject.parameter.Out.2\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.2\: boolean := false;
     Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._Started\: boolean := false;
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Finished.0\: boolean := false;
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Finished.1\: boolean := false;
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Finished.2\: boolean := false;
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).return.0\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).return.1\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
-    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).return.2\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Finished.0\: boolean := false;
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Finished.1\: boolean := false;
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Finished.2\: boolean := false;
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).return.0\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).return.1\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
+    Signal \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).return.2\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
     -- System.Void Hast.Samples.SampleAssembly.Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
@@ -675,56 +675,56 @@ architecture Imp of Hast_IP is
 
 begin 
 
-    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).0 state machine start
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._StateMachine\: process (\Clock\) 
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\: \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._States\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_0\;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.upToNumberObject\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.fix\: \Hast.Algorithms.Fix64\;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.fix2\: \Hast.Algorithms.Fix64\;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.binaryOperationResult.0\: boolean := false;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return.0\: \Hast.Algorithms.Fix64\;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.array\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return.1\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
+    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).0 state machine start
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._StateMachine\: process (\Clock\) 
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\: \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._States\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_0\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.upToNumberObject\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.fix\: \Hast.Algorithms.Fix64\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.fix2\: \Hast.Algorithms.Fix64\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.binaryOperationResult.0\: boolean := false;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.return.0\: \Hast.Algorithms.Fix64\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.array\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.return.1\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._Finished\ <= false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32)._Started.0\ <= false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers()._Started.0\ <= false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_0\;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.upToNumberObject\ := to_signed(0, 32);
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.num\ := to_signed(0, 32);
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.binaryOperationResult.0\ := false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.array\ := (others => to_signed(0, 32));
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return.1\ := (others => to_signed(0, 32));
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._Finished\ <= false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32)._Started.0\ <= false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers()._Started.0\ <= false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_0\;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.upToNumberObject\ := to_signed(0, 32);
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.num\ := to_signed(0, 32);
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.binaryOperationResult.0\ := false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.binaryOperationResult.1\ := to_signed(0, 32);
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.array\ := (others => to_signed(0, 32));
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.return.1\ := (others => to_signed(0, 32));
             else 
-                case \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ is 
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_0\ => 
+                case \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\ is 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._Started\ = true) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_2\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._Started\ = true) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_1\ => 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._Started\ = true) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._Finished\ <= true;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._Started\ = true) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._Finished\ <= true;
                         else 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._Finished\ <= false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_0\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._Finished\ <= false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_2\ => 
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.upToNumberObject\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.upToNumberObject.parameter.In\;
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_2\ => 
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.upToNumberObject\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.upToNumberObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- Fix64 fix;
                         -- 
@@ -732,34 +732,34 @@ begin
                         -- fix = new Fix64 (1);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.fix\.\IsNull\ := false;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.fix\.\RawValue\ := to_signed(0, 64);
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.fix\.\IsNull\ := false;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.fix\.\RawValue\ := to_signed(0, 64);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.Fix64::.ctor(System.Int32)
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32).this.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.fix\;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(1, 32);
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32)._Started.0\ <= true;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_3\;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32).this.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.fix\;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(1, 32);
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32)._Started.0\ <= true;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_3\ => 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Algorithms.Fix64::.ctor(System.Int32)
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32)._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32)._Finished.0\) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32)._Started.0\ <= false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.fix\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32).this.parameter.In.0\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32)._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32)._Finished.0\) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32)._Started.0\ <= false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.fix\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- Fix64 fix2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- fix2 = fix;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.fix2\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.fix\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.fix2\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.fix\;
                             -- The following section was transformed from the .NET statement below:
                             -- int num;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- num = 1;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.num\ := to_signed(1, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.num\ := to_signed(1, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (num < upToNumberObject) {
                             -- 	fix = Fix64.op_Addition (fix, fix2);
@@ -767,14 +767,14 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_4\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_4\ => 
-                        -- Repeated state of the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_3\.
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_4\ => 
+                        -- Repeated state of the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_3\.
                         -- The while loop's condition:
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.binaryOperationResult.0\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.num\ < \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.upToNumberObject\;
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.binaryOperationResult.0\) then 
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.binaryOperationResult.0\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.num\ < \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.upToNumberObject\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	fix = Fix64.op_Addition (fix, fix2);
@@ -785,16 +785,16 @@ begin
                             -- fix = Fix64.op_Addition (fix, fix2);
                             -- 
                             -- Starting state machine invocation for the following method: Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64)
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.fix\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.fix2\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= true;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_6\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.fix\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.fix2\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= true;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_6\;
                         else 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_5\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.46515
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_5\ => 
-                        -- State after the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_3\.
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_5\ => 
+                        -- State after the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- int[] array;
                         -- 
@@ -802,115 +802,115 @@ begin
                         -- array = Hast.Algorithms.Fix64.ToIntegers (fix);
                         -- 
                         -- Starting state machine invocation for the following method: System.Int32[] Hast.Algorithms.Fix64::ToIntegers()
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers().this.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.fix\;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers()._Started.0\ <= true;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_7\;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers().this.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.fix\;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers()._Started.0\ <= true;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_6\ => 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64)
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return.0\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.fix\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return.0\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.return.0\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.fix\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.return.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- num = num + 1;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.binaryOperationResult.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.num\ + to_signed(1, 32);
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.num\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.binaryOperationResult.1\;
-                            -- Returning to the repeated state of the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_3\ if the loop wasn't exited with a state change.
-                            if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_6\) then 
-                                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_4\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.binaryOperationResult.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.num\ + to_signed(1, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.num\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.binaryOperationResult.1\;
+                            -- Returning to the repeated state of the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_3\ if the loop wasn't exited with a state change.
+                            if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_6\) then 
+                                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_4\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_7\ => 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32[] Hast.Algorithms.Fix64::ToIntegers()
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers()._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers()._Finished.0\) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers()._Started.0\ <= false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers().return.0\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.array\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return.1\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers()._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers()._Finished.0\) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers()._Started.0\ <= false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.return.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers().return.0\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.array\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- TaskResult objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0;
+                            -- TaskResult objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0 = new TaskResult { };
+                            -- objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9 = new TaskResult { };
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\IsNull\ := false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64Low\ := to_signed(0, 32);
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64High\ := to_signed(0, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\IsNull\ := false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\Fix64Low\ := to_signed(0, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\Fix64High\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0.Fix64High = array [1];
+                            -- objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9.Fix64High = array [1];
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64High\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.array\(to_integer(to_signed(1, 32)));
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\Fix64High\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.array\(to_integer(to_signed(1, 32)));
                             -- The following section was transformed from the .NET statement below:
-                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0.Fix64Low = array [0];
+                            -- objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9.Fix64Low = array [0];
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64Low\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.array\(to_integer(to_signed(0, 32)));
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\Fix64Low\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.array\(to_integer(to_signed(0, 32)));
                             -- The following section was transformed from the .NET statement below:
-                            -- return objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0;
+                            -- return objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._State_1\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.return\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).0 state machine end
+    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).0 state machine end
 
 
-    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).1 state machine start
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._StateMachine\: process (\Clock\) 
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\: \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._States\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_0\;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.upToNumberObject\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.fix\: \Hast.Algorithms.Fix64\;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.fix2\: \Hast.Algorithms.Fix64\;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.binaryOperationResult.0\: boolean := false;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return.0\: \Hast.Algorithms.Fix64\;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.array\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return.1\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
+    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).1 state machine start
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._StateMachine\: process (\Clock\) 
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\: \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._States\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_0\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.upToNumberObject\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.fix\: \Hast.Algorithms.Fix64\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.fix2\: \Hast.Algorithms.Fix64\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.binaryOperationResult.0\: boolean := false;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.return.0\: \Hast.Algorithms.Fix64\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.array\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.return.1\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._Finished\ <= false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32)._Started.0\ <= false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers()._Started.0\ <= false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_0\;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.upToNumberObject\ := to_signed(0, 32);
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.num\ := to_signed(0, 32);
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.binaryOperationResult.0\ := false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.binaryOperationResult.1\ := to_signed(0, 32);
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.array\ := (others => to_signed(0, 32));
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return.1\ := (others => to_signed(0, 32));
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._Finished\ <= false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32)._Started.0\ <= false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers()._Started.0\ <= false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_0\;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.upToNumberObject\ := to_signed(0, 32);
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.num\ := to_signed(0, 32);
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.binaryOperationResult.0\ := false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.binaryOperationResult.1\ := to_signed(0, 32);
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.array\ := (others => to_signed(0, 32));
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.return.1\ := (others => to_signed(0, 32));
             else 
-                case \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ is 
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_0\ => 
+                case \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\ is 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._Started\ = true) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_2\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._Started\ = true) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_1\ => 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._Started\ = true) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._Finished\ <= true;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._Started\ = true) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._Finished\ <= true;
                         else 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._Finished\ <= false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_0\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._Finished\ <= false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_2\ => 
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.upToNumberObject\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.upToNumberObject.parameter.In\;
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_2\ => 
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.upToNumberObject\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.upToNumberObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- Fix64 fix;
                         -- 
@@ -918,34 +918,34 @@ begin
                         -- fix = new Fix64 (1);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.fix\.\IsNull\ := false;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.fix\.\RawValue\ := to_signed(0, 64);
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.fix\.\IsNull\ := false;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.fix\.\RawValue\ := to_signed(0, 64);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.Fix64::.ctor(System.Int32)
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32).this.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.fix\;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(1, 32);
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32)._Started.0\ <= true;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_3\;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32).this.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.fix\;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(1, 32);
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32)._Started.0\ <= true;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_3\ => 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Algorithms.Fix64::.ctor(System.Int32)
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32)._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32)._Finished.0\) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32)._Started.0\ <= false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.fix\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32).this.parameter.In.0\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32)._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32)._Finished.0\) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32)._Started.0\ <= false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.fix\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- Fix64 fix2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- fix2 = fix;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.fix2\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.fix\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.fix2\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.fix\;
                             -- The following section was transformed from the .NET statement below:
                             -- int num;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- num = 1;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.num\ := to_signed(1, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.num\ := to_signed(1, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (num < upToNumberObject) {
                             -- 	fix = Fix64.op_Addition (fix, fix2);
@@ -953,14 +953,14 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_4\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_4\ => 
-                        -- Repeated state of the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_3\.
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_4\ => 
+                        -- Repeated state of the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_3\.
                         -- The while loop's condition:
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.binaryOperationResult.0\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.num\ < \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.upToNumberObject\;
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.binaryOperationResult.0\) then 
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.binaryOperationResult.0\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.num\ < \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.upToNumberObject\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	fix = Fix64.op_Addition (fix, fix2);
@@ -971,16 +971,16 @@ begin
                             -- fix = Fix64.op_Addition (fix, fix2);
                             -- 
                             -- Starting state machine invocation for the following method: Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64)
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.fix\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.fix2\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= true;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_6\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.fix\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.fix2\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= true;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_6\;
                         else 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_5\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.46515
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_5\ => 
-                        -- State after the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_3\.
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_5\ => 
+                        -- State after the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- int[] array;
                         -- 
@@ -988,115 +988,115 @@ begin
                         -- array = Hast.Algorithms.Fix64.ToIntegers (fix);
                         -- 
                         -- Starting state machine invocation for the following method: System.Int32[] Hast.Algorithms.Fix64::ToIntegers()
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers().this.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.fix\;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers()._Started.0\ <= true;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_7\;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers().this.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.fix\;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers()._Started.0\ <= true;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_6\ => 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64)
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return.0\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.fix\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return.0\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.return.0\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.fix\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.return.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- num = num + 1;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.binaryOperationResult.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.num\ + to_signed(1, 32);
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.num\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.binaryOperationResult.1\;
-                            -- Returning to the repeated state of the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_3\ if the loop wasn't exited with a state change.
-                            if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_6\) then 
-                                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_4\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.binaryOperationResult.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.num\ + to_signed(1, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.num\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.binaryOperationResult.1\;
+                            -- Returning to the repeated state of the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_3\ if the loop wasn't exited with a state change.
+                            if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_6\) then 
+                                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_4\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_7\ => 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32[] Hast.Algorithms.Fix64::ToIntegers()
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers()._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers()._Finished.0\) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers()._Started.0\ <= false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers().return.0\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.array\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return.1\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers()._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers()._Finished.0\) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers()._Started.0\ <= false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.return.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers().return.0\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.array\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- TaskResult objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0;
+                            -- TaskResult objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0 = new TaskResult { };
+                            -- objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9 = new TaskResult { };
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\IsNull\ := false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64Low\ := to_signed(0, 32);
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64High\ := to_signed(0, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\IsNull\ := false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\Fix64Low\ := to_signed(0, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\Fix64High\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0.Fix64High = array [1];
+                            -- objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9.Fix64High = array [1];
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64High\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.array\(to_integer(to_signed(1, 32)));
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\Fix64High\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.array\(to_integer(to_signed(1, 32)));
                             -- The following section was transformed from the .NET statement below:
-                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0.Fix64Low = array [0];
+                            -- objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9.Fix64Low = array [0];
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64Low\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.array\(to_integer(to_signed(0, 32)));
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\Fix64Low\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.array\(to_integer(to_signed(0, 32)));
                             -- The following section was transformed from the .NET statement below:
-                            -- return objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0;
+                            -- return objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._State_1\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.return\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).1 state machine end
+    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).1 state machine end
 
 
-    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).2 state machine start
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._StateMachine\: process (\Clock\) 
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\: \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._States\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_0\;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.upToNumberObject\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.fix\: \Hast.Algorithms.Fix64\;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.fix2\: \Hast.Algorithms.Fix64\;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.num\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.binaryOperationResult.0\: boolean := false;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return.0\: \Hast.Algorithms.Fix64\;
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.array\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return.1\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
-        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
+    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).2 state machine start
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._StateMachine\: process (\Clock\) 
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\: \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._States\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_0\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.upToNumberObject\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.fix\: \Hast.Algorithms.Fix64\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.fix2\: \Hast.Algorithms.Fix64\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.binaryOperationResult.0\: boolean := false;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.return.0\: \Hast.Algorithms.Fix64\;
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.array\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.return.1\: \signed32_Array\(0 to 1) := (others => to_signed(0, 32));
+        Variable \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._Finished\ <= false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32)._Started.0\ <= false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers()._Started.0\ <= false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_0\;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.upToNumberObject\ := to_signed(0, 32);
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.num\ := to_signed(0, 32);
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.binaryOperationResult.0\ := false;
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.binaryOperationResult.1\ := to_signed(0, 32);
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.array\ := (others => to_signed(0, 32));
-                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return.1\ := (others => to_signed(0, 32));
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._Finished\ <= false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32)._Started.0\ <= false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers()._Started.0\ <= false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_0\;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.upToNumberObject\ := to_signed(0, 32);
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.num\ := to_signed(0, 32);
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.binaryOperationResult.0\ := false;
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.binaryOperationResult.1\ := to_signed(0, 32);
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.array\ := (others => to_signed(0, 32));
+                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.return.1\ := (others => to_signed(0, 32));
             else 
-                case \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ is 
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_0\ => 
+                case \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\ is 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._Started\ = true) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_2\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._Started\ = true) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_1\ => 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._Started\ = true) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._Finished\ <= true;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._Started\ = true) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._Finished\ <= true;
                         else 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._Finished\ <= false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_0\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._Finished\ <= false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_2\ => 
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.upToNumberObject\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.upToNumberObject.parameter.In\;
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_2\ => 
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.upToNumberObject\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.upToNumberObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- Fix64 fix;
                         -- 
@@ -1104,34 +1104,34 @@ begin
                         -- fix = new Fix64 (1);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.fix\.\IsNull\ := false;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.fix\.\RawValue\ := to_signed(0, 64);
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.fix\.\IsNull\ := false;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.fix\.\RawValue\ := to_signed(0, 64);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Hast.Algorithms.Fix64::.ctor(System.Int32)
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32).this.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.fix\;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(1, 32);
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32)._Started.0\ <= true;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_3\;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32).this.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.fix\;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32).value.parameter.Out.0\ <= to_signed(1, 32);
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32)._Started.0\ <= true;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_3\ => 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_3\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Algorithms.Fix64::.ctor(System.Int32)
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32)._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32)._Finished.0\) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32)._Started.0\ <= false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.fix\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32).this.parameter.In.0\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32)._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32)._Finished.0\) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32)._Started.0\ <= false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.fix\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- Fix64 fix2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- fix2 = fix;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.fix2\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.fix\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.fix2\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.fix\;
                             -- The following section was transformed from the .NET statement below:
                             -- int num;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- num = 1;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.num\ := to_signed(1, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.num\ := to_signed(1, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (num < upToNumberObject) {
                             -- 	fix = Fix64.op_Addition (fix, fix2);
@@ -1139,14 +1139,14 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_4\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_4\ => 
-                        -- Repeated state of the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_3\.
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_4\ => 
+                        -- Repeated state of the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_3\.
                         -- The while loop's condition:
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.binaryOperationResult.0\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.num\ < \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.upToNumberObject\;
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.binaryOperationResult.0\) then 
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.binaryOperationResult.0\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.num\ < \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.upToNumberObject\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	fix = Fix64.op_Addition (fix, fix2);
@@ -1157,16 +1157,16 @@ begin
                             -- fix = Fix64.op_Addition (fix, fix2);
                             -- 
                             -- Starting state machine invocation for the following method: Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64)
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.fix\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.fix2\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= true;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_6\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.fix\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.fix2\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= true;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_6\;
                         else 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_5\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.46515
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_5\ => 
-                        -- State after the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_3\.
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_5\ => 
+                        -- State after the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- int[] array;
                         -- 
@@ -1174,63 +1174,63 @@ begin
                         -- array = Hast.Algorithms.Fix64.ToIntegers (fix);
                         -- 
                         -- Starting state machine invocation for the following method: System.Int32[] Hast.Algorithms.Fix64::ToIntegers()
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers().this.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.fix\;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers()._Started.0\ <= true;
-                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_7\;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers().this.parameter.Out.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.fix\;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers()._Started.0\ <= true;
+                        \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_6\ => 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64)
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return.0\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.fix\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return.0\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\ <= false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.return.0\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.fix\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.return.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- num = num + 1;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.binaryOperationResult.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.num\ + to_signed(1, 32);
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.num\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.binaryOperationResult.1\;
-                            -- Returning to the repeated state of the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_3\ if the loop wasn't exited with a state change.
-                            if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_6\) then 
-                                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_4\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.binaryOperationResult.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.num\ + to_signed(1, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.num\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.binaryOperationResult.1\;
+                            -- Returning to the repeated state of the while loop which was started in state \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_3\ if the loop wasn't exited with a state change.
+                            if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_6\) then 
+                                \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_4\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_7\ => 
+                    when \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Int32[] Hast.Algorithms.Fix64::ToIntegers()
-                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers()._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers()._Finished.0\) then 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers()._Started.0\ <= false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers().return.0\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.array\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return.1\;
+                        if (\Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers()._Started.0\ = \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers()._Finished.0\) then 
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers()._Started.0\ <= false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.return.1\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers().return.0\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.array\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- TaskResult objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0;
+                            -- TaskResult objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0 = new TaskResult { };
+                            -- objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9 = new TaskResult { };
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\IsNull\ := false;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64Low\ := to_signed(0, 32);
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64High\ := to_signed(0, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\IsNull\ := false;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\Fix64Low\ := to_signed(0, 32);
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\Fix64High\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0.Fix64High = array [1];
+                            -- objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9.Fix64High = array [1];
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64High\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.array\(to_integer(to_signed(1, 32)));
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\Fix64High\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.array\(to_integer(to_signed(1, 32)));
                             -- The following section was transformed from the .NET statement below:
-                            -- objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0.Fix64Low = array [0];
+                            -- objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9.Fix64Low = array [0];
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\.\Fix64Low\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.array\(to_integer(to_signed(0, 32)));
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\.\Fix64Low\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.array\(to_integer(to_signed(0, 32)));
                             -- The following section was transformed from the .NET statement below:
-                            -- return objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0;
+                            -- return objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9;
                             -- 
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.objectc5678b147b85efe6625e0a275be760789ec1d0db7494b191e320a3d6150babb0\;
-                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._State_1\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.return\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.objectea779772f3f1480aeffcf875331737fa2a5cbede3575cc8114cac64aaa5608f9\;
+                            \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State\ := \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                 end case;
             end if;
         end if;
     end process;
-    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).2 state machine end
+    -- Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).2 state machine end
 
 
     -- System.Void Hast.Samples.SampleAssembly.Fix64Calculator::CalculateIntegerSumUpToNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
@@ -1462,7 +1462,7 @@ begin
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).invocationIndex\: integer range 0 to 2 := 0;
+        Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).invocationIndex\: integer range 0 to 2 := 0;
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.0\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
         Variable \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.1\: \Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult\;
@@ -1482,18 +1482,18 @@ begin
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).upToNumberObject.parameter.Out.0\ <= to_signed(0, 32);
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.0\ <= false;
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).upToNumberObject.parameter.Out.1\ <= to_signed(0, 32);
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.1\ <= false;
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).upToNumberObject.parameter.Out.2\ <= to_signed(0, 32);
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.2\ <= false;
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).upToNumberObject.parameter.Out.0\ <= to_signed(0, 32);
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.0\ <= false;
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).upToNumberObject.parameter.Out.1\ <= to_signed(0, 32);
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.1\ <= false;
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).upToNumberObject.parameter.Out.2\ <= to_signed(0, 32);
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.2\ <= false;
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_0\;
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num\ := to_signed(0, 32);
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\ := to_signed(0, 32);
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.dataIn.0\ := (others => '0');
-                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).invocationIndex\ := 0;
+                \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).invocationIndex\ := 0;
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num3\ := to_signed(0, 32);
                 \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.binaryOperationResult.2\ := false;
@@ -1538,7 +1538,7 @@ begin
                         -- while (num < 10) {
                         -- 	int num2;
                         -- 	num2 = memory.ReadInt32 (num);
-                        -- 	array [num] = Task.Factory.StartNew (<>c.<>9__6_0 ?? (<>c.<>9__6_0 = <>c.<>9.<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0), num2);
+                        -- 	array [num] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0), num2);
                         -- 	num = num + 1;
                         -- }
                         -- 
@@ -1554,7 +1554,7 @@ begin
                             -- {
                             -- 	int num2;
                             -- 	num2 = memory.ReadInt32 (num);
-                            -- 	array [num] = Task.Factory.StartNew (<>c.<>9__6_0 ?? (<>c.<>9__6_0 = <>c.<>9.<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0), num2);
+                            -- 	array [num] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0), num2);
                             -- 	num = num + 1;
                             -- }
                             -- 
@@ -1587,21 +1587,21 @@ begin
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\ := ConvertStdLogicVectorToInt32(\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- array [num] = Task.Factory.StartNew (<>c.<>9__6_0 ?? (<>c.<>9__6_0 = <>c.<>9.<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0), num2);
+                            -- array [num] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0), num2);
                             -- 
-                            -- Starting state machine invocation for the following method: Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object)
-                            case \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).invocationIndex\ is 
+                            -- Starting state machine invocation for the following method: Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object)
+                            case \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).invocationIndex\ is 
                                 when 0 => 
-                                    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).upToNumberObject.parameter.Out.0\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\;
-                                    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.0\ <= true;
+                                    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).upToNumberObject.parameter.Out.0\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\;
+                                    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.0\ <= true;
                                 when 1 => 
-                                    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).upToNumberObject.parameter.Out.1\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\;
-                                    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.1\ <= true;
+                                    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).upToNumberObject.parameter.Out.1\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\;
+                                    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.1\ <= true;
                                 when 2 => 
-                                    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).upToNumberObject.parameter.Out.2\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\;
-                                    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.2\ <= true;
+                                    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).upToNumberObject.parameter.Out.2\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.num2\;
+                                    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.2\ <= true;
                             end case;
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).invocationIndex\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).invocationIndex\ + 1;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).invocationIndex\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).invocationIndex\ + 1;
                             -- The following section was transformed from the .NET statement below:
                             -- num = num + 1;
                             -- 
@@ -1614,15 +1614,15 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object)
-                        if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.1\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Finished.1\ and \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.2\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Finished.2\ and \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.0\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Finished.0\) then 
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.0\ <= false;
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.1\ <= false;
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.2\ <= false;
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).invocationIndex\ := 0;
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.0\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).return.0\;
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.1\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).return.1\;
-                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.2\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).return.2\;
+                        -- Waiting for the state machine invocation of the following method to finish: Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object)
+                        if (\Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.1\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Finished.1\ and \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.2\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Finished.2\ and \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.0\ = \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Finished.0\) then 
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.0\ <= false;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.1\ <= false;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.2\ <= false;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).invocationIndex\ := 0;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.0\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).return.0\;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.1\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).return.1\;
+                            \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.2\ := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).return.2\;
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array\(0) := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.0\;
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array\(1) := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.1\;
                             \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.array\(2) := \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.return.2\;
@@ -3467,24 +3467,24 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Algorithms.Fix64::.ctor(System.Int32) start
-    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).0 (#0):
-    \Fix64::.ctor(Int32).0._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32)._Started.0\;
-    \Fix64::.ctor(Int32).0.this.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32).this.parameter.Out.0\;
-    \Fix64::.ctor(Int32).0.value.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32).value.parameter.Out.0\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32)._Finished.0\ <= \Fix64::.ctor(Int32).0._Finished\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::.ctor(Int32).this.parameter.In.0\ <= \Fix64::.ctor(Int32).0.this.parameter.Out\;
-    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).1 (#1):
-    \Fix64::.ctor(Int32).1._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32)._Started.0\;
-    \Fix64::.ctor(Int32).1.this.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32).this.parameter.Out.0\;
-    \Fix64::.ctor(Int32).1.value.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32).value.parameter.Out.0\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32)._Finished.0\ <= \Fix64::.ctor(Int32).1._Finished\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::.ctor(Int32).this.parameter.In.0\ <= \Fix64::.ctor(Int32).1.this.parameter.Out\;
-    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).2 (#2):
-    \Fix64::.ctor(Int32).2._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32)._Started.0\;
-    \Fix64::.ctor(Int32).2.this.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32).this.parameter.Out.0\;
-    \Fix64::.ctor(Int32).2.value.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32).value.parameter.Out.0\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32)._Finished.0\ <= \Fix64::.ctor(Int32).2._Finished\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::.ctor(Int32).this.parameter.In.0\ <= \Fix64::.ctor(Int32).2.this.parameter.Out\;
+    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).0 (#0):
+    \Fix64::.ctor(Int32).0._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32)._Started.0\;
+    \Fix64::.ctor(Int32).0.this.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32).this.parameter.Out.0\;
+    \Fix64::.ctor(Int32).0.value.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32).value.parameter.Out.0\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32)._Finished.0\ <= \Fix64::.ctor(Int32).0._Finished\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::.ctor(Int32).this.parameter.In.0\ <= \Fix64::.ctor(Int32).0.this.parameter.Out\;
+    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).1 (#1):
+    \Fix64::.ctor(Int32).1._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32)._Started.0\;
+    \Fix64::.ctor(Int32).1.this.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32).this.parameter.Out.0\;
+    \Fix64::.ctor(Int32).1.value.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32).value.parameter.Out.0\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32)._Finished.0\ <= \Fix64::.ctor(Int32).1._Finished\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::.ctor(Int32).this.parameter.In.0\ <= \Fix64::.ctor(Int32).1.this.parameter.Out\;
+    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).2 (#2):
+    \Fix64::.ctor(Int32).2._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32)._Started.0\;
+    \Fix64::.ctor(Int32).2.this.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32).this.parameter.Out.0\;
+    \Fix64::.ctor(Int32).2.value.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32).value.parameter.Out.0\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32)._Finished.0\ <= \Fix64::.ctor(Int32).2._Finished\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::.ctor(Int32).this.parameter.In.0\ <= \Fix64::.ctor(Int32).2.this.parameter.Out\;
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.Fix64Calculator::CalculateIntegerSumUpToNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#3):
     \Fix64::.ctor(Int32).3._Started\ <= \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Fix64::.ctor(Int32)._Started.0\;
     \Fix64::.ctor(Int32).3.this.parameter.In\ <= \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Fix64::.ctor(Int32).this.parameter.Out.0\;
@@ -3495,24 +3495,24 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().Hast.Algorithms.Fix64 Hast.Algorithms.Fix64::op_Addition(Hast.Algorithms.Fix64,Hast.Algorithms.Fix64) start
-    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).0 (#0):
-    \Fix64 Fix64::op_Addition(Fix64,Fix64).0._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\;
-    \Fix64 Fix64::op_Addition(Fix64,Fix64).0.x.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\;
-    \Fix64 Fix64::op_Addition(Fix64,Fix64).0.y.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\ <= \Fix64 Fix64::op_Addition(Fix64,Fix64).0._Finished\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\ <= \Fix64 Fix64::op_Addition(Fix64,Fix64).0.return\;
-    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).1 (#1):
-    \Fix64 Fix64::op_Addition(Fix64,Fix64).1._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\;
-    \Fix64 Fix64::op_Addition(Fix64,Fix64).1.x.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\;
-    \Fix64 Fix64::op_Addition(Fix64,Fix64).1.y.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\ <= \Fix64 Fix64::op_Addition(Fix64,Fix64).1._Finished\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\ <= \Fix64 Fix64::op_Addition(Fix64,Fix64).1.return\;
-    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).2 (#2):
-    \Fix64 Fix64::op_Addition(Fix64,Fix64).2._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\;
-    \Fix64 Fix64::op_Addition(Fix64,Fix64).2.x.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\;
-    \Fix64 Fix64::op_Addition(Fix64,Fix64).2.y.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\ <= \Fix64 Fix64::op_Addition(Fix64,Fix64).2._Finished\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\ <= \Fix64 Fix64::op_Addition(Fix64,Fix64).2.return\;
+    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).0 (#0):
+    \Fix64 Fix64::op_Addition(Fix64,Fix64).0._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\;
+    \Fix64 Fix64::op_Addition(Fix64,Fix64).0.x.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\;
+    \Fix64 Fix64::op_Addition(Fix64,Fix64).0.y.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\ <= \Fix64 Fix64::op_Addition(Fix64,Fix64).0._Finished\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\ <= \Fix64 Fix64::op_Addition(Fix64,Fix64).0.return\;
+    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).1 (#1):
+    \Fix64 Fix64::op_Addition(Fix64,Fix64).1._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\;
+    \Fix64 Fix64::op_Addition(Fix64,Fix64).1.x.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\;
+    \Fix64 Fix64::op_Addition(Fix64,Fix64).1.y.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\ <= \Fix64 Fix64::op_Addition(Fix64,Fix64).1._Finished\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\ <= \Fix64 Fix64::op_Addition(Fix64,Fix64).1.return\;
+    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).2 (#2):
+    \Fix64 Fix64::op_Addition(Fix64,Fix64).2._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\;
+    \Fix64 Fix64::op_Addition(Fix64,Fix64).2.x.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\;
+    \Fix64 Fix64::op_Addition(Fix64,Fix64).2.y.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).y.parameter.Out.0\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64)._Finished.0\ <= \Fix64 Fix64::op_Addition(Fix64,Fix64).2._Finished\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64 Fix64::op_Addition(Fix64,Fix64).return.0\ <= \Fix64 Fix64::op_Addition(Fix64,Fix64).2.return\;
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.Fix64Calculator::CalculateIntegerSumUpToNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#3):
     \Fix64 Fix64::op_Addition(Fix64,Fix64).3._Started\ <= \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Fix64 Fix64::op_Addition(Fix64,Fix64)._Started.0\;
     \Fix64 Fix64::op_Addition(Fix64,Fix64).3.x.parameter.In\ <= \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Fix64 Fix64::op_Addition(Fix64,Fix64).x.parameter.Out.0\;
@@ -3523,21 +3523,21 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Int32[] Hast.Algorithms.Fix64::ToIntegers() start
-    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).0 (#0):
-    \Fix64::ToIntegers().0._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers()._Started.0\;
-    \Fix64::ToIntegers().0.this.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers().this.parameter.Out.0\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers()._Finished.0\ <= \Fix64::ToIntegers().0._Finished\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.Fix64::ToIntegers().return.0\ <= \Fix64::ToIntegers().0.return\;
-    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).1 (#1):
-    \Fix64::ToIntegers().1._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers()._Started.0\;
-    \Fix64::ToIntegers().1.this.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers().this.parameter.Out.0\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers()._Finished.0\ <= \Fix64::ToIntegers().1._Finished\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.Fix64::ToIntegers().return.0\ <= \Fix64::ToIntegers().1.return\;
-    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object).2 (#2):
-    \Fix64::ToIntegers().2._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers()._Started.0\;
-    \Fix64::ToIntegers().2.this.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers().this.parameter.Out.0\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers()._Finished.0\ <= \Fix64::ToIntegers().2._Finished\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.Fix64::ToIntegers().return.0\ <= \Fix64::ToIntegers().2.return\;
+    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).0 (#0):
+    \Fix64::ToIntegers().0._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers()._Started.0\;
+    \Fix64::ToIntegers().0.this.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers().this.parameter.Out.0\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers()._Finished.0\ <= \Fix64::ToIntegers().0._Finished\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.Fix64::ToIntegers().return.0\ <= \Fix64::ToIntegers().0.return\;
+    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).1 (#1):
+    \Fix64::ToIntegers().1._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers()._Started.0\;
+    \Fix64::ToIntegers().1.this.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers().this.parameter.Out.0\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers()._Finished.0\ <= \Fix64::ToIntegers().1._Finished\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.Fix64::ToIntegers().return.0\ <= \Fix64::ToIntegers().1.return\;
+    -- Signal connections for Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object).2 (#2):
+    \Fix64::ToIntegers().2._Started\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers()._Started.0\;
+    \Fix64::ToIntegers().2.this.parameter.In\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers().this.parameter.Out.0\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers()._Finished.0\ <= \Fix64::ToIntegers().2._Finished\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.Fix64::ToIntegers().return.0\ <= \Fix64::ToIntegers().2.return\;
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.Fix64Calculator::CalculateIntegerSumUpToNumber(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#3):
     \Fix64::ToIntegers().3._Started\ <= \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Fix64::ToIntegers()._Started.0\;
     \Fix64::ToIntegers().3.this.parameter.In\ <= \Fix64Calculator::CalculateIntegerSumUpToNumber(SimpleMemory).0.Fix64::ToIntegers().this.parameter.Out.0\;
@@ -3546,23 +3546,23 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Int32[] Hast.Algorithms.Fix64::ToIntegers() end
 
 
-    -- System.Void Hast::InternalInvocationProxy().Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object) start
+    -- System.Void Hast::InternalInvocationProxy().Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object) start
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._Started\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.0\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.upToNumberObject.parameter.In\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).upToNumberObject.parameter.Out.0\;
-    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Finished.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0._Finished\;
-    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).return.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).0.return\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._Started\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.0\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.upToNumberObject.parameter.In\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).upToNumberObject.parameter.Out.0\;
+    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Finished.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0._Finished\;
+    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).return.0\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).0.return\;
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#1):
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._Started\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.1\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.upToNumberObject.parameter.In\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).upToNumberObject.parameter.Out.1\;
-    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Finished.1\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1._Finished\;
-    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).return.1\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).1.return\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._Started\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.1\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.upToNumberObject.parameter.In\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).upToNumberObject.parameter.Out.1\;
+    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Finished.1\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1._Finished\;
+    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).return.1\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).1.return\;
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#2):
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._Started\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Started.2\;
-    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.upToNumberObject.parameter.In\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).upToNumberObject.parameter.Out.2\;
-    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object)._Finished.2\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2._Finished\;
-    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).return.2\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(Object).2.return\;
-    -- System.Void Hast::InternalInvocationProxy().Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__6_0(System.Object) end
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._Started\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Started.2\;
+    \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.upToNumberObject.parameter.In\ <= \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).upToNumberObject.parameter.Out.2\;
+    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object)._Finished.2\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2._Finished\;
+    \Fix64Calculator::ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory).0.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).return.2\ <= \Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(Object).2.return\;
+    -- System.Void Hast::InternalInvocationProxy().Hast.Samples.SampleAssembly.Fix64Calculator+TaskResult Hast.Samples.SampleAssembly.Fix64Calculator+<>c::<ParallelizedCalculateIntegerSumUpToNumbers>b__7_0(System.Object) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Algorithms.Fix64::.ctor(System.Int64) start
