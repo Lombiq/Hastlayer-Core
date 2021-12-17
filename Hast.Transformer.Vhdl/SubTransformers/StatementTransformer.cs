@@ -108,7 +108,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         returnExpression = _typeConversionTransformer
                             .ImplementTypeConversion(expressionVhdlType, returnType, returnExpression)
                             .ConvertedFromExpression;
-
                     }
 
                     var assigmentElement = new Assignment
@@ -203,6 +202,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         "    * The false branch starts in state " + StateNameGenerator(falseStateIndex, vhdlGenerationOptions) +
                         " and ends in state " + StateNameGenerator(falseEndStateIndex, vhdlGenerationOptions) + "."));
                 }
+
                 ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
                     "    * Execution after either branch will continue in the following state: " +
                     StateNameGenerator(afterIfElseStateIndex, vhdlGenerationOptions) + "."));
@@ -268,6 +268,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     currentBlock.Add(CreateConditionalStateChange(repeatedStateStartIndex, context));
                 }
+
                 currentBlock.ChangeBlockToDifferentState(afterWhileState, afterWhileStateIndex);
 
                 GetOrCreateAfterWhileStateIndexStack(context).Pop();

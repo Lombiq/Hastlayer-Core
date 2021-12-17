@@ -74,6 +74,7 @@ namespace Hast.Transformer.Services
                             child = parent;
                             parent = parent.FindFirstParentTypeDeclaration();
                         }
+
                         child.AddReference(syntaxTree);
 
                         member.AcceptVisitor(referencedNodesFlaggingVisitor);
