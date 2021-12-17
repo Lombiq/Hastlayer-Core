@@ -12443,7 +12443,7 @@ begin
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.25\: \Lombiq.Arithmetics.BitMask\;
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.26\: \Lombiq.Arithmetics.BitMask\;
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.27\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Unum::AddExactUnums(Unum,Unum).0.conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632\: boolean := false;
+        Variable \Unum::AddExactUnums(Unum,Unum).0.conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.28\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.29\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.0\: boolean := false;
@@ -12457,11 +12457,11 @@ begin
         Variable \Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.2\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.35\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.3\: boolean := false;
-        Variable \Unum::AddExactUnums(Unum,Unum).0.conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d\: boolean := false;
+        Variable \Unum::AddExactUnums(Unum,Unum).0.conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.36\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.37\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.15\: boolean := false;
-        Variable \Unum::AddExactUnums(Unum,Unum).0.conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee\: boolean := false;
+        Variable \Unum::AddExactUnums(Unum,Unum).0.conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.38\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.4\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.16\: boolean := false;
@@ -12509,7 +12509,7 @@ begin
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.31\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.32\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Unum::AddExactUnums(Unum,Unum).0.exponent\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Unum::AddExactUnums(Unum,Unum).0.objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf\: \Lombiq.Arithmetics.BitMask\;
+        Variable \Unum::AddExactUnums(Unum,Unum).0.object9381cbea53a48d5ead7f8a56c7a22a448e90d32d807023fd17bb997d784da6ee\: \Lombiq.Arithmetics.BitMask\;
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.33\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.63\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.64\: \Lombiq.Arithmetics.BitMask\;
@@ -12531,7 +12531,7 @@ begin
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.71\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.40\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.72\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Unum::AddExactUnums(Unum,Unum).0.conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Unum::AddExactUnums(Unum,Unum).0.conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.41\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.42\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.73\: boolean := false;
@@ -12541,7 +12541,7 @@ begin
         Variable \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.43\: boolean := false;
         Variable \Unum::AddExactUnums(Unum,Unum).0.bits\: \Lombiq.Arithmetics.BitMask\;
         Variable \Unum::AddExactUnums(Unum,Unum).0.return.75\: \Lombiq.Arithmetics.BitMask\;
-        Variable \Unum::AddExactUnums(Unum,Unum).0.object47a49a682b8a78b984e334a38e27f347e4eb52f6029f70dbe39ee90285b20037\: \Lombiq.Arithmetics.Unum\;
+        Variable \Unum::AddExactUnums(Unum,Unum).0.object991b5b3e58f1bda0e69dfd4e026710da31e2adf095ac6c0c641fe5603ad4f5ba\: \Lombiq.Arithmetics.Unum\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -12627,7 +12627,7 @@ begin
                 \Unum::AddExactUnums(Unum,Unum).0.return.22\ := to_unsigned(0, 16);
                 \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.13\ := to_signed(0, 32);
                 \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.14\ := to_signed(0, 32);
-                \Unum::AddExactUnums(Unum,Unum).0.conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632\ := false;
+                \Unum::AddExactUnums(Unum,Unum).0.conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.return.28\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.return.29\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.0\ := false;
@@ -12639,11 +12639,11 @@ begin
                 \Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.2\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.return.35\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.3\ := false;
-                \Unum::AddExactUnums(Unum,Unum).0.conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d\ := false;
+                \Unum::AddExactUnums(Unum,Unum).0.conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.return.36\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.return.37\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.15\ := false;
-                \Unum::AddExactUnums(Unum,Unum).0.conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee\ := false;
+                \Unum::AddExactUnums(Unum,Unum).0.conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.return.38\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.4\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.16\ := false;
@@ -12697,7 +12697,7 @@ begin
                 \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.39\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.return.71\ := to_unsigned(0, 16);
                 \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.40\ := to_unsigned(0, 16);
-                \Unum::AddExactUnums(Unum,Unum).0.conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be\ := to_unsigned(0, 32);
+                \Unum::AddExactUnums(Unum,Unum).0.conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6\ := to_unsigned(0, 32);
                 \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.41\ := false;
                 \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.42\ := to_unsigned(0, 32);
                 \Unum::AddExactUnums(Unum,Unum).0.return.73\ := false;
@@ -13309,11 +13309,11 @@ begin
                             -- 	num2 = (int)(Lombiq.Arithmetics.Unum.get_FractionSizeMax (left)) + 1 - ((int)(Lombiq.Arithmetics.Unum.FractionSize (left)) + 1);
                             -- 	num3 = (int)(Lombiq.Arithmetics.Unum.get_FractionSizeMax (left)) + 1 - ((int)(Lombiq.Arithmetics.Unum.FractionSize (right)) + 1);
                             -- 	bitMask = Unum.AddAlignedFractions (BitMask.op_LeftShift (Lombiq.Arithmetics.Unum.FractionWithHiddenBit (left), num2), BitMask.op_LeftShift (Lombiq.Arithmetics.Unum.FractionWithHiddenBit (right), num3), flag);
-                            -- 	bool conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632;
+                            -- 	bool conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107;
                             -- 	if (Lombiq.Arithmetics.Unum.HiddenBitIsOne (left)) {
-                            -- 		conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
+                            -- 		conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
                             -- 	} else {
-                            -- 		conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632 = (!Lombiq.Arithmetics.Unum.IsPositive (right));
+                            -- 		conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107 = (!Lombiq.Arithmetics.Unum.IsPositive (right));
                             -- 	}
                             -- 	bool conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a;
                             -- 	if (BitMask.op_GreaterThanOrEqual (Lombiq.Arithmetics.Unum.Fraction (left), Lombiq.Arithmetics.Unum.Fraction (right))) {
@@ -13321,19 +13321,19 @@ begin
                             -- 	} else {
                             -- 		conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a = (!Lombiq.Arithmetics.Unum.IsPositive (right));
                             -- 	}
-                            -- 	bool conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d;
+                            -- 	bool conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c;
                             -- 	if ((Lombiq.Arithmetics.Unum.HiddenBitIsOne (left) != Lombiq.Arithmetics.Unum.HiddenBitIsOne (right))) {
-                            -- 		conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d = (conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632);
+                            -- 		conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c = (conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107);
                             -- 	} else {
-                            -- 		conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d = (conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a);
+                            -- 		conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c = (conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a);
                             -- 	}
-                            -- 	bool conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee;
+                            -- 	bool conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0;
                             -- 	if (flag) {
-                            -- 		conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee = (!Lombiq.Arithmetics.Unum.IsPositive (left));
+                            -- 		conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
                             -- 	} else {
-                            -- 		conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee = (conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d);
+                            -- 		conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0 = (conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c);
                             -- 	}
-                            -- 	flag2 = (conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee);
+                            -- 	flag2 = (conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0);
                             -- } else if (num > 0) {
                             -- 	flag2 = !Lombiq.Arithmetics.Unum.IsPositive (left);
                             -- 	num4 = Lombiq.Arithmetics.Unum.ExponentValueWithBias (left);
@@ -13385,11 +13385,11 @@ begin
                         -- 	num2 = (int)(Lombiq.Arithmetics.Unum.get_FractionSizeMax (left)) + 1 - ((int)(Lombiq.Arithmetics.Unum.FractionSize (left)) + 1);
                         -- 	num3 = (int)(Lombiq.Arithmetics.Unum.get_FractionSizeMax (left)) + 1 - ((int)(Lombiq.Arithmetics.Unum.FractionSize (right)) + 1);
                         -- 	bitMask = Unum.AddAlignedFractions (BitMask.op_LeftShift (Lombiq.Arithmetics.Unum.FractionWithHiddenBit (left), num2), BitMask.op_LeftShift (Lombiq.Arithmetics.Unum.FractionWithHiddenBit (right), num3), flag);
-                        -- 	bool conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632;
+                        -- 	bool conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107;
                         -- 	if (Lombiq.Arithmetics.Unum.HiddenBitIsOne (left)) {
-                        -- 		conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
+                        -- 		conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
                         -- 	} else {
-                        -- 		conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632 = (!Lombiq.Arithmetics.Unum.IsPositive (right));
+                        -- 		conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107 = (!Lombiq.Arithmetics.Unum.IsPositive (right));
                         -- 	}
                         -- 	bool conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a;
                         -- 	if (BitMask.op_GreaterThanOrEqual (Lombiq.Arithmetics.Unum.Fraction (left), Lombiq.Arithmetics.Unum.Fraction (right))) {
@@ -13397,19 +13397,19 @@ begin
                         -- 	} else {
                         -- 		conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a = (!Lombiq.Arithmetics.Unum.IsPositive (right));
                         -- 	}
-                        -- 	bool conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d;
+                        -- 	bool conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c;
                         -- 	if ((Lombiq.Arithmetics.Unum.HiddenBitIsOne (left) != Lombiq.Arithmetics.Unum.HiddenBitIsOne (right))) {
-                        -- 		conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d = (conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632);
+                        -- 		conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c = (conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107);
                         -- 	} else {
-                        -- 		conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d = (conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a);
+                        -- 		conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c = (conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a);
                         -- 	}
-                        -- 	bool conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee;
+                        -- 	bool conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0;
                         -- 	if (flag) {
-                        -- 		conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee = (!Lombiq.Arithmetics.Unum.IsPositive (left));
+                        -- 		conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
                         -- 	} else {
-                        -- 		conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee = (conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d);
+                        -- 		conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0 = (conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c);
                         -- 	}
-                        -- 	flag2 = (conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee);
+                        -- 	flag2 = (conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -13556,13 +13556,13 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.return.27\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::AddAlignedFractions(BitMask,BitMask,Boolean).return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.bitMask\ := \Unum::AddExactUnums(Unum,Unum).0.return.27\;
                             -- The following section was transformed from the .NET statement below:
-                            -- bool conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632;
+                            -- bool conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if (Lombiq.Arithmetics.Unum.HiddenBitIsOne (left)) {
-                            -- 	conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
+                            -- 	conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
                             -- } else {
-                            -- 	conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632 = (!Lombiq.Arithmetics.Unum.IsPositive (right));
+                            -- 	conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107 = (!Lombiq.Arithmetics.Unum.IsPositive (right));
                             -- }
                             -- 
                             -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Unum::HiddenBitIsOne()
@@ -13610,11 +13610,11 @@ begin
                         -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_61\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
+                        -- 	conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
+                        -- conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
@@ -13627,7 +13627,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.29\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.0\ := not(\Unum::AddExactUnums(Unum,Unum).0.return.29\);
-                            \Unum::AddExactUnums(Unum,Unum).0.conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632\ := (\Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.0\);
+                            \Unum::AddExactUnums(Unum,Unum).0.conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107\ := (\Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.0\);
                             -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_61\.
                             if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_64\) then 
                                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_62\;
@@ -13638,11 +13638,11 @@ begin
                         -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_61\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632 = (!Lombiq.Arithmetics.Unum.IsPositive (right));
+                        -- 	conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107 = (!Lombiq.Arithmetics.Unum.IsPositive (right));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632 = (!Lombiq.Arithmetics.Unum.IsPositive (right));
+                        -- conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107 = (!Lombiq.Arithmetics.Unum.IsPositive (right));
                         -- 
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
                         \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_66\;
@@ -13659,7 +13659,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.30\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.1\ := not(\Unum::AddExactUnums(Unum,Unum).0.return.30\);
-                            \Unum::AddExactUnums(Unum,Unum).0.conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632\ := (\Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.1\);
+                            \Unum::AddExactUnums(Unum,Unum).0.conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107\ := (\Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.1\);
                             -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_61\.
                             if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_67\) then 
                                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_62\;
@@ -13718,13 +13718,13 @@ begin
                     when \Unum::AddExactUnums(Unum,Unum).0._State_73\ => 
                         -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_72\.
                         -- The following section was transformed from the .NET statement below:
-                        -- bool conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d;
+                        -- bool conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((Lombiq.Arithmetics.Unum.HiddenBitIsOne (left) != Lombiq.Arithmetics.Unum.HiddenBitIsOne (right))) {
-                        -- 	conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d = (conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632);
+                        -- 	conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c = (conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107);
                         -- } else {
-                        -- 	conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d = (conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a);
+                        -- 	conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c = (conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Unum::HiddenBitIsOne()
@@ -13833,13 +13833,13 @@ begin
                     when \Unum::AddExactUnums(Unum,Unum).0._State_83\ => 
                         -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_82\.
                         -- The following section was transformed from the .NET statement below:
-                        -- bool conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee;
+                        -- bool conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
-                        -- 	conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee = (!Lombiq.Arithmetics.Unum.IsPositive (left));
+                        -- 	conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
                         -- } else {
-                        -- 	conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee = (conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d);
+                        -- 	conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0 = (conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c);
                         -- }
                         -- 
 
@@ -13858,13 +13858,13 @@ begin
                         -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_82\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d = (conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632);
+                        -- 	conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c = (conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d = (conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632);
+                        -- conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c = (conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107);
                         -- 
-                        \Unum::AddExactUnums(Unum,Unum).0.conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d\ := (\Unum::AddExactUnums(Unum,Unum).0.conditional026b396057ebbedcaf4bff38621ac44a0df3afdd696926fa1cf2ae7f68324632\);
+                        \Unum::AddExactUnums(Unum,Unum).0.conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c\ := (\Unum::AddExactUnums(Unum,Unum).0.conditionalf919f842a64404777ebf3b1d44e781533b0fa139822a9b8db3032c6a528e7107\);
                         -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_82\.
                         if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_84\) then 
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_83\;
@@ -13874,13 +13874,13 @@ begin
                         -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_82\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d = (conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a);
+                        -- 	conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c = (conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d = (conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a);
+                        -- conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c = (conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a);
                         -- 
-                        \Unum::AddExactUnums(Unum,Unum).0.conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d\ := (\Unum::AddExactUnums(Unum,Unum).0.conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a\);
+                        \Unum::AddExactUnums(Unum,Unum).0.conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c\ := (\Unum::AddExactUnums(Unum,Unum).0.conditionalc0ca7f56ef929b7ce6a5d2fedcc567406a86b0a15392180baf4810c3bcc9ac2a\);
                         -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_82\.
                         if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_85\) then 
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_83\;
@@ -13889,9 +13889,9 @@ begin
                     when \Unum::AddExactUnums(Unum,Unum).0._State_86\ => 
                         -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_83\.
                         -- The following section was transformed from the .NET statement below:
-                        -- flag2 = (conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee);
+                        -- flag2 = (conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0);
                         -- 
-                        \Unum::AddExactUnums(Unum,Unum).0.flag2\ := (\Unum::AddExactUnums(Unum,Unum).0.conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee\);
+                        \Unum::AddExactUnums(Unum,Unum).0.flag2\ := (\Unum::AddExactUnums(Unum,Unum).0.conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0\);
                         -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_46\.
                         if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_86\) then 
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_47\;
@@ -13901,11 +13901,11 @@ begin
                         -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_83\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee = (!Lombiq.Arithmetics.Unum.IsPositive (left));
+                        -- 	conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee = (!Lombiq.Arithmetics.Unum.IsPositive (left));
+                        -- conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0 = (!Lombiq.Arithmetics.Unum.IsPositive (left));
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Unum::IsPositive()
                         \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\;
@@ -13918,7 +13918,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive()._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.38\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::IsPositive().return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.4\ := not(\Unum::AddExactUnums(Unum,Unum).0.return.38\);
-                            \Unum::AddExactUnums(Unum,Unum).0.conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee\ := (\Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.4\);
+                            \Unum::AddExactUnums(Unum,Unum).0.conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0\ := (\Unum::AddExactUnums(Unum,Unum).0.unaryOperationResult.4\);
                             -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_83\.
                             if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_88\) then 
                                 \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_86\;
@@ -13929,13 +13929,13 @@ begin
                         -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_83\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee = (conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d);
+                        -- 	conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0 = (conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee = (conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d);
+                        -- conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0 = (conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c);
                         -- 
-                        \Unum::AddExactUnums(Unum,Unum).0.conditional9b57a28f98bd0a076872f9bc99afbab0f3529392bd863450f841f76df087d4ee\ := (\Unum::AddExactUnums(Unum,Unum).0.conditionalef03e5b483182ac5babc9316195c9b99bf550f23b2503bc3b2f90ec0c34d406d\);
+                        \Unum::AddExactUnums(Unum,Unum).0.conditionalef2c0d05e6a2d7aa289e25cdb1cdcbabad92007a2a31c32b29d518cd3730d9b0\ := (\Unum::AddExactUnums(Unum,Unum).0.conditionalbc128f9a5de099e9f71b029392d529c48d0ff0d7c8299d287fafdb6b1c1daf0c\);
                         -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_83\.
                         if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_89\) then 
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_86\;
@@ -14367,19 +14367,19 @@ begin
                             -- BitMask exponent;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- BitMask objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf;
+                            -- BitMask object9381cbea53a48d5ead7f8a56c7a22a448e90d32d807023fd17bb997d784da6ee;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf = new BitMask (left._environment.Size, false);
+                            -- object9381cbea53a48d5ead7f8a56c7a22a448e90d32d807023fd17bb997d784da6ee = new BitMask (left._environment.Size, false);
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Unum::AddExactUnums(Unum,Unum).0.objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf\.\IsNull\ := false;
-                            \Unum::AddExactUnums(Unum,Unum).0.objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf\.\Size\ := to_unsigned(0, 16);
-                            \Unum::AddExactUnums(Unum,Unum).0.objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf\.\SegmentCount\ := to_unsigned(0, 16);
-                            \Unum::AddExactUnums(Unum,Unum).0.objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf\.\Segments\ := (others => to_unsigned(0, 32));
+                            \Unum::AddExactUnums(Unum,Unum).0.object9381cbea53a48d5ead7f8a56c7a22a448e90d32d807023fd17bb997d784da6ee\.\IsNull\ := false;
+                            \Unum::AddExactUnums(Unum,Unum).0.object9381cbea53a48d5ead7f8a56c7a22a448e90d32d807023fd17bb997d784da6ee\.\Size\ := to_unsigned(0, 16);
+                            \Unum::AddExactUnums(Unum,Unum).0.object9381cbea53a48d5ead7f8a56c7a22a448e90d32d807023fd17bb997d784da6ee\.\SegmentCount\ := to_unsigned(0, 16);
+                            \Unum::AddExactUnums(Unum,Unum).0.object9381cbea53a48d5ead7f8a56c7a22a448e90d32d807023fd17bb997d784da6ee\.\Segments\ := (others => to_unsigned(0, 32));
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
-                            \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf\;
+                            \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.object9381cbea53a48d5ead7f8a56c7a22a448e90d32d807023fd17bb997d784da6ee\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).size.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\.\_environment\.\Size\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).allOne.parameter.Out.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= true;
@@ -14390,9 +14390,9 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean)
                         if (\Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean)._Started.0\ <= false;
-                            \Unum::AddExactUnums(Unum,Unum).0.objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf\ := \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
+                            \Unum::AddExactUnums(Unum,Unum).0.object9381cbea53a48d5ead7f8a56c7a22a448e90d32d807023fd17bb997d784da6ee\ := \Unum::AddExactUnums(Unum,Unum).0.BitMask::.ctor(UInt16,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- exponent = BitMask.op_Addition (objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf, Unum.ExponentValueToExponentBits (num4 + num5, Lombiq.Arithmetics.Unum.get_Size (left)));
+                            -- exponent = BitMask.op_Addition (object9381cbea53a48d5ead7f8a56c7a22a448e90d32d807023fd17bb997d784da6ee, Unum.ExponentValueToExponentBits (num4 + num5, Lombiq.Arithmetics.Unum.get_Size (left)));
                             -- 
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.33\ := \Unum::AddExactUnums(Unum,Unum).0.num4\ + \Unum::AddExactUnums(Unum,Unum).0.num5\;
                             -- Starting state machine invocation for the following method: System.UInt16 Lombiq.Arithmetics.Unum::get_Size()
@@ -14419,7 +14419,7 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,UInt16)._Started.0\ <= false;
                             \Unum::AddExactUnums(Unum,Unum).0.return.64\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::ExponentValueToExponentBits(Int32,UInt16).return.0\;
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Addition(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask)
-                            \Unum::AddExactUnums(Unum,Unum).0.BitMask BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.objecte165b3d54b25a21f5076a75ab21923682045a891cfc4f16d3847ceee62f77abf\;
+                            \Unum::AddExactUnums(Unum,Unum).0.BitMask BitMask::op_Addition(BitMask,BitMask).left.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.object9381cbea53a48d5ead7f8a56c7a22a448e90d32d807023fd17bb997d784da6ee\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask BitMask::op_Addition(BitMask,BitMask).right.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.return.64\;
                             \Unum::AddExactUnums(Unum,Unum).0.BitMask BitMask::op_Addition(BitMask,BitMask)._Started.0\ <= true;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_125\;
@@ -14568,13 +14568,13 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- if ((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (exponent)) != 0) {
                         -- 	bitMask = Lombiq.Arithmetics.BitMask.SetZero (bitMask, (ushort)((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (bitMask)) - 1));
-                        -- 	uint conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be;
+                        -- 	uint conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6;
                         -- 	if (((int)(num6) != 0)) {
-                        -- 		conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be = ((uint)((int)(num6) - 1));
+                        -- 		conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6 = ((uint)((int)(num6) - 1));
                         -- 	} else {
-                        -- 		conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be = 0u;
+                        -- 		conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6 = 0u;
                         -- 	}
-                        -- 	num6 = (ushort)(conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be);
+                        -- 	num6 = (ushort)(conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6);
                         -- }
                         -- 
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
@@ -14671,13 +14671,13 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	bitMask = Lombiq.Arithmetics.BitMask.SetZero (bitMask, (ushort)((int)(Lombiq.Arithmetics.BitMask.GetMostSignificantOnePosition (bitMask)) - 1));
-                        -- 	uint conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be;
+                        -- 	uint conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6;
                         -- 	if (((int)(num6) != 0)) {
-                        -- 		conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be = ((uint)((int)(num6) - 1));
+                        -- 		conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6 = ((uint)((int)(num6) - 1));
                         -- 	} else {
-                        -- 		conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be = 0u;
+                        -- 		conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6 = 0u;
                         -- 	}
-                        -- 	num6 = (ushort)(conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be);
+                        -- 	num6 = (ushort)(conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -14708,13 +14708,13 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.return.72\ := \Unum::AddExactUnums(Unum,Unum).0.BitMask::SetZero(UInt16).return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.bitMask\ := \Unum::AddExactUnums(Unum,Unum).0.return.72\;
                             -- The following section was transformed from the .NET statement below:
-                            -- uint conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be;
+                            -- uint conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if (((int)(num6) != 0)) {
-                            -- 	conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be = ((uint)((int)(num6) - 1));
+                            -- 	conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6 = ((uint)((int)(num6) - 1));
                             -- } else {
-                            -- 	conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be = 0u;
+                            -- 	conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6 = 0u;
                             -- }
                             -- 
                             \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.41\ := signed(SmartResize((\Unum::AddExactUnums(Unum,Unum).0.num6\), 32)) /= to_signed(0, 32);
@@ -14734,9 +14734,9 @@ begin
                     when \Unum::AddExactUnums(Unum,Unum).0._State_142\ => 
                         -- State after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_141\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num6 = (ushort)(conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be);
+                        -- num6 = (ushort)(conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6);
                         -- 
-                        \Unum::AddExactUnums(Unum,Unum).0.num6\ := SmartResize((\Unum::AddExactUnums(Unum,Unum).0.conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be\), 16);
+                        \Unum::AddExactUnums(Unum,Unum).0.num6\ := SmartResize((\Unum::AddExactUnums(Unum,Unum).0.conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6\), 16);
                         -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_137\.
                         if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_142\) then 
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_138\;
@@ -14746,14 +14746,14 @@ begin
                         -- True branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_141\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be = ((uint)((int)(num6) - 1));
+                        -- 	conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6 = ((uint)((int)(num6) - 1));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be = ((uint)((int)(num6) - 1));
+                        -- conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6 = ((uint)((int)(num6) - 1));
                         -- 
                         \Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.42\ := unsigned(signed(SmartResize((\Unum::AddExactUnums(Unum,Unum).0.num6\), 32)) - to_signed(1, 32));
-                        \Unum::AddExactUnums(Unum,Unum).0.conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be\ := ((\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.42\));
+                        \Unum::AddExactUnums(Unum,Unum).0.conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6\ := ((\Unum::AddExactUnums(Unum,Unum).0.binaryOperationResult.42\));
                         -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_141\.
                         if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_143\) then 
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_142\;
@@ -14763,13 +14763,13 @@ begin
                         -- False branch of the if-else started in state \Unum::AddExactUnums(Unum,Unum).0._State_141\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be = 0u;
+                        -- 	conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6 = 0u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be = 0u;
+                        -- conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6 = 0u;
                         -- 
-                        \Unum::AddExactUnums(Unum,Unum).0.conditional8cb18ff83452518eca2070b4a393042f03744b7a72e8001e1bd24f66375f17be\ := to_unsigned(0, 32);
+                        \Unum::AddExactUnums(Unum,Unum).0.conditional4a92d3eafb8d43d3e4878c19a98760ca1be950b2a8b1ce5c720a2024bcd605b6\ := to_unsigned(0, 32);
                         -- Going to the state after the if-else which was started in state \Unum::AddExactUnums(Unum,Unum).0._State_141\.
                         if (\Unum::AddExactUnums(Unum,Unum).0._State\ = \Unum::AddExactUnums(Unum,Unum).0._State_144\) then 
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_142\;
@@ -14857,16 +14857,16 @@ begin
                             \Unum::AddExactUnums(Unum,Unum).0.return.75\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::AssembleUnumBits(Boolean,BitMask,BitMask,Boolean,Byte,UInt16).return.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.bits\ := \Unum::AddExactUnums(Unum,Unum).0.return.75\;
                             -- The following section was transformed from the .NET statement below:
-                            -- Unum object47a49a682b8a78b984e334a38e27f347e4eb52f6029f70dbe39ee90285b20037;
+                            -- Unum object991b5b3e58f1bda0e69dfd4e026710da31e2adf095ac6c0c641fe5603ad4f5ba;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- object47a49a682b8a78b984e334a38e27f347e4eb52f6029f70dbe39ee90285b20037 = new Unum (left._environment, bits);
+                            -- object991b5b3e58f1bda0e69dfd4e026710da31e2adf095ac6c0c641fe5603ad4f5ba = new Unum (left._environment, bits);
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Unum::AddExactUnums(Unum,Unum).0.object47a49a682b8a78b984e334a38e27f347e4eb52f6029f70dbe39ee90285b20037\.\IsNull\ := false;
+                            \Unum::AddExactUnums(Unum,Unum).0.object991b5b3e58f1bda0e69dfd4e026710da31e2adf095ac6c0c641fe5603ad4f5ba\.\IsNull\ := false;
                             -- Invoking the target's constructor.
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,Lombiq.Arithmetics.BitMask)
-                            \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.object47a49a682b8a78b984e334a38e27f347e4eb52f6029f70dbe39ee90285b20037\;
+                            \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask).this.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.object991b5b3e58f1bda0e69dfd4e026710da31e2adf095ac6c0c641fe5603ad4f5ba\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask).environment.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.left\.\_environment\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask).bits.parameter.Out.0\ <= \Unum::AddExactUnums(Unum,Unum).0.bits\;
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask)._Started.0\ <= true;
@@ -14877,12 +14877,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,Lombiq.Arithmetics.BitMask)
                         if (\Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask)._Started.0\ = \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask)._Finished.0\) then 
                             \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask)._Started.0\ <= false;
-                            \Unum::AddExactUnums(Unum,Unum).0.object47a49a682b8a78b984e334a38e27f347e4eb52f6029f70dbe39ee90285b20037\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask).this.parameter.In.0\;
+                            \Unum::AddExactUnums(Unum,Unum).0.object991b5b3e58f1bda0e69dfd4e026710da31e2adf095ac6c0c641fe5603ad4f5ba\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask).this.parameter.In.0\;
                             \Unum::AddExactUnums(Unum,Unum).0.left\.\_environment\ := \Unum::AddExactUnums(Unum,Unum).0.Unum::.ctor(UnumEnvironment,BitMask).environment.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object47a49a682b8a78b984e334a38e27f347e4eb52f6029f70dbe39ee90285b20037;
+                            -- return object991b5b3e58f1bda0e69dfd4e026710da31e2adf095ac6c0c641fe5603ad4f5ba;
                             -- 
-                            \Unum::AddExactUnums(Unum,Unum).0.return\ <= \Unum::AddExactUnums(Unum,Unum).0.object47a49a682b8a78b984e334a38e27f347e4eb52f6029f70dbe39ee90285b20037\;
+                            \Unum::AddExactUnums(Unum,Unum).0.return\ <= \Unum::AddExactUnums(Unum,Unum).0.object991b5b3e58f1bda0e69dfd4e026710da31e2adf095ac6c0c641fe5603ad4f5ba\;
                             \Unum::AddExactUnums(Unum,Unum).0._State\ := \Unum::AddExactUnums(Unum,Unum).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
