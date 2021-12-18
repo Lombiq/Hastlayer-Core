@@ -22,8 +22,8 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             VhdlManifest manifest = null;
 
-            _hostConfiguration.OnServiceRegistration += (configuration, services) =>
-                services.AddSingleton(new EventHandler<TransformedVhdlManifest>((sender, e) => manifest = e.Manifest));
+            _hostConfiguration.OnServiceRegistration += (_, services) =>
+                services.AddSingleton(new EventHandler<TransformedVhdlManifest>((_, e) => manifest = e.Manifest));
 
             return Host.RunAsync<ITransformer>(async transformer =>
             {
@@ -41,8 +41,8 @@ namespace Hast.Transformer.Vhdl.Tests
         {
             VhdlManifest manifest = null;
 
-            _hostConfiguration.OnServiceRegistration += (configuration, services) =>
-                services.AddSingleton(new EventHandler<TransformedVhdlManifest>((sender, e) => manifest = e.Manifest));
+            _hostConfiguration.OnServiceRegistration += (_, services) =>
+                services.AddSingleton(new EventHandler<TransformedVhdlManifest>((_, e) => manifest = e.Manifest));
 
             return Host.RunAsync<ITransformer>(async transformer =>
              {

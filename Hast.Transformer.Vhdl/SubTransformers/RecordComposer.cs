@@ -30,7 +30,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // result in the record being composed.
             var typeFullName = typeDeclaration.GetFullName();
 
-            return _memoryCache.GetOrCreate("ComposedRecord." + typeFullName, ctx =>
+            return _memoryCache.GetOrCreate("ComposedRecord." + typeFullName, _ =>
             {
                 var recordName = typeFullName.ToExtendedVhdlId();
 

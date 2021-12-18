@@ -34,7 +34,7 @@ namespace Hast.DynamicTests
             //// folderName = folderName.Substring(methodNameStartIndex + 2, folderName.IndexOf("(") - 2 - methodNameStartIndex);
             //// configuration.HardwareFrameworkPath = $@"E:\ShortPath\BinaryAndUnaryTests\{folderName}";
 
-            hastlayer.ExecutedOnHardware += (sender, e) =>
+            hastlayer.ExecutedOnHardware += (_, e) =>
                 Console.WriteLine(
                     "Executing on hardware took " +
                     e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +

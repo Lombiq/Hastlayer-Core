@@ -34,7 +34,7 @@ namespace Hast.Transformer.Vhdl.Tests
                         typeof(Nexys4DdrDriver).Assembly,
                     });
 
-            _hostConfiguration.OnServiceRegistration += (configuration, services) =>
+            _hostConfiguration.OnServiceRegistration += (_, services) =>
             {
                 if (UseStubMemberSuitabilityChecker)
                 {
