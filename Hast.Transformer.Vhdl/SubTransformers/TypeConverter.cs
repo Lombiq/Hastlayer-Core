@@ -97,7 +97,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 KnownTypeCode.UInt32 => KnownDataTypes.UInt32,
                 KnownTypeCode.UInt64 => KnownDataTypes.UInt64,
                 KnownTypeCode.Void => KnownDataTypes.Void,
-                _ => throw new NotSupportedException("The type " + typeCode + " is not supported for transforming."),
+                _ => throw new NotSupportedException($"The type \"{typeCode}\" is not supported for transforming."),
             };
 
         private DataType ConvertComposed(ComposedType type, IVhdlTransformationContext context)
