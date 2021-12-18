@@ -3183,7 +3183,7 @@ begin
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.20\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff\: signed(31 downto 0) := to_signed(0, 32);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\: boolean := false;
@@ -3244,7 +3244,7 @@ begin
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.20\ := to_unsigned(0, 16);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e\ := to_signed(0, 32);
+                \GenomeMatcher::FillTable(SimpleMemory).0.conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff\ := to_signed(0, 32);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\ := false;
@@ -3381,13 +3381,13 @@ begin
                         -- 		if ((int)(num11) > (int)(num10)) {
                         -- 			if ((int)(num11) > (int)(num9)) {
                         -- 				num12 = num11;
-                        -- 				int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                        -- 				if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                        -- 					conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
+                        -- 				int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
+                        -- 				if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                        -- 					conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
                         -- 				} else {
-                        -- 					conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
+                        -- 					conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
                         -- 				}
-                        -- 				num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
+                        -- 				num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
                         -- 			} else {
                         -- 				num12 = num9;
                         -- 				num13 = 0;
@@ -3446,13 +3446,13 @@ begin
                             -- 		if ((int)(num11) > (int)(num10)) {
                             -- 			if ((int)(num11) > (int)(num9)) {
                             -- 				num12 = num11;
-                            -- 				int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                            -- 				if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                            -- 					conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
+                            -- 				int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
+                            -- 				if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                            -- 					conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
                             -- 				} else {
-                            -- 					conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
+                            -- 					conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
                             -- 				}
-                            -- 				num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
+                            -- 				num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
                             -- 			} else {
                             -- 				num12 = num9;
                             -- 				num13 = 0;
@@ -3507,13 +3507,13 @@ begin
                             -- 	if ((int)(num11) > (int)(num10)) {
                             -- 		if ((int)(num11) > (int)(num9)) {
                             -- 			num12 = num11;
-                            -- 			int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                            -- 			if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                            -- 				conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
+                            -- 			int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
+                            -- 			if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                            -- 				conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
                             -- 			} else {
-                            -- 				conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
+                            -- 				conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
                             -- 			}
-                            -- 			num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
+                            -- 			num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
                             -- 		} else {
                             -- 			num12 = num9;
                             -- 			num13 = 0;
@@ -3574,13 +3574,13 @@ begin
                             -- 	if ((int)(num11) > (int)(num10)) {
                             -- 		if ((int)(num11) > (int)(num9)) {
                             -- 			num12 = num11;
-                            -- 			int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                            -- 			if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                            -- 				conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
+                            -- 			int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
+                            -- 			if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                            -- 				conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
                             -- 			} else {
-                            -- 				conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
+                            -- 				conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
                             -- 			}
-                            -- 			num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
+                            -- 			num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
                             -- 		} else {
                             -- 			num12 = num9;
                             -- 			num13 = 0;
@@ -3869,13 +3869,13 @@ begin
                         -- if ((int)(num11) > (int)(num10)) {
                         -- 	if ((int)(num11) > (int)(num9)) {
                         -- 		num12 = num11;
-                        -- 		int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                        -- 		if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                        -- 			conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
+                        -- 		int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
+                        -- 		if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                        -- 			conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
                         -- 		} else {
-                        -- 			conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
+                        -- 			conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
                         -- 		}
-                        -- 		num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
+                        -- 		num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
                         -- 	} else {
                         -- 		num12 = num9;
                         -- 		num13 = 0;
@@ -3935,13 +3935,13 @@ begin
                         -- {
                         -- 	if ((int)(num11) > (int)(num9)) {
                         -- 		num12 = num11;
-                        -- 		int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                        -- 		if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                        -- 			conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
+                        -- 		int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
+                        -- 		if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                        -- 			conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
                         -- 		} else {
-                        -- 			conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
+                        -- 			conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
                         -- 		}
-                        -- 		num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
+                        -- 		num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
                         -- 	} else {
                         -- 		num12 = num9;
                         -- 		num13 = 0;
@@ -3951,13 +3951,13 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- if ((int)(num11) > (int)(num9)) {
                         -- 	num12 = num11;
-                        -- 	int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                        -- 	if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                        -- 		conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
+                        -- 	int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
+                        -- 	if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                        -- 		conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
                         -- 	} else {
-                        -- 		conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
+                        -- 		conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
                         -- 	}
-                        -- 	num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
+                        -- 	num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
                         -- } else {
                         -- 	num12 = num9;
                         -- 	num13 = 0;
@@ -3988,13 +3988,13 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num12 = num11;
-                        -- 	int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
-                        -- 	if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                        -- 		conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
+                        -- 	int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
+                        -- 	if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                        -- 		conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
                         -- 	} else {
-                        -- 		conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
+                        -- 		conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
                         -- 	}
-                        -- 	num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
+                        -- 	num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -4002,18 +4002,18 @@ begin
                         -- 
                         \GenomeMatcher::FillTable(SimpleMemory).0.num12\ := \GenomeMatcher::FillTable(SimpleMemory).0.num11\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e;
+                        -- int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (((int)(num6) != 0 && (int)(num7) != 0)) {
-                        -- 	conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
+                        -- if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                        -- 	conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
                         -- } else {
-                        -- 	conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
+                        -- 	conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
                         -- }
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) /= to_signed(0, 32);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32)) /= to_signed(0, 32);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\ := \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ and \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\;
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) = to_signed(0, 32);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32)) = to_signed(0, 32);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\ := \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ or \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\.
@@ -4029,9 +4029,9 @@ begin
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_31\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num13 = (ushort)(conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e);
+                        -- num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned((\GenomeMatcher::FillTable(SimpleMemory).0.conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e\)), 16);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned((\GenomeMatcher::FillTable(SimpleMemory).0.conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff\)), 16);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\.
                         if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_31\) then 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_29\;
@@ -4041,13 +4041,13 @@ begin
                         -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
+                        -- 	conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 2;
+                        -- conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e\ := to_signed(2, 32);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff\ := to_signed(3, 32);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
                         if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_32\) then 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_31\;
@@ -4057,13 +4057,13 @@ begin
                         -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
+                        -- 	conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e = 3;
+                        -- conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.conditionalfd664102795ba3533a0d07f9998922efd2ac1ae5886d18f82f38188236f0b40e\ := to_signed(3, 32);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff\ := to_signed(2, 32);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
                         if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_33\) then 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_31\;

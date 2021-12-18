@@ -1161,6 +1161,7 @@ begin
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.7\: boolean := false;
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.9\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\: boolean := false;
@@ -1171,7 +1172,7 @@ begin
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.return.1\: \Lombiq.Arithmetics.Quire\;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc\: \Lombiq.Arithmetics.Posit32\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1372,11 +1373,13 @@ begin
                         -- 	int num4;
                         -- 	num4 = 0;
                         -- 	while (num4 < 160) {
-                        -- 		if ((long)(num3 * 160 + num4) < (long)(num)) {
-                        -- 			array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                        -- 		Posit32 conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de;
+                        -- 		if (((long)(num3 * 160 + num4) < (long)(num))) {
+                        -- 			conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                         -- 		} else {
-                        -- 			array [num4] = new Posit32 (0);
+                        -- 			conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                         -- 		}
+                        -- 		array [num4] = (conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de);
                         -- 		num4 = num4 + 1;
                         -- 	}
                         -- 	quire = Posit32.FusedSum (array, quire);
@@ -1413,11 +1416,13 @@ begin
                             -- 	int num4;
                             -- 	num4 = 0;
                             -- 	while (num4 < 160) {
-                            -- 		if ((long)(num3 * 160 + num4) < (long)(num)) {
-                            -- 			array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                            -- 		Posit32 conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de;
+                            -- 		if (((long)(num3 * 160 + num4) < (long)(num))) {
+                            -- 			conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                             -- 		} else {
-                            -- 			array [num4] = new Posit32 (0);
+                            -- 			conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                             -- 		}
+                            -- 		array [num4] = (conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de);
                             -- 		num4 = num4 + 1;
                             -- 	}
                             -- 	quire = Posit32.FusedSum (array, quire);
@@ -1433,11 +1438,13 @@ begin
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (num4 < 160) {
-                            -- 	if ((long)(num3 * 160 + num4) < (long)(num)) {
-                            -- 		array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                            -- 	Posit32 conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de;
+                            -- 	if (((long)(num3 * 160 + num4) < (long)(num))) {
+                            -- 		conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                             -- 	} else {
-                            -- 		array [num4] = new Posit32 (0);
+                            -- 		conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                             -- 	}
+                            -- 	array [num4] = (conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de);
                             -- 	num4 = num4 + 1;
                             -- }
                             -- 
@@ -1450,17 +1457,17 @@ begin
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_14\ => 
                         -- State after the while loop which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_11\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135;
+                        -- Posit32 objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135 = new Posit32 (quire);
+                        -- objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc = new Posit32 (quire);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\.\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc\.\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(Lombiq.Arithmetics.Quire)
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).q.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.quire\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_27\;
@@ -1472,19 +1479,24 @@ begin
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.7\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	if ((long)(num3 * 160 + num4) < (long)(num)) {
-                            -- 		array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                            -- 	Posit32 conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de;
+                            -- 	if (((long)(num3 * 160 + num4) < (long)(num))) {
+                            -- 		conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                             -- 	} else {
-                            -- 		array [num4] = new Posit32 (0);
+                            -- 		conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                             -- 	}
+                            -- 	array [num4] = (conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de);
                             -- 	num4 = num4 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if ((long)(num3 * 160 + num4) < (long)(num)) {
-                            -- 	array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                            -- Posit32 conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (((long)(num3 * 160 + num4) < (long)(num))) {
+                            -- 	conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                             -- } else {
-                            -- 	array [num4] = new Posit32 (0);
+                            -- 	conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                             -- }
                             -- 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ * to_signed(160, 32), 32);
@@ -1518,7 +1530,7 @@ begin
                         --     * The false branch starts in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_24\ and ends in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_25\.
                         --     * Execution after either branch will continue in the following state: \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\.
 
-                        if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\) then 
+                        if ((\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\)) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_20\;
                         else 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_24\;
@@ -1526,6 +1538,10 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.678
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\ => 
                         -- State after the if-else which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- array [num4] = (conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de);
+                        -- 
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\);
                         -- The following section was transformed from the .NET statement below:
                         -- num4 = num4 + 1;
                         -- 
@@ -1540,15 +1556,15 @@ begin
                         -- True branch of the if-else started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                        -- 	conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                        -- conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ * to_signed(160, 32), 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.12\ := to_signed(1, 32) + \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.11\;
@@ -1569,7 +1585,7 @@ begin
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\));
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -1580,7 +1596,7 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\.
                             if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_23\) then 
                                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\;
@@ -1591,18 +1607,18 @@ begin
                         -- False branch of the if-else started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [num4] = new Posit32 (0);
+                        -- 	conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [num4] = new Posit32 (0);
+                        -- conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.Int32)
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\));
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_25\;
@@ -1611,7 +1627,7 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.Int32)
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\.
                             if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_25\) then 
                                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\;
@@ -1641,15 +1657,15 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(Lombiq.Arithmetics.Quire)
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.In.0\;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.quire\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).q.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 (0, object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135.PositBits);
+                            -- memory.WriteUInt32 (0, objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc.PositBits);
                             -- 
                             -- Begin SimpleMemory write.
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\.\PositBits\);
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc\.\PositBits\);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_28\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -9848,6 +9864,7 @@ begin
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.7\: boolean := false;
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.9\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\: boolean := false;
@@ -9858,7 +9875,7 @@ begin
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.return.1\: \Lombiq.Arithmetics.Quire\;
         Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc\: \Lombiq.Arithmetics.Posit32\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -10059,11 +10076,13 @@ begin
                         -- 	int num4;
                         -- 	num4 = 0;
                         -- 	while (num4 < 160) {
-                        -- 		if ((long)(num3 * 160 + num4) < (long)(num)) {
-                        -- 			array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                        -- 		Posit32 conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de;
+                        -- 		if (((long)(num3 * 160 + num4) < (long)(num))) {
+                        -- 			conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                         -- 		} else {
-                        -- 			array [num4] = new Posit32 (0);
+                        -- 			conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                         -- 		}
+                        -- 		array [num4] = (conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de);
                         -- 		num4 = num4 + 1;
                         -- 	}
                         -- 	quire = Posit32.FusedSum (array, quire);
@@ -10100,11 +10119,13 @@ begin
                             -- 	int num4;
                             -- 	num4 = 0;
                             -- 	while (num4 < 160) {
-                            -- 		if ((long)(num3 * 160 + num4) < (long)(num)) {
-                            -- 			array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                            -- 		Posit32 conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de;
+                            -- 		if (((long)(num3 * 160 + num4) < (long)(num))) {
+                            -- 			conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                             -- 		} else {
-                            -- 			array [num4] = new Posit32 (0);
+                            -- 			conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                             -- 		}
+                            -- 		array [num4] = (conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de);
                             -- 		num4 = num4 + 1;
                             -- 	}
                             -- 	quire = Posit32.FusedSum (array, quire);
@@ -10120,11 +10141,13 @@ begin
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (num4 < 160) {
-                            -- 	if ((long)(num3 * 160 + num4) < (long)(num)) {
-                            -- 		array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                            -- 	Posit32 conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de;
+                            -- 	if (((long)(num3 * 160 + num4) < (long)(num))) {
+                            -- 		conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                             -- 	} else {
-                            -- 		array [num4] = new Posit32 (0);
+                            -- 		conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                             -- 	}
+                            -- 	array [num4] = (conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de);
                             -- 	num4 = num4 + 1;
                             -- }
                             -- 
@@ -10137,17 +10160,17 @@ begin
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_14\ => 
                         -- State after the while loop which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_11\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135;
+                        -- Posit32 objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135 = new Posit32 (quire);
+                        -- objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc = new Posit32 (quire);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\.\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc\.\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(Lombiq.Arithmetics.Quire)
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).q.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.quire\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_27\;
@@ -10159,19 +10182,24 @@ begin
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.7\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	if ((long)(num3 * 160 + num4) < (long)(num)) {
-                            -- 		array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                            -- 	Posit32 conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de;
+                            -- 	if (((long)(num3 * 160 + num4) < (long)(num))) {
+                            -- 		conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                             -- 	} else {
-                            -- 		array [num4] = new Posit32 (0);
+                            -- 		conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                             -- 	}
+                            -- 	array [num4] = (conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de);
                             -- 	num4 = num4 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if ((long)(num3 * 160 + num4) < (long)(num)) {
-                            -- 	array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                            -- Posit32 conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (((long)(num3 * 160 + num4) < (long)(num))) {
+                            -- 	conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                             -- } else {
-                            -- 	array [num4] = new Posit32 (0);
+                            -- 	conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                             -- }
                             -- 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.8\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ * to_signed(160, 32), 32);
@@ -10205,7 +10233,7 @@ begin
                         --     * The false branch starts in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_24\ and ends in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_25\.
                         --     * Execution after either branch will continue in the following state: \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\.
 
-                        if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\) then 
+                        if ((\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.10\)) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_20\;
                         else 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_24\;
@@ -10213,6 +10241,10 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.678
                     when \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\ => 
                         -- State after the if-else which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- array [num4] = (conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de);
+                        -- 
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\);
                         -- The following section was transformed from the .NET statement below:
                         -- num4 = num4 + 1;
                         -- 
@@ -10227,15 +10259,15 @@ begin
                         -- True branch of the if-else started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                        -- 	conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [num4] = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
+                        -- conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (memory.ReadUInt32 (1 + num3 * 160 + num4), true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num3\ * to_signed(160, 32), 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.12\ := to_signed(1, 32) + \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.binaryOperationResult.11\;
@@ -10256,7 +10288,7 @@ begin
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\));
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.dataIn.1\);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -10267,7 +10299,7 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\.
                             if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_23\) then 
                                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\;
@@ -10278,18 +10310,18 @@ begin
                         -- False branch of the if-else started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	array [num4] = new Posit32 (0);
+                        -- 	conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array [num4] = new Posit32 (0);
+                        -- conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de = new Posit32 (0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\IsNull\ := false;
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)).\PositBits\ := to_unsigned(0, 32);
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\IsNull\ := false;
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.Int32)
-                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\));
+                        \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ <= true;
                         \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_25\;
@@ -10298,7 +10330,7 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.Int32)
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.array\(to_integer(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.num4\)) := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.conditional94b9b3e820e16b464845c81b40c912b932f547f4b5b14b3e575c556c5c62b2de\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Int32).this.parameter.In.0\;
                             -- Going to the state after the if-else which was started in state \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_18\.
                             if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_25\) then 
                                 \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_19\;
@@ -10328,15 +10360,15 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(Lombiq.Arithmetics.Quire)
                         if (\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ = \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Finished.0\) then 
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire)._Started.0\ <= false;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.In.0\;
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).this.parameter.In.0\;
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.quire\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.Posit32::.ctor(Quire).q.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 (0, object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135.PositBits);
+                            -- memory.WriteUInt32 (0, objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc.PositBits);
                             -- 
                             -- Begin SimpleMemory write.
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.object8016d49c452675c9fa5bf61f2a206cfb1d611b5514120d03dc6f8e26a5a26135\.\PositBits\);
+                            \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0.objecte5d64413f908c4801ae1d97bed6220dfab866e5fa3ea4e0d55745abc26bd9afc\.\PositBits\);
                             \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State\ := \Posit32FusedCalculator::CalculateFusedSum(SimpleMemory).0._State_28\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
