@@ -548,7 +548,8 @@ architecture Imp of Hast_IP is
         \Posit32::ExponentSize().0._State_11\, 
         \Posit32::ExponentSize().0._State_12\, 
         \Posit32::ExponentSize().0._State_13\, 
-        \Posit32::ExponentSize().0._State_14\);
+        \Posit32::ExponentSize().0._State_14\, 
+        \Posit32::ExponentSize().0._State_15\);
     -- Signals:
     Signal \Posit32::ExponentSize().0._Finished\: boolean := false;
     Signal \Posit32::ExponentSize().0.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -2095,12 +2096,11 @@ begin
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.29\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.30\: boolean := false;
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.31\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -2177,12 +2177,11 @@ begin
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.28\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.29\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.30\ := false;
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.31\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\ := to_signed(0, 64);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\ := to_unsigned(0, 32);
             else 
                 case \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ is 
@@ -2819,13 +2818,13 @@ begin
                         -- 	}
                         -- 	fractionBits = (conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3);
                         -- 	if (fractionBits >= 2147483648u) {
-                        -- 		uint conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87;
+                        -- 		uint conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88;
                         -- 		if ((fractionBits != 2147483648u)) {
-                        -- 			conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- 			conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = 1;
                         -- 		} else {
-                        -- 			conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- 			conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = ((uint)((long)(num) & 1L));
                         -- 		}
-                        -- 		num = (conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87);
+                        -- 		num = num + (conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88);
                         -- 	}
                         -- }
                         -- 
@@ -2880,13 +2879,13 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_30\.
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742;
+                        -- uint conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (signBit) {
-                        -- 	conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = Posit32.GetTwosComplement (num);
+                        -- 	conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f = Posit32.GetTwosComplement (num);
                         -- } else {
-                        -- 	conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = num;
+                        -- 	conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f = num;
                         -- }
                         -- 
 
@@ -2913,13 +2912,13 @@ begin
                         -- 	}
                         -- 	fractionBits = (conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3);
                         -- 	if (fractionBits >= 2147483648u) {
-                        -- 		uint conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87;
+                        -- 		uint conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88;
                         -- 		if ((fractionBits != 2147483648u)) {
-                        -- 			conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- 			conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = 1;
                         -- 		} else {
-                        -- 			conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- 			conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = ((uint)((long)(num) & 1L));
                         -- 		}
-                        -- 		num = (conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87);
+                        -- 		num = num + (conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88);
                         -- 	}
                         -- }
                         -- 
@@ -2955,13 +2954,13 @@ begin
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional0557e32b11ba8656de63af77389f74397db38458b6838b7ec71d9300b43b97b3\);
                         -- The following section was transformed from the .NET statement below:
                         -- if (fractionBits >= 2147483648u) {
-                        -- 	uint conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87;
+                        -- 	uint conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88;
                         -- 	if ((fractionBits != 2147483648u)) {
-                        -- 		conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- 		conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = 1;
                         -- 	} else {
-                        -- 		conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- 		conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = ((uint)((long)(num) & 1L));
                         -- 	}
-                        -- 	num = (conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87);
+                        -- 	num = num + (conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88);
                         -- }
                         -- 
                         -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
@@ -3030,23 +3029,23 @@ begin
                         -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	uint conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87;
+                        -- 	uint conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88;
                         -- 	if ((fractionBits != 2147483648u)) {
-                        -- 		conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- 		conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = 1;
                         -- 	} else {
-                        -- 		conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- 		conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = ((uint)((long)(num) & 1L));
                         -- 	}
-                        -- 	num = (conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87);
+                        -- 	num = num + (conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87;
+                        -- uint conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((fractionBits != 2147483648u)) {
-                        -- 	conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- 	conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = 1;
                         -- } else {
-                        -- 	conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- 	conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = ((uint)((long)(num) & 1L));
                         -- }
                         -- 
                         -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
@@ -3066,66 +3065,65 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num = (conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87);
+                        -- num = num + (conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88);
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ + (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\;
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
+                        -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\ => 
                         -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- 	conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = 1;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + 1L));
+                        -- conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = 1;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\), 64)) + to_signed(1, 64)), 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87\ := ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88\ := unsigned(to_signed(1, 32));
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_42\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.49995
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_43\ => 
                         -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- 	conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = ((uint)((long)(num) & 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87 = ((uint)((long)(num) + ((long)(num) & 1L)));
+                        -- conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88 = ((uint)((long)(num) & 1L));
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\ := signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\), 64)) and to_signed(1, 64);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\), 64)) + (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\)), 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional18df916b486c957f6d73b71f963f462865051a4dad21055f9f7bb67a1b272e87\ := ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\), 64)) and to_signed(1, 64)), 32);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionalf785b0afe4ece3e3594cd02f6b5f1982f069e1dcecb8938b5a56e565b0c79e88\ := ((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.32\));
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_43\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_41\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.72285
+                        -- Clock cycles needed to complete this state (approximation): 0.2229
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742;
+                        -- return conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f\;
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\ => 
                         -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = Posit32.GetTwosComplement (num);
+                        -- 	conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f = Posit32.GetTwosComplement (num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = Posit32.GetTwosComplement (num);
+                        -- conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f = Posit32.GetTwosComplement (num);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
@@ -3137,7 +3135,7 @@ begin
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= false;
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\;
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return.6\;
                             -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
                             if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_46\) then 
                                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\;
@@ -3148,13 +3146,13 @@ begin
                         -- False branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = num;
+                        -- 	conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f = num;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742 = num;
+                        -- conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f = num;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditionald2725b08648280591c123f3ac2dada2a51f0603c9a42be0d76f7682ac70bf742\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional387696ad28480d9c3a30bb715ea7c994c6d6532ae1063b717c140922f7bfd34f\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_33\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_47\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_44\;
@@ -3563,14 +3561,15 @@ begin
         Variable \Posit32::ExponentSize().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::ExponentSize().0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::ExponentSize().0.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::ExponentSize().0.result\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::ExponentSize().0.binaryOperationResult.1\: boolean := false;
-        Variable \Posit32::ExponentSize().0.conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::ExponentSize().0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::ExponentSize().0.binaryOperationResult.4\: boolean := false;
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.3\: boolean := false;
+        Variable \Posit32::ExponentSize().0.conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::ExponentSize().0.binaryOperationResult.6\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.6\: boolean := false;
         Variable \Posit32::ExponentSize().0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::ExponentSize().0.binaryOperationResult.8\: unsigned(7 downto 0) := to_unsigned(0, 8);
     begin 
@@ -3592,14 +3591,15 @@ begin
                 \Posit32::ExponentSize().0.return.1\ := to_unsigned(0, 32);
                 \Posit32::ExponentSize().0.b\ := to_unsigned(0, 8);
                 \Posit32::ExponentSize().0.return.2\ := to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.result\ := to_unsigned(0, 8);
                 \Posit32::ExponentSize().0.binaryOperationResult.0\ := to_signed(0, 32);
-                \Posit32::ExponentSize().0.binaryOperationResult.1\ := false;
-                \Posit32::ExponentSize().0.conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9\ := to_signed(0, 32);
+                \Posit32::ExponentSize().0.binaryOperationResult.1\ := to_unsigned(0, 8);
                 \Posit32::ExponentSize().0.binaryOperationResult.2\ := to_signed(0, 32);
-                \Posit32::ExponentSize().0.binaryOperationResult.3\ := to_signed(0, 32);
-                \Posit32::ExponentSize().0.binaryOperationResult.4\ := false;
+                \Posit32::ExponentSize().0.binaryOperationResult.3\ := false;
+                \Posit32::ExponentSize().0.conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15\ := to_signed(0, 32);
+                \Posit32::ExponentSize().0.binaryOperationResult.4\ := to_signed(0, 32);
                 \Posit32::ExponentSize().0.binaryOperationResult.5\ := to_signed(0, 32);
-                \Posit32::ExponentSize().0.binaryOperationResult.6\ := to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.binaryOperationResult.6\ := false;
                 \Posit32::ExponentSize().0.binaryOperationResult.7\ := to_signed(0, 32);
                 \Posit32::ExponentSize().0.binaryOperationResult.8\ := to_unsigned(0, 8);
             else 
@@ -3727,127 +3727,137 @@ begin
                             \Posit32::ExponentSize().0.return.2\ := \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
                             \Posit32::ExponentSize().0.b\ := \Posit32::ExponentSize().0.return.2\;
                             -- The following section was transformed from the .NET statement below:
+                            -- byte result;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- result = (byte)(32 - (int)(b) - 1);
+                            -- 
+                            \Posit32::ExponentSize().0.binaryOperationResult.0\ := to_signed(32, 32) - signed(SmartResize((\Posit32::ExponentSize().0.b\), 32));
+                            \Posit32::ExponentSize().0.binaryOperationResult.1\ := SmartResize(unsigned(\Posit32::ExponentSize().0.binaryOperationResult.0\ - to_signed(1, 32)), 8);
+                            \Posit32::ExponentSize().0.result\ := (\Posit32::ExponentSize().0.binaryOperationResult.1\);
+                            -- The following section was transformed from the .NET statement below:
                             -- if ((int)(b) + 2 <= 32) {
-                            -- 	int conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9;
+                            -- 	int conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15;
                             -- 	if ((32 - ((int)(b) + 2) > 2)) {
-                            -- 		conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = 2;
+                            -- 		conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15 = 2;
                             -- 	} else {
-                            -- 		conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = ((byte)(32 - ((int)(b) + 2)));
+                            -- 		conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15 = ((byte)(32 - ((int)(b) + 2)));
                             -- 	}
-                            -- 	return (byte)(conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9);
+                            -- 	result = (byte)(conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15);
                             -- }
                             -- 
-                            \Posit32::ExponentSize().0.binaryOperationResult.0\ := signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32);
-                            \Posit32::ExponentSize().0.binaryOperationResult.1\ := \Posit32::ExponentSize().0.binaryOperationResult.0\ <= to_signed(32, 32);
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_9\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7128
+                    when \Posit32::ExponentSize().0._State_9\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::ExponentSize().0.binaryOperationResult.2\ := signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.3\ := \Posit32::ExponentSize().0.binaryOperationResult.2\ <= to_signed(32, 32);
 
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Posit32::ExponentSize().0._State_10\ and ends in state \Posit32::ExponentSize().0._State_12\.
-                            --     * Execution after either branch will continue in the following state: \Posit32::ExponentSize().0._State_9\.
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::ExponentSize().0._State_11\ and ends in state \Posit32::ExponentSize().0._State_13\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::ExponentSize().0._State_10\.
 
-                            if (\Posit32::ExponentSize().0.binaryOperationResult.1\) then 
-                                \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_10\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_9\;
-                            end if;
+                        if (\Posit32::ExponentSize().0.binaryOperationResult.3\) then 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_11\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.93435
-                    when \Posit32::ExponentSize().0._State_9\ => 
-                        -- State after the if-else which was started in state \Posit32::ExponentSize().0._State_8\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return (byte)(32 - (int)(b) - 1);
-                        -- 
-                        \Posit32::ExponentSize().0.binaryOperationResult.7\ := to_signed(32, 32) - signed(SmartResize((\Posit32::ExponentSize().0.b\), 32));
-                        \Posit32::ExponentSize().0.binaryOperationResult.8\ := SmartResize(unsigned(\Posit32::ExponentSize().0.binaryOperationResult.7\ - to_signed(1, 32)), 8);
-                        \Posit32::ExponentSize().0.return\ <= (\Posit32::ExponentSize().0.binaryOperationResult.8\);
-                        \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7128
                     when \Posit32::ExponentSize().0._State_10\ => 
-                        -- True branch of the if-else started in state \Posit32::ExponentSize().0._State_8\.
+                        -- State after the if-else which was started in state \Posit32::ExponentSize().0._State_9\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
+                        \Posit32::ExponentSize().0.return\ <= \Posit32::ExponentSize().0.result\;
+                        \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::ExponentSize().0._State_11\ => 
+                        -- True branch of the if-else started in state \Posit32::ExponentSize().0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	int conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9;
+                        -- 	int conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15;
                         -- 	if ((32 - ((int)(b) + 2) > 2)) {
-                        -- 		conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = 2;
+                        -- 		conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15 = 2;
                         -- 	} else {
-                        -- 		conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = ((byte)(32 - ((int)(b) + 2)));
+                        -- 		conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15 = ((byte)(32 - ((int)(b) + 2)));
                         -- 	}
-                        -- 	return (byte)(conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9);
+                        -- 	result = (byte)(conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9;
+                        -- int conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((32 - ((int)(b) + 2) > 2)) {
-                        -- 	conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = 2;
+                        -- 	conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15 = 2;
                         -- } else {
-                        -- 	conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = ((byte)(32 - ((int)(b) + 2)));
+                        -- 	conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15 = ((byte)(32 - ((int)(b) + 2)));
                         -- }
                         -- 
-                        \Posit32::ExponentSize().0.binaryOperationResult.2\ := signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32);
-                        \Posit32::ExponentSize().0.binaryOperationResult.3\ := to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.2\);
-                        \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_11\;
+                        \Posit32::ExponentSize().0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.5\ := to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.4\);
+                        \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0.7545
-                    when \Posit32::ExponentSize().0._State_11\ => 
+                    when \Posit32::ExponentSize().0._State_12\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::ExponentSize().0.binaryOperationResult.4\ := \Posit32::ExponentSize().0.binaryOperationResult.3\ > to_signed(2, 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.6\ := \Posit32::ExponentSize().0.binaryOperationResult.5\ > to_signed(2, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::ExponentSize().0._State_13\ and ends in state \Posit32::ExponentSize().0._State_13\.
-                        --     * The false branch starts in state \Posit32::ExponentSize().0._State_14\ and ends in state \Posit32::ExponentSize().0._State_14\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::ExponentSize().0._State_12\.
+                        --     * The true branch starts in state \Posit32::ExponentSize().0._State_14\ and ends in state \Posit32::ExponentSize().0._State_14\.
+                        --     * The false branch starts in state \Posit32::ExponentSize().0._State_15\ and ends in state \Posit32::ExponentSize().0._State_15\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::ExponentSize().0._State_13\.
 
-                        if ((\Posit32::ExponentSize().0.binaryOperationResult.4\)) then 
-                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_13\;
-                        else 
+                        if ((\Posit32::ExponentSize().0.binaryOperationResult.6\)) then 
                             \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_14\;
+                        else 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_15\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.50535
-                    when \Posit32::ExponentSize().0._State_12\ => 
-                        -- State after the if-else which was started in state \Posit32::ExponentSize().0._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return (byte)(conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9);
-                        -- 
-                        \Posit32::ExponentSize().0.return\ <= SmartResize(unsigned((\Posit32::ExponentSize().0.conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9\)), 8);
-                        \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_1\;
-                        -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_8\.
-                        if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_12\) then 
-                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_9\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::ExponentSize().0._State_13\ => 
-                        -- True branch of the if-else started in state \Posit32::ExponentSize().0._State_11\.
+                        -- State after the if-else which was started in state \Posit32::ExponentSize().0._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = 2;
-                        -- }
+                        -- result = (byte)(conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15);
                         -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = 2;
-                        -- 
-                        \Posit32::ExponentSize().0.conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9\ := to_signed(2, 32);
-                        -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_11\.
+                        \Posit32::ExponentSize().0.result\ := SmartResize(unsigned((\Posit32::ExponentSize().0.conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15\)), 8);
+                        -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_9\.
                         if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_13\) then 
-                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_12\;
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::ExponentSize().0._State_14\ => 
-                        -- False branch of the if-else started in state \Posit32::ExponentSize().0._State_11\.
+                        -- True branch of the if-else started in state \Posit32::ExponentSize().0._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = ((byte)(32 - ((int)(b) + 2)));
+                        -- 	conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15 = 2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9 = ((byte)(32 - ((int)(b) + 2)));
+                        -- conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15 = 2;
                         -- 
-                        \Posit32::ExponentSize().0.binaryOperationResult.5\ := signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32);
-                        \Posit32::ExponentSize().0.binaryOperationResult.6\ := SmartResize(unsigned(to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.5\)), 8);
-                        \Posit32::ExponentSize().0.conditional68bcd4673000ed90d5e5bddf9742548ff8843dd36c272b449a1de261af0ae5a9\ := signed(SmartResize(((\Posit32::ExponentSize().0.binaryOperationResult.6\)), 32));
-                        -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_11\.
+                        \Posit32::ExponentSize().0.conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15\ := to_signed(2, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_12\.
                         if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_14\) then 
-                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_12\;
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_13\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::ExponentSize().0._State_15\ => 
+                        -- False branch of the if-else started in state \Posit32::ExponentSize().0._State_12\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15 = ((byte)(32 - ((int)(b) + 2)));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15 = ((byte)(32 - ((int)(b) + 2)));
+                        -- 
+                        \Posit32::ExponentSize().0.binaryOperationResult.7\ := signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.8\ := SmartResize(unsigned(to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.7\)), 8);
+                        \Posit32::ExponentSize().0.conditional49bc984bd2c3ad06e30b23a2ff42c87c16bf015aaba8bc2ed3853f6adc988a15\ := signed(SmartResize(((\Posit32::ExponentSize().0.binaryOperationResult.8\)), 32));
+                        -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_12\.
+                        if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_15\) then 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_13\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7545
                 end case;
