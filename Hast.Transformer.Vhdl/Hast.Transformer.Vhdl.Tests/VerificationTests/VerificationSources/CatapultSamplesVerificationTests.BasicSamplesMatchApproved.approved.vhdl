@@ -1936,85 +1936,85 @@ architecture Imp of Hast_IP is
     -- System.Void Hast.Samples.SampleAssembly.MemoryTest::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
-    -- System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::randomSeed declarations start
+    -- System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::randomSeed declarations start
     -- Shared (global) variables:
-    shared Variable \System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::randomSeed\: unsigned(15 downto 0) := to_unsigned(0, 16);
-    -- System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::randomSeed declarations end
+    shared Variable \System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::randomSeed\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    -- System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::randomSeed declarations end
 
 
-    -- System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask declarations start
+    -- System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::iterationsPerTask declarations start
     -- Shared (global) variables:
-    shared Variable \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\: signed(63 downto 0) := to_signed(0, 64);
-    -- System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask declarations end
+    shared Variable \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::iterationsPerTask\: signed(63 downto 0) := to_signed(0, 64);
+    -- System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::iterationsPerTask declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).0 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object).0 declarations start
     -- State machine states:
-    type \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._States\ is (
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_0\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_1\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_2\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_3\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_4\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_5\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_6\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_7\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_8\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_9\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_10\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_11\);
+    type \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._States\ is (
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_0\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_1\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_2\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_3\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_4\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_5\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_6\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_7\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_8\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_9\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_10\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_11\);
     -- Signals:
-    Signal \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._Finished\: boolean := false;
-    Signal \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._Started\: boolean := false;
-    Signal \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).0 declarations end
+    Signal \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._Finished\: boolean := false;
+    Signal \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._Started\: boolean := false;
+    Signal \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object).0 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).1 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object).1 declarations start
     -- State machine states:
-    type \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._States\ is (
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_0\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_1\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_2\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_3\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_4\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_5\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_6\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_7\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_8\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_9\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_10\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_11\);
+    type \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._States\ is (
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_0\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_1\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_2\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_3\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_4\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_5\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_6\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_7\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_8\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_9\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_10\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_11\);
     -- Signals:
-    Signal \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._Finished\: boolean := false;
-    Signal \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._Started\: boolean := false;
-    Signal \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).1 declarations end
+    Signal \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._Finished\: boolean := false;
+    Signal \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._Started\: boolean := false;
+    Signal \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object).1 declarations end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).2 declarations start
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object).2 declarations start
     -- State machine states:
-    type \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._States\ is (
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_0\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_1\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_2\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_3\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_4\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_5\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_6\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_7\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_8\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_9\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_10\, 
-        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_11\);
+    type \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._States\ is (
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_0\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_1\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_2\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_3\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_4\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_5\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_6\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_7\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_8\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_9\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_10\, 
+        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_11\);
     -- Signals:
-    Signal \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._Finished\: boolean := false;
-    Signal \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._Started\: boolean := false;
-    Signal \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).2 declarations end
+    Signal \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._Finished\: boolean := false;
+    Signal \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._Started\: boolean := false;
+    Signal \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.indexObject.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object).2 declarations end
 
 
     -- System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations start
@@ -2042,19 +2042,19 @@ architecture Imp of Hast_IP is
     Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
     Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
     Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.0\: boolean := false;
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.1\: boolean := false;
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.2\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.0\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.1\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.2\: boolean := false;
     Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._Started\: boolean := false;
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Finished.0\: boolean := false;
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Finished.1\: boolean := false;
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Finished.2\: boolean := false;
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Finished.0\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Finished.1\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Finished.2\: boolean := false;
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
     -- System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 declarations end
 
 
@@ -15521,101 +15521,101 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.MemoryTest::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).0 state machine start
-    \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._StateMachine\: process (\Clock\) 
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\: \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._States\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_0\;
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\: \Hast.Algorithms.Random.RandomXorshiftLfsr16\;
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\: boolean := false;
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.17\: boolean := false;
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.18\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object).0 state machine start
+    \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._StateMachine\: process (\Clock\) 
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\: \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._States\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_0\;
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\: \Hast.Algorithms.Random.RandomXorshiftLfsr16\;
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\: boolean := false;
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.17\: boolean := false;
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.18\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._Finished\ <= false;
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return\ <= to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_0\;
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.indexObject\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.0\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num2\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num3\ := to_signed(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\ := false;
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num4\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.5\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num5\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.11\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.14\ := to_signed(0, 64);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.15\ := to_signed(0, 64);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.16\ := to_unsigned(0, 64);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.17\ := false;
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.18\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.19\ := to_signed(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._Finished\ <= false;
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return\ <= to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_0\;
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.indexObject\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.0\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num2\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num3\ := to_signed(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\ := false;
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num4\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.5\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num5\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.11\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.14\ := to_signed(0, 64);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.15\ := to_signed(0, 64);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.16\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.17\ := false;
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.18\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.19\ := to_signed(0, 32);
             else 
-                case \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ is 
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_0\ => 
+                case \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ is 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._Started\ = true) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_2\;
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._Started\ = true) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_1\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._Started\ = true) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._Finished\ <= true;
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._Started\ = true) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._Finished\ <= true;
                         else 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._Finished\ <= false;
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_0\;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._Finished\ <= false;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_2\ => 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.indexObject\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.indexObject.parameter.In\;
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_2\ => 
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.indexObject\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.indexObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- uint num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num = indexObject;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.indexObject\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.indexObject\;
                         -- The following section was transformed from the .NET statement below:
                         -- RandomXorshiftLfsr16 randomXorshiftLfsr;
                         -- 
@@ -15623,47 +15623,47 @@ begin
                         -- randomXorshiftLfsr = new RandomXorshiftLfsr16 { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\IsNull\ := false;
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := SmartResize(unsigned(to_signed(49813, 32)), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\IsNull\ := false;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := SmartResize(unsigned(to_signed(49813, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((uint)(this.randomSeed) + num);
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.0\ := SmartResize(SmartResize((\System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::randomSeed\), 32) + \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num\, 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.0\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.0\ := SmartResize(SmartResize((\System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::randomSeed\), 32) + \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num\, 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.0\);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = 0u;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num2\ := to_unsigned(0, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num2\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- int num3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = 0;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num3\ := to_signed(0, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num3\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while ((long)(num3) < this.iterationsPerTask) {
                         -- 	uint num4;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                        -- 	ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
+                        -- 	return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                        -- 	num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                         -- 	uint num5;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                        -- 	ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
+                        -- 	return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                        -- 	num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 		num2 = (uint)((long)(num2) + 1L);
                         -- 	}
@@ -15671,33 +15671,33 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_3\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_2\.
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_2\.
                         -- The while loop's condition:
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\ := SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num3\), 64) < \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\;
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\) then 
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\ := SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num3\), 64) < \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::iterationsPerTask\;
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	uint num4;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                            -- 	ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
+                            -- 	return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                            -- 	num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                             -- 	uint num5;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                            -- 	ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
+                            -- 	return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                            -- 	num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                             -- 		num2 = (uint)((long)(num2) + 1L);
                             -- 	}
@@ -15709,136 +15709,136 @@ begin
                             -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                            -- ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_5\;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_5\;
                         else 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_4\;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.96135
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_4\ => 
-                        -- State after the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_2\.
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_4\ => 
+                        -- State after the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- return num2;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return\ <= \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num2\;
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_1\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return\ <= \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num2\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_5\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_5\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.5\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
+                        -- return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                        -- num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
                         -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                        -- ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_6\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.89625
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_6\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_6\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.11\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.11\);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_7\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.7107
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_7\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
+                        -- return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                        -- num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 	num2 = (uint)((long)(num2) + 1L);
                         -- }
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.14\ := signed(SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num4\ * \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num4\, 64));
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_8\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.14\ := signed(SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num4\ * \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num4\, 64));
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.8511
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_8\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.15\ := signed(SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num5\ * \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num5\, 64));
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.16\ := SmartResize(unsigned((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.14\) + (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.15\)), 64);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.15\ := signed(SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num5\ * \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num5\, 64));
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.16\ := SmartResize(unsigned((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.14\) + (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.15\)), 64);
                         -- Since the integer literal 4294836225 was out of the VHDL integer range it was substituted with a binary literal (11111111111111100000000000000001).
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_9\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.88215
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_9\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_9\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.17\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.16\) <= "0000000000000000000000000000000011111111111111100000000000000001";
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.17\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.16\) <= "0000000000000000000000000000000011111111111111100000000000000001";
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_11\ and ends in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_11\.
-                        --     * Execution after either branch will continue in the following state: \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_10\.
+                        --     * The true branch starts in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_11\ and ends in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_11\.
+                        --     * Execution after either branch will continue in the following state: \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_10\.
 
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.17\) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_11\;
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.17\) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_11\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_10\;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.62685
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_10\ => 
-                        -- State after the if-else which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_9\.
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_10\ => 
+                        -- State after the if-else which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = num3 + 1;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.19\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num3\ + to_signed(1, 32);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num3\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.19\;
-                        -- Returning to the repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ = \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_10\) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_3\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.19\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num3\ + to_signed(1, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num3\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.19\;
+                        -- Returning to the repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_2\ if the loop wasn't exited with a state change.
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ = \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_10\) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_11\ => 
-                        -- True branch of the if-else started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_9\.
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_11\ => 
+                        -- True branch of the if-else started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = (uint)((long)(num2) + 1L);
@@ -15847,115 +15847,115 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (uint)((long)(num2) + 1L);
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.18\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num2\), 64)) + to_signed(1, 64)), 32);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.num2\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.binaryOperationResult.18\);
-                        -- Going to the state after the if-else which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_9\.
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ = \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_11\) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._State_10\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.18\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num2\), 64)) + to_signed(1, 64)), 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num2\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.18\);
+                        -- Going to the state after the if-else which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_9\.
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ = \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_11\) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.49995
                 end case;
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).0 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object).0 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).1 state machine start
-    \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._StateMachine\: process (\Clock\) 
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\: \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._States\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_0\;
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\: \Hast.Algorithms.Random.RandomXorshiftLfsr16\;
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\: boolean := false;
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.17\: boolean := false;
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.18\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object).1 state machine start
+    \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._StateMachine\: process (\Clock\) 
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\: \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._States\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_0\;
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\: \Hast.Algorithms.Random.RandomXorshiftLfsr16\;
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\: boolean := false;
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.17\: boolean := false;
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.18\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._Finished\ <= false;
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return\ <= to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_0\;
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.indexObject\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.0\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num2\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num3\ := to_signed(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\ := false;
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num4\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.5\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num5\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.11\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.14\ := to_signed(0, 64);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.15\ := to_signed(0, 64);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.16\ := to_unsigned(0, 64);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.17\ := false;
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.18\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.19\ := to_signed(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._Finished\ <= false;
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return\ <= to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_0\;
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.indexObject\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.0\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num2\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num3\ := to_signed(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\ := false;
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num4\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.5\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num5\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.11\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.14\ := to_signed(0, 64);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.15\ := to_signed(0, 64);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.16\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.17\ := false;
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.18\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.19\ := to_signed(0, 32);
             else 
-                case \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ is 
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_0\ => 
+                case \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ is 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._Started\ = true) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_2\;
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._Started\ = true) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_1\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._Started\ = true) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._Finished\ <= true;
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._Started\ = true) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._Finished\ <= true;
                         else 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._Finished\ <= false;
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_0\;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._Finished\ <= false;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_2\ => 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.indexObject\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.indexObject.parameter.In\;
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_2\ => 
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.indexObject\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.indexObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- uint num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num = indexObject;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.indexObject\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.indexObject\;
                         -- The following section was transformed from the .NET statement below:
                         -- RandomXorshiftLfsr16 randomXorshiftLfsr;
                         -- 
@@ -15963,47 +15963,47 @@ begin
                         -- randomXorshiftLfsr = new RandomXorshiftLfsr16 { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\IsNull\ := false;
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := SmartResize(unsigned(to_signed(49813, 32)), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\IsNull\ := false;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := SmartResize(unsigned(to_signed(49813, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((uint)(this.randomSeed) + num);
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.0\ := SmartResize(SmartResize((\System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::randomSeed\), 32) + \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num\, 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.0\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.0\ := SmartResize(SmartResize((\System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::randomSeed\), 32) + \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num\, 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.0\);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = 0u;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num2\ := to_unsigned(0, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num2\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- int num3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = 0;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num3\ := to_signed(0, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num3\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while ((long)(num3) < this.iterationsPerTask) {
                         -- 	uint num4;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                        -- 	ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
+                        -- 	return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                        -- 	num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                         -- 	uint num5;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                        -- 	ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
+                        -- 	return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                        -- 	num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 		num2 = (uint)((long)(num2) + 1L);
                         -- 	}
@@ -16011,33 +16011,33 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_3\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_2\.
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_2\.
                         -- The while loop's condition:
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\ := SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num3\), 64) < \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\;
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\) then 
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\ := SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num3\), 64) < \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::iterationsPerTask\;
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	uint num4;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                            -- 	ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
+                            -- 	return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                            -- 	num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                             -- 	uint num5;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                            -- 	ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
+                            -- 	return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                            -- 	num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                             -- 		num2 = (uint)((long)(num2) + 1L);
                             -- 	}
@@ -16049,136 +16049,136 @@ begin
                             -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                            -- ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_5\;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_5\;
                         else 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_4\;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.96135
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_4\ => 
-                        -- State after the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_2\.
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_4\ => 
+                        -- State after the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- return num2;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return\ <= \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num2\;
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_1\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return\ <= \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num2\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_5\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_5\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.5\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
+                        -- return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                        -- num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
                         -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                        -- ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_6\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.89625
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_6\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_6\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.11\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.11\);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_7\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.7107
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_7\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
+                        -- return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                        -- num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 	num2 = (uint)((long)(num2) + 1L);
                         -- }
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.14\ := signed(SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num4\ * \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num4\, 64));
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_8\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.14\ := signed(SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num4\ * \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num4\, 64));
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.8511
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_8\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.15\ := signed(SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num5\ * \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num5\, 64));
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.16\ := SmartResize(unsigned((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.14\) + (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.15\)), 64);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.15\ := signed(SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num5\ * \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num5\, 64));
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.16\ := SmartResize(unsigned((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.14\) + (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.15\)), 64);
                         -- Since the integer literal 4294836225 was out of the VHDL integer range it was substituted with a binary literal (11111111111111100000000000000001).
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_9\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.88215
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_9\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_9\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.17\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.16\) <= "0000000000000000000000000000000011111111111111100000000000000001";
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.17\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.16\) <= "0000000000000000000000000000000011111111111111100000000000000001";
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_11\ and ends in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_11\.
-                        --     * Execution after either branch will continue in the following state: \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_10\.
+                        --     * The true branch starts in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_11\ and ends in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_11\.
+                        --     * Execution after either branch will continue in the following state: \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_10\.
 
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.17\) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_11\;
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.17\) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_11\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_10\;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.62685
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_10\ => 
-                        -- State after the if-else which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_9\.
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_10\ => 
+                        -- State after the if-else which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = num3 + 1;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.19\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num3\ + to_signed(1, 32);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num3\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.19\;
-                        -- Returning to the repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_2\ if the loop wasn't exited with a state change.
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ = \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_10\) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_3\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.19\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num3\ + to_signed(1, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num3\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.19\;
+                        -- Returning to the repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_2\ if the loop wasn't exited with a state change.
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ = \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_10\) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_11\ => 
-                        -- True branch of the if-else started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_9\.
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_11\ => 
+                        -- True branch of the if-else started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = (uint)((long)(num2) + 1L);
@@ -16187,115 +16187,115 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (uint)((long)(num2) + 1L);
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.18\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num2\), 64)) + to_signed(1, 64)), 32);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.num2\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.binaryOperationResult.18\);
-                        -- Going to the state after the if-else which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_9\.
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ = \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_11\) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._State_10\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.18\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num2\), 64)) + to_signed(1, 64)), 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num2\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.18\);
+                        -- Going to the state after the if-else which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_9\.
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ = \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_11\) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.49995
                 end case;
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).1 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object).1 state machine end
 
 
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).2 state machine start
-    \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._StateMachine\: process (\Clock\) 
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\: \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._States\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_0\;
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\: \Hast.Algorithms.Random.RandomXorshiftLfsr16\;
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\: boolean := false;
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.17\: boolean := false;
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.18\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object).2 state machine start
+    \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._StateMachine\: process (\Clock\) 
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\: \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._States\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_0\;
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\: \Hast.Algorithms.Random.RandomXorshiftLfsr16\;
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\: boolean := false;
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.17\: boolean := false;
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.18\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._Finished\ <= false;
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return\ <= to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_0\;
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.indexObject\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.0\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num2\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num3\ := to_signed(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\ := false;
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num4\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.5\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num5\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.11\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\ := to_unsigned(0, 16);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.14\ := to_signed(0, 64);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.15\ := to_signed(0, 64);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.16\ := to_unsigned(0, 64);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.17\ := false;
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.18\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.19\ := to_signed(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._Finished\ <= false;
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return\ <= to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_0\;
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.indexObject\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.0\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num2\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num3\ := to_signed(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\ := false;
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num4\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.5\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num5\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.11\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.14\ := to_signed(0, 64);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.15\ := to_signed(0, 64);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.16\ := to_unsigned(0, 64);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.17\ := false;
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.18\ := to_unsigned(0, 32);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.19\ := to_signed(0, 32);
             else 
-                case \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ is 
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_0\ => 
+                case \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ is 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_0\ => 
                         -- Start state
                         -- Waiting for the start signal.
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._Started\ = true) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_2\;
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._Started\ = true) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_2\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_1\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_1\ => 
                         -- Final state
                         -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._Started\ = true) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._Finished\ <= true;
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._Started\ = true) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._Finished\ <= true;
                         else 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._Finished\ <= false;
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_0\;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._Finished\ <= false;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_0\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_2\ => 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.indexObject\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.indexObject.parameter.In\;
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_2\ => 
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.indexObject\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.indexObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- uint num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num = indexObject;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.indexObject\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.indexObject\;
                         -- The following section was transformed from the .NET statement below:
                         -- RandomXorshiftLfsr16 randomXorshiftLfsr;
                         -- 
@@ -16303,47 +16303,47 @@ begin
                         -- randomXorshiftLfsr = new RandomXorshiftLfsr16 { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\IsNull\ := false;
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := SmartResize(unsigned(to_signed(49813, 32)), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\IsNull\ := false;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := SmartResize(unsigned(to_signed(49813, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((uint)(this.randomSeed) + num);
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.0\ := SmartResize(SmartResize((\System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::randomSeed\), 32) + \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num\, 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.0\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.0\ := SmartResize(SmartResize((\System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::randomSeed\), 32) + \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num\, 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.0\);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = 0u;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num2\ := to_unsigned(0, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num2\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- int num3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = 0;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num3\ := to_signed(0, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num3\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while ((long)(num3) < this.iterationsPerTask) {
                         -- 	uint num4;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                        -- 	ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
+                        -- 	return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                        -- 	num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                         -- 	uint num5;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                        -- 	ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
+                        -- 	return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                        -- 	num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 		num2 = (uint)((long)(num2) + 1L);
                         -- 	}
@@ -16351,33 +16351,33 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_3\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_2\.
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_3\ => 
+                        -- Repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_2\.
                         -- The while loop's condition:
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\ := SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num3\), 64) < \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\;
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\) then 
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\ := SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num3\), 64) < \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::iterationsPerTask\;
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	uint num4;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                            -- 	ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
+                            -- 	return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                            -- 	num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                             -- 	uint num5;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                            -- 	ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
+                            -- 	return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                            -- 	num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                             -- 		num2 = (uint)((long)(num2) + 1L);
                             -- 	}
@@ -16389,136 +16389,136 @@ begin
                             -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                            -- ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_5\;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_5\;
                         else 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_4\;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.96135
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_4\ => 
-                        -- State after the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_2\.
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_4\ => 
+                        -- State after the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- return num2;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return\ <= \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num2\;
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_1\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return\ <= \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num2\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_5\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_5\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.5\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.5\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d = randomXorshiftLfsr.State;
+                        -- return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d;
+                        -- num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_b41a53abf86b2d0bed8107599d35367a46b66f10a327e73d833d5703efca198d\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
                         -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                        -- ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_6\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.89625
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_6\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_6\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(7, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.11\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\ := SmartResize(unsigned(shift_left(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(9, 32), 5))))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.11\);
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_7\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.7107
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_7\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\)), 32))), 16);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\ := SmartResize(unsigned(shift_right(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)), to_integer(unsigned(SmartResize(to_signed(13, 32), 5) and "11111")))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\)), 32))), 16);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2 = randomXorshiftLfsr.State;
+                        -- return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2;
+                        -- num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return_3b11dafd5305abf28394fd527a618fe72046cfe7f5e1444ab6613da221dd87c2\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 	num2 = (uint)((long)(num2) + 1L);
                         -- }
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.14\ := signed(SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num4\ * \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num4\, 64));
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_8\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.14\ := signed(SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num4\ * \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num4\, 64));
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.8511
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_8\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.15\ := signed(SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num5\ * \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num5\, 64));
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.16\ := SmartResize(unsigned((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.14\) + (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.15\)), 64);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.15\ := signed(SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num5\ * \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num5\, 64));
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.16\ := SmartResize(unsigned((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.14\) + (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.15\)), 64);
                         -- Since the integer literal 4294836225 was out of the VHDL integer range it was substituted with a binary literal (11111111111111100000000000000001).
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_9\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.88215
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_9\ => 
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_9\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.17\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.16\) <= "0000000000000000000000000000000011111111111111100000000000000001";
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.17\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.16\) <= "0000000000000000000000000000000011111111111111100000000000000001";
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_11\ and ends in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_11\.
-                        --     * Execution after either branch will continue in the following state: \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_10\.
+                        --     * The true branch starts in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_11\ and ends in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_11\.
+                        --     * Execution after either branch will continue in the following state: \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_10\.
 
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.17\) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_11\;
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.17\) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_11\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_10\;
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.62685
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_10\ => 
-                        -- State after the if-else which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_9\.
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_10\ => 
+                        -- State after the if-else which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- num3 = num3 + 1;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.19\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num3\ + to_signed(1, 32);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num3\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.19\;
-                        -- Returning to the repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_2\ if the loop wasn't exited with a state change.
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ = \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_10\) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_3\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.19\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num3\ + to_signed(1, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num3\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.19\;
+                        -- Returning to the repeated state of the while loop which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_2\ if the loop wasn't exited with a state change.
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ = \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_10\) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_3\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_11\ => 
-                        -- True branch of the if-else started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_9\.
+                    when \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_11\ => 
+                        -- True branch of the if-else started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num2 = (uint)((long)(num2) + 1L);
@@ -16527,18 +16527,18 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (uint)((long)(num2) + 1L);
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.18\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num2\), 64)) + to_signed(1, 64)), 32);
-                        \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.num2\ := (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.binaryOperationResult.18\);
-                        -- Going to the state after the if-else which was started in state \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_9\.
-                        if (\MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ = \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_11\) then 
-                            \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._State_10\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.18\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num2\), 64)) + to_signed(1, 64)), 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num2\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.18\);
+                        -- Going to the state after the if-else which was started in state \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_9\.
+                        if (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ = \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_11\) then 
+                            \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.49995
                 end case;
             end if;
         end if;
     end process;
-    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object).2 state machine end
+    -- System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object).2 state machine end
 
 
     -- System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
@@ -16552,7 +16552,7 @@ begin
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\: \unsigned32_Array\(0 to 122) := (others => to_unsigned(0, 32));
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
-        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).invocationIndex\: integer range 0 to 2 := 0;
+        Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).invocationIndex\: integer range 0 to 2 := 0;
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -16571,12 +16571,12 @@ begin
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
-                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.0\ <= to_unsigned(0, 32);
-                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.0\ <= false;
-                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.1\ <= to_unsigned(0, 32);
-                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.1\ <= false;
-                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.2\ <= to_unsigned(0, 32);
-                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.2\ <= false;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.0\ <= to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.0\ <= false;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.1\ <= to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.1\ <= false;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.2\ <= to_unsigned(0, 32);
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.2\ <= false;
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_0\;
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\ := to_unsigned(0, 32);
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\ := (others => '0');
@@ -16586,7 +16586,7 @@ begin
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\ := (others => to_unsigned(0, 32));
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ := to_unsigned(0, 32);
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\ := false;
-                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).invocationIndex\ := 0;
+                \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).invocationIndex\ := 0;
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.0\ := to_unsigned(0, 32);
                 \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.1\ := to_unsigned(0, 32);
@@ -16617,10 +16617,10 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_2\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- <>c__DisplayClass4_0 <>c__DisplayClass4_;
+                        -- <>c__DisplayClass5_0 <>c__DisplayClass5_;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- <>c__DisplayClass4_ = new <>c__DisplayClass4_0 ();
+                        -- <>c__DisplayClass5_ = new <>c__DisplayClass5_0 ();
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- uint num;
@@ -16641,7 +16641,7 @@ begin
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- <>c__DisplayClass4_.randomSeed = (ushort)memory.ReadUInt32 (1);
+                            -- <>c__DisplayClass5_.randomSeed = (ushort)memory.ReadUInt32 (1);
                             -- 
                             -- The last SimpleMemory read just finished, so need to start the next one in the next state.
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_4\;
@@ -16659,9 +16659,9 @@ begin
                             -- SimpleMemory read finished.
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::randomSeed\ := SmartResize(ConvertStdLogicVectorToUInt32(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\), 16);
+                            \System.UInt16 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::randomSeed\ := SmartResize(ConvertStdLogicVectorToUInt32(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.dataIn.1\), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- <>c__DisplayClass4_.iterationsPerTask = (long)num / 123L;
+                            -- <>c__DisplayClass5_.iterationsPerTask = (long)num / 123L;
                             -- 
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_6\;
                         end if;
@@ -16678,7 +16678,7 @@ begin
                         \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\ := signed(SmartResize(\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num\, 64)) / to_signed(123, 64);
                         -- Clock cycles needed to complete this state (approximation): 21
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_7\ => 
-                        \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::iterationsPerTask\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\;
+                        \System.Int64 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::iterationsPerTask\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- Task<uint>[] array;
                         -- 
@@ -16695,7 +16695,7 @@ begin
                         \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while ((long)(num2) < 123L) {
-                        -- 	array [num2] = Task.Factory.StartNew (<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<EstimatePi>b__0), num2);
+                        -- 	array [num2] = Task.Factory.StartNew (<>c__DisplayClass5_.<>9__0 ?? (<>c__DisplayClass5_.<>9__0 = <>c__DisplayClass5_.<EstimatePi>b__0), num2);
                         -- 	num2 = (uint)((long)(num2) + 1L);
                         -- }
                         -- 
@@ -16709,26 +16709,26 @@ begin
                         if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.binaryOperationResult.1\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	array [num2] = Task.Factory.StartNew (<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<EstimatePi>b__0), num2);
+                            -- 	array [num2] = Task.Factory.StartNew (<>c__DisplayClass5_.<>9__0 ?? (<>c__DisplayClass5_.<>9__0 = <>c__DisplayClass5_.<EstimatePi>b__0), num2);
                             -- 	num2 = (uint)((long)(num2) + 1L);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- array [num2] = Task.Factory.StartNew (<>c__DisplayClass4_.<>9__0 ?? (<>c__DisplayClass4_.<>9__0 = <>c__DisplayClass4_.<EstimatePi>b__0), num2);
+                            -- array [num2] = Task.Factory.StartNew (<>c__DisplayClass5_.<>9__0 ?? (<>c__DisplayClass5_.<>9__0 = <>c__DisplayClass5_.<EstimatePi>b__0), num2);
                             -- 
-                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object)
-                            case \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).invocationIndex\ is 
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object)
+                            case \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).invocationIndex\ is 
                                 when 0 => 
-                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.0\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\;
-                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.0\ <= true;
+                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.0\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\;
+                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.0\ <= true;
                                 when 1 => 
-                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.1\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\;
-                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.1\ <= true;
+                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.1\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\;
+                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.1\ <= true;
                                 when 2 => 
-                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.2\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\;
-                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.2\ <= true;
+                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.2\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.num2\;
+                                    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.2\ <= true;
                             end case;
-                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).invocationIndex\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).invocationIndex\ + 1;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).invocationIndex\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).invocationIndex\ + 1;
                             -- The following section was transformed from the .NET statement below:
                             -- num2 = (uint)((long)(num2) + 1L);
                             -- 
@@ -16754,15 +16754,15 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.49995
                     when \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object)
-                        if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.1\ = \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Finished.1\ and \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.2\ = \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Finished.2\ and \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.0\ = \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Finished.0\) then 
-                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.0\ <= false;
-                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.1\ <= false;
-                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.2\ <= false;
-                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).invocationIndex\ := 0;
-                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.0\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).return.0\;
-                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.1\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).return.1\;
-                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.2\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).return.2\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object)
+                        if (\MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.1\ = \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Finished.1\ and \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.2\ = \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Finished.2\ and \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.0\ = \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Finished.0\) then 
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.0\ <= false;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.1\ <= false;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.2\ <= false;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).invocationIndex\ := 0;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.0\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).return.0\;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.1\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).return.1\;
+                            \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.2\ := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).return.2\;
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\(0) := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.0\;
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\(1) := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.1\;
                             \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.array\(2) := \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.return.2\;
@@ -23118,23 +23118,23 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object) start
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object) start
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#0):
-    \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._Started\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.0\;
-    \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.indexObject.parameter.In\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.0\;
-    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Finished.0\ <= \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0._Finished\;
-    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).return.0\ <= \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).0.return\;
+    \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._Started\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.0\;
+    \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.indexObject.parameter.In\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.0\;
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Finished.0\ <= \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0._Finished\;
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).return.0\ <= \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return\;
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#1):
-    \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._Started\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.1\;
-    \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.indexObject.parameter.In\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.1\;
-    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Finished.1\ <= \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1._Finished\;
-    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).return.1\ <= \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).1.return\;
+    \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._Started\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.1\;
+    \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.indexObject.parameter.In\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.1\;
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Finished.1\ <= \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1._Finished\;
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).return.1\ <= \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return\;
     -- Signal connections for System.Void Hast.Samples.SampleAssembly.MonteCarloPiEstimator::EstimatePi(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 (#2):
-    \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._Started\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Started.2\;
-    \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.indexObject.parameter.In\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.2\;
-    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object)._Finished.2\ <= \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2._Finished\;
-    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).return.2\ <= \MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(Object).2.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass4_0::<EstimatePi>b__0(System.Object) end
+    \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._Started\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Started.2\;
+    \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.indexObject.parameter.In\ <= \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).indexObject.parameter.Out.2\;
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object)._Finished.2\ <= \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2._Finished\;
+    \MonteCarloPiEstimator::EstimatePi(SimpleMemory).0.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).return.2\ <= \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(System.Object) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32) start
