@@ -2281,8 +2281,8 @@ begin
         Variable \Posit32::.ctor(Int32).0._State\: \Posit32::.ctor(Int32).0._States\ := \Posit32::.ctor(Int32).0._State_0\;
         Variable \Posit32::.ctor(Int32).0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).0.value\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::.ctor(Int32).0.conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::.ctor(Int32).0.conditional68968a9a6392defd6e5a3b182fa4434bc81f526716f6e55de1b9cb4711133f48\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::.ctor(Int32).0.object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2\: \Lombiq.Arithmetics.Posit32\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -2292,7 +2292,7 @@ begin
                 \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= false;
                 \Posit32::.ctor(Int32).0._State\ := \Posit32::.ctor(Int32).0._State_0\;
                 \Posit32::.ctor(Int32).0.value\ := to_signed(0, 32);
-                \Posit32::.ctor(Int32).0.conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331\ := to_unsigned(0, 32);
+                \Posit32::.ctor(Int32).0.conditional68968a9a6392defd6e5a3b182fa4434bc81f526716f6e55de1b9cb4711133f48\ := to_unsigned(0, 32);
             else 
                 case \Posit32::.ctor(Int32).0._State\ is 
                     when \Posit32::.ctor(Int32).0._State_0\ => 
@@ -2318,20 +2318,20 @@ begin
                         \Posit32::.ctor(Int32).0.this\ := \Posit32::.ctor(Int32).0.this.parameter.In\;
                         \Posit32::.ctor(Int32).0.value\ := \Posit32::.ctor(Int32).0.value.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331;
+                        -- uint conditional68968a9a6392defd6e5a3b182fa4434bc81f526716f6e55de1b9cb4711133f48;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321;
+                        -- Posit32 object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321 = new Posit32 (0u);
+                        -- object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2 = new Posit32 (0u);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).0.object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).0.object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\;
+                        \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).0.object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2\;
                         \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= to_unsigned(0, 32);
                         \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).0._State\ := \Posit32::.ctor(Int32).0._State_3\;
@@ -2340,11 +2340,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\ := \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).0.object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2\ := \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331 = 0u;
+                            -- conditional68968a9a6392defd6e5a3b182fa4434bc81f526716f6e55de1b9cb4711133f48 = 0u;
                             -- 
-                            \Posit32::.ctor(Int32).0.conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331\ := to_unsigned(0, 32);
+                            \Posit32::.ctor(Int32).0.conditional68968a9a6392defd6e5a3b182fa4434bc81f526716f6e55de1b9cb4711133f48\ := to_unsigned(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- @this.PositBits = 0u;
                             -- 
@@ -10899,8 +10899,8 @@ begin
         Variable \Posit32::.ctor(Int32).0._State\: \Posit32::.ctor(Int32).0._States\ := \Posit32::.ctor(Int32).0._State_0\;
         Variable \Posit32::.ctor(Int32).0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).0.value\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::.ctor(Int32).0.conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::.ctor(Int32).0.conditional68968a9a6392defd6e5a3b182fa4434bc81f526716f6e55de1b9cb4711133f48\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::.ctor(Int32).0.object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2\: \Lombiq.Arithmetics.Posit32\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -10910,7 +10910,7 @@ begin
                 \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= false;
                 \Posit32::.ctor(Int32).0._State\ := \Posit32::.ctor(Int32).0._State_0\;
                 \Posit32::.ctor(Int32).0.value\ := to_signed(0, 32);
-                \Posit32::.ctor(Int32).0.conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331\ := to_unsigned(0, 32);
+                \Posit32::.ctor(Int32).0.conditional68968a9a6392defd6e5a3b182fa4434bc81f526716f6e55de1b9cb4711133f48\ := to_unsigned(0, 32);
             else 
                 case \Posit32::.ctor(Int32).0._State\ is 
                     when \Posit32::.ctor(Int32).0._State_0\ => 
@@ -10936,20 +10936,20 @@ begin
                         \Posit32::.ctor(Int32).0.this\ := \Posit32::.ctor(Int32).0.this.parameter.In\;
                         \Posit32::.ctor(Int32).0.value\ := \Posit32::.ctor(Int32).0.value.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331;
+                        -- uint conditional68968a9a6392defd6e5a3b182fa4434bc81f526716f6e55de1b9cb4711133f48;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321;
+                        -- Posit32 object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321 = new Posit32 (0u);
+                        -- object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2 = new Posit32 (0u);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).0.object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).0.object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\;
+                        \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).0.object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2\;
                         \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= to_unsigned(0, 32);
                         \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).0._State\ := \Posit32::.ctor(Int32).0._State_3\;
@@ -10958,11 +10958,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).0.object62f645adbfb4d116e9dadbde41fc03ee8eecadf80abd12f7fbc8d9dfa7162321\ := \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).0.object333ff0d0dd85e50d2c95be675373bf374482e68f690fd047fd1bd29354833ec2\ := \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331 = 0u;
+                            -- conditional68968a9a6392defd6e5a3b182fa4434bc81f526716f6e55de1b9cb4711133f48 = 0u;
                             -- 
-                            \Posit32::.ctor(Int32).0.conditional2430432b7cbc58715e662a8c82abb8a42239e5b92d4c7ea6c2c87a87483f3331\ := to_unsigned(0, 32);
+                            \Posit32::.ctor(Int32).0.conditional68968a9a6392defd6e5a3b182fa4434bc81f526716f6e55de1b9cb4711133f48\ := to_unsigned(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- @this.PositBits = 0u;
                             -- 
