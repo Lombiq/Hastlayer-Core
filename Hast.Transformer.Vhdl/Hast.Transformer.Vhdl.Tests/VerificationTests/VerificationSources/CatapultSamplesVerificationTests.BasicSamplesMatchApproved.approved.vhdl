@@ -2212,14 +2212,9 @@ architecture Imp of Hast_IP is
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\, 
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\, 
         \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\, 
-        \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\, 
-        \ObjectOrientedShowcase::Run(SimpleMemory).0._State_22\);
+        \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\);
     -- Signals:
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0._Finished\: boolean := false;
-    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
-    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
-    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.Out.0\: \Hast.Samples.SampleAssembly.MemoryContainer\;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.Out.0\: \Hast.Samples.SampleAssembly.MemoryContainer\;
@@ -2245,6 +2240,10 @@ architecture Imp of Hast_IP is
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[]).numberContainers.parameter.Out.0\: \Hast.Samples.SampleAssembly.NumberContainer_Array\(0 to 3);
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\: boolean := false;
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\: std_logic_vector(31 downto 0) := (others => '0');
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\: boolean := false;
+    Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0._Started\: boolean := false;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.In.0\: \Hast.Samples.SampleAssembly.MemoryContainer\;
     Signal \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Finished.0\: boolean := false;
@@ -3182,16 +3181,20 @@ begin
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.6\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.19\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.20\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.flag\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\: boolean := false;
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.num14\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff\: signed(31 downto 0) := to_signed(0, 32);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\: boolean := false;
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc\: signed(31 downto 0) := to_signed(0, 32);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.26\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.28\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\: boolean := false;
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.29\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.30\: unsigned(15 downto 0) := to_unsigned(0, 16);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -3243,16 +3246,20 @@ begin
                 \GenomeMatcher::FillTable(SimpleMemory).0.dataIn.6\ := (others => '0');
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.19\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.20\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.flag\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\ := false;
+                \GenomeMatcher::FillTable(SimpleMemory).0.num14\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963\ := to_unsigned(0, 16);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff\ := to_signed(0, 32);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\ := false;
+                \GenomeMatcher::FillTable(SimpleMemory).0.conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc\ := to_signed(0, 32);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.26\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\ := to_signed(0, 32);
-                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.28\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\ := false;
+                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.28\ := to_signed(0, 32);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.29\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.30\ := to_unsigned(0, 16);
             else 
                 case \GenomeMatcher::FillTable(SimpleMemory).0._State\ is 
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_0\ => 
@@ -3379,26 +3386,31 @@ begin
                         -- 		if (memory.ReadUInt32 ((int)(2 + (int)(num7))) == memory.ReadUInt32 ((int)((int)(num3) + (int)(num6)))) {
                         -- 			num11 = (ushort)((int)(num11) + 1);
                         -- 		}
-                        -- 		if ((int)(num11) > (int)(num10)) {
-                        -- 			if ((int)(num11) > (int)(num9)) {
-                        -- 				num12 = num11;
-                        -- 				int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
-                        -- 				if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                        -- 					conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
-                        -- 				} else {
-                        -- 					conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
-                        -- 				}
-                        -- 				num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
-                        -- 			} else {
-                        -- 				num12 = num9;
-                        -- 				num13 = 0;
-                        -- 			}
-                        -- 		} else if ((int)(num10) > (int)(num9)) {
-                        -- 			num12 = num10;
-                        -- 			num13 = 1;
+                        -- 		bool flag;
+                        -- 		flag = (int)(num11) > (int)(num10);
+                        -- 		ushort num14;
+                        -- 		ushort conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963;
+                        -- 		if (flag) {
+                        -- 			conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
                         -- 		} else {
+                        -- 			conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                        -- 		}
+                        -- 		num14 = (conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963);
+                        -- 		if ((int)(num9) >= (int)(num14)) {
                         -- 			num12 = num9;
                         -- 			num13 = 0;
+                        -- 		} else if (flag && (int)(num11) > (int)(num9)) {
+                        -- 			num12 = num11;
+                        -- 			int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                        -- 			if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                        -- 				conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- 			} else {
+                        -- 				conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- 			}
+                        -- 			num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                        -- 		} else {
+                        -- 			num12 = num10;
+                        -- 			num13 = 1;
                         -- 		}
                         -- 		memory.WriteUInt32 (num8, num12);
                         -- 		memory.WriteUInt32 ((int)((int)(num8) + (int)(num5)), num13);
@@ -3444,26 +3456,31 @@ begin
                             -- 		if (memory.ReadUInt32 ((int)(2 + (int)(num7))) == memory.ReadUInt32 ((int)((int)(num3) + (int)(num6)))) {
                             -- 			num11 = (ushort)((int)(num11) + 1);
                             -- 		}
-                            -- 		if ((int)(num11) > (int)(num10)) {
-                            -- 			if ((int)(num11) > (int)(num9)) {
-                            -- 				num12 = num11;
-                            -- 				int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
-                            -- 				if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                            -- 					conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
-                            -- 				} else {
-                            -- 					conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
-                            -- 				}
-                            -- 				num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
-                            -- 			} else {
-                            -- 				num12 = num9;
-                            -- 				num13 = 0;
-                            -- 			}
-                            -- 		} else if ((int)(num10) > (int)(num9)) {
-                            -- 			num12 = num10;
-                            -- 			num13 = 1;
+                            -- 		bool flag;
+                            -- 		flag = (int)(num11) > (int)(num10);
+                            -- 		ushort num14;
+                            -- 		ushort conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963;
+                            -- 		if (flag) {
+                            -- 			conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
                             -- 		} else {
+                            -- 			conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                            -- 		}
+                            -- 		num14 = (conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963);
+                            -- 		if ((int)(num9) >= (int)(num14)) {
                             -- 			num12 = num9;
                             -- 			num13 = 0;
+                            -- 		} else if (flag && (int)(num11) > (int)(num9)) {
+                            -- 			num12 = num11;
+                            -- 			int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                            -- 			if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                            -- 				conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                            -- 			} else {
+                            -- 				conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                            -- 			}
+                            -- 			num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                            -- 		} else {
+                            -- 			num12 = num10;
+                            -- 			num13 = 1;
                             -- 		}
                             -- 		memory.WriteUInt32 (num8, num12);
                             -- 		memory.WriteUInt32 ((int)((int)(num8) + (int)(num5)), num13);
@@ -3505,26 +3522,31 @@ begin
                             -- 	if (memory.ReadUInt32 ((int)(2 + (int)(num7))) == memory.ReadUInt32 ((int)((int)(num3) + (int)(num6)))) {
                             -- 		num11 = (ushort)((int)(num11) + 1);
                             -- 	}
-                            -- 	if ((int)(num11) > (int)(num10)) {
-                            -- 		if ((int)(num11) > (int)(num9)) {
-                            -- 			num12 = num11;
-                            -- 			int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
-                            -- 			if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                            -- 				conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
-                            -- 			} else {
-                            -- 				conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
-                            -- 			}
-                            -- 			num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
-                            -- 		} else {
-                            -- 			num12 = num9;
-                            -- 			num13 = 0;
-                            -- 		}
-                            -- 	} else if ((int)(num10) > (int)(num9)) {
-                            -- 		num12 = num10;
-                            -- 		num13 = 1;
+                            -- 	bool flag;
+                            -- 	flag = (int)(num11) > (int)(num10);
+                            -- 	ushort num14;
+                            -- 	ushort conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963;
+                            -- 	if (flag) {
+                            -- 		conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
                             -- 	} else {
+                            -- 		conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                            -- 	}
+                            -- 	num14 = (conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963);
+                            -- 	if ((int)(num9) >= (int)(num14)) {
                             -- 		num12 = num9;
                             -- 		num13 = 0;
+                            -- 	} else if (flag && (int)(num11) > (int)(num9)) {
+                            -- 		num12 = num11;
+                            -- 		int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                            -- 		if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                            -- 			conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                            -- 		} else {
+                            -- 			conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                            -- 		}
+                            -- 		num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                            -- 	} else {
+                            -- 		num12 = num10;
+                            -- 		num13 = 1;
                             -- 	}
                             -- 	memory.WriteUInt32 (num8, num12);
                             -- 	memory.WriteUInt32 ((int)((int)(num8) + (int)(num5)), num13);
@@ -3572,26 +3594,31 @@ begin
                             -- 	if (memory.ReadUInt32 ((int)(2 + (int)(num7))) == memory.ReadUInt32 ((int)((int)(num3) + (int)(num6)))) {
                             -- 		num11 = (ushort)((int)(num11) + 1);
                             -- 	}
-                            -- 	if ((int)(num11) > (int)(num10)) {
-                            -- 		if ((int)(num11) > (int)(num9)) {
-                            -- 			num12 = num11;
-                            -- 			int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
-                            -- 			if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                            -- 				conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
-                            -- 			} else {
-                            -- 				conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
-                            -- 			}
-                            -- 			num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
-                            -- 		} else {
-                            -- 			num12 = num9;
-                            -- 			num13 = 0;
-                            -- 		}
-                            -- 	} else if ((int)(num10) > (int)(num9)) {
-                            -- 		num12 = num10;
-                            -- 		num13 = 1;
+                            -- 	bool flag;
+                            -- 	flag = (int)(num11) > (int)(num10);
+                            -- 	ushort num14;
+                            -- 	ushort conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963;
+                            -- 	if (flag) {
+                            -- 		conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
                             -- 	} else {
+                            -- 		conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                            -- 	}
+                            -- 	num14 = (conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963);
+                            -- 	if ((int)(num9) >= (int)(num14)) {
                             -- 		num12 = num9;
                             -- 		num13 = 0;
+                            -- 	} else if (flag && (int)(num11) > (int)(num9)) {
+                            -- 		num12 = num11;
+                            -- 		int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                            -- 		if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                            -- 			conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                            -- 		} else {
+                            -- 			conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                            -- 		}
+                            -- 		num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                            -- 	} else {
+                            -- 		num12 = num10;
+                            -- 		num13 = 1;
                             -- 	}
                             -- 	memory.WriteUInt32 (num8, num12);
                             -- 	memory.WriteUInt32 ((int)((int)(num8) + (int)(num5)), num13);
@@ -3615,8 +3642,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num6 = (ushort)((int)(num6) + 1);
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.29\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) + to_signed(1, 32)), 16);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num6\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.29\);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.30\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) + to_signed(1, 32)), 16);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.num6\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.30\);
                         -- Returning to the repeated state of the while loop which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_6\ if the loop wasn't exited with a state change.
                         if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_10\) then 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_7\;
@@ -3867,39 +3894,36 @@ begin
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_25\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_24\.
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num11) > (int)(num10)) {
-                        -- 	if ((int)(num11) > (int)(num9)) {
-                        -- 		num12 = num11;
-                        -- 		int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
-                        -- 		if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                        -- 			conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
-                        -- 		} else {
-                        -- 			conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
-                        -- 		}
-                        -- 		num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
-                        -- 	} else {
-                        -- 		num12 = num9;
-                        -- 		num13 = 0;
-                        -- 	}
-                        -- } else if ((int)(num10) > (int)(num9)) {
-                        -- 	num12 = num10;
-                        -- 	num13 = 1;
-                        -- } else {
-                        -- 	num12 = num9;
-                        -- 	num13 = 0;
-                        -- }
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = (int)(num11) > (int)(num10);
                         -- 
                         \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num11\), 32)) > signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num10\), 32));
+                        \GenomeMatcher::FillTable(SimpleMemory).0.flag\ := \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort num14;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ushort conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
+                        -- } else {
+                        -- 	conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_29\.
-                        --     * The false branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_36\.
+                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\.
+                        --     * The false branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_29\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_29\.
                         --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_27\.
 
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\) then 
+                        if (\GenomeMatcher::FillTable(SimpleMemory).0.flag\) then 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_28\;
                         else 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_35\;
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_29\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.50535
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_26\ => 
@@ -3922,6 +3946,75 @@ begin
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_27\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
+                        -- num14 = (conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963);
+                        -- 
+                        \GenomeMatcher::FillTable(SimpleMemory).0.num14\ := (\GenomeMatcher::FillTable(SimpleMemory).0.conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((int)(num9) >= (int)(num14)) {
+                        -- 	num12 = num9;
+                        -- 	num13 = 0;
+                        -- } else if (flag && (int)(num11) > (int)(num9)) {
+                        -- 	num12 = num11;
+                        -- 	int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                        -- 	if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                        -- 		conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- 	} else {
+                        -- 		conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- 	}
+                        -- 	num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                        -- } else {
+                        -- 	num12 = num10;
+                        -- 	num13 = 1;
+                        -- }
+                        -- 
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num9\), 32)) >= signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num14\), 32));
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_31\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_31\.
+                        --     * The false branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_33\.
+                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
+
+                        if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\) then 
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_31\;
+                        else 
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_32\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4818
+                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_28\ => 
+                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
+                        -- 
+                        \GenomeMatcher::FillTable(SimpleMemory).0.conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963\ := \GenomeMatcher::FillTable(SimpleMemory).0.num11\;
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
+                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_28\) then 
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_27\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_29\ => 
+                        -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                        -- 
+                        \GenomeMatcher::FillTable(SimpleMemory).0.conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963\ := \GenomeMatcher::FillTable(SimpleMemory).0.num10\;
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
+                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_29\) then 
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_27\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_30\ => 
+                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_27\.
+                        -- The following section was transformed from the .NET statement below:
                         -- memory.WriteUInt32 (num8, num12);
                         -- 
                         -- Begin SimpleMemory write.
@@ -3930,148 +4023,8 @@ begin
                         \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\GenomeMatcher::FillTable(SimpleMemory).0.num12\, 32));
                         \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_39\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_28\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	if ((int)(num11) > (int)(num9)) {
-                        -- 		num12 = num11;
-                        -- 		int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
-                        -- 		if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                        -- 			conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
-                        -- 		} else {
-                        -- 			conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
-                        -- 		}
-                        -- 		num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
-                        -- 	} else {
-                        -- 		num12 = num9;
-                        -- 		num13 = 0;
-                        -- 	}
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num11) > (int)(num9)) {
-                        -- 	num12 = num11;
-                        -- 	int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
-                        -- 	if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                        -- 		conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
-                        -- 	} else {
-                        -- 		conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
-                        -- 	}
-                        -- 	num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
-                        -- } else {
-                        -- 	num12 = num9;
-                        -- 	num13 = 0;
-                        -- }
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num11\), 32)) > signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num9\), 32));
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_31\.
-                        --     * The false branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\.
-                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_29\.
-
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_30\;
-                        else 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_34\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.50535
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_29\ => 
-                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\.
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_29\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_27\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_30\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num12 = num11;
-                        -- 	int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
-                        -- 	if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                        -- 		conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
-                        -- 	} else {
-                        -- 		conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
-                        -- 	}
-                        -- 	num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num12 = num11;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num12\ := \GenomeMatcher::FillTable(SimpleMemory).0.num11\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                        -- 	conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
-                        -- } else {
-                        -- 	conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
-                        -- }
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) = to_signed(0, 32);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32)) = to_signed(0, 32);
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\ := \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ or \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\;
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\.
-                        --     * The false branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_33\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_33\.
-                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_31\.
-
-                        if ((\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\)) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_32\;
-                        else 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_33\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7866
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_31\ => 
-                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num13 = (ushort)(conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff);
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned((\GenomeMatcher::FillTable(SimpleMemory).0.conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff\)), 16);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_31\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_29\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_32\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 3;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff\ := to_signed(3, 32);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_32\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_31\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_33\ => 
-                        -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff = 2;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.conditional34abd9d87643751d62433cfaed2f67f20a6a2b62072133427f221925c873ebff\ := to_signed(2, 32);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_30\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_33\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_31\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_34\ => 
-                        -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\.
+                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_27\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num12 = num9;
@@ -4086,44 +4039,137 @@ begin
                         -- num13 = 0;
                         -- 
                         \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned(to_signed(0, 32)), 16);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_28\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_34\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_29\;
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_27\.
+                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_31\) then 
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_30\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_35\ => 
-                        -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
+                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_32\ => 
+                        -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_27\.
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num10) > (int)(num9)) {
+                        -- if (flag && (int)(num11) > (int)(num9)) {
+                        -- 	num12 = num11;
+                        -- 	int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                        -- 	if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                        -- 		conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- 	} else {
+                        -- 		conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- 	}
+                        -- 	num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                        -- } else {
                         -- 	num12 = num10;
                         -- 	num13 = 1;
-                        -- } else {
-                        -- 	num12 = num9;
-                        -- 	num13 = 0;
                         -- }
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.26\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num10\), 32)) > signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num9\), 32));
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num11\), 32)) > signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num9\), 32));
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\ := \GenomeMatcher::FillTable(SimpleMemory).0.flag\ and \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_37\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_37\.
+                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\.
                         --     * The false branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_38\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_38\.
-                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_36\.
+                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_33\.
 
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.26\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_37\;
+                        if (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\) then 
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_34\;
                         else 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_38\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.50535
+                        -- Clock cycles needed to complete this state (approximation): 0.62475
+                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_33\ => 
+                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\.
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_27\.
+                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_33\) then 
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_30\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_34\ => 
+                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num12 = num11;
+                        -- 	int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                        -- 	if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                        -- 		conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- 	} else {
+                        -- 		conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- 	}
+                        -- 	num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num12 = num11;
+                        -- 
+                        \GenomeMatcher::FillTable(SimpleMemory).0.num12\ := \GenomeMatcher::FillTable(SimpleMemory).0.num11\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (((int)(num6) == 0 || (int)(num7) == 0)) {
+                        -- 	conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- } else {
+                        -- 	conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- }
+                        -- 
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) = to_signed(0, 32);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.26\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32)) = to_signed(0, 32);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\ := \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\ or \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.26\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_36\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_36\.
+                        --     * The false branch starts in state \GenomeMatcher::FillTable(SimpleMemory).0._State_37\ and ends in state \GenomeMatcher::FillTable(SimpleMemory).0._State_37\.
+                        --     * Execution after either branch will continue in the following state: \GenomeMatcher::FillTable(SimpleMemory).0._State_35\.
+
+                        if ((\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\)) then 
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_36\;
+                        else 
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_37\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7866
+                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_35\ => 
+                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                        -- 
+                        \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned((\GenomeMatcher::FillTable(SimpleMemory).0.conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc\)), 16);
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\.
+                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_35\) then 
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_33\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_36\ => 
-                        -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\.
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
+                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- 
+                        \GenomeMatcher::FillTable(SimpleMemory).0.conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc\ := to_signed(3, 32);
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\.
                         if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_36\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_27\;
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_35\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_37\ => 
-                        -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\.
+                        -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- 
+                        \GenomeMatcher::FillTable(SimpleMemory).0.conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc\ := to_signed(2, 32);
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\.
+                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_37\) then 
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_35\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_38\ => 
+                        -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num12 = num10;
@@ -4138,30 +4184,9 @@ begin
                         -- num13 = 1;
                         -- 
                         \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned(to_signed(1, 32)), 16);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\.
-                        if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_37\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_36\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \GenomeMatcher::FillTable(SimpleMemory).0._State_38\ => 
-                        -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num12 = num9;
-                        -- 	num13 = 0;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num12 = num9;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num12\ := \GenomeMatcher::FillTable(SimpleMemory).0.num9\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num13 = 0;
-                        -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned(to_signed(0, 32)), 16);
-                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_35\.
+                        -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\.
                         if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_38\) then 
-                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_36\;
+                            \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_33\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_39\ => 
@@ -4172,14 +4197,14 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- memory.WriteUInt32 ((int)((int)(num8) + (int)(num5)), num13);
                             -- 
-                            \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num8\), 32)) + signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num5\), 32));
+                            \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.28\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num8\), 32)) + signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num5\), 32));
                             -- The last SimpleMemory write just finished, so need to start the next one in the next state.
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_40\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_40\ => 
                         -- Begin SimpleMemory write.
-                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.28\);
                         \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                         \GenomeMatcher::FillTable(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(SmartResize(\GenomeMatcher::FillTable(SimpleMemory).0.num13\, 32));
                         \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_41\;
@@ -4192,8 +4217,8 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num7 = (ushort)((int)(num7) + 1);
                             -- 
-                            \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.28\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32)) + to_signed(1, 32)), 16);
-                            \GenomeMatcher::FillTable(SimpleMemory).0.num7\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.28\);
+                            \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.29\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num7\), 32)) + to_signed(1, 32)), 16);
+                            \GenomeMatcher::FillTable(SimpleMemory).0.num7\ := (\GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.29\);
                             -- Returning to the repeated state of the while loop which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_7\ if the loop wasn't exited with a state change.
                             if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_41\) then 
                                 \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_9\;
@@ -17272,9 +17297,8 @@ begin
     -- System.Void Hast.Samples.SampleAssembly.ObjectOrientedShowcase::Run(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \ObjectOrientedShowcase::Run(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0._State\: \ObjectOrientedShowcase::Run(SimpleMemory).0._States\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_0\;
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7\: \Hast.Samples.SampleAssembly.MemoryContainer\;
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.input\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\: \Hast.Samples.SampleAssembly.MemoryContainer\;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.array\: \Hast.Samples.SampleAssembly.NumberContainer_Array\(0 to 3);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -17291,7 +17315,7 @@ begin
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\: boolean := false;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -17301,10 +17325,6 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \ObjectOrientedShowcase::Run(SimpleMemory).0._Finished\ <= false;
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32).number.parameter.Out.0\ <= to_unsigned(0, 32);
@@ -17320,9 +17340,12 @@ begin
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Started.0\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\ <= false;
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= (others => '0');
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_0\;
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := to_unsigned(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\ := (others => '0');
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.input\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\ := to_unsigned(0, 32);
@@ -17336,7 +17359,7 @@ begin
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.5\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\ := false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\ := to_unsigned(0, 32);
-                \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ := to_signed(0, 32);
+                \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := to_signed(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\ := false;
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\ := to_unsigned(0, 32);
                 \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
@@ -17362,59 +17385,43 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_2\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint num;
+                        -- uint input;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num = memory.ReadUInt32 (0);
+                        -- MemoryContainer object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e;
                         -- 
-                        -- Begin SimpleMemory read.
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
+                        -- The following section was transformed from the .NET statement below:
+                        -- object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e = new MemoryContainer (memory);
+                        -- 
+                        -- Initializing record fields to their defaults.
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\.\IsNull\ := false;
+                        -- Invoking the target's constructor.
+                        -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= true;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_3\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\ObjectOrientedShowcase::Run(SimpleMemory).0.dataIn.0\);
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
+                        if (\ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Finished.0\) then 
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= false;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- MemoryContainer object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7;
+                            -- input = Hast.Samples.SampleAssembly.MemoryContainer.GetInput (object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e);
                             -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7 = new MemoryContainer (memory);
-                            -- 
-                            -- Initializing record fields to their defaults.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7\.\IsNull\ := false;
-                            -- Invoking the target's constructor.
-                            -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= true;
+                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput()
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= true;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_4\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
-                        if (\ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Finished.0\) then 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= false;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.In.0\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- num = Hast.Samples.SampleAssembly.MemoryContainer.GetInput (object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7);
-                            -- 
-                            -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput()
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_5\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_5\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput()
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().return.0\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object4c286d92be3b672a42d70d448220df71c1283464f2c83c4bb99cde9ab50f7ef7\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.In.0\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.In.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.input\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- NumberContainer[] array;
                             -- 
@@ -17429,9 +17436,9 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\WasIncreased\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := to_unsigned(99, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- array [0].Number = num;
+                            -- array [0].Number = input;
                             -- 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32))).\Number\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.input\;
                             -- The following section was transformed from the .NET statement below:
                             -- array [1] = new NumberContainer { };
                             -- 
@@ -17440,9 +17447,9 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\WasIncreased\ := false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\Number\ := to_unsigned(99, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- array [1].Number = (uint)((long)(num) + 4L);
+                            -- array [1].Number = (uint)((long)(input) + 4L);
                             -- 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\ObjectOrientedShowcase::Run(SimpleMemory).0.num\), 64)) + to_signed(4, 64)), 32);
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\ObjectOrientedShowcase::Run(SimpleMemory).0.input\), 64)) + to_signed(4, 64)), 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32))).\Number\ := (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\);
                             -- The following section was transformed from the .NET statement below:
                             -- array [2] = new NumberContainer { };
@@ -17467,26 +17474,26 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32).number.parameter.Out.0\ <= to_unsigned(9, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_6\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.49995
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_6\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_5\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.NumberContainer::.ctor(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32)._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- Hast.Samples.SampleAssembly.NumberContainer.set_NumberPlusFive (array [0], (uint)((long)(num) + 10L));
+                            -- Hast.Samples.SampleAssembly.NumberContainer.set_NumberPlusFive (array [0], (uint)((long)(input) + 10L));
                             -- 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize((\ObjectOrientedShowcase::Run(SimpleMemory).0.num\), 64)) + to_signed(10, 64)), 32);
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize((\ObjectOrientedShowcase::Run(SimpleMemory).0.input\), 64)) + to_signed(10, 64)), 32);
                             -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.NumberContainer::set_NumberPlusFive(System.UInt32)
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(0, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32).value.parameter.Out.0\ <= (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.1\);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_7\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.49995
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_7\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_6\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.NumberContainer::set_NumberPlusFive(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::set_NumberPlusFive(UInt32)._Started.0\ <= false;
@@ -17498,10 +17505,10 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(1, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= to_unsigned(5, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_8\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_8\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
@@ -17513,10 +17520,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumberBy10()
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10()._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_9\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_9\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumberBy10()
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberBy10()._Started.0\ <= false;
@@ -17528,10 +17535,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer)
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer).numberContainer.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(2, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_9\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainerExtensions::IncreaseNumberBy20(Hast.Samples.SampleAssembly.NumberContainer)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainerExtensions::IncreaseNumberBy20(NumberContainer)._Started.0\ <= false;
@@ -17555,10 +17562,10 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.increaseBy\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&).originalNumber.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.originalNumber\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_10\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumberByParameterTimes10(System.UInt32&,System.UInt32&)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumberByParameterTimes10(UInt32&,UInt32&)._Started.0\ <= false;
@@ -17573,10 +17580,10 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(to_signed(3, 32)));
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.2\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_11\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
@@ -17608,10 +17615,10 @@ begin
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::get_NumberPlusFive()
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\ <= true;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::get_NumberPlusFive()
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::get_NumberPlusFive()._Started.0\ <= false;
@@ -17626,41 +17633,41 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\ := not(\ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\.\WasIncreased\);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ and ends in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\.
-                            --     * Execution after either branch will continue in the following state: \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
+                            --     * The true branch starts in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ and ends in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\.
+                            --     * Execution after either branch will continue in the following state: \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
 
                             if (\ObjectOrientedShowcase::Run(SimpleMemory).0.unaryOperationResult.0\) then 
-                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\;
+                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
-                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\;
+                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.0984
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ => 
-                        -- State after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\ => 
+                        -- State after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- array3 [0] = numberContainer;
                         -- 
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.array3\(to_integer(to_signed(0, 32))) := \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num2;
+                        -- int num;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = 0;
+                        -- num = 0;
                         -- 
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ := to_signed(0, 32);
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while (num2 < 4) {
-                        -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num2], array3 [0].Number);
-                        -- 	num2 = num2 + 1;
+                        -- while (num < 4) {
+                        -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num], array3 [0].Number);
+                        -- 	num = num + 1;
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ => 
-                        -- True branch of the if-else started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ => 
+                        -- True branch of the if-else started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (numberContainer, 5u);
@@ -17673,75 +17680,75 @@ begin
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= to_unsigned(5, 32);
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.6\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.numberContainer\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
-                            -- Going to the state after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
-                            if (\ObjectOrientedShowcase::Run(SimpleMemory).0._State\ = \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\) then 
-                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\;
+                            -- Going to the state after the if-else which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_12\.
+                            if (\ObjectOrientedShowcase::Run(SimpleMemory).0._State\ = \ObjectOrientedShowcase::Run(SimpleMemory).0._State_15\) then 
+                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\ => 
-                        -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\ => 
+                        -- Repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
                         -- The while loop's condition:
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ < to_signed(4, 32);
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ < to_signed(4, 32);
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.3\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num2], array3 [0].Number);
-                            -- 	num2 = num2 + 1;
+                            -- 	Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num], array3 [0].Number);
+                            -- 	num = num + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num2], array3 [0].Number);
+                            -- Hast.Samples.SampleAssembly.NumberContainer.IncreaseNumber (array [num], array3 [0].Number);
                             -- 
                             -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\;
-                        else 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\;
+                        else 
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.46515
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\ => 
-                        -- State after the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\.
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\ => 
+                        -- State after the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\.
                         -- The following section was transformed from the .NET statement below:
                         -- memory.WriteUInt32 (0, this.SumNumberContainers (array));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberContainers(Hast.Samples.SampleAssembly.NumberContainer[])
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[]).numberContainers.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\ <= true;
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\ => 
-                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.num2\));
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array3\(to_integer(to_signed(0, 32))).\Number\;
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_18\ => 
+                        -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.num\));
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).increaseBy.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.array3\(to_integer(to_signed(0, 32))).\Number\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= true;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.NumberContainer::IncreaseNumber(System.UInt32)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32)._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.7\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).return.0\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.num2\)) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.array\(to_integer(\ObjectOrientedShowcase::Run(SimpleMemory).0.num\)) := \ObjectOrientedShowcase::Run(SimpleMemory).0.NumberContainer::IncreaseNumber(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- num2 = num2 + 1;
+                            -- num = num + 1;
                             -- 
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ + to_signed(1, 32);
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num2\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\;
-                            -- Returning to the repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_14\ if the loop wasn't exited with a state change.
-                            if (\ObjectOrientedShowcase::Run(SimpleMemory).0._State\ = \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\) then 
-                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_17\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ + to_signed(1, 32);
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.num\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.4\;
+                            -- Returning to the repeated state of the while loop which was started in state \ObjectOrientedShowcase::Run(SimpleMemory).0._State_13\ if the loop wasn't exited with a state change.
+                            if (\ObjectOrientedShowcase::Run(SimpleMemory).0._State\ = \ObjectOrientedShowcase::Run(SimpleMemory).0._State_19\) then 
+                                \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_16\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_20\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Hast.Samples.SampleAssembly.ObjectOrientedShowcase::SumNumberContainers(Hast.Samples.SampleAssembly.NumberContainer[])
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.ObjectOrientedShowcase::SumNumberContainers(NumberContainer[])._Started.0\ <= false;
@@ -17751,10 +17758,10 @@ begin
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\ObjectOrientedShowcase::Run(SimpleMemory).0.return.8\);
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_22\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_22\ => 
+                    when \ObjectOrientedShowcase::Run(SimpleMemory).0._State_21\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
