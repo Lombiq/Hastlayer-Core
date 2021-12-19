@@ -241,10 +241,7 @@ architecture Imp of Hast_IP is
         \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_6\, 
         \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_7\, 
         \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_8\, 
-        \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_9\, 
-        \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_10\, 
-        \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_11\, 
-        \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_12\);
+        \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_9\);
     -- Signals:
     Signal \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._Finished\: boolean := false;
     Signal \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.SimpleMemory.CellIndex\: signed(31 downto 0) := to_signed(0, 32);
@@ -1312,13 +1309,11 @@ begin
         Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\: \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._States\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_0\;
         Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.posit\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
-        Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.return.0\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -1337,11 +1332,10 @@ begin
                 \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_0\;
                 \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.num\ := to_unsigned(0, 32);
                 \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.0\ := (others => '0');
-                \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.1\ := (others => '0');
                 \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.num2\ := to_signed(0, 32);
                 \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.binaryOperationResult.0\ := false;
                 \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.2\ := (others => '0');
+                \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.1\ := (others => '0');
                 \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
             else 
                 case \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ is 
@@ -1382,45 +1376,6 @@ begin
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.num\ := ConvertStdLogicVectorToUInt32(\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- Posit32 posit;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- posit = new Posit32 (memory.ReadUInt32 (1), true);
-                            -- 
-                            -- Initializing record fields to their defaults.
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.posit\.\IsNull\ := false;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.posit\.\PositBits\ := to_unsigned(0, 32);
-                            -- Invoking the target's constructor.
-                            -- The last SimpleMemory read just finished, so need to start the next one in the next state.
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_4\ => 
-                        -- Begin SimpleMemory read.
-                        \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(1, 32);
-                        \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                        \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_5\ => 
-                        -- Waiting for the SimpleMemory operation to finish.
-                        if (\ReadsDone\ = true) then 
-                            -- SimpleMemory read finished.
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.posit\;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.1\);
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_6\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                        if (\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.posit\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
-                            -- The following section was transformed from the .NET statement below:
                             -- int num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
@@ -1429,81 +1384,81 @@ begin
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.num2\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while ((long)(num2) < (long)(num)) {
-                            -- 	Posit32 objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191;
-                            -- 	objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191 = new Posit32 (memory.ReadUInt32 (1 + num2), true);
-                            -- 	memory.WriteUInt32 (num2, Posit32.Sqrt (objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191).PositBits);
+                            -- 	Posit32 object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85;
+                            -- 	object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85 = new Posit32 (memory.ReadUInt32 (1 + num2), true);
+                            -- 	memory.WriteUInt32 (num2, Posit32.Sqrt (object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85).PositBits);
                             -- 	num2 = num2 + 1;
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_7\;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_7\ => 
-                        -- Repeated state of the while loop which was started in state \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_6\.
+                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_4\ => 
+                        -- Repeated state of the while loop which was started in state \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_3\.
                         -- The while loop's condition:
                         \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.binaryOperationResult.0\ := SmartResize((\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.num2\), 64) < signed(SmartResize((\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.num\), 64));
                         if (\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	Posit32 objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191;
-                            -- 	objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191 = new Posit32 (memory.ReadUInt32 (1 + num2), true);
-                            -- 	memory.WriteUInt32 (num2, Posit32.Sqrt (objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191).PositBits);
+                            -- 	Posit32 object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85;
+                            -- 	object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85 = new Posit32 (memory.ReadUInt32 (1 + num2), true);
+                            -- 	memory.WriteUInt32 (num2, Posit32.Sqrt (object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85).PositBits);
                             -- 	num2 = num2 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- Posit32 objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191;
+                            -- Posit32 object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191 = new Posit32 (memory.ReadUInt32 (1 + num2), true);
+                            -- object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85 = new Posit32 (memory.ReadUInt32 (1 + num2), true);
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191\.\IsNull\ := false;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191\.\PositBits\ := to_unsigned(0, 32);
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85\.\IsNull\ := false;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85\.\PositBits\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.binaryOperationResult.1\ := to_signed(1, 32) + \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.num2\;
                             -- Begin SimpleMemory read.
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.SimpleMemory.CellIndex\ <= \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.binaryOperationResult.1\;
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_9\;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_6\;
                         else 
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_8\;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.616
-                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_8\ => 
-                        -- State after the while loop which was started in state \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_6\.
+                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_5\ => 
+                        -- State after the while loop which was started in state \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_3\.
                         \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_9\ => 
+                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_6\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\ReadsDone\ = true) then 
                             -- SimpleMemory read finished.
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.2\ := \DataIn\;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191\;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.2\);
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85\;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.dataIn.1\);
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_10\;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_10\ => 
+                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_7\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 (num2, Posit32.Sqrt (objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191).PositBits);
+                            -- memory.WriteUInt32 (num2, Posit32.Sqrt (object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85).PositBits);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Posit32 Lombiq.Arithmetics.Posit32::Sqrt(Lombiq.Arithmetics.Posit32)
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::Sqrt(Posit32).number.parameter.Out.0\ <= \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.objectb85625124ffe63ada379d3454c3fec41296a24890560a18d715c5c153c31f191\;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::Sqrt(Posit32).number.parameter.Out.0\ <= \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.object06b31263e96a020693f8314704270e5442a7e0ec624897afea597fdfe7cbbb85\;
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::Sqrt(Posit32)._Started.0\ <= true;
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_11\;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_8\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_11\ => 
+                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_8\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.Posit32 Lombiq.Arithmetics.Posit32::Sqrt(Lombiq.Arithmetics.Posit32)
                         if (\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::Sqrt(Posit32)._Started.0\ = \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::Sqrt(Posit32)._Finished.0\) then 
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.Posit32::Sqrt(Posit32)._Started.0\ <= false;
@@ -1512,10 +1467,10 @@ begin
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.SimpleMemory.CellIndex\ <= \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.num2\;
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertUInt32ToStdLogicVector(\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.return.0\.\PositBits\);
-                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_12\;
+                            \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_9\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_12\ => 
+                    when \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_9\ => 
                         -- Waiting for the SimpleMemory operation to finish.
                         if (\WritesDone\ = true) then 
                             -- SimpleMemory write finished.
@@ -1525,9 +1480,9 @@ begin
                             -- 
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.binaryOperationResult.2\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.num2\ + to_signed(1, 32);
                             \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.num2\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0.binaryOperationResult.2\;
-                            -- Returning to the repeated state of the while loop which was started in state \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_6\ if the loop wasn't exited with a state change.
-                            if (\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ = \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_12\) then 
-                                \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_7\;
+                            -- Returning to the repeated state of the while loop which was started in state \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
+                            if (\Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ = \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_9\) then 
+                                \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State\ := \Posit32AdvancedCalculator::SqrtOfPositsInArray(SimpleMemory).0._State_4\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
