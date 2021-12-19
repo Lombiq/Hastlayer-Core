@@ -8,7 +8,7 @@ namespace Hast.TestInputs.Static
             a.Method(input);
         }
 
-        private class MyClass
+        private sealed class MyClass
         {
 #pragma warning disable S4487 // Unread "private" fields should be removed
             private int _state;

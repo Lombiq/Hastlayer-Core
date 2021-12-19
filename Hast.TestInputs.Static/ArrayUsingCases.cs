@@ -1,4 +1,4 @@
-﻿namespace Hast.TestInputs.Static
+namespace Hast.TestInputs.Static
 {
     public class ArrayUsingCases
     {
@@ -21,7 +21,7 @@
             return array;
         }
 
-        private class ArrayHolder
+        private sealed class ArrayHolder
         {
             public int[] Array { get; }
 

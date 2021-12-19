@@ -49,7 +49,7 @@ namespace Hast.TestInputs.Static
             myClass.MyProperty = 5;
         }
 
-        private class MyClass
+        private sealed class MyClass
         {
             public int MyProperty { get; set; }
         }

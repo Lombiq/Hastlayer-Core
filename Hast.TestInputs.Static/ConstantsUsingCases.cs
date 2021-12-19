@@ -74,7 +74,7 @@ namespace Hast.TestInputs.Static
 
         private static int StaticConstantUsingMethod(int input) => (input * 2) + 8;
 
-        private class ArrayHolder1
+        private sealed class ArrayHolder1
         {
             public uint ArrayLength { get; }
             public uint ArrayLengthCopy { get; }
@@ -103,7 +103,7 @@ namespace Hast.TestInputs.Static
             }
         }
 
-        private class ArrayHolder2
+        private sealed class ArrayHolder2
         {
             public uint ArrayLength { get; }
 
