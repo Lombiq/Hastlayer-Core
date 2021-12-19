@@ -128,7 +128,7 @@ namespace Hast.Remote.Worker.Services
                             TaskCreationOptions.None,
                             TaskScheduler.Current)
                             .ContinueWith(
-                                (task, blobNameObject) => _transformationTasks.TryRemove((string)blobNameObject, out _),
+                                (_, blobNameObject) => _transformationTasks.TryRemove((string)blobNameObject, out _),
                                 jobBlob.Name,
                                 cancellationToken,
                                 TaskContinuationOptions.None,
