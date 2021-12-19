@@ -130,21 +130,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     new ProcessParentActions
                     {
                         AssignmentHandler = assignment => Handler(assignment.Left),
-                        MemberReferenceHandler = memberReference =>
-                        {
-                            var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
-                                .FindMemberReferenceInConstructor(
-                                    constructorReference.Constructor,
-                                    memberReference.GetMemberFullName(),
-                                    _typeDeclarationLookupTable);
-
-                            if (memberReferenceExpressionInConstructor != null &&
-                                _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
-                                    .TryGetValue(memberReferenceExpressionInConstructor.GetFullName(), out constructorReference))
-                            {
-                                Handler(memberReference);
-                            }
-                        },
+                        MemberReferenceHandler = memberReference => MemberReferenceHandler(Handler, memberReference, ref constructorReference),
                         InvocationParameterHandler = Handler,
                         ObjectCreationParameterHandler = Handler,
                         VariableInitializerHandler = Handler,
@@ -169,6 +155,25 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (existingSize == null) return;
 
             PassLengthOfArrayHolderToParent(node, existingSize.Length);
+        }
+
+        private void MemberReferenceHandler(
+            Action<AstNode> handler,
+            MemberReferenceExpression memberReference,
+            ref ConstantValuesSubstitutingAstProcessor.ConstructorReference constructorReference)
+        {
+            var memberReferenceExpressionInConstructor = ConstantValueSubstitutionHelper
+                .FindMemberReferenceInConstructor(
+                    constructorReference.Constructor,
+                    memberReference.GetMemberFullName(),
+                    _typeDeclarationLookupTable);
+
+            if (memberReferenceExpressionInConstructor != null &&
+                _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
+                    .TryGetValue(memberReferenceExpressionInConstructor.GetFullName(), out constructorReference))
+            {
+                handler(memberReference);
+            }
         }
 
         private void VisitBinaryPrimitiveExpression(

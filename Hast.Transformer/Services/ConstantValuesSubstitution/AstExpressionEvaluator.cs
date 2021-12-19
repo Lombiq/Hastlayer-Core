@@ -105,10 +105,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 UnaryOperatorType.BitNot => ~value,
                 UnaryOperatorType.Minus => -value,
                 UnaryOperatorType.Plus => +value,
-                UnaryOperatorType.Increment => ++value,
-                UnaryOperatorType.Decrement => --value,
-                UnaryOperatorType.PostIncrement => ++value,
-                UnaryOperatorType.PostDecrement => --value,
+                UnaryOperatorType.Increment => value + 1,
+                UnaryOperatorType.Decrement => value - 1,
+                UnaryOperatorType.PostIncrement => value + 1,
+                UnaryOperatorType.PostDecrement => value - 1,
                 _ => throw new NotSupportedException(
                     $"Evaluating unary operator expressions with the operator {unaryOperatorExpression.Operator} is" +
                     $" not supported. Affected expression: {unaryOperatorExpression.ToString().AddParentEntityName(unaryOperatorExpression)}"),
