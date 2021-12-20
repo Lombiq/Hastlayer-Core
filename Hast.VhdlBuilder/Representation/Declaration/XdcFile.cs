@@ -44,7 +44,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// <code>set_multicycle_path 8 -setup -to [get_cells -hierarchical
         /// {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]</code>
         /// </summary>
-        private class XdcPath : IVhdlElement
+        private sealed class XdcPath : IVhdlElement
         {
             public IDataObject PathReference { get; set; }
             public int ClockCycles { get; set; }

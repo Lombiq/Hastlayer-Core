@@ -51,7 +51,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 "\"",
                 vhdlGenerationOptions);
 
-        private class SdcStatement : IVhdlElement
+        private sealed class SdcStatement : IVhdlElement
         {
             public string ParentName { get; set; }
             public IDataObject PathReference { get; set; }

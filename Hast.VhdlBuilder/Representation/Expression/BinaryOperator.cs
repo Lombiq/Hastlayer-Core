@@ -34,7 +34,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => _source;
 
-        private class BinaryOperatorJsonConverter : JsonConverter
+        private sealed class BinaryOperatorJsonConverter : JsonConverter
         {
             public override bool CanConvert(Type objectType) => objectType == typeof(BinaryOperator);
 

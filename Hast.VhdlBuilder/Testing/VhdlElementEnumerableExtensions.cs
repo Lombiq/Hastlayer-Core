@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -63,14 +64,7 @@ namespace Hast.VhdlBuilder.Testing
             where T : class, IVhdlElement => elements.Contains<T>(null);
 
         public static bool Contains<T>(this IEnumerable<IVhdlElement> elements, Expression<Func<T, bool>> predicate)
-            where T : class, IVhdlElement
-        {
-            foreach (var element in elements)
-            {
-                if (element.Is(predicate)) return true;
-            }
-
-            return false;
-        }
+            where T : class, IVhdlElement =>
+            elements.Any(element => element.Is(predicate));
     }
 }
