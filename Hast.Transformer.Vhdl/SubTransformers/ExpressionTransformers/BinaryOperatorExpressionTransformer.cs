@@ -210,24 +210,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
-            if (operationIsMultiCycle &&
-                context.TransformationContext.DeviceDriver.DeviceManifest.UsesVivadoInToolChain())
-            {
-                //// We need to add an attribute like the one below so Vivado won't merge this variable/signal with
-                //// others, thus allowing us to create XDC timing constraints for it.
-                //// attribute dont_touch of \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ : variable is "true";
-
-                var attributes = operationResultDataObjectIsVariable ?
-                    stateMachine.LocalAttributeSpecifications :
-                    stateMachine.GlobalAttributeSpecifications;
-                attributes.Add(new AttributeSpecification
-                {
-                    Attribute = KnownDataTypes.DontTouchAttribute,
-                    Expression = new Value { DataType = KnownDataTypes.UnrangedString, Content = "true" },
-                    ItemClass = operationResultDataObjectReference.DataObjectKind.ToString(),
-                    Of = operationResultDataObjectReference,
-                });
-            }
+            HandleMultiCycleForVivado(
+                context,
+                stateMachine,
+                operationIsMultiCycle,
+                operationResultDataObjectIsVariable,
+                operationResultDataObjectReference);
 
             // If the current state already takes more than one clock cycle we add a new state and follow up there.
             if (isFirstOfSimdOperationsOrIsSingleOperation && !operationIsMultiCycle)
@@ -254,53 +242,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             // Building the wait state, just when this is the first transform of multiple SIMD operations (or is a
             // single operation).
-            if (isFirstOfSimdOperationsOrIsSingleOperation)
-            {
-                var waitedCyclesCountVariable = stateMachine.CreateVariableWithNextUnusedIndexedName(
-                    "clockCyclesWaitedForBinaryOperationResult",
-                    KnownDataTypes.Int32);
-                var waitedCyclesCountInitialValue = "0".ToVhdlValue(waitedCyclesCountVariable.DataType);
-                waitedCyclesCountVariable.InitialValue = waitedCyclesCountInitialValue;
-                var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
-
-                var waitForResultBlock = new InlineBlock(
-                    new GeneratedComment(vhdlGenerationOptions =>
-                        "Waiting for the result to appear in " +
-                        operationResultDataObjectReference.ToVhdl(vhdlGenerationOptions) +
-                        " (have to wait " + clockCyclesToWait + " clock cycles in this state)."),
-                    new LineComment(
-                        "The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target."));
-
-                var waitForResultIf = new IfElse
-                {
-                    Condition = new Binary
-                    {
-                        Left = waitedCyclesCountVariableReference,
-                        Operator = BinaryOperator.GreaterThanOrEqual,
-                        Right = clockCyclesToWait.ToVhdlValue(waitedCyclesCountVariable.DataType),
-                    },
-                };
-                waitForResultBlock.Add(waitForResultIf);
-
-                var waitForResultStateIndex = stateMachine.AddNewStateAndChangeCurrentBlock(context, waitForResultBlock);
-                stateMachine.States[waitForResultStateIndex].RequiredClockCycles = clockCyclesToWait;
-
-                var afterResultReceivedBlock = new InlineBlock();
-                var afterResultReceivedStateIndex = stateMachine.AddState(afterResultReceivedBlock);
-                waitForResultIf.True = new InlineBlock(
-                    stateMachine.CreateStateChange(afterResultReceivedStateIndex),
-                    new Assignment { AssignTo = waitedCyclesCountVariableReference, Expression = waitedCyclesCountInitialValue });
-                waitForResultIf.Else = new Assignment
-                {
-                    AssignTo = waitedCyclesCountVariableReference,
-                    Expression = new Binary
-                    {
-                        Left = waitedCyclesCountVariableReference,
-                        Operator = BinaryOperator.Add,
-                        Right = "1".ToVhdlValue(waitedCyclesCountVariable.DataType),
-                    },
-                };
-            }
+            BuildWaitState(
+                isFirstOfSimdOperationsOrIsSingleOperation,
+                context,
+                stateMachine,
+                operationResultDataObjectReference,
+                clockCyclesToWait);
 
             currentBlock.Add(operationResultAssignment);
             stateMachine.RecordMultiCycleOperation(operationResultDataObjectReference, clockCyclesToWait);
@@ -314,6 +261,88 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             }
 
             return operationResultDataObjectReference;
+        }
+
+        private static void HandleMultiCycleForVivado(
+            SubTransformerContext context,
+            IMemberStateMachine stateMachine,
+            bool operationIsMultiCycle,
+            bool operationResultDataObjectIsVariable,
+            IDataObject operationResultDataObjectReference)
+        {
+            if (operationIsMultiCycle &&
+                context.TransformationContext.DeviceDriver.DeviceManifest.UsesVivadoInToolChain())
+            {
+                //// We need to add an attribute like the one below so Vivado won't merge this variable/signal with
+                //// others, thus allowing us to create XDC timing constraints for it.
+                //// attribute dont_touch of \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ : variable is "true";
+
+                var attributes = operationResultDataObjectIsVariable
+                    ? stateMachine.LocalAttributeSpecifications
+                    : stateMachine.GlobalAttributeSpecifications;
+                attributes.Add(new AttributeSpecification
+                {
+                    Attribute = KnownDataTypes.DontTouchAttribute,
+                    Expression = new Value { DataType = KnownDataTypes.UnrangedString, Content = "true" },
+                    ItemClass = operationResultDataObjectReference.DataObjectKind.ToString(),
+                    Of = operationResultDataObjectReference,
+                });
+            }
+        }
+
+        private static void BuildWaitState(
+            bool isFirstOfSimdOperationsOrIsSingleOperation,
+            SubTransformerContext context,
+            IMemberStateMachine stateMachine,
+            IDataObject operationResultDataObjectReference,
+            int clockCyclesToWait)
+        {
+            if (!isFirstOfSimdOperationsOrIsSingleOperation) return;
+
+            var waitedCyclesCountVariable = stateMachine.CreateVariableWithNextUnusedIndexedName(
+                "clockCyclesWaitedForBinaryOperationResult",
+                KnownDataTypes.Int32);
+            var waitedCyclesCountInitialValue = "0".ToVhdlValue(waitedCyclesCountVariable.DataType);
+            waitedCyclesCountVariable.InitialValue = waitedCyclesCountInitialValue;
+            var waitedCyclesCountVariableReference = waitedCyclesCountVariable.ToReference();
+
+            var waitForResultBlock = new InlineBlock(
+                new GeneratedComment(vhdlGenerationOptions =>
+                    "Waiting for the result to appear in " +
+                    operationResultDataObjectReference.ToVhdl(vhdlGenerationOptions) +
+                    " (have to wait " + clockCyclesToWait + " clock cycles in this state)."),
+                new LineComment(
+                    "The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target."));
+
+            var waitForResultIf = new IfElse
+            {
+                Condition = new Binary
+                {
+                    Left = waitedCyclesCountVariableReference,
+                    Operator = BinaryOperator.GreaterThanOrEqual,
+                    Right = clockCyclesToWait.ToVhdlValue(waitedCyclesCountVariable.DataType),
+                },
+            };
+            waitForResultBlock.Add(waitForResultIf);
+
+            var waitForResultStateIndex = stateMachine.AddNewStateAndChangeCurrentBlock(context, waitForResultBlock);
+            stateMachine.States[waitForResultStateIndex].RequiredClockCycles = clockCyclesToWait;
+
+            var afterResultReceivedBlock = new InlineBlock();
+            var afterResultReceivedStateIndex = stateMachine.AddState(afterResultReceivedBlock);
+            waitForResultIf.True = new InlineBlock(
+                stateMachine.CreateStateChange(afterResultReceivedStateIndex),
+                new Assignment { AssignTo = waitedCyclesCountVariableReference, Expression = waitedCyclesCountInitialValue });
+            waitForResultIf.Else = new Assignment
+            {
+                AssignTo = waitedCyclesCountVariableReference,
+                Expression = new Binary
+                {
+                    Left = waitedCyclesCountVariableReference,
+                    Operator = BinaryOperator.Add,
+                    Right = "1".ToVhdlValue(waitedCyclesCountVariable.DataType),
+                },
+            };
         }
 
         private VhdlTypeInfo GetTypeAndSize(IType type, SubTransformerContext context, bool allowNullKind)
