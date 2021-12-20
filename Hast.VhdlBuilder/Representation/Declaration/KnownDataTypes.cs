@@ -1,4 +1,5 @@
 using Hast.VhdlBuilder.Extensions;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
@@ -101,7 +102,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public static readonly SizedDataType[] UnsignedIntegers = new[] { UInt8, UInt16, UInt32, UInt64 };
 
-        public static readonly SizedDataType[] Integers = SignedIntegers.Union(UnsignedIntegers).ToArray();
+        public static readonly IReadOnlyList<SizedDataType> Integers = SignedIntegers.Union(UnsignedIntegers).ToArray();
 
         private static readonly DataType _stdLogic = new() { TypeCategory = DataTypeCategory.Character, Name = "std_logic" };
         public static readonly DataType StdLogic = new(_stdLogic)
