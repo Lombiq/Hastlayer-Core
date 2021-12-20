@@ -4,6 +4,7 @@
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
+    <DefineConstants>ShouldMatchApproved</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Properties\AssemblyInfo.cs" />
