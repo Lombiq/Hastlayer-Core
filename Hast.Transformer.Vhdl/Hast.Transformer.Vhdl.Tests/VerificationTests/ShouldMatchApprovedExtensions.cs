@@ -23,7 +23,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 .ShouldMatchApproved(configurationBuilder =>
                 {
                     var configuration = configurationBuilder.WithVhdlConfiguration().UseCallerLocation();
-                    if (!string.IsNullOrEmpty(deviceName)) configuration.WithDescriminator(deviceName);
+                    if (!string.IsNullOrEmpty(deviceName)) configuration.WithDiscriminator(deviceName);
                 });
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 .ShouldMatchApproved(configurationBuilder =>
                 {
                     var configuration = configurationBuilder.WithVhdlConfiguration().UseCallerLocation();
-                    if (!string.IsNullOrEmpty(deviceName)) configuration.WithDescriminator(deviceName);
+                    if (!string.IsNullOrEmpty(deviceName)) configuration.WithDiscriminator(deviceName);
                 });
 
         /// <summary>
