@@ -2,6 +2,7 @@ using Hast.Common.Models;
 using Shouldly;
 using Shouldly.Configuration;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -59,9 +60,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
     public static class ShouldMatchConfigurationBuilderExtensions
     {
-        public static ShouldMatchConfigurationBuilder WithVhdlConfiguration(this ShouldMatchConfigurationBuilder configurationBuilder) =>
-            configurationBuilder
-                .SubFolder(System.IO.Path.Combine("VerificationSources"))
+        public static ShouldMatchConfigurationBuilder WithVhdlConfiguration(this ShouldMatchConfigurationBuilder configurationBuilder)
+        {
+            var builder = configurationBuilder
+                .SubFolder(Path.Combine("VerificationSources"))
                 .WithFileExtension("vhdl")
                 .WithScrubber(source =>
                 {
@@ -74,5 +76,19 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                     return source;
                 });
+
+            // This is what the builder sets with no explicit WithFilenameGenerator. We decorate it using the
+            // WithFilenameGenerator call below.
+            var defaultFileNameGenerator = builder.Build().FilenameGenerator;
+
+            // Alter the FileNameGenerator to strip out invalid path characters.
+            builder = builder
+                .WithFilenameGenerator((testMethodInfo, discriminator, type, extension) =>
+                    string.Concat(
+                        defaultFileNameGenerator(testMethodInfo, discriminator, type, extension)
+                            .Split(Path.GetInvalidFileNameChars())));
+
+            return builder;
+        }
     }
 }
