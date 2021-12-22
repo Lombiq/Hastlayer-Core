@@ -411,7 +411,9 @@ namespace Hast.Remote.Worker.Services
 
                 // Task.Delay() waits for 1 second less so the lease is renewed for sure before it
                 // expires.
-                await processingTask.Task.WithTimeoutAsync(leaseTimeSpan - TimeSpan.FromSeconds(1), cancellationToken);
+                await Task.WhenAny(
+                    processingTask.Task,
+                    Task.Delay(leaseTimeSpan - TimeSpan.FromSeconds(1), cancellationToken));
             }
         }
 
