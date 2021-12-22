@@ -154,19 +154,7 @@ namespace Hast.Remote.Worker.Services
 
                 try
                 {
-                    foreach (var assembly in job.Assemblies)
-                    {
-                        cancellationToken.ThrowIfCancellationRequested();
-
-                        var path = _appDataFolder.Combine(jobFolder, assembly.Name + ".dll");
-
-                        assemblyPaths.Add(_appDataFolder.MapPath(path));
-
-                        await using var memoryStream = new MemoryStream(assembly.GetFileContent());
-                        await using var fileStream = _appDataFolder.CreateFile(path);
-                        await memoryStream.CopyToAsync(fileStream, cancellationToken);
-                    }
-
+                    await TransformationWorker.SaveAssembliesAsync(job, _appDataFolder, assemblyPaths, cancellationToken);
                     cancellationToken.ThrowIfCancellationRequested();
 
                     var result = new TransformationJobResult

@@ -254,18 +254,7 @@ namespace Hast.Remote.Worker.Services
 
                 try
                 {
-                    foreach (var assembly in job.Assemblies)
-                    {
-                        cancellationToken.ThrowIfCancellationRequested();
-
-                        var path = _appDataFolder.Combine(jobFolder, assembly.Name + ".dll");
-
-                        assemblyPaths.Add(_appDataFolder.MapPath(path));
-
-                        await using var memoryStream = new MemoryStream(assembly.GetFileContent());
-                        await using var fileStream = _appDataFolder.CreateFile(path);
-                        await memoryStream.CopyToAsync(fileStream, cancellationToken);
-                    }
+                    await SaveAssembliesAsync(job, _appDataFolder, assemblyPaths, cancellationToken);
 
                     cancellationToken.ThrowIfCancellationRequested();
 
@@ -423,6 +412,27 @@ namespace Hast.Remote.Worker.Services
                 // Task.Delay() waits for 1 second less so the lease is renewed for sure before it
                 // expires.
                 await processingTask.Task.WithTimeoutAsync(leaseTimeSpan - TimeSpan.FromSeconds(1), cancellationToken);
+            }
+        }
+
+        public static async Task SaveAssembliesAsync(
+            TransformationJob job,
+            IAppDataFolder appDataFolder,
+            List<string> assemblyPaths,
+            CancellationToken cancellationToken = default)
+        {
+            var jobFolder = appDataFolder.Combine("Hastlayer", "RemoteWorker", job.Token);
+
+            foreach (var assembly in job.Assemblies)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var path = appDataFolder.Combine(jobFolder, assembly.Name + ".dll");
+
+                assemblyPaths.Add(appDataFolder.MapPath(path));
+
+                await using var fileStream = appDataFolder.CreateFile(path);
+                await assembly.SaveContentToFileStreamAsync(fileStream, cancellationToken);
             }
         }
     }
