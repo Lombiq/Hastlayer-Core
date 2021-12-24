@@ -11,7 +11,7 @@ namespace Hast.DynamicTests
     [SuppressMessage(
         "Globalization",
         "CA1303:Do not pass literals as localized parameters",
-        Justification = "There should be no localization for testing.")]
+        Justification = "There needn't be localization for testing.")]
     internal static class TestExecutor
     {
         public static Task ExecuteSelectedTestAsync<T>(Expression<Action<T>> caseSelector, Action<T> testExecutor)
