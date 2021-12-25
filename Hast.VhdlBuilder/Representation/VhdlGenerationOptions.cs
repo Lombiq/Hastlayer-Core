@@ -77,46 +77,40 @@ namespace Hast.VhdlBuilder.Representation
 
             // Cutting off return type name, but not for operators (operators, unlike normal methods /properties can
             // have the same name, like op_Explicit, with a different return type).
-            if (shortName.Partition(" ") is (_, " ", var afterSpace)) shortName = afterSpace!;
+            if (!isOperator && shortName.Partition(" ") is (_, " ", var afterSpace)) shortName = afterSpace;
 
             // Cutting off namespace name, type name can be enough.
-            if (shortName.Partition("::") is (var namespaceAndClassName, "::", var afterDoubleColon))
+            if (shortName.Partition("::") is (var namespaceAndClassName, "::", var afterColons))
             {
                 // Re-adding return type name for operators.
-                var returnType = string.Empty;
-                if (isOperator &&
-                    namespaceAndClassName.Partition(" ") is (var returnTypeFullName, " ", _))
-                {
-                    returnType = returnTypeFullName.PartitionEnd(".").Right  + " ";
-                }
+                var returnType = isOperator && namespaceAndClassName.Partition(" ") is (var returnTypeFullName, " ", _)
+                    ? returnTypeFullName.PartitionEnd(".").Right + " "
+                    : string.Empty;
 
-                shortName =
-                    returnType +
-                    namespaceAndClassName[(namespaceAndClassName.LastIndexOf('.') + 1)..] +
-                    afterDoubleColon;
+                shortName = $"{returnType}{namespaceAndClassName.PartitionEnd(".").Right}::{afterColons}";
             }
 
             // Shortening parameter type names to just their type name.
-            if (shortName.ContainsOrdinal("(") && shortName.ContainsOrdinal(")"))
+            if (shortName?.ContainsOrdinal("(") == true && shortName.ContainsOrdinal(")"))
             {
-                var (name, _, temporary) = shortName.Partition("(");
-                var (parameters, _, rest) = temporary.Partition(")");
+                var (before, _, temporary) = shortName.Partition("(");
+                var (arguments, _, after) = temporary.Partition(")");
 
-                var shortenedParameters = parameters
+                var shortenedParameters = string.Join(",", arguments
                     .Split(',')
-                    .Select(parameter => parameter.Split('.').Last());
+                    .Select(parameter => parameter.Split('.').Last()));
 
-                shortName = $"{name}({string.Join(",", shortenedParameters)}){rest}";
+                shortName = $"{before}({shortenedParameters}){after}";
             }
 
             // Keep leading backslash for extended VHDL identifiers.
-            if (originalMatch.StartsWithOrdinal(@"\") && !shortName.StartsWithOrdinal(@"\"))
+            if (originalMatch.StartsWithOrdinal(@"\") && shortName?.StartsWithOrdinal(@"\") == false)
             {
                 shortName = @"\" + shortName;
             }
 
             // Keep leading dot for concatenated names.
-            if (originalMatch.StartsWithOrdinal(".") && !shortName.StartsWithOrdinal("."))
+            if (originalMatch.StartsWithOrdinal(".") && shortName?.StartsWithOrdinal(".") == false)
             {
                 shortName = "." + shortName;
             }
