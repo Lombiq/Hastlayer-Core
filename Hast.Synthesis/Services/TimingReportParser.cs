@@ -62,12 +62,9 @@ namespace Hast.Synthesis.Services
                 // (like div). This is so that if one operand is a const that's a power of two we have a different
                 // timing value, addressing specific VHDL compiler optimizations (like with div_by_4).
 
-                var constantOperand = string.Empty;
-                var byStartIndex = operatorString.IndexOf("_by_", StringComparison.Ordinal);
-                if (byStartIndex != -1)
-                {
-                    constantOperand = operatorString[(byStartIndex + 4)..];
-                }
+                var constantOperand = operatorString.Partition("_by_") is (_, "_by_", var constantOperandString)
+                    ? constantOperandString
+                    : string.Empty;
 
                 var operandType = csvReader.GetField<string>("InType");
                 var isSigned = operandType.StartsWithOrdinal("signed");

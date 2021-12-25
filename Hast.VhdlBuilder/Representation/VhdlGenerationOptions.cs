@@ -77,48 +77,36 @@ namespace Hast.VhdlBuilder.Representation
 
             // Cutting off return type name, but not for operators (operators, unlike normal methods /properties can
             // have the same name, like op_Explicit, with a different return type).
-            var firstSpaceIndex = shortName.IndexOf(' ', StringComparison.Ordinal);
-            if (firstSpaceIndex != -1 && !isOperator)
-            {
-                shortName = shortName[(firstSpaceIndex + 1)..];
-            }
+            if (shortName.Partition(" ") is (_, " ", var afterSpace)) shortName = afterSpace!;
 
             // Cutting off namespace name, type name can be enough.
-            var doubleColonIndex = shortName.IndexOf("::", StringComparison.Ordinal);
-            if (doubleColonIndex != -1)
+            if (shortName.Partition("::") is (var namespaceAndClassName, "::", var afterDoubleColon))
             {
-                var namespaceAndClassName = shortName.Substring(0, doubleColonIndex);
-
                 // Re-adding return type name for operators.
                 var returnType = string.Empty;
-                var spaceIndex = namespaceAndClassName.IndexOf(' ', StringComparison.Ordinal);
-                if (isOperator && spaceIndex != -1)
+                if (isOperator &&
+                    namespaceAndClassName.Partition(" ") is (var returnTypeFullName, " ", _))
                 {
-                    var returnTypeFullName = namespaceAndClassName.Substring(0, spaceIndex);
-                    returnType = returnTypeFullName[(returnTypeFullName.LastIndexOf('.') + 1)..] + " ";
+                    returnType = returnTypeFullName.PartitionEnd(".").Right  + " ";
                 }
 
                 shortName =
                     returnType +
                     namespaceAndClassName[(namespaceAndClassName.LastIndexOf('.') + 1)..] +
-                    shortName[doubleColonIndex..];
+                    afterDoubleColon;
             }
 
             // Shortening parameter type names to just their type name.
-            if (shortName.ContainsOrdinal("(") && shortName.Contains(')', StringComparison.Ordinal))
+            if (shortName.ContainsOrdinal("(") && shortName.ContainsOrdinal(")"))
             {
-                var openingParenthesisIndex = shortName.IndexOf('(', StringComparison.Ordinal);
-                var closingParenthesisIndex = shortName.IndexOf(')', StringComparison.Ordinal);
+                var (name, _, temporary) = shortName.Partition("(");
+                var (parameters, _, rest) = temporary.Partition(")");
 
-                var shortenedParameters = string.Join(",", shortName
-                    .Substring(openingParenthesisIndex + 1, closingParenthesisIndex - openingParenthesisIndex)
+                var shortenedParameters = parameters
                     .Split(',')
-                    .Select(parameter => parameter.Split('.').Last()));
+                    .Select(parameter => parameter.Split('.').Last());
 
-                shortName =
-                    shortName.Substring(0, openingParenthesisIndex + 1) +
-                    shortenedParameters +
-                    shortName[(closingParenthesisIndex + 1)..];
+                shortName = $"{name}({string.Join(",", shortenedParameters)}){rest}";
             }
 
             // Keep leading backslash for extended VHDL identifiers.
@@ -136,7 +124,7 @@ namespace Hast.VhdlBuilder.Representation
             return shortName;
         }
 
-        public static VhdlGenerationOptions Debug { get; } = new VhdlGenerationOptions
+        public static VhdlGenerationOptions Debug { get; } = new()
         {
             FormatCode = true,
             OmitComments = false,
