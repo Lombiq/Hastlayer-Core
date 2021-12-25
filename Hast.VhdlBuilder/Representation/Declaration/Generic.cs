@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using System.Diagnostics;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Expression;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -13,9 +13,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             var values = Items != null
-                ? Items.ToVhdl(
-                    vhdlGenerationOptions,
-                    Terminated.Terminator(vhdlGenerationOptions)).IndentLinesIfShouldFormat(vhdlGenerationOptions)
+                ? Items
+                    .ToVhdl(vhdlGenerationOptions, Terminated.Terminator(vhdlGenerationOptions))
+                    .IndentLinesIfShouldFormat(vhdlGenerationOptions)
                 : string.Empty;
             return Terminated.Terminate(
                 $"generic ({vhdlGenerationOptions.NewLineIfShouldFormat()}{values})", vhdlGenerationOptions);

@@ -11,7 +11,7 @@ namespace Hast.DynamicTests
     [SuppressMessage(
         "Globalization",
         "CA1303:Do not pass literals as localized parameters",
-        Justification = "There should be no localization for testing.")]
+        Justification = "There needn't be localization for testing.")]
     internal static class TestExecutor
     {
         public static Task ExecuteSelectedTestAsync<T>(Expression<Action<T>> caseSelector, Action<T> testExecutor)
@@ -27,12 +27,6 @@ namespace Hast.DynamicTests
             configurator(configuration);
 
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
-
-            // Thoth, what's this?
-            //// var folderName = configuration.HardwareEntryPointMemberFullNames.Single();
-            //// var methodNameStartIndex = folderName.IndexOf("::");
-            //// folderName = folderName.Substring(methodNameStartIndex + 2, folderName.IndexOf("(") - 2 - methodNameStartIndex);
-            //// configuration.HardwareFrameworkPath = $@"E:\ShortPath\BinaryAndUnaryTests\{folderName}";
 
             hastlayer.ExecutedOnHardware += (_, e) =>
                 Console.WriteLine(

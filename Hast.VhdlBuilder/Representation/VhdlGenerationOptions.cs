@@ -75,9 +75,8 @@ namespace Hast.VhdlBuilder.Representation
             var shortName = originalMatch;
             var isOperator = shortName.Contains("::op_", StringComparison.Ordinal);
 
-            // Cutting off return type name, but not for operators (operators, unlike normal
-            // methods /properties can have the same name, like op_Explicit, with a different return
-            // type).
+            // Cutting off return type name, but not for operators (operators, unlike normal methods /properties can
+            // have the same name, like op_Explicit, with a different return type).
             var firstSpaceIndex = shortName.IndexOf(' ', StringComparison.Ordinal);
             if (firstSpaceIndex != -1 && !isOperator)
             {

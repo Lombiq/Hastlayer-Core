@@ -8,7 +8,7 @@ namespace Hast.Remote.Worker.Configuration
     public interface ITransformationWorkerConfiguration
     {
         /// <summary>
-        /// Gets the connection string used in Azure cloud storage.
+        /// Gets the connection string used in Azure Blob Storage.
         /// </summary>
         string StorageConnectionString { get; }
     }

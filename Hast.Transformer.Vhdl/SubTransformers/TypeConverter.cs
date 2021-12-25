@@ -73,6 +73,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 PrimitiveType primitiveType => ConvertPrimitive(primitiveType.KnownTypeCode),
                 ComposedType composedType =>
+                    // For inner classes (member types) the BaseType will contain the actual type (in a strange way the
+                    // actual type will be the BaseType of itself...).
                     type.GetFullName() == composedType.BaseType.GetFullName()
                         ? ConvertAstType(composedType.BaseType, context)
                         : ConvertComposed(composedType, context),
@@ -132,10 +134,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
 
             if (type.TypeArguments.Count != 1) return SpecialTypes.Task;
-            // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
 
             if (!IsTaskType(type.GetActualType())) return ConvertAstType(type.TypeArguments.Single(), context);
 
+            // Changing e.g. Task<bool> to bool. Then it will be handled later what to do with the Task.
             if (!type.TypeArguments.Single().IsArray()) return ConvertAstType(type.TypeArguments.Single(), context);
 
             try

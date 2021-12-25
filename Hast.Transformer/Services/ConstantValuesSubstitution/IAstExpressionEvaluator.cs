@@ -4,12 +4,12 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
     /// <summary>
-    /// Evaluates operator expressions found on the syntax tree.
+    /// Evaluates operator expressions found in the syntax tree.
     /// </summary>
     public interface IAstExpressionEvaluator : IDependency
     {
         /// <summary>
-        /// Returns the resuzlt of a binary operation.
+        /// Returns the result of a binary operation.
         /// </summary>
         dynamic EvaluateBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression);
 

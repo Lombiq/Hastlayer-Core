@@ -23,7 +23,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             bool isLeft,
             SubTransformerContext context)
         {
-            // If this some null check then no need for any type conversion.
+            // If this is some null check then no need for any type conversion.
             if (binaryOperatorExpression.EitherIs<NullReferenceExpression>())
             {
                 return variableReference;
@@ -54,11 +54,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (leftVhdlType == rightVhdlType) return variableReference;
 
-            // Is the result type of the expression equal to one of the operands? Then convert the other operand.
             var convertToLeftType =
                 expressionType?.Equals(leftType) == true ||
                 expressionType?.Equals(rightType) == true
+                    // Is the result type of the expression equal to one of the operands? Then convert the other operand.
                     ? expressionType.Equals(leftType)
+                    // If the result type of the expression is something else (e.g. if the operation is inequality then
+                    // for two integer operands the result type will be boolean) then convert in a way that's lossless.
                     : ImplementTypeConversion(leftVhdlType, rightVhdlType, Empty.Instance).IsLossy;
 
             var fromType = convertToLeftType ? rightVhdlType : leftVhdlType;
@@ -228,8 +230,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                     var expression = fromExpression;
 
-                    // Resizing needs to happen before signed() otherwise casting an unsigned to signed can result in data
-                    // loss due to the range change.
+                    // Resizing needs to happen before signed() otherwise casting an unsigned to signed can result in
+                    // data loss due to the range change.
                     if (fromSize != toSize)
                     {
                         expression = CreateResizeExpression(fromExpression);

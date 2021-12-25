@@ -35,7 +35,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         public static AstType GetElementType(this ArrayCreateExpression expression) =>
             // Sometimes instead of `new Task<uint>[2]` an array instantiation will be in form of
-            // `new Task<bool>[2][] {}` even if the task is still one-dimensional. In this case its type will be a ComposedType.
+            // `new Task<bool>[2][] {}` even if the task is still one-dimensional. In this case its type will be a
+            // ComposedType.
             expression.Type is ComposedType composedType ? composedType.BaseType : expression.Type;
     }
 }

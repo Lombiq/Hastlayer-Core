@@ -69,7 +69,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     return;
                 case IfElseStatement ifElse:
                     TransformIfElseStatement(ifElse, stateMachine, context, currentBlock, StateNameGenerator);
-
                     return;
                 case BlockStatement blockStatement:
                     foreach (var blockStatementStatement in blockStatement.Statements)
@@ -98,7 +97,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     };
                     currentBlock.Add(caseStatement);
 
-                    // Case statements, much like if-else statements need a state added in advance where all branches will
+                    // Case statements, much like if-else statements need a state added in advance where all branches
                     // will finally return to. All branches have their own states too.
                     var caseStartStateIndex = currentBlock.StateMachineStateIndex;
 
@@ -153,8 +152,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         currentBlock.Add(CreateConditionalStateChangeToAfterCaseState());
                     }
 
-                    // If the AST doesn't contain cases for all possible values of the type the statement switches on then
-                    // the VHDL will be incorrect. By including an "others" case every time this is solved.
+                    // If the AST doesn't contain cases for all possible values of the type the statement switches on
+                    // then the VHDL will be incorrect. By including an "others" case every time this is solved.
                     caseStatement.Whens.Add(CaseWhen.CreateOthers());
 
                     currentBlock.ChangeBlockToDifferentState(afterCaseStateBlock, aftercaseStateIndex);
@@ -242,8 +241,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var lastState = stateMachine.States[^1].Body;
             if (lastState != afterWhileState)
             {
-                // We need an if to check whether the state was changed in the logic. If it was then that means
-                // that the loop was exited so we mustn't overwrite the new state.
+                // We need an if to check whether the state was changed in the logic. If it was then that means that the
+                // loop was exited so we mustn't overwrite the new state.
                 currentBlock.Add(
                     new GeneratedComment(vhdlGenerationOptions =>
                         "Returning to the repeated state of the while loop which was started in state " +
@@ -265,9 +264,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             CurrentBlock currentBlock,
             Func<int, IVhdlGenerationOptions, string> stateNameGenerator)
         {
-            // If-elses are always split up into multiple states, i.e. the true and false statements branch off
-            // into separate states. This makes it simpler to track how many clock cycles something requires, since
-            // the latency of the two branches should be tracked separately.
+            // If-elses are always split up into multiple states, i.e. the true and false statements branch off into
+            // separate states. This makes it simpler to track how many clock cycles something requires, since the
+            // latency of the two branches should be tracked separately.
 
             var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context) };
             var ifElseCommentsBlock = new LogicalBlock();
@@ -357,11 +356,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 IDataObject returnReference = stateMachine.CreateReturnSignalReference();
                 var returnExpression = _expressionTransformer.Transform(returnStatement.Expression, context);
 
-                // It can happen that the type of the expression is not the same as the return type of the method.
-                // Thus a cast may be necessary.
+                // It can happen that the type of the expression is not the same as the return type of the method. Thus
+                // a cast may be necessary.
                 var expressionType = returnStatement.Expression.GetActualType();
                 var expressionVhdlType = (returnExpression as Value)?.DataType ??
-                                         (expressionType != null ? _typeConverter.ConvertType(expressionType, context.TransformationContext) : null);
+                    (expressionType != null ? _typeConverter.ConvertType(expressionType, context.TransformationContext) : null);
                 if (expressionVhdlType != null)
                 {
                     returnExpression = _typeConversionTransformer
@@ -375,8 +374,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Expression = returnExpression,
                 };
 
-                // If the expression is an assignment we can't assign it to the return signal, so need to split it.
-                // This happens with lines like "return (Number += increaseBy);".
+                // If the expression is an assignment we can't assign it to the return signal, so need to split it. This
+                // happens with lines like "return (Number += increaseBy);".
                 if (assigmentElement.Expression is Assignment assignment)
                 {
                     currentBlock.Add(assignment);
@@ -396,8 +395,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         {
             var variableType = variableStatement.Type;
 
-            // Filtering out variable declarations that were added by the compiler for multi-threaded code but
-            // which shouldn't be transformed.
+            // Filtering out variable declarations that were added by the compiler for multi-threaded code but which
+            // shouldn't be transformed.
             var omitStatement =
                 // DisplayClass objects that generated for lambda expressions are put into variables like:
                 // PrimeCalculator.<>c__DisplayClass9_0 <>c__DisplayClass9_; They are being kept track of when

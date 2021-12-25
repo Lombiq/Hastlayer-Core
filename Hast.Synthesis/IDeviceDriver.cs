@@ -20,13 +20,13 @@ namespace Hast.Synthesis
         ITimingReport TimingReport { get; }
 
         /// <summary>
-        /// Returns the amount of cycles requred to perform the specified binary <paramref name="expression"/>.
+        /// Returns the amount of cycles required to perform the specified binary <paramref name="expression"/>.
         /// </summary>
         decimal GetClockCyclesNeededForBinaryOperation(BinaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
             DeviceDriverHelper.ComputeClockCyclesForBinaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);
 
         /// <summary>
-        /// Returns the amount of cycles requred to perform the specified unary <paramref name="expression"/>.
+        /// Returns the amount of cycles required to perform the specified unary <paramref name="expression"/>.
         /// </summary>
         decimal GetClockCyclesNeededForUnaryOperation(UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
             DeviceDriverHelper.ComputeClockCyclesForUnaryOperation(DeviceManifest, TimingReport, expression, operandSizeBits, isSigned);

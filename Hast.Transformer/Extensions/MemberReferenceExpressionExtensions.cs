@@ -126,10 +126,11 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             memberReferenceExpression.Target.GetActualTypeFullName() == typeof(System.Threading.Tasks.TaskFactory).FullName;
 
         public static bool IsMethodReference(this MemberReferenceExpression memberReferenceExpression) =>
-#pragma warning disable IDE0078 // Use pattern matching. False positive.
+            // False positive.
+#pragma warning disable IDE0078 // Use pattern matching.
             memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IMethod ||
             memberReferenceExpression.GetResolveResult<MethodGroupResolveResult>() != null;
-#pragma warning restore IDE0078 // Use pattern matching. False positive.
+#pragma warning restore IDE0078 // Use pattern matching.
 
         public static bool IsFieldReference(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IField;

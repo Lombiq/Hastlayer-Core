@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -27,8 +27,10 @@ namespace Hast.Transformer.Services
     /// </code>
     /// </example>
     /// <remarks>
-    /// <para>The MakeAssignmentExpressions configuration of <see cref="ICSharpCode.Decompiler.DecompilerSettings"/> serves
-    /// something similar but that also changes how a decompiled Task.Factory.StartNew() looks like.</para>
+    /// <para>
+    /// The MakeAssignmentExpressions configuration of <see cref="ICSharpCode.Decompiler.DecompilerSettings"/> serves
+    /// something similar but that also changes how a decompiled Task.Factory.StartNew() looks like.
+    /// </para>
     /// </remarks>
     public class EmbeddedAssignmentExpressionsExpander : IConverter
     {

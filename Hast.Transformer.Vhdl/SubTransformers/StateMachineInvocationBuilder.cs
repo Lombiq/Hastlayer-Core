@@ -250,8 +250,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             int index)
         {
             var parameterReference = parameter.Reference;
-            var scope = context.Scope;
-            var stateMachine = scope.StateMachine;
+            var stateMachine = context.Scope.StateMachine;
 
             var parameterSignalName = stateMachine
                 .CreatePrefixedSegmentedObjectName(
@@ -280,8 +279,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var assignmentExpression = flowDirection == ParameterFlowDirection.Out ? parameterReference : parameterSignalReference;
 
             // We need to do type conversion if there is a type mismatch. This can also occur with Values (i.e.
-            // transformed PrimitiveExpressions) since in .NET there can be an implicit downcast not visible in
-            // the AST.
+            // transformed PrimitiveExpressions) since in .NET there can be an implicit downcast not visible in the AST.
             if (parameter.DataType != parameterSignalType)
             {
                 IAssignmentTypeConversionResult conversionResult;

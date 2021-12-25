@@ -87,16 +87,14 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             node.GetMemberResolveResult()?.Member.ReflectionName ?? node.GetActualType().FullName;
 
         public static T GetResolveResult<T>(this AstNode node)
-            where T : ResolveResult
-            =>
+            where T : ResolveResult =>
             node.GetResolveResult() as T;
 
         public static MemberResolveResult GetMemberResolveResult(this AstNode node) =>
             node.GetResolveResult<MemberResolveResult>();
 
         public static bool IsIn<T>(this AstNode node)
-            where T : AstNode
-            =>
+            where T : AstNode =>
             node.FindFirstParentOfType<T>() != null;
 
         public static TypeDeclaration FindFirstParentTypeDeclaration(this AstNode node) =>
@@ -112,13 +110,11 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             node.FindFirstParentOfType<BlockStatement>();
 
         public static T FindFirstParentOfType<T>(this AstNode node)
-            where T : AstNode
-            =>
+            where T : AstNode =>
             node.FindFirstParentOfType<T>(_ => true);
 
         public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate)
-            where T : AstNode
-            =>
+            where T : AstNode =>
             node.FindFirstParentOfType(predicate, out _);
 
         public static T FindFirstParentOfType<T>(this AstNode node, Predicate<T> predicate, out int height)
@@ -137,13 +133,11 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         }
 
         public static T FindFirstChildOfType<T>(this AstNode node)
-            where T : AstNode
-            =>
+            where T : AstNode =>
             node.FindFirstChildOfType<T>(_ => true);
 
         public static T FindFirstChildOfType<T>(this AstNode node, Predicate<T> predicate)
-            where T : AstNode
-            =>
+            where T : AstNode =>
             node.FindAllChildrenOfType(predicate, true).SingleOrDefault();
 
         public static IEnumerable<T> FindAllChildrenOfType<T>(
@@ -180,8 +174,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             node.Is(predicate, out _);
 
         public static bool Is<T>(this AstNode node, out T castNode)
-            where T : AstNode
-            =>
+            where T : AstNode =>
             node.Is(_ => true, out castNode);
 
         public static bool Is<T>(this AstNode node, Predicate<T> predicate, out T castNode)
@@ -193,8 +186,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         }
 
         public static T As<T>(this AstNode node)
-            where T : AstNode
-            => node as T;
+            where T : AstNode =>
+            node as T;
 
         public static AstNode FindFirstNonParenthesizedExpressionParent(this AstNode node)
         {
@@ -245,8 +238,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             node.GetActualType().ToResolveResult();
 
         public static T Clone<T>(this AstNode node)
-            where T : AstNode
-            => (T)node.Clone();
+            where T : AstNode =>
+            (T)node.Clone();
 
         /// <summary>
         /// Remove the node from the syntax tree and mark it as such so later it can be determined that it was removed.
@@ -281,9 +274,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 !property.Setter.IsCompilerGenerated();
 
             // For certain members only their parent invocation will contain usable ResolveResult (see:
-            // https://github.com/icsharpcode/ILSpy/issues/1407). For properties this is the case every time since
-            // from the IMember of the property we can't see whether the getter or setter is invoked, only from the
-            // parent invocation (this is only true for custom properties, not for auto-properties).
+            // https://github.com/icsharpcode/ILSpy/issues/1407). For properties this is the case every time since from
+            // the IMember of the property we can't see whether the getter or setter is invoked, only from the parent
+            // invocation (this is only true for custom properties, not for auto-properties).
             if (node.Parent is InvocationExpression invocationExpression &&
                 (memberResolveResult == null || isCustomProperty))
             {
@@ -294,9 +287,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
                 if (memberReferenceExpression.IsPropertyReference())
                 {
-                    // This is not necessarily true in all cases but seems to be OK for now: If the property is not
-                    // the target but an argument of an invocation then the property reference is most possibly a
-                    // getter.
+                    // This is not necessarily true in all cases but seems to be OK for now: If the property is not the
+                    // target but an argument of an invocation then the property reference is most possibly a getter.
                     return property?.Getter.GetFullName();
                 }
             }

@@ -1,4 +1,4 @@
-﻿namespace Hast.VhdlBuilder.Representation.Declaration
+namespace Hast.VhdlBuilder.Representation.Declaration
 {
     public enum DataObjectKind
     {
@@ -15,7 +15,7 @@
     public interface IDataObject : INamedElement, IReferenceableDeclaration<IDataObject>
     {
         /// <summary>
-        /// Gets or sets the type of the data object.
+        /// Gets or sets the kind of the data object.
         /// </summary>
         DataObjectKind DataObjectKind { get; set; }
     }

@@ -221,8 +221,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             var existingSize = arrayCreateExpression.Parent is AssignmentExpression parentAssignment
                 ? _arraySizeHolder.GetSize(parentAssignment.Left)
                 : null;
-            var noExistingSize = existingSize == null; // Because of IDE0078 false positive.
 
+            var noExistingSize = existingSize == null; // Because of IDE0078 false positive.
             if (noExistingSize || lengthArgument is PrimitiveExpression) return;
 
             // If the array creation doesn't have a static length but the value holder the array is assigned to has the
@@ -355,8 +355,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             }
             else if (member.IsReadOnlyMember())
             {
-                // If this is a nested member reference (e.g. _member.Property1.Property2) then let's find the
-                // first member that has a corresponding ctor.
+                // If this is a nested member reference (e.g. _member.Property1.Property2) then let's find the first
+                // member that has a corresponding ctor.
                 var currentMemberReference = memberReferenceExpression;
                 ConstructorReference constructorReference;
 
@@ -370,8 +370,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 if (constructorReference == null) return false;
 
-                // Try to substitute this member reference's value with a value set in the corresponding
-                // constructor.
+                // Try to substitute this member reference's value with a value set in the corresponding constructor.
 
                 var constructor = constructorReference.Constructor;
 
@@ -381,11 +380,11 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 if (memberReferenceExpressionInConstructor == null) return false;
 
-                // Using the substitution also used in the constructor. This should be safe to do even if in
-                // the ctor there are multiple assignments because an retrieved constant will only remain in
-                // the ConstantValuesTable if there are no more substitutions needed in the ctor.
-                // But for this we need to rebuild a ConstantValuesTable just for this ctor. At this point the
-                // ctor should be fully substituted so we only need to care about primitive expressions.
+                // Using the substitution also used in the constructor. This should be safe to do even if in the ctor
+                // there are multiple assignments because an retrieved constant will only remain in the
+                // ConstantValuesTable if there are no more substitutions needed in the ctor.
+                // But for this we need to rebuild a ConstantValuesTable just for this ctor. At this point the ctor
+                // should be fully substituted so we only need to care about primitive expressions.
 
                 var constructorConstantValuesTableBuildingVisitor =
                     new ConstructorConstantValuesTableBuildingVisitor(constructor);

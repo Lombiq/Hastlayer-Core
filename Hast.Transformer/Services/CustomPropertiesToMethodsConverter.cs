@@ -12,7 +12,7 @@ using System.Linq;
 namespace Hast.Transformer.Services
 {
     /// <summary>
-    /// Converts customly implemented properties' setters and getters into equivalent methods so it's easier to
+    /// Converts custom implemented properties' setters and getters into equivalent methods so it's easier to
     /// transform them.
     /// </summary>
     /// <example>

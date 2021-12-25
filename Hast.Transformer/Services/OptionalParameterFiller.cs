@@ -10,6 +10,11 @@ namespace Hast.Transformer.Services
     /// Arguments for optional method parameters can be omitted. This service fills those too so later processing these
     /// method calls can be easier. Note that method class include constructors as well.
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Needs to run before method inlining but after anything that otherwise modified method signatures or invocations.
+    /// </para>
+    /// </remarks>
     /// <example>
     /// <para>
     /// The constructor's signature being:

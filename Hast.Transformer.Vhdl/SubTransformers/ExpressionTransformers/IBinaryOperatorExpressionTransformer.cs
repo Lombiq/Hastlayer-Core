@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using Hast.Common.Interfaces;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -11,7 +11,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
     public interface IBinaryOperatorExpressionTransformer : IDependency
     {
         /// <summary>
-        /// Transforms binary operator expressions that can be executed in parallel.
+        /// Transforms binary operator expressions that can be executed in parallel, with operation-level (SIMD-like)
+        /// parallelism.
         /// </summary>
         IEnumerable<IVhdlElement> TransformParallelBinaryOperatorExpressions(
               IEnumerable<PartiallyTransformedBinaryOperatorExpression> partiallyTransformedExpressions,

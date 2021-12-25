@@ -24,10 +24,12 @@ namespace Hast.Transformer.Services
     /// </code>
     /// </example>
     /// <remarks>
-    /// <para>There is the ObjectOrCollectionInitializers decompiler option with a similar aim. However, that would unpack
-    /// initializations for compiler-generated methods created from closures and processing that would be painful.
-    /// Also, with that option a new variable is created for every instantiation even if the new object is immediately
-    /// assigned to an array element. So it would make the resulting code a bit messier.</para>
+    /// <para>
+    /// There is the ObjectOrCollectionInitializers decompiler option with a similar aim. However, that would unpack
+    /// initializations for compiler-generated methods created from closures and processing that would be painful. Also,
+    /// with that option a new variable is created for every instantiation even if the new object is immediately
+    /// assigned to an array element. So it would make the resulting code a bit messier.
+    /// </para>
     /// </remarks>
     public class ObjectInitializerExpander : IConverter
     {
