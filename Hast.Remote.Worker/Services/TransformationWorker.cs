@@ -71,6 +71,7 @@ namespace Hast.Remote.Worker.Services
 
                 try
                 {
+                    timerIsBusy = true;
                     Task.Run(async () =>
                     {
                         // Removing those result blobs that weren't deleted somehow (like the client exited while waiting
