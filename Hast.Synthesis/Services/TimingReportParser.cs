@@ -95,6 +95,17 @@ namespace Hast.Synthesis.Services
                     NumberStyles.Any,
                     CultureInfo.InvariantCulture);
 
+                // Timing window difference from requirement, i.e.:
+                // For Vivado:
+                // TWDFR = Requirement plus delays - Source clock delay - Requirement for arrival (clock period)
+                // For Quartus Prime:
+                // TWDFR = Data required time -(Data Arrival Time -Data Delay) -Setup relationship(clock period)
+                // This is currently not used, but all timing reports contain it and may be required in the future.
+                ////var twdfr = decimal.Parse(
+                ////    csvReader.GetField<string>("TWDFR").Replace(',', '.'), // Taking care of decimal commas.
+                ////    NumberStyles.Any,
+                ////    CultureInfo.InvariantCulture);
+
                 var operatorInfo = new OperatorInfo
                 {
                     OperandSizeBits = operandSizeBits,
