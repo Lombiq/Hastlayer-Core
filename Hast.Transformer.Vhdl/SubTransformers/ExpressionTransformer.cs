@@ -401,7 +401,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // Is this a Task result access like array[k].Result or task.Result?
             var targetType = memberReference.Target.GetActualType();
             if (targetType != null &&
-                targetType.GetFullName().StartsWith("System.Threading.Tasks.Task", StringComparison.Ordinal) &&
+                targetType.GetFullName().StartsWithOrdinal("System.Threading.Tasks.Task") &&
                 memberReference.MemberName == "Result")
             {
                 // If this is not an array then it doesn't need to be explicitly awaited, just access to its
@@ -605,7 +605,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // If a constant value of type real doesn't contain a decimal separator then it will be detected as integer
             // and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
-            if (vhdlType == KnownDataTypes.Real && !valueString.Contains('.', StringComparison.Ordinal))
+            if (vhdlType == KnownDataTypes.Real && !valueString.ContainsOrdinal("."))
             {
                 valueString += ".0";
             }

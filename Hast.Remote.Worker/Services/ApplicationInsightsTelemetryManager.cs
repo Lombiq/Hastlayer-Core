@@ -53,7 +53,7 @@ namespace Hast.Remote.Worker.Services
         {
             var configuration = Hastlayer.BuildConfiguration();
             var key = configuration.GetSection(ApplicationInsightsInstrumentationKey).Value;
-            if (key.StartsWith("Insert your instrumentation key", StringComparison.OrdinalIgnoreCase)) key = null;
+            if (key.StartsWithOrdinalIgnoreCase("Insert your instrumentation key")) key = null;
             key ??= configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY").Value;
 
             if (string.IsNullOrEmpty(key))

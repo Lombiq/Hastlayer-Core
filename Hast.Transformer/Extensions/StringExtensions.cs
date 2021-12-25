@@ -1,4 +1,4 @@
-using ICSharpCode.Decompiler.CSharp.Syntax;
+﻿using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Text.RegularExpressions;
 
 namespace System
@@ -24,7 +24,7 @@ namespace System
             simpleName = simpleName.Substring(0, simpleName.IndexOf('(', StringComparison.Ordinal));
 
             // Changing the double colons that delimit a member access to a single dot.
-            return simpleName.Replace("::", ".", StringComparison.Ordinal);
+            return simpleName?.ReplaceOrdinal("::", ".");
         }
 
         /// <summary>
@@ -50,8 +50,7 @@ namespace System
         /// </example>
         public static bool IsDisplayOrClosureClassName(this string name) =>
             // A class name containing "<>" would be invalid in standard C#, so this is a fairly safe bet.
-            name.Contains("+<>c", StringComparison.Ordinal) ||
-            name.IsClosureClassName();
+            name.ContainsOrdinal("+<>c") || name.IsClosureClassName();
 
         /// <summary>
         /// Checks whether the string looks like the name of a compiler-generated DisplayClass member.
@@ -64,7 +63,7 @@ namespace System
         /// </code>
         /// </example>
         public static bool IsDisplayOrClosureClassMemberName(this string name) =>
-            name.IsDisplayOrClosureClassName() && name.Contains("::", StringComparison.Ordinal);
+            name.IsDisplayOrClosureClassName() && name.ContainsOrdinal("::");
 
 #pragma warning disable S103 // Lines should not be too long
         /// <summary>
@@ -122,7 +121,7 @@ namespace System
         /// <summary>
         /// Determines whether the string looks like the name of a constructor.
         /// </summary>
-        public static bool IsConstructorName(this string name) => name.Contains(".ctor", StringComparison.Ordinal);
+        public static bool IsConstructorName(this string name) => name.ContainsOrdinal(".ctor");
 
         /// <summary>
         /// Adds the full name of the given node's parent entity to the message string. Useful in exception message for

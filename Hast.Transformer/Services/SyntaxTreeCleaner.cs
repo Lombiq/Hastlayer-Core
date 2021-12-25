@@ -1,4 +1,4 @@
-using Hast.Common.Extensions;
+﻿using Hast.Common.Extensions;
 using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -45,7 +45,7 @@ namespace Hast.Transformer.Services
                         configuration.HardwareEntryPointMemberFullNames.Contains(fullName) ||
                         fullName.GetMemberNameAlternates().Intersect(configuration.HardwareEntryPointMemberFullNames).Any() ||
                         configuration.HardwareEntryPointMemberNamePrefixes
-                            .Any(prefix => member.GetSimpleName().StartsWith(prefix, StringComparison.Ordinal))) ||
+                            .Any(prefix => member.GetSimpleName().StartsWithOrdinal(prefix))) ||
                     !_memberSuitabilityChecker.IsSuitableHardwareEntryPointMember(member, typeDeclarationLookupTable))
                 {
                     continue;

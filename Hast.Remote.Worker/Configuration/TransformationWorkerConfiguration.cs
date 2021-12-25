@@ -17,7 +17,7 @@ namespace Hast.Remote.Worker.Configuration
             var configuration = Hastlayer.BuildConfiguration();
 
             var connectionString = configuration.GetSection(ConfigurationPaths.StorageConnectionString).Value;
-            if (connectionString?.Contains("insert your instrumentation", StringComparison.OrdinalIgnoreCase) == true)
+            if (connectionString?.ContainsOrdinalIgnoreCase("insert your instrumentation") == true)
             {
                 connectionString = null;
             }

@@ -44,8 +44,8 @@ namespace Hast.Synthesis.Services
 
                 // Instead of the shift_left/right* versions we use dotnet_shift_left/right, which also takes a
                 // surrounding SmartResize() call into account.
-                if (operatorString.StartsWith("shift_left", StringComparison.Ordinal) ||
-                    operatorString.StartsWith("shift_right", StringComparison.Ordinal))
+                if (operatorString.StartsWithOrdinal("shift_left") ||
+                    operatorString.StartsWithOrdinal("shift_right"))
                 {
                     continue;
                 }
@@ -70,7 +70,7 @@ namespace Hast.Synthesis.Services
                 }
 
                 var operandType = csvReader.GetField<string>("InType");
-                var isSigned = operandType.StartsWith("signed", StringComparison.Ordinal);
+                var isSigned = operandType.StartsWithOrdinal("signed");
                 var operandSizeMatch = Regex.Match(operandType, "([0-9]+)", RegexOptions.Compiled);
                 if (!operandSizeMatch.Success)
                 {
@@ -149,7 +149,7 @@ namespace Hast.Synthesis.Services
             {
                 "and" => BinaryOperatorType.BitwiseAnd,
                 "add" => BinaryOperatorType.Add,
-                var op when op.StartsWith("div", StringComparison.Ordinal) => BinaryOperatorType.Divide,
+                var op when op.StartsWithOrdinal("div") => BinaryOperatorType.Divide,
                 "eq" => BinaryOperatorType.Equality,
                 "ge" => BinaryOperatorType.GreaterThanOrEqual,
                 "gt" => BinaryOperatorType.GreaterThan,
@@ -158,13 +158,13 @@ namespace Hast.Synthesis.Services
                 // BinaryOperatorType.Modulus is actually the remainder operator and corresponds to the VHDL operator
                 // rem, see below.
                 "mod" => Union.Neither<BinaryOperatorType?, UnaryOperatorType?>(),
-                var op when op.StartsWith("mul", StringComparison.Ordinal) => BinaryOperatorType.Multiply,
+                var op when op.StartsWithOrdinal("mul") => BinaryOperatorType.Multiply,
                 "neq" => BinaryOperatorType.InEquality,
                 "not" => operandSizeBits == 1 ? UnaryOperatorType.Not : UnaryOperatorType.BitNot,
                 "or" => BinaryOperatorType.BitwiseOr,
-                var op when op.StartsWith("dotnet_shift_left", StringComparison.Ordinal) =>
+                var op when op.StartsWithOrdinal("dotnet_shift_left") =>
                     BinaryOperatorType.ShiftLeft,
-                var op when op.StartsWith("dotnet_shift_right", StringComparison.Ordinal) => BinaryOperatorType
+                var op when op.StartsWithOrdinal("dotnet_shift_right") => BinaryOperatorType
                     .ShiftRight,
                 "rem" => BinaryOperatorType.Modulus,
                 "sub" => BinaryOperatorType.Subtract,

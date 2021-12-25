@@ -1,4 +1,4 @@
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
@@ -51,7 +51,7 @@ namespace Hast.Transformer.Services
         }
 
         private static bool IsTask(Expression expression) =>
-            expression.GetActualTypeFullName().StartsWith(TaskStart, StringComparison.Ordinal);
+            expression.GetActualTypeFullName().StartsWithOrdinal(TaskStart);
 
         private class InlinableTaskArraysFindingVisitor : DepthFirstAstVisitor
         {
@@ -67,7 +67,7 @@ namespace Hast.Transformer.Services
                 if (assignmentExpression.Left.Is<IdentifierExpression>(identifier =>
                     {
                         compilerGeneratedVariableName = identifier.Identifier;
-                        return compilerGeneratedVariableName.StartsWith("arg_", StringComparison.Ordinal);
+                        return compilerGeneratedVariableName.StartsWithOrdinal("arg_");
                     }) &&
                     IsTask(assignmentExpression.Right))
                 {

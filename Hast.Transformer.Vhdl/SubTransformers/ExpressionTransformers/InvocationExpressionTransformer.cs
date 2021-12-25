@@ -1,4 +1,4 @@
-using Hast.Common.Configuration;
+﻿using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -74,7 +74,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var memberName = targetMemberReference.MemberName;
 
-            var isWrite = memberName.StartsWith("Write", StringComparison.Ordinal);
+            var isWrite = memberName.StartsWithOrdinal("Write");
             var invocationParameters = transformedParameters.ToList();
 
             var operationPropertyKey = isWrite ? lastWriteFinishedKey : lastReadFinishedKey;
@@ -196,7 +196,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             string operationDataTypeName,
             string memberName)
         {
-            var isWrite = memberName.StartsWith("Write", StringComparison.Ordinal);
+            var isWrite = memberName.StartsWithOrdinal("Write");
             if (!isWrite) return;
 
             var stateMachine = context.Scope.StateMachine;

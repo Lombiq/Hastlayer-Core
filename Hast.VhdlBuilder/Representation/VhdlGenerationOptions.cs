@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -73,7 +73,7 @@ namespace Hast.VhdlBuilder.Representation
         {
             var originalMatch = match.Groups[0].Value;
             var shortName = originalMatch;
-            var isOperator = shortName.Contains("::op_", StringComparison.Ordinal);
+            var isOperator = shortName.ContainsOrdinal("::op_");
 
             // Cutting off return type name, but not for operators (operators, unlike normal methods /properties can
             // have the same name, like op_Explicit, with a different return type).
@@ -105,7 +105,7 @@ namespace Hast.VhdlBuilder.Representation
             }
 
             // Shortening parameter type names to just their type name.
-            if (shortName.Contains('(', StringComparison.Ordinal) && shortName.Contains(')', StringComparison.Ordinal))
+            if (shortName.ContainsOrdinal("(") && shortName.Contains(')', StringComparison.Ordinal))
             {
                 var openingParenthesisIndex = shortName.IndexOf('(', StringComparison.Ordinal);
                 var closingParenthesisIndex = shortName.IndexOf(')', StringComparison.Ordinal);
@@ -122,13 +122,13 @@ namespace Hast.VhdlBuilder.Representation
             }
 
             // Keep leading backslash for extended VHDL identifiers.
-            if (originalMatch.StartsWith(@"\", StringComparison.Ordinal) && !shortName.StartsWith(@"\", StringComparison.Ordinal))
+            if (originalMatch.StartsWithOrdinal(@"\") && !shortName.StartsWithOrdinal(@"\"))
             {
                 shortName = @"\" + shortName;
             }
 
             // Keep leading dot for concatenated names.
-            if (originalMatch.StartsWith(".", StringComparison.Ordinal) && !shortName.StartsWith(".", StringComparison.Ordinal))
+            if (originalMatch.StartsWithOrdinal(".") && !shortName.StartsWithOrdinal("."))
             {
                 shortName = "." + shortName;
             }

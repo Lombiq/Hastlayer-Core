@@ -22,7 +22,7 @@ namespace Hast.Remote.Worker.Daemon.Services
                 {
                     Log = DisplayName,
                     // The EventLog source can't contain dots like the service's technical name.
-                    Source = Name.Replace(".", string.Empty, StringComparison.Ordinal),
+                    Source = Name.ReplaceOrdinal("."),
                 };
             }
         }
