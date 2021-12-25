@@ -1,5 +1,4 @@
-using System;
-using System.Globalization;
+﻿using System;
 using System.Linq;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
@@ -21,7 +20,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                         $"dynamically sized array creation was: {expression}{".".AddParentEntityName(expression)}");
                 }
 
-                return int.Parse(((PrimitiveExpression)lengthArgument).Value.ToString(), CultureInfo.InvariantCulture);
+                return ((PrimitiveExpression)lengthArgument).Value.ToString().ToTechnicalInt();
             }
 
             // The array is initialized in-place, i.e. new[] { 1, 2, 3 }-style.
