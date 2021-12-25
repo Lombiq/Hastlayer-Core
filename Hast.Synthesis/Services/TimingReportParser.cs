@@ -307,7 +307,7 @@ namespace Hast.Synthesis.Services
 
             private static string GetKey(dynamic operatorType, int operandSizeBits, bool isSigned, string constantOperand) =>
                     operatorType.ToString() +
-                    operandSizeBits.ToString(CultureInfo.InvariantCulture) +
+                    operandSizeBits.ToTechnicalString() +
                     isSigned.ToString() +
                     (string.IsNullOrEmpty(constantOperand) ? "-" : constantOperand);
         }

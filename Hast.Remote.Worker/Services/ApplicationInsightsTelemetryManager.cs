@@ -1,4 +1,4 @@
-using Hast.Common.Interfaces;
+﻿using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Remote.Worker.Exceptions;
 using Hast.Remote.Worker.Models;
@@ -12,7 +12,6 @@ using Microsoft.ApplicationInsights.WorkerService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Globalization;
 using System.Linq;
 using static Hast.Remote.Worker.Constants.ConfigurationPaths;
 
@@ -45,7 +44,7 @@ namespace Hast.Remote.Worker.Services
                 Url = new Uri(telemetry.JobName, UriKind.Relative),
             };
 
-            requestTelemetry.Context.User.AccountId = telemetry.AppId.ToString(CultureInfo.InvariantCulture);
+            requestTelemetry.Context.User.AccountId = telemetry.AppId.ToTechnicalString();
 
             _telemetryClient.TrackRequest(requestTelemetry);
         }

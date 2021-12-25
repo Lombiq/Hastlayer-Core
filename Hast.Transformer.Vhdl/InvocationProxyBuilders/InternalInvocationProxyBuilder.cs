@@ -1,4 +1,4 @@
-using Hast.Common.Configuration;
+﻿using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -10,8 +10,8 @@ using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
+using Enum = Hast.VhdlBuilder.Representation.Declaration.Enum;
 
 namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 {
@@ -56,7 +56,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             var proxyComponents = new List<IArchitectureComponent>(invokedMembers.Count);
 
             var booleanArrayType = GetBooleanArrayType();
-            var runningStates = new VhdlBuilder.Representation.Declaration.Enum
+            var runningStates = new Enum
             {
                 Name = (NamePrefix + "_RunningStates").ToExtendedVhdlId(),
             };
@@ -129,7 +129,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             int targetComponentCount,
             string targetMemberName,
             List<KeyValuePair<string, int>> invokedFromComponents,
-            VhdlBuilder.Representation.Declaration.Enum runningStates,
+            Enum runningStates,
             Dictionary<string, IArchitectureComponent> componentsByName)
         {
             var proxyComponentName = NamePrefix + targetMemberName;
@@ -226,7 +226,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 for (int i = 0; i < invocationInstanceCount; i++)
                 {
                     var runningIndexName = proxyComponent
-                        .CreatePrefixedSegmentedObjectName(invokerName, "runningIndex", i.ToString(CultureInfo.InvariantCulture));
+                        .CreatePrefixedSegmentedObjectName(invokerName, "runningIndex", i.ToTechnicalString());
                     var runningIndexVariableReference = runningIndexName.ToVhdlVariableReference();
                     proxyComponent.LocalVariables.Add(new Variable
                     {
@@ -239,7 +239,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     });
 
                     var runningStateVariableName = proxyComponent
-                        .CreatePrefixedSegmentedObjectName(invokerName, "runningState", i.ToString(CultureInfo.InvariantCulture));
+                        .CreatePrefixedSegmentedObjectName(invokerName, "runningState", i.ToTechnicalString());
                     var runningStateVariableReference = runningStateVariableName.ToVhdlVariableReference();
                     proxyComponent.LocalVariables.Add(new Variable
                     {
@@ -250,8 +250,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
 
                     var invocationHandlerBlock = new LogicalBlock(
                         new LineComment(
-                            "Invocation handler #" + i.ToString(CultureInfo.InvariantCulture) +
-                            " out of " + invocationInstanceCount.ToString(CultureInfo.InvariantCulture) +
+                            "Invocation handler #" + i.ToTechnicalString() +
+                            " out of " + invocationInstanceCount.ToTechnicalString() +
                             " corresponding to " + invokerName));
                     bodyBlock.Add(invocationHandlerBlock);
 

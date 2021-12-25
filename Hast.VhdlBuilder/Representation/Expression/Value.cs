@@ -89,7 +89,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public static IVhdlElement UnrangedInt(int value) => new Value
         {
             DataType = KnownDataTypes.UnrangedInt,
-            Content = value.ToString(CultureInfo.InvariantCulture),
+            Content = value.ToTechnicalString(),
         };
     }
 }

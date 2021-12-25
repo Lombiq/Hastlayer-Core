@@ -1,10 +1,10 @@
-using Hast.Transformer.Vhdl.Helpers;
+﻿using Hast.Transformer.Vhdl.Helpers;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
@@ -103,7 +103,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             string targetStateMachineName,
             string signalName,
             int index) => ArchitectureComponentNameHelper
-                .CreatePrefixedSegmentedObjectName(componentName, targetStateMachineName, signalName, index.ToString(CultureInfo.InvariantCulture))
+                .CreatePrefixedSegmentedObjectName(componentName, targetStateMachineName, signalName, index.ToTechnicalString())
                 .ToVhdlSignalReference();
     }
 }
