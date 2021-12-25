@@ -2,6 +2,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using Hast.Synthesis.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -125,81 +126,44 @@ namespace Hast.Synthesis.Services
             ref bool isSignAgnosticBinaryOperatorType,
             ref bool isSignAgnosticUnaryOperatorType)
         {
-            BinaryOperatorType? binaryOperator = null;
-            UnaryOperatorType? unaryOperator = null;
+            isSignAgnosticBinaryOperatorType =
+                isSignAgnosticBinaryOperatorType ||
+                operatorString is "and" or "or" or "xor";
+            isSignAgnosticUnaryOperatorType = isSignAgnosticUnaryOperatorType || operatorString == "not";
 
-            switch (operatorString)
+            // Notes:
+            // xor:
+
+            var binaryOrUnaryOperator = operatorString switch
             {
-                case "and":
-                    isSignAgnosticBinaryOperatorType = true;
-                    binaryOperator = BinaryOperatorType.BitwiseAnd;
-                    break;
-                case "add":
-                    binaryOperator = BinaryOperatorType.Add;
-                    break;
-                case var op when op.StartsWith("div", StringComparison.Ordinal):
-                    binaryOperator = BinaryOperatorType.Divide;
-                    break;
-                case "eq":
-                    binaryOperator = BinaryOperatorType.Equality;
-                    break;
-                case "ge":
-                    binaryOperator = BinaryOperatorType.GreaterThanOrEqual;
-                    break;
-                case "gt":
-                    binaryOperator = BinaryOperatorType.GreaterThan;
-                    break;
-                case "le":
-                    binaryOperator = BinaryOperatorType.LessThanOrEqual;
-                    break;
-                case "lt":
-                    binaryOperator = BinaryOperatorType.LessThan;
-                    break;
-                case "mod":
-                    // BinaryOperatorType.Modulus is actually the remainder operator and corresponds to the
-                    // VHDL operator rem, see below.
-                    break;
-                case var op when op.StartsWith("mul", StringComparison.Ordinal):
-                    binaryOperator = BinaryOperatorType.Multiply;
-                    break;
-                case "neq":
-                    binaryOperator = BinaryOperatorType.InEquality;
-                    break;
-                case "not":
-                    isSignAgnosticUnaryOperatorType = true;
-                    unaryOperator = operandSizeBits == 1
-                        ? UnaryOperatorType.Not
-                        : UnaryOperatorType.BitNot;
-                    break;
-                case "or":
-                    isSignAgnosticBinaryOperatorType = true;
-                    binaryOperator = BinaryOperatorType.BitwiseOr;
-                    break;
-                case var op when op.StartsWith("dotnet_shift_left", StringComparison.Ordinal):
-                    binaryOperator = BinaryOperatorType.ShiftLeft;
-                    break;
-                case var op when op.StartsWith("dotnet_shift_right", StringComparison.Ordinal):
-                    binaryOperator = BinaryOperatorType.ShiftRight;
-                    break;
-                case "rem":
-                    binaryOperator = BinaryOperatorType.Modulus;
-                    break;
-                case "sub":
-                    binaryOperator = BinaryOperatorType.Subtract;
-                    break;
-                case "unary_minus":
-                    unaryOperator = UnaryOperatorType.Minus;
-                    break;
-                case "xor":
-                    // There is no separate bitwise and conditional version for XOR.
-                    isSignAgnosticBinaryOperatorType = true;
-                    binaryOperator = BinaryOperatorType.ExclusiveOr;
-                    break;
-                default:
-                    throw new NotSupportedException("Unrecognized operator in timing report: " + operatorString + ".");
-            }
+                "and" => BinaryOperatorType.BitwiseAnd,
+                "add" => BinaryOperatorType.Add,
+                var op when op.StartsWith("div", StringComparison.Ordinal) => BinaryOperatorType.Divide,
+                "eq" => BinaryOperatorType.Equality,
+                "ge" => BinaryOperatorType.GreaterThanOrEqual,
+                "gt" => BinaryOperatorType.GreaterThan,
+                "le" => BinaryOperatorType.LessThanOrEqual,
+                "lt" => BinaryOperatorType.LessThan,
+                // BinaryOperatorType.Modulus is actually the remainder operator and corresponds to the VHDL operator
+                // rem, see below.
+                "mod" => Union.Neither<BinaryOperatorType?, UnaryOperatorType?>(),
+                var op when op.StartsWith("mul", StringComparison.Ordinal) => BinaryOperatorType.Multiply,
+                "neq" => BinaryOperatorType.InEquality,
+                "not" => operandSizeBits == 1 ? UnaryOperatorType.Not : UnaryOperatorType.BitNot,
+                "or" => BinaryOperatorType.BitwiseOr,
+                var op when op.StartsWith("dotnet_shift_left", StringComparison.Ordinal) =>
+                    BinaryOperatorType.ShiftLeft,
+                var op when op.StartsWith("dotnet_shift_right", StringComparison.Ordinal) => BinaryOperatorType
+                    .ShiftRight,
+                "rem" => BinaryOperatorType.Modulus,
+                "sub" => BinaryOperatorType.Subtract,
+                "unary_minus" => UnaryOperatorType.Minus,
+                // There is no separate bitwise and conditional version for XOR.
+                "xor" => BinaryOperatorType.ExclusiveOr,
+                _ => throw new NotSupportedException("Unrecognized operator in timing report: " + operatorString + "."),
+            };
 
-            return (binaryOperator, unaryOperator);
+            return binaryOrUnaryOperator.ToTuple();
         }
 
         private static bool WhenBinaryOperatorHasvalue(
