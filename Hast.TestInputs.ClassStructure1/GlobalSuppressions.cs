@@ -20,3 +20,8 @@ using static Hast.TestInputs.ClassStructure1.SuppressionConstants;
     "S3353:Unchanged local variables should be \"const\"",
     Justification = ThatsThePoint,
     Scope = "module")]
+[assembly: SuppressMessage(
+    "CodeQuality",
+    "IDE0079:Remove unnecessary suppression",
+    Justification = "There are a bunch of false positives.",
+    Scope = "module")]
