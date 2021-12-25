@@ -144,7 +144,7 @@ namespace Hast.Remote.Worker.Services
             }
             catch (OperationCanceledException)
             {
-                _logger.LogInformation("cancelling {0} tasks", _transformationTasks.Count);
+                _logger.LogInformation("Cancelling {0} tasks.", _transformationTasks.Count);
                 await Task.WhenAll(_transformationTasks.Values);
                 Dispose();
             }
@@ -223,7 +223,7 @@ namespace Hast.Remote.Worker.Services
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
-                _logger.LogError(ex, "processing the job blob {0} failed", blob.Name);
+                _logger.LogError(ex, "Processing the job blob {0} failed.", blob.Name);
             }
 
             telemetry.FinishTimeUtc = _clock.UtcNow;
