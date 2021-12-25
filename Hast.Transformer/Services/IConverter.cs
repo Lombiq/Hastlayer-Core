@@ -14,7 +14,7 @@ namespace Hast.Transformer.Services
     public interface IConverter : IDependency
     {
         /// <summary>
-        /// Gets the name of the converter. Normally this is the type name and in this case it should not be left as the
+        /// Gets the name of the converter. Normally this is the type name and in this case it should be left as the
         /// interface implementation.
         /// </summary>
         string Name => GetType().Name;
