@@ -1,5 +1,6 @@
 using Hast.Xilinx.Abstractions.ManifestProviders;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -7,16 +8,13 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
     public class XilinxSamplesVerificationTests : SamplesVerificationTestsBase
     {
-        public static IEnumerable<object[]> AllDevices =>
-            new[]
-            {
-                new object[] { Nexys4DdrManifestProvider.DeviceName },
-                new object[] { AlveoU50ManifestProvider.DeviceName },
-                new object[] { AlveoU200ManifestProvider.DeviceName },
-                new object[] { AlveoU250ManifestProvider.DeviceName },
-                new object[] { AlveoU280ManifestProvider.DeviceName },
-                new object[] { AwsF1ManifestProvider.DeviceName },
-            };
+        private static readonly string[] _devicesToTest =
+        {
+            Nexys4DdrManifestProvider.DeviceName,
+            AlveoU50ManifestProvider.DeviceName,
+        };
+
+        public static IEnumerable<object[]> AllDevices => _devicesToTest.Select(name => new object[] { name });
 
         [Theory, MemberData(nameof(AllDevices))]
         public async Task BasicSamplesMatchApproved(string deviceName) =>
