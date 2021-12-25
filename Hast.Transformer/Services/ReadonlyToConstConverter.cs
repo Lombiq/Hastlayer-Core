@@ -4,9 +4,11 @@ using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Attribute = ICSharpCode.Decompiler.CSharp.Syntax.Attribute;
 
 namespace Hast.Transformer.Services
 {
@@ -104,7 +106,7 @@ namespace Hast.Transformer.Services
                     result = value.Value switch
                     {
                         string => resultString,
-                        int => int.Parse(resultString, CultureInfo.InvariantCulture),
+                        int => resultString.ToTechnicalInt(),
                         uint => uint.Parse(resultString, CultureInfo.InvariantCulture),
                         long => long.Parse(resultString, CultureInfo.InvariantCulture),
                         ulong => ulong.Parse(resultString, CultureInfo.InvariantCulture),

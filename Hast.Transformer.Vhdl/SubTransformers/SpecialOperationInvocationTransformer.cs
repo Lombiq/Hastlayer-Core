@@ -9,7 +9,6 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
@@ -53,10 +52,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // Transforming the operation to parallel signal-using operations.
 
             // The last argument for SIMD operations is always the max degree of parallelism.
-            var maxDegreeOfParallelism = int.Parse(((Value)transformedParameters.Last()).Content, CultureInfo.InvariantCulture);
+            var parameters = transformedParameters.AsList(); // Convert to IList to prevent multiple enumerations.
+            var maxDegreeOfParallelism = ((Value)parameters[^1]).Content.ToTechnicalInt();
 
-            var vector1 = (DataObjectReference)transformedParameters.First();
-            var vector2 = (DataObjectReference)transformedParameters.Skip(1).First();
+            var vector1 = (DataObjectReference)parameters[0];
+            var vector2 = (DataObjectReference)parameters[1];
             var binaryOperations = new List<PartiallyTransformedBinaryOperatorExpression>();
 
             var simdBinaryOperator = simdOperation switch
