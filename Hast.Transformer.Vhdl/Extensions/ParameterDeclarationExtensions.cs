@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
@@ -13,7 +13,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             // If the parameter is a value type then still it needs to be out-flowing if this is a constructor.
             parameter.GetActualType().IsReferenceType == true ||
             (parameter.FindFirstParentEntityDeclaration().GetFullName().IsConstructorName() &&
-            parameter.FindFirstParentTypeDeclaration().GetFullName() == parameter.GetActualTypeFullName()) ||
+                parameter.FindFirstParentTypeDeclaration().GetFullName() == parameter.GetActualTypeFullName()) ||
             parameter.ParameterModifier == ParameterModifier.Out ||
             parameter.ParameterModifier == ParameterModifier.Ref;
     }
