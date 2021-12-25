@@ -112,7 +112,7 @@ namespace Hast.Remote.Worker.Services
                             .StorageUri
                             .PrimaryUri
                             .ToString()
-                            .Contains("$$$ORCHARD$$$.$$$", StringComparison.Ordinal))
+                            .ContainsOrdinalIgnoreCase("$$$ORCHARD$$$.$$$"))
                         .Cast<CloudBlockBlob>()
                         .Where(blob => blob.Properties.LeaseStatus == LeaseStatus.Unlocked && blob.Properties.Length != 0);
 
