@@ -39,13 +39,17 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                             .AddMemberInvocationInstanceCountConfiguration(
                                 new MemberInvocationInstanceCountConfigurationForMethod<ParallelCases>(
                                     p => p.WhenAllWhenAnyAwaitedTasks(0), 0)
-                                { MaxDegreeOfParallelism = 3 });
+                                {
+                                    MaxDegreeOfParallelism = 3,
+                                });
                         configuration
                             .TransformerConfiguration()
                             .AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<ParallelCases>(
                                 p => p.ObjectUsingTasks(0), 0)
-                            { MaxDegreeOfParallelism = 3 });
+                            {
+                                MaxDegreeOfParallelism = 3,
+                            });
                     });
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
