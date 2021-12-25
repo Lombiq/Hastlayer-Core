@@ -81,7 +81,8 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
             // WithFilenameGenerator call below.
             var defaultFileNameGenerator = builder.Build().FilenameGenerator;
 
-            // Alter the FileNameGenerator to strip out invalid path characters.
+            // Alter the FileNameGenerator to strip out invalid path characters. Prevents weird file names like this:
+            // StaticTestInputAssembliesVerificationTests.<ClassStructureAssembliesMatchApproved.received.vhdl
             builder = builder
                 .WithFilenameGenerator((testMethodInfo, discriminator, type, extension) =>
                     string.Concat(
