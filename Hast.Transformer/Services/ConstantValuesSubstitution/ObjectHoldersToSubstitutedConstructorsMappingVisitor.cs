@@ -26,8 +26,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             // another instance).
 
             if (objectCreateExpression.Parent.Is(
-                assignment =>
-                assignment.Left.GetActualType()?.GetFullName() == objectCreateExpression.Type.GetFullName(),
+                assignment => assignment.Left.GetActualType()?.GetFullName() == objectCreateExpression.Type.GetFullName(),
                 out AssignmentExpression parentAssignment))
             {
                 var constructorDeclaration = objectCreateExpression

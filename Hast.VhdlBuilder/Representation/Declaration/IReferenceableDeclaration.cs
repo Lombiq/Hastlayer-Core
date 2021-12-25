@@ -9,15 +9,16 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     }
 
     /// <summary>
-    /// Represents a VHDL element that is <see cref="IReferenceableDeclaration"/> and also can be referenced as an
-    /// <see cref="IVhdlElement"/>.
+    /// Represents a VHDL element that is <see cref="IReferenceableDeclaration"/> and also can produce a VHDL reference
+    /// to itself. E.g. an implementation of this can be a signal or variable declaration that can produce a reference
+    /// to itself to be used in the body of a process.
     /// </summary>
     /// <typeparam name="T">The type of the reference.</typeparam>
     public interface IReferenceableDeclaration<out T> : IReferenceableDeclaration
         where T : IVhdlElement
     {
         /// <summary>
-        /// Returns <see langword="this" />.
+        /// Creates a reference to the declared type to be used in the body of entities.
         /// </summary>
         T ToReference();
     }

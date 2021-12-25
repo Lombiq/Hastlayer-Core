@@ -32,10 +32,10 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             var valueDescriptors = GetOrCreateValueDescriptors(valueHolder.GetFullName());
 
-            // Simply using != would yield a reference equality check.
             if (disallowDifferentValues &&
                 expression != null &&
                 valueDescriptors.TryGetValue(scope, out var existingExpression) &&
+                // Simply using != would yield a reference equality check.
                 (existingExpression == null || !expression.Value.Equals(existingExpression.Value)))
             {
                 expression = null;

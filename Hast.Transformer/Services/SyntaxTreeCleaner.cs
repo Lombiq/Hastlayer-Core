@@ -42,10 +42,10 @@ namespace Hast.Transformer.Services
             {
                 var fullName = member.GetFullName();
                 if (!(noIncludedMembers ||
-                    configuration.HardwareEntryPointMemberFullNames.Contains(fullName) ||
-                    fullName.GetMemberNameAlternates().Intersect(configuration.HardwareEntryPointMemberFullNames).Any() ||
-                    configuration.HardwareEntryPointMemberNamePrefixes
-                        .Any(prefix => member.GetSimpleName().StartsWith(prefix, StringComparison.Ordinal))) ||
+                        configuration.HardwareEntryPointMemberFullNames.Contains(fullName) ||
+                        fullName.GetMemberNameAlternates().Intersect(configuration.HardwareEntryPointMemberFullNames).Any() ||
+                        configuration.HardwareEntryPointMemberNamePrefixes
+                            .Any(prefix => member.GetSimpleName().StartsWith(prefix, StringComparison.Ordinal))) ||
                     !_memberSuitabilityChecker.IsSuitableHardwareEntryPointMember(member, typeDeclarationLookupTable))
                 {
                     continue;
@@ -174,8 +174,8 @@ namespace Hast.Transformer.Services
                     typeReferenceExpression.Type.Is<SimpleType>(simple => simple.Identifier == "MethodImplOptions"))
                 {
                     // This can happen when a method is extern (see:
-                    // https://msdn.microsoft.com/en-us/library/e59b22c5.aspx), thus has no body but has the
-                    // MethodImpl attribute (e.g. Math.Abs(double value). Nothing to do.
+                    // https://msdn.microsoft.com/en-us/library/e59b22c5.aspx), thus has no body but has the MethodImpl
+                    // attribute (e.g. Math.Abs(double value). Nothing to do.
                     return;
                 }
 

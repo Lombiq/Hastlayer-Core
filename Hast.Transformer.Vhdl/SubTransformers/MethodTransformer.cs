@@ -43,9 +43,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     .GetMaxInvocationInstanceCountConfigurationForMember(method).MaxInvocationInstanceCount;
                 var stateMachineResults = new IArchitectureComponentResult[stateMachineCount];
 
-                // Not much use to parallelize computation unless there are a lot of state machines to create or
-                // the method is very complex. We'll need to examine when to parallelize here and determine it in
-                // runtime.
+                // Not much use to parallelize computation unless there are a lot of state machines to create or the
+                // method is very complex. We'll need to examine when to parallelize here and determine it in runtime.
                 if (stateMachineCount > 50)
                 {
                     var stateMachineComputingTasks = new List<Task<IArchitectureComponentResult>>();
@@ -139,8 +138,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Expression = parameterSignalReference,
                 });
 
-                // If the parameter can be modified inside and those changes should be passed back then we need to
-                // write the local variables back to parameters.
+                // If the parameter can be modified inside and those changes should be passed back then we need to write
+                // the local variables back to parameters.
                 if (!parameter.IsOutFlowing()) continue;
 
                 if (isFirstOutFlowingParameter)

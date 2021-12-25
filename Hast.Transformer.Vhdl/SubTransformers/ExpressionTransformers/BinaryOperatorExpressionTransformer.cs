@@ -94,7 +94,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             ThrowIfUnsupported(leftType, rightType, expression);
 
-            // The commented out cases with unsupported operators are here so adding them later is easier.
             binary.Operator = expression.Operator switch
             {
                 BinaryOperatorType.Add => BinaryOperator.Add,
@@ -139,11 +138,13 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             var resultVhdlType = _typeConverter.ConvertType(resultType, context.TransformationContext);
             var resultTypeSize = resultVhdlType.GetSize();
 
-            var operationResultDataObjectReference = operationResultDataObjectIsVariable ? stateMachine
-                .CreateVariableWithNextUnusedIndexedName("binaryOperationResult", resultVhdlType)
-                .ToReference() : stateMachine
-                .CreateSignalWithNextUnusedIndexedName("binaryOperationResult", resultVhdlType)
-                .ToReference();
+            var operationResultDataObjectReference = operationResultDataObjectIsVariable
+                ? stateMachine
+                    .CreateVariableWithNextUnusedIndexedName("binaryOperationResult", resultVhdlType)
+                    .ToReference()
+                : stateMachine
+                    .CreateSignalWithNextUnusedIndexedName("binaryOperationResult", resultVhdlType)
+                    .ToReference();
 
             IVhdlElement binaryElement = binary;
 
@@ -171,6 +172,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 ("signed", "signed") => clockCyclesNeededForSignedOperation,
                 ({ } left, { } right) when left == right => clockCyclesNeededForUnsignedOperation,
+                // If the operands have different signs then let's take the slower version just to be safe.
                 _ => Math.Max(clockCyclesNeededForSignedOperation, clockCyclesNeededForUnsignedOperation),
             };
 
@@ -389,7 +391,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             {
                 isShift = true;
 
-                // Contrary to what happens in VHDL binary shifting in .NET will only use the lower 5 bits (for 32b
+                // Contrary to what happens in VHDL, binary shifting in .NET will only use the lower 5 bits (for 32b
                 // operands) or 6 bits (for 64b operands) of the shift count. So e.g. 1 << 33 won't produce 0 (by
                 // shifting out to the void) but 2, since only a shift by 1 happens (as 33 is 100001 in binary).
                 // See: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/left-shift-operator
@@ -473,6 +475,14 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             BinaryOperatorExpression expression)
         {
             var shouldResizeResult =
+                //// If the type of the result is the same as the type of the binary expression but the expression is
+                //// a multiplication then this means that the result of the operation wouldn't fit into the result
+                //// type. This is allowed in .NET (an explicit cast is needed in C# but that will be removed by the
+                //// compiler) but will fail in VHDL with something like "[Synth 8-690] width mismatch in assignment;
+                //// target has 16 bits, source has 32 bits." In this cases we need to add a type conversion. Also
+                //// see the block below.
+                //// E.g. ushort = ushort * ushort is valid in IL but in VHDL it must have a length truncation:
+                //// unsigned(15 downto 0) = resize(unsigned(15 downto 0) * unsigned(15 downto 0), 16)
                 isMultiplication &&
                 (
                     resultType.Equals(expression.GetActualType()) ||
@@ -482,14 +492,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             if (!shouldResizeResult && left.Type != null && right.Type != null)
             {
                 shouldResizeResult =
+                    // If the operands and the result have the same size then the result won't fit.
                     (isMultiplication &&
-                     resultTypeSize != 0 &&
-                     resultTypeSize == left.Size &&
-                     resultTypeSize == right.Size)
+                         resultTypeSize != 0 &&
+                         resultTypeSize == left.Size &&
+                         resultTypeSize == right.Size)
                     ||
+                    // If the operation is an addition and the types of the result and the operands differ then we also
+                    // have to resize.
                     (expression.Operator == BinaryOperatorType.Add &&
-                     !(resultType.Equals(left.Type) && resultType.Equals(right.Type)))
+                        !(resultType.Equals(left.Type) && resultType.Equals(right.Type)))
                     ||
+                    // If the operand and result sizes don't match.
                     (resultTypeSize != 0 && (resultTypeSize != left.Size || resultTypeSize != right.Size));
             }
 

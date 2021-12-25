@@ -1,11 +1,11 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure2;
 using Hast.TestInputs.Static;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
-using Xunit;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
@@ -18,10 +18,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 var hardwareDescription = await TransformAssembliesToVhdlAsync(
                     transformer,
                     new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
-                    configuration =>
-                    {
-                        configuration.TransformerConfiguration().UseSimpleMemory = false;
-                    });
+                    configuration => configuration.TransformerConfiguration().UseSimpleMemory = false);
 
                 hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
             });

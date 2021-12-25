@@ -53,14 +53,14 @@ namespace Hast.Transformer.Vhdl.Verifiers
             var field = fields.Values
                 .SingleOrDefault(f => f.GetMemberResolveResult().GetFullName() == fullName);
 
-            // The field won't be on the compiler-generated class if the member reference accesses a
-            // user-defined type's field.
+            // The field won't be on the compiler-generated class if the member reference accesses a user-defined type's
+            // field.
             if (field == null) return;
 
-            // Is the field assigned to? Because we don't support that currently, since with it being
-            // converted to a parameter we'd need to return its value and assign it to the caller's
-            // variable. Maybe we'll allow this with static field support, but not for lambdas used in
-            // parallelized expressions (since that would require concurrent access too).
+            // Is the field assigned to? Because we don't support that currently, since with it being converted to a
+            // parameter we'd need to return its value and assign it to the caller's variable. Maybe we'll allow this
+            // with static field support, but not for lambdas used in parallelized expressions (since that would require
+            // concurrent access too).
             var isAssignedTo =
                 // The field is directly assigned to.
                 (memberReferenceExpression.Parent is AssignmentExpression directAssignment &&
@@ -73,8 +73,8 @@ namespace Hast.Transformer.Vhdl.Verifiers
             if (isAssignedTo)
             {
                 throw new NotSupportedException(
-                    "It's not supported to modify the content of a variable coming from the parent scope in a lambda expression. " +
-                    "Pass arguments instead. Affected method: " + Environment.NewLine + method);
+                    "It's not supported to modify the content of a variable coming from the parent scope in a lambda " +
+                    "expression. Pass arguments instead. Affected method: " + Environment.NewLine + method);
             }
         }
 

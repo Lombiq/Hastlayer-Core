@@ -7,8 +7,7 @@ using System.Linq;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
-    public class TypesCreator
-        : ITypesCreator
+    public class TypesCreator : ITypesCreator
     {
         private readonly IArrayTypesCreator _arrayTypesCreator;
         private readonly IEnumTypesCreator _enumTypesCreator;

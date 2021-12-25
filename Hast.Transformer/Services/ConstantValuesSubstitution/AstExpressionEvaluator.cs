@@ -99,8 +99,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             return unaryOperatorExpression.Operator switch
             {
-                ////case UnaryOperatorType.Any:
-                ////    break;
                 UnaryOperatorType.Not => !value,
                 UnaryOperatorType.BitNot => ~value,
                 UnaryOperatorType.Minus => -value,

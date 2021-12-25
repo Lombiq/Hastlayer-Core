@@ -3,7 +3,7 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
     /// <summary>
-    /// And interface for sub-transformers that support only support specific node types.
+    /// An interface for sub-transformers that support only support specific node types.
     /// </summary>
     public interface ISpecificNodeTypeTransformer
     {

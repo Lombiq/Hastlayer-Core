@@ -33,8 +33,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var traverseTo = node.Children;
 
-            // If for debugging you want to make the below processing serial instead of it running in parallel then
-            // add .Result to every transformation call and wrap them into Task.FromResult() methods.
+            // If for debugging you want to make the below processing serial instead of it running in parallel then add
+            // .Result to every transformation call and wrap them into Task.FromResult() methods.
             return node.NodeType switch
             {
                 NodeType.Member =>
@@ -87,8 +87,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                             "Class inheritance is not supported. Affected class: " + node.GetFullName() + ".");
                     }
 
-                    // Records need to be created only for those types that are neither display classes, nor
-                    // hardware entry point types or static types
+                    // Records need to be created only for those types that are neither display classes, nor hardware
+                    // entry point types or static types
                     if (!typeDeclaration.GetFullName().IsDisplayOrClosureClassName() &&
                         !typeDeclaration.Members.Any(member => member.IsHardwareEntryPointMember()) &&
                         !typeDeclaration.Modifiers.HasFlag(Modifiers.Static))

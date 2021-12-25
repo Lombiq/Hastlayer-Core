@@ -127,30 +127,30 @@ namespace Hast.Transformer.Services
             }
 
             private void AdjustMaxRecursionDepth(
-                MemberInvocationInstanceCountConfiguration invokingMemberMaxInvocationConfiguration,
-                MemberInvocationInstanceCountConfiguration referencedMemberMaxInvocationConfiguration,
+                MemberInvocationInstanceCountConfiguration invoking,
+                MemberInvocationInstanceCountConfiguration referenced,
                 EntityDeclaration referencedMember,
                 string referencedMemberFullName)
             {
-                if (invokingMemberMaxInvocationConfiguration.MaxRecursionDepth > referencedMemberMaxInvocationConfiguration.MaxRecursionDepth)
+                if (invoking.MaxRecursionDepth > referenced.MaxRecursionDepth)
                 {
-                    referencedMemberMaxInvocationConfiguration.MaxRecursionDepth = invokingMemberMaxInvocationConfiguration.MaxRecursionDepth;
+                    referenced.MaxRecursionDepth = invoking.MaxRecursionDepth;
 
                     // Same logic here than above with MaxDegreeOfParallelism.
                     if (_membersInvokedFromNonRecursive.Contains(referencedMember))
                     {
-                        referencedMemberMaxInvocationConfiguration.MaxRecursionDepth++;
+                        referenced.MaxRecursionDepth++;
                     }
                 }
-                else if (invokingMemberMaxInvocationConfiguration.MaxRecursionDepth == 1 &&
+                else if (invoking.MaxRecursionDepth == 1 &&
                          !(referencedMemberFullName.IsDisplayOrClosureClassMemberName() ||
                          referencedMemberFullName.IsInlineCompilerGeneratedMethodName()))
                 {
                     _membersInvokedFromNonParallel.Add(referencedMember);
 
-                    if (referencedMemberMaxInvocationConfiguration.MaxRecursionDepth != 1)
+                    if (referenced.MaxRecursionDepth != 1)
                     {
-                        referencedMemberMaxInvocationConfiguration.MaxRecursionDepth++;
+                        referenced.MaxRecursionDepth++;
                     }
                 }
             }

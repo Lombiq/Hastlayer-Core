@@ -14,8 +14,8 @@ namespace Hast.Transformer.Services
                 method.Parent is TypeDeclaration declaration &&
                 // If it's a public virtual method,
                 (method.Modifiers == (Modifiers.Public | Modifiers.Virtual) ||
-                // or a public override method which is the same in F# (no direct virtual there, just abstract
-                // and override)
+                // or a public override method which is the same in F# (no direct virtual there, just abstract and
+                // override)
                 method.Modifiers == (Modifiers.Public | Modifiers.Override) ||
                 // or a public virtual async method,
                 method.Modifiers == (Modifiers.Public | Modifiers.Virtual | Modifiers.Async) ||

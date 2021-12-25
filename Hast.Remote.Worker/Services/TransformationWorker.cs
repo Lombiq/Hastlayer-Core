@@ -2,7 +2,6 @@ using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Remote.Worker.Models;
-using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using Microsoft.ApplicationInsights;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;

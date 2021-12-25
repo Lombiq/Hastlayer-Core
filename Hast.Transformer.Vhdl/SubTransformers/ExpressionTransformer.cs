@@ -74,6 +74,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 },
                 ObjectCreateExpression objectCreateExpression => TransformObjectCreate(objectCreateExpression, context),
                 DefaultValueExpression defaultValueExpression => TransformDefaultValue(defaultValueExpression, context),
+                // DirectionExpressions like ref and out modifiers on method invocation arguments don't need to be
+                // handled specially: these are just out-flowing parameters.
                 DirectionExpression directionExpression => Transform(directionExpression.Expression, context),
                 _ => throw new NotSupportedException(
                     $"Expressions of type {expression.GetType()} are not supported. The {nameof(expression)} was: " +
@@ -101,7 +103,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private IVhdlElement TransformObjectCreate(ObjectCreateExpression objectCreateExpression, SubTransformerContext context)
         {
-            var scope = context.Scope;
             var initiailizationResult = InitializeRecord(objectCreateExpression, objectCreateExpression.Type, context);
 
             // Running the constructor, which needs to be done before initializers.
@@ -113,7 +114,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         .SingleOrDefault(member => member.GetFullName() == constructorFullName) is MethodDeclaration
                     constructor)
             {
-                scope.CurrentBlock.Add(new LineComment("Invoking the target's constructor."));
+                context.Scope.CurrentBlock.Add(new LineComment("Invoking the target's constructor."));
 
                 // The easiest is to fake an invocation.
                 var constructorInvocation = new InvocationExpression(
@@ -222,10 +223,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                         context);
             }
 
-            var scope = context.Scope;
-            var stateMachine = scope.StateMachine;
-
-            var reference = stateMachine.CreatePrefixedObjectName(identifierExpression.Identifier).ToVhdlVariableReference();
+            var reference = context.Scope.StateMachine
+                .CreatePrefixedObjectName(identifierExpression.Identifier)
+                .ToVhdlVariableReference();
 
             return identifierExpression.Parent is not BinaryOperatorExpression
                 ? reference
@@ -260,9 +260,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     Operator = UnaryOperator.Negation,
                     Expression = transformedExpression,
                 },
-                // In VHDL there is no boolean negation operator, just the not() function. This will bitwise
-                // negate the value, so for bools it will work as the .NET NOT operator, for other types as a
-                // bitwise NOT.
+                // In VHDL there is no boolean negation operator, just the not() function. This will bitwise negate the
+                // value, so for bools it will work as the .NET NOT operator, for other types as a bitwise NOT.
                 UnaryOperatorType.Not or UnaryOperatorType.BitNot => new Invocation("not", transformedExpression),
                 UnaryOperatorType.Plus => transformedExpression, // Unary plus is a noop.
                 UnaryOperatorType.Await when
@@ -294,8 +293,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             IEnumerable<Expression> arguments = invocationExpression.Arguments;
 
-            // When the SimpleMemory object is passed around it can be omitted since state machines access the
-            // memory directly.
+            // When the SimpleMemory object is passed around it can be omitted since state machines access the memory
+            // directly.
             if (context.TransformationContext.UseSimpleMemory())
             {
                 arguments = arguments.Where(argument => !argument.GetActualType().IsSimpleMemory());
@@ -561,20 +560,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var firstArgument = rightInvocationExpression.Arguments.First();
 
             // Is this the first type of Task starts?
-            var targetMethod = firstArgument is BinaryOperatorExpression binaryOperatorExpression ? binaryOperatorExpression
-                .Right
-                .As<ParenthesizedExpression>()
-                .Expression
-                .As<AssignmentExpression>()
-                .Right
-                .As<MemberReferenceExpression>()
-                .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
-                .As<MethodDeclaration>() : firstArgument
-                .As<CastExpression>()
-                .Expression
-                .As<MemberReferenceExpression>()
-                .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
-                .As<MethodDeclaration>();
+            var targetMethod = firstArgument is BinaryOperatorExpression binaryOperatorExpression
+                ? binaryOperatorExpression
+                    .Right
+                    .As<ParenthesizedExpression>()
+                    .Expression
+                    .As<AssignmentExpression>()
+                    .Right
+                    .As<MemberReferenceExpression>()
+                    .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
+                    .As<MethodDeclaration>()
+                : firstArgument
+                    .As<CastExpression>()
+                    .Expression
+                    .As<MemberReferenceExpression>()
+                    .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
+                    .As<MethodDeclaration>();
 
             // We only need to care about the invocation here. Since this is a Task start there will be
             // some form of await later.
@@ -597,24 +598,21 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private IVhdlElement TransformPrimitiveExpression(PrimitiveExpression primitive, SubTransformerContext context)
         {
-            var scope = context.Scope;
-            var type = primitive.GetActualType();
-
-            var vhdlType = _typeConverter.ConvertType(type, context.TransformationContext);
+            var vhdlType = _typeConverter.ConvertType(primitive.GetActualType(), context.TransformationContext);
             var valueString = primitive.Value.ToString() ?? string.Empty;
             // Replacing decimal comma to decimal dot.
             if (vhdlType.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
 
-            // If a constant value of type real doesn't contain a decimal separator then it will be detected as
-            // integer and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
+            // If a constant value of type real doesn't contain a decimal separator then it will be detected as integer
+            // and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
             if (vhdlType == KnownDataTypes.Real && !valueString.Contains('.', StringComparison.Ordinal))
             {
                 valueString += ".0";
             }
 
-            // The to_signed() and to_unsigned() functions expect signed integer arguments (range: -2147483648
-            // to +2147483647). Thus if the literal is larger than an integer we need to use the binary notation
-            // without these functions.
+            // The to_signed() and to_unsigned() functions expect signed integer arguments (range: -2147483648 to
+            // +2147483647). Thus if the literal is larger than an integer we need to use the binary notation without
+            // these functions.
             if (vhdlType.Name != KnownDataTypes.Int8.Name && vhdlType.Name != KnownDataTypes.UInt8.Name)
             {
                 return valueString.ToVhdlValue(vhdlType);
@@ -635,10 +633,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (!string.IsNullOrEmpty(binaryLiteral))
             {
-                scope.CurrentBlock.Add(new LineComment(
-                    "Since the integer literal " + valueString +
-                    " was out of the VHDL integer range it was substituted with a binary literal (" +
-                    binaryLiteral + ")."));
+                context.Scope.CurrentBlock.Add(new LineComment(
+                    "Since the integer literal " + valueString + " was out of the VHDL integer range it was " +
+                    "substituted with a binary literal (" + binaryLiteral + ")."));
 
                 var size = vhdlType.GetSize();
 
@@ -684,9 +681,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (left is IdentifierExpression &&
                 stateMachine.LocalAliases.Any(alias => alias.Name == leftDataObject.Name))
             {
-                // The left variable was previously swapped for an alias to allow reference-like behavior so
-                // changes made to record fields are propagated. However such aliases can't be assigned to as
-                // that would also overwrite the original variable.
+                // The left variable was previously swapped for an alias to allow reference-like behavior so changes
+                // made to record fields are propagated. However such aliases can't be assigned to as that would also
+                // overwrite the original variable.
                 throw new NotSupportedException(
                     $"The {nameof(assignment)} {expression} is not supported. You can't at the moment assign to a " +
                     $"variable that you previously assigned to using a reference type-holding variable."
@@ -699,10 +696,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             if (assignment.IsPotentialAliasAssignment())
             {
-                // This is an assignment which is possibly just an alias. Since there are no references in VHDL
-                // the best option is to use aliases (instead of assigning back variables after every change).
-                // This is not perfect though since if the now alias variable is assigned to then that won't
-                // work, see the exception above.
+                // This is an assignment which is possibly just an alias. Since there are no references in VHDL the best
+                // option is to use aliases (instead of assigning back variables after every change). This is not
+                // perfect though since if the now alias variable is assigned to then that won't work, see the exception
+                // above.
                 // This might not be needed because of UnneededReferenceVariablesRemover.
 
                 // Switching the left variable out with an alias so it'll have reference-like behavior.
@@ -745,7 +742,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private RecordInitializationResult InitializeRecord(Expression expression, AstType recordAstType, SubTransformerContext context)
         {
-            // Objects are mimicked with records and those don't need instantiation. However it's useful to initialize
+            // Objects are mimicked with records and those don't need instantiation. However, it's useful to initialize
             // all record fields to their default or initial values (otherwise if e.g. a class is instantiated in a
             // loop in the second run the old values could be accessed in VHDL).
 
@@ -763,8 +760,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             var parentAssignment = expression
                 .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == expression);
 
-            // This will only work if the newly created object is assigned to a variable or something else. It
-            // won't work if the newly created object is directly passed to a method for example. However
+            // This will only work if the newly created object is assigned to a variable or something else. It won't
+            // work if the newly created object is directly passed to a method for example. However,
             // DirectlyAccessedNewObjectVariablesCreator takes care of that.
             var recordInstanceAssignmentTarget = parentAssignment.Left;
             result.RecordInstanceIdentifier =
@@ -807,8 +804,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 IVhdlElement initializerExpression = initializationValue;
 
-                // In C# the default value can be e.g. an integer literal for an ushort field. So we need to
-                // take care of that.
+                // In C# the default value can be e.g. an integer literal for an ushort field. So we need to take care
+                // of that.
                 if (field.DataType != initializationValue.DataType)
                 {
                     initializerExpression = _typeConversionTransformer.ImplementTypeConversion(

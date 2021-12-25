@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -41,7 +42,7 @@ namespace Hast.TestInputs.Dynamic
                 codeBuilder.AppendLine("}");
             }
 
-            System.IO.File.WriteAllText("AllBinaryOperatorExpressionVariations.cs", codeBuilder.ToString());
+            File.WriteAllText("AllBinaryOperatorExpressionVariations.cs", codeBuilder.ToString());
 
             memoryIndex = 0;
             codeBuilder.Clear();
@@ -64,7 +65,7 @@ namespace Hast.TestInputs.Dynamic
                 }
             }
 
-            System.IO.File.WriteAllText("AllUnaryOperatorExpressionVariations.cs", codeBuilder.ToString());
+            File.WriteAllText("AllUnaryOperatorExpressionVariations.cs", codeBuilder.ToString());
         }
 
         private static void GenerateTypes(
