@@ -4,7 +4,7 @@
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>ShouldMatchApproved</DefineConstants>
+    <DefineConstants>ShouldMatchApproved</DefineConstants> <!-- This is required by Shouldly on the CI. -->
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Properties\AssemblyInfo.cs" />
