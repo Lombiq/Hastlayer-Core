@@ -3,7 +3,7 @@
 // member, etc.
 
 using System.Diagnostics.CodeAnalysis;
-using static Hast.TestInputs.ClassStructure2.SuppressionConstants;
+using static Hast.TestInputs.Base.SuppressionConstants;
 
 [assembly: SuppressMessage(
     "Style",

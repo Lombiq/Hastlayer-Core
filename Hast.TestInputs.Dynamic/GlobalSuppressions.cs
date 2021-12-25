@@ -3,7 +3,7 @@
 // member, etc.
 
 using System.Diagnostics.CodeAnalysis;
-using static Hast.TestInputs.Dynamic.SuppressionConstants;
+using static Hast.TestInputs.Base.SuppressionConstants;
 
 #pragma warning disable S103 // Lines should not be too long
 [assembly: SuppressMessage(

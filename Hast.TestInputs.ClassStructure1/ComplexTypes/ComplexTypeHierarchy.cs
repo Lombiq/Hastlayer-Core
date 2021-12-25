@@ -1,5 +1,5 @@
-using System.Diagnostics.CodeAnalysis;
-using static Hast.TestInputs.ClassStructure1.SuppressionConstants;
+﻿using System.Diagnostics.CodeAnalysis;
+using static Hast.TestInputs.Base.SuppressionConstants;
 
 namespace Hast.TestInputs.ClassStructure1.ComplexTypes
 {

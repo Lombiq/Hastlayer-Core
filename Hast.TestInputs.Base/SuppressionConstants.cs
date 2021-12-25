@@ -1,4 +1,4 @@
-namespace Hast.TestInputs.Static
+namespace Hast.TestInputs.Base
 {
     public static class SuppressionConstants
     {
@@ -6,6 +6,6 @@ namespace Hast.TestInputs.Static
         /// Justification for disabling warnings that'd make the test. It's because we test scenarios the warning
         /// wants to alter or remove.
         /// </summary>
-        internal const string ThatsThePoint = "This is the point of the exercise.";
+        public const string ThatsThePoint = "This is the point of the exercise.";
     }
 }
