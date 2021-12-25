@@ -2,7 +2,6 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Expression

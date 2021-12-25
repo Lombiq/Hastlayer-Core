@@ -65,24 +65,25 @@ namespace Hast.Remote.Worker.Services
             var timerIsBusy = false;
 
             // The API doesn't make it possible, however the state is handled manually.
-#pragma warning disable AsyncFixer03 // Fire-and-forget async-void methods or delegates
-#pragma warning disable VSTHRD101 // Avoid unsupported async delegates
-            _oldResultBlobsCleanerTimer.Elapsed += async (_, _) =>
+            _oldResultBlobsCleanerTimer.Elapsed += (_, _) =>
             {
                 if (timerIsBusy) return;
 
                 try
                 {
-                    // Removing those result blobs that weren't deleted somehow (like the client exited while waiting
-                    // for the result to appear, thus never requesting it hence it never getting deleted).
-                    var oldResultBlobs = (await GetBlobsAsync(container, "results/"))
-                        .Cast<CloudBlockBlob>()
-                        .Where(blob => blob.Properties.LastModified < _clock.UtcNow.AddHours(-1));
-
-                    foreach (var blob in oldResultBlobs)
+                    Task.Run(async () =>
                     {
-                        await blob.DeleteAsync();
-                    }
+                        // Removing those result blobs that weren't deleted somehow (like the client exited while waiting
+                        // for the result to appear, thus never requesting it hence it never getting deleted).
+                        var oldResultBlobs = (await GetBlobsAsync(container, "results/"))
+                            .Cast<CloudBlockBlob>()
+                            .Where(blob => blob.Properties.LastModified < _clock.UtcNow.AddHours(-1));
+
+                        foreach (var blob in oldResultBlobs)
+                        {
+                            await blob.DeleteAsync();
+                        }
+                    }).Wait();
                 }
                 catch (Exception ex) when (!ex.IsFatal())
                 {
@@ -94,8 +95,6 @@ namespace Hast.Remote.Worker.Services
                     timerIsBusy = false;
                 }
             };
-#pragma warning restore VSTHRD101 // Avoid unsupported async delegates
-#pragma warning restore AsyncFixer03 // Fire-and-forget async-void methods or delegates
 
             _oldResultBlobsCleanerTimer.Enabled = true;
         }
