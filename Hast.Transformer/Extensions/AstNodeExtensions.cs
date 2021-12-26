@@ -5,6 +5,7 @@ using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
@@ -18,6 +19,15 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         {
             switch (node)
             {
+                case PrimitiveType primitiveType:
+                    return primitiveType.Keyword;
+                case ComposedType composedType:
+                    var name = composedType.BaseType.GetFullName();
+                    if (!composedType.ArraySpecifiers.Any()) return name;
+
+                    var nameBuilder = new StringBuilder(name);
+                    foreach (var arraySpecifier in composedType.ArraySpecifiers.Select(nameBuilder.Append)) nameBuilder.Append(arraySpecifier);
+                    return nameBuilder.ToString();
                 case TypeDeclaration:
                 case AstType:
                     return node.GetActualTypeFullName();
@@ -49,27 +59,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 case AssignmentExpression assignment:
                     return node.CreateNameForUnnamedNode() + assignment.Left.GetFullName() + assignment.Right.GetFullName();
                 default:
-                    var referencedMemberFullName = node.GetReferencedMemberFullName();
-                    if (!string.IsNullOrEmpty(referencedMemberFullName)) return referencedMemberFullName;
-                    break;
+                    return GetFullNameOfUnknownNode(node);
             }
-
-            if (node.GetResolveResult<ILVariableResolveResult>() is { } iLVariableResolveResult)
-            {
-                return CreateParentEntityBasedName(node, iLVariableResolveResult.Variable.Name);
-            }
-
-            if (node.Annotation<ILVariable>() is { } ilVariable)
-            {
-                return CreateParentEntityBasedName(node, ilVariable.Name);
-            }
-
-            if (node == Expression.Null || node == Statement.Null)
-            {
-                return string.Empty;
-            }
-
-            return node.CreateNameForUnnamedNode();
         }
 
         public static string GetILRangeName(this AstNode node)
@@ -328,6 +319,29 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         private static string CreateParentEntityBasedName(AstNode node, string name) =>
             node.FindFirstParentEntityDeclaration().GetFullName() + "." + name;
+
+        private static string GetFullNameOfUnknownNode(AstNode node)
+        {
+            var referencedMemberFullName = node.GetReferencedMemberFullName();
+            if (!string.IsNullOrEmpty(referencedMemberFullName)) return referencedMemberFullName;
+
+            if (node.GetResolveResult<ILVariableResolveResult>() is { } iLVariableResolveResult)
+            {
+                return CreateParentEntityBasedName(node, iLVariableResolveResult.Variable.Name);
+            }
+
+            if (node.Annotation<ILVariable>() is { } ilVariable)
+            {
+                return CreateParentEntityBasedName(node, ilVariable.Name);
+            }
+
+            if (node == Expression.Null || node == Statement.Null)
+            {
+                return string.Empty;
+            }
+
+            return node.CreateNameForUnnamedNode();
+        }
 
         private class WasRemoved
         {
