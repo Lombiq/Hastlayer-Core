@@ -30,6 +30,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             Name = "signed",
             SizeNumber = 16,
         };
+        public static SizedDataType BinaryString { get; } = new SizedDataType(_binaryString)
+        {
+            DefaultValue = default(short).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_int16),
+        };
+
         private static readonly DataType _character = new() { TypeCategory = DataTypeCategory.Character, Name = "character" };
         public static readonly DataType Character = new(_character)
         {
@@ -131,11 +136,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             Name = "dont_touch",
             ValueType = UnrangedString,
-        };
-
-        public static SizedDataType BinaryString { get; } = new SizedDataType(_binaryString)
-        {
-            DefaultValue = default(short).ToString(CultureInfo.InvariantCulture).ToVhdlValue(_int16),
         };
     }
 }
