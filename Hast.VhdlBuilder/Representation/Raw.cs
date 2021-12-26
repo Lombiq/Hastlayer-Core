@@ -34,6 +34,6 @@ namespace Hast.VhdlBuilder.Representation
                 : string.Format(
                     CultureInfo.InvariantCulture,
                     Source,
-                    Parameters.Select(element => element.ToVhdl(vhdlGenerationOptions)).ToArray());
+                    Parameters.Select(element => (object)element.ToVhdl(vhdlGenerationOptions)).ToArray());
     }
 }

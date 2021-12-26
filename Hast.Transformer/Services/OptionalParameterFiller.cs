@@ -88,7 +88,7 @@ namespace Hast.Transformer.Services
                 if (arguments.Count == parameters.Count) return;
 
                 // All the remaining parameters are optional ones.
-                var parametersArray = parameters.ToArray();
+                var parametersArray = parameters.AsList();
                 for (int i = arguments.Count; i < parameters.Count; i++)
                 {
                     arguments.Add(parametersArray[i].DefaultExpression.Clone());

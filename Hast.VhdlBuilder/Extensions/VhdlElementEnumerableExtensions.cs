@@ -23,22 +23,19 @@ namespace System.Collections.Generic
             // It's efficient to run this parallelized implementation even with a low number of items (or even one)
             // because the overhead of checking whether there are more than a few elements is bigger than the below
             // ceremony.
-            var elementsArray = elements.ToArray();
-            if (!elementsArray.Any()) return string.Empty;
-            var lastElement = elementsArray[^1];
-            var resultArray = new string[elementsArray.Length];
+            var elementsList = elements.AsList();
+            if (!elementsList.Any()) return string.Empty;
 
-            Threading.Tasks.Parallel.For(0, elementsArray.Length - 1, i =>
+            var lastElement = elementsList[^1];
+            var resultArray = new string[elementsList.Count];
+
+            Threading.Tasks.Parallel.For(0, elementsList.Count - 1, i =>
             {
-                resultArray[i] = elementsArray[i].ToVhdl(vhdlGenerationOptions) + elementTerminator;
+                resultArray[i] = elementsList[i].ToVhdl(vhdlGenerationOptions) + elementTerminator;
             });
 
             var stringBuilder = new StringBuilder();
-
-            for (int i = 0; i < resultArray.Length; i++)
-            {
-                stringBuilder.Append(resultArray[i]);
-            }
+            stringBuilder.AppendJoin(string.Empty, resultArray);
 
             lastElementTerminator ??= elementTerminator;
             stringBuilder.Append(lastElement.ToVhdl(vhdlGenerationOptions) + lastElementTerminator);
