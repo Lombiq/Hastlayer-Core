@@ -130,6 +130,171 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
         }
 
+        private void TransformVariableDeclarationStatement(
+            VariableDeclarationStatement variableStatement,
+            IMemberStateMachine stateMachine,
+            SubTransformerContext context)
+        {
+            var variableType = variableStatement.Type;
+
+            // Filtering out variable declarations that were added by the compiler for multi-threaded code but which
+            // shouldn't be transformed.
+            var omitStatement =
+                // DisplayClass objects that generated for lambda expressions are put into variables like:
+                // PrimeCalculator.<>c__DisplayClass9_0 <>c__DisplayClass9_; They are being kept track of when
+                // processing the corresponding ObjectCreateExpressions.
+                variableType.GetFullName().IsDisplayOrClosureClassName() ||
+                (variableType is SimpleType variableSimpleType &&
+                 (
+                     // The TaskFactory object is saved to a variable like "TaskFactory arg_97_0;".
+                     variableSimpleType.Identifier == nameof(TaskFactory) ||
+                     // Delegates used for the body of Tasks are functions like "Func<object, bool> arg_97_1;".
+                     variableSimpleType.Identifier == "Func"
+                 ));
+            if (!omitStatement)
+            {
+                foreach (var variableInitializer in variableStatement.Variables)
+                {
+                    stateMachine.LocalVariables.Add(new Variable
+                    {
+                        Name = stateMachine.CreatePrefixedObjectName(variableInitializer.Name),
+                        DataType = _declarableTypeCreator.CreateDeclarableType(variableInitializer, variableType, context.TransformationContext),
+                    });
+                }
+            }
+        }
+
+        private void TransformReturnStatement(
+            ReturnStatement returnStatement,
+            IMemberStateMachine stateMachine,
+            SubTransformerContext context,
+            SubTransformerScope scope,
+            CurrentBlock currentBlock)
+        {
+            var returnType = _typeConverter.ConvertAstType(scope.Method.ReturnType, context.TransformationContext);
+            if (returnType != KnownDataTypes.Void && returnType != SpecialTypes.Task)
+            {
+                IDataObject returnReference = stateMachine.CreateReturnSignalReference();
+                var returnExpression = _expressionTransformer.Transform(returnStatement.Expression, context);
+
+                // It can happen that the type of the expression is not the same as the return type of the method. Thus
+                // a cast may be necessary.
+                var expressionType = returnStatement.Expression.GetActualType();
+                var expressionVhdlType = (returnExpression as Value)?.DataType ??
+                    (expressionType != null ? _typeConverter.ConvertType(expressionType, context.TransformationContext) : null);
+                if (expressionVhdlType != null)
+                {
+                    returnExpression = _typeConversionTransformer
+                        .ImplementTypeConversion(expressionVhdlType, returnType, returnExpression)
+                        .ConvertedFromExpression;
+                }
+
+                var assigmentElement = new Assignment
+                {
+                    AssignTo = returnReference,
+                    Expression = returnExpression,
+                };
+
+                // If the expression is an assignment we can't assign it to the return signal, so need to split it. This
+                // happens with lines like "return (Number += increaseBy);".
+                if (assigmentElement.Expression is Assignment assignment)
+                {
+                    currentBlock.Add(assignment);
+                    assigmentElement.Expression = assignment.AssignTo;
+                }
+
+                currentBlock.Add(assigmentElement);
+            }
+
+            currentBlock.Add(stateMachine.ChangeToFinalState());
+        }
+
+        private void TransformIfElseStatement(
+            IfElseStatement ifElse,
+            IMemberStateMachine stateMachine,
+            SubTransformerContext context,
+            CurrentBlock currentBlock,
+            Func<int, IVhdlGenerationOptions, string> stateNameGenerator)
+        {
+            // If-elses are always split up into multiple states, i.e. the true and false statements branch off into
+            // separate states. This makes it simpler to track how many clock cycles something requires, since the
+            // latency of the two branches should be tracked separately.
+
+            var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context) };
+            var ifElseCommentsBlock = new LogicalBlock();
+            currentBlock.Add(new InlineBlock(ifElseCommentsBlock, ifElseElement));
+
+            var ifElseStartStateIndex = currentBlock.StateMachineStateIndex;
+
+            var afterIfElseStateBlock = new InlineBlock(
+                new GeneratedComment(vhdlGenerationOptions =>
+                    "State after the if-else which was started in state " +
+                    stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
+                    "."));
+            var afterIfElseStateIndex = stateMachine.AddState(afterIfElseStateBlock);
+
+            IVhdlElement CreateConditionalStateChangeToAfterIfElseState() =>
+                new InlineBlock(
+                    new GeneratedComment(vhdlGenerationOptions =>
+                        "Going to the state after the if-else which was started in state " +
+                        stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
+                        "."),
+                    CreateConditionalStateChange(afterIfElseStateIndex, context));
+
+            var trueStateBlock = new InlineBlock(
+                new GeneratedComment(vhdlGenerationOptions =>
+                    "True branch of the if-else started in state " +
+                    stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
+                    "."));
+            var trueStateIndex = stateMachine.AddState(trueStateBlock);
+            ifElseElement.True = stateMachine.CreateStateChange(trueStateIndex);
+            currentBlock.ChangeBlockToDifferentState(trueStateBlock, trueStateIndex);
+            TransformInner(ifElse.TrueStatement, context);
+            currentBlock.Add(CreateConditionalStateChangeToAfterIfElseState());
+            var trueEndStateIndex = currentBlock.StateMachineStateIndex;
+
+            var falseStateIndex = 0;
+            var falseEndStateIndex = 0;
+            if (ifElse.FalseStatement != Statement.Null)
+            {
+                var falseStateBlock = new InlineBlock(
+                    new GeneratedComment(vhdlGenerationOptions =>
+                        "False branch of the if-else started in state " +
+                        stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
+                        "."));
+                falseStateIndex = stateMachine.AddState(falseStateBlock);
+                ifElseElement.Else = stateMachine.CreateStateChange(falseStateIndex);
+                currentBlock.ChangeBlockToDifferentState(falseStateBlock, falseStateIndex);
+                TransformInner(ifElse.FalseStatement, context);
+                currentBlock.Add(CreateConditionalStateChangeToAfterIfElseState());
+                falseEndStateIndex = currentBlock.StateMachineStateIndex;
+            }
+            else
+            {
+                ifElseElement.Else = new InlineBlock(
+                    new LineComment("There was no false branch, so going directly to the state after the if-else."),
+                    stateMachine.CreateStateChange(afterIfElseStateIndex));
+            }
+
+            ifElseCommentsBlock.Add(
+                new LineComment("This if-else was transformed from a .NET if-else. It spans across multiple states:"));
+            ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
+                "    * The true branch starts in state " + stateNameGenerator(trueStateIndex, vhdlGenerationOptions) +
+                " and ends in state " + stateNameGenerator(trueEndStateIndex, vhdlGenerationOptions) + "."));
+            if (falseStateIndex != 0)
+            {
+                ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
+                    "    * The false branch starts in state " + stateNameGenerator(falseStateIndex, vhdlGenerationOptions) +
+                    " and ends in state " + stateNameGenerator(falseEndStateIndex, vhdlGenerationOptions) + "."));
+            }
+
+            ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
+                "    * Execution after either branch will continue in the following state: " +
+                stateNameGenerator(afterIfElseStateIndex, vhdlGenerationOptions) + "."));
+
+            currentBlock.ChangeBlockToDifferentState(afterIfElseStateBlock, afterIfElseStateIndex);
+        }
+
         private void TransformWhileStatement(
             WhileStatement whileStatement,
             IMemberStateMachine stateMachine,
@@ -266,171 +431,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             caseStatement.Whens.Add(CaseWhen.CreateOthers());
 
             currentBlock.ChangeBlockToDifferentState(afterCaseStateBlock, aftercaseStateIndex);
-        }
-
-        private void TransformIfElseStatement(
-            IfElseStatement ifElse,
-            IMemberStateMachine stateMachine,
-            SubTransformerContext context,
-            CurrentBlock currentBlock,
-            Func<int, IVhdlGenerationOptions, string> stateNameGenerator)
-        {
-            // If-elses are always split up into multiple states, i.e. the true and false statements branch off into
-            // separate states. This makes it simpler to track how many clock cycles something requires, since the
-            // latency of the two branches should be tracked separately.
-
-            var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context) };
-            var ifElseCommentsBlock = new LogicalBlock();
-            currentBlock.Add(new InlineBlock(ifElseCommentsBlock, ifElseElement));
-
-            var ifElseStartStateIndex = currentBlock.StateMachineStateIndex;
-
-            var afterIfElseStateBlock = new InlineBlock(
-                new GeneratedComment(vhdlGenerationOptions =>
-                    "State after the if-else which was started in state " +
-                    stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
-                    "."));
-            var afterIfElseStateIndex = stateMachine.AddState(afterIfElseStateBlock);
-
-            IVhdlElement CreateConditionalStateChangeToAfterIfElseState() =>
-                new InlineBlock(
-                    new GeneratedComment(vhdlGenerationOptions =>
-                        "Going to the state after the if-else which was started in state " +
-                        stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
-                        "."),
-                    CreateConditionalStateChange(afterIfElseStateIndex, context));
-
-            var trueStateBlock = new InlineBlock(
-                new GeneratedComment(vhdlGenerationOptions =>
-                    "True branch of the if-else started in state " +
-                    stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
-                    "."));
-            var trueStateIndex = stateMachine.AddState(trueStateBlock);
-            ifElseElement.True = stateMachine.CreateStateChange(trueStateIndex);
-            currentBlock.ChangeBlockToDifferentState(trueStateBlock, trueStateIndex);
-            TransformInner(ifElse.TrueStatement, context);
-            currentBlock.Add(CreateConditionalStateChangeToAfterIfElseState());
-            var trueEndStateIndex = currentBlock.StateMachineStateIndex;
-
-            var falseStateIndex = 0;
-            var falseEndStateIndex = 0;
-            if (ifElse.FalseStatement != Statement.Null)
-            {
-                var falseStateBlock = new InlineBlock(
-                    new GeneratedComment(vhdlGenerationOptions =>
-                        "False branch of the if-else started in state " +
-                        stateNameGenerator(ifElseStartStateIndex, vhdlGenerationOptions) +
-                        "."));
-                falseStateIndex = stateMachine.AddState(falseStateBlock);
-                ifElseElement.Else = stateMachine.CreateStateChange(falseStateIndex);
-                currentBlock.ChangeBlockToDifferentState(falseStateBlock, falseStateIndex);
-                TransformInner(ifElse.FalseStatement, context);
-                currentBlock.Add(CreateConditionalStateChangeToAfterIfElseState());
-                falseEndStateIndex = currentBlock.StateMachineStateIndex;
-            }
-            else
-            {
-                ifElseElement.Else = new InlineBlock(
-                    new LineComment("There was no false branch, so going directly to the state after the if-else."),
-                    stateMachine.CreateStateChange(afterIfElseStateIndex));
-            }
-
-            ifElseCommentsBlock.Add(
-                new LineComment("This if-else was transformed from a .NET if-else. It spans across multiple states:"));
-            ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
-                "    * The true branch starts in state " + stateNameGenerator(trueStateIndex, vhdlGenerationOptions) +
-                " and ends in state " + stateNameGenerator(trueEndStateIndex, vhdlGenerationOptions) + "."));
-            if (falseStateIndex != 0)
-            {
-                ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
-                    "    * The false branch starts in state " + stateNameGenerator(falseStateIndex, vhdlGenerationOptions) +
-                    " and ends in state " + stateNameGenerator(falseEndStateIndex, vhdlGenerationOptions) + "."));
-            }
-
-            ifElseCommentsBlock.Add(new GeneratedComment(vhdlGenerationOptions =>
-                "    * Execution after either branch will continue in the following state: " +
-                stateNameGenerator(afterIfElseStateIndex, vhdlGenerationOptions) + "."));
-
-            currentBlock.ChangeBlockToDifferentState(afterIfElseStateBlock, afterIfElseStateIndex);
-        }
-
-        private void TransformReturnStatement(
-            ReturnStatement returnStatement,
-            IMemberStateMachine stateMachine,
-            SubTransformerContext context,
-            SubTransformerScope scope,
-            CurrentBlock currentBlock)
-        {
-            var returnType = _typeConverter.ConvertAstType(scope.Method.ReturnType, context.TransformationContext);
-            if (returnType != KnownDataTypes.Void && returnType != SpecialTypes.Task)
-            {
-                IDataObject returnReference = stateMachine.CreateReturnSignalReference();
-                var returnExpression = _expressionTransformer.Transform(returnStatement.Expression, context);
-
-                // It can happen that the type of the expression is not the same as the return type of the method. Thus
-                // a cast may be necessary.
-                var expressionType = returnStatement.Expression.GetActualType();
-                var expressionVhdlType = (returnExpression as Value)?.DataType ??
-                    (expressionType != null ? _typeConverter.ConvertType(expressionType, context.TransformationContext) : null);
-                if (expressionVhdlType != null)
-                {
-                    returnExpression = _typeConversionTransformer
-                        .ImplementTypeConversion(expressionVhdlType, returnType, returnExpression)
-                        .ConvertedFromExpression;
-                }
-
-                var assigmentElement = new Assignment
-                {
-                    AssignTo = returnReference,
-                    Expression = returnExpression,
-                };
-
-                // If the expression is an assignment we can't assign it to the return signal, so need to split it. This
-                // happens with lines like "return (Number += increaseBy);".
-                if (assigmentElement.Expression is Assignment assignment)
-                {
-                    currentBlock.Add(assignment);
-                    assigmentElement.Expression = assignment.AssignTo;
-                }
-
-                currentBlock.Add(assigmentElement);
-            }
-
-            currentBlock.Add(stateMachine.ChangeToFinalState());
-        }
-
-        private void TransformVariableDeclarationStatement(
-            VariableDeclarationStatement variableStatement,
-            IMemberStateMachine stateMachine,
-            SubTransformerContext context)
-        {
-            var variableType = variableStatement.Type;
-
-            // Filtering out variable declarations that were added by the compiler for multi-threaded code but which
-            // shouldn't be transformed.
-            var omitStatement =
-                // DisplayClass objects that generated for lambda expressions are put into variables like:
-                // PrimeCalculator.<>c__DisplayClass9_0 <>c__DisplayClass9_; They are being kept track of when
-                // processing the corresponding ObjectCreateExpressions.
-                variableType.GetFullName().IsDisplayOrClosureClassName() ||
-                (variableType is SimpleType variableSimpleType &&
-                 (
-                     // The TaskFactory object is saved to a variable like "TaskFactory arg_97_0;".
-                     variableSimpleType.Identifier == nameof(TaskFactory) ||
-                     // Delegates used for the body of Tasks are functions like "Func<object, bool> arg_97_1;".
-                     variableSimpleType.Identifier == "Func"
-                 ));
-            if (!omitStatement)
-            {
-                foreach (var variableInitializer in variableStatement.Variables)
-                {
-                    stateMachine.LocalVariables.Add(new Variable
-                    {
-                        Name = stateMachine.CreatePrefixedObjectName(variableInitializer.Name),
-                        DataType = _declarableTypeCreator.CreateDeclarableType(variableInitializer, variableType, context.TransformationContext),
-                    });
-                }
-            }
         }
 
         /// <summary>
