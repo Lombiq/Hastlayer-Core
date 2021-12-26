@@ -20,10 +20,10 @@ namespace Hast.Transformer.Vhdl.Services
             return await VhdlHardwareDescription.DeserializeAsync(fileStream);
         }
 
-        public Task SetHardwareDescriptionAsync(string cacheKey, VhdlHardwareDescription hardwareDescription)
+        public async Task SetHardwareDescriptionAsync(string cacheKey, VhdlHardwareDescription hardwareDescription)
         {
-            using var fileStream = _appDataFolder.CreateFile(GetCacheFilePath(cacheKey));
-            return hardwareDescription.SerializeAsync(fileStream);
+            await using var fileStream = _appDataFolder.CreateFile(GetCacheFilePath(cacheKey));
+            await hardwareDescription.SerializeAsync(fileStream);
         }
 
         private string GetCacheFilePath(string cacheKey)
