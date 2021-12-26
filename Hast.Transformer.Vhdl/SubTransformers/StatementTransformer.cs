@@ -91,72 +91,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     return;
                 case SwitchStatement switchStatement:
-                    var caseStatement = new Case
-                    {
-                        Expression = _expressionTransformer.Transform(switchStatement.Expression, context),
-                    };
-                    currentBlock.Add(caseStatement);
-
-                    // Case statements, much like if-else statements need a state added in advance where all branches
-                    // will finally return to. All branches have their own states too.
-                    var caseStartStateIndex = currentBlock.StateMachineStateIndex;
-
-                    var afterCaseStateBlock = new InlineBlock(
-                        new GeneratedComment(vhdlGenerationOptions =>
-                            "State after the case statement which was started in state " +
-                            StateNameGenerator(caseStartStateIndex, vhdlGenerationOptions) +
-                            "."));
-                    var aftercaseStateIndex = stateMachine.AddState(afterCaseStateBlock);
-
-                    IVhdlElement CreateConditionalStateChangeToAfterCaseState() =>
-                        new InlineBlock(
-                            new GeneratedComment(vhdlGenerationOptions =>
-                                "Going to the state after the case statement which was started in state " +
-                                StateNameGenerator(caseStartStateIndex, vhdlGenerationOptions) +
-                                "."),
-                            CreateConditionalStateChange(aftercaseStateIndex, context));
-
-                    var switchExpressionType = _typeConverter
-                        .ConvertType(switchStatement.Expression.GetActualType(), context.TransformationContext);
-
-                    foreach (var switchSection in switchStatement.SwitchSections)
-                    {
-                        var when = new CaseWhen();
-                        caseStatement.Whens.Add(when);
-                        var whenBody = new InlineBlock();
-                        when.Body.Add(whenBody);
-
-                        scope.CurrentBlock.ChangeBlock(whenBody);
-                        stateMachine.AddNewStateAndChangeCurrentBlock(scope);
-
-                        // If there are multiple labels for a switch section then those should be OR-ed together.
-                        when.Expression = BinaryChainBuilder.BuildBinaryChain(
-                            switchSection.CaseLabels.Select(caseLabel =>
-                            {
-                                var caseExpressionType = _typeConverter
-                                    .ConvertType(caseLabel.Expression.GetActualType(), context.TransformationContext);
-
-                                return _typeConversionTransformer.ImplementTypeConversion(
-                                        caseExpressionType,
-                                        switchExpressionType,
-                                        _expressionTransformer.Transform(caseLabel.Expression, context))
-                                    .ConvertedFromExpression;
-                            }),
-                            BinaryOperator.Or);
-
-                        foreach (var sectionStatement in switchSection.Statements)
-                        {
-                            Transform(sectionStatement, context);
-                        }
-
-                        currentBlock.Add(CreateConditionalStateChangeToAfterCaseState());
-                    }
-
-                    // If the AST doesn't contain cases for all possible values of the type the statement switches on
-                    // then the VHDL will be incorrect. By including an "others" case every time this is solved.
-                    caseStatement.Whens.Add(CaseWhen.CreateOthers());
-
-                    currentBlock.ChangeBlockToDifferentState(afterCaseStateBlock, aftercaseStateIndex);
+                    TransformSwitchStatement(switchStatement, stateMachine, context, scope, currentBlock, StateNameGenerator);
 
                     return;
                 // If this is a break in a switch's section then nothing to do: these are not needed in VHDL.
@@ -255,6 +190,82 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             currentBlock.ChangeBlockToDifferentState(afterWhileState, afterWhileStateIndex);
 
             GetOrCreateAfterWhileStateIndexStack(context).Pop();
+        }
+
+        private void TransformSwitchStatement(
+            SwitchStatement switchStatement,
+            IMemberStateMachine stateMachine,
+            SubTransformerContext context,
+            SubTransformerScope scope,
+            CurrentBlock currentBlock,
+            Func<int, IVhdlGenerationOptions, string> stateNameGenerator)
+        {
+            var caseStatement = new Case
+            {
+                Expression = _expressionTransformer.Transform(switchStatement.Expression, context),
+            };
+            currentBlock.Add(caseStatement);
+
+            // Case statements, much like if-else statements need a state added in advance where all branches
+            // will finally return to. All branches have their own states too.
+            var caseStartStateIndex = currentBlock.StateMachineStateIndex;
+
+            var afterCaseStateBlock = new InlineBlock(
+                new GeneratedComment(vhdlGenerationOptions =>
+                    "State after the case statement which was started in state " +
+                    stateNameGenerator(caseStartStateIndex, vhdlGenerationOptions) +
+                    "."));
+            var aftercaseStateIndex = stateMachine.AddState(afterCaseStateBlock);
+
+            IVhdlElement CreateConditionalStateChangeToAfterCaseState() =>
+                new InlineBlock(
+                    new GeneratedComment(vhdlGenerationOptions =>
+                        "Going to the state after the case statement which was started in state " +
+                        stateNameGenerator(caseStartStateIndex, vhdlGenerationOptions) +
+                        "."),
+                    CreateConditionalStateChange(aftercaseStateIndex, context));
+
+            var switchExpressionType = _typeConverter
+                .ConvertType(switchStatement.Expression.GetActualType(), context.TransformationContext);
+
+            foreach (var switchSection in switchStatement.SwitchSections)
+            {
+                var when = new CaseWhen();
+                caseStatement.Whens.Add(when);
+                var whenBody = new InlineBlock();
+                when.Body.Add(whenBody);
+
+                scope.CurrentBlock.ChangeBlock(whenBody);
+                stateMachine.AddNewStateAndChangeCurrentBlock(scope);
+
+                // If there are multiple labels for a switch section then those should be OR-ed together.
+                when.Expression = BinaryChainBuilder.BuildBinaryChain(
+                    switchSection.CaseLabels.Select(caseLabel =>
+                    {
+                        var caseExpressionType = _typeConverter
+                            .ConvertType(caseLabel.Expression.GetActualType(), context.TransformationContext);
+
+                        return _typeConversionTransformer.ImplementTypeConversion(
+                                caseExpressionType,
+                                switchExpressionType,
+                                _expressionTransformer.Transform(caseLabel.Expression, context))
+                            .ConvertedFromExpression;
+                    }),
+                    BinaryOperator.Or);
+
+                foreach (var sectionStatement in switchSection.Statements)
+                {
+                    Transform(sectionStatement, context);
+                }
+
+                currentBlock.Add(CreateConditionalStateChangeToAfterCaseState());
+            }
+
+            // If the AST doesn't contain cases for all possible values of the type the statement switches on
+            // then the VHDL will be incorrect. By including an "others" case every time this is solved.
+            caseStatement.Whens.Add(CaseWhen.CreateOthers());
+
+            currentBlock.ChangeBlockToDifferentState(afterCaseStateBlock, aftercaseStateIndex);
         }
 
         private void TransformIfElseStatement(
