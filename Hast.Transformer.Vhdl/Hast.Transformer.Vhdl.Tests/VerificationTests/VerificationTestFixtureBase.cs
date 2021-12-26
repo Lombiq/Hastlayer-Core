@@ -11,19 +11,12 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
     public abstract class VerificationTestFixtureBase : VhdlTransformingTestFixtureBase
     {
-        // Uncomment to make Shouldly open KDiff for diffing.
-        ////static VerificationTestFixtureBase()
-        ////{
-        ////    var kDiff = new Shouldly.Configuration.DiffTool(
-        ////        "KDiff3",
-        ////        @"C:\Program Files\kdiff3\bin\kdiff3.exe",
-        ////        (received, approved, approvedExists) =>
-        ////            approvedExists ?
-        ////                $"\"{received}\" \"{approved}\" -o \"{approved}\"" :
-        ////                $"\"{received}\" -o \"{approved}\"");
-        ////    Shouldly.ShouldlyConfiguration.DiffTools.RegisterDiffTool(kDiff);
-        ////    Shouldly.ShouldlyConfiguration.DiffTools.SetDiffToolPriorities(kDiff);
-        ////}
+        // Uncomment to make Shouldly open KDiff for diffing (or something else than what comes from the default order:
+        // https://github.com/VerifyTests/DiffEngine/blob/main/docs/diff-tool.order.md). Note that until the
+        // https://github.com/VerifyTests/DiffEngine/issues/267 issue is fixed, if KDiff was installed into the path
+        // %ProgramFiles%\KDiff3\bin\kdiff3.exe for you, you'll need to add a symlink to the file under
+        // %ProgramFiles%\KDiff3.
+        ////static VerificationTestFixtureBase() => DiffEngine.DiffTools.UseOrder(true, DiffEngine.DiffTool.KDiff3);
 
         protected override Task<VhdlHardwareDescription> TransformAssembliesToVhdlAsync(
             ITransformer transformer,
