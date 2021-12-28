@@ -56,7 +56,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     (IsHierarchical ? "-hierarchical " : string.Empty) + "{*" +
                     // The config should contain the path's name without backslashes even if the original name is an
                     // extended identifier. Spaces need to be escaped with a slash.
-                    PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().ReplaceOrdinal(" ", "\\ ") +
+                    PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ") +
                     "*}]";
         }
     }

@@ -73,7 +73,7 @@ namespace Hast.VhdlBuilder.Representation
         {
             var originalMatch = match.Groups[0].Value;
             var shortName = originalMatch;
-            var isOperator = shortName.ContainsOrdinal("::op_");
+            var isOperator = shortName.Contains("::op_");
 
             // Cutting off return type name, but not for operators (operators, unlike normal methods /properties can
             // have the same name, like op_Explicit, with a different return type).
@@ -91,7 +91,7 @@ namespace Hast.VhdlBuilder.Representation
             }
 
             // Shortening parameter type names to just their type name.
-            if (shortName?.ContainsOrdinal("(") == true && shortName.ContainsOrdinal(")"))
+            if (shortName?.Contains("(") == true && shortName.Contains(")"))
             {
                 var (before, _, temporary) = shortName.Partition("(");
                 var (arguments, _, after) = temporary.Partition(")");

@@ -85,7 +85,7 @@ namespace Hast.Transformer.Services
             {
                 using var stream = File.OpenRead(path);
                 using var sha = new SHA256Managed();
-                fileHashes.Append(BitConverter.ToString(sha.ComputeHash(stream)).ReplaceOrdinal("-"));
+                fileHashes.Append(BitConverter.ToString(sha.ComputeHash(stream)).Replace("-", string.Empty));
             }
 
             var hashCode = transformationId.GetHashCode(StringComparison.InvariantCulture);

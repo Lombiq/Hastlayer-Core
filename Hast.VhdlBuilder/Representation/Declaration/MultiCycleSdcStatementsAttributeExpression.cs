@@ -66,8 +66,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                         ? string.Empty
                         : vhdlGenerationOptions
                             .NameShortener(ParentName.TrimExtendedVhdlIdDelimiters()
-                            .ReplaceOrdinal(" ", "\\ ")) + ":") +
-                    PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().ReplaceOrdinal(" ", "\\ ") +
+                            .Replace(" ", "\\ ")) + ":") +
+                    PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ") +
                     "[*]}\"\"";
         }
     }

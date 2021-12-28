@@ -282,7 +282,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             // If a constant value of type real doesn't contain a decimal separator then it will be detected as integer
             // and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
-            if (vhdlType == KnownDataTypes.Real && !valueString.ContainsOrdinal("."))
+            if (vhdlType == KnownDataTypes.Real && !valueString.Contains("."))
             {
                 valueString += ".0";
             }
