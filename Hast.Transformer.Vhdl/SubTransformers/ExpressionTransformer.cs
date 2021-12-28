@@ -791,7 +791,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     .SingleOrDefault(member =>
                         member.Is<FieldDeclaration>(f =>
                             f.Variables.Single().Name == field.Name.TrimExtendedVhdlIdDelimiters()));
-#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
                 if ((fieldDeclaration as FieldDeclaration)?.Variables?.SingleOrDefault()?.Initializer is { } fieldInitializer &&
                     fieldInitializer != Expression.Null)
                 {
@@ -809,7 +808,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     initializationValue = Transform(propertyDeclaration.Initializer, context) as Value;
                 }
-#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
 
                 if (initializationValue == null) continue;
 
