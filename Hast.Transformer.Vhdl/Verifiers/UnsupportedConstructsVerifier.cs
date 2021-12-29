@@ -1,41 +1,30 @@
-﻿using Hast.Transformer.Vhdl.SubTransformers;
-using ICSharpCode.Decompiler.CSharp.Syntax;
-using Hast.Common.Interfaces;
+using Hast.Transformer.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Hast.Transformer.Vhdl.SubTransformers;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.Verifiers
 {
-    public class UnsupportedConstructsVerifier : IUnsupportedConstructsVerifier
+    /// <summary>
+    /// Verifies whether unsupported languages constructs not checked for otherwise are present, and if yes, throws
+    /// exceptions. Note: this doesn't check for everything unsupported.
+    /// </summary>
+    public class UnsupportedConstructsVerifier : IVerifyer
     {
         private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
 
-
-        public UnsupportedConstructsVerifier(IDisplayClassFieldTransformer displayClassFieldTransformer)
-        {
+        public UnsupportedConstructsVerifier(IDisplayClassFieldTransformer displayClassFieldTransformer) =>
             _displayClassFieldTransformer = displayClassFieldTransformer;
-        }
 
-
-        public void ThrowIfUnsupportedConstructsFound(SyntaxTree syntaxTree)
-        {
+        public void Verify(SyntaxTree syntaxTree, ITransformationContext transformationContext) =>
             syntaxTree.AcceptVisitor(new UnsupportedConstructsFindingVisitor(_displayClassFieldTransformer));
-        }
-
 
         private class UnsupportedConstructsFindingVisitor : DepthFirstAstVisitor
         {
             private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
 
-
-            public UnsupportedConstructsFindingVisitor(IDisplayClassFieldTransformer displayClassFieldTransformer)
-            {
+            public UnsupportedConstructsFindingVisitor(IDisplayClassFieldTransformer displayClassFieldTransformer) =>
                 _displayClassFieldTransformer = displayClassFieldTransformer;
-            }
-
 
             public override void VisitFieldDeclaration(FieldDeclaration fieldDeclaration)
             {

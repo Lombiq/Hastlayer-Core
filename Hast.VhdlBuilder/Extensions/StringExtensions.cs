@@ -13,7 +13,7 @@ namespace Hast.VhdlBuilder.Extensions
         /// </summary>
         public static string ToExtendedVhdlId(this string id)
         {
-            if (id.StartsWith(@"\") && id.EndsWith(@"\")) return id;
+            if (id.StartsWithOrdinal(@"\") && id.EndsWithOrdinal(@"\")) return id;
             return @"\" + id + @"\";
         }
 
@@ -33,26 +33,27 @@ namespace Hast.VhdlBuilder.Extensions
         public static Value ToVhdlIdValue(this string id) => new IdentifierValue(id);
 
         public static Value ToVhdlValue(this string valueString, DataType dataType) =>
-            new Value { Content = valueString, DataType = dataType };
+            new()
+            { Content = valueString, DataType = dataType };
 
         /// <summary>
         /// Converts a variable name to a VHDL variable reference.
         /// </summary>
         public static DataObjectReference ToVhdlVariableReference(this string variableName) =>
-            new DataObjectReference
+            new()
             {
                 DataObjectKind = DataObjectKind.Variable,
-                Name = variableName
+                Name = variableName,
             };
 
         /// <summary>
         /// Converts a signal name to a VHDL signal reference.
         /// </summary>
         public static DataObjectReference ToVhdlSignalReference(this string signalName) =>
-            new DataObjectReference
+            new()
             {
                 DataObjectKind = DataObjectKind.Signal,
-                Name = signalName
+                Name = signalName,
             };
 
         public static string IndentLinesIfShouldFormat(this string vhdl, IVhdlGenerationOptions vhdlGenerationOptions) =>
@@ -60,7 +61,7 @@ namespace Hast.VhdlBuilder.Extensions
             // A space will be added if no formatting is uses so the code remains syntactically correct even if being
             // just one line.
             string.Join(vhdlGenerationOptions.NewLineIfShouldFormat(), vhdl
-                .Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
+                .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
                 .Select(line => (!string.IsNullOrEmpty(line) ? vhdlGenerationOptions.IndentIfShouldFormat() : string.Empty) + line)) +
                 (vhdlGenerationOptions.FormatCode ? string.Empty : " ");
     }

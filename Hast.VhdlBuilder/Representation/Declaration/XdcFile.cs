@@ -10,13 +10,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     /// Represents a Xilinx XDC constraints file.
     /// </summary>
     /// <remarks>
-    /// See <see cref="Expression.MultiCycleSdcStatementsAttributeExpression"/> for something similar for Quartus Prime.
+    /// <para>See <c>Expression.MultiCycleSdcStatementsAttributeExpression</c> for something similar for Quartus Prime.</para>
     /// </remarks>
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class XdcFile : IVhdlElement
     {
-        public List<IVhdlElement> Lines { get; set; } = new List<IVhdlElement>();
-
+        public List<IVhdlElement> Lines { get; } = new List<IVhdlElement>();
 
         public void AddPath(IDataObject pathReference, int clockCycles, bool isHierarchical)
         {
@@ -25,7 +24,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 PathReference = pathReference,
                 ClockCycles = clockCycles,
                 Type = "setup",
-                IsHierarchical = isHierarchical
+                IsHierarchical = isHierarchical,
             });
 
             Lines.Add(new XdcPath
@@ -33,25 +32,24 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 PathReference = pathReference,
                 ClockCycles = clockCycles - 1,
                 Type = "hold",
-                IsHierarchical = isHierarchical
+                IsHierarchical = isHierarchical,
             });
         }
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             string.Join(Environment.NewLine, Lines.Select(line => line.ToVhdl(vhdlGenerationOptions)));
 
-
         /// <summary>
-        /// Represents a path constraint declarations like:
-        /// set_multicycle_path 8 -setup -to [get_cells -hierarchical {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]
+        /// <para>Represents a path constraint declarations like:</para>
+        /// <code>set_multicycle_path 8 -setup -to [get_cells -hierarchical
+        /// {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]</code>
         /// </summary>
-        private class XdcPath : IVhdlElement
+        private sealed class XdcPath : IVhdlElement
         {
             public IDataObject PathReference { get; set; }
             public int ClockCycles { get; set; }
             public string Type { get; set; }
             public bool IsHierarchical { get; set; }
-
 
             public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
                     "set_multicycle_path " + ClockCycles + " -" + Type + " -to [get_cells " +

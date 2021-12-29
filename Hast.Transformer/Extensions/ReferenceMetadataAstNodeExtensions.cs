@@ -6,15 +6,9 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
     {
         public static bool IsReferenced(this AstNode node) => node.GetReferenceMetadata()?.IsReferenced == true;
 
-        public static void AddReference(this AstNode node, AstNode from)
-        {
-            node.GetOrAddReferenceMetadata().ReferencedFrom.Add(from);
-        }
+        public static void AddReference(this AstNode node, AstNode from) => node.GetOrAddReferenceMetadata().ReferencedFrom.Add(from);
 
-        public static void SetVisited(this AstNode node)
-        {
-            node.GetOrAddReferenceMetadata().WasVisited = true;
-        }
+        public static void SetVisited(this AstNode node) => node.GetOrAddReferenceMetadata().WasVisited = true;
 
         public static bool WasVisited(this AstNode node) => node.GetOrAddReferenceMetadata().WasVisited;
 
@@ -31,6 +25,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 metadata = new DeclarationReferenceMetadata();
                 node.AddAnnotation(metadata);
             }
+
             return metadata;
         }
 

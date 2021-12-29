@@ -8,7 +8,7 @@ namespace Hast.DynamicTests.Tests
     {
         [Fact]
         public Task AllNumberCastingVariations() =>
-            TestExecutor.ExecuteSelectedTest<CastExpressionCases>(
+            TestExecutor.ExecuteSelectedTestAsync<CastExpressionCases>(
                 c => c.AllNumberCastingVariations(null),
                 c =>
                 {

@@ -6,28 +6,24 @@ using System.Linq;
 namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
     /// <summary>
-    /// The value of parameters of an object creation or method invocation, a member (in this case: field or property) 
-    /// or what's returned from a method can only be substituted if they have a globally unique value, since these are 
+    /// The value of parameters of an object creation or method invocation, a member (in this case: field or property)
+    /// or what's returned from a method can only be substituted if they have a globally unique value, since these are
     /// used not just from a single method (in contrast to variables). Thus these need special care, handling them here.
     /// </summary>
     internal class GlobalValueHoldersHandlingVisitor : DepthFirstAstVisitor
     {
-        private readonly ConstantValuesSubstitutingAstProcessor _constantValuesSubstitutingAstProcessor;
         private readonly ConstantValuesTable _constantValuesTable;
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
         private readonly AstNode _rootNode;
-
 
         public GlobalValueHoldersHandlingVisitor(
             ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor,
             AstNode rootNode)
         {
-            _constantValuesSubstitutingAstProcessor = constantValuesSubstitutingAstProcessor;
             _constantValuesTable = constantValuesSubstitutingAstProcessor.ConstantValuesTable;
             _typeDeclarationLookupTable = constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable;
             _rootNode = rootNode;
         }
-
 
         public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
         {
@@ -76,7 +72,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             base.VisitParameterDeclaration(parameterDeclaration);
 
             // Handling parameters with default values.
-            if (!(parameterDeclaration.DefaultExpression is PrimitiveExpression primitiveExpression)) return;
+            if (parameterDeclaration.DefaultExpression is not PrimitiveExpression primitiveExpression) return;
             _constantValuesTable.MarkAsPotentiallyConstant(parameterDeclaration, primitiveExpression, _rootNode, true);
         }
 
@@ -85,7 +81,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             base.VisitMemberReferenceExpression(memberReferenceExpression);
 
             // We only care about cases where this member is assigned to.
-            if (!memberReferenceExpression.Parent.Is<AssignmentExpression>(assignment => assignment.Left == memberReferenceExpression, out var parentAssignment))
+            if (!memberReferenceExpression.Parent.Is<AssignmentExpression>(
+                assignment => assignment.Left == memberReferenceExpression, out var parentAssignment))
             {
                 return;
             }
@@ -125,8 +122,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             }
         }
 
-        // Since fields and properties can be read even without initializing them they can be only substituted if 
-        // they are read-only (or just have their data type defaults assigned to them). This is possible with 
+        // Since fields and properties can be read even without initializing them they can be only substituted if
+        // they are read-only (or just have their data type defaults assigned to them). This is possible with
         // readonly fields and auto-properties having only getters.
         // So to prevent anything else from being substituted marking those as non-constant (this could be improved
         // to still substitute the .NET default value if nothing else is assigned, but this should be extremely rare).

@@ -8,7 +8,7 @@ namespace Hast.Xilinx
     public abstract class NexysDriverBase : NexysManifestProviderBase, IDeviceDriver
     {
         private readonly ITimingReportParser _timingReportParser;
-        private readonly object _timingReportParserLock = new object();
+        private readonly object _timingReportParserLock = new();
 
         private ITimingReport _timingReport;
         public ITimingReport TimingReport

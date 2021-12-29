@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
@@ -7,9 +6,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class SizedDataType : DataType
     {
-        public int Size { get; set; }
+        public int SizeNumber { get; set; }
         public IVhdlElement SizeExpression { get; set; }
-
 
         public SizedDataType(DataType baseType)
             : base(baseType)
@@ -19,7 +17,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public SizedDataType(SizedDataType previous)
             : base(previous)
         {
-            Size = previous.Size;
+            SizeNumber = previous.SizeNumber;
             SizeExpression = previous.SizeExpression;
         }
 
@@ -27,40 +25,35 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
         }
 
-
         public override DataType ToReference() => this;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            if (Size == 0 && SizeExpression == null) return Name;
+            const int hasNumericSize = 1;
+            const int hasSizeExpression = 2;
+            const int hasBoth = hasNumericSize + hasSizeExpression;
 
-            if (Size != 0 && SizeExpression != null)
+            var state = (SizeNumber > 0 ? hasNumericSize : 0) + (SizeExpression != null ? hasSizeExpression : 0);
+            return state switch
             {
-                throw new InvalidOperationException(
-                    "VHDL sized data types should have their size specified either as an integer value or as an expression, but not both.");
-            }
-
-            return
-                Name +
-                "(" +
-                (Size != 0 ? (Size - 1).ToString() : SizeExpression.ToVhdl(vhdlGenerationOptions)) +
-                " downto 0)";
+                hasNumericSize => $"{Name}({SizeNumber - 1} downto 0)",
+                hasSizeExpression => $"{Name}({SizeExpression.ToVhdl(vhdlGenerationOptions)} downto 0)",
+                hasBoth => throw new InvalidOperationException(
+                    "VHDL sized data types should have their size specified either as an integer value or as an expression, but not both."),
+                _ => Name,
+            };
         }
+
+        public override int GetSize() => SizeNumber;
 
         public override bool Equals(object obj)
         {
             var otherType = obj as SizedDataType;
             if (otherType == null) return false;
-            return base.Equals(obj) && 
-                (SizeExpression == null ? Size == otherType.Size : SizeExpression.ToVhdl() == otherType.SizeExpression.ToVhdl());
+            return base.Equals(obj) &&
+                (SizeExpression == null ? SizeNumber == otherType.SizeNumber : SizeExpression.ToVhdl() == otherType.SizeExpression.ToVhdl());
         }
 
-        public override int GetHashCode() => (Name + TypeCategory.ToString() + Size).GetHashCode();
-    }
-
-
-    public static class SizedDataTypeExtensions
-    {
-        public static int GetSize(this DataType type) => type is SizedDataType ? ((SizedDataType)type).Size : 0;
+        public override int GetHashCode() => (Name + TypeCategory + SizeNumber).GetHashCode(StringComparison.InvariantCulture);
     }
 }

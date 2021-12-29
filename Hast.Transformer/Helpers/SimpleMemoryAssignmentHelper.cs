@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
 
@@ -21,9 +21,9 @@ namespace Hast.Transformer.Helpers
 
             var result =
                 assignmentExpression.Left.GetActualType()?.IsArray() == true &&
-                assignmentExpression.Right.Is(invocation =>
-                    invocation.IsSimpleMemoryInvocation() &&
-                    invocation.Arguments.Count == 2, out readInvocation);
+                assignmentExpression.Right.Is(
+                    invocation => invocation.IsSimpleMemoryInvocation() && invocation.Arguments.Count == 2,
+                    out readInvocation);
 
             if (result)
             {

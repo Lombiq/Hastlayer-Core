@@ -1,6 +1,7 @@
-﻿using Hast.Common.Helpers;
+using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
@@ -10,10 +11,21 @@ using System.Runtime.CompilerServices;
 
 namespace Hast.Transformer.Services
 {
-    public class MethodInliner : IMethodInliner
+    /// <summary>
+    /// Inlines suitable methods at the location of their invocation.
+    /// </summary>
+    public class MethodInliner : IConverter
     {
-        public void InlineMethods(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(OptionalParameterFiller) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable)
         {
+            var transformerConfiguration = configuration.TransformerConfiguration();
+            if (!transformerConfiguration.EnableMethodInlining) return;
+
             var additionalInlinableMethodsFullNames = configuration.TransformerConfiguration().AdditionalInlinableMethodsFullNames;
             var inlinableMethods = new Dictionary<string, MethodDeclaration>();
 
@@ -49,7 +61,7 @@ namespace Hast.Transformer.Services
 
             string codeOutput;
             var passCount = 0;
-            const int maxPassCount = 1000;
+            const int maxPassCount = 1_000;
             do
             {
                 codeOutput = syntaxTree.ToString();
@@ -57,7 +69,8 @@ namespace Hast.Transformer.Services
                 syntaxTree.AcceptVisitor(new MethodCallChangingVisitor(inlinableMethods));
 
                 passCount++;
-            } while (codeOutput != syntaxTree.ToString() && passCount < maxPassCount);
+            }
+            while (codeOutput != syntaxTree.ToString() && passCount < maxPassCount);
 
             if (passCount == maxPassCount)
             {
@@ -67,21 +80,19 @@ namespace Hast.Transformer.Services
             }
         }
 
-
-        private static string SuffixMethodIdentifier(string identifier, string methodIdentifierNameSuffix) =>
-            identifier.EndsWith("_" + methodIdentifierNameSuffix) ? identifier : identifier + "_" + methodIdentifierNameSuffix;
-
+        private static string SuffixMethodIdentifier(string identifier, string methodIdentifierNameSuffix)
+        {
+            var suffix = "_" + methodIdentifierNameSuffix;
+            return identifier.EndsWithOrdinal(suffix)
+                ? identifier
+                : identifier + suffix;
+        }
 
         private class MethodCallChangingVisitor : DepthFirstAstVisitor
         {
             private readonly Dictionary<string, MethodDeclaration> _inlinableMethods;
 
-
-            public MethodCallChangingVisitor(Dictionary<string, MethodDeclaration> inlinableMethods)
-            {
-                _inlinableMethods = inlinableMethods;
-            }
-
+            public MethodCallChangingVisitor(Dictionary<string, MethodDeclaration> inlinableMethods) => _inlinableMethods = inlinableMethods;
 
             public override void VisitInvocationExpression(InvocationExpression invocationExpression)
             {
@@ -106,6 +117,7 @@ namespace Hast.Transformer.Services
                     // EmptyStatement is hackish but it's a noop and it works.
                     AstInsertionHelper.InsertStatementBefore(invocationParentStatement, new EmptyStatement());
                 }
+
                 invocationParentStatement.PrevSibling.AddChild(
                     new Comment($" Starting inlined block of the method {methodFullName}."), Roles.Comment);
 
@@ -113,15 +125,14 @@ namespace Hast.Transformer.Services
                 // inlined. Since the same method can be inlined multiple times in another method we also need to
                 // distinguish per invocation. Furthermore, such inlined invocations can themselves be inlined too, so
                 // identifiers need to be continued to suffixed on every level.
-                var methodIdentifierNameSuffix = Sha2456Helper.ComputeHash(methodFullName + invocationExpression.GetFullName());
+                var methodIdentifierNameSuffix = Sha256Helper.ComputeHash(methodFullName + invocationExpression.GetFullName());
 
                 // Assigning all invocation arguments to newly created local variables which then will be used in the
                 // inlined method's body.
-                var argumentsEnumerator = invocationExpression.Arguments.GetEnumerator();
+                using var argumentsEnumerator = invocationExpression.Arguments.GetEnumerator();
                 foreach (var parameter in method.Parameters)
                 {
                     argumentsEnumerator.MoveNext();
-
 
                     var variableReference = VariableHelper.DeclareAndReferenceVariable(
                         SuffixMethodIdentifier(parameter.Name, methodIdentifierNameSuffix),
@@ -164,6 +175,7 @@ namespace Hast.Transformer.Services
                     // method.
                     inlinedBody.Add(exitLabel);
                 }
+
                 inlinedBody.AcceptVisitor(new MethodBodyAdaptingVisitor(methodIdentifierNameSuffix, returnVariableReference, lastReturn));
 
                 foreach (var statement in inlinedBody.Statements)
@@ -173,17 +185,6 @@ namespace Hast.Transformer.Services
 
                 // The invocation now can be replaced with a reference to the return variable.
                 invocationExpression.ReplaceWith(returnVariableReference);
-
-                //var endingComment = new Comment($" Ending inlined block of the method {methodFullName}.");
-                //if (invocationParentStatement.NextSibling == null)
-                //{
-                //    AstInsertionHelper.InsertStatementAfter(invocationParentStatement, new EmptyStatement());
-                //    invocationParentStatement.NextSibling.AddChild(endingComment, Roles.Comment);
-                //}
-                //else
-                //{
-                //    invocationParentStatement.AddChild(endingComment, Roles.Comment);
-                //}
 
                 invocationParentStatement.PrevSibling.AddChild(
                     new Comment($" Ending inlined block of the method {methodFullName}."), Roles.Comment);
@@ -196,7 +197,6 @@ namespace Hast.Transformer.Services
             private readonly IdentifierExpression _returnVariableReference;
             private readonly ReturnStatement _lastReturn;
 
-
             public MethodBodyAdaptingVisitor(
                 string methodIdentifierNameSuffix,
                 IdentifierExpression returnVariableReferenc,
@@ -206,7 +206,6 @@ namespace Hast.Transformer.Services
                 _returnVariableReference = returnVariableReferenc;
                 _lastReturn = lastReturn;
             }
-
 
             public override void VisitReturnStatement(ReturnStatement returnStatement)
             {

@@ -11,5 +11,12 @@ namespace Hast.Transformer.Vhdl.Models
         public IVhdlElement Declarations { get; set; }
         public IVhdlElement Body { get; set; }
         public IEnumerable<ITransformationWarning> Warnings { get; set; } = new List<ITransformationWarning>();
+
+        public ArchitectureComponentResult(IArchitectureComponent component)
+        {
+            ArchitectureComponent = component;
+            Declarations = component?.BuildDeclarations();
+            Body = component?.BuildBody();
+        }
     }
 }

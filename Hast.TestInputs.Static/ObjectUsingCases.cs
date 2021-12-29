@@ -1,14 +1,17 @@
-﻿namespace Hast.TestInputs.Static
+namespace Hast.TestInputs.Static
 {
     public class ObjectUsingCases
     {
         public void NullUsage()
         {
             var customObject = new MyClass { MyProperty = 5 };
+#pragma warning disable S3240 // The simplest possible condition syntax should be used
             if (customObject == null)
             {
                 customObject = new MyClass();
             }
+#pragma warning restore S3240 // The simplest possible condition syntax should be used
+
             customObject = null;
 
             if (customObject != null)
@@ -32,7 +35,6 @@
             customObject2.MyProperty += 1;
         }
 
-
         private void VoidMethod(MyClass myClass)
         {
             // A nested if statement is needed for the return to remain in the syntax tree and not be optimized away
@@ -47,8 +49,7 @@
             myClass.MyProperty = 5;
         }
 
-
-        private class MyClass
+        private sealed class MyClass
         {
             public int MyProperty { get; set; }
         }

@@ -1,14 +1,23 @@
-﻿using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Representation.Declaration;
 using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
+    /// <summary>
+    /// The current state of the <see cref="IMemberStateMachine" />.
+    /// </summary>
     public interface IMemberStateMachineState
     {
+        /// <summary>
+        /// Gets the block body of the member the state machine represents.
+        /// </summary>
         IBlockElement Body { get; }
+
+        /// <summary>
+        /// Gets or sets the clock cycles required to invoke the member the state machine represents.
+        /// </summary>
         decimal RequiredClockCycles { get; set; }
     }
-
 
     /// <summary>
     /// A state machine generated from a .NET member.
@@ -16,7 +25,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
     public interface IMemberStateMachine : IArchitectureComponent
     {
         /// <summary>
-        /// States of the state machine. The state with the index 0 is the start state, the one with the index 1 is the
+        /// Gets the states of the state machine. The state with the index 0 is the start state, the one with the index 1 is the
         /// final state.
         /// </summary>
         IReadOnlyList<IMemberStateMachineState> States { get; }

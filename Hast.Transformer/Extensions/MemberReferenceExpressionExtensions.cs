@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Models;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Resolver;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
@@ -15,8 +15,8 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
         /// The <see cref="ITypeDeclarationLookupTable"/> instance corresponding to the current scope.
         /// </param>
         /// <param name="findLeftmostMemberIfRecursive">
-        /// If the member reference references another member (like <c>this.Property1.Property2.Property3</c>) then if 
-        /// set to <c>true</c> the member corresponding to the leftmost member (<c>this.Property1</c> in this case) will
+        /// If the member reference references another member (like <c>this.Property1.Property2.Property3</c>) then if
+        /// set to <see langword="true"/> the member corresponding to the leftmost member (<c>this.Property1</c> in this case) will
         /// be looked up.
         /// </param>
         public static EntityDeclaration FindMemberDeclaration(
@@ -85,7 +85,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                     .Select(type => typeDeclarationLookupTable.Lookup(type))
                     .SingleOrDefault(typeDeclaration => typeDeclaration != null && typeDeclaration.ClassType == ClassType.Class);
             }
-            else if (target is IdentifierExpression || target is IndexerExpression)
+            else if (target is IdentifierExpression or IndexerExpression)
             {
                 var type = target.GetActualType();
                 return type == null ? null : typeDeclarationLookupTable.Lookup(type.GetFullName());
@@ -94,10 +94,10 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             {
                 return target.As<MemberReferenceExpression>().FindTargetTypeDeclaration(typeDeclarationLookupTable);
             }
-            else if (target is ObjectCreateExpression)
+            else if (target is ObjectCreateExpression expression)
             {
                 // The member is referenced in an object initializer.
-                return typeDeclarationLookupTable.Lookup(((ObjectCreateExpression)target).Type);
+                return typeDeclarationLookupTable.Lookup(expression.Type);
             }
             else if (target is InvocationExpression)
             {
@@ -126,15 +126,17 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             memberReferenceExpression.Target.GetActualTypeFullName() == typeof(System.Threading.Tasks.TaskFactory).FullName;
 
         public static bool IsMethodReference(this MemberReferenceExpression memberReferenceExpression) =>
+            // False positive.
+#pragma warning disable IDE0078 // Use pattern matching.
             memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IMethod ||
             memberReferenceExpression.GetResolveResult<MethodGroupResolveResult>() != null;
+#pragma warning restore IDE0078 // Use pattern matching.
 
         public static bool IsFieldReference(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IField;
 
         public static bool IsPropertyReference(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.GetMemberDirectlyOrFromParentInvocation() is IProperty;
-
 
         private static IMember GetMemberDirectlyOrFromParentInvocation(this MemberReferenceExpression memberReferenceExpression) =>
             memberReferenceExpression.GetMemberResolveResult()?.Member ??

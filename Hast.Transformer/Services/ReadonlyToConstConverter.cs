@@ -1,32 +1,73 @@
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Attribute = ICSharpCode.Decompiler.CSharp.Syntax.Attribute;
 
 namespace Hast.Transformer.Services
 {
-    public class ReadonlyToConstConverter : IReadonlyToConstConverter
+    /// <summary>
+    /// Replaces <see langword="static"/> <see langword="readonly"/> fields with literal value substitution. Only
+    /// applies to fields that have the <see cref="ReplaceableAttribute"/>.
+    /// </summary>
+    /// <example>
+    /// <para>If you have this code:</para>
+    /// <code>
+    ///     public class ParallelAlgorithm
+    ///     {
+    ///         [Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))]
+    ///         private static readonly int MaxDegreeOfParallelism = 260;
+    ///         // ..
+    ///         public virtual void Run(SimpleMemory memory)
+    ///         {
+    ///             var input = memory.ReadInt32(Run_InputInt32Index);
+    ///             var tasks = new Task&lt;int&gt;[MaxDegreeOfParallelism];
+    /// </code>
+    /// <para>The last line becomes by default:</para>
+    /// <code>
+    ///             var tasks = new Task&lt;int&gt;[260];
+    /// </code>
+    /// <para>But with substitution of 123:</para>
+    /// <code>
+    ///             var tasks = new Task&lt;int&gt;[123];
+    /// </code>
+    /// </example>
+    public class ReadonlyToConstConverter : IConverter
     {
-        public void ConvertReadonlyPrimitives(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration) =>
-            syntaxTree.AcceptVisitor(new ReadonlyToConstVisitor(configuration, syntaxTree));
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(SyntaxTreeCleaner) };
 
+        /// <summary>
+        /// Finds and replaces any <see langword="public"/> <see langword="static"/> <see langword="readonly"/> fields
+        /// in <paramref name="syntaxTree"/> that have <see cref="ReplaceableAttribute"/> with their assigned literal
+        /// value. If <see cref="IHardwareGenerationConfiguration.CustomConfiguration"/> in
+        /// <paramref name="configuration"/> has a <c>ReplaceableDynamicConstants</c> of type <c>IDictionary&lt;string, string&gt;</c>
+        /// with the matching value identified by the attribute, then it is used instead of the assigned value. Read
+        /// "Using dynamic constants" in <c>Docs/DevelopingHastlayer.md</c> for usage information.
+        /// </summary>
+        /// <param name="syntaxTree">The code to transform.</param>
+        /// <param name="configuration">The holder of the custom configuration.</param>
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new ReadonlyToConstVisitor(configuration, syntaxTree));
 
         private class ReadonlyToConstVisitor : DepthFirstAstVisitor
         {
             private readonly Dictionary<string, object> _replacements;
             private readonly SyntaxTree _syntaxTree;
 
-
             public ReadonlyToConstVisitor(IHardwareGenerationConfiguration configuration, SyntaxTree syntaxTree)
             {
                 _replacements = configuration.GetOrAddReplacements();
                 _syntaxTree = syntaxTree;
             }
-
 
             public override void VisitFieldDeclaration(FieldDeclaration fieldDeclaration)
             {
@@ -64,15 +105,15 @@ namespace Hast.Transformer.Services
                 {
                     result = value.Value switch
                     {
-                        string _ => resultString,
-                        int _ => int.Parse(resultString, CultureInfo.InvariantCulture),
-                        uint _ => uint.Parse(resultString, CultureInfo.InvariantCulture),
-                        long _ => long.Parse(resultString, CultureInfo.InvariantCulture),
-                        ulong _ => ulong.Parse(resultString, CultureInfo.InvariantCulture),
-                        short _ => short.Parse(resultString, CultureInfo.InvariantCulture),
-                        ushort _ => ushort.Parse(resultString, CultureInfo.InvariantCulture),
-                        byte _ => byte.Parse(resultString, CultureInfo.InvariantCulture),
-                        bool _ => resultString.ToLowerInvariant() == "true",
+                        string => resultString,
+                        int => resultString.ToTechnicalInt(),
+                        uint => uint.Parse(resultString, CultureInfo.InvariantCulture),
+                        long => long.Parse(resultString, CultureInfo.InvariantCulture),
+                        ulong => ulong.Parse(resultString, CultureInfo.InvariantCulture),
+                        short => short.Parse(resultString, CultureInfo.InvariantCulture),
+                        ushort => ushort.Parse(resultString, CultureInfo.InvariantCulture),
+                        byte => byte.Parse(resultString, CultureInfo.InvariantCulture),
+                        bool => resultString.ToUpperInvariant() == "TRUE",
                         _ => value.Value,
                     };
                 }
@@ -100,7 +141,7 @@ namespace Hast.Transformer.Services
             {
                 base.VisitIdentifier(identifier);
 
-                if (!(identifier.Parent is MemberReferenceExpression member) ||
+                if (identifier.Parent is not MemberReferenceExpression member ||
                     identifier.Name != _name ||
                     !GetTypeOfStaticIdentifier(identifier).Equals(_typeDeclaration.GetActualType()))
                 {
@@ -112,7 +153,7 @@ namespace Hast.Transformer.Services
                 member.ReplaceWith(primitive);
             }
 
-            private IType GetTypeOfStaticIdentifier(Identifier identifier) =>
+            private static IType GetTypeOfStaticIdentifier(Identifier identifier) =>
                 (identifier.Parent as MemberReferenceExpression)?
                 .FindFirstChildOfType<TypeReferenceExpression>()?
                 .Type

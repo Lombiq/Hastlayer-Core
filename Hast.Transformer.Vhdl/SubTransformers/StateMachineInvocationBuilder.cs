@@ -19,7 +19,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly ITypeConversionTransformer _typeConversionTransformer;
         private readonly IDeclarableTypeCreator _declarableTypeCreator;
 
-
         public StateMachineInvocationBuilder(
             ITypeConversionTransformer typeConversionTransformer,
             IDeclarableTypeCreator declarableTypeCreator)
@@ -28,22 +27,19 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _declarableTypeCreator = declarableTypeCreator;
         }
 
-
         public IBuildInvocationResult BuildInvocation(
             MethodDeclaration targetDeclaration,
-            IEnumerable<ITransformedInvocationParameter> transformedParameters,
+            IEnumerable<TransformedInvocationParameter> transformedParameters,
             int instanceCount,
-            ISubTransformerContext context)
+            SubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
             var targetMethodName = targetDeclaration.GetFullName();
 
-
-            void addInvocationStartComment() =>
+            void AddInvocationStartComment() =>
                 currentBlock
                 .Add(new LineComment("Starting state machine invocation for the following method: " + targetMethodName));
-
 
             var maxDegreeOfParallelism = context.TransformationContext.GetTransformerConfiguration()
                 .GetMaxInvocationInstanceCountConfigurationForMember(targetDeclaration).MaxDegreeOfParallelism;
@@ -63,7 +59,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 stateMachine.OtherMemberMaxInvocationInstanceCounts[targetDeclaration] = instanceCount;
             }
 
-
             if (instanceCount == 1)
             {
                 var buildInvocationBlockResult = BuildInvocationBlock(
@@ -73,98 +68,89 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     context,
                     0);
 
-                addInvocationStartComment();
+                AddInvocationStartComment();
                 currentBlock.Add(buildInvocationBlockResult.InvocationBlock);
 
                 return buildInvocationBlockResult;
             }
-            else
+
+            var outParameterBackAssignments = new List<Assignment>();
+            var invocationIndexVariableName = stateMachine.CreateInvocationIndexVariableName(targetMethodName);
+            var invocationIndexVariableType = new RangedDataType(KnownDataTypes.UnrangedInt)
             {
-                var outParameterBackAssignments = new List<Assignment>();
-                var invocationIndexVariableName = stateMachine.CreateInvocationIndexVariableName(targetMethodName);
-                var invocationIndexVariableType = new RangedDataType(KnownDataTypes.UnrangedInt)
-                {
-                    RangeMax = instanceCount - 1
-                };
-                var invocationIndexVariableReference = invocationIndexVariableName.ToVhdlVariableReference();
-                stateMachine.LocalVariables.AddIfNew(new Variable
-                {
-                    DataType = invocationIndexVariableType,
-                    InitialValue = KnownDataTypes.UnrangedInt.DefaultValue,
-                    Name = invocationIndexVariableName
-                });
+                RangeMax = instanceCount - 1,
+            };
+            var invocationIndexVariableReference = invocationIndexVariableName.ToVhdlVariableReference();
+            stateMachine.LocalVariables.AddIfNew(new Variable
+            {
+                DataType = invocationIndexVariableType,
+                InitialValue = KnownDataTypes.UnrangedInt.DefaultValue,
+                Name = invocationIndexVariableName,
+            });
 
-                var proxyCase = new Case
-                {
-                    Expression = invocationIndexVariableReference
-                };
+            var proxyCase = new Case
+            {
+                Expression = invocationIndexVariableReference,
+            };
 
-                for (int i = 0; i < instanceCount; i++)
-                {
-                    var buildInvocationBlockResult = BuildInvocationBlock(
-                        targetDeclaration,
-                        targetMethodName,
-                        transformedParameters,
-                        context,
-                        i);
+            for (int i = 0; i < instanceCount; i++)
+            {
+                var buildInvocationBlockResult = BuildInvocationBlock(
+                    targetDeclaration,
+                    targetMethodName,
+                    transformedParameters,
+                    context,
+                    i);
 
-                    outParameterBackAssignments.AddRange(buildInvocationBlockResult.OutParameterBackAssignments);
+                outParameterBackAssignments.AddRange(buildInvocationBlockResult.OutParameterBackAssignments);
 
-                    proxyCase.Whens.Add(new CaseWhen
+                proxyCase.Whens.Add(new CaseWhen(
+                    expression: i.ToVhdlValue(invocationIndexVariableType),
+                    body: new List<IVhdlElement>
                     {
-                        Expression = i.ToVhdlValue(invocationIndexVariableType),
-                        Body = new List<IVhdlElement>
                         {
-                            {
-                                buildInvocationBlockResult.InvocationBlock
-                            }
-                        }
-                    });
-                }
-
-                addInvocationStartComment();
-                currentBlock.Add(proxyCase);
-                currentBlock.Add(new Assignment
-                {
-                    AssignTo = invocationIndexVariableReference,
-                    Expression = new Binary
-                    {
-                        Left = invocationIndexVariableReference,
-                        Operator = BinaryOperator.Add,
-                        Right = 1.ToVhdlValue(invocationIndexVariableType)
-                    }
-                });
-
-                return new BuildInvocationResult { OutParameterBackAssignments = outParameterBackAssignments };
+                            buildInvocationBlockResult.InvocationBlock
+                        },
+                    }));
             }
+
+            AddInvocationStartComment();
+            currentBlock.Add(proxyCase);
+            currentBlock.Add(new Assignment
+            {
+                AssignTo = invocationIndexVariableReference,
+                Expression = new Binary
+                {
+                    Left = invocationIndexVariableReference,
+                    Operator = BinaryOperator.Add,
+                    Right = 1.ToVhdlValue(invocationIndexVariableType),
+                },
+            });
+
+            return new BuildInvocationResult { OutParameterBackAssignments = outParameterBackAssignments };
         }
 
         public IEnumerable<IVhdlElement> BuildMultiInvocationWait(
             MethodDeclaration targetDeclaration,
             int instanceCount,
             bool waitForAll,
-            ISubTransformerContext context)
-        {
-            return BuildInvocationWait(targetDeclaration, instanceCount, -1, waitForAll, context);
-        }
+            SubTransformerContext context) =>
+            BuildInvocationWait(targetDeclaration, instanceCount, -1, waitForAll, context);
 
         public IVhdlElement BuildSingleInvocationWait(
             MethodDeclaration targetDeclaration,
             int targetIndex,
-            ISubTransformerContext context)
-        {
-            return BuildInvocationWait(targetDeclaration, 1, targetIndex, true, context).Single();
-        }
-
+            SubTransformerContext context) =>
+            BuildInvocationWait(targetDeclaration, 1, targetIndex, true, context).Single();
 
         /// <summary>
-        /// Be aware that the method can change the current block!
+        /// Be aware that the method can change the current block.
         /// </summary>
         private BuildInvocationBlockResult BuildInvocationBlock(
             MethodDeclaration targetDeclaration,
             string targetMethodName,
-            IEnumerable<ITransformedInvocationParameter> transformedParameters,
-            ISubTransformerContext context,
+            IEnumerable<TransformedInvocationParameter> transformedParameters,
+            SubTransformerContext context,
             int index)
         {
             var scope = context.Scope;
@@ -172,9 +158,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             var indexedStateMachineName = ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, index);
 
-
             // Due to the time needed for the invocation proxy to register that the invoked state machine is not started
-            // any more the same state machine can be restarted in the second state counted from the await state at 
+            // any more the same state machine can be restarted in the second state counted from the await state at
             // earliest. Thus adding a new state and also a wait state if necessary.
             var finishedInvokedComponentsForStates = scope.FinishedInvokedStateMachinesForStates;
 
@@ -194,6 +179,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 stateMachine.AddNewStateAndChangeCurrentBlock(scope);
             }
+
             // Are we one state later from the await for some other reason already? Still another state needs to be added
             // got leave time for the invocation proxy.
             else if (finishedInvokedComponentsForStates
@@ -201,109 +187,122 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 finishedComponents.Contains(indexedStateMachineName))
             {
                 scope.CurrentBlock.Add(new LineComment(
-                    "The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state."));
+                    "The last invocation for the target state machine finished in the previous state, so need to " +
+                    "start the next one in the next state."));
                 stateMachine.AddNewStateAndChangeCurrentBlock(scope);
             }
-
 
             var invocationBlock = new InlineBlock();
             var outParameterBackAssignments = new List<Assignment>();
 
-            var methodParametersEnumerator = targetDeclaration
+            using var methodParametersEnumerator = targetDeclaration
                 .GetNonSimpleMemoryParameters()
                 .GetEnumerator();
             methodParametersEnumerator.MoveNext();
 
             foreach (var parameter in transformedParameters)
             {
-                var parameterReference = parameter.Reference;
-
                 // Managing signals for parameter passing.
                 var targetParameter = methodParametersEnumerator.Current;
                 var parameterSignalType = _declarableTypeCreator
                     .CreateDeclarableType(targetParameter, targetParameter.Type, context.TransformationContext);
 
-                Assignment createParameterAssignment(ParameterFlowDirection flowDirection)
-                {
-                    var parameterSignalName = stateMachine
-                        .CreatePrefixedSegmentedObjectName(
-                            ArchitectureComponentNameHelper
-                                .CreateParameterSignalName(targetMethodName, targetParameter.Name, flowDirection)
-                                .TrimExtendedVhdlIdDelimiters(),
-                            index.ToString());
-                    var parameterSignalReference = parameterSignalName.ToVhdlSignalReference();
-
-                    var signals = flowDirection == ParameterFlowDirection.Out ?
-                        stateMachine.InternallyDrivenSignals :
-                        stateMachine.ExternallyDrivenSignals;
-                    signals.AddIfNew(new ParameterSignal(
-                        targetMethodName,
-                        targetParameter.Name,
-                        index,
-                        false)
-                    {
-                        DataType = parameterSignalType,
-                        Name = parameterSignalName
-                    });
-
-
-                    // Assign local variables to/from the intermediary parameter signal.
-                    // If the parameter is of direction In then the parameter element should contain an IDataObject.
-                    var assignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameterReference;
-                    var assignmentExpression = flowDirection == ParameterFlowDirection.Out ? parameterReference : parameterSignalReference;
-
-                    // We need to do type conversion if there is a type mismatch. This can also occur with Values (i.e.
-                    // transformed PrimitiveExpressions) since in .NET there can be an implicit downcast not visible in
-                    // the AST.
-                    if (parameter.DataType != parameterSignalType)
-                    {
-                        IAssignmentTypeConversionResult conversionResult;
-                        if (flowDirection == ParameterFlowDirection.Out)
-                        {
-                            conversionResult = _typeConversionTransformer
-                                .ImplementTypeConversionForAssignment(parameter.DataType, parameterSignalType, parameterReference, assignTo);
-                        }
-                        else
-                        {
-                            conversionResult = _typeConversionTransformer
-                                .ImplementTypeConversionForAssignment(parameterSignalType, parameter.DataType, parameterSignalReference, assignTo);
-                        }
-
-                        assignTo = conversionResult.ConvertedToDataObject;
-                        assignmentExpression = conversionResult.ConvertedFromExpression;
-                    }
-
-                    // In this case the parameter is e.g. a primitive value, no need to assign to it.
-                    if (flowDirection == ParameterFlowDirection.In && !(parameterReference is IDataObject))
-                    {
-                        return null;
-                    }
-
-                    return new Assignment
-                    {
-                        AssignTo = assignTo,
-                        Expression = assignmentExpression
-                    };
-                }
-
-
-                invocationBlock.Add(createParameterAssignment(ParameterFlowDirection.Out));
+                invocationBlock.Add(CreateParameterAssignment(
+                    ParameterFlowDirection.Out,
+                    parameter,
+                    parameterSignalType,
+                    targetMethodName,
+                    targetParameter,
+                    context,
+                    index));
                 if (targetParameter.IsOutFlowing())
                 {
-                    var assignment = createParameterAssignment(ParameterFlowDirection.In);
+                    var assignment = CreateParameterAssignment(
+                        ParameterFlowDirection.In,
+                        parameter,
+                        parameterSignalType,
+                        targetMethodName,
+                        targetParameter,
+                        context,
+                        index);
                     if (assignment != null) outParameterBackAssignments.Add(assignment);
                 }
 
                 methodParametersEnumerator.MoveNext();
             }
 
-
             invocationBlock.Add(InvocationHelper.CreateInvocationStart(stateMachine, targetMethodName, index));
 
             return new BuildInvocationBlockResult
             {
                 InvocationBlock = invocationBlock,
-                OutParameterBackAssignments = outParameterBackAssignments
+                OutParameterBackAssignments = outParameterBackAssignments,
+            };
+        }
+
+        private Assignment CreateParameterAssignment(
+            ParameterFlowDirection flowDirection,
+            TransformedInvocationParameter parameter,
+            DataType parameterSignalType,
+            string targetMethodName,
+            ParameterDeclaration targetParameter,
+            SubTransformerContext context,
+            int index)
+        {
+            var parameterReference = parameter.Reference;
+            var stateMachine = context.Scope.StateMachine;
+
+            var parameterSignalName = stateMachine
+                .CreatePrefixedSegmentedObjectName(
+                    ArchitectureComponentNameHelper
+                        .CreateParameterSignalName(targetMethodName, targetParameter.Name, flowDirection)
+                        .TrimExtendedVhdlIdDelimiters(),
+                    index.ToTechnicalString());
+            var parameterSignalReference = parameterSignalName.ToVhdlSignalReference();
+
+            var signals = flowDirection == ParameterFlowDirection.Out ?
+                stateMachine.InternallyDrivenSignals :
+                stateMachine.ExternallyDrivenSignals;
+            signals.AddIfNew(new ParameterSignal(
+                targetMethodName,
+                targetParameter.Name,
+                index,
+                false)
+            {
+                DataType = parameterSignalType,
+                Name = parameterSignalName,
+            });
+
+            // Assign local variables to/from the intermediary parameter signal.
+            // If the parameter is of direction In then the parameter element should contain an IDataObject.
+            var assignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameterReference;
+            var assignmentExpression = flowDirection == ParameterFlowDirection.Out ? parameterReference : parameterSignalReference;
+
+            // We need to do type conversion if there is a type mismatch. This can also occur with Values (i.e.
+            // transformed PrimitiveExpressions) since in .NET there can be an implicit downcast not visible in the AST.
+            if (parameter.DataType != parameterSignalType)
+            {
+                IAssignmentTypeConversionResult conversionResult;
+                conversionResult = flowDirection == ParameterFlowDirection.Out
+                    ? _typeConversionTransformer
+                        .ImplementTypeConversionForAssignment(parameter.DataType, parameterSignalType, parameterReference, assignTo)
+                    : _typeConversionTransformer
+                        .ImplementTypeConversionForAssignment(parameterSignalType, parameter.DataType, parameterSignalReference, assignTo);
+
+                assignTo = conversionResult.ConvertedToDataObject;
+                assignmentExpression = conversionResult.ConvertedFromExpression;
+            }
+
+            // In this case the parameter is e.g. a primitive value, no need to assign to it.
+            if (flowDirection == ParameterFlowDirection.In && !(parameterReference is IDataObject))
+            {
+                return null;
+            }
+
+            return new Assignment
+            {
+                AssignTo = assignTo,
+                Expression = assignmentExpression,
             };
         }
 
@@ -312,12 +311,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             int instanceCount,
             int index,
             bool waitForAll,
-            ISubTransformerContext context)
+            SubTransformerContext context)
         {
             var stateMachine = context.Scope.StateMachine;
             var currentBlock = context.Scope.CurrentBlock;
             var targetMethodName = targetDeclaration.GetFullName();
-
 
             var waitForInvocationFinishedIfElse = InvocationHelper
                 .CreateWaitForInvocationFinished(stateMachine, targetMethodName, instanceCount, waitForAll);
@@ -337,19 +335,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     AssignTo = stateMachine
                         .CreateInvocationIndexVariableName(targetMethodName)
                         .ToVhdlVariableReference(),
-                    Expression = 0.ToVhdlValue(KnownDataTypes.UnrangedInt)
+                    Expression = 0.ToVhdlValue(KnownDataTypes.UnrangedInt),
                 });
             }
 
             currentBlock.ChangeBlockToDifferentState(waitForInvocationFinishedIfElse.True, waitForInvokedStateMachineToFinishStateIndex);
-
 
             var returnType = _declarableTypeCreator
                 .CreateDeclarableType(targetDeclaration, targetDeclaration.ReturnType, context.TransformationContext);
 
             var returnVariableReferences = new List<IDataObject>();
 
-            void buildInvocationWaitBlock(int targetIndex)
+            void BuildInvocationWaitBlock(int targetIndex)
             {
                 if (returnType != KnownDataTypes.Void)
                 {
@@ -359,7 +356,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     stateMachine.ExternallyDrivenSignals.AddIfNew(new Signal
                     {
                         DataType = returnType,
-                        Name = returnSignalReference.Name
+                        Name = returnSignalReference.Name,
                     });
 
                     // The return signal's value needs to be copied over to a local variable. Otherwise if we'd re-use the
@@ -371,23 +368,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     currentBlock.Add(new Assignment
                     {
                         AssignTo = returnVariableReference,
-                        Expression = returnSignalReference
+                        Expression = returnSignalReference,
                     });
 
                     // Using the reference of the state machine's return value in place of the original method call.
                     returnVariableReferences.Add(returnVariableReference);
                 }
 
-
                 // Noting that this component was finished in this state.
                 var finishedInvokedComponentsForStates = context.Scope.FinishedInvokedStateMachinesForStates;
-                ISet<string> finishedComponents;
                 if (!finishedInvokedComponentsForStates
-                    .TryGetValue(currentBlock.StateMachineStateIndex, out finishedComponents))
+                    .TryGetValue(currentBlock.StateMachineStateIndex, out var finishedComponents))
                 {
                     finishedComponents = finishedInvokedComponentsForStates[currentBlock.StateMachineStateIndex] =
                         new HashSet<string>();
                 }
+
                 finishedComponents.Add(ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, targetIndex));
             }
 
@@ -395,12 +391,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 for (int i = 0; i < instanceCount; i++)
                 {
-                    buildInvocationWaitBlock(i);
+                    BuildInvocationWaitBlock(i);
                 }
             }
             else
             {
-                buildInvocationWaitBlock(index);
+                BuildInvocationWaitBlock(index);
             }
 
             if (returnType == KnownDataTypes.Void)
@@ -412,7 +408,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 return returnVariableReferences;
             }
         }
-
 
         private class BuildInvocationResult : IBuildInvocationResult
         {

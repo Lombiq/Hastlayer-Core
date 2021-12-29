@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace Hast.TestInputs.Invalid
 {
@@ -12,7 +12,10 @@ namespace Hast.TestInputs.Invalid
                     // If this would be something like input = 5 then it would correctly be substituted with a const.
                     input += 5;
                     return input == 5;
-                });
+                },
+                default,
+                TaskCreationOptions.None,
+                TaskScheduler.Default);
         }
     }
 }

@@ -7,21 +7,15 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         In,
         Out,
         Buffer,
-        InOut
+        InOut,
     }
-
 
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Port : TypedDataObjectBase
     {
         public PortMode Mode { get; set; }
 
-
-        public Port()
-        {
-            DataObjectKind = DataObjectKind.Signal;
-        }
-
+        public Port() => DataObjectKind = DataObjectKind.Signal;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             vhdlGenerationOptions.ShortenName(Name) +

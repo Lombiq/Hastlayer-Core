@@ -1,4 +1,3 @@
-﻿using Hast.VhdlBuilder.Representation.Expression;
 using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
@@ -7,16 +6,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Alias : TypedDataObjectBase
     {
         /// <summary>
-        /// Name of the object that the alias is created for.
+        /// Gets or sets the name of the object that the alias is created for.
         /// </summary>
         public IDataObject AliasedObject { get; set; }
 
-
-        public Alias()
-        {
-            DataObjectKind = DataObjectKind.Variable;
-        }
-
+        public Alias() => DataObjectKind = DataObjectKind.Variable;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(

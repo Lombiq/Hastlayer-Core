@@ -1,21 +1,28 @@
+using Hast.Layer;
 using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Resolver;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class MemberIdentifiersFixer : IMemberIdentifiersFixer
+    /// <summary>
+    /// If a method is called from within its own class then the target of the <see cref="InvocationExpression"/> will
+    /// be an <see cref="IdentifierExpression"/>. However, it should really be a
+    /// <see cref="MemberReferenceExpression"/> as it was in ILSpy prior to v3 and as it is if it's called from another
+    /// class. See: <see href="https://github.com/icsharpcode/ILSpy/issues/1407"/>.
+    /// </summary>
+    public class MemberIdentifiersFixer : IConverter
     {
-        public void FixMemberIdentifiers(SyntaxTree syntaxTree)
-        {
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
             syntaxTree.AcceptVisitor(new MemberIdentifiersFixingVisitor());
-        }
-
 
         private class MemberIdentifiersFixingVisitor : DepthFirstAstVisitor
         {
@@ -55,6 +62,8 @@ namespace Hast.Transformer.Services
                 {
                     return;
                 }
+
+                if (member == null) return;
 
                 if (member.IsStatic)
                 {

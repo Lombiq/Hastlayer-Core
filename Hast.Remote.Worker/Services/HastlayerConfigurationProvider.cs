@@ -1,4 +1,4 @@
-﻿using Hast.Catapult;
+using Hast.Catapult;
 using Hast.Common.Enums;
 using Hast.Common.Services;
 using Hast.Layer;
@@ -23,7 +23,7 @@ namespace Hast.Remote.Worker.Services
     {
         private IHastlayerConfiguration _configuration;
 
-        public async Task<IHastlayerConfiguration> GetConfiguration(
+        public async Task<IHastlayerConfiguration> GetConfigurationAsync(
             ITransformationWorkerConfiguration configuration,
             CancellationToken cancellationToken = default)
         {
@@ -71,7 +71,7 @@ namespace Hast.Remote.Worker.Services
 
         public static void ConfigureLogging(ILoggingBuilder builder) =>
             builder
-                .AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Trace)
+                .AddFilter<ApplicationInsightsLoggerProvider>(string.Empty, LogLevel.Trace)
                 .AddApplicationInsights(ApplicationInsightsTelemetryManager.GetInstrumentationKey())
                 .AddNLog("NLog.config");
     }

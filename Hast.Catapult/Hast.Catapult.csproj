@@ -16,9 +16,14 @@
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj" />
+    <ProjectReference Include="..\Hast.Xilinx\Hast.Xilinx.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="TimingReports\*.csv" />
+    <EmbeddedResource Include="TimingReports\*.csv" />
   </ItemGroup>
 </Project>

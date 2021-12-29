@@ -1,20 +1,45 @@
-﻿using System;
+using Hast.Layer;
+using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Transformer.Helpers;
-using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
 {
-    public class ObjectInitializerExpander : IObjectInitializerExpander
+    /// <summary>
+    /// Converts inline object initializers into one-by-one property assignments so these can be transformed in a
+    /// simpler way.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// var x = new MyClass { Property1 = value1, Property2 = value2 };
+    ///
+    /// will be converted to:
+    ///
+    /// var x = new MyClass();
+    /// x.Property1 = value1;
+    /// x.Property2 = value2;
+    /// </code>
+    /// </example>
+    /// <remarks>
+    /// <para>
+    /// There is the ObjectOrCollectionInitializers decompiler option with a similar aim. However, that would unpack
+    /// initializations for compiler-generated methods created from closures and processing that would be painful. Also,
+    /// with that option a new variable is created for every instantiation even if the new object is immediately
+    /// assigned to an array element. So it would make the resulting code a bit messier.
+    /// </para>
+    /// </remarks>
+    public class ObjectInitializerExpander : IConverter
     {
-        public void ExpandObjectInitializers(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new ObjectInitializerExpanderVisitor());
-        }
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(DirectlyAccessedNewObjectVariablesCreator) };
 
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new ObjectInitializerExpanderVisitor());
 
         private class ObjectInitializerExpanderVisitor : DepthFirstAstVisitor
         {
@@ -32,9 +57,7 @@ namespace Hast.Transformer.Services
 
                 foreach (var initializerElement in objectCreateExpression.Initializer.Elements)
                 {
-                    var namedInitializerExpression = initializerElement as NamedExpression;
-
-                    if (namedInitializerExpression == null)
+                    if (initializerElement is not NamedExpression namedInitializerExpression)
                     {
                         throw new NotSupportedException(
                             "Object initializers can only contain named expressions (i.e. \"Name = expression\" pairs)."

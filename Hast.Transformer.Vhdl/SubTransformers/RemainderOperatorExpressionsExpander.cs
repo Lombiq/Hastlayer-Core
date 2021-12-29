@@ -1,4 +1,4 @@
-﻿using Hast.Common.Helpers;
+using Hast.Common.Helpers;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
@@ -6,11 +6,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 {
     public class RemainderOperatorExpressionsExpander : IRemainderOperatorExpressionsExpander
     {
-        public void ExpandRemainderOperatorExpressions(SyntaxTree syntaxTree)
-        {
+        public void ExpandRemainderOperatorExpressions(SyntaxTree syntaxTree) =>
             syntaxTree.AcceptVisitor(new RemainderOperatorExpressionsExpanderVisitor());
-        }
-
 
         private class RemainderOperatorExpressionsExpanderVisitor : DepthFirstAstVisitor
         {
@@ -32,12 +29,12 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 // First assigning the operands to new variables so if method calls, casts or anything are in there
                 // those are not duplicated.
 
-                void createVariableForOperand(Expression operand)
+                void CreateVariableForOperand(Expression operand)
                 {
                     // Don't create a variable if it's not necessary.
                     // Primitive values should be left out because operations with primitive operands can be faster on
                     // hardware.
-                    if (operand is PrimitiveExpression || operand is IdentifierExpression)
+                    if (operand is PrimitiveExpression or IdentifierExpression)
                     {
                         return;
                     }
@@ -53,8 +50,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     }
 
                     var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
-
-                        "remainderOperand" + Sha2456Helper.ComputeHash(operand.GetFullName() + ilRangeName),
+                        "remainderOperand" + Sha256Helper.ComputeHash(operand.GetFullName() + ilRangeName),
                         operand.GetActualType(),
                         TypeHelper.CreateAstType(operand.GetActualType()),
                         operand.FindFirstParentStatement());
@@ -69,8 +65,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     operand.ReplaceWith(variableIdentifier.Clone());
                 }
 
-                createVariableForOperand(binaryOperatorExpression.Left);
-                createVariableForOperand(binaryOperatorExpression.Right);
+                CreateVariableForOperand(binaryOperatorExpression.Left);
+                CreateVariableForOperand(binaryOperatorExpression.Right);
 
                 // Building the chained operation from the inside out.
 

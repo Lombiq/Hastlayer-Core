@@ -1,27 +1,30 @@
-﻿using Hast.Transformer.Models;
+﻿using Hast.Common.Interfaces;
+using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
-using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
+    /// <summary>
+    /// A service for converting from C# data types to VHDL data types.
+    /// </summary>
     public interface ITypeConverter : IDependency
     {
+        /// <summary>
+        /// Converts the given system <paramref name="type"/> to a VHDL <see cref="DataType"/>.
+        /// </summary>
         DataType ConvertType(
             IType type,
             IVhdlTransformationContext context);
 
+        /// <summary>
+        /// Converts the given ICSharpCode <paramref name="type"/> to a VHDL <see cref="DataType"/>.
+        /// </summary>
         DataType ConvertAstType(AstType type, IVhdlTransformationContext context);
-
-        DataType ConvertAndDeclareAstType(
-            AstType type,
-            IDeclarableElement declarable,
-            IVhdlTransformationContext context);
     }
-
 
     public static class TypeConvertedExtensions
     {

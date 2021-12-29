@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hast.TestInputs.Invalid
+﻿namespace Hast.TestInputs.Invalid
 {
     public class InvalidObjectUsingCases
     {
@@ -25,7 +19,6 @@ namespace Hast.TestInputs.Invalid
             var customObject1 = new MyClass2();
             var customObject2 = new MyClass2 { SelfReference = customObject1 };
         }
-
 
         private class MyClass1
         {

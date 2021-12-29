@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
@@ -15,7 +15,7 @@ namespace Hast.VhdlBuilder
             {
                 Mode = PortMode.In,
                 Name = clockSignalName,
-                DataType = KnownDataTypes.StdLogic
+                DataType = KnownDataTypes.StdLogic,
             };
 
             module.Entity.Ports.Add(clockPort);
@@ -26,7 +26,7 @@ namespace Hast.VhdlBuilder
                 var wrappingIf = new IfElse
                 {
                     Condition = new Invocation("rising_edge", clockSignalName.ToVhdlSignalReference()),
-                    True = new InlineBlock { Body = new List<IVhdlElement>(process.Body) } // Needs to copy the list.
+                    True = new InlineBlock(process.Body.ToList()), // Needs to copy the list.
                 };
                 process.Body.Clear();
                 process.Add(wrappingIf);
@@ -37,7 +37,7 @@ namespace Hast.VhdlBuilder
             // Also looking on level down, so detecting processes even if they're in an inline block.
             elements.Where(element => element is Process)
                 .Union(elements
-                    .Where(element => !(element is Process) && element is IBlockElement)
+                    .Where(element => element is not Process and IBlockElement)
                     .Cast<InlineBlock>()
                     .SelectMany(block => block.Body.Where(element => element is Process)))
             .Cast<Process>();

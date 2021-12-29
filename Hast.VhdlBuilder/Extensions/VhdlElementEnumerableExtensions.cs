@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Text;
 using Hast.VhdlBuilder.Representation;
 
@@ -9,10 +9,7 @@ namespace System.Collections.Generic
         public static string ToVhdl<T>(
             this IEnumerable<T> elements,
             IVhdlGenerationOptions vhdlGenerationOptions)
-            where T : IVhdlElement
-        {
-            return elements.ToVhdl(vhdlGenerationOptions, string.Empty, null);
-        }
+            where T : IVhdlElement => elements.ToVhdl(vhdlGenerationOptions, string.Empty);
 
         public static string ToVhdl<T>(
             this IEnumerable<T> elements,
@@ -21,30 +18,26 @@ namespace System.Collections.Generic
             string lastElementTerminator = null)
             where T : IVhdlElement
         {
-            if (elements == null || !elements.Any()) return string.Empty;
-
+            if (elements == null) return string.Empty;
 
             // It's efficient to run this parallelized implementation even with a low number of items (or even one)
             // because the overhead of checking whether there are more than a few elements is bigger than the below
             // ceremony.
-            var elementsArray = elements.ToArray();
-            var lastElement = elementsArray[elementsArray.Length - 1];
-            var resultArray = new string[elementsArray.Length];
+            var elementsList = elements.AsList();
+            if (!elementsList.Any()) return string.Empty;
 
-            Threading.Tasks.Parallel.For(0, elementsArray.Length - 1, i =>
+            var lastElement = elementsList[^1];
+            var resultArray = new string[elementsList.Count];
+
+            Threading.Tasks.Parallel.For(0, elementsList.Count - 1, i =>
             {
-                resultArray[i] = elementsArray[i].ToVhdl(vhdlGenerationOptions) + elementTerminator;
+                resultArray[i] = elementsList[i].ToVhdl(vhdlGenerationOptions) + elementTerminator;
             });
 
-
             var stringBuilder = new StringBuilder();
+            stringBuilder.AppendJoin(string.Empty, resultArray);
 
-            for (int i = 0; i < resultArray.Length; i++)
-            {
-                stringBuilder.Append(resultArray[i]);
-            }
-
-            if (lastElementTerminator == null) lastElementTerminator = elementTerminator;
+            lastElementTerminator ??= elementTerminator;
             stringBuilder.Append(lastElement.ToVhdl(vhdlGenerationOptions) + lastElementTerminator);
 
             return stringBuilder.ToString();

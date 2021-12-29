@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.Models;
+using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -8,29 +8,20 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
     public static class MemberStateMachineExtenions
     {
-        public static IVhdlElement ChangeToStartState(this IMemberStateMachine stateMachine)
-        {
-            return stateMachine.CreateStateChange(0);
-        }
+        public static IVhdlElement ChangeToStartState(this IMemberStateMachine stateMachine) => stateMachine.CreateStateChange(0);
 
-        public static IVhdlElement ChangeToFinalState(this IMemberStateMachine stateMachine)
-        {
-            return stateMachine.CreateStateChange(1);
-        }
+        public static IVhdlElement ChangeToFinalState(this IMemberStateMachine stateMachine) => stateMachine.CreateStateChange(1);
 
         /// <summary>
         /// Implements a change from the current state to the state with the given index in VHDL.
         /// </summary>
         /// <param name="destinationStateIndex">The index of the state to change to.</param>
         /// <returns>The state change implemented in VHDL.</returns>
-        public static IVhdlElement CreateStateChange(this IMemberStateMachine stateMachine, int destinationStateIndex)
+        public static IVhdlElement CreateStateChange(this IMemberStateMachine stateMachine, int destinationStateIndex) => new Assignment
         {
-            return new Assignment
-            {
-                AssignTo = stateMachine.CreateStateVariableName().ToVhdlVariableReference(),
-                Expression = stateMachine.CreateStateName(destinationStateIndex).ToVhdlIdValue()
-            };
-        }
+            AssignTo = stateMachine.CreateStateVariableName().ToVhdlVariableReference(),
+            Expression = stateMachine.CreateStateName(destinationStateIndex).ToVhdlIdValue(),
+        };
 
         /// <summary>
         /// Adds a state change to the current block if the current block wouldn't fit into one clock cycle with the
@@ -38,7 +29,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         /// </summary>
         public static int AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(
             this IMemberStateMachine stateMachine,
-            ISubTransformerContext context,
+            SubTransformerContext context,
             decimal clockCyclesNeededForNewOperation)
         {
             var currentBlock = context.Scope.CurrentBlock;
@@ -56,18 +47,15 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
 
         public static int AddNewStateAndChangeCurrentBlock(
             this IMemberStateMachine stateMachine,
-            ISubTransformerContext context,
-            IBlockElement newBlock = null)
-        {
-            return stateMachine.AddNewStateAndChangeCurrentBlock(context.Scope, newBlock);
-        }
+            SubTransformerContext context,
+            IBlockElement newBlock = null) => stateMachine.AddNewStateAndChangeCurrentBlock(context.Scope, newBlock);
 
         public static int AddNewStateAndChangeCurrentBlock(
             this IMemberStateMachine stateMachine,
-            ISubTransformerScope scope,
+            SubTransformerScope scope,
             IBlockElement newBlock = null)
         {
-            if (newBlock == null) newBlock = new InlineBlock();
+            newBlock ??= new InlineBlock();
             var newStateIndex = scope.StateMachine.AddState(newBlock);
             scope.CurrentBlock.Add(scope.StateMachine.CreateStateChange(newStateIndex));
             scope.CurrentBlock.ChangeBlockToDifferentState(newBlock, newStateIndex);
@@ -79,21 +67,15 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
         /// </summary>
         /// <param name="index">The index of the state.</param>
         /// <returns>The name of the state.</returns>
-        public static string CreateStateName(this IMemberStateMachine stateMachine, int index)
-        {
+        public static string CreateStateName(this IMemberStateMachine stateMachine, int index) =>
             // This doesn't need a static helper method because we deliberately don't want to generate state names for
             // other state machines, since we don't want to directly set other state machines' states.
-            return ArchitectureComponentNameHelper.CreatePrefixedObjectName(stateMachine.Name, "_State_" + index);
-        }
+            ArchitectureComponentNameHelper.CreatePrefixedObjectName(stateMachine.Name, "_State_" + index);
 
-        public static string CreateStateVariableName(this IMemberStateMachine stateMachine)
-        {
-            return ArchitectureComponentNameHelper.CreatePrefixedObjectName(stateMachine.Name, "_State");
-        }
+        public static string CreateStateVariableName(this IMemberStateMachine stateMachine) =>
+            ArchitectureComponentNameHelper.CreatePrefixedObjectName(stateMachine.Name, "_State");
 
-        public static string CreateInvocationIndexVariableName(this IMemberStateMachine stateMachine, string targetMethodName)
-        {
-            return stateMachine.CreatePrefixedSegmentedObjectName(targetMethodName, "invocationIndex");
-        }
+        public static string CreateInvocationIndexVariableName(this IMemberStateMachine stateMachine, string targetMethodName) =>
+            stateMachine.CreatePrefixedSegmentedObjectName(targetMethodName, "invocationIndex");
     }
 }

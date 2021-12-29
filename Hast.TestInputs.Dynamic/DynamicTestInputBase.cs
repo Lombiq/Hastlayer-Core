@@ -8,7 +8,6 @@ namespace Hast.TestInputs.Dynamic
         public IHastlayer Hastlayer { get; set; }
         public IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; set; }
 
-
         protected SimpleMemory CreateMemory(int cellCount) =>
             Hastlayer.CreateMemory(HardwareGenerationConfiguration, cellCount);
     }

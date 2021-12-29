@@ -1,9 +1,7 @@
 using Hast.Synthesis;
-using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Xilinx.Abstractions.ManifestProviders;
-using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Xilinx
 {
@@ -11,7 +9,7 @@ namespace Hast.Xilinx
     {
         private readonly ITimingReportParser _timingReportParser;
 
-        private readonly object _timingReportParserLock = new object();
+        private readonly object _timingReportParserLock = new();
 
         private ITimingReport _timingReport;
         public ITimingReport TimingReport
@@ -26,7 +24,6 @@ namespace Hast.Xilinx
                 }
             }
         }
-
 
         public AwsF1Driver(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
     }

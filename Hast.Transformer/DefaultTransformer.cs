@@ -1,7 +1,5 @@
-using Hast.Common.Helpers;
 using Hast.Common.Services;
 using Hast.Layer;
-using Hast.Synthesis.Services;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
@@ -12,7 +10,7 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.CSharp.Transforms;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
-using Microsoft.Extensions.Logging;
+using Medallion.Collections;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,7 +32,7 @@ namespace Hast.Transformer
 #endif
 
         // Used for turning off language features to make processing easier.
-        private static DecompilerSettings DecompilerSettings = new DecompilerSettings
+        private static readonly DecompilerSettings _decompilerSettings = new()
         {
             AlwaysShowEnumMemberValues = false,
             AnonymousMethods = false,
@@ -75,112 +73,33 @@ namespace Hast.Transformer
             YieldReturn = false,
         };
 
-        private readonly IEnumerable<EventHandler<ITransformationContext>> _eventHandlers;
-        private readonly IJsonConverter _jsonConverter;
+        private readonly IEnumerable<IConverter> _converters;
         private readonly ISyntaxTreeCleaner _syntaxTreeCleaner;
-        private readonly IInvocationInstanceCountAdjuster _invocationInstanceCountAdjuster;
-        private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
-        private readonly ITransformingEngine _engine;
-        private readonly IGeneratedTaskArraysInliner _generatedTaskArraysInliner;
-        private readonly IObjectVariableTypesConverter _objectVariableTypesConverter;
-        private readonly IInstanceMethodsToStaticConverter _instanceMethodsToStaticConverter;
-        private readonly IConstructorsToMethodsConverter _constructorsToMethodsConverter;
-        private readonly IConditionalExpressionsToIfElsesConverter _conditionalExpressionsToIfElsesConverter;
         private readonly IConstantValuesSubstitutor _constantValuesSubstitutor;
-        private readonly IOperatorsToMethodsConverter _operatorsToMethodsConverter;
-        private readonly ICustomPropertiesToMethodsConverter _customPropertiesToMethodsConverter;
-        private readonly IImmutableArraysToStandardArraysConverter _immutableArraysToStandardArraysConverter;
-        private readonly IDirectlyAccessedNewObjectVariablesCreator _directlyAccessedNewObjectVariablesCreator;
         private readonly IAppDataFolder _appDataFolder;
-        private readonly IEmbeddedAssignmentExpressionsExpander _embeddedAssignmentExpressionsExpander;
         private readonly ITransformationContextCacheService _transformationContextCacheService;
-        private readonly IMethodInliner _methodInliner;
-        private readonly IObjectInitializerExpander _objectInitializerExpander;
-        private readonly ITaskBodyInvocationInstanceCountsSetter _taskBodyInvocationInstanceCountsSetter;
-        private readonly ISimpleMemoryUsageVerifier _simpleMemoryUsageVerifier;
-        private readonly IBinaryAndUnaryOperatorExpressionsCastAdjuster _binaryAndUnaryOperatorExpressionsCastAdjuster;
-        private readonly IDeviceDriverSelector _deviceDriverSelector;
-        private readonly IFSharpIdiosyncrasiesAdjuster _fSharpIdiosyncrasiesAdjuster;
         private readonly IKnownTypeLookupTableFactory _knownTypeLookupTableFactory;
-        private readonly IMemberIdentifiersFixer _memberIdentifiersFixer;
-        private readonly IUnneededReferenceVariablesRemover _unneededReferenceVariablesRemover;
-        private readonly IRefLocalVariablesRemover _refLocalVariablesRemover;
-        private readonly IOptionalParameterFiller _optionalParameterFiller;
-        private readonly IReadonlyToConstConverter _readonlyToConstConverter;
-        private readonly ILogger<DefaultTransformer> _logger;
-
+        private readonly ITransformerPostProcessor _transformerPostProcessor;
 
         public DefaultTransformer(
-            IEnumerable<EventHandler<ITransformationContext>> eventHandlers,
-            IJsonConverter jsonConverter,
+            IEnumerable<IConverter> converters,
             ISyntaxTreeCleaner syntaxTreeCleaner,
-            IInvocationInstanceCountAdjuster invocationInstanceCountAdjuster,
-            ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory,
-            ITransformingEngine engine,
-            IGeneratedTaskArraysInliner generatedTaskArraysInliner,
-            IObjectVariableTypesConverter objectVariableTypesConverter,
-            IInstanceMethodsToStaticConverter instanceMethodsToStaticConverter,
-            IConstructorsToMethodsConverter constructorsToMethodsConverter,
-            IConditionalExpressionsToIfElsesConverter conditionalExpressionsToIfElsesConverter,
             IConstantValuesSubstitutor constantValuesSubstitutor,
-            IOperatorsToMethodsConverter operatorsToMethodsConverter,
-            ICustomPropertiesToMethodsConverter customPropertiesToMethodsConverter,
-            IImmutableArraysToStandardArraysConverter immutableArraysToStandardArraysConverter,
-            IDirectlyAccessedNewObjectVariablesCreator directlyAccessedNewObjectVariablesCreator,
             IAppDataFolder appDataFolder,
-            IEmbeddedAssignmentExpressionsExpander embeddedAssignmentExpressionsExpander,
             ITransformationContextCacheService transformationContextCacheService,
-            IMethodInliner methodInliner,
-            IObjectInitializerExpander objectInitializerExpander,
-            ITaskBodyInvocationInstanceCountsSetter taskBodyInvocationInstanceCountsSetter,
-            ISimpleMemoryUsageVerifier simpleMemoryUsageVerifier,
-            IBinaryAndUnaryOperatorExpressionsCastAdjuster binaryAndUnaryOperatorExpressionsCastAdjuster,
-            IDeviceDriverSelector deviceDriverSelector,
-            IFSharpIdiosyncrasiesAdjuster fSharpIdiosyncrasiesAdjuster,
             IKnownTypeLookupTableFactory knownTypeLookupTableFactory,
-            IMemberIdentifiersFixer memberIdentifiersFixer,
-            IUnneededReferenceVariablesRemover unneededReferenceVariablesRemover,
-            IRefLocalVariablesRemover refLocalVariablesRemover,
-            IOptionalParameterFiller optionalParameterFiller,
-            IReadonlyToConstConverter readonlyToConstConverter,
-            ILogger<DefaultTransformer> logger)
+            ITransformerPostProcessor transformerPostProcessor)
         {
-            _eventHandlers = eventHandlers;
-            _jsonConverter = jsonConverter;
+            _converters = converters;
             _syntaxTreeCleaner = syntaxTreeCleaner;
-            _invocationInstanceCountAdjuster = invocationInstanceCountAdjuster;
-            _typeDeclarationLookupTableFactory = typeDeclarationLookupTableFactory;
-            _engine = engine;
-            _generatedTaskArraysInliner = generatedTaskArraysInliner;
-            _objectVariableTypesConverter = objectVariableTypesConverter;
-            _instanceMethodsToStaticConverter = instanceMethodsToStaticConverter;
-            _constructorsToMethodsConverter = constructorsToMethodsConverter;
-            _conditionalExpressionsToIfElsesConverter = conditionalExpressionsToIfElsesConverter;
             _constantValuesSubstitutor = constantValuesSubstitutor;
-            _operatorsToMethodsConverter = operatorsToMethodsConverter;
-            _customPropertiesToMethodsConverter = customPropertiesToMethodsConverter;
-            _immutableArraysToStandardArraysConverter = immutableArraysToStandardArraysConverter;
-            _directlyAccessedNewObjectVariablesCreator = directlyAccessedNewObjectVariablesCreator;
             _appDataFolder = appDataFolder;
-            _embeddedAssignmentExpressionsExpander = embeddedAssignmentExpressionsExpander;
             _transformationContextCacheService = transformationContextCacheService;
-            _methodInliner = methodInliner;
-            _objectInitializerExpander = objectInitializerExpander;
-            _taskBodyInvocationInstanceCountsSetter = taskBodyInvocationInstanceCountsSetter;
-            _simpleMemoryUsageVerifier = simpleMemoryUsageVerifier;
-            _binaryAndUnaryOperatorExpressionsCastAdjuster = binaryAndUnaryOperatorExpressionsCastAdjuster;
-            _deviceDriverSelector = deviceDriverSelector;
-            _fSharpIdiosyncrasiesAdjuster = fSharpIdiosyncrasiesAdjuster;
             _knownTypeLookupTableFactory = knownTypeLookupTableFactory;
-            _memberIdentifiersFixer = memberIdentifiersFixer;
-            _unneededReferenceVariablesRemover = unneededReferenceVariablesRemover;
-            _refLocalVariablesRemover = refLocalVariablesRemover;
-            _optionalParameterFiller = optionalParameterFiller;
-            _readonlyToConstConverter = readonlyToConstConverter;
-            _logger = logger;
+            _transformerPostProcessor = transformerPostProcessor;
         }
 
-        public async Task<IHardwareDescription> Transform(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
+        public async Task<IHardwareDescription> TransformAsync(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
             var transformerConfiguration = configuration.TransformerConfiguration();
 
@@ -211,13 +130,13 @@ namespace Hast.Transformer
                 var dependenciesFolderPath = _appDataFolder.MapPath("Dependencies");
                 if (dependenciesFolderPath != null) resolver.AddSearchDirectory(dependenciesFolderPath);
                 resolver.AddSearchDirectory(AppDomain.CurrentDomain.BaseDirectory);
-                foreach (var searchPath in assemblyPaths.Select(path => Path.GetDirectoryName(path)).Distinct())
+                foreach (var searchPath in assemblyPaths.Select(Path.GetDirectoryName).Distinct())
                 {
                     resolver.AddSearchDirectory(searchPath);
                 }
 
-                var typeSystem = new DecompilerTypeSystem(module, resolver, DecompilerSettings);
-                var decompiler = new CSharpDecompiler(typeSystem, DecompilerSettings);
+                var typeSystem = new DecompilerTypeSystem(module, resolver, _decompilerSettings);
+                var decompiler = new CSharpDecompiler(typeSystem, _decompilerSettings);
 
                 // We don't want to run all transforms since they would also transform some low-level constructs that are
                 // useful to have as simple as possible (e.g. it's OK if we only have while statements in the AST, not for
@@ -225,28 +144,28 @@ namespace Hast.Transformer
                 // Must revisit after an ILSpy update.
 
                 decompiler.ILTransforms
-                    // InlineReturnTransform might need to be removed: it creates returns with ternary operators and
-                    // introduces multiple return statements.
-
-                    // Converts simple while loops into for loops. However, all resulting loops are while (true) ones
-                    // with a break statement inside.
-                    // Not necessary to remove it with ForStatement = DoWhileStatement = false
-                    //.Remove<HighLevelLoopTransform>()
-
-                    // Creates local variables instead of assigning them to DisplayClasses. E.g. instead of:
-                    //
-                    //      ParallelAlgorithm.<> c__DisplayClass3_0 <> c__DisplayClass3_;
-                    //      <> c__DisplayClass3_ = new ParallelAlgorithm.<> c__DisplayClass3_0();
-                    //      <> c__DisplayClass3_.input = memory.ReadUInt32(0);
-                    //
-                    // ...we'd get:
-                    //
-                    //      uint input;
-                    //      input = memory.ReadUInt32(0);
-                    //      Func<object, uint> func = default(Func<object, uint>);
-                    //      <> c__DisplayClass3_0 @object;
-                    //
-                    // Note that the DisplayClass is not instantiated either.
+                    //// InlineReturnTransform might need to be removed: it creates returns with ternary operators and
+                    //// introduces multiple return statements.
+                    ////
+                    //// Converts simple while loops into for loops. However, all resulting loops are while (true) ones
+                    //// with a break statement inside.
+                    //// Not necessary to remove it with ForStatement = DoWhileStatement = false
+                    //// .Remove<HighLevelLoopTransform>()
+                    ////
+                    //// Creates local variables instead of assigning them to DisplayClasses. E.g. instead of:
+                    ////
+                    ////      ParallelAlgorithm.<> c__DisplayClass3_0 <> c__DisplayClass3_;
+                    ////      <> c__DisplayClass3_ = new ParallelAlgorithm.<> c__DisplayClass3_0();
+                    ////      <> c__DisplayClass3_.input = memory.ReadUInt32(0);
+                    ////
+                    //// ...we'd get:
+                    ////
+                    ////      uint input;
+                    ////      input = memory.ReadUInt32(0);
+                    ////      Func<object, uint> func = default(Func<object, uint>);
+                    ////      <> c__DisplayClass3_0 @object;
+                    ////
+                    //// Note that the DisplayClass is not instantiated either.
                     .Remove("TransformDisplayClassUsage");
 
                 decompiler.AstTransforms
@@ -285,123 +204,59 @@ namespace Hast.Transformer
             await WriteSyntaxTreeAsync(syntaxTree, "UnprocessedSyntaxTree.cs");
             transformationIdComponents.Add($"source code: {syntaxTree}");
 
-            transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberFullNames);
-            transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberNamePrefixes);
-            transformationIdComponents.Add(_jsonConverter.Serialize(configuration.CustomConfiguration));
+            var transformationId = _transformationContextCacheService.BuildTransformationId(
+                transformationIdComponents,
+                configuration);
 
-            // Adding the assembly name so the Hastlayer version is included too, to prevent stale caches after a
-            // Hastlayer update.
-            transformationIdComponents.Add(GetType().Assembly.FullName);
-
-            // Adding the device name to ensure different a cached program for a different hardware doesn't get used.
-            transformationIdComponents.Add(configuration.DeviceName);
-
-            if (!string.IsNullOrWhiteSpace(configuration.Label)) transformationIdComponents.Add(configuration.Label);
-
-            foreach (var transformationIdComponent in transformationIdComponents)
+            if (configuration.EnableCaching &&
+                await _transformationContextCacheService.ExecuteTransformationContextIfAnyAsync(
+                    assemblyPaths,
+                    transformationId) is { } hardwareDescription)
             {
-                _logger.LogTrace(
-                    "Transformation ID component: {0}",
-                    transformationIdComponent.StartsWith("source code: ")
-                        ? "[whole source code]"
-                        : transformationIdComponent);
-            }
-
-            var transformationId = Sha2456Helper.ComputeHash(string.Join("\n", transformationIdComponents));
-
-            if (configuration.EnableCaching && _transformationContextCacheService
-                .GetTransformationContext(assemblyPaths, transformationId) is { } cachedTransformationContext)
-            {
-                return await _engine.Transform(cachedTransformationContext);
+                return hardwareDescription;
             }
 
             // Since this is about known (i.e. .NET built-in) types it doesn't matter which type system we use.
             var knownTypeLookupTable = _knownTypeLookupTableFactory.Create(decompilers.First().TypeSystem);
+            var arraySizeHolder = ArraySizeHolder.FromConfiguration(configuration);
 
-            _memberIdentifiersFixer.FixMemberIdentifiers(syntaxTree);
-            _fSharpIdiosyncrasiesAdjuster.AdjustFSharpIdiosyncrasies(syntaxTree);
+            var convertersByName = _converters.ToDictionary(converter => converter.Name ?? converter.GetType().Name);
 
-            // Removing the unnecessary bits.
-            _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
-
-            // Conversions making the syntax tree easier to process. Note that the order is NOT arbitrary but these
-            // services sometimes depend on each other.
-            _readonlyToConstConverter.ConvertReadonlyPrimitives(syntaxTree, configuration);
-            _immutableArraysToStandardArraysConverter.ConvertImmutableArraysToStandardArrays(syntaxTree, knownTypeLookupTable);
-            _binaryAndUnaryOperatorExpressionsCastAdjuster.AdjustBinaryAndUnaryOperatorExpressions(syntaxTree, knownTypeLookupTable);
-            _generatedTaskArraysInliner.InlineGeneratedTaskArrays(syntaxTree);
-            _objectVariableTypesConverter.ConvertObjectVariableTypes(syntaxTree);
-            _constructorsToMethodsConverter.ConvertConstructorsToMethods(syntaxTree);
-            _operatorsToMethodsConverter.ConvertOperatorsToMethods(syntaxTree);
-            _customPropertiesToMethodsConverter.ConvertCustomPropertiesToMethods(syntaxTree);
-            _instanceMethodsToStaticConverter.ConvertInstanceMethodsToStatic(syntaxTree);
-            _conditionalExpressionsToIfElsesConverter.ConvertConditionalExpressionsToIfElses(syntaxTree);
-            _directlyAccessedNewObjectVariablesCreator.CreateVariablesForDirectlyAccessedNewObjects(syntaxTree);
-            _objectInitializerExpander.ExpandObjectInitializers(syntaxTree);
-            _embeddedAssignmentExpressionsExpander.ExpandEmbeddedAssignmentExpressions(syntaxTree);
-            // Needs to run before method inlining but after anything that otherwise modified method signatures or
-            // invocations.
-            _optionalParameterFiller.FillOptionalParamters(syntaxTree);
-            if (transformerConfiguration.EnableMethodInlining) _methodInliner.InlineMethods(syntaxTree, configuration);
-            // This needs to run before UnneededReferenceVariablesRemover.
-            _refLocalVariablesRemover.RemoveRefLocalVariables(syntaxTree);
-            _unneededReferenceVariablesRemover.RemoveUnneededVariables(syntaxTree);
-
-            var preConfiguredArrayLengths = configuration
-                .TransformerConfiguration()
-                .ArrayLengths
-                .ToDictionary(kvp => kvp.Key, kvp => (IArraySize)new ArraySize { Length = kvp.Value });
-            var arraySizeHolder = new ArraySizeHolder(preConfiguredArrayLengths);
-            if (transformerConfiguration.EnableConstantSubstitution)
+            // This one needs additional configuration.
+            new CustomConverter
             {
-                _constantValuesSubstitutor.SubstituteConstantValues(syntaxTree, arraySizeHolder, configuration, knownTypeLookupTable);
+                Name = nameof(ConstantValuesSubstitutor),
+                ConverterAction = (syntaxTree, configuration, knownTypeLookupTable) =>
+                {
+                    if (!transformerConfiguration.EnableConstantSubstitution) return;
+                    _constantValuesSubstitutor.SubstituteConstantValues(
+                        syntaxTree,
+                        arraySizeHolder,
+                        configuration,
+                        knownTypeLookupTable);
+                },
             }
+                .WithDependency<UnneededReferenceVariablesRemover>()
+                .AddToDictionary(convertersByName);
 
-            // Needs to run after const substitution.
-            _taskBodyInvocationInstanceCountsSetter.SetTaskBodyInvocationInstanceCounts(syntaxTree, configuration);
+            var converters = convertersByName
+                .Values
+                .OrderTopologicallyBy(converter => converter.Dependencies.Select(name => convertersByName[name]));
+            foreach (var converter in converters) converter.Convert(syntaxTree, configuration, knownTypeLookupTable);
 
             // If the conversions removed something let's clean them up here.
             _syntaxTreeCleaner.CleanUnusedDeclarations(syntaxTree, configuration);
 
             await WriteSyntaxTreeAsync(syntaxTree, "ProcessedSyntaxTree.cs");
 
-            _invocationInstanceCountAdjuster.AdjustInvocationInstanceCounts(syntaxTree, configuration);
-
-
-            if (transformerConfiguration.UseSimpleMemory)
-            {
-                _simpleMemoryUsageVerifier.VerifySimpleMemoryUsage(syntaxTree);
-            }
-
-            var deviceDriver = _deviceDriverSelector.GetDriver(configuration.DeviceName);
-
-            if (deviceDriver == null)
-            {
-                throw new InvalidOperationException(
-                    $"No device driver with the name \"{configuration.DeviceName}\" was found.");
-            }
-
-            var context = new TransformationContext
-            {
-                Id = transformationId,
-                HardwareGenerationConfiguration = configuration,
-                SyntaxTree = syntaxTree,
-                TypeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree),
-                KnownTypeLookupTable = knownTypeLookupTable,
-                ArraySizeHolder = arraySizeHolder,
-                DeviceDriver = deviceDriver,
-            };
-
-            foreach (var eventHandler in _eventHandlers) eventHandler?.Invoke(this, context);
-
-            if (configuration.EnableCaching)
-            {
-                _transformationContextCacheService.SetTransformationContext(context, assemblyPaths);
-            }
-
-            return await _engine.Transform(context);
+            return await _transformerPostProcessor.PostProcessAsync(
+                assemblyPaths,
+                transformationId,
+                syntaxTree,
+                configuration,
+                knownTypeLookupTable,
+                arraySizeHolder);
         }
-
 
         private static async Task WriteSyntaxTreeAsync(SyntaxTree syntaxTree, string fileName)
         {
@@ -412,7 +267,10 @@ namespace Hast.Transformer
                     await File.WriteAllTextAsync(fileName, syntaxTree.ToString());
                     return;
                 }
-                catch (IOException) { }
+                catch (IOException)
+                {
+                    // It's no big deal if we can't create it.
+                }
             }
         }
 

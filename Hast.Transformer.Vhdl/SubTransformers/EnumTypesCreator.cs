@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
@@ -18,17 +18,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return enumDeclarations;
         }
 
-
         private class EnumCheckingVisitor : DepthFirstAstVisitor
         {
             private readonly List<IVhdlElement> _enumDeclarations;
 
-
-            public EnumCheckingVisitor(List<IVhdlElement> enumDeclarations)
-            {
-                _enumDeclarations = enumDeclarations;
-            }
-
+            public EnumCheckingVisitor(List<IVhdlElement> enumDeclarations) => _enumDeclarations = enumDeclarations;
 
             public override void VisitTypeDeclaration(TypeDeclaration typeDeclaration)
             {
@@ -36,13 +30,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                 if (typeDeclaration.ClassType != ClassType.Enum) return;
 
-                _enumDeclarations.Add(new Enum
-                {
-                    Name = typeDeclaration.GetFullName().ToExtendedVhdlId(),
-                    Values = typeDeclaration.Members
-                        .Select(member => member.GetFullName().ToExtendedVhdlIdValue())
-                        .ToList()
-                });
+                var values = typeDeclaration.Members.Select(member => member.GetFullName().ToExtendedVhdlIdValue());
+                _enumDeclarations.Add(new Enum(values) { Name = typeDeclaration.GetFullName().ToExtendedVhdlId() });
             }
         }
     }

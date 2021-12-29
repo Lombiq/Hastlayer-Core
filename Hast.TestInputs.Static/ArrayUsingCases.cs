@@ -1,4 +1,4 @@
-﻿namespace Hast.TestInputs.Static
+namespace Hast.TestInputs.Static
 {
     public class ArrayUsingCases
     {
@@ -14,7 +14,6 @@
             var array = ArrayProducingMethod(5);
         }
 
-
         private int[] ArrayProducingMethod(int arrayLength)
         {
             var array = new int[arrayLength];
@@ -22,16 +21,11 @@
             return array;
         }
 
-
-        private class ArrayHolder
+        private sealed class ArrayHolder
         {
             public int[] Array { get; }
 
-
-            public ArrayHolder(int[] array)
-            {
-                Array = array;
-            }
+            public ArrayHolder(int[] array) => Array = array;
         }
     }
 }

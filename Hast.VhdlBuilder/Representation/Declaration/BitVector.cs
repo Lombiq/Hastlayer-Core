@@ -5,14 +5,15 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class BitVector : SizedDataType
     {
-        public BitVector(DataType baseType) : base(baseType)
+        public BitVector(DataType baseType)
+            : base(baseType)
         {
         }
 
         public BitVector(SizedDataType previous)
             : base(previous)
         {
-            Size = previous.Size;
+            SizeNumber = previous.SizeNumber;
             SizeExpression = previous.SizeExpression;
         }
 

@@ -1,16 +1,46 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Layer;
+using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Services
 {
-    public class EmbeddedAssignmentExpressionsExpander : IEmbeddedAssignmentExpressionsExpander
+    /// <summary>
+    /// Searches for assignment expressions embedded in other expressions and brings them up to their own statements,
+    /// allowing easier processing later.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// if (skipCount = skipCount - 1u &lt;= 0u)
+    /// {
+    ///     ...
+    ///
+    /// ...will be converted into:
+    /// uint assignment;
+    /// assignment = skipCount - 1u;
+    /// skipCount = assignment;
+    /// if (assignment &lt;= 0u)
+    /// {
+    ///     ...
+    /// </code>
+    /// </example>
+    /// <remarks>
+    /// <para>
+    /// The MakeAssignmentExpressions configuration of <see cref="ICSharpCode.Decompiler.DecompilerSettings"/> serves
+    /// something similar but that also changes how a decompiled Task.Factory.StartNew() looks like.
+    /// </para>
+    /// </remarks>
+    public class EmbeddedAssignmentExpressionsExpander : IConverter
     {
-        public void ExpandEmbeddedAssignmentExpressions(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new EmbeddedAssignmentExpressionsExpandingVisitor());
-        }
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(ObjectInitializerExpander) };
 
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new EmbeddedAssignmentExpressionsExpandingVisitor());
 
         private class EmbeddedAssignmentExpressionsExpandingVisitor : DepthFirstAstVisitor
         {
@@ -48,7 +78,6 @@ namespace Hast.Transformer.Services
                     .WithAnnotation(resolveResult);
 
                 AstInsertionHelper.InsertStatementBefore(firstParentStatement, new ExpressionStatement(leftAssignment));
-
 
                 assignmentExpression.ReplaceWith(variableIdentifier.Clone());
             }
