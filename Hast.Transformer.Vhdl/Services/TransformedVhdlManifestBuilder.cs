@@ -15,6 +15,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -35,6 +36,10 @@ namespace Hast.Transformer.Vhdl.Services
         private readonly ITypesCreator _typesCreator;
         private readonly IEnumerable<IXdcFileBuilder> _xdcFileBuilders;
 
+        [SuppressMessage(
+            "Major Code Smell",
+            "S107:Methods should not have too many parameters",
+            Justification = "All of these are necessary for VHDL manifest building.")]
         public TransformedVhdlManifestBuilder(
             IEnumerable<IVerifyer> verifiers,
             IClock clock,

@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using System;
@@ -28,5 +28,20 @@ namespace Hast.Transformer.Abstractions
             // That's not really a cause for panic.
             return string.Compare(ManifestType.FullName, other.ManifestType.FullName, StringComparison.Ordinal);
         }
+
+        public override bool Equals(object obj) => obj is XdcFileBuilder<T>;
+
+        public override int GetHashCode() => typeof(T).GetHashCode();
+
+        public static bool operator ==(XdcFileBuilder<T> left, IXdcFileBuilder right) =>
+            left?.ManifestType == right?.ManifestType;
+
+        public static bool operator !=(XdcFileBuilder<T> left, IXdcFileBuilder right) =>
+            left?.ManifestType != right?.ManifestType;
+
+        public static bool operator <(XdcFileBuilder<T> left, IXdcFileBuilder right) => left.CompareTo(right) < 0;
+        public static bool operator <=(XdcFileBuilder<T> left, IXdcFileBuilder right) => left.CompareTo(right) <= 0;
+        public static bool operator >(XdcFileBuilder<T> left, IXdcFileBuilder right) => left.CompareTo(right) > 0;
+        public static bool operator >=(XdcFileBuilder<T> left, IXdcFileBuilder right) => left.CompareTo(right) >= 0;
     }
 }
