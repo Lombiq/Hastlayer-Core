@@ -83,7 +83,7 @@ namespace Hast.Transformer.Services
         private static string SuffixMethodIdentifier(string identifier, string methodIdentifierNameSuffix)
         {
             var suffix = "_" + methodIdentifierNameSuffix;
-            return identifier.EndsWith(suffix, StringComparison.InvariantCulture)
+            return identifier.EndsWithOrdinal(suffix)
                 ? identifier
                 : identifier + suffix;
         }

@@ -112,7 +112,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 Expression = Value.True,
             });
 
-            var is4BytesOperation = targetMemberReference.MemberName.EndsWith("4Bytes", StringComparison.InvariantCulture);
+            var is4BytesOperation = targetMemberReference.MemberName.EndsWithOrdinal("4Bytes");
             var operationDataTypeName = memberName
                 .Replace("Write", string.Empty, StringComparison.InvariantCulture)
                 .Replace("Read", string.Empty, StringComparison.InvariantCulture);
