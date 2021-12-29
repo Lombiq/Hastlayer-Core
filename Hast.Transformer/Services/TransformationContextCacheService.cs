@@ -69,7 +69,7 @@ namespace Hast.Transformer.Services
             {
                 _logger.LogTrace(
                     "Transformation ID component: {0}",
-                    transformationIdComponent.StartsWith("source code: ", StringComparison.InvariantCulture)
+                    transformationIdComponent.StartsWithOrdinal("source code: ")
                         ? "[whole source code]"
                         : transformationIdComponent);
             }

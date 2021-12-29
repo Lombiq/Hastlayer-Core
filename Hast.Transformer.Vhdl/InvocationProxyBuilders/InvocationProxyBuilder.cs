@@ -46,7 +46,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                 // index, the deepest one in the call stack) from the list of invoking ones, because that won't invoke
                 // anything else.
                 var maxIndexComponent = invokedMember.Value
-                    .Where(component => component.Key.StartsWith(memberFullName, StringComparison.InvariantCulture))
+                    .Where(component => component.Key.StartsWithOrdinal(memberFullName))
                     .OrderByDescending(component => component.Key)
                     .Cast<KeyValuePair<string, int>?>()
                     .FirstOrDefault();

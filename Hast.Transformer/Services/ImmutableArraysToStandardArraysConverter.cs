@@ -291,7 +291,7 @@ namespace Hast.Transformer.Services
             }
 
             private static bool IsImmutableArray(IType type) =>
-                type?.GetFullName().StartsWith("System.Collections.Immutable.ImmutableArray", StringComparison.InvariantCulture) == true;
+                type?.GetFullName().StartsWithOrdinal("System.Collections.Immutable.ImmutableArray") == true;
 
             private static ArrayType CreateArrayType(IType elementType, ICompilationProvider compilationProvider = null) =>
                 new(compilationProvider?.Compilation ?? ((ICompilationProvider)elementType).Compilation, elementType, 1);
