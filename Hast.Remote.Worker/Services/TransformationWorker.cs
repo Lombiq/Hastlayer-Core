@@ -314,7 +314,7 @@ namespace Hast.Remote.Worker.Services
                     assemblyPaths,
                     new HardwareGenerationConfiguration(
                         job.Configuration.DeviceName,
-hardwareFrameworkPath: null,
+                        hardwareFrameworkPath: null,
                         job.Configuration.CustomConfiguration,
                         job.Configuration.HardwareEntryPointMemberFullNames,
                         job.Configuration.HardwareEntryPointMemberNamePrefixes)

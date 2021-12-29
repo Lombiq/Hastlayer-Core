@@ -117,9 +117,9 @@ namespace Hast.Transformer
 
                 var resolver = new UniversalAssemblyResolver(
                     Path.GetFullPath(assemblyPath),
-throwOnError: true,
+                    throwOnError: true,
                     module.Reader.DetectTargetFrameworkId(),
-runtimePack: null,
+                    runtimePack: null,
                     PEStreamOptions.PrefetchMetadata);
 
                 // When executed as a Windows service not all Hastlayer assemblies references' from transformed assemblies

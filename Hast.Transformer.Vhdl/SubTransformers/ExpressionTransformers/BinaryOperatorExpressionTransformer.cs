@@ -39,26 +39,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             resultReferences.Add(TransformBinaryOperatorExpressionInner(
                 partiallyTransformedExpressionsList[0],
-operationResultDataObjectIsVariable: false,
-isFirstOfSimdOperationsOrIsSingleOperation: true,
-isLastOfSimdOperations: false,
+                operationResultDataObjectIsVariable: false,
+                isFirstOfSimdOperationsOrIsSingleOperation: true,
+                isLastOfSimdOperations: false,
                 context));
 
             for (int i = 1; i < partiallyTransformedExpressionsList.Count - 1; i++)
             {
                 resultReferences.Add(TransformBinaryOperatorExpressionInner(
                     partiallyTransformedExpressionsList[i],
-operationResultDataObjectIsVariable: false,
-isFirstOfSimdOperationsOrIsSingleOperation: false,
-isLastOfSimdOperations: false,
+                    operationResultDataObjectIsVariable: false,
+                    isFirstOfSimdOperationsOrIsSingleOperation: false,
+                    isLastOfSimdOperations: false,
                     context));
             }
 
             resultReferences.Add(TransformBinaryOperatorExpressionInner(
                 partiallyTransformedExpressionsList[^1],
-operationResultDataObjectIsVariable: false,
-isFirstOfSimdOperationsOrIsSingleOperation: false,
-isLastOfSimdOperations: true,
+                operationResultDataObjectIsVariable: false,
+                isFirstOfSimdOperationsOrIsSingleOperation: false,
+                isLastOfSimdOperations: true,
                 context));
 
             return resultReferences;
@@ -69,9 +69,9 @@ isLastOfSimdOperations: true,
             SubTransformerContext context) =>
             TransformBinaryOperatorExpressionInner(
                 partiallyTransformedExpression,
-operationResultDataObjectIsVariable: true,
-isFirstOfSimdOperationsOrIsSingleOperation: true,
-isLastOfSimdOperations: true,
+                operationResultDataObjectIsVariable: true,
+                isFirstOfSimdOperationsOrIsSingleOperation: true,
+                isLastOfSimdOperations: true,
                 context);
 
         private IVhdlElement TransformBinaryOperatorExpressionInner(

@@ -23,7 +23,7 @@ namespace Hast.DynamicTests.Tests
         ExecuteIntTestAsync(
              b => b.ByteBinaryOperatorExpressionVariations(null),
              b => b.ByteBinaryOperatorExpressionVariations,
-noMinValue: true);
+             noMinValue: true);
 
         [Fact]
         public Task SbyteBinaryOperatorExpressionVariations() =>
@@ -42,7 +42,7 @@ noMinValue: true);
             ExecuteIntTestAsync(
                  b => b.UshortBinaryOperatorExpressionVariations(null),
                  b => b.UshortBinaryOperatorExpressionVariations,
-noMinValue: true);
+                 noMinValue: true);
 
         [Fact]
         public Task IntBinaryOperatorExpressionVariations() =>

@@ -120,7 +120,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     methodFullName,
                     parameter.Name,
                     0,
-isOwn: true)
+                    isOwn: true)
                 {
                     DataType = parameterDataType,
                     Name = parameterSignalReference.Name,
@@ -157,7 +157,7 @@ isOwn: true)
                     methodFullName,
                     parameter.Name,
                     0,
-isOwn: true)
+                    isOwn: true)
                 {
                     DataType = parameterDataType,
                     Name = outParameterSignalReference.Name,

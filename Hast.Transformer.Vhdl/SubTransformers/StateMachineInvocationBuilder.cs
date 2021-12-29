@@ -267,7 +267,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 targetMethodName,
                 targetParameter.Name,
                 index,
-isOwn: false)
+                isOwn: false)
             {
                 DataType = parameterSignalType,
                 Name = parameterSignalName,

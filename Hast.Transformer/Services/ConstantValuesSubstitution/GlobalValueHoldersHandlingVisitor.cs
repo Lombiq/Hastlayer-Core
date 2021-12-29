@@ -114,7 +114,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     returnStatement.FindFirstParentEntityDeclaration(),
                     primitiveExpression,
                     _rootNode,
-disallowDifferentValues: true);
+                    disallowDifferentValues: true);
             }
             else if (!returnStatement.Expression.GetFullName().IsBackingFieldName())
             {
