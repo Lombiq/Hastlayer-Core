@@ -53,7 +53,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
             public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
             {
-                var hierarchical = (IsHierarchical ? "-hierarchical " : string.Empty);
+                var hierarchical = IsHierarchical ? "-hierarchical " : string.Empty;
 
                 // The config should contain the path's name without backslashes even if the original name is an
                 // extended identifier. Spaces need to be escaped with a slash.

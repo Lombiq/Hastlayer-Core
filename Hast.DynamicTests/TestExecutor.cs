@@ -1,6 +1,7 @@
 using Hast.Layer;
 using Hast.TestInputs.Dynamic;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -30,12 +31,12 @@ namespace Hast.DynamicTests
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
             hastlayer.ExecutedOnHardware += (_, e) =>
-                Console.Out.WriteLineInvariant(
+                Console.WriteLine(StringHelper.ConcatenateConvertible(
                     "Executing on hardware took ",
                     e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds,
                     " milliseconds (net) ",
                     e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds,
-                    " milliseconds (all together).");
+                    " milliseconds (all together)."));
 
             Console.WriteLine("Hardware generation starts.");
             var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
