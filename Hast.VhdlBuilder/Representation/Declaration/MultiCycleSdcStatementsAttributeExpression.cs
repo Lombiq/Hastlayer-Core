@@ -1,4 +1,5 @@
 ﻿using Hast.VhdlBuilder.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -57,17 +58,21 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             public int ClockCycles { get; set; }
             public string Type { get; set; }
 
-            public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-                    "-name SDC_STATEMENT \"\"set_multicycle_path " + ClockCycles + " -" + Type + " -to {*" +
-                    // The config should contain the path's name without backslashes even if the original name is an
-                    // extended identifier. Spaces need to be escaped with a slash.
-                    (string.IsNullOrEmpty(ParentName)
-                        ? string.Empty
-                        : vhdlGenerationOptions
-                            .NameShortener(ParentName.TrimExtendedVhdlIdDelimiters()
-                            .Replace(" ", "\\ ")) + ":") +
-                    PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ") +
-                    "[*]}\"\"";
+            public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+            {
+                // The config should contain the path's name without backslashes even if the original name is an
+                // extended identifier. Spaces need to be escaped with a slash.
+                var name =
+                string.IsNullOrEmpty(ParentName)
+                    ? string.Empty
+                    : vhdlGenerationOptions
+                        .NameShortener(ParentName.TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ")) + ":";
+
+                var vhdl = PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ");
+
+                return FormattableString.Invariant(
+                    $"-name SDC_STATEMENT \"\"set_multicycle_path {ClockCycles} -{Type} -to {{*{name}{vhdl}[*]}}\"\"");
+            }
         }
     }
 }

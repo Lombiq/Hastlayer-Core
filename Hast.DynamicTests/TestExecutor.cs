@@ -3,6 +3,7 @@ using Hast.TestInputs.Dynamic;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -29,11 +30,11 @@ namespace Hast.DynamicTests
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
             hastlayer.ExecutedOnHardware += (_, e) =>
-                Console.WriteLine(
-                    "Executing on hardware took " +
-                    e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
-                    " milliseconds (net) " +
-                    e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                Console.Out.WriteLineInvariant(
+                    "Executing on hardware took ",
+                    e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds,
+                    " milliseconds (net) ",
+                    e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds,
                     " milliseconds (all together).");
 
             Console.WriteLine("Hardware generation starts.");

@@ -51,13 +51,17 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             public string Type { get; set; }
             public bool IsHierarchical { get; set; }
 
-            public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-                    "set_multicycle_path " + ClockCycles + " -" + Type + " -to [get_cells " +
-                    (IsHierarchical ? "-hierarchical " : string.Empty) + "{*" +
-                    // The config should contain the path's name without backslashes even if the original name is an
-                    // extended identifier. Spaces need to be escaped with a slash.
-                    PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ") +
-                    "*}]";
+            public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+            {
+                var hierarchical = (IsHierarchical ? "-hierarchical " : string.Empty);
+
+                // The config should contain the path's name without backslashes even if the original name is an
+                // extended identifier. Spaces need to be escaped with a slash.
+                var vhdl = PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ");
+
+                return FormattableString.Invariant(
+                    $"set_multicycle_path {ClockCycles} -{Type} -to [get_cells {hierarchical}{{*{vhdl}*}}]");
+            }
         }
     }
 }

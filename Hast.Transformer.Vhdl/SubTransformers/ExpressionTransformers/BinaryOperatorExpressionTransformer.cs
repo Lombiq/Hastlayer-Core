@@ -310,9 +310,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var waitForResultBlock = new InlineBlock(
                 new GeneratedComment(vhdlGenerationOptions =>
-                    "Waiting for the result to appear in " +
-                    operationResultDataObjectReference.ToVhdl(vhdlGenerationOptions) +
-                    " (have to wait " + clockCyclesToWait + " clock cycles in this state)."),
+                {
+                    var vhdl = operationResultDataObjectReference.ToVhdl(vhdlGenerationOptions);
+                    return FormattableString.Invariant(
+                        $"Waiting for the result to appear in {vhdl} (have to wait {clockCyclesToWait} clock cycles in this state).");
+                }),
                 new LineComment(
                     "The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target."));
 

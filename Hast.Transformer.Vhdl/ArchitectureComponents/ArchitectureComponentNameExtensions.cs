@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using System;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
@@ -38,7 +39,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 component.InternallyDrivenSignals.Any(signal => signal.Name == component.CreatePrefixedObjectName(objectName)))
             {
                 objectNameIndex++;
-                objectName = name + "." + objectNameIndex;
+                objectName = FormattableString.Invariant($"{name}.{objectNameIndex}");
             }
 
             return component.CreatePrefixedObjectName(objectName);

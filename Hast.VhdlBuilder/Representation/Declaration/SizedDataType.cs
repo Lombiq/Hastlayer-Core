@@ -54,6 +54,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 (SizeExpression == null ? SizeNumber == otherType.SizeNumber : SizeExpression.ToVhdl() == otherType.SizeExpression.ToVhdl());
         }
 
-        public override int GetHashCode() => (Name + TypeCategory + SizeNumber).GetHashCode(StringComparison.InvariantCulture);
+        public override int GetHashCode() =>
+            FormattableString.Invariant($"{Name}{TypeCategory}{SizeNumber}")
+                .GetHashCode(StringComparison.InvariantCulture);
     }
 }

@@ -715,8 +715,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     var targetComponentName = GetTargetMemberComponentNameLocal(targetIndex);
                     var invokerIndex = invokedFromSingleComponent ? j : 0;
 
-                    signalConnectionsBlock.Add(new LineComment(
-                        "Signal connections for " + invokerName + " (#" + targetIndex + "):"));
+                    signalConnectionsBlock.Add(new LineComment(FormattableString.Invariant(
+                        $"Signal connections for {invokerName} (#{targetIndex}):")));
 
                     signalConnectionsBlock.Add(new Assignment
                     {
