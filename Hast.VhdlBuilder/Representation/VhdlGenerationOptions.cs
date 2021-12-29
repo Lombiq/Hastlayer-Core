@@ -11,7 +11,6 @@ namespace Hast.VhdlBuilder.Representation
     /// <returns>The shortened name.</returns>
     public delegate string NameShortener(string originalName);
 
-
     /// <summary>
     /// Provides some configuration options for generating VHDL code. Note that readable code should be only produced
     /// if the result should be handled manually; otherwise for machine processing code shouldn't be formatted.
@@ -19,12 +18,12 @@ namespace Hast.VhdlBuilder.Representation
     public interface IVhdlGenerationOptions
     {
         /// <summary>
-        /// Gets whether the resulting source code will be formatted in a readable way.
+        /// Gets a value indicating whether the resulting source code will be formatted in a readable way.
         /// </summary>
         bool FormatCode { get; }
 
         /// <summary>
-        /// Gets whether to omit added comments from the output or include them.
+        /// Gets a value indicating whether to omit added comments from the output or include them.
         /// </summary>
         bool OmitComments { get; }
 
@@ -34,7 +33,6 @@ namespace Hast.VhdlBuilder.Representation
         NameShortener NameShortener { get; }
     }
 
-
     public class VhdlGenerationOptions : IVhdlGenerationOptions
     {
         /// <summary>
@@ -43,112 +41,94 @@ namespace Hast.VhdlBuilder.Representation
         /// to VHDL generation (making it take 10 or even more times longer!).
         /// </summary>
         public static readonly NameShortener SimpleNameShortener = originalName =>
+        {
+            if (string.IsNullOrEmpty(originalName)) return string.Empty;
+
+            var newName = originalName;
+            var previousNewName = string.Empty;
+            // As long as we can find names inside names we'll replace the inner names first.
+
+            while (newName != previousNewName)
             {
-                if (string.IsNullOrEmpty(originalName))
-                {
-                    return string.Empty;
-                }
+                previousNewName = newName;
 
-                var newName = originalName;
-                var previousNewName = string.Empty;
-                // As long as we can find names inside names we'll replace the inner names first.
-
-                while (newName != previousNewName)
-                {
-                    previousNewName = newName;
-
-                    newName = Regex.Replace(
-                        newName,
-                        // Detects names in the following patterns:
-                        // System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(Hast.Transformer.SimpleMemory.SimpleMemory)
-                        // \System.Void Hast::ExternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(Hast.Transformer.SimpleMemory.SimpleMemory)._Finished.0\
-                        // Will also replace names in names.
-                        @"\\?\S+\.\S+ [^\s:]+::[^\s(]+\(\S*?\)(\.\d+)?\\?",
-                        match =>
-                        {
-                            var originalMatch = match.Groups[0].Value;
-                            var shortName = originalMatch;
-                            var isOperator = shortName.Contains("::op_");
-
-                            // Cutting off return type name, but not for operators (operators, unlike normal 
-                            // methods /properties can have the same name, like op_Explicit, with a different return
-                            // type).
-                            var firstSpaceIndex = shortName.IndexOf(' ');
-                            if (firstSpaceIndex != -1 && !isOperator)
-                            {
-                                shortName = shortName.Substring(firstSpaceIndex + 1);
-                            }
-
-                            // Cutting off namespace name, type name can be enough.
-                            var doubleColonIndex = shortName.IndexOf("::");
-                            if (doubleColonIndex != -1)
-                            {
-                                var namespaceAndClassName = shortName.Substring(0, doubleColonIndex);
-
-                                // Re-adding return type name for operators.
-                                var returnType = string.Empty;
-                                var spaceIndex = namespaceAndClassName.IndexOf(' ');
-                                if (isOperator && spaceIndex != -1)
-                                {
-                                    var returnTypeFullName = namespaceAndClassName.Substring(0, spaceIndex);
-                                    returnType = returnTypeFullName.Substring(returnTypeFullName.LastIndexOf('.') + 1) + " ";
-                                }
-
-                                shortName =
-                                    returnType +
-                                    namespaceAndClassName.Substring(namespaceAndClassName.LastIndexOf('.') + 1) +
-                                    shortName.Substring(doubleColonIndex);
-                            }
-
-                            // Shortening parameter type names to just their type name.
-                            if (shortName.Contains('(') && shortName.Contains(')'))
-                            {
-                                var openingParenthesisIndex = shortName.IndexOf('(');
-                                var closingParenthesisIndex = shortName.IndexOf(')');
-
-                                var shortenedParameters = string.Join(",", shortName
-                                    .Substring(openingParenthesisIndex + 1, closingParenthesisIndex - openingParenthesisIndex)
-                                    .Split(',')
-                                    .Select(parameter => parameter.Split('.').Last()));
-
-                                shortName =
-                                    shortName.Substring(0, openingParenthesisIndex + 1) +
-                                    shortenedParameters +
-                                    shortName.Substring(closingParenthesisIndex + 1);
-                            }
-
-                            // Keep leading backslash for extended VHDL identifiers.
-                            if (originalMatch.StartsWith(@"\") && !shortName.StartsWith(@"\"))
-                            {
-                                shortName = @"\" + shortName;
-                            }
-
-                            // Keep leading dot for concatenated names.
-                            if (originalMatch.StartsWith(".") && !shortName.StartsWith("."))
-                            {
-                                shortName = "." + shortName;
-                            }
-
-                            return shortName;
-                    },
+                newName = Regex.Replace(
+                    newName,
+                    // Detects names in the following patterns:
+                    // System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(
+                    //     Hast.Transformer.SimpleMemory.SimpleMemory)
+                    // \System.Void Hast::ExternalInvocationProxy().System.Void
+                    //     Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(
+                    //     Hast.Transformer.SimpleMemory.SimpleMemory)._Finished.0\
+                    // Will also replace names in names.
+                    @"\\?\S+\.\S+ [^\s:]+::[^\s(]+\(\S*?\)(\.\d+)?\\?",
+                    NameShortenerMatch,
                     RegexOptions.Compiled);
-                }
+            }
 
-                return newName;
-            };
+            return newName;
+        };
 
-        public static VhdlGenerationOptions Debug { get; } = new VhdlGenerationOptions
+        private static string NameShortenerMatch(Match match)
+        {
+            var originalMatch = match.Groups[0].Value;
+            var shortName = originalMatch;
+            var isOperator = shortName.Contains("::op_");
+
+            // Cutting off return type name, but not for operators (operators, unlike normal methods /properties can
+            // have the same name, like op_Explicit, with a different return type).
+            if (!isOperator && shortName.Partition(" ") is (_, " ", var afterSpace)) shortName = afterSpace;
+
+            // Cutting off namespace name, type name can be enough.
+            if (shortName.Partition("::") is (var namespaceAndClassName, "::", var afterColons))
+            {
+                // Re-adding return type name for operators.
+                var returnType = isOperator && namespaceAndClassName.Partition(" ") is (var returnTypeFullName, " ", _)
+                    ? returnTypeFullName.PartitionEnd(".").Right + " "
+                    : string.Empty;
+
+                shortName = $"{returnType}{namespaceAndClassName.PartitionEnd(".").Right}::{afterColons}";
+            }
+
+            // Shortening parameter type names to just their type name.
+            if (shortName?.Contains("(") == true && shortName.Contains(")"))
+            {
+                var (before, _, temporary) = shortName.Partition("(");
+                var (arguments, _, after) = temporary.Partition(")");
+
+                var shortenedParameters = string.Join(",", arguments
+                    .Split(',')
+                    .Select(parameter => parameter.Split('.').Last()));
+
+                shortName = $"{before}({shortenedParameters}){after}";
+            }
+
+            // Keep leading backslash for extended VHDL identifiers.
+            if (originalMatch.StartsWithOrdinal(@"\") && shortName?.StartsWithOrdinal(@"\") == false)
+            {
+                shortName = @"\" + shortName;
+            }
+
+            // Keep leading dot for concatenated names.
+            if (originalMatch.StartsWithOrdinal(".") && shortName?.StartsWithOrdinal(".") == false)
+            {
+                shortName = "." + shortName;
+            }
+
+            return shortName;
+        }
+
+        public static VhdlGenerationOptions Debug { get; } = new()
         {
             FormatCode = true,
             OmitComments = false,
-            NameShortener = SimpleNameShortener
+            NameShortener = SimpleNameShortener,
         };
 
         public bool FormatCode { get; set; } = true;
         public bool OmitComments { get; set; } = true;
         public NameShortener NameShortener { get; set; } = name => name; // No name shortening by default.
     }
-
 
     public static class VhdlGenerationOptionsExtensions
     {

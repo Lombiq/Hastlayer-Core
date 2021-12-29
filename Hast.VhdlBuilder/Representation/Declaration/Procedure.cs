@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Hast.VhdlBuilder.Extensions;
@@ -9,10 +9,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Procedure : ISubProgram
     {
         public string Name { get; set; }
-        public List<ProcedureParameter> Parameters { get; set; } = new List<ProcedureParameter>();
-        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
-        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
-
+        public List<ProcedureParameter> Parameters { get; } = new List<ProcedureParameter>();
+        public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
@@ -22,29 +21,28 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 (Parameters.Count > 0 ? " (" : " ") + vhdlGenerationOptions.NewLineIfShouldFormat() +
                 // Out params at the end.
                 Parameters.OrderBy(parameter => parameter.ParameterType).ToVhdl(vhdlGenerationOptions, "; ", string.Empty) +
-                (Parameters.Count > 0 ? ")" : string.Empty)  +
+                (Parameters.Count > 0 ? ")" : string.Empty) +
                 " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
-                    Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) + (Declarations != null && Declarations.Any() ? " " : string.Empty) +
+                    Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                    (Declarations != null && Declarations.Any() ? " " : string.Empty) +
                 "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
-                "end procedure " + name, vhdlGenerationOptions);
+                "end procedure " + name,
+                vhdlGenerationOptions);
         }
     }
-
 
     public enum ProcedureParameterType
     {
         In,
         InOut,
-        Out
+        Out,
     }
-
 
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class ProcedureParameter : TypedDataObjectBase
     {
         public ProcedureParameterType ParameterType { get; set; }
-
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             (DataObjectKind.ToString() ?? string.Empty) +

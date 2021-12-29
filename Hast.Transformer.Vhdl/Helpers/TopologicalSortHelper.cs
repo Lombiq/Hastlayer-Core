@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.Helpers
 {
     // Taken from: http://www.codeproject.com/Articles/869059/Topological-sorting-in-Csharp
-    static class TopologicalSortHelper
+    public static class TopologicalSortHelper
     {
         public static List<T> Sort<T>(IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies)
         {
@@ -19,7 +19,6 @@ namespace Hast.Transformer.Vhdl.Helpers
             return sorted;
         }
 
-
         private static void Visit<T>(T item, Func<T, IEnumerable<T>> getDependencies, List<T> sorted, Dictionary<T, bool> visited)
         {
             var alreadyVisited = visited.TryGetValue(item, out var inProcess);
@@ -33,11 +32,10 @@ namespace Hast.Transformer.Vhdl.Helpers
             }
             else
             {
-                visited[item] = true;
-
                 var dependencies = getDependencies(item);
                 if (dependencies != null)
                 {
+                    visited[item] = true;
                     foreach (var dependency in dependencies)
                     {
                         Visit(dependency, getDependencies, sorted, visited);

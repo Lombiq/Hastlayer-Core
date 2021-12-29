@@ -1,9 +1,7 @@
-﻿using Hast.Common.Extensions;
 using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Models;
-using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.InvocationProxyBuilders;
@@ -16,72 +14,52 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Attribute = Hast.VhdlBuilder.Representation.Declaration.Attribute;
+using Module = Hast.VhdlBuilder.Representation.Declaration.Module;
 
 namespace Hast.Transformer.Vhdl.Services
 {
     public class TransformedVhdlManifestBuilder : ITransformedVhdlManifestBuilder
     {
-        private readonly ICompilerGeneratedClassesVerifier _compilerGeneratedClassesVerifier;
-        private readonly IHardwareEntryPointsVerifier _hardwareEntryPointsVerifier;
+        private readonly IEnumerable<IVerifyer> _verifyers;
         private readonly IClock _clock;
-        private readonly IArrayTypesCreator _arrayTypesCreator;
-        private readonly IMethodTransformer _methodTransformer;
-        private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
-        private readonly IExternalInvocationProxyBuilder _externalInvocationProxyBuilder;
-        private readonly IInternalInvocationProxyBuilder _internalInvocationProxyBuilder;
+        private readonly IInvocationProxyBuilder _invocationProxyBuilder;
         private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
-        private readonly IEnumTypesCreator _enumTypesCreator;
-        private readonly IPocoTransformer _pocoTransformer;
         private readonly IRemainderOperatorExpressionsExpander _remainderOperatorExpressionsExpander;
-        private readonly IUnsupportedConstructsVerifier _unsupportedConstructsVerifier;
-
+        private readonly IMemberTransformer _memberTransformer;
+        private readonly ITypesCreator _typesCreator;
 
         public TransformedVhdlManifestBuilder(
-            ICompilerGeneratedClassesVerifier compilerGeneratedClassesVerifier,
-            IHardwareEntryPointsVerifier hardwareEntryPointsVerifier,
+            IEnumerable<IVerifyer> verifyers,
             IClock clock,
-            IArrayTypesCreator arrayTypesCreator,
-            IMethodTransformer methodTransformer,
-            IDisplayClassFieldTransformer displayClassFieldTransformer,
-            IExternalInvocationProxyBuilder externalInvocationProxyBuilder,
-            IInternalInvocationProxyBuilder internalInvocationProxyBuilder,
+            IInvocationProxyBuilder invocationProxyBuilder,
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
-            IEnumTypesCreator enumTypesCreator,
-            IPocoTransformer pocoTransformer,
             IRemainderOperatorExpressionsExpander remainderOperatorExpressionsExpander,
-            IUnsupportedConstructsVerifier unsupportedConstructsVerifier)
+            IMemberTransformer memberTransformer,
+            ITypesCreator typesCreator)
         {
-            _compilerGeneratedClassesVerifier = compilerGeneratedClassesVerifier;
-            _hardwareEntryPointsVerifier = hardwareEntryPointsVerifier;
+            _verifyers = verifyers;
             _clock = clock;
-            _arrayTypesCreator = arrayTypesCreator;
-            _methodTransformer = methodTransformer;
-            _displayClassFieldTransformer = displayClassFieldTransformer;
-            _externalInvocationProxyBuilder = externalInvocationProxyBuilder;
-            _internalInvocationProxyBuilder = internalInvocationProxyBuilder;
+            _invocationProxyBuilder = invocationProxyBuilder;
             _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
-            _enumTypesCreator = enumTypesCreator;
-            _pocoTransformer = pocoTransformer;
             _remainderOperatorExpressionsExpander = remainderOperatorExpressionsExpander;
-            _unsupportedConstructsVerifier = unsupportedConstructsVerifier;
+            _memberTransformer = memberTransformer;
+            _typesCreator = typesCreator;
         }
 
-
-        public async Task<ITransformedVhdlManifest> BuildManifest(ITransformationContext transformationContext)
+        public async Task<TransformedVhdlManifest> BuildManifestAsync(ITransformationContext transformationContext)
         {
             var syntaxTree = transformationContext.SyntaxTree;
 
             // Running verifications.
-            _unsupportedConstructsVerifier.ThrowIfUnsupportedConstructsFound(syntaxTree);
-            _compilerGeneratedClassesVerifier.VerifyCompilerGeneratedClasses(syntaxTree);
-            _hardwareEntryPointsVerifier.VerifyHardwareEntryPoints(syntaxTree, transformationContext.TypeDeclarationLookupTable);
+            foreach (var verifyer in _verifyers) verifyer.Verify(syntaxTree, transformationContext);
 
             // Running AST changes.
             _remainderOperatorExpressionsExpander.ExpandRemainderOperatorExpressions(syntaxTree);
@@ -90,22 +68,18 @@ namespace Hast.Transformer.Vhdl.Services
             var useSimpleMemory = transformationContext.GetTransformerConfiguration().UseSimpleMemory;
 
             var hastIpArchitecture = new Architecture { Name = "Imp" };
-            var hastIpModule = new VhdlBuilder.Representation.Declaration.Module { Architecture = hastIpArchitecture };
-
+            var hastIpModule = new Module { Architecture = hastIpArchitecture };
 
             // Adding libraries
-            hastIpModule.Libraries.Add(new Library
-            {
-                Name = "ieee",
-                Uses = new List<string> { "std_logic_1164.all", "numeric_std.all" }
-            });
-
+            hastIpModule.Libraries.Add(new Library(
+                name: "ieee",
+                uses: new List<string> { "std_logic_1164.all", "numeric_std.all" }));
 
             // Creating the Hast_IP entity. Its name can't be an extended identifier.
             var hastIpEntity = hastIpModule.Entity = new Entity { Name = Entity.ToSafeEntityName("Hast_IP") };
             hastIpArchitecture.Entity = hastIpEntity;
 
-            var generationDateTimeUtcText = _clock.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + " UTC";
+            var generationDateTimeUtcText = _clock.UtcNow.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) + " UTC";
 
             hastIpEntity.Declarations.Add(new UnOmittableLineComment("Hast_IP ID: " + transformationContext.Id));
             hastIpEntity.Declarations.Add(new UnOmittableLineComment("Date and time: " + generationDateTimeUtcText));
@@ -118,132 +92,51 @@ namespace Hast.Transformer.Vhdl.Services
 
             var dependentTypesTables = new List<DependentTypesTable>();
 
-            // Adding array types for any arrays created in code.
-            // This is necessary in a separate step because in VHDL the array types themselves should be created too
-            // (like in C# we'd need to first define what an int[] is before being able to create one).
-            var arrayDeclarations = _arrayTypesCreator.CreateArrayTypes(syntaxTree, vhdlTransformationContext);
-            if (arrayDeclarations.Any())
-            {
-                var arrayTypeDependentTypes = new DependentTypesTable();
-                foreach (var arrayDeclaration in arrayDeclarations)
-                {
-                    arrayTypeDependentTypes.AddDependency(arrayDeclaration, arrayDeclaration.ElementType.Name);
-                }
-                dependentTypesTables.Add(arrayTypeDependentTypes);
-            }
-
-
-            // Adding enum types.
-            var enumDeclarations = _enumTypesCreator.CreateEnumTypes(syntaxTree);
-            if (enumDeclarations.Any())
-            {
-                var enumDeclarationsBlock = new LogicalBlock(new LineComment("Enum declarations start"));
-                enumDeclarationsBlock.Body.AddRange(enumDeclarations);
-                enumDeclarationsBlock.Add(new LineComment("Enum declarations end"));
-                hastIpArchitecture.Declarations.Add(enumDeclarationsBlock);
-            }
-
+            _typesCreator.CreateTypes(
+                syntaxTree,
+                vhdlTransformationContext,
+                dependentTypesTables,
+                hastIpArchitecture);
 
             // Doing transformations.
-            var transformerResults = await Task.WhenAll(TransformMembers(transformationContext.SyntaxTree, vhdlTransformationContext));
+            var transformerResults = await Task.WhenAll(
+                _memberTransformer.TransformMembers(transformationContext.SyntaxTree, vhdlTransformationContext));
             var warnings = new List<ITransformationWarning>();
             var potentiallyInvokingArchitectureComponents = transformerResults
-                .SelectMany(result =>
-                    result.ArchitectureComponentResults
-                        .Select(componentResult =>
-                        {
-                            warnings.AddRange(componentResult.Warnings);
-                            return componentResult.ArchitectureComponent;
-                        })
-                        .Cast<IArchitectureComponent>())
+                .SelectMany(result => result
+                    .ArchitectureComponentResults
+                    .Select(componentResult =>
+                    {
+                        warnings.AddRange(componentResult.Warnings);
+                        return componentResult.ArchitectureComponent;
+                    }))
                 .ToList();
-            var architectureComponentResults = transformerResults.SelectMany(transformerResult => transformerResult.ArchitectureComponentResults);
+            var architectureComponentResults = transformerResults
+                .SelectMany(transformerResult => transformerResult.ArchitectureComponentResults)
+                .ToList();
             foreach (var architectureComponentResult in architectureComponentResults)
             {
-                if (architectureComponentResult.ArchitectureComponent.DependentTypesTable.GetTypes().Any())
+                if (architectureComponentResult.ArchitectureComponent.DependentTypesTable.Types.Any())
                 {
                     dependentTypesTables.Add(architectureComponentResult.ArchitectureComponent.DependentTypesTable);
                 }
             }
 
-
             XdcFile xdcFile = null;
             if (transformationContext.DeviceDriver.DeviceManifest.ToolChainName == CommonToolChainNames.QuartusPrime)
             {
-                // Adding multi-cycle path constraints for Quartus.
-
-                var anyMultiCycleOperations = false;
-                var sdcExpression = new MultiCycleSdcStatementsAttributeExpression();
-
-                foreach (var architectureComponentResult in architectureComponentResults)
-                {
-                    foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
-                    {
-                        sdcExpression.AddPath(
-                            // If the path is through a global signal (i.e. that doesn't have a parent process) then
-                            // the parent should be empty.
-                            operation.OperationResultReference.DataObjectKind == DataObjectKind.Variable ?
-                                ProcessUtility.FindProcesses(new[] { architectureComponentResult.Body }).Single().Name :
-                                string.Empty,
-                            operation.OperationResultReference,
-                            operation.RequiredClockCyclesCeiling);
-
-                        anyMultiCycleOperations = true;
-                    }
-                }
-
-                if (anyMultiCycleOperations)
-                {
-                    var alteraAttribute = new VhdlBuilder.Representation.Declaration.Attribute
-                    {
-                        Name = "altera_attribute",
-                        ValueType = KnownDataTypes.UnrangedString
-                    };
-
-                    hastIpArchitecture.Declarations.Add(new LogicalBlock(
-                        new LineComment("Adding multi-cycle path constraints for Quartus Prime. See: https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/solutions/rd05162013_635.html"),
-                        alteraAttribute,
-                        new AttributeSpecification
-                        {
-                            Attribute = alteraAttribute,
-                            Of = hastIpArchitecture.ToReference(),
-                            ItemClass = "architecture",
-                            Expression = sdcExpression
-                        }));
-                }
+                BuildManifestQuartusPrime(architectureComponentResults, hastIpArchitecture);
             }
             else if (transformationContext.DeviceDriver.DeviceManifest.UsesVivadoInToolChain())
             {
-                // Adding multi-cycle path constraints for Vivado.
-
-                xdcFile = new XdcFile();
-
-                var anyMultiCycleOperations = false;
-
-                foreach (var architectureComponentResult in architectureComponentResults)
-                {
-                    foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
-                    {
-                        xdcFile.AddPath(operation.OperationResultReference, operation.RequiredClockCyclesCeiling, true);
-                        anyMultiCycleOperations = true;
-                    }
-                }
-
-                // attribute dont_touch : string;
-                if (anyMultiCycleOperations)
-                {
-                    hastIpArchitecture.Declarations.Add(new LogicalBlock(
-                        new LineComment("When put on variables and signals this attribute instructs Vivado not to merge them, thus allowing us to define multi-cycle paths properly."),
-                        KnownDataTypes.DontTouchAttribute));
-                }
+                xdcFile = BuildManifestVivado(architectureComponentResults, hastIpArchitecture);
             }
-
 
             // Processing inter-dependent types. In VHDL if a type depends another type (e.g. an array stores elements
             // of a record type) than the type depending on the other one should come after the other one in the code
             // file.
             var allDependentTypes = dependentTypesTables
-                .SelectMany(table => table.GetTypes())
+                .SelectMany(table => table.Types)
                 .GroupBy(type => type.Name) // A dependency relation can be present multiple times, so need to group first.
                 .ToDictionary(group => group.Key, group => group.First());
             var sortedDependentTypes = TopologicalSortHelper.Sort(
@@ -260,7 +153,6 @@ namespace Hast.Transformer.Vhdl.Services
                 hastIpArchitecture.Declarations.Add(dependentTypesDeclarationsBlock);
             }
 
-
             // Adding architecture component declarations. These should come after custom inter-dependent type declarations.
             foreach (var architectureComponentResult in architectureComponentResults)
             {
@@ -268,31 +160,12 @@ namespace Hast.Transformer.Vhdl.Services
                 hastIpArchitecture.Add(architectureComponentResult.Body);
             }
 
-
-            // Proxying external invocations.
-            var hardwareEntryPointMemberResults = transformerResults.Where(result => result.IsHardwareEntryPointMember);
-            if (!hardwareEntryPointMemberResults.Any())
-            {
-                throw new InvalidOperationException(
-                    "There aren't any hardware entry point members, however at least one is needed to execute anything on hardware. Did you forget to pass all the assemblies to Hastlayer? Are there methods suitable as hardware entry points (see the documentation)?");
-            }
-            var memberIdTable = BuildMemberIdTable(hardwareEntryPointMemberResults);
-            var externalInvocationProxy = _externalInvocationProxyBuilder.BuildProxy(hardwareEntryPointMemberResults, memberIdTable);
-            potentiallyInvokingArchitectureComponents.Add(externalInvocationProxy);
-            hastIpArchitecture.Declarations.Add(externalInvocationProxy.BuildDeclarations());
-            hastIpArchitecture.Add(externalInvocationProxy.BuildBody());
-
-
-            // Proxying internal invocations.
-            var internaInvocationProxies = _internalInvocationProxyBuilder.BuildProxy(
+            // Proxying invocations.
+            var (hardwareEntryPointMemberResults, memberIdTable) = _invocationProxyBuilder.GetHardwareEntryPoints(
+                transformerResults,
                 potentiallyInvokingArchitectureComponents,
+                hastIpArchitecture,
                 vhdlTransformationContext);
-            foreach (var proxy in internaInvocationProxies)
-            {
-                hastIpArchitecture.Declarations.Add(proxy.BuildDeclarations());
-                hastIpArchitecture.Add(proxy.BuildBody());
-            }
-
 
             // Proxying SimpleMemory operations.
             if (useSimpleMemory)
@@ -302,37 +175,34 @@ namespace Hast.Transformer.Vhdl.Services
                     hastIpArchitecture);
             }
 
-
             // Adding common ports.
             var ports = hastIpEntity.Ports;
             ports.Add(new Port
             {
                 Name = CommonPortNames.MemberId,
                 Mode = PortMode.In,
-                DataType = KnownDataTypes.UnrangedInt
+                DataType = KnownDataTypes.UnrangedInt,
             });
             ports.Add(new Port
             {
                 Name = CommonPortNames.Reset,
                 Mode = PortMode.In,
-                DataType = KnownDataTypes.StdLogic
+                DataType = KnownDataTypes.StdLogic,
             });
             ports.Add(new Port
             {
                 Name = CommonPortNames.Started,
                 Mode = PortMode.In,
-                DataType = KnownDataTypes.Boolean
+                DataType = KnownDataTypes.Boolean,
             });
             ports.Add(new Port
             {
                 Name = CommonPortNames.Finished,
                 Mode = PortMode.Out,
-                DataType = KnownDataTypes.Boolean
+                DataType = KnownDataTypes.Boolean,
             });
 
-
             ProcessUtility.AddClockToProcesses(hastIpModule, CommonPortNames.Clock);
-
 
             var manifest = new VhdlManifest();
 
@@ -360,139 +230,106 @@ namespace Hast.Transformer.Vhdl.Services
                 Manifest = manifest,
                 MemberIdTable = memberIdTable,
                 Warnings = warnings,
-                XdcFile = xdcFile
+                XdcFile = xdcFile,
             };
         }
 
-
-        private IEnumerable<Task<IMemberTransformerResult>> TransformMembers(
-            AstNode node,
-            VhdlTransformationContext transformationContext,
-            List<Task<IMemberTransformerResult>> memberTransformerTasks = null)
+        private static XdcFile BuildManifestVivado(
+            IEnumerable<IArchitectureComponentResult> architectureComponentResults,
+            Architecture hastIpArchitecture)
         {
-            if (memberTransformerTasks == null)
+            // Adding multi-cycle path constraints for Vivado.
+
+            var xdcFile = new XdcFile();
+
+            var anyMultiCycleOperations = false;
+
+            foreach (var architectureComponentResult in architectureComponentResults)
             {
-                memberTransformerTasks = new List<Task<IMemberTransformerResult>>();
+                foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
+                {
+                    xdcFile.AddPath(operation.OperationResultReference, operation.RequiredClockCyclesCeiling, true);
+                    anyMultiCycleOperations = true;
+                }
             }
 
-            var traverseTo = node.Children;
-
-            // If for debugging you want to make the below processing serial instead of it running in parallel then
-            // add .Result to every transformation call and wrap them into Task.FromResult() methods.
-            switch (node.NodeType)
+            if (anyMultiCycleOperations)
             {
-                case NodeType.Expression:
-                    break;
-                case NodeType.Member:
-                    if (node is MethodDeclaration)
-                    {
-                        memberTransformerTasks.Add(_methodTransformer.Transform((MethodDeclaration)node, transformationContext));
-                    }
-                    else if (node is FieldDeclaration && _displayClassFieldTransformer.IsDisplayClassField((FieldDeclaration)node))
-                    {
-                        memberTransformerTasks.Add(_displayClassFieldTransformer.Transform((FieldDeclaration)node, transformationContext));
-                    }
-                    else if (!_pocoTransformer.IsSupportedMember(node))
-                    {
-                        throw new NotSupportedException("The member " + node.ToString() + " is not supported for transformation.");
-                    }
-                    break;
-                case NodeType.Pattern:
-                    break;
-                case NodeType.QueryClause:
-                    break;
-                case NodeType.Statement:
-                    break;
-                case NodeType.Token:
-                    if (node is CSharpModifierToken)
-                    {
-                        var modifier = node as CSharpModifierToken;
-                    }
-                    break;
-                case NodeType.TypeDeclaration:
-                    var typeDeclaration = node as TypeDeclaration;
-                    switch (typeDeclaration.ClassType)
-                    {
-                        case ClassType.Class:
-                        case ClassType.Struct:
-                            if (typeDeclaration.BaseTypes.Any(baseType => baseType.GetActualType().Kind != TypeKind.Interface))
-                            {
-                                throw new NotSupportedException(
-                                    "Class inheritance is not supported. Affected class: " + node.GetFullName() + ".");
-                            }
-
-                            // Records need to be created only for those types that are neither display classes, nor
-                            // hardware entry point types or static types
-                            if (!typeDeclaration.GetFullName().IsDisplayOrClosureClassName() &&
-                                !typeDeclaration.Members.Any(member => member.IsHardwareEntryPointMember()) &&
-                                !typeDeclaration.Modifiers.HasFlag(Modifiers.Static))
-                            {
-                                memberTransformerTasks.Add(_pocoTransformer.Transform(typeDeclaration, transformationContext));
-                            }
-                            traverseTo = traverseTo.Where(n =>
-                                n.NodeType == NodeType.Member || n.NodeType == NodeType.TypeDeclaration);
-                            break;
-                        case ClassType.Enum:
-                            return memberTransformerTasks; // Enums are transformed separately.
-                        case ClassType.Interface:
-                            return memberTransformerTasks; // Interfaces are irrelevant here.
-                    }
-                    break;
-                case NodeType.TypeReference:
-                    break;
-                case NodeType.Unknown:
-                    break;
-                case NodeType.Whitespace:
-                    break;
+                hastIpArchitecture.Declarations.Add(new LogicalBlock(
+                    new LineComment(
+                        "When put on variables and signals this attribute instructs Vivado not to merge them, thus " +
+                        "allowing us to define multi-cycle paths properly."),
+                    KnownDataTypes.DontTouchAttribute));
             }
 
-            foreach (var target in traverseTo)
-            {
-                TransformMembers(target, transformationContext, memberTransformerTasks);
-            }
-
-            return memberTransformerTasks;
+            return xdcFile;
         }
 
-
-        private static MemberIdTable BuildMemberIdTable(IEnumerable<IMemberTransformerResult> hardwareEntryPointMemberResults)
+        private static void BuildManifestQuartusPrime(
+            IEnumerable<IArchitectureComponentResult> architectureComponentResults,
+            Architecture hastIpArchitecture)
         {
-            var memberIdTable = new MemberIdTable();
-            var memberId = 0;
+            // Adding multi-cycle path constraints for Quartus.
 
-            foreach (var interfaceMemberResult in hardwareEntryPointMemberResults)
+            var anyMultiCycleOperations = false;
+            var sdcExpression = new MultiCycleSdcStatementsAttributeExpression();
+
+            foreach (var architectureComponentResult in architectureComponentResults)
             {
-                var methodFullName = interfaceMemberResult.Member.GetFullName();
-                memberIdTable.SetMapping(methodFullName, memberId);
-                foreach (var methodNameAlternate in methodFullName.GetMemberNameAlternates())
+                foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
                 {
-                    memberIdTable.SetMapping(methodNameAlternate, memberId);
-                }
+                    // If the path is through a global signal (i.e. that doesn't have a parent process) then the parent
+                    // should be empty.
+                    sdcExpression.AddPath(
+                        operation.OperationResultReference.DataObjectKind == DataObjectKind.Variable ?
+                            ProcessUtility.FindProcesses(new[] { architectureComponentResult.Body }).Single().Name :
+                            string.Empty,
+                        operation.OperationResultReference,
+                        operation.RequiredClockCyclesCeiling);
 
-                memberId++;
+                    anyMultiCycleOperations = true;
+                }
             }
 
+            if (anyMultiCycleOperations)
+            {
+                var alteraAttribute = new Attribute
+                {
+                    Name = "altera_attribute",
+                    ValueType = KnownDataTypes.UnrangedString,
+                };
 
-            return memberIdTable;
+                hastIpArchitecture.Declarations.Add(new LogicalBlock(
+                    new LineComment("Adding multi-cycle path constraints for Quartus Prime. See: " +
+                    "https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/solutions/rd05162013_635.html"),
+                    alteraAttribute,
+                    new AttributeSpecification
+                    {
+                        Attribute = alteraAttribute,
+                        Of = hastIpArchitecture.ToReference(),
+                        ItemClass = "architecture",
+                        Expression = sdcExpression,
+                    }));
+            }
         }
 
         private static void ReadAndAddEmbedLibrary(
             string libraryName,
             VhdlManifest manifest,
-            VhdlBuilder.Representation.Declaration.Module hastIpModule)
+            Module hastIpModule)
         {
             var resourceName = "Hast.Transformer.Vhdl.VhdlLibraries." + libraryName + ".vhd";
+#pragma warning disable S3902 // "Assembly.GetExecutingAssembly" should not be called. Except we are in a library.
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
-            using (var reader = new StreamReader(stream))
+#pragma warning restore S3902 // "Assembly.GetExecutingAssembly" should not be called. Except we are in a library.
+            using (var reader = new StreamReader(stream!))
             {
                 manifest.Modules.Add(new LogicalBlock(new Raw(reader.ReadToEnd())));
             }
 
-            hastIpModule.Libraries.Add(new Library
-            {
-                Name = "work",
-                Uses = new List<string> { libraryName + ".all" }
-            });
+            hastIpModule.Libraries.Add(new Library(
+                name: "work",
+                uses: new List<string> { libraryName + ".all" }));
         }
     }
 }

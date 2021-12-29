@@ -7,7 +7,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
     {
         public IVhdlElement Target { get; set; }
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => "(" + Target.ToVhdl(vhdlGenerationOptions) + ")";
     }
 }

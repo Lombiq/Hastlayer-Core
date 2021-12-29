@@ -8,20 +8,14 @@ namespace Hast.VhdlBuilder.Representation
     {
         public IVhdlElement Element { get; set; }
 
-
         public Terminated()
         {
         }
 
-        public Terminated(IVhdlElement element)
-        {
-            Element = element;
-        }
-
+        public Terminated(IVhdlElement element) => Element = element;
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminate(Element.ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);
-
 
         public static string Terminator(IVhdlGenerationOptions vhdlGenerationOptions) =>
             ";" + vhdlGenerationOptions.NewLineIfShouldFormat();
@@ -30,12 +24,11 @@ namespace Hast.VhdlBuilder.Representation
         {
             if (string.IsNullOrEmpty(vhdl)) return string.Empty;
 
-            return vhdl.TrimEnd(Environment.NewLine.ToCharArray()).EndsWith(";") ?
-                vhdl :
-                vhdl + Terminator(vhdlGenerationOptions);
+            return vhdl.TrimEnd(Environment.NewLine.ToCharArray()).EndsWithOrdinal(";")
+                ? vhdl
+                : vhdl + Terminator(vhdlGenerationOptions);
         }
     }
-
 
     public static class TerminatedExtensions
     {

@@ -8,7 +8,7 @@ namespace Hast.Xilinx
     public class AzureAlveoU250Driver : AzureAlveoU250ManifestProvider, IDeviceDriver
     {
         private readonly ITimingReportParser _timingReportParser;
-        private readonly object _timingReportParserLock = new object();
+        private readonly object _timingReportParserLock = new();
 
         private ITimingReport _timingReport;
         public ITimingReport TimingReport

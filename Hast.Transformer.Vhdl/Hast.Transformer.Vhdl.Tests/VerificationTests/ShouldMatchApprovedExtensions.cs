@@ -2,6 +2,7 @@ using Hast.Common.Models;
 using Shouldly;
 using Shouldly.Configuration;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         /// existing approved source file. This quickly tells if something changed.
         /// </summary>
         /// <remarks>
-        /// Also see: http://shouldly.readthedocs.io/en/latest/assertions/shouldMatchApproved.html
+        /// <para>Also see: <c>http://shouldly.readthedocs.io/en/latest/assertions/shouldMatchApproved.html</c>.</para>
         /// </remarks>
         public static void ShouldMatchApprovedWithVhdlConfiguration(
             this VhdlHardwareDescription hardwareDescription,
@@ -23,7 +24,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
                 .ShouldMatchApproved(configurationBuilder =>
                 {
                     var configuration = configurationBuilder.WithVhdlConfiguration().UseCallerLocation();
-                    if (!string.IsNullOrEmpty(deviceName)) configuration.WithDescriminator(deviceName);
+                    if (!string.IsNullOrEmpty(deviceName)) configuration.WithDiscriminator(deviceName);
                 });
 
         /// <summary>
@@ -31,36 +32,38 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         /// existing approved source file. This quickly tells if something changed.
         /// </summary>
         /// <remarks>
-        /// Also see: http://shouldly.readthedocs.io/en/latest/assertions/shouldMatchApproved.html
+        /// <para>Also see: <c>http://shouldly.readthedocs.io/en/latest/assertions/shouldMatchApproved.html</c>.</para>
         /// </remarks>
         public static void ShouldMatchApprovedWithVhdlConfiguration(
             this IEnumerable<VhdlHardwareDescription> hardwareDescriptions,
             string deviceName = null) =>
-            (string.Join(string.Empty, hardwareDescriptions.Select(hardwareDescription => hardwareDescription.VhdlSource + hardwareDescription.XdcSource)))
+            string.Join(
+                string.Empty,
+                hardwareDescriptions.Select(hardwareDescription => hardwareDescription.VhdlSource + hardwareDescription.XdcSource))
                 .ShouldMatchApproved(configurationBuilder =>
                 {
                     var configuration = configurationBuilder.WithVhdlConfiguration().UseCallerLocation();
-                    if (!string.IsNullOrEmpty(deviceName)) configuration.WithDescriminator(deviceName);
+                    if (!string.IsNullOrEmpty(deviceName)) configuration.WithDiscriminator(deviceName);
                 });
 
         /// <summary>
         /// Match the input VHDL source against an existing approved source file. This quickly tells if something changed.
         /// </summary>
         /// <remarks>
-        /// Note that the two methods here can't be DRY because even with UseCallerLocation() Shouldly would loose
-        /// track of where the verification file is.
+        /// <para>Note that the two methods here can't be DRY because even with UseCallerLocation() Shouldly would loose
+        /// track of where the verification file is.</para>
         /// </remarks>
         public static void ShouldMatchApprovedWithVhdlConfiguration(this string vhdlSource) =>
             vhdlSource.ShouldMatchApproved(configurationBuilder =>
                 configurationBuilder.WithVhdlConfiguration().UseCallerLocation());
     }
 
-
     public static class ShouldMatchConfigurationBuilderExtensions
     {
-        public static ShouldMatchConfigurationBuilder WithVhdlConfiguration(this ShouldMatchConfigurationBuilder configurationBuilder) =>
-            configurationBuilder
-                .SubFolder(System.IO.Path.Combine("VerificationSources"))
+        public static ShouldMatchConfigurationBuilder WithVhdlConfiguration(this ShouldMatchConfigurationBuilder configurationBuilder)
+        {
+            var builder = configurationBuilder
+                .SubFolder(Path.Combine("VerificationSources"))
                 .WithFileExtension("vhdl")
                 .WithScrubber(source =>
                 {
@@ -73,5 +76,20 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 
                     return source;
                 });
+
+            // This is what the builder sets with no explicit WithFilenameGenerator. We decorate it using the
+            // WithFilenameGenerator call below.
+            var defaultFileNameGenerator = builder.Build().FilenameGenerator;
+
+            // Alter the FileNameGenerator to strip out invalid path characters. Prevents weird file names like this:
+            // StaticTestInputAssembliesVerificationTests.<ClassStructureAssembliesMatchApproved.received.vhdl
+            builder = builder
+                .WithFilenameGenerator((testMethodInfo, discriminator, type, extension) =>
+                    string.Concat(
+                        defaultFileNameGenerator(testMethodInfo, discriminator, type, extension)
+                            .Split(Path.GetInvalidFileNameChars())));
+
+            return builder;
+        }
     }
 }

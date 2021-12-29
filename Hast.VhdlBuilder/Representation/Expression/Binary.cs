@@ -9,7 +9,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public BinaryOperator Operator { get; set; }
         public IVhdlElement Right { get; set; }
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Left.ToVhdl(vhdlGenerationOptions) +
             " " + Operator.ToVhdl(vhdlGenerationOptions) + " " +

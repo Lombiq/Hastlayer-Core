@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,34 +13,27 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class BlockComment : IVhdlElement
     {
-        public List<string> Lines { get; set; }
+        public List<string> Lines { get; }
 
         /// <summary>
-        /// If set to <c>true</c>, the comment won't be omitted even if this is configured in 
+        /// Gets or sets a value indicating whether the comment won't be omitted even if this is configured in
         /// <see cref="IVhdlGenerationOptions"/>.
         /// </summary>
         public bool CantBeOmitted { get; set; }
 
-
         /// <summary>
-        /// Creates a new <see cref="BlockComment"/> object, initialized with a string that contains a newline character-
-        /// delimited block of text, corresponding to lines of the block comment.
+        /// Initializes a new instance of the <see cref="BlockComment"/> class. Initialized with a string that contains
+        /// a newline character-delimited block of text, corresponding to lines of the block comment.
         /// </summary>
         public BlockComment(string textBlock)
-            : this(textBlock.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
+            : this(textBlock.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
         {
         }
 
-        public BlockComment(params string[] lines) : this()
-        {
-            Lines = lines.ToList();
-        }
+        public BlockComment(params string[] lines)
+            : this() => Lines = lines.ToList();
 
-        public BlockComment()
-        {
-            Lines = new List<string>();
-        }
-
+        public BlockComment() => Lines = new List<string>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {

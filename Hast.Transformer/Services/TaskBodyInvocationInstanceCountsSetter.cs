@@ -1,29 +1,53 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.Configuration;
+using Hast.Transformer.Models;
+using Hast.Transformer.Services.ConstantValuesSubstitution;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Services
 {
-    public class TaskBodyInvocationInstanceCountsSetter : ITaskBodyInvocationInstanceCountsSetter
+    /// <summary>
+    /// Configures the invocation instance count for the body delegates of <see cref="Task"/>s, i.e. determines how
+    /// many hardware copies a Task's body needs. Sets the <see cref="MemberInvocationInstanceCountConfiguration"/>
+    /// automatically.
+    /// </summary>
+    /// <example>
+    /// <para>For example in this case:</para>
+    ///
+    /// <code>
+    /// for (uint i = 0; i &lt; 10; i++)
+    /// {
+    ///     tasks[i] = Task.Factory.StartNew(
+    ///         indexObject =&gt;
+    ///         {
+    ///             ...
+    ///         },
+    ///         i);
+    /// }
+    /// </code>
+    ///
+    /// <para>...this service will be able to determine that the level of parallelism is 10.</para>
+    /// </example>
+    public class TaskBodyInvocationInstanceCountsSetter : IConverter
     {
-        public void SetTaskBodyInvocationInstanceCounts(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
-        {
-            syntaxTree.AcceptVisitor(new TaskBodyInvocationInstanceCountsSetterVisitor(configuration.TransformerConfiguration()));
-        }
+        // Many other dependencies are just leftovers from the previous linear execution order. However in this case
+        // we know explicitly that ConstantValuesSubstitutor must come before TaskBodyInvocationInstanceCountsSetter.
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(ConstantValuesSubstitutor) };
 
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new TaskBodyInvocationInstanceCountsSetterVisitor(configuration.TransformerConfiguration()));
 
         private class TaskBodyInvocationInstanceCountsSetterVisitor : DepthFirstAstVisitor
         {
-            private readonly Dictionary<string, int> _taskStartsCountInMembers = new Dictionary<string, int>();
+            private readonly Dictionary<string, int> _taskStartsCountInMembers = new();
             private readonly TransformerConfiguration _configuration;
 
-
-            public TaskBodyInvocationInstanceCountsSetterVisitor(TransformerConfiguration configuration)
-            {
-                _configuration = configuration;
-            }
-
+            public TaskBodyInvocationInstanceCountsSetterVisitor(TransformerConfiguration configuration) => _configuration = configuration;
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {
@@ -68,9 +92,10 @@ namespace Hast.Transformer.Services
 
                     if (condition.Right.Is<BinaryOperatorExpression>(out var innerCondition))
                     {
-                        // In code decopmiled from F# it can happen that the expression will be decompiled into 
+                        // In code decopmiled from F# it can happen that the expression will be decompiled into
                         // "1 + actual number"... Taking care of that here.
-                        primitiveExpression = innerCondition.Right as PrimitiveExpression ?? innerCondition.Right.FindFirstChildOfType<PrimitiveExpression>();
+                        primitiveExpression = innerCondition.Right as PrimitiveExpression ??
+                            innerCondition.Right.FindFirstChildOfType<PrimitiveExpression>();
                     }
                 }
 

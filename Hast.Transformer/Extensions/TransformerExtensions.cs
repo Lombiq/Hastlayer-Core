@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Text;
@@ -14,34 +14,35 @@ namespace Hast.Transformer
     public enum Language
     {
         CSharp,
-        VisualBasic
+        VisualBasic,
     }
-
 
     public static class TransformerExtensions
     {
-        public static Task<IHardwareDescription> Transform(
-            this ITransformer transformer, 
+        public static Task<IHardwareDescription> TransformAsync(
+            this ITransformer transformer,
             string sourceCode,
-            Language language, 
+            Language dotNetLanguage,
             IHardwareGenerationConfiguration configuration)
         {
             CompilerResults result;
-            var providerOptions = new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } };
-            var parameters = new CompilerParameters()
+            var providerOptions = new Dictionary<string, string> { { "CompilerVersion", "v4.0" } };
+            var parameters = new CompilerParameters
             {
                 GenerateInMemory = false,
                 TreatWarningsAsErrors = false,
-                OutputAssembly = "DynamicHastAssembly" + Sha2456Helper.ComputeHash(sourceCode)
+                OutputAssembly = "DynamicHastAssembly" + Sha256Helper.ComputeHash(sourceCode),
             };
 
-            switch (language)
+            switch (dotNetLanguage)
             {
                 case Language.CSharp:
-                    result = new CSharpCodeProvider(providerOptions).CompileAssemblyFromSource(parameters, sourceCode);
+                    using (var csharpCompiler = new CSharpCodeProvider(providerOptions))
+                        result = csharpCompiler.CompileAssemblyFromSource(parameters, sourceCode);
                     break;
                 case Language.VisualBasic:
-                    result = new VBCodeProvider(providerOptions).CompileAssemblyFromSource(parameters, sourceCode);
+                    using (var vbCompiler = new VBCodeProvider(providerOptions))
+                        result = vbCompiler.CompileAssemblyFromSource(parameters, sourceCode);
                     break;
                 default:
                     throw new ArgumentException("Unsupported .NET language.");
@@ -51,10 +52,10 @@ namespace Hast.Transformer
             {
                 var builder = new StringBuilder();
                 foreach (var item in result.Errors) builder.Append(Environment.NewLine + item);
-                throw new ArgumentException("The provided source code is invalid and has the following errors: " + builder.ToString());
+                throw new ArgumentException("The provided source code is invalid and has the following errors: " + builder);
             }
 
-            return transformer.Transform(new[] { result.CompiledAssembly }, configuration);
+            return transformer.TransformAsync(new[] { result.CompiledAssembly }, configuration);
         }
     }
 }

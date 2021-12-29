@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
@@ -16,12 +16,11 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
         {
             var simpleMemoryUsingComponents = components.Where(c => c.AreSimpleMemorySignalsAdded());
 
-            var proxyComponentName = "System.Void Hast::SimpleMemoryOperationProxy()";
+            const string proxyComponentName = "System.Void Hast::SimpleMemoryOperationProxy()";
 
             if (!simpleMemoryUsingComponents.Any()) return new BasicComponent(proxyComponentName);
 
             var signalsAssignmentBlock = new InlineBlock();
-
 
             signalsAssignmentBlock.Add(BuildConditionalPortAssignment(
                 SimpleMemoryPortNames.CellIndex,
@@ -30,7 +29,7 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 {
                     Left = component.CreateSimpleMemoryReadEnableSignalReference(),
                     Operator = BinaryOperator.Or,
-                    Right = component.CreateSimpleMemoryWriteEnableSignalReference()
+                    Right = component.CreateSimpleMemoryWriteEnableSignalReference(),
                 }));
 
             signalsAssignmentBlock.Add(BuildConditionalPortAssignment(
@@ -46,15 +45,13 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 SimpleMemoryPortNames.WriteEnable,
                 simpleMemoryUsingComponents));
 
-
-            // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would look 
+            // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would look
             // from a generated state machine.
             return new BasicComponent(proxyComponentName)
             {
-                Body = signalsAssignmentBlock
+                Body = signalsAssignmentBlock,
             };
         }
-
 
         private static ConditionalSignalAssignment BuildConditionalPortAssignment(
             string portName,
@@ -63,9 +60,8 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
         {
             var assignment = new ConditionalSignalAssignment
             {
-                AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference()
+                AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference(),
             };
-
 
             foreach (var component in components)
             {
@@ -81,33 +77,28 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
                 assignment.Whens.Add(new SignalAssignmentWhen
                 {
                     Expression = expressionBuilderForComponentsAssignment(component),
-                    Value = value
+                    Value = value,
                 });
             }
-
 
             assignment.Whens.Add(new SignalAssignmentWhen
             {
                 Value = portName == SimpleMemoryPortNames.CellIndex ?
                     KnownDataTypes.UnrangedInt.DefaultValue :
-                    SimpleMemoryTypes.DataSignalsDataType.DefaultValue
+                    SimpleMemoryTypes.DataSignalsDataType.DefaultValue,
             });
-
 
             return assignment;
         }
 
         private static Assignment BuildConditionalOrPortAssignment(
             string portName,
-            IEnumerable<IArchitectureComponent> components)
-        {
-            return new Assignment
+            IEnumerable<IArchitectureComponent> components) => new()
             {
                 AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference(),
                 Expression = BinaryChainBuilder.BuildBinaryChain(
                     components.Select(c => c.CreateSimpleMemorySignalReference(portName)),
-                    BinaryOperator.Or)
+                    BinaryOperator.Or),
             };
-        }
     }
 }

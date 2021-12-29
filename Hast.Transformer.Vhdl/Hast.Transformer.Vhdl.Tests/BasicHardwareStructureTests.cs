@@ -18,16 +18,16 @@ namespace Hast.Transformer.Vhdl.Tests
     public class BasicHardwareStructureTests : VhdlTransformingTestFixtureBase
     {
         [Fact]
-        public async Task BasicHardwareDescriptionPropertiesAreCorrect()
+        public Task BasicHardwareDescriptionPropertiesAreCorrect()
         {
             VhdlManifest manifest = null;
 
-            _hostConfiguration.OnServiceRegistration += (configuration, services) =>
-                services.AddSingleton(new EventHandler<ITransformedVhdlManifest>((sender, e) => manifest = e.Manifest));
+            _hostConfiguration.OnServiceRegistration += (_, services) =>
+                services.AddSingleton(new EventHandler<TransformedVhdlManifest>((_, e) => manifest = e.Manifest));
 
-            await Host.RunAsync<ITransformer>(async transformer =>
+            return Host.RunAsync<ITransformer>(async transformer =>
             {
-                var hardwareDescription = await TransformClassStrutureExamplesToVhdl(transformer);
+                var hardwareDescription = await TransformClassStrutureExamplesToVhdlAsync(transformer);
 
                 hardwareDescription.Language.ShouldBe("VHDL");
                 hardwareDescription.HardwareEntryPointNamesToMemberIdMappings.Count.ShouldBe(14);
@@ -37,35 +37,35 @@ namespace Hast.Transformer.Vhdl.Tests
         }
 
         [Fact]
-        public async Task BasicVhdlStructureIsCorrect()
+        public Task BasicVhdlStructureIsCorrect()
         {
             VhdlManifest manifest = null;
 
-            _hostConfiguration.OnServiceRegistration += (configuration, services) =>
-                services.AddSingleton(new EventHandler<ITransformedVhdlManifest>((sender, e) => manifest = e.Manifest));
+            _hostConfiguration.OnServiceRegistration += (_, services) =>
+                services.AddSingleton(new EventHandler<TransformedVhdlManifest>((_, e) => manifest = e.Manifest));
 
-            await Host.RunAsync<ITransformer>(async transformer =>
-            {
-                await TransformClassStrutureExamplesToVhdl(transformer);
-                var topModule = (Module)manifest.Modules.Last();
+            return Host.RunAsync<ITransformer>(async transformer =>
+             {
+                 await TransformClassStrutureExamplesToVhdlAsync(transformer);
+                 var topModule = (Module)manifest.Modules.Last();
 
-                var architecture = topModule.Architecture;
-                architecture.Name.ShouldNotBeNullOrEmpty();
-                architecture.Declarations.ShouldRecursivelyContain(element => element is Signal);
-                architecture.Body.ShouldRecursivelyContain<Process>(p => p.Name.Contains("ExternalInvocationProxy"));
+                 var architecture = topModule.Architecture;
+                 architecture.Name.ShouldNotBeNullOrEmpty();
+                 architecture.Declarations.ShouldRecursivelyContain(element => element is Signal);
+                 architecture.Body.ShouldRecursivelyContain<Process>(
+                     p => p.Name.Contains("ExternalInvocationProxy", StringComparison.InvariantCulture));
 
-                var entity = topModule.Entity;
-                entity.Name.ShouldNotBeNullOrEmpty();
-                entity.Ports.Count.ShouldBe(5);
-                entity.ShouldBe(topModule.Architecture.Entity, "The top module's entity is not referenced by the architecture.");
+                 var entity = topModule.Entity;
+                 entity.Name.ShouldNotBeNullOrEmpty();
+                 entity.Ports.Count.ShouldBe(5);
+                 entity.ShouldBe(topModule.Architecture.Entity, "The top module's entity is not referenced by the architecture.");
 
-                topModule.Libraries.Any().ShouldBeTrue();
-            });
+                 topModule.Libraries.Any().ShouldBeTrue();
+             });
         }
 
-
-        private Task<VhdlHardwareDescription> TransformClassStrutureExamplesToVhdl(ITransformer transformer) =>
-            TransformAssembliesToVhdl(
+        private Task<VhdlHardwareDescription> TransformClassStrutureExamplesToVhdlAsync(ITransformer transformer) =>
+            TransformAssembliesToVhdlAsync(
                 transformer,
                 new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
                 configuration => configuration.TransformerConfiguration().UseSimpleMemory = false);

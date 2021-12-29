@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -12,23 +12,23 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public string Name { get; set; }
         public Entity Entity { get; set; }
-        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
-        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
+        public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
-
-        public ArchitectureReference ToReference() => new ArchitectureReference { Name = Name };
+        public ArchitectureReference ToReference() => new() { Name = Name };
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             var name = vhdlGenerationOptions.ShortenName(Name);
             return Terminated.Terminate(
-                "architecture " + name + " of " + vhdlGenerationOptions.ShortenName(Entity.Name) + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
-                    Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                $"architecture {name} of {vhdlGenerationOptions.ShortenName(Entity.Name)} is " +
+                vhdlGenerationOptions.NewLineIfShouldFormat() +
+                Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
-                    Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
-                "end " + name, vhdlGenerationOptions);
+                Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
+                "end " + name,
+                vhdlGenerationOptions);
         }
-
 
         [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
         public class ArchitectureReference : INamedElement

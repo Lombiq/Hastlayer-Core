@@ -14,7 +14,7 @@ namespace Hast.Remote.Worker.Daemon
 {
     public static class Program
     {
-        public static string ApplicationDirectory { get; } = Path.GetDirectoryName(typeof(Program).Assembly.Location);
+        public static string ApplicationDirectory { get; } = AppContext.BaseDirectory;
 
         public static ExitCode ExitCode { get; set; } = ExitCode.Success;
 
@@ -34,17 +34,14 @@ namespace Hast.Remote.Worker.Daemon
 
             if (installer != null && args.Length >= 2 && args[0].ToUpperInvariant() == "CLI")
             {
-                switch (args[1].ToUpperInvariant())
+                return args[1].ToUpperInvariant() switch
                 {
-                    case "INSTALL":
-                        return await installer.InstallAsync();
-                    case "START":
-                        return await installer.StartAsync();
-                    case "STOP":
-                        return await installer.StopAsync();
-                    case "UNINSTALL":
-                        return await installer.UninstallAsync();
-                }
+                    "INSTALL" => await installer.InstallAsync(),
+                    "START" => await installer.StartAsync(),
+                    "STOP" => await installer.StopAsync(),
+                    "UNINSTALL" => await installer.UninstallAsync(),
+                    _ => throw new ArgumentOutOfRangeException(nameof(args), $"Unknown value \"{args[1]}\"."),
+                };
             }
 
             try

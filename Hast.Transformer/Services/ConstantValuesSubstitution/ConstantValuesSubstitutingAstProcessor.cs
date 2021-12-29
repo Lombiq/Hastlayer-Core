@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Models;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
         public Dictionary<string, ConstructorReference> ObjectHoldersToConstructorsMappings { get; }
         public IAstExpressionEvaluator AstExpressionEvaluator { get; }
         public IKnownTypeLookupTable KnownTypeLookupTable { get; }
-
 
         public ConstantValuesSubstitutingAstProcessor(
             ConstantValuesTable constantValuesTable,
@@ -31,10 +30,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             KnownTypeLookupTable = knownTypeLookupTable;
         }
 
-
         public void SubstituteConstantValuesInSubTree(AstNode rootNode, bool reUseOriginalConstantValuesTable)
         {
-            // Gradually propagating the constant values through the syntax tree so this needs multiple passes. So 
+            // Gradually propagating the constant values through the syntax tree so this needs multiple passes. So
             // running them until nothing changes.
 
             ConstantValuesTable originalConstantValuesTable = null;
@@ -47,14 +45,14 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             var constantValuesSubstitutingVisitor = new ConstantValuesSubstitutingVisitor(this);
 
             string codeOutput;
-            var hiddenlyUpdatedNodesUpdatedCount = 0;
+            int hiddenlyUpdatedNodesUpdatedCount;
             var passCount = 0;
-            const int maxPassCount = 1000;
+            const int maxPassCount = 1_000;
             do
             {
                 codeOutput = rootNode.ToString();
                 // Uncomment the below line to get a debug output about the current state of this sub-tree.
-                //System.IO.File.WriteAllText("ConstantSubstitution.cs", codeOutput);
+                ////System.IO.File.WriteAllText("ConstantSubstitution.cs", codeOutput);
                 hiddenlyUpdatedNodesUpdatedCount = constantValuesMarkingVisitor.HiddenlyUpdatedNodesUpdated.Count;
 
                 rootNode.AcceptVisitor(constantValuesMarkingVisitor);
@@ -66,8 +64,9 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 else ConstantValuesTable.Clear();
 
                 passCount++;
-            } while ((codeOutput != rootNode.ToString() ||
-                        constantValuesMarkingVisitor.HiddenlyUpdatedNodesUpdated.Count != hiddenlyUpdatedNodesUpdatedCount) &&
+            }
+            while ((codeOutput != rootNode.ToString() ||
+                constantValuesMarkingVisitor.HiddenlyUpdatedNodesUpdated.Count != hiddenlyUpdatedNodesUpdatedCount) &&
                     passCount < maxPassCount);
 
             if (passCount == maxPassCount)
@@ -78,7 +77,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     ". This most possibly indicates some error or the assembly being processed is exceptionally big.");
             }
         }
-
 
         public class ConstructorReference
         {

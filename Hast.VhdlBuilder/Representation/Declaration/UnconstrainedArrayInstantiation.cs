@@ -11,7 +11,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public int RangeFrom { get; set; }
         public int RangeTo { get; set; }
 
-
         public override DataType ToReference() => this;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>

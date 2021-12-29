@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -8,7 +8,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public DataType RangeType { get; set; } = KnownDataTypes.UnrangedInt;
         public int MaxLength { get; set; }
 
-
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
                 "type " +
@@ -16,6 +15,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 " is array (" +
                 (MaxLength > 0 ? MaxLength + " downto 0" : RangeType.ToReference().ToVhdl(vhdlGenerationOptions) + " range <>") +
                 ") of " +
-                ElementType.ToReference().ToVhdl(vhdlGenerationOptions), vhdlGenerationOptions);
+                ElementType.ToReference().ToVhdl(vhdlGenerationOptions),
+                vhdlGenerationOptions);
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Hast.Layer;
 using Hast.Synthesis.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -24,12 +24,11 @@ namespace Hast.Synthesis.Helpers
         public static decimal ComputeClockCyclesForUnaryOperation(
             IDeviceManifest deviceManifest, ITimingReport timingReport, UnaryOperatorExpression expression, int operandSizeBits, bool isSigned) =>
             ComputeClockCyclesFromLatency(
-                deviceManifest, 
+                deviceManifest,
                 ReturnLatencyOrThrowIfInvalid(timingReport.GetLatencyNs(expression.Operator, operandSizeBits, isSigned), expression));
 
-            public static bool IsRightOperandConstant(BinaryOperatorExpression expression, out string constantValue)
+        public static bool IsRightOperandConstant(BinaryOperatorExpression expression, out string constantValue)
         {
-            var binaryOperator = expression.Operator;
             constantValue = string.Empty;
 
             if (expression.Right is PrimitiveExpression primitiveExpression)
@@ -39,7 +38,7 @@ namespace Hast.Synthesis.Helpers
                 if (valueObject != null)
                 {
                     constantValue = valueObject.ToString();
-                    return true; 
+                    return true;
                 }
             }
 
@@ -48,7 +47,7 @@ namespace Hast.Synthesis.Helpers
 
         public static decimal ComputeClockCyclesFromLatency(IDeviceManifest deviceManifest, decimal latencyNs)
         {
-            var latencyClockCycles = latencyNs * (deviceManifest.ClockFrequencyHz * 0.000000001M);
+            var latencyClockCycles = latencyNs * deviceManifest.ClockFrequencyHz * 0.000000001M;
 
             // If there is no latency then let's try with a basic default (unless the operation is "instant" there should
             // be latency data).
@@ -57,13 +56,14 @@ namespace Hast.Synthesis.Helpers
             return latencyClockCycles;
         }
 
-        public static decimal ReturnLatencyOrThrowIfInvalid(decimal latency, Expression expression)
+        public static decimal ReturnLatencyOrThrowIfInvalid(decimal latencyNs, Expression expression)
         {
-            if (latency >= 0) return latency;
+            if (latencyNs >= 0) return latencyNs;
 
             throw new InvalidOperationException(
-                "No latency data found for the expression " + expression.ToString() + 
-                ". This is most possibly a bug in Hastlayer, please submit a bug report with the affected code snippet: https://github.com/Lombiq/Hastlayer-SDK/issues.");
+                $"No latency data found for the {nameof(expression)} {expression}. This is most possibly a bug in " +
+                $"Hastlayer, please submit a bug report with the affected code snippet: " +
+                $"https://github.com/Lombiq/Hastlayer-SDK/issues.");
         }
     }
 }

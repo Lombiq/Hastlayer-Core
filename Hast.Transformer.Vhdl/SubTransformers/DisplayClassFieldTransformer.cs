@@ -16,7 +16,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly ITypeConverter _typeConverter;
         private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;
 
-
         public DisplayClassFieldTransformer(
             ITypeConverter typeConverter,
             IArrayCreateExpressionTransformer arrayCreateExpressionTransformer)
@@ -25,29 +24,23 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
         }
 
+        public bool IsDisplayClassField(FieldDeclaration field) => field.GetFullName().IsDisplayOrClosureClassMemberName();
 
-        public bool IsDisplayClassField(FieldDeclaration field)
-        {
-            return field.GetFullName().IsDisplayOrClosureClassMemberName();
-        }
-
-        public Task<IMemberTransformerResult> Transform(FieldDeclaration field, IVhdlTransformationContext context)
-        {
-            return Task.Run(() =>
+        public Task<IMemberTransformerResult> TransformAsync(FieldDeclaration field, IVhdlTransformationContext context) =>
+            Task.Run(() =>
             {
                 var fieldFullName = field.GetFullName();
                 var fieldComponent = new BasicComponent(fieldFullName);
 
-
                 var shouldTransform =
-                    // Nothing to do with "__this" fields of DisplayClasses that reference the parent class's object
-                    // like: public PrimeCalculator <>4__this;
-                    !field.Variables.Any(variable => variable.Name.EndsWith("__this")) &&
-                    // Roslyn adds a field like public Func<object, bool> <>9__0; with the same argument and return types 
-                    // as the original lambda. Nothing needs to be done with this.
-                    !(field.ReturnType.Is<SimpleType>(simple => simple.GetActualType().IsFunc())) &&
-                    // Sometimes the compiler adds a static field containing an object of the parent class as below:
-                    // public static readonly HastlayerOptimizedAlgorithm.<>c <>9 = new HastlayerOptimizedAlgorithm.<>c ();
+                    //// Nothing to do with "__this" fields of DisplayClasses that reference the parent class's object
+                    //// like: public PrimeCalculator <>4__this;
+                    !field.Variables.Any(variable => variable.Name.EndsWithOrdinal("__this")) &&
+                    //// Roslyn adds a field like public Func<object, bool> <>9__0; with the same argument and return
+                    //// types as the original lambda. Nothing needs to be done with this.
+                    !field.ReturnType.Is<SimpleType>(simple => simple.GetActualType().IsFunc()) &&
+                    //// Sometimes the compiler adds a static field containing an object of the parent class as below:
+                    //// public static readonly HastlayerOptimizedAlgorithm.<>c <>9 = new HastlayerOptimizedAlgorithm.<>c ();
                     field.Modifiers != (Modifiers.Public | Modifiers.Static | Modifiers.Readonly);
                 if (shouldTransform)
                 {
@@ -69,7 +62,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     fieldComponent.GlobalVariables.Add(new Variable
                     {
                         Name = fieldFullName.ToExtendedVhdlId(),
-                        DataType = dataType
+                        DataType = dataType,
                     });
                 }
 
@@ -77,19 +70,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     IsHardwareEntryPointMember = false,
                     Member = field,
-                    ArchitectureComponentResults = new[]
-                    {
-                        new ArchitectureComponentResult
-                        {
-                            ArchitectureComponent = fieldComponent,
-                            Body = fieldComponent.BuildBody(),
-                            Declarations = fieldComponent.BuildDeclarations()
-                        }
-                    }
+                    ArchitectureComponentResults = new[] { new ArchitectureComponentResult(fieldComponent) },
                 };
             });
-        }
-
 
         private class ArrayCreationDataTypeRetrievingVisitor : DepthFirstAstVisitor
         {
@@ -98,7 +81,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             private readonly IVhdlTransformationContext _context;
 
             public DataType ArrayDataType { get; private set; }
-
 
             public ArrayCreationDataTypeRetrievingVisitor(
                 string fieldDefinitionFullName,
@@ -109,7 +91,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 _arrayCreateExpressionTransformer = arrayCreateExpressionTransformer;
                 _context = context;
             }
-
 
             public override void VisitArrayCreateExpression(ArrayCreateExpression arrayCreateExpression)
             {

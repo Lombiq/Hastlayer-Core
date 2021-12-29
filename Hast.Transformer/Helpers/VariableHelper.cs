@@ -27,7 +27,7 @@ namespace Hast.Transformer.Helpers
             Expression valueHolder,
             AstType astType) =>
             DeclareAndReferenceVariable(
-                variableNamePrefix + Sha2456Helper.ComputeHash(valueHolder.GetFullName()),
+                variableNamePrefix + Sha256Helper.ComputeHash(valueHolder.GetFullName()),
                 valueHolder.GetActualType(),
                 astType,
                 valueHolder.FindFirstParentStatement());
@@ -48,6 +48,6 @@ namespace Hast.Transformer.Helpers
         }
 
         public static ILVariableResolveResult CreateILVariableResolveResult(VariableKind variableKind, IType type, string name) =>
-            new ILVariableResolveResult(new ILVariable(variableKind, type) { Name = name });
+            new(new ILVariable(variableKind, type) { Name = name });
     }
 }

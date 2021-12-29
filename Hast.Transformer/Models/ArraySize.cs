@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace Hast.Transformer.Models
 {
@@ -8,7 +9,6 @@ namespace Hast.Transformer.Models
     {
         public int Length { get; set; }
 
-
-        public override string ToString() => "Length: " + Length.ToString();
+        public override string ToString() => "Length: " + Length.ToTechnicalString();
     }
 }

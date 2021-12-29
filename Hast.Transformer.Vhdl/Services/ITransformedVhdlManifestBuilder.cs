@@ -1,12 +1,18 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
+using Hast.Common.Interfaces;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Models;
-using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Vhdl.Services
 {
+    /// <summary>
+    /// Service for building VHDL manifest from the transformation engine.
+    /// </summary>
     public interface ITransformedVhdlManifestBuilder : IDependency
     {
-        Task<ITransformedVhdlManifest> BuildManifest(ITransformationContext transformationContext);
+        /// <summary>
+        /// Performs some member transformations and creates a new VHDL manifest.
+        /// </summary>
+        Task<TransformedVhdlManifest> BuildManifestAsync(ITransformationContext transformationContext);
     }
 }

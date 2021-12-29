@@ -2,9 +2,6 @@
 {
     public class BaseClass
     {
-        protected int BaseClassMethod1(int a)
-        {
-            return a + 1;
-        }
+        protected int BaseClassMethod1(int a) => a + 1;
     }
 }

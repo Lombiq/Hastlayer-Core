@@ -14,7 +14,7 @@ namespace Hast.Synthesis.Models
         /// <param name="operandSizeBits">The size of the operation's operands, in bits.</param>
         /// <param name="isSigned">Indicates whether the operands are signed.</param>
         /// <param name="constantOperand">
-        /// If one of the operand of the operation is constant then supply the value here (due to compiler optimizations 
+        /// If one of the operand of the operation is constant then supply the value here (due to compiler optimizations
         /// the latency can be different - smaller - in such a case).
         /// </param>
         /// <returns>The latency, in ns, what the operation will roughly take. -1 if no timing data was found.</returns>

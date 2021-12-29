@@ -12,7 +12,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
         private IDataObject _instance;
         public IDataObject Instance
         {
-            get { return _instance; }
+            get => _instance;
             set
             {
                 _instance = value;
@@ -22,7 +22,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
         }
 
         public string FieldName { get; set; }
-
 
         public override IDataObject ToReference() => this;
 

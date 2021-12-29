@@ -1,4 +1,4 @@
-﻿using Hast.Common.Numerics;
+using Hast.Common.Numerics;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
@@ -18,7 +18,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IBinaryOperatorExpressionTransformer _binaryOperatorExpressionTransformer;
         private readonly ITypeConverter _typeConverter;
 
-
         public SpecialOperationInvocationTransformer(
             IBinaryOperatorExpressionTransformer binaryOperatorExpressionTransformer,
             ITypeConverter typeConverter)
@@ -27,58 +26,47 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _typeConverter = typeConverter;
         }
 
-
-        public bool IsSpecialOperationInvocation(InvocationExpression expression) =>
-            TryGetSimdOperation(expression.GetTargetMemberFullName()) != null;
+        public bool IsSupported(AstNode node) =>
+            node is InvocationExpression invocationExpression &&
+            TryGetSimdOperation(invocationExpression.GetTargetMemberFullName()) != null;
 
         public IVhdlElement TransformSpecialOperationInvocation(
             InvocationExpression expression,
             IEnumerable<IVhdlElement> transformedParameters,
-            ISubTransformerContext context)
+            SubTransformerContext context)
         {
-            if (!IsSpecialOperationInvocation(expression))
-            {
-                throw new InvalidOperationException(
-                    "The given expression (" + expression.ToString() + ") is not a special operation invocation.");
-            }
-
             var targetMethodName = expression.GetTargetMemberFullName();
 
-            var simdOperation = TryGetSimdOperation(targetMethodName);
+            if (TryGetSimdOperation(targetMethodName) is not { } simdOperation)
+            {
+                throw new InvalidOperationException(
+                    $"The given {nameof(expression)} ({expression}) is not a special operation invocation.");
+            }
 
             if (string.IsNullOrEmpty(simdOperation))
             {
                 throw new NotSupportedException(
-                    "No transformer logic exists for the following special operation invocation: " + expression.ToString());
+                    "No transformer logic exists for the following special operation invocation: " + expression);
             }
 
             // Transforming the operation to parallel signal-using operations.
 
             // The last argument for SIMD operations is always the max degree of parallelism.
-            var maxDegreeOfParallelism = int.Parse(((Value)transformedParameters.Last()).Content);
+            var parameters = transformedParameters.AsList(); // Convert to IList to prevent multiple enumerations.
+            var maxDegreeOfParallelism = ((Value)parameters[^1]).Content.ToTechnicalInt();
 
-            var vector1 = (DataObjectReference)transformedParameters.First();
-            var vector2 = (DataObjectReference)transformedParameters.Skip(1).First();
-            var binaryOperations = new List<IPartiallyTransformedBinaryOperatorExpression>();
+            var vector1 = (DataObjectReference)parameters[0];
+            var vector2 = (DataObjectReference)parameters[1];
+            var binaryOperations = new List<PartiallyTransformedBinaryOperatorExpression>();
 
-            BinaryOperatorType simdBinaryOperator;
-            switch (simdOperation)
+            var simdBinaryOperator = simdOperation switch
             {
-                case nameof(SimdOperations.AddVectors):
-                    simdBinaryOperator = BinaryOperatorType.Add;
-                    break;
-                case nameof(SimdOperations.SubtractVectors):
-                    simdBinaryOperator = BinaryOperatorType.Subtract;
-                    break;
-                case nameof(SimdOperations.MultiplyVectors):
-                    simdBinaryOperator = BinaryOperatorType.Multiply;
-                    break;
-                case nameof(SimdOperations.DivideVectors):
-                    simdBinaryOperator = BinaryOperatorType.Divide;
-                    break;
-                default:
-                    throw new NotSupportedException("The SIMD operation " + simdOperation + " is not supported.");
-            }
+                nameof(SimdOperations.AddVectors) => BinaryOperatorType.Add,
+                nameof(SimdOperations.SubtractVectors) => BinaryOperatorType.Subtract,
+                nameof(SimdOperations.MultiplyVectors) => BinaryOperatorType.Multiply,
+                nameof(SimdOperations.DivideVectors) => BinaryOperatorType.Divide,
+                _ => throw new NotSupportedException($"The SIMD operation {simdOperation} is not supported."),
+            };
 
             // The result type of each artificial BinaryOperatorExpression should be the same as the SIMD method call's
             // return array type's element type.
@@ -87,17 +75,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
             for (int i = 0; i < maxDegreeOfParallelism; i++)
             {
+                PrimitiveExpression GetIndexer(int index) =>
+                    new PrimitiveExpression(index).WithAnnotation(intType.ToResolveResult());
+
+                var arrayReferences = expression.Arguments.Take(2).Select(expression => expression.Clone()).ToList();
+
                 var binaryOperatorExpression = new BinaryOperatorExpression(
-                        new IndexerExpression(
-                            // The first array's reference.
-                            expression.Arguments.First().Clone(),
-                            // The expression object can't be re-used below.
-                            new PrimitiveExpression(i).WithAnnotation(intType.ToResolveResult())),
+                        new IndexerExpression(arrayReferences[0], GetIndexer(i)),
                         simdBinaryOperator,
-                        new IndexerExpression(
-                            // The second array's reference.
-                            expression.Arguments.Skip(1).First().Clone(),
-                            new PrimitiveExpression(i).WithAnnotation(intType.ToResolveResult())));
+                        new IndexerExpression(arrayReferences[1], GetIndexer(i)));
 
                 binaryOperatorExpression.AddAnnotation(resultElementResolveResult);
 
@@ -107,27 +93,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     BinaryOperatorExpression = binaryOperatorExpression,
                     LeftTransformed = new ArrayElementAccess { ArrayReference = vector1, IndexExpression = indexValue },
-                    RightTransformed = new ArrayElementAccess { ArrayReference = vector2, IndexExpression = indexValue }
+                    RightTransformed = new ArrayElementAccess { ArrayReference = vector2, IndexExpression = indexValue },
                 });
             }
 
-
             var stateMachine = context.Scope.StateMachine;
-            var preTransformationStateCount = stateMachine.States.Count;
 
             var resultReferences = _binaryOperatorExpressionTransformer
                 .TransformParallelBinaryOperatorExpressions(binaryOperations, context);
 
             // If no new states were added, i.e. the operation wasn't a multi-cycle one with wait states, then we add
-            // a new state here: this is needed because accessing the results (since they are assigned to signals) 
+            // a new state here: this is needed because accessing the results (since they are assigned to signals)
             // should always happen in a separate state.
             // A state may have been added already because the state before the SIMD operations would otherwise go over
-            // a clock cycle, but in that case we still need to add another one, so the fact alone that there is a new 
+            // a clock cycle, but in that case we still need to add another one, so the fact alone that there is a new
             // state is not enough; checking if this is an empty state instead.
             var currentBlock = context.Scope.CurrentBlock;
             if (stateMachine.States[currentBlock.StateMachineStateIndex].Body.Body.Any())
             {
-                currentBlock.Add(new LineComment("A SIMD operation's results should always be read out in the next clock cycle at earliest, so closing the current state."));
+                currentBlock.Add(new LineComment(
+                    "A SIMD operation's results should always be read out in the next clock cycle at earliest, so closing the current state."));
                 stateMachine.AddNewStateAndChangeCurrentBlock(context);
             }
 
@@ -137,12 +122,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 DataType = _typeConverter.ConvertType(
                     expression.GetActualType(),
                     context.TransformationContext),
-                EvaluatedContent = new InlineBlock(resultReferences)
+                EvaluatedContent = new InlineBlock(resultReferences),
             };
         }
 
-
-        private string TryGetSimdOperation(string targetMethodName)
+        private static string TryGetSimdOperation(string targetMethodName)
         {
             var simdOperationsClassFullNamePrefix = typeof(SimdOperations).FullName + "::";
             var simdOperations = new[]
@@ -150,26 +134,18 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 nameof(SimdOperations.AddVectors),
                 nameof(SimdOperations.SubtractVectors),
                 nameof(SimdOperations.MultiplyVectors),
-                nameof(SimdOperations.DivideVectors)
+                nameof(SimdOperations.DivideVectors),
             };
 
             for (int i = 0; i < simdOperations.Length; i++)
             {
-                if (targetMethodName.Contains(simdOperationsClassFullNamePrefix + simdOperations[i]))
+                if (targetMethodName.Contains(simdOperationsClassFullNamePrefix + simdOperations[i], StringComparison.InvariantCulture))
                 {
                     return simdOperations[i];
                 }
             }
 
             return null;
-        }
-
-
-        private class PartiallyTransformedBinaryOperatorExpression : IPartiallyTransformedBinaryOperatorExpression
-        {
-            public BinaryOperatorExpression BinaryOperatorExpression { get; set; }
-            public IVhdlElement LeftTransformed { get; set; }
-            public IVhdlElement RightTransformed { get; set; }
         }
     }
 }

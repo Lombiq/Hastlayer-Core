@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests
 {
     public class CatapultSamplesVerificationTests : SamplesVerificationTestsBase
@@ -12,49 +11,47 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         protected override bool UseStubMemberSuitabilityChecker => false;
         protected override string DeviceName => CatapultManifestProvider.DeviceName;
 
-
         public CatapultSamplesVerificationTests() =>
             _hostConfiguration.Extensions = _hostConfiguration.Extensions.Union(new[] { typeof(CatapultDriver).Assembly });
 
-
         [Fact]
         public async Task BasicSamplesMatchApproved() =>
-            (await CreateSourceForBasicSamples()).ShouldMatchApprovedWithVhdlConfiguration();
+            (await CreateSourceForBasicSamplesAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 
         [Fact]
         public async Task KpzSamplesMatchesApproved() =>
-            (await CreateVhdlForKpzSamples()).ShouldMatchApprovedWithVhdlConfiguration();
+            (await CreateVhdlForKpzSamplesAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 
         [Fact]
         public async Task UnumSampleMatchesApproved() =>
-            (await CreateVhdlForUnumSample()).ShouldMatchApprovedWithVhdlConfiguration();
+            (await CreateVhdlForUnumSampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 
         [Fact]
         public async Task PositSampleMatchesApproved() =>
-            (await CreateVhdlForPositSample()).ShouldMatchApprovedWithVhdlConfiguration();
+            (await CreateVhdlForPositSampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 
         [Fact]
         public async Task Posit32SampleMatchesApproved() =>
-            (await CreateVhdlForPosit32Sample()).ShouldMatchApprovedWithVhdlConfiguration();
+            (await CreateVhdlForPosit32SampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 
         [Fact]
         public async Task Posit32AdvancedSampleMatchesApproved() =>
-            (await CreateSourceForAdvancedPosit32Sample()).ShouldMatchApprovedWithVhdlConfiguration();
+            (await CreateSourceForAdvancedPosit32SampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 
         [Fact]
         public async Task Posit32SampleWithInliningMatchesApproved() =>
-            (await CreateVhdlForPosit32SampleWithInlining()).ShouldMatchApprovedWithVhdlConfiguration();
+            (await CreateVhdlForPosit32SampleWithInliningAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 
         [Fact]
         public async Task Posit32FusedSampleMatchesApproved() =>
-            (await CreateVhdlForPosit32FusedSample()).ShouldMatchApprovedWithVhdlConfiguration();
+            (await CreateVhdlForPosit32FusedSampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 
         [Fact]
         public async Task Fix64SamplesMatchesApproved() =>
-            (await CreateVhdlForFix64Samples()).ShouldMatchApprovedWithVhdlConfiguration();
+            (await CreateVhdlForFix64SamplesAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 
         [Fact]
         public async Task FSharpSamplesMatchesApproved() =>
-            (await CreateVhdlForFSharpSamples()).ShouldMatchApprovedWithVhdlConfiguration();
+            (await CreateVhdlForFSharpSamplesAsync()).ShouldMatchApprovedWithVhdlConfiguration();
     }
 }

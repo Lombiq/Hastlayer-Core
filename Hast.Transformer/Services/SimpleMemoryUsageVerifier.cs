@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
@@ -16,28 +13,28 @@ namespace Hast.Transformer.Services
             {
                 foreach (var member in type.Members.Where(m => m.IsHardwareEntryPointMember()))
                 {
-                    if (member is MethodDeclaration method)
+                    if (member is not MethodDeclaration method) continue;
+
+                    var methodName = member.GetFullName();
+
+                    if (string.IsNullOrEmpty(method.GetSimpleMemoryParameterName()))
                     {
-                        var methodName = member.GetFullName();
+                        throw new InvalidOperationException(
+                            "The method " + methodName + " doesn't have a necessary SimpleMemory parameter. Hardware entry points should have one.");
+                    }
 
-                        if (string.IsNullOrEmpty(method.GetSimpleMemoryParameterName()))
-                        {
-                            throw new InvalidOperationException(
-                                "The method " + methodName + " doesn't have a necessary SimpleMemory parameter. Hardware entry points should have one.");
-                        }
-
-                        if (method.Parameters.Count > 1)
-                        {
-                            throw new InvalidOperationException(
-                                "The method " + methodName + " contains parameters apart from the SimpleMemory parameter. Hardware entry points should only have a single SimpleMemory parameter and nothing else.");
-                        }
+                    if (method.Parameters.Count > 1)
+                    {
+                        throw new InvalidOperationException(
+                            $"The method {methodName} contains parameters apart from the SimpleMemory parameter." +
+                            $" Hardware entry points should only have a single SimpleMemory parameter and " +
+                            $"nothing else.");
                     }
                 }
             }
 
             syntaxTree.AcceptVisitor(new SimpleMemoryAssignmentVerifyingVisitor());
         }
-
 
         private class SimpleMemoryAssignmentVerifyingVisitor : DepthFirstAstVisitor
         {
@@ -50,7 +47,7 @@ namespace Hast.Transformer.Services
                 {
                     throw new NotSupportedException(
                         "The cell count parameter of the batched SimpleMemory read operation in the expression " +
-                        assignmentExpression.ToString() +
+                        assignmentExpression +
                         " couldn't be statically determined. Such operations need to define the cell count at compile-time."
                         .AddParentEntityName(assignmentExpression));
                 }

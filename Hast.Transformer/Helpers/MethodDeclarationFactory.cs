@@ -16,7 +16,7 @@ namespace Hast.Transformer.Helpers
         {
             var method = new MethodDeclaration
             {
-                Name = name
+                Name = name,
             };
 
             foreach (var annotation in annotations)

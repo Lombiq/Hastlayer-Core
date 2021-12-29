@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Abstractions.Configuration;
+using Hast.Transformer.Abstractions.Configuration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
@@ -30,26 +30,25 @@ namespace Hast.Common.Configuration
             // If there is no IndexedNameHolder then first we need to generate the indices for all lambdas.
             if (indexedNameHolder == null)
             {
-                TypeDeclaration parentType;
+                var parentType = entity.FindFirstParentTypeDeclaration();
                 IEnumerable<EntityDeclaration> compilerGeneratedMembers;
 
-                if (isDisplayClassMember)
+                if (isDisplayClassMember && parentType.FindFirstParentTypeDeclaration() is { } displayClassParent)
                 {
                     // Run the index-setting logic on the members of the parent class.
+                    parentType = displayClassParent;
 
-                    parentType = entity
-                        .FindFirstParentTypeDeclaration() // The DisplayClass.
-                        .FindFirstParentTypeDeclaration(); // The parent type.
-
-                    compilerGeneratedMembers = parentType.Members
-                        .Where(member => member.GetFullName().IsDisplayOrClosureClassName())
+                    compilerGeneratedMembers = parentType
+                        .Members
+                        .Where(member =>
+                            member is TypeDeclaration &&
+                            member.GetFullName().IsDisplayOrClosureClassName())
                         .SelectMany(displayClass => ((TypeDeclaration)displayClass).Members);
                 }
                 else
                 {
-                    parentType = entity.FindFirstParentTypeDeclaration();
-
-                    compilerGeneratedMembers = parentType.Members
+                    compilerGeneratedMembers = parentType
+                        .Members
                         .Where(member => member.GetFullName().IsInlineCompilerGeneratedMethodName());
                 }
 
@@ -70,7 +69,6 @@ namespace Hast.Common.Configuration
             return configuration.GetMaxInvocationInstanceCountConfigurationForMember(indexedNameHolder.IndexedName);
         }
 
-
         private class LambdaExpressionIndexedNameHolder
         {
             public string IndexedName { get; set; }
@@ -79,14 +77,10 @@ namespace Hast.Common.Configuration
         private class IndexedNameHolderSettingVisitor : DepthFirstAstVisitor
         {
             private readonly Dictionary<string, EntityDeclaration> _compilerGeneratedMembers;
-            private readonly Dictionary<EntityDeclaration, int> _lambdaCounts = new Dictionary<EntityDeclaration, int>();
+            private readonly Dictionary<EntityDeclaration, int> _lambdaCounts = new();
 
-
-            public IndexedNameHolderSettingVisitor(Dictionary<string, EntityDeclaration> compilerGeneratedMembers)
-            {
+            public IndexedNameHolderSettingVisitor(Dictionary<string, EntityDeclaration> compilerGeneratedMembers) =>
                 _compilerGeneratedMembers = compilerGeneratedMembers;
-            }
-
 
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {
@@ -103,7 +97,7 @@ namespace Hast.Common.Configuration
                     return;
                 }
 
-                if (_compilerGeneratedMembers.TryGetValue(memberFullName, out EntityDeclaration member) &&
+                if (_compilerGeneratedMembers.TryGetValue(memberFullName, out var member) &&
                     member.Annotation<LambdaExpressionIndexedNameHolder>() == null)
                 {
                     var parentMember = memberReferenceExpression.FindFirstParentOfType<EntityDeclaration>();
@@ -116,7 +110,7 @@ namespace Hast.Common.Configuration
                     member.AddAnnotation(new LambdaExpressionIndexedNameHolder
                     {
                         IndexedName = MemberInvocationInstanceCountConfiguration
-                            .AddLambdaExpressionIndexToSimpleName(parentMember.GetSimpleName(), _lambdaCounts[parentMember])
+                            .AddLambdaExpressionIndexToSimpleName(parentMember.GetSimpleName(), _lambdaCounts[parentMember]),
                     });
 
                     _lambdaCounts[parentMember]++;

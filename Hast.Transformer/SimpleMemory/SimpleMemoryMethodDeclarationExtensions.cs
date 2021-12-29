@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
@@ -16,4 +16,3 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             method.Parameters.Where(p => !p.IsSimpleMemoryParameter());
     }
 }
-

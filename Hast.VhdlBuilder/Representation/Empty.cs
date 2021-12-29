@@ -7,11 +7,9 @@
     {
         public static Empty Instance { get; } = new Empty();
 
-
         private Empty()
         {
         }
-
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => string.Empty;
     }

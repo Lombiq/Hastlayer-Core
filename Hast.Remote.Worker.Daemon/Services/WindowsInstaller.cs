@@ -19,9 +19,9 @@ namespace Hast.Remote.Worker.Daemon.Services
             return result == ExitCode.Success ? await StartAsync() : result;
         }
 
-        public async Task<ExitCode> StartAsync() => await ServiceControlAsync("start", Name);
+        public Task<ExitCode> StartAsync() => ServiceControlAsync("start", Name);
 
-        public async Task<ExitCode> StopAsync() => await ServiceControlAsync("stop", Name);
+        public Task<ExitCode> StopAsync() => ServiceControlAsync("stop", Name);
 
         public async Task<ExitCode> UninstallAsync()
         {

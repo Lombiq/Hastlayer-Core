@@ -1,21 +1,30 @@
-﻿using Hast.Transformer.Helpers;
+﻿using Hast.Layer;
+using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
 {
     // Maybe this would be better suitable in Hast.Transformer.Vhdl since it might not be interesting for every hardware
     // description language. But then we'd need to run IInstanceMethodsToStaticConverter again to make constructor
-    // methods static too. 
-    public class ConstructorsToMethodsConverter : IConstructorsToMethodsConverter
-    {
-        public void ConvertConstructorsToMethods(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new ConstructorConvertingVisitor());
-        }
+    // methods static too.
 
+    /// <summary>
+    /// Converts constructors to normal method declarations so they're easier to process later.
+    /// </summary>
+    public class ConstructorsToMethodsConverter : IConverter
+    {
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(ObjectVariableTypesConverter) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new ConstructorConvertingVisitor());
 
         private class ConstructorConvertingVisitor : DepthFirstAstVisitor
         {
@@ -39,7 +48,7 @@ namespace Hast.Transformer.Services
                     body: constructorDeclaration.Body,
                     returnType: new PrimitiveType("void"));
 
-                // If the type has no base type then remove the automatically added base.ctor() call from the 
+                // If the type has no base type then remove the automatically added base.ctor() call from the
                 // constructor as it won't reference anything transformable.
                 if (!constructorDeclaration.FindFirstParentTypeDeclaration().BaseTypes.Any())
                 {
@@ -60,7 +69,7 @@ namespace Hast.Transformer.Services
                         throw new NotSupportedException(
                             "Only this() constructor initializers are supported. Unsupported constructor: " +
                             Environment.NewLine +
-                            constructorDeclaration.ToString());
+                            constructorDeclaration);
                     }
 
                     var invocation = new InvocationExpression(

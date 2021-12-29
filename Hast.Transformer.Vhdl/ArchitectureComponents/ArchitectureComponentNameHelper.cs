@@ -5,9 +5,8 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
     public enum ParameterFlowDirection
     {
         In,
-        Out
+        Out,
     }
-
 
     public static class ArchitectureComponentNameHelper
     {

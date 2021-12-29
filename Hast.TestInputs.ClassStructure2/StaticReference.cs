@@ -1,4 +1,4 @@
-﻿using Hast.TestInputs.ClassStructure1.ComplexTypes;
+using Hast.TestInputs.ClassStructure1.ComplexTypes;
 
 namespace Hast.TestInputs.ClassStructure2
 {
