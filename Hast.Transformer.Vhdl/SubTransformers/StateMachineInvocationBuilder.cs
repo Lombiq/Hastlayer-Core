@@ -141,7 +141,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             MethodDeclaration targetDeclaration,
             int targetIndex,
             SubTransformerContext context) =>
-            BuildInvocationWait(targetDeclaration, 1, targetIndex, true, context).Single();
+            BuildInvocationWait(targetDeclaration, 1, targetIndex, waitForAll: true, context).Single();
 
         /// <summary>
         /// Be aware that the method can change the current block.
@@ -267,7 +267,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 targetMethodName,
                 targetParameter.Name,
                 index,
-                false)
+isOwn: false)
             {
                 DataType = parameterSignalType,
                 Name = parameterSignalName,

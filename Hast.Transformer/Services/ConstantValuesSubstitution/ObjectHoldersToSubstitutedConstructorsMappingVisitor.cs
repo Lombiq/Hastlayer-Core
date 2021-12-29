@@ -55,7 +55,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     new Dictionary<string, ConstructorReference>(_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings),
                     _constantValuesSubstitutingAstProcessor.AstExpressionEvaluator,
                     _constantValuesSubstitutingAstProcessor.KnownTypeLookupTable)
-                .SubstituteConstantValuesInSubTree(constructorDeclarationClone, true);
+                .SubstituteConstantValuesInSubTree(constructorDeclarationClone, reUseOriginalConstantValuesTable: true);
 
                 var constructorReference = new ConstructorReference
                 {

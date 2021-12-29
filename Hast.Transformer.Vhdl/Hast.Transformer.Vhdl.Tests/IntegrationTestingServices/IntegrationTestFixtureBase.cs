@@ -22,7 +22,7 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 
         public void Dispose()
         {
-            Dispose(true);
+            Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
 
@@ -36,6 +36,6 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
             _disposed = true;
         }
 
-        ~IntegrationTestFixtureBase() => Dispose(false);
+        ~IntegrationTestFixtureBase() => Dispose(disposing: false);
     }
 }

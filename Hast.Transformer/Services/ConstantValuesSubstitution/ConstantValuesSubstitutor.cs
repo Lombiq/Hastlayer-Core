@@ -29,6 +29,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 new Dictionary<string, ConstantValuesSubstitutingAstProcessor.ConstructorReference>(),
                 _astExpressionEvaluator,
                 knownTypeLookupTable)
-                .SubstituteConstantValuesInSubTree(syntaxTree, false);
+                .SubstituteConstantValuesInSubTree(syntaxTree, reUseOriginalConstantValuesTable: false);
     }
 }

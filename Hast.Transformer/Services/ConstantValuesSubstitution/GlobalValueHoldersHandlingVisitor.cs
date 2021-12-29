@@ -37,7 +37,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 if (argument is PrimitiveExpression primitiveExpression)
                 {
-                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, primitiveExpression, _rootNode, true);
+                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, primitiveExpression, _rootNode, disallowDifferentValues: true);
                 }
                 else
                 {
@@ -58,7 +58,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
                 if (argument is PrimitiveExpression expression)
                 {
-                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, expression, _rootNode, true);
+                    _constantValuesTable.MarkAsPotentiallyConstant(parameter, expression, _rootNode, disallowDifferentValues: true);
                 }
                 else
                 {
@@ -73,7 +73,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             // Handling parameters with default values.
             if (parameterDeclaration.DefaultExpression is not PrimitiveExpression primitiveExpression) return;
-            _constantValuesTable.MarkAsPotentiallyConstant(parameterDeclaration, primitiveExpression, _rootNode, true);
+            _constantValuesTable.MarkAsPotentiallyConstant(parameterDeclaration, primitiveExpression, _rootNode, disallowDifferentValues: true);
         }
 
         public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
@@ -94,7 +94,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             if (parentAssignment.Right is PrimitiveExpression expression)
             {
                 _constantValuesTable
-                    .MarkAsPotentiallyConstant(memberEntity, expression, _rootNode, true);
+                    .MarkAsPotentiallyConstant(memberEntity, expression, _rootNode, disallowDifferentValues: true);
             }
             else
             {
@@ -114,7 +114,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     returnStatement.FindFirstParentEntityDeclaration(),
                     primitiveExpression,
                     _rootNode,
-                    true);
+disallowDifferentValues: true);
             }
             else if (!returnStatement.Expression.GetFullName().IsBackingFieldName())
             {
@@ -140,7 +140,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             }
             else if (propertyDeclaration.Initializer is PrimitiveExpression primitiveExpression)
             {
-                _constantValuesTable.MarkAsPotentiallyConstant(propertyDeclaration, primitiveExpression, _rootNode, true);
+                _constantValuesTable.MarkAsPotentiallyConstant(propertyDeclaration, primitiveExpression, _rootNode, disallowDifferentValues: true);
             }
         }
 
@@ -158,7 +158,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                 var variable = fieldDeclaration.Variables.SingleOrDefault();
                 if (variable?.Initializer is PrimitiveExpression primitiveExpression)
                 {
-                    _constantValuesTable.MarkAsPotentiallyConstant(fieldDeclaration, primitiveExpression, _rootNode, true);
+                    _constantValuesTable.MarkAsPotentiallyConstant(fieldDeclaration, primitiveExpression, _rootNode, disallowDifferentValues: true);
                 }
             }
         }

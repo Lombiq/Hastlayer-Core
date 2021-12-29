@@ -10,7 +10,7 @@ namespace Hast.VhdlBuilder.Testing
     public static class VhdlElementEnumerableExtensions
     {
         public static bool ShouldContain<T>(this IEnumerable<IVhdlElement> elementsToCheck)
-            where T : class, IVhdlElement => elementsToCheck.ShouldContain<T>(null);
+            where T : class, IVhdlElement => elementsToCheck.ShouldContain<T>(predicate: null);
 
         public static bool ShouldContain<T>(
             this IEnumerable<IVhdlElement> elementsToCheck,
@@ -30,7 +30,7 @@ namespace Hast.VhdlBuilder.Testing
             elementsToCheck.ShouldRecursivelyContain<IVhdlElement>(predicate);
 
         public static bool ShouldRecursivelyContain<T>(this IEnumerable<IVhdlElement> elementsToCheck)
-            where T : class, IVhdlElement => elementsToCheck.ShouldRecursivelyContain<T>(null);
+            where T : class, IVhdlElement => elementsToCheck.ShouldRecursivelyContain<T>(predicate: null);
 
         public static bool ShouldRecursivelyContain<T>(
             this IEnumerable<IVhdlElement> elementsToCheck,
@@ -61,7 +61,7 @@ namespace Hast.VhdlBuilder.Testing
         }
 
         public static bool Contains<T>(this IEnumerable<IVhdlElement> elements)
-            where T : class, IVhdlElement => elements.Contains<T>(null);
+            where T : class, IVhdlElement => elements.Contains<T>(predicate: null);
 
         public static bool Contains<T>(this IEnumerable<IVhdlElement> elements, Expression<Func<T, bool>> predicate)
             where T : class, IVhdlElement =>

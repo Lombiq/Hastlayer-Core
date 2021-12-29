@@ -32,7 +32,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 {
                     return memberReferenceExpression.Target
                         .As<MemberReferenceExpression>()
-                        .FindMemberDeclaration(typeDeclarationLookupTable, true);
+                        .FindMemberDeclaration(typeDeclarationLookupTable, findLeftmostMemberIfRecursive: true);
                 }
                 else
                 {

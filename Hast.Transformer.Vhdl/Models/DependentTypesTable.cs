@@ -31,7 +31,7 @@ namespace Hast.Transformer.Vhdl.Models
         /// <summary>
         /// Add a type that doesn't depend on any other type but other types depend on it.
         /// </summary>
-        public void AddBaseType(DataType type) => AddDependency(type, null);
+        public void AddBaseType(DataType type) => AddDependency(type, dependencyTypeName: null);
 
         /// <summary>
         /// Gets all types stored in this table.
