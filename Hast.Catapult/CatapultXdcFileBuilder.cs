@@ -25,9 +25,9 @@ namespace Hast.Catapult
             {
                 foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
                 {
+                    // If the path is through a global signal (i.e. that doesn't have a parent process) then
+                    // the parent should be empty.
                     sdcExpression.AddPath(
-                        // If the path is through a global signal (i.e. that doesn't have a parent process) then
-                        // the parent should be empty.
                         operation.OperationResultReference.DataObjectKind == DataObjectKind.Variable ?
                             ProcessUtility.FindProcesses(new[] { architectureComponentResult.Body }).Single().Name :
                             string.Empty,
@@ -48,8 +48,8 @@ namespace Hast.Catapult
 
                 hastIpArchitecture.Declarations.Add(new LogicalBlock(
                     new LineComment(
-                        "Adding multi-cycle path constraints for Quartus Prime. See: " +
-                        "https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/solutions/rd05162013_635.html"),
+                        "Adding multi-cycle path constraints for Quartus Prime. See: https://www.intel.com/" +
+                        "content/www/us/en/programmable/support/support-resources/knowledge-base/solutions/rd05162013_635.html"),
                     alteraAttribute,
                     new AttributeSpecification
                     {

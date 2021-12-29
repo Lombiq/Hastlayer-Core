@@ -28,7 +28,7 @@ namespace Hast.Xilinx
                 }
             }
 
-            // attribute dont_touch : string;
+            //// attribute dont_touch : string;
             if (anyMultiCycleOperations)
             {
                 hastIpArchitecture.Declarations.Add(new LogicalBlock(
