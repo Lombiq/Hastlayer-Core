@@ -32,9 +32,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             }
         }
 
-        public List<Generic> Generics { get; } = new List<Generic>();
-        public List<Port> Ports { get; } = new List<Port>();
-        public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
+        public IList<Generic> Generics { get; } = new List<Generic>();
+        public IList<Port> Ports { get; } = new List<Port>();
+        public IList<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {

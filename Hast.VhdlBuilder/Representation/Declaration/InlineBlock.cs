@@ -10,7 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class InlineBlock : IBlockElement
     {
-        public List<IVhdlElement> Body { get; }
+        public IList<IVhdlElement> Body { get; }
 
         public InlineBlock(params IVhdlElement[] vhdlElements) => Body = vhdlElements.ToList();
 

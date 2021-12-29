@@ -18,7 +18,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         void CreateTypes(
             SyntaxTree syntaxTree,
             VhdlTransformationContext vhdlTransformationContext,
-            List<DependentTypesTable> dependentTypesTables,
+            ICollection<DependentTypesTable> dependentTypesTables,
             Architecture hastIpArchitecture);
     }
 }

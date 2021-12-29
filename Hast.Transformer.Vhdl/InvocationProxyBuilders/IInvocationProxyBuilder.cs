@@ -36,7 +36,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             GetHardwareEntryPoints(
             this IInvocationProxyBuilder invocationProxyBuilder,
             IEnumerable<IMemberTransformerResult> transformerResults,
-            List<IArchitectureComponent> potentiallyInvokingArchitectureComponents,
+            ICollection<IArchitectureComponent> potentiallyInvokingArchitectureComponents,
             Architecture architecture,
             VhdlTransformationContext vhdlTransformationContext)
         {

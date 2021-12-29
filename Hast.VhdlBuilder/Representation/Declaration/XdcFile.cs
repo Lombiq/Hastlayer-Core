@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,7 +15,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class XdcFile : IVhdlElement
     {
-        public List<IVhdlElement> Lines { get; } = new List<IVhdlElement>();
+        public IList<IVhdlElement> Lines { get; } = new List<IVhdlElement>();
 
         public void AddPath(IDataObject pathReference, int clockCycles, bool isHierarchical)
         {

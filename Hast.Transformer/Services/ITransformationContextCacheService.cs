@@ -43,6 +43,6 @@ namespace Hast.Transformer.Services
         /// External components that are prepended to the transformation ID source before hashing.
         /// </param>
         /// <param name="configuration">The configuration of this operation.</param>
-        string BuildTransformationId(List<string> transformationIdComponents, IHardwareGenerationConfiguration configuration);
+        string BuildTransformationId(ICollection<string> transformationIdComponents, IHardwareGenerationConfiguration configuration);
     }
 }

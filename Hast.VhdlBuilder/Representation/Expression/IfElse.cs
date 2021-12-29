@@ -8,7 +8,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class IfElse<T> : If<T>, IVhdlElement
         where T : IVhdlElement
     {
-        public List<If<T>> ElseIfs { get; } = new List<If<T>>();
+        public IList<If<T>> ElseIfs { get; } = new List<If<T>>();
         public T Else { get; set; }
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)

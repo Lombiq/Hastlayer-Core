@@ -21,7 +21,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         public void CreateTypes(
             SyntaxTree syntaxTree,
             VhdlTransformationContext vhdlTransformationContext,
-            List<DependentTypesTable> dependentTypesTables,
+            ICollection<DependentTypesTable> dependentTypesTables,
             Architecture hastIpArchitecture)
         {
             // Adding array types for any arrays created in code.

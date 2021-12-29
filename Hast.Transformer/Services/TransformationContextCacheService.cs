@@ -51,7 +51,7 @@ namespace Hast.Transformer.Services
                 });
 
         public string BuildTransformationId(
-            List<string> transformationIdComponents,
+            ICollection<string> transformationIdComponents,
             IHardwareGenerationConfiguration configuration)
         {
             transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberFullNames);

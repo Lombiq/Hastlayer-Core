@@ -419,7 +419,7 @@ hardwareFrameworkPath: null,
         public static async Task SaveAssembliesAsync(
             TransformationJob job,
             IAppDataFolder appDataFolder,
-            List<string> assemblyPaths,
+            ICollection<string> assemblyPaths,
             CancellationToken cancellationToken = default)
         {
             var jobFolder = appDataFolder.Combine("Hastlayer", "RemoteWorker", job.Token);

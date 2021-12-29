@@ -50,7 +50,7 @@ namespace Hast.Transformer.Vhdl.Models
         /// <summary>
         /// Adds this table to a list of tables but only if it actually has any dependencies.
         /// </summary>
-        public void AddToIfNotEmpty(List<DependentTypesTable> tables)
+        public void AddToIfNotEmpty(ICollection<DependentTypesTable> tables)
         {
             if (_dependencies.Count > 0) tables.Add(this);
         }

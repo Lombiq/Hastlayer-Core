@@ -6,7 +6,7 @@ namespace Hast.Transformer.Vhdl.Helpers
     // Taken from: http://www.codeproject.com/Articles/869059/Topological-sorting-in-Csharp
     public static class TopologicalSortHelper
     {
-        public static List<T> Sort<T>(IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies)
+        public static IReadOnlyList<T> Sort<T>(IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies)
         {
             var sorted = new List<T>();
             var visited = new Dictionary<T, bool>();
