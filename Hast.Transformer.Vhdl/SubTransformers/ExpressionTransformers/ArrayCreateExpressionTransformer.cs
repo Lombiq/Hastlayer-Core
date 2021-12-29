@@ -6,6 +6,7 @@ using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 {
@@ -46,12 +47,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             if (length > 500 && elementAstType is Record)
             {
-                context.Scope.Warnings.AddWarning(
-                    "NonPrimitiveArrayTooLarge",
-                    $"You've created a large array (length: {length}) with non-primitive items (type: " +
-                    $"{elementType.GetFullName()}). The resulting hardware implementation might not fit on the FPGA " +
-                    $"and/or will take a very long time to complete. Consider using a smaller array (below 500 items)."
-                        .AddParentEntityName(expression));
+                var message = StringHelper.Concatenate(
+                    $"You've created a large array (length: {length}) with non-primitive items (type: ",
+                    $"{elementType.GetFullName()}). The resulting hardware implementation might not fit on the FPGA ",
+                    $"and/or will take a very long time to complete. Consider using a smaller array (below 500 items).");
+                context.Scope.Warnings.AddWarning("NonPrimitiveArrayTooLarge", message.AddParentEntityName(expression));
             }
 
             if (elementAstType.DefaultValue != null)
