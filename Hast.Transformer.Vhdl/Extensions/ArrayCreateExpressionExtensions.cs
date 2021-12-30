@@ -23,6 +23,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 return ((PrimitiveExpression)lengthArgument).Value.ToString().ToTechnicalInt();
             }
 
+            // The array is initialized in-place, i.e. new[] { 1, 2, 3 }-style.
             return expression.Initializer.Elements.Count;
         }
 
