@@ -35,7 +35,5 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 
             _disposed = true;
         }
-
-        ~IntegrationTestFixtureBase() => Dispose(disposing: false);
     }
 }
