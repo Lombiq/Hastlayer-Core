@@ -30,7 +30,7 @@ namespace Hast.DynamicTests
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
             hastlayer.ExecutedOnHardware += (_, e) =>
-                Console.WriteLine(StringHelper.ConcatenateConvertible(
+                Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant(
                     "Executing on hardware took ",
                     e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds,
                     " milliseconds (net) ",
