@@ -7,7 +7,6 @@ namespace Hast.TestInputs.Invalid
     [SuppressMessage("Usage", "CA2211:Non-constant fields should not be visible", Justification = "Sample.")]
     [SuppressMessage("Critical Code Smell", "S2223:Non-constant static fields should not be visible", Justification = "Sample.")]
     [SuppressMessage("Minor Code Smell", "S1104:Fields should not have public accessibility", Justification = "Sample.")]
-    [SuppressMessage("Design", "MA0069:Non-constant static fields should not be visible", Justification = "Sample.")]
     public class InvalidModel
     {
         // Static fields are not supported.
