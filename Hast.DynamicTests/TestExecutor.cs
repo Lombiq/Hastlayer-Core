@@ -4,7 +4,6 @@ using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
