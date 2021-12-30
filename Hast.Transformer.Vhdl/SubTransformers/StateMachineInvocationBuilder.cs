@@ -404,10 +404,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 return Enumerable.Repeat<IVhdlElement>(Empty.Instance, instanceCount);
             }
-            else
-            {
-                return returnVariableReferences;
-            }
+
+            return returnVariableReferences;
         }
 
         private class BuildInvocationResult : IBuildInvocationResult

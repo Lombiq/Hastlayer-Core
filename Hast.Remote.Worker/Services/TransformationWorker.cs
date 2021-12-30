@@ -266,7 +266,11 @@ namespace Hast.Remote.Worker.Services
 
                     var resultBlob = _container.GetBlockBlobReference("results/" + job.Token);
 
-                    await using (var blobStream = await resultBlob.OpenWriteAsync(accessCondition: null, options: null, operationContext: null, cancellationToken))
+                    await using (var blobStream = await resultBlob.OpenWriteAsync(
+                        accessCondition: null,
+                        options: null,
+                        operationContext: null,
+                        cancellationToken))
                     await using (var streamWriter = new StreamWriter(blobStream))
                     {
                         await streamWriter.WriteAsync(_jsonConverter.Serialize(result));

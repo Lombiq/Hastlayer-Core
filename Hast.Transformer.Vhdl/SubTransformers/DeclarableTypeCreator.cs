@@ -20,16 +20,15 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 return _typeConverter.ConvertAstType(new PrimitiveType("void"), context);
             }
-            else if (type.IsArray())
+
+            if (type.IsArray())
             {
                 return ArrayHelper.CreateArrayInstantiation(
                     _typeConverter.ConvertType(type.GetElementType(), context),
                     context.ArraySizeHolder.GetSizeOrThrow(valueHolder).Length);
             }
-            else
-            {
-                return _typeConverter.ConvertType(type, context);
-            }
+
+            return _typeConverter.ConvertType(type, context);
         }
     }
 }

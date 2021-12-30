@@ -62,13 +62,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                     ArrayHelper.CreateArrayInstantiation(elementAstType, length),
                     elementAstType);
             }
-            else
-            {
-                // If there's no default value then we can't initialize the array. This is the case when objects
-                // are stored in the array and that's no problem, since objects are initialized during instantiation
-                // any way.
-                return Empty.Instance;
-            }
+
+            // If there's no default value then we can't initialize the array. This is the case when objects
+            // are stored in the array and that's no problem, since objects are initialized during instantiation
+            // any way.
+            return Empty.Instance;
         }
     }
 }
