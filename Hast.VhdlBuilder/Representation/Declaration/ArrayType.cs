@@ -13,7 +13,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
             var shortName = vhdlGenerationOptions.ShortenName(Name);
             var range = MaxLength > 0
-                ? FormattableString.Invariant($"{MaxLength} downto 0")
+                ? MaxLength.ToTechnicalString() + " downto 0"
                 : RangeType.ToReference().ToVhdl(vhdlGenerationOptions) + " range <>";
             var vhdl = ElementType.ToReference().ToVhdl(vhdlGenerationOptions);
 
