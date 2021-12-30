@@ -10,7 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class Case : IVhdlElement
     {
         public IVhdlElement Expression { get; set; }
-        public List<CaseWhen> Whens { get; } = new List<CaseWhen>();
+        public IList<CaseWhen> Whens { get; } = new List<CaseWhen>();
 
         /// <summary>
         /// Gets or sets a value indicating whether the case expression is a matching case (case?) new to VHDL 2008.
@@ -46,7 +46,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class CaseWhen : IBlockElement
     {
         public IVhdlElement Expression { get; set; }
-        public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
+        public IList<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
         public CaseWhen() { }
 

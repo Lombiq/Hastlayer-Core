@@ -39,26 +39,26 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             resultReferences.Add(TransformBinaryOperatorExpressionInner(
                 partiallyTransformedExpressionsList[0],
-                false,
-                true,
-                false,
+                operationResultDataObjectIsVariable: false,
+                isFirstOfSimdOperationsOrIsSingleOperation: true,
+                isLastOfSimdOperations: false,
                 context));
 
             for (int i = 1; i < partiallyTransformedExpressionsList.Count - 1; i++)
             {
                 resultReferences.Add(TransformBinaryOperatorExpressionInner(
                     partiallyTransformedExpressionsList[i],
-                    false,
-                    false,
-                    false,
+                    operationResultDataObjectIsVariable: false,
+                    isFirstOfSimdOperationsOrIsSingleOperation: false,
+                    isLastOfSimdOperations: false,
                     context));
             }
 
             resultReferences.Add(TransformBinaryOperatorExpressionInner(
                 partiallyTransformedExpressionsList[^1],
-                false,
-                false,
-                true,
+                operationResultDataObjectIsVariable: false,
+                isFirstOfSimdOperationsOrIsSingleOperation: false,
+                isLastOfSimdOperations: true,
                 context));
 
             return resultReferences;
@@ -69,9 +69,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             SubTransformerContext context) =>
             TransformBinaryOperatorExpressionInner(
                 partiallyTransformedExpression,
-                true,
-                true,
-                true,
+                operationResultDataObjectIsVariable: true,
+                isFirstOfSimdOperationsOrIsSingleOperation: true,
+                isLastOfSimdOperations: true,
                 context);
 
         private IVhdlElement TransformBinaryOperatorExpressionInner(
@@ -164,9 +164,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var deviceDriver = context.TransformationContext.DeviceDriver;
             var clockCyclesNeededForSignedOperation = deviceDriver
-                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, true);
+                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, isSigned: true);
             var clockCyclesNeededForUnsignedOperation = deviceDriver
-                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, false);
+                .GetClockCyclesNeededForBinaryOperation(expression, maxOperandSize, isSigned: false);
 
             var clockCyclesNeededForOperation = (leftTypeInfo.DataType?.Name, rightTypeInfo.DataType?.Name) switch
             {
@@ -310,9 +310,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
             var waitForResultBlock = new InlineBlock(
                 new GeneratedComment(vhdlGenerationOptions =>
-                    "Waiting for the result to appear in " +
-                    operationResultDataObjectReference.ToVhdl(vhdlGenerationOptions) +
-                    " (have to wait " + clockCyclesToWait + " clock cycles in this state)."),
+                {
+                    var vhdl = operationResultDataObjectReference.ToVhdl(vhdlGenerationOptions);
+                    return FormattableString.Invariant(
+                        $"Waiting for the result to appear in {vhdl} (have to wait {clockCyclesToWait} clock cycles in this state).");
+                }),
                 new LineComment(
                     "The assignment needs to be kept up for multi-cycle operations for the result to actually appear in the target."));
 
@@ -426,9 +428,9 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                         expression.Right.Clone());
 
                     clockCyclesNeededForOperation += Math.Max(
-                        deviceDriver.GetClockCyclesNeededForBinaryOperation(bitwiseAndBinary, maxOperandSize, true),
+                        deviceDriver.GetClockCyclesNeededForBinaryOperation(bitwiseAndBinary, maxOperandSize, isSigned: true),
                         deviceDriver.GetClockCyclesNeededForBinaryOperation(
-                            bitwiseAndBinary.Clone<BinaryOperatorExpression>(), maxOperandSize, false));
+                            bitwiseAndBinary.Clone<BinaryOperatorExpression>(), maxOperandSize, isSigned: false));
                 }
 
                 var invocation = new Invocation

@@ -32,12 +32,10 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 {
                     return memberReferenceExpression.Target
                         .As<MemberReferenceExpression>()
-                        .FindMemberDeclaration(typeDeclarationLookupTable, true);
+                        .FindMemberDeclaration(typeDeclarationLookupTable, findLeftmostMemberIfRecursive: true);
                 }
-                else
-                {
-                    type = typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeFullName());
-                }
+
+                type = typeDeclarationLookupTable.Lookup(memberReferenceExpression.Target.GetActualTypeFullName());
             }
             else
             {
@@ -78,28 +76,33 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
                 // The member is in a different class.
                 return typeDeclarationLookupTable.Lookup(typeReferenceExpression);
             }
-            else if (target is BaseReferenceExpression)
+
+            if (target is BaseReferenceExpression)
             {
                 // The member is in the base class (because of single class inheritance in C#, there can be only one base class).
                 return memberReferenceExpression.FindFirstParentTypeDeclaration().BaseTypes
                     .Select(type => typeDeclarationLookupTable.Lookup(type))
                     .SingleOrDefault(typeDeclaration => typeDeclaration != null && typeDeclaration.ClassType == ClassType.Class);
             }
-            else if (target is IdentifierExpression or IndexerExpression)
+
+            if (target is IdentifierExpression or IndexerExpression)
             {
                 var type = target.GetActualType();
                 return type == null ? null : typeDeclarationLookupTable.Lookup(type.GetFullName());
             }
-            else if (target is MemberReferenceExpression)
+
+            if (target is MemberReferenceExpression)
             {
                 return target.As<MemberReferenceExpression>().FindTargetTypeDeclaration(typeDeclarationLookupTable);
             }
-            else if (target is ObjectCreateExpression expression)
+
+            if (target is ObjectCreateExpression expression)
             {
                 // The member is referenced in an object initializer.
                 return typeDeclarationLookupTable.Lookup(expression.Type);
             }
-            else if (target is InvocationExpression)
+
+            if (target is InvocationExpression)
             {
                 var memberResolveResult = memberReferenceExpression.GetMemberResolveResult();
                 if (memberResolveResult != null)

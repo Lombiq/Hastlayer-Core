@@ -1,6 +1,7 @@
 using Hast.Common.Validation;
 using Hast.Layer;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,11 +36,12 @@ namespace Hast.Transformer.Models
                 if (existingSize.Length != length)
                 {
                     throw new NotSupportedException(
-                        $"Array sizes should be statically defined but the array stored in the array holder " +
-                        $"\"{holderName}\" has multiple {nameof(length)} assigned (previously it had a {nameof(length)} of " +
-                        $"{existingSize.Length} and secondly a  {nameof(length)} of {length} specified). Make sure that a " +
-                        $"variable, field or property always stores an array of the same size (including target " +
-                        $"variables, fields and properties when it's passed around).");
+                        StringHelper.Concatenate(
+                            $"Array sizes should be statically defined but the array stored in the array holder ",
+                            $"\"{holderName}\" has multiple {nameof(length)} assigned (previously it had a ",
+                            $"{nameof(length)} of {existingSize.Length} and secondly a  {nameof(length)} of {length} ",
+                            $"specified). Make sure that a variable, field or property always stores an array of the ",
+                            $"same size (including target variables, fields and properties when it's passed around)."));
                 }
 
                 return;

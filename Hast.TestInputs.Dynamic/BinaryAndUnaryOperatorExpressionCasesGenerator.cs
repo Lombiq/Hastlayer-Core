@@ -138,7 +138,7 @@ namespace Hast.TestInputs.Dynamic
             // The long cast will be unnecessary most of the time but determining when it's needed is complex so
             // good enough.
             // Awkward indentation is so the generated code can be properly formatted.
-            return $@"SaveResult(
+            return FormattableString.Invariant($@"SaveResult(
                 memory,
                 {originalMemoryIndex},
                 (long)({code0}), // {originalMemoryIndex}
@@ -148,7 +148,7 @@ namespace Hast.TestInputs.Dynamic
                 (long)({code4}), // {originalMemoryIndex + 8}
                 (long)({code5}), // {originalMemoryIndex + 10}
                 (long)({code6}), // {originalMemoryIndex + 12}
-                (long)({code7})); // {originalMemoryIndex + 14}";
+                (long)({code7})); // {originalMemoryIndex + 14}");
         }
 
         private static void AddMethodStart(string nameSuffix, StringBuilder codeBuilder, string leftType)
@@ -183,7 +183,7 @@ namespace Hast.TestInputs.Dynamic
             // The long cast will be unnecessary most of the time but determining when it's needed is complex so
             // good enough.
             if (addLongCast) code = $"(long)({code})";
-            return $@"SaveResult(memory, {originalMemoryIndex}, {code});";
+            return FormattableString.Invariant($@"SaveResult(memory, {originalMemoryIndex}, {code});");
         }
     }
 }

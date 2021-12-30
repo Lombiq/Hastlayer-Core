@@ -51,7 +51,7 @@ namespace Hast.Transformer.Vhdl.Tests
             string deviceName = null)
         {
             deviceName ??= DeviceName;
-            var configuration = new HardwareGenerationConfiguration(deviceName, null) { EnableCaching = false };
+            var configuration = new HardwareGenerationConfiguration(deviceName, hardwareFrameworkPath: null) { EnableCaching = false };
             configurationModifier?.Invoke(configuration);
             return (VhdlHardwareDescription)await transformer.TransformAsync(assemblies, configuration);
         }

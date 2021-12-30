@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using System;
 using System.IO;
 using System.Text;
@@ -13,7 +13,7 @@ namespace Hast.Remote.Worker.Daemon.Helpers
     {
         public static void Log(Exception exception)
         {
-            var fileName = $"hastlayer-log-{DateTime.UtcNow:yyyy-MM-dd}.log";
+            var fileName = FormattableString.Invariant($"hastlayer-log-{DateTime.UtcNow:yyyy-MM-dd}.log");
             var logsPath = Path.Combine(Program.ApplicationDirectory, "App_Data", "logs");
 
             try

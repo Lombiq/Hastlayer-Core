@@ -60,7 +60,7 @@ namespace Hast.Transformer.Services
 
         private class ReadonlyToConstVisitor : DepthFirstAstVisitor
         {
-            private readonly Dictionary<string, object> _replacements;
+            private readonly IDictionary<string, object> _replacements;
             private readonly SyntaxTree _syntaxTree;
 
             public ReadonlyToConstVisitor(IHardwareGenerationConfiguration configuration, SyntaxTree syntaxTree)

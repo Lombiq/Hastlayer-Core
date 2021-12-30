@@ -6,11 +6,11 @@ namespace Hast.Transformer.Helpers
     {
         public static void InsertStatementBefore<T>(Statement nextSibling, T statement)
             where T : Statement
-            => InsertStatement(nextSibling, statement, true);
+            => InsertStatement(nextSibling, statement, before: true);
 
         public static void InsertStatementAfter<T>(Statement previousSibling, T statement)
             where T : Statement
-            => InsertStatement(previousSibling, statement, false);
+            => InsertStatement(previousSibling, statement, before: false);
 
         private static void InsertStatement<T>(Statement adjacentSibling, T statement, bool before)
             where T : Statement

@@ -1,4 +1,4 @@
-﻿using Hast.Common.Helpers;
+using Hast.Common.Helpers;
 using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Transformer.Models;
@@ -51,7 +51,7 @@ namespace Hast.Transformer.Services
                 });
 
         public string BuildTransformationId(
-            List<string> transformationIdComponents,
+            ICollection<string> transformationIdComponents,
             IHardwareGenerationConfiguration configuration)
         {
             transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberFullNames);
@@ -89,7 +89,7 @@ namespace Hast.Transformer.Services
             }
 
             var hashCode = transformationId.GetHashCode(StringComparison.InvariantCulture);
-            return $"Hast.Transformer.TransformationContextCache.{fileHashes} - {hashCode}";
+            return FormattableString.Invariant($"Hast.Transformer.TransformationContextCache.{fileHashes} - {hashCode}");
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
             }
         }
 
-        public List<SignalAssignmentWhen> Whens { get; } = new List<SignalAssignmentWhen>();
+        public IList<SignalAssignmentWhen> Whens { get; } = new List<SignalAssignmentWhen>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {

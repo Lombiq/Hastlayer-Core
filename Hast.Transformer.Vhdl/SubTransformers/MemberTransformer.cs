@@ -27,7 +27,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         public IEnumerable<Task<IMemberTransformerResult>> TransformMembers(
             AstNode node,
             VhdlTransformationContext transformationContext,
-            List<Task<IMemberTransformerResult>> memberTransformerTasks = null)
+            ICollection<Task<IMemberTransformerResult>> memberTransformerTasks = null)
         {
             memberTransformerTasks ??= new List<Task<IMemberTransformerResult>>();
 
@@ -47,7 +47,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private IEnumerable<Task<IMemberTransformerResult>> TransformSingleMember(
             AstNode node,
-            List<Task<IMemberTransformerResult>> memberTransformerTasks,
+            ICollection<Task<IMemberTransformerResult>> memberTransformerTasks,
             IEnumerable<AstNode> traverseTo,
             VhdlTransformationContext transformationContext)
         {
@@ -72,7 +72,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
         private IEnumerable<Task<IMemberTransformerResult>> TransformTypeDeclaration(
             AstNode node,
-            List<Task<IMemberTransformerResult>> memberTransformerTasks,
+            ICollection<Task<IMemberTransformerResult>> memberTransformerTasks,
             IEnumerable<AstNode> traverseTo,
             VhdlTransformationContext transformationContext)
         {
@@ -108,8 +108,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             }
         }
 
-        private List<Task<IMemberTransformerResult>> TransformChildMembers(
-            List<Task<IMemberTransformerResult>> memberTransformerTasks,
+        private ICollection<Task<IMemberTransformerResult>> TransformChildMembers(
+            ICollection<Task<IMemberTransformerResult>> memberTransformerTasks,
             IEnumerable<AstNode> traverseTo,
             VhdlTransformationContext transformationContext)
         {

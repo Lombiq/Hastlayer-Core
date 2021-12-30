@@ -1,4 +1,4 @@
-﻿using Hast.Common.Configuration;
+using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Constants;
@@ -715,8 +715,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
                     var targetComponentName = GetTargetMemberComponentNameLocal(targetIndex);
                     var invokerIndex = invokedFromSingleComponent ? j : 0;
 
-                    signalConnectionsBlock.Add(new LineComment(
-                        "Signal connections for " + invokerName + " (#" + targetIndex + "):"));
+                    signalConnectionsBlock.Add(new LineComment(FormattableString.Invariant(
+                        $"Signal connections for {invokerName} (#{targetIndex}):")));
 
                     signalConnectionsBlock.Add(new Assignment
                     {
@@ -752,7 +752,7 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders
             int invokerIndex,
             int targetIndex,
             string targetMemberName,
-            Dictionary<string, IArchitectureComponent> componentsByName)
+            IDictionary<string, IArchitectureComponent> componentsByName)
         {
             // Does the target have a return value?
             var targetComponentName = ArchitectureComponentNameHelper

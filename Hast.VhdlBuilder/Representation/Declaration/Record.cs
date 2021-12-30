@@ -7,7 +7,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
     public class Record : DataType
     {
-        public List<RecordField> Fields { get; } = new List<RecordField>();
+        public IList<RecordField> Fields { get; } = new List<RecordField>();
 
         public Record() => TypeCategory = DataTypeCategory.Composite;
 

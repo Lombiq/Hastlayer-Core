@@ -36,8 +36,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             var state = (SizeNumber > 0 ? hasNumericSize : 0) + (SizeExpression != null ? hasSizeExpression : 0);
             return state switch
             {
-                hasNumericSize => $"{Name}({SizeNumber - 1} downto 0)",
-                hasSizeExpression => $"{Name}({SizeExpression.ToVhdl(vhdlGenerationOptions)} downto 0)",
+                hasNumericSize => FormattableString.Invariant($"{Name}({SizeNumber - 1} downto 0)"),
+                hasSizeExpression => FormattableString.Invariant($"{Name}({SizeExpression.ToVhdl(vhdlGenerationOptions)} downto 0)"),
                 hasBoth => throw new InvalidOperationException(
                     "VHDL sized data types should have their size specified either as an integer value or as an expression, but not both."),
                 _ => Name,
@@ -54,6 +54,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                 (SizeExpression == null ? SizeNumber == otherType.SizeNumber : SizeExpression.ToVhdl() == otherType.SizeExpression.ToVhdl());
         }
 
-        public override int GetHashCode() => (Name + TypeCategory + SizeNumber).GetHashCode(StringComparison.InvariantCulture);
+        public override int GetHashCode() =>
+            FormattableString.Invariant($"{Name}{TypeCategory}{SizeNumber}")
+                .GetHashCode(StringComparison.InvariantCulture);
     }
 }

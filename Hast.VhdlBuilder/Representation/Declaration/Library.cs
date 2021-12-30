@@ -8,7 +8,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Library : INamedElement
     {
         public string Name { get; set; }
-        public List<string> Uses { get; } = new List<string>();
+        public IList<string> Uses { get; } = new List<string>();
 
         public Library() { }
 

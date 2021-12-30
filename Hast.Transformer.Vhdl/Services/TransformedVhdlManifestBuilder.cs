@@ -248,7 +248,7 @@ namespace Hast.Transformer.Vhdl.Services
             {
                 foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
                 {
-                    xdcFile.AddPath(operation.OperationResultReference, operation.RequiredClockCyclesCeiling, true);
+                    xdcFile.AddPath(operation.OperationResultReference, operation.RequiredClockCyclesCeiling, isHierarchical: true);
                     anyMultiCycleOperations = true;
                 }
             }

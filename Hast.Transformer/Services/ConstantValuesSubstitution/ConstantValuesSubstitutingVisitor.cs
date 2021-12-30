@@ -353,7 +353,8 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             {
                 return true;
             }
-            else if (member.IsReadOnlyMember())
+
+            if (member.IsReadOnlyMember())
             {
                 // If this is a nested member reference (e.g. _member.Property1.Property2) then let's find the first
                 // member that has a corresponding ctor.

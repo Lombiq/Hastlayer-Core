@@ -24,10 +24,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             }
 
             // The array is initialized in-place, i.e. new[] { 1, 2, 3 }-style.
-            else
-            {
-                return expression.Initializer.Elements.Count;
-            }
+            return expression.Initializer.Elements.Count;
         }
 
         public static bool HasInitializer(this ArrayCreateExpression expression) => expression.Initializer.Elements.Count != 0;

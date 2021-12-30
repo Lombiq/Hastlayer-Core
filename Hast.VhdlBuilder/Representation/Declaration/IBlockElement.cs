@@ -10,7 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// <summary>
         /// Gets the body of the element.
         /// </summary>
-        List<IVhdlElement> Body { get; }
+        IList<IVhdlElement> Body { get; }
     }
 
     public static class BlockElementExtensions

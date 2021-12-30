@@ -23,7 +23,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
             ITypeDeclarationLookupTable typeDeclarationLookupTable) =>
             constructorDeclaration
                 .FindFirstChildOfType<MemberReferenceExpression>(m =>
-                    m.FindMemberDeclaration(typeDeclarationLookupTable, true)?.GetFullName() == memberFullName &&
+                    m.FindMemberDeclaration(typeDeclarationLookupTable, findLeftmostMemberIfRecursive: true)?.GetFullName() == memberFullName &&
                     m.Target.Is<IdentifierExpression>(identifier => identifier.Identifier == "this"));
 
         public static ParameterDeclaration FindConstructorParameterForPassedExpression(

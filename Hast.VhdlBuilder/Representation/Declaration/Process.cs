@@ -12,9 +12,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
         public string Name { get => Label; set => Label = value; }
 
-        public List<IDataObject> SensitivityList { get; } = new List<IDataObject>();
-        public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
-        public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
+        public IList<IDataObject> SensitivityList { get; } = new List<IDataObject>();
+        public IList<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
+        public IList<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
