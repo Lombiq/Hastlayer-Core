@@ -23,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             get => _name;
             set
             {
-                if (!value.Match("^[" + SafeNameCharacterSet + "]*$", RegexOptions.IgnoreCase).Success)
+                if (!value.IsMatch("^[" + SafeNameCharacterSet + "]*$", RegexOptions.IgnoreCase))
                 {
                     throw new ArgumentException("VHDL Entity names can only contain alphanumerical characters.");
                 }
