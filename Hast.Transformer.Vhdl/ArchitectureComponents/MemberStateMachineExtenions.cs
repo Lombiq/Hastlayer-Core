@@ -3,7 +3,7 @@ using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
-using System.Globalization;
+using System;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
@@ -73,7 +73,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             // other state machines, since we don't want to directly set other state machines' states.
             ArchitectureComponentNameHelper.CreatePrefixedObjectName(
                 stateMachine.Name,
-                "_State_" + index.ToString(CultureInfo.InvariantCulture));
+                "_State_" + index.ToTechnicalString());
 
         public static string CreateStateVariableName(this IMemberStateMachine stateMachine) =>
             ArchitectureComponentNameHelper.CreatePrefixedObjectName(stateMachine.Name, "_State");
