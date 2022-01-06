@@ -4,7 +4,7 @@
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <NoWarn>0219, 0162</NoWarn>
-    <DisabledWarnings>0219, 0162</DisabledWarnings>
+    <DisabledWarnings>219, 162</DisabledWarnings>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
