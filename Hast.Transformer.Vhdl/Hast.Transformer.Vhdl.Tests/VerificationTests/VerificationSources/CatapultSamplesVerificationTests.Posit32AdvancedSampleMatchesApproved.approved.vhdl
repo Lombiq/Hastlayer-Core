@@ -700,7 +700,6 @@ architecture Imp of Hast_IP is
     Signal \Posit32::FractionWithHiddenBitWithoutSignCheck().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::FractionSizeWithoutSignCheck().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::FractionSizeWithoutSignCheck()._Started.0\: boolean := false;
-    Signal \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16)._Started.0\: boolean := false;
@@ -795,7 +794,6 @@ architecture Imp of Hast_IP is
     Signal \Posit32::SetOne(UInt32,UInt16).0._Finished\: boolean := false;
     Signal \Posit32::SetOne(UInt32,UInt16).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::SetOne(UInt32,UInt16).0._Started\: boolean := false;
-    Signal \Posit32::SetOne(UInt32,UInt16).0.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32::SetOne(UInt32,UInt16).0.bits.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::SetOne(UInt32,UInt16).0.index.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
     -- System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).0 declarations end
@@ -4575,10 +4573,9 @@ begin
                         \Posit32::FractionWithHiddenBitWithoutSignCheck().0.binaryOperationResult.3\ := shift_right(\Posit32::FractionWithHiddenBitWithoutSignCheck().0.binaryOperationResult.1\, to_integer(unsigned(SmartResize((\Posit32::FractionWithHiddenBitWithoutSignCheck().0.binaryOperationResult.2\), 5) and "11111")));
                         \Posit32::FractionWithHiddenBitWithoutSignCheck().0.bits\ := \Posit32::FractionWithHiddenBitWithoutSignCheck().0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- return Posit32.SetOne (bits, (ushort)num);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
-                        \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\ <= \Posit32::FractionWithHiddenBitWithoutSignCheck().0.this\;
                         \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\ <= \Posit32::FractionWithHiddenBitWithoutSignCheck().0.bits\;
                         \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\ <= SmartResize(\Posit32::FractionWithHiddenBitWithoutSignCheck().0.num\, 16);
                         \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= true;
@@ -4976,7 +4973,6 @@ begin
     -- System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).0 state machine start
     \Posit32::SetOne(UInt32,UInt16).0._StateMachine\: process (\Clock\) 
         Variable \Posit32::SetOne(UInt32,UInt16).0._State\: \Posit32::SetOne(UInt32,UInt16).0._States\ := \Posit32::SetOne(UInt32,UInt16).0._State_0\;
-        Variable \Posit32::SetOne(UInt32,UInt16).0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::SetOne(UInt32,UInt16).0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::SetOne(UInt32,UInt16).0.index\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -5012,7 +5008,6 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::SetOne(UInt32,UInt16).0._State_2\ => 
-                        \Posit32::SetOne(UInt32,UInt16).0.this\ := \Posit32::SetOne(UInt32,UInt16).0.this.parameter.In\;
                         \Posit32::SetOne(UInt32,UInt16).0.bits\ := \Posit32::SetOne(UInt32,UInt16).0.bits.parameter.In\;
                         \Posit32::SetOne(UInt32,UInt16).0.index\ := \Posit32::SetOne(UInt32,UInt16).0.index.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
@@ -7983,7 +7978,6 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16) start
     -- Signal connections for System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBitWithoutSignCheck().0 (#0):
     \Posit32::SetOne(UInt32,UInt16).0._Started\ <= \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16)._Started.0\;
-    \Posit32::SetOne(UInt32,UInt16).0.this.parameter.In\ <= \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\;
     \Posit32::SetOne(UInt32,UInt16).0.bits.parameter.In\ <= \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\;
     \Posit32::SetOne(UInt32,UInt16).0.index.parameter.In\ <= \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\;
     \Posit32::FractionWithHiddenBitWithoutSignCheck().0.Posit32::SetOne(UInt32,UInt16)._Finished.0\ <= \Posit32::SetOne(UInt32,UInt16).0._Finished\;
