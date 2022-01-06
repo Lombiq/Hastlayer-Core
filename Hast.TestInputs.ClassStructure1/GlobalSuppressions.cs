@@ -26,16 +26,6 @@ using static Hast.TestInputs.Base.SuppressionConstants;
     Justification = "There are a bunch of false positives.",
     Scope = "module")]
 [assembly: SuppressMessage(
-    "Design",
-    "CS0219:Variable is assigned but its value is never used",
-    Justification = ThatsThePoint,
-    Scope = "module")]
-[assembly: SuppressMessage(
-    "Design",
-    "CS0162:Unreachable code detected",
-    Justification = ThatsThePoint,
-    Scope = "module")]
-[assembly: SuppressMessage(
     "Performance",
     "CA1822:Mark members as static",
     Justification = ThatsThePoint,

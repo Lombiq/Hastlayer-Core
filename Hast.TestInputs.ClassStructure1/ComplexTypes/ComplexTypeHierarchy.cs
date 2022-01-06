@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using static Hast.TestInputs.Base.SuppressionConstants;
 
 namespace Hast.TestInputs.ClassStructure1.ComplexTypes
@@ -24,6 +24,8 @@ namespace Hast.TestInputs.ClassStructure1.ComplexTypes
             //// var y = x + 4;
             //// var z = x + y;
 
+            // Fine to test transformation.
+#pragma warning disable CS0162 // Unreachable code detected
             if (true)
             {
                 PrivateMethod();
@@ -33,6 +35,7 @@ namespace Hast.TestInputs.ClassStructure1.ComplexTypes
             {
                 PrivateMethod();
             }
+#pragma warning restore CS0162 // Unreachable code detected
         }
 
         public void Interface2Method1() => BaseInterfaceMethod2();
