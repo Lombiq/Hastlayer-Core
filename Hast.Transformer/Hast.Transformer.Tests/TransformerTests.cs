@@ -215,7 +215,7 @@ namespace Hast.Transformer.Vhdl.Tests
 
         private static HardwareGenerationConfiguration CreateConfig()
         {
-            var configuration = new HardwareGenerationConfiguration(Nexys4DdrManifestProvider.DeviceName, null);
+            var configuration = new HardwareGenerationConfiguration(Nexys4DdrManifestProvider.DeviceName, hardwareFrameworkPath: null);
             configuration.TransformerConfiguration().UseSimpleMemory = false;
             return configuration;
         }

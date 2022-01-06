@@ -9,7 +9,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class While : IBlockElement
     {
         public IVhdlElement Condition { get; set; }
-        public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
+        public IList<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(

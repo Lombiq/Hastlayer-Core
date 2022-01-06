@@ -68,7 +68,7 @@ namespace Hast.Synthesis.Services
 
                 var operandType = csvReader.GetField<string>("InType");
                 var isSigned = operandType.StartsWithOrdinal("signed");
-                var operandSizeMatch = Regex.Match(operandType, "([0-9]+)", RegexOptions.Compiled);
+                var operandSizeMatch = operandType.RegexMatch("([0-9]+)", RegexOptions.Compiled);
                 if (!operandSizeMatch.Success)
                 {
                     throw new InvalidOperationException("The \"" + operandType + "\" operand type doesn't have a size.");

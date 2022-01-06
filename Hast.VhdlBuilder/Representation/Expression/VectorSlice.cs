@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+using System;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
@@ -12,8 +13,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public bool IsDownTo { get; set; }
 
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-            Vector.ToVhdl(vhdlGenerationOptions) +
-            "(" + IndexFrom + " " + (IsDownTo ? "down" : string.Empty) + "to " + IndexTo + ")";
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            var vhdl = Vector.ToVhdl(vhdlGenerationOptions);
+            var direction = IsDownTo ? "downto" : "to";
+            return FormattableString.Invariant($"{vhdl}({IndexFrom} {direction} {IndexTo})");
+        }
     }
 }

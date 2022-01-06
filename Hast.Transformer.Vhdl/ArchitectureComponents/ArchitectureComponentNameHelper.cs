@@ -1,4 +1,5 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
+using System;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents
 {
@@ -23,7 +24,7 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             CreatePrefixedObjectName(componentName, NameSuffixes.Finished);
 
         public static string CreateIndexedComponentName(string componentName, int index) =>
-            componentName + "." + index;
+            FormattableString.Invariant($"{componentName}.{index}");
 
         public static string CreatePrefixedSegmentedObjectName(string componentName, params string[] segments) =>
             CreatePrefixedObjectName(componentName, string.Join(".", segments));

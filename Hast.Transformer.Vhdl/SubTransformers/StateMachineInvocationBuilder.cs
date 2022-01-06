@@ -1,4 +1,4 @@
-﻿using Hast.Common.Configuration;
+using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
@@ -8,6 +8,7 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,10 +48,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             if (instanceCount > maxDegreeOfParallelism)
             {
                 throw new InvalidOperationException(
-                    "This parallelized call from " + context.Scope.Method + " to " + targetMethodName + " would do " +
-                    instanceCount +
-                    " calls in parallel but the maximal degree of parallelism for this member was set up as " +
-                    maxDegreeOfParallelism + ".");
+                    StringHelper.Concatenate(
+                        $"This parallelized call from {context.Scope.Method} to {targetMethodName} would do ",
+                        $"{instanceCount} calls in parallel but the maximal degree of parallelism for this member ",
+                        $"was set up as {maxDegreeOfParallelism}."));
             }
 
             if (!stateMachine.OtherMemberMaxInvocationInstanceCounts.TryGetValue(targetDeclaration, out var previousMaxInvocationInstanceCount) ||
@@ -141,7 +142,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             MethodDeclaration targetDeclaration,
             int targetIndex,
             SubTransformerContext context) =>
-            BuildInvocationWait(targetDeclaration, 1, targetIndex, true, context).Single();
+            BuildInvocationWait(targetDeclaration, 1, targetIndex, waitForAll: true, context).Single();
 
         /// <summary>
         /// Be aware that the method can change the current block.
@@ -267,7 +268,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 targetMethodName,
                 targetParameter.Name,
                 index,
-                false)
+                isOwn: false)
             {
                 DataType = parameterSignalType,
                 Name = parameterSignalName,
@@ -403,10 +404,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             {
                 return Enumerable.Repeat<IVhdlElement>(Empty.Instance, instanceCount);
             }
-            else
-            {
-                return returnVariableReferences;
-            }
+
+            return returnVariableReferences;
         }
 
         private class BuildInvocationResult : IBuildInvocationResult

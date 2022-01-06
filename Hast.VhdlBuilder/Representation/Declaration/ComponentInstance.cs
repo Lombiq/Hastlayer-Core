@@ -9,7 +9,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public Component Component { get; set; }
         public string Label { get; set; }
-        public List<PortMapping> PortMappings { get; } = new List<PortMapping>();
+        public IList<PortMapping> PortMappings { get; } = new List<PortMapping>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => Terminated.Terminate(
                 Label + " : " + vhdlGenerationOptions.ShortenName(Component.Name) + vhdlGenerationOptions.NewLineIfShouldFormat() +

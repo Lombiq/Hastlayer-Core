@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Text.RegularExpressions;
 
 namespace System
@@ -29,7 +29,7 @@ namespace System
         /// Such a name is like following: <c>Run@28</c>.
         /// </example>
         // // A class name containing "@" would be invalid in standard C#, so this is a fairly safe bet.
-        public static bool IsClosureClassName(this string name) => Regex.IsMatch(name, @".+\@\d+", RegexOptions.Compiled);
+        public static bool IsClosureClassName(this string name) => name.RegexIsMatch(@".+\@\d+", RegexOptions.Compiled);
 
         /// <summary>
         /// Checks whether the string looks like the name of a compiler-generated DisplayClass from C# or one
@@ -73,7 +73,7 @@ namespace System
 #pragma warning restore S103 // Lines should not be too long
         public static bool IsInlineCompilerGeneratedMethodName(this string name) =>
             // A name where before the "<" there is nothing is invalid in standard C#, so this is a fairly safe bet.
-            Regex.IsMatch(name, "^.+?::<.+>.+__\\d_\\d\\(", RegexOptions.Compiled);
+            name.RegexIsMatch("^.+?::<.+>.+__\\d_\\d\\(", RegexOptions.Compiled);
 
         /// <summary>
         /// Determines whether the string looks like the name of a compiler-generated field that backs an auto-property.
@@ -81,7 +81,7 @@ namespace System
         /// <example>
         /// Such a field's name looks like "&lt;Number&gt;k__BackingField". It will contain the name of the property.
         /// </example>
-        public static bool IsBackingFieldName(this string name) => Regex.IsMatch(name, "<(.*)>.*BackingField");
+        public static bool IsBackingFieldName(this string name) => name.RegexIsMatch("<(.*)>.*BackingField");
 
         /// <summary>
         /// Converts the full name of a property-backing auto-generated field's name to the corresponding property's
@@ -111,7 +111,7 @@ namespace System
         /// name: "Number".</para>
         /// </remarks>
         public static string ConvertSimpleBackingFieldNameToPropertyName(this string name) =>
-             Regex.Replace(name, "<(.*)>.*BackingField", match => match.Groups[1].Value);
+             name.RegexReplace("<(.*)>.*BackingField", match => match.Groups[1].Value);
 
         /// <summary>
         /// Determines whether the string looks like the name of a constructor.

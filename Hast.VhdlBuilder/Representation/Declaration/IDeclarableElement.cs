@@ -10,6 +10,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// <summary>
         /// Gets the list of type declarations.
         /// </summary>
-        List<IVhdlElement> Declarations { get; }
+        IList<IVhdlElement> Declarations { get; }
     }
 }

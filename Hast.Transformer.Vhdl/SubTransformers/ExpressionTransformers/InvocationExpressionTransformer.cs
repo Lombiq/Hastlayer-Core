@@ -1,4 +1,4 @@
-﻿using Hast.Common.Configuration;
+using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -161,30 +161,28 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
 
                 return Empty.Instance;
             }
-            else
+
+            memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory read finished."));
+
+            currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
+            customProperties[lastReadFinishedKey] = memoryOperationFinishedStateIndex;
+
+            var dataInTemporaryVariableReference = stateMachine
+                    .CreateVariableWithNextUnusedIndexedName("dataIn", SimpleMemoryTypes.DataSignalsDataType)
+                    .ToReference();
+            currentBlock.Add(new Assignment
             {
-                memoryOperationFinishedBlock.Body.Insert(0, new LineComment("SimpleMemory read finished."));
+                AssignTo = dataInTemporaryVariableReference,
+                Expression = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference(),
+            });
 
-                currentBlock.ChangeBlockToDifferentState(memoryOperationFinishedBlock, memoryOperationFinishedStateIndex);
-                customProperties[lastReadFinishedKey] = memoryOperationFinishedStateIndex;
-
-                var dataInTemporaryVariableReference = stateMachine
-                        .CreateVariableWithNextUnusedIndexedName("dataIn", SimpleMemoryTypes.DataSignalsDataType)
-                        .ToReference();
-                currentBlock.Add(new Assignment
-                {
-                    AssignTo = dataInTemporaryVariableReference,
-                    Expression = SimpleMemoryPortNames.DataIn.ToExtendedVhdlId().ToVhdlSignalReference(),
-                });
-
-                return ImplementSimpleMemoryTypeConversion(
-                    dataInTemporaryVariableReference,
-                    directionIsLogicVectorToType: true,
-                    operationDataTypeName,
-                    invocationParameters,
-                    is4BytesOperation,
-                    memberName);
-            }
+            return ImplementSimpleMemoryTypeConversion(
+                dataInTemporaryVariableReference,
+                directionIsLogicVectorToType: true,
+                operationDataTypeName,
+                invocationParameters,
+                is4BytesOperation,
+                memberName);
         }
 
         private void TransformSimpleMemoryInvocationWrite(
@@ -397,7 +395,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
             InvocationExpression expression,
             SubTransformerContext context)
         {
-            if (targetMethodName != "System.Void System.Threading.Tasks.Task::Wait()") return (false, null);
+            var empty = (HasResult: false, ResultBlock: (InlineBlock)null);
+            if (targetMethodName != "System.Void System.Threading.Tasks.Task::Wait()") return empty;
 
             // Tasks aren't awaited where they're started so we only need to await the already started state
             // machines here.
@@ -414,11 +413,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                                 context.TransformationContext) == SpecialTypes.Task),
                     out memberReference)))
             {
-                return (false, null);
+                return empty;
             }
 
             var memberName = memberReference.MemberName;
-            if (memberName is not (nameof(Task.WhenAll) or nameof(Task.WhenAny))) return (false, null);
+            if (memberName is not (nameof(Task.WhenAll) or nameof(Task.WhenAny))) return empty;
 
             // Since it's used in a WhenAll() or WhenAny() call the argument should be an array.
             var taskArrayIdentifier =
@@ -463,7 +462,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers
                 index++;
             }
 
-            return (true, resultBlock);
+            return (HasResult: true, ResultBlock: resultBlock);
         }
 
         private static IVhdlElement TransformArrayCopy(

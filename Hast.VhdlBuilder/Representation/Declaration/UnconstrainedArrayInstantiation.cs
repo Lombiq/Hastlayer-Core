@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+using System;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -14,6 +15,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public override DataType ToReference() => this;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-             vhdlGenerationOptions.NameShortener(Name) + "(" + RangeFrom + " to " + RangeTo + ")";
+             FormattableString.Invariant($"{vhdlGenerationOptions.NameShortener(Name)}({RangeFrom} to {RangeTo})");
     }
 }

@@ -129,7 +129,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
         public static T FindFirstChildOfType<T>(this AstNode node, Predicate<T> predicate)
             where T : AstNode =>
-            node.FindAllChildrenOfType(predicate, true).SingleOrDefault();
+            node.FindAllChildrenOfType(predicate, stopAfterFirst: true).SingleOrDefault();
 
         public static IEnumerable<T> FindAllChildrenOfType<T>(
             this AstNode node,

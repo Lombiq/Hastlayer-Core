@@ -12,7 +12,7 @@ namespace Hast.VhdlBuilder.Representation
     public class Raw : IVhdlElement
     {
         public string Source { get; set; }
-        public List<IVhdlElement> Parameters { get; } = new List<IVhdlElement>();
+        public IList<IVhdlElement> Parameters { get; } = new List<IVhdlElement>();
 
         public Raw()
         {

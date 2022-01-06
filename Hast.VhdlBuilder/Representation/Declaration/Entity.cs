@@ -23,7 +23,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             get => _name;
             set
             {
-                if (!Regex.IsMatch(value, "^[" + SafeNameCharacterSet + "]*$", RegexOptions.IgnoreCase))
+                if (!value.RegexIsMatch("^[" + SafeNameCharacterSet + "]*$", RegexOptions.IgnoreCase))
                 {
                     throw new ArgumentException("VHDL Entity names can only contain alphanumerical characters.");
                 }
@@ -32,9 +32,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             }
         }
 
-        public List<Generic> Generics { get; } = new List<Generic>();
-        public List<Port> Ports { get; } = new List<Port>();
-        public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
+        public IList<Generic> Generics { get; } = new List<Generic>();
+        public IList<Port> Ports { get; } = new List<Port>();
+        public IList<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
@@ -65,6 +65,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// <param name="name">The unsafe name to convert.</param>
         /// <returns>The cleaned name.</returns>
         public static string ToSafeEntityName(string name) =>
-            Regex.Replace(name, "[^" + SafeNameCharacterSet + "]", "_", RegexOptions.IgnoreCase);
+            name.RegexReplace("[^" + SafeNameCharacterSet + "]", "_", RegexOptions.IgnoreCase);
     }
 }

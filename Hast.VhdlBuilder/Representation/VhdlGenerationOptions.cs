@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -52,15 +52,14 @@ namespace Hast.VhdlBuilder.Representation
             {
                 previousNewName = newName;
 
-                newName = Regex.Replace(
-                    newName,
-                    // Detects names in the following patterns:
-                    // System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(
-                    //     Hast.Transformer.SimpleMemory.SimpleMemory)
-                    // \System.Void Hast::ExternalInvocationProxy().System.Void
-                    //     Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(
-                    //     Hast.Transformer.SimpleMemory.SimpleMemory)._Finished.0\
-                    // Will also replace names in names.
+                // Detects names in the following patterns:
+                // System.Void Hast.Samples.SampleAssembly.PrimeCalculator::ArePrimeNumbers(
+                //     Hast.Transformer.SimpleMemory.SimpleMemory)
+                // \System.Void Hast::ExternalInvocationProxy().System.Void
+                //     Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumber(
+                //     Hast.Transformer.SimpleMemory.SimpleMemory)._Finished.0\
+                // Will also replace names in names.
+                newName = newName.RegexReplace(
                     @"\\?\S+\.\S+ [^\s:]+::[^\s(]+\(\S*?\)(\.\d+)?\\?",
                     NameShortenerMatch,
                     RegexOptions.Compiled);

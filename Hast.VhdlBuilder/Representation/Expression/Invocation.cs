@@ -10,7 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Expression
     public class Invocation : IVhdlElement
     {
         public IVhdlElement Target { get; set; }
-        public List<IVhdlElement> Parameters { get; } = new List<IVhdlElement>();
+        public IList<IVhdlElement> Parameters { get; } = new List<IVhdlElement>();
 
         public Invocation()
         {

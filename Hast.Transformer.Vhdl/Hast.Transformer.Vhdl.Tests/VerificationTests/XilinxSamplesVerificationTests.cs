@@ -52,7 +52,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests
         public async Task Fix64SamplesMatchesApproved(string deviceName) =>
             (await CreateVhdlForFix64SamplesAsync()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
 
-        [Theory, MemberData(nameof(AllDevices))]
+        [Theory(Skip = "Disabled until we update to .NET 6 due to F# compiler changes."), MemberData(nameof(AllDevices))]
         public async Task FSharpSamplesMatchesApproved(string deviceName) =>
             (await CreateVhdlForFSharpSamplesAsync()).ShouldMatchApprovedWithVhdlConfiguration(deviceName);
     }

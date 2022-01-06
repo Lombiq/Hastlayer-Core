@@ -15,7 +15,7 @@ namespace Hast.Transformer.Vhdl.Models
         public bool IsOwn { get; set; }
 
         public ParameterSignal(string targetMemberFullName, string targetParameterName)
-            : this(targetMemberFullName, targetParameterName, 0, false)
+            : this(targetMemberFullName, targetParameterName, 0, isOwn: false)
         {
         }
 

@@ -18,6 +18,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         IEnumerable<Task<IMemberTransformerResult>> TransformMembers(
             AstNode node,
             VhdlTransformationContext transformationContext,
-            List<Task<IMemberTransformerResult>> memberTransformerTasks = null);
+            ICollection<Task<IMemberTransformerResult>> memberTransformerTasks = null);
     }
 }

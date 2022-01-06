@@ -195,7 +195,7 @@ namespace Hast.Remote.Worker.Services
                     // started to work then nothing to do.
                     if (blob.Properties.LeaseStatus != LeaseStatus.Unlocked) return;
 
-                    var leaseId = await blob.AcquireLeaseAsync(leaseTimeSpan, null, cancellationToken);
+                    var leaseId = await blob.AcquireLeaseAsync(leaseTimeSpan, proposedLeaseId: null, cancellationToken);
                     accessCondition = new AccessCondition { LeaseId = leaseId };
                 }
                 catch (StorageException ex)
@@ -240,7 +240,7 @@ namespace Hast.Remote.Worker.Services
             {
                 TransformationJob job;
 
-                await using (var stream = await blob.OpenReadAsync(null, null, null, cancellationToken))
+                await using (var stream = await blob.OpenReadAsync(accessCondition: null, options: null, operationContext: null, cancellationToken))
                 using (var streamReader = new StreamReader(stream))
                 {
                     job = _jsonConverter.Deserialize<TransformationJob>(await streamReader.ReadToEndAsync());
@@ -266,7 +266,11 @@ namespace Hast.Remote.Worker.Services
 
                     var resultBlob = _container.GetBlockBlobReference("results/" + job.Token);
 
-                    await using (var blobStream = await resultBlob.OpenWriteAsync(null, null, null, cancellationToken))
+                    await using (var blobStream = await resultBlob.OpenWriteAsync(
+                        accessCondition: null,
+                        options: null,
+                        operationContext: null,
+                        cancellationToken))
                     await using (var streamWriter = new StreamWriter(blobStream))
                     {
                         await streamWriter.WriteAsync(_jsonConverter.Serialize(result));
@@ -314,7 +318,7 @@ namespace Hast.Remote.Worker.Services
                     assemblyPaths,
                     new HardwareGenerationConfiguration(
                         job.Configuration.DeviceName,
-                        null,
+                        hardwareFrameworkPath: null,
                         job.Configuration.CustomConfiguration,
                         job.Configuration.HardwareEntryPointMemberFullNames,
                         job.Configuration.HardwareEntryPointMemberNamePrefixes)
@@ -372,7 +376,7 @@ namespace Hast.Remote.Worker.Services
 
         private static async Task<List<IListBlobItem>> GetBlobsAsync(CloudBlobContainer container, string prefix)
         {
-            var segment = await container.ListBlobsSegmentedAsync(prefix, null);
+            var segment = await container.ListBlobsSegmentedAsync(prefix, currentToken: null);
             var list = new List<IListBlobItem>();
             list.AddRange(segment.Results);
             while (segment.ContinuationToken != null)
@@ -419,7 +423,7 @@ namespace Hast.Remote.Worker.Services
         public static async Task SaveAssembliesAsync(
             TransformationJob job,
             IAppDataFolder appDataFolder,
-            List<string> assemblyPaths,
+            ICollection<string> assemblyPaths,
             CancellationToken cancellationToken = default)
         {
             var jobFolder = appDataFolder.Combine("Hastlayer", "RemoteWorker", job.Token);

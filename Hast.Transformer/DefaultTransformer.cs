@@ -117,9 +117,9 @@ namespace Hast.Transformer
 
                 var resolver = new UniversalAssemblyResolver(
                     Path.GetFullPath(assemblyPath),
-                    true,
+                    throwOnError: true,
                     module.Reader.DetectTargetFrameworkId(),
-                    null,
+                    runtimePack: null,
                     PEStreamOptions.PrefetchMetadata);
 
                 // When executed as a Windows service not all Hastlayer assemblies references' from transformed assemblies
@@ -277,7 +277,7 @@ namespace Hast.Transformer
         private static async Task<SyntaxTree> DecompileTogetherAsync(IEnumerable<CSharpDecompiler> decompilers)
         {
             var decompilerTasks = await Task.WhenAll(decompilers
-                .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile(true))));
+                .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile(sortTypes: true))));
 
             // Unlike with the ILSpy v2 libraries multiple unrelated assemblies can't be decompiled into a single AST
             // so we need to decompile them separately and merge them like this.

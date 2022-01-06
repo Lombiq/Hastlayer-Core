@@ -9,9 +9,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Procedure : ISubProgram
     {
         public string Name { get; set; }
-        public List<ProcedureParameter> Parameters { get; } = new List<ProcedureParameter>();
-        public List<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
-        public List<IVhdlElement> Body { get; } = new List<IVhdlElement>();
+        public IList<ProcedureParameter> Parameters { get; } = new List<ProcedureParameter>();
+        public IList<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
+        public IList<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
