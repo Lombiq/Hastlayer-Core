@@ -62,7 +62,8 @@ namespace Hast.VhdlBuilder.Representation
                 newName = newName.RegexReplace(
                     @"\\?\S+\.\S+ [^\s:]+::[^\s(]+\(\S*?\)(\.\d+)?\\?",
                     NameShortenerMatch,
-                    RegexOptions.Compiled);
+                    RegexOptions.Compiled,
+                    TimeSpan.FromSeconds(5));
             }
 
             return newName;
