@@ -672,7 +672,6 @@ architecture Imp of Hast_IP is
     Signal \Posit32::FractionWithHiddenBit().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Started.0\: boolean := false;
-    Signal \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
     Signal \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\: boolean := false;
@@ -711,7 +710,6 @@ architecture Imp of Hast_IP is
     Signal \Posit32::SetOne(UInt32,UInt16).0._Finished\: boolean := false;
     Signal \Posit32::SetOne(UInt32,UInt16).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::SetOne(UInt32,UInt16).0._Started\: boolean := false;
-    Signal \Posit32::SetOne(UInt32,UInt16).0.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32::SetOne(UInt32,UInt16).0.bits.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32::SetOne(UInt32,UInt16).0.index.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
     -- System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).0 declarations end
@@ -4545,7 +4543,7 @@ begin
         Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::FractionWithHiddenBit().0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\: boolean := false;
         Variable \Posit32::FractionWithHiddenBit().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -4568,7 +4566,7 @@ begin
                 \Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\ := to_unsigned(0, 32);
-                \Posit32::FractionWithHiddenBit().0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2\ := to_unsigned(0, 32);
                 \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\ := false;
                 \Posit32::FractionWithHiddenBit().0.return.1\ := to_unsigned(0, 32);
             else 
@@ -4644,13 +4642,13 @@ begin
                         \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\ := shift_right(\Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\, to_integer(unsigned(SmartResize((\Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\), 5) and "11111")));
                         \Posit32::FractionWithHiddenBit().0.bits\ := \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea;
+                        -- uint conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (((long)(num) == 0L)) {
-                        -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea = 1u;
+                        -- 	conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2 = 1u;
                         -- } else {
-                        -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- 	conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2 = Posit32.SetOne (bits, (ushort)num);
                         -- }
                         -- 
                         \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::FractionWithHiddenBit().0.num\), 64)) = to_signed(0, 64);
@@ -4669,22 +4667,22 @@ begin
                     when \Posit32::FractionWithHiddenBit().0._State_6\ => 
                         -- State after the if-else which was started in state \Posit32::FractionWithHiddenBit().0._State_5\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea;
+                        -- return conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2;
                         -- 
-                        \Posit32::FractionWithHiddenBit().0.return\ <= \Posit32::FractionWithHiddenBit().0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea\;
+                        \Posit32::FractionWithHiddenBit().0.return\ <= \Posit32::FractionWithHiddenBit().0.conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2\;
                         \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::FractionWithHiddenBit().0._State_7\ => 
                         -- True branch of the if-else started in state \Posit32::FractionWithHiddenBit().0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea = 1u;
+                        -- 	conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2 = 1u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea = 1u;
+                        -- conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2 = 1u;
                         -- 
-                        \Posit32::FractionWithHiddenBit().0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea\ := to_unsigned(1, 32);
+                        \Posit32::FractionWithHiddenBit().0.conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2\ := to_unsigned(1, 32);
                         -- Going to the state after the if-else which was started in state \Posit32::FractionWithHiddenBit().0._State_5\.
                         if (\Posit32::FractionWithHiddenBit().0._State\ = \Posit32::FractionWithHiddenBit().0._State_7\) then 
                             \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_6\;
@@ -4694,14 +4692,13 @@ begin
                         -- False branch of the if-else started in state \Posit32::FractionWithHiddenBit().0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- 	conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2 = Posit32.SetOne (bits, (ushort)num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea = Lombiq.Arithmetics.Posit32.SetOne (@this, bits, (ushort)num);
+                        -- conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2 = Posit32.SetOne (bits, (ushort)num);
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
-                        \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().0.this\;
                         \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().0.bits\;
                         \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\ <= SmartResize(\Posit32::FractionWithHiddenBit().0.num\, 16);
                         \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= true;
@@ -4712,7 +4709,7 @@ begin
                         if (\Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ = \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Finished.0\) then 
                             \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= false;
                             \Posit32::FractionWithHiddenBit().0.return.1\ := \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).return.0\;
-                            \Posit32::FractionWithHiddenBit().0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea\ := \Posit32::FractionWithHiddenBit().0.return.1\;
+                            \Posit32::FractionWithHiddenBit().0.conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2\ := \Posit32::FractionWithHiddenBit().0.return.1\;
                             -- Going to the state after the if-else which was started in state \Posit32::FractionWithHiddenBit().0._State_5\.
                             if (\Posit32::FractionWithHiddenBit().0._State\ = \Posit32::FractionWithHiddenBit().0._State_9\) then 
                                 \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_6\;
@@ -4826,7 +4823,6 @@ begin
     -- System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).0 state machine start
     \Posit32::SetOne(UInt32,UInt16).0._StateMachine\: process (\Clock\) 
         Variable \Posit32::SetOne(UInt32,UInt16).0._State\: \Posit32::SetOne(UInt32,UInt16).0._States\ := \Posit32::SetOne(UInt32,UInt16).0._State_0\;
-        Variable \Posit32::SetOne(UInt32,UInt16).0.this\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::SetOne(UInt32,UInt16).0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::SetOne(UInt32,UInt16).0.index\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -4862,7 +4858,6 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::SetOne(UInt32,UInt16).0._State_2\ => 
-                        \Posit32::SetOne(UInt32,UInt16).0.this\ := \Posit32::SetOne(UInt32,UInt16).0.this.parameter.In\;
                         \Posit32::SetOne(UInt32,UInt16).0.bits\ := \Posit32::SetOne(UInt32,UInt16).0.bits.parameter.In\;
                         \Posit32::SetOne(UInt32,UInt16).0.index\ := \Posit32::SetOne(UInt32,UInt16).0.index.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
@@ -8436,7 +8431,6 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16) start
     -- Signal connections for System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit().0 (#0):
     \Posit32::SetOne(UInt32,UInt16).0._Started\ <= \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\;
-    \Posit32::SetOne(UInt32,UInt16).0.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).this.parameter.Out.0\;
     \Posit32::SetOne(UInt32,UInt16).0.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\;
     \Posit32::SetOne(UInt32,UInt16).0.index.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\;
     \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Finished.0\ <= \Posit32::SetOne(UInt32,UInt16).0._Finished\;
@@ -13063,12 +13057,11 @@ begin
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.23\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.25\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.26\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.quire\: \Lombiq.Arithmetics.Quire\;
@@ -13322,11 +13315,11 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.23\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.24\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.25\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.26\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 16);
-                \Quire Posit32::op_Explicit(Posit32).0.return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 16);
+                \Quire Posit32::op_Explicit(Posit32).0.return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.return_8dfbaed5965e93c29818d159b1ad2555bb8b028790c39ebb33911ab61c042d02\ := to_unsigned(0, 32);
@@ -14091,24 +14084,22 @@ begin
                         \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.25\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.23\, to_integer(unsigned(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.24\), 5) and "11111")));
                         \Quire Posit32::op_Explicit(Posit32).0.bits_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.25\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- uint conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (((long)(num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d) == 0L)) {
-                        -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = 1u;
+                        -- 	conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = 1u;
                         -- } else {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
-                        -- 	Lombiq.Arithmetics.Posit32 this_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	this_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = this_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	uint bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	ushort index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (ushort)num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	uint return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d | (uint)(1 << (int)index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
+                        -- 	uint bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	ushort index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (ushort)num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	uint return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d | (uint)(1 << (int)index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
-                        -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- }
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.26\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\), 64)) = to_signed(0, 64);
@@ -14127,10 +14118,10 @@ begin
                     when \Quire Posit32::op_Explicit(Posit32).0._State_22\ => 
                         -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- return_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\;
+                        \Quire Posit32::op_Explicit(Posit32).0.return_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\;
                         -- The following section was transformed from the .NET statement below:
                         -- array [0] = return_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
@@ -14159,13 +14150,13 @@ begin
                         -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = 1u;
+                        -- 	conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = 1u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = 1u;
+                        -- conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = 1u;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := to_unsigned(1, 32);
                         -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_21\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_23\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_22\;
@@ -14177,16 +14168,14 @@ begin
                         -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
-                        -- 	Lombiq.Arithmetics.Posit32 this_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	this_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = this_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	uint bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	ushort index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (ushort)num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	uint return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 	return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d | (uint)(1 << (int)index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
+                        -- 	uint bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	ushort index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (ushort)num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	uint return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d | (uint)(1 << (int)index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
-                        -- 	conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- 	conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -14194,40 +14183,33 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- uint bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- this_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = this_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.this_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\;
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.bits_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.bits_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- ushort index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- ushort index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (ushort)num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = (ushort)num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\, 16);
+                        \Quire Posit32::op_Explicit(Posit32).0.index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.num_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\, 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- uint return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d | (uint)(1 << (int)index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
+                        -- return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d | (uint)(1 << (int)index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\ := unsigned(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.index_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\, 32)), 5)))));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\ := \Quire Posit32::op_Explicit(Posit32).0.bits_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ or (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\ := unsigned(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.index_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\, 32)), 5)))));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\ := \Quire Posit32::op_Explicit(Posit32).0.bits_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ or (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\;
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
+                        -- conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d = return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional7e2c70f465bbd6af6328e84460df8cc63262cd5e429e5f14f0c6d6c3620c3cea_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.return_fb93a852800b1e46e7592da171e65de7ddd0018d517ad2135ba24c2440a2f0e3_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional228b1055e46d1363e308fb550cd6f22a83de28e2e3a141858be8dfd0e89f8fd2_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\ := \Quire Posit32::op_Explicit(Posit32).0.return_4ddc9c08deb685e334f47c2f9be93813800f005383f7490b26a659039cd2b9c5_310be957880a463aabf2b9e3fe034bc10c979fe352d91dac9b2227df64d3429d\;
                         -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_21\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_24\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_22\;

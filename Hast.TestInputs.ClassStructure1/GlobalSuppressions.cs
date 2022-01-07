@@ -25,3 +25,8 @@ using static Hast.TestInputs.Base.SuppressionConstants;
     "IDE0079:Remove unnecessary suppression",
     Justification = "There are a bunch of false positives.",
     Scope = "module")]
+[assembly: SuppressMessage(
+    "Performance",
+    "CA1822:Mark members as static",
+    Justification = ThatsThePoint,
+    Scope = "module")]

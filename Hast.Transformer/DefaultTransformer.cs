@@ -258,8 +258,14 @@ namespace Hast.Transformer
                 arraySizeHolder);
         }
 
+        // We'd get a build warning when SaveSyntaxTree is false in Release mode.
+#pragma warning disable IDE0060 // Remove unused parameter
         private static async Task WriteSyntaxTreeAsync(SyntaxTree syntaxTree, string fileName)
         {
+#pragma warning restore CS0162 // Remove unused parameter
+            // We'd get a build warning when SaveSyntaxTree is false in Release mode.
+#pragma warning disable IDE0079 // Remove unnecessary suppression
+#pragma warning disable CS0162 // Unreachable code detected
             while (SaveSyntaxTree)
             {
                 try
@@ -272,6 +278,8 @@ namespace Hast.Transformer
                     // It's no big deal if we can't create it.
                 }
             }
+#pragma warning restore CS0162 // Unreachable code detected
+#pragma warning restore IDE0079 // Remove unnecessary suppression
         }
 
         private static async Task<SyntaxTree> DecompileTogetherAsync(IEnumerable<CSharpDecompiler> decompilers)
