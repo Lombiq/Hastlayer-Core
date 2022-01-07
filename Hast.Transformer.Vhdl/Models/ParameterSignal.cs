@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.Models
 {
@@ -9,14 +9,13 @@ namespace Hast.Transformer.Vhdl.Models
         public int Index { get; private set; }
 
         /// <summary>
-        /// Indicates whether the parameter is the own (in or out) parameter of the component (as opposed to being
+        /// Gets or sets a value indicating whether the parameter is the own (in or out) parameter of the component (as opposed to being
         /// a parameter passed to invoked components).
         /// </summary>
         public bool IsOwn { get; set; }
 
-
         public ParameterSignal(string targetMemberFullName, string targetParameterName)
-            : this(targetMemberFullName, targetParameterName, 0, false)
+            : this(targetMemberFullName, targetParameterName, 0, isOwn: false)
         {
         }
 

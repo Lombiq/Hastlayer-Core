@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Hast.VhdlBuilder.Extensions;
 
@@ -9,12 +9,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     {
         public Component Component { get; set; }
         public string Label { get; set; }
-        public List<PortMapping> PortMappings { get; set; } = new List<PortMapping>();
+        public IList<PortMapping> PortMappings { get; } = new List<PortMapping>();
 
-
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
-        {
-            return Terminated.Terminate(
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => Terminated.Terminate(
                 Label + " : " + vhdlGenerationOptions.ShortenName(Component.Name) + vhdlGenerationOptions.NewLineIfShouldFormat() +
 
                     "port map (" + vhdlGenerationOptions.NewLineIfShouldFormat() +
@@ -23,16 +20,14 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                             .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                     Terminated.Terminate(")", vhdlGenerationOptions) +
 
-                ")", vhdlGenerationOptions);
-        }
+                ")",
+                vhdlGenerationOptions);
     }
-
 
     public class PortMapping : IVhdlElement
     {
         public string From { get; set; }
         public string To { get; set; }
-
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             vhdlGenerationOptions.ShortenName(From) + " => " + vhdlGenerationOptions.ShortenName(To);

@@ -19,7 +19,7 @@ namespace Hast.Transformer.Vhdl.Helpers
                 var currentBinary = new Binary
                 {
                     Left = expressions.Skip(1).First(),
-                    Operator = binaryOperator
+                    Operator = binaryOperator,
                 };
 
                 var firstBinary = currentBinary;
@@ -29,7 +29,7 @@ namespace Hast.Transformer.Vhdl.Helpers
                     var newBinary = new Binary
                     {
                         Left = expression,
-                        Operator = binaryOperator
+                        Operator = binaryOperator,
                     };
 
                     currentBinary.Right = newBinary;

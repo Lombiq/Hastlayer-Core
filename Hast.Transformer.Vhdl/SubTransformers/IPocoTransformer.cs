@@ -1,16 +1,18 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
+using Hast.Common.Interfaces;
 using Hast.Transformer.Vhdl.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
     /// <summary>
     /// Transformer for processing POCOs (Plain Old C# Object) to handle e.g. properties.
     /// </summary>
-    public interface IPocoTransformer : IDependency
+    public interface IPocoTransformer : IDependency, ISpecificNodeTypeTransformer
     {
-        bool IsSupportedMember(AstNode node);
-        Task<IMemberTransformerResult> Transform(TypeDeclaration typeDeclaration, IVhdlTransformationContext context);
+        /// <summary>
+        /// Transforms the <paramref name="typeDeclaration"/> of the class into matching member records.
+        /// </summary>
+        Task<IMemberTransformerResult> TransformAsync(TypeDeclaration typeDeclaration, IVhdlTransformationContext context);
     }
 }

@@ -1,5 +1,4 @@
-﻿using ICSharpCode.Decompiler.Semantics;
-using ICSharpCode.Decompiler.TypeSystem;
+﻿using ICSharpCode.Decompiler.TypeSystem;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax
 {

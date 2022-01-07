@@ -1,15 +1,43 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using Hast.Layer;
+using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class UnneededReferenceVariablesRemover : IUnneededReferenceVariablesRemover
+    /// <summary>
+    /// Removes those variables from the syntax tree which are just aliases to another variable and thus unneeded. Due
+    /// to reference behavior such alias variables make hardware generation much more complicated so it's better to get
+    /// rid of them.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// internal KpzKernelsTaskState &lt;ScheduleIterations&gt;b__9_0 (KpzKernelsTaskState rawTaskState)
+    /// {
+    ///     KpzKernelsTaskState kpzKernelsTaskState;
+    ///     kpzKernelsTaskState = rawTaskState;
+    ///     // kpzKernelsTaskState is being used from now on everywhere so better to just use rawTaskState directly.
+    ///     return kpzKernelsTaskState;
+    /// }
+    ///
+    /// // The variable "random" is unneeded here.
+    /// RandomMwc64X random;
+    /// random = array [num4].Random1;
+    /// random.State = (random.State | ((ulong)num8 &lt;&lt; 32));
+    /// </code>
+    /// </example>
+    public class UnneededReferenceVariablesRemover : IConverter
     {
-        public void RemoveUnneededVariables(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new AssignmentsDiscoveringVisitor());
-        }
+        // Many other dependencies are just leftovers from the previous linear execution order. However in this case
+        // we know explicitly that RefLocalVariablesRemover must come before UnneededReferenceVariablesRemover.
+        public virtual IEnumerable<string> Dependencies { get; } = new[] { nameof(RefLocalVariablesRemover) };
 
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new AssignmentsDiscoveringVisitor());
 
         private class AssignmentsDiscoveringVisitor : DepthFirstAstVisitor
         {
@@ -19,8 +47,6 @@ namespace Hast.Transformer.Services
 
                 var left = assignmentExpression.Left;
                 var right = assignmentExpression.Right;
-
-                var leftType = left.GetActualType();
 
                 // Let's check whether the assignment is for a reference type and whether it's between two variables or
                 // a variable and a field/property/array item access (properties at these stage are only
@@ -56,12 +82,7 @@ namespace Hast.Transformer.Services
 
             public bool? AssignedToOnce { get; private set; }
 
-
-            public AssignmentsCheckingVisitor(string identifier)
-            {
-                _identifier = identifier;
-            }
-
+            public AssignmentsCheckingVisitor(string identifier) => _identifier = identifier;
 
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
             {
@@ -70,7 +91,7 @@ namespace Hast.Transformer.Services
                 if (assignmentExpression.Left is IdentifierExpression identifierExpression &&
                     identifierExpression.Identifier == _identifier)
                 {
-                    AssignedToOnce = AssignedToOnce == null ? true : false;
+                    AssignedToOnce = AssignedToOnce == null;
                 }
             }
         }
@@ -80,13 +101,11 @@ namespace Hast.Transformer.Services
             private readonly string _oldIdentifier;
             private readonly Expression _newExpression;
 
-
             public IdentifiersChangingVisitor(string oldIdentifier, Expression newExpression)
             {
                 _oldIdentifier = oldIdentifier;
                 _newExpression = newExpression;
             }
-
 
             public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
             {

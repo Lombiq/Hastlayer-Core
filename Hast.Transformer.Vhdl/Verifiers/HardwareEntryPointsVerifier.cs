@@ -6,18 +6,23 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Vhdl.Verifiers
 {
-    public class HardwareEntryPointsVerifier : IHardwareEntryPointsVerifier
+    /// <summary>
+    /// Checks if hardware entry point types are suitable for transforming.
+    /// </summary>
+    public class HardwareEntryPointsVerifier : IVerifyer
     {
         private readonly IMemberSuitabilityChecker _memberSuitabilityChecker;
 
-
-        public HardwareEntryPointsVerifier(IMemberSuitabilityChecker memberSuitabilityChecker)
-        {
+        public HardwareEntryPointsVerifier(IMemberSuitabilityChecker memberSuitabilityChecker) =>
             _memberSuitabilityChecker = memberSuitabilityChecker;
-        }
 
+        public void Verify(SyntaxTree syntaxTree, ITransformationContext transformationContext) =>
+            VerifyHardwareEntryPoints(syntaxTree, transformationContext.TypeDeclarationLookupTable);
 
-        public void VerifyHardwareEntryPoints(SyntaxTree syntaxTree, ITypeDeclarationLookupTable typeDeclarationLookupTable)
+        /// <summary>
+        /// Checks if hardware entry point types are suitable for transforming.
+        /// </summary>
+        private void VerifyHardwareEntryPoints(SyntaxTree syntaxTree, ITypeDeclarationLookupTable typeDeclarationLookupTable)
         {
             var hardwareEntryPointTypes = syntaxTree
                 .GetTypes()
@@ -36,7 +41,7 @@ namespace Hast.Transformer.Vhdl.Verifiers
                 {
                     throw new NotSupportedException(
                         "Fields, properties and constructors are not supported in hardware entry point types. The type " +
-                        type.GetFullName() + " contains the following unsupported members: " + 
+                        type.GetFullName() + " contains the following unsupported members: " +
                         string.Join(", ", unsupportedMembers.Select(member => member.GetFullName())));
                 }
             }

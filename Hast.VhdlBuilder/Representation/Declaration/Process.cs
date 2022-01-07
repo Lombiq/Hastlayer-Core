@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Hast.VhdlBuilder.Extensions;
@@ -9,11 +9,12 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Process : ISubProgram
     {
         public string Label { get; set; }
-        public string Name { get { return Label; } set { Label = value; } }
-        public List<IDataObject> SensitivityList { get; set; } = new List<IDataObject>();
-        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
-        public List<IVhdlElement> Body { get; set; } = new List<IVhdlElement>();
 
+        public string Name { get => Label; set => Label = value; }
+
+        public IList<IDataObject> SensitivityList { get; } = new List<IDataObject>();
+        public IList<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
+        public IList<IVhdlElement> Body { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Terminated.Terminate(
@@ -24,6 +25,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                     Declarations.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                 "begin " + vhdlGenerationOptions.NewLineIfShouldFormat() +
                     Body.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) +
-                "end process", vhdlGenerationOptions);
+                "end process",
+                vhdlGenerationOptions);
     }
 }

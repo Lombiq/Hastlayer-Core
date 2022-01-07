@@ -1,4 +1,4 @@
-﻿using Hast.Common.Validation;
+using Hast.Common.Validation;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,21 +7,17 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 {
     internal class ConstantValuesTable
     {
-        // The outer dictionary is keyed by value holder names. In the inner dictionary the scope is the key and 
+        // The outer dictionary is keyed by value holder names. In the inner dictionary the scope is the key and
         // the value is the primitive value.
         private Dictionary<string, Dictionary<AstNode, PrimitiveExpression>> _valueHoldersAndValueDescriptors =
-            new Dictionary<string, Dictionary<AstNode, PrimitiveExpression>>();
-
+            new();
 
         public ConstantValuesTable()
         {
         }
 
-        private ConstantValuesTable(Dictionary<string, Dictionary<AstNode, PrimitiveExpression>> valueHoldersAndValueDescriptors)
-        {
+        private ConstantValuesTable(Dictionary<string, Dictionary<AstNode, PrimitiveExpression>> valueHoldersAndValueDescriptors) =>
             _valueHoldersAndValueDescriptors = valueHoldersAndValueDescriptors;
-        }
-
 
         /// <param name="scope">The node within which the value should valid.</param>
         public void MarkAsPotentiallyConstant(
@@ -36,16 +32,13 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
             var valueDescriptors = GetOrCreateValueDescriptors(valueHolder.GetFullName());
 
-            if (disallowDifferentValues && expression != null)
+            if (disallowDifferentValues &&
+                expression != null &&
+                valueDescriptors.TryGetValue(scope, out var existingExpression) &&
+                // Simply using != would yield a reference equality check.
+                (existingExpression == null || !expression.Value.Equals(existingExpression.Value)))
             {
-                if (valueDescriptors.TryGetValue(scope, out var existingExpression))
-                {
-                    // Simply using != would yield a reference equality check.
-                    if (existingExpression == null || !expression.Value.Equals(existingExpression.Value))
-                    {
-                        expression = null;
-                    }
-                }
+                expression = null;
             }
 
             valueDescriptors[scope] = expression;
@@ -74,7 +67,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                         return new
                         {
                             ValueDescriptor = valueDescriptor,
-                            Height = parent != null ? height : int.MaxValue
+                            Height = parent != null ? height : int.MaxValue,
                         };
                     })
                     .OrderBy(valueWithHeight => valueWithHeight.Height)
@@ -111,7 +104,6 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
 
         public void OverWrite(ConstantValuesTable source) =>
             _valueHoldersAndValueDescriptors = source._valueHoldersAndValueDescriptors;
-
 
         private Dictionary<AstNode, PrimitiveExpression> GetOrCreateValueDescriptors(string holderName)
         {

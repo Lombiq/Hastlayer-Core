@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
+    /// <summary>
+    /// Represents an element that contains type declarations.
+    /// </summary>
     public interface IDeclarableElement : IVhdlElement
     {
-        List<IVhdlElement> Declarations { get; set; }
+        /// <summary>
+        /// Gets the list of type declarations.
+        /// </summary>
+        IList<IVhdlElement> Declarations { get; }
     }
 }

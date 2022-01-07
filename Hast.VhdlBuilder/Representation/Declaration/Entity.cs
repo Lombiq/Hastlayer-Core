@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -15,15 +15,15 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         private string _name;
 
         /// <summary>
-        /// Gets or sets the name of the VHDL Entity. Keep in mind that Entity names can't be extended identifiers thus 
+        /// Gets or sets the name of the VHDL Entity. Keep in mind that Entity names can't be extended identifiers thus
         /// they can only contain alphanumerical characters.
         /// </summary>
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
-                if (!Regex.IsMatch(value, "^[" + SafeNameCharacterSet + "]*$", RegexOptions.IgnoreCase))
+                if (!value.RegexIsMatch("^[" + SafeNameCharacterSet + "]*$", RegexOptions.IgnoreCase))
                 {
                     throw new ArgumentException("VHDL Entity names can only contain alphanumerical characters.");
                 }
@@ -32,20 +32,19 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             }
         }
 
-        public List<Generic> Generics { get; set; } = new List<Generic>();
-        public List<Port> Ports { get; set; } = new List<Port>();
-        public List<IVhdlElement> Declarations { get; set; } = new List<IVhdlElement>();
-
+        public IList<Generic> Generics { get; } = new List<Generic>();
+        public IList<Port> Ports { get; } = new List<Port>();
+        public IList<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
             var name = vhdlGenerationOptions.ShortenName(Name);
             return Terminated.Terminate(
                 "entity " + name + " is " + vhdlGenerationOptions.NewLineIfShouldFormat() +
-                    ((Generics != null && Generics.Any() ? 
-                        Generics.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) : 
+                    ((Generics != null && Generics.Any() ?
+                        Generics.ToVhdl(vhdlGenerationOptions).IndentLinesIfShouldFormat(vhdlGenerationOptions) :
                         string.Empty) +
-                    
+
                     "port(" + vhdlGenerationOptions.NewLineIfShouldFormat() +
                         (Ports
                             // The last port shouldn't be terminated by a semicolon...
@@ -56,9 +55,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
                     Declarations.ToVhdl(vhdlGenerationOptions))
                     .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
-                "end " + name, vhdlGenerationOptions);
+                "end " + name,
+                vhdlGenerationOptions);
         }
-
 
         /// <summary>
         /// Converts a string to be a safe Entity name, i.e. strips and substitutes everything not suited.
@@ -66,6 +65,6 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         /// <param name="name">The unsafe name to convert.</param>
         /// <returns>The cleaned name.</returns>
         public static string ToSafeEntityName(string name) =>
-            Regex.Replace(name, "[^" + SafeNameCharacterSet + "]", "_", RegexOptions.IgnoreCase);
+            name.RegexReplace("[^" + SafeNameCharacterSet + "]", "_", RegexOptions.IgnoreCase);
     }
 }

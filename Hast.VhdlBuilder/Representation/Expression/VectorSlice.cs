@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hast.VhdlBuilder.Representation.Expression
 {
@@ -17,9 +13,11 @@ namespace Hast.VhdlBuilder.Representation.Expression
 
         public bool IsDownTo { get; set; }
 
-
-        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-            Vector.ToVhdl(vhdlGenerationOptions) +
-            "(" + IndexFrom + " " + (IsDownTo ? "down" : string.Empty) + "to " + IndexTo + ")";
+        public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
+        {
+            var vhdl = Vector.ToVhdl(vhdlGenerationOptions);
+            var direction = IsDownTo ? "downto" : "to";
+            return FormattableString.Invariant($"{vhdl}({IndexFrom} {direction} {IndexTo})");
+        }
     }
 }

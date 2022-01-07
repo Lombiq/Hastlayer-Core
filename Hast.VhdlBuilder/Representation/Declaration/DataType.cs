@@ -1,6 +1,7 @@
-﻿using Hast.VhdlBuilder.Representation.Expression;
-using System.Collections.Generic;
+using Hast.VhdlBuilder.Representation.Expression;
+using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -11,9 +12,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         Array,
         Character,
         Unit,
-        Composite
+        Composite,
     }
-
 
     /// <summary>
     /// VHDL object data type, e.g. std_logic or std_logic_vector.
@@ -25,8 +25,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public string Name { get; set; }
         public virtual Value DefaultValue { get; set; }
 
-
-        public DataType(DataType previous) : this()
+        public DataType(DataType previous)
+            : this()
         {
             TypeCategory = previous.TypeCategory;
             Name = previous.Name;
@@ -37,14 +37,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
         }
 
-
         /// <summary>
         /// Generates VHDL code that can be used when the data type is referenced e.g. in a variable declaration.
         /// </summary>
         /// <remarks>
-        /// This is necessary because enums are declared and used in variables differently. Note that this is a different
+        /// <para>This is necessary because enums are declared and used in variables differently. Note that this is a different
         /// concept from <see cref="DataObjectReference"/> which is about referencing data objects (e.g. signals), not
-        /// data types.
+        /// data types.</para>
         /// </remarks>
         public virtual DataType ToReference() =>
             new DataTypeReference(this, vhdlGenerationOptions => vhdlGenerationOptions.NameShortener(Name));
@@ -53,11 +52,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             vhdlGenerationOptions.NameShortener(Name);
 
         /// <summary>
-        /// Indicated whether this data type is among the types that can be assigned to an array as a literal inside 
+        /// Indicated whether this data type is among the types that can be assigned to an array as a literal inside
         /// double quotes.
         /// </summary>
         public virtual bool IsLiteralArrayType() =>
             this == KnownDataTypes.UnrangedInt || Name == "bit_vector" || Name == "std_logic_vector" || Name == "string";
+
+        public virtual int GetSize() => 0;
 
         public override bool Equals(object obj)
         {
@@ -66,9 +67,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return Name == otherType.Name && TypeCategory == otherType.TypeCategory;
         }
 
-        public override int GetHashCode() => (Name + TypeCategory.ToString()).GetHashCode();
+        public override int GetHashCode() => (Name + TypeCategory).GetHashCode(StringComparison.InvariantCulture);
 
-
+        [SuppressMessage("Blocker Code Smell", "S3875:\"operator==\" should not be overloaded on reference types", Justification = "Why?")]
         public static bool operator ==(DataType a, DataType b)
         {
             // If both are null, or both are the same instance, return true (ReferenceEquals() returns true if both
@@ -79,7 +80,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             }
 
             // If one is null, but not both, return false.
-            if ((a is null) || (b is null))
+            if (a is null || b is null)
             {
                 return false;
             }

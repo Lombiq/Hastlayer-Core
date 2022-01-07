@@ -11,12 +11,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
     {
         private readonly ITypeConverter _typeConverter;
 
-
-        public ArrayTypesCreator(ITypeConverter typeConverter)
-        {
-            _typeConverter = typeConverter;
-        }
-
+        public ArrayTypesCreator(ITypeConverter typeConverter) => _typeConverter = typeConverter;
 
         public IEnumerable<ArrayType> CreateArrayTypes(SyntaxTree syntaxTree, IVhdlTransformationContext context)
         {
@@ -27,13 +22,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             return arrayDeclarations.Values;
         }
 
-
         private class ArrayCreationCheckingVisitor : DepthFirstAstVisitor
         {
             private readonly ITypeConverter _typeConverter;
             private readonly Dictionary<string, ArrayType> _arrayDeclarations;
             private readonly IVhdlTransformationContext _context;
-
 
             public ArrayCreationCheckingVisitor(
                 ITypeConverter typeConverter,
@@ -44,7 +37,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 _arrayDeclarations = arrayDeclarations;
                 _context = context;
             }
-
 
             public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
             {
@@ -67,7 +59,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 CreateArrayDeclarationIfNew(arrayCreateExpression.GetElementType());
             }
 
-
             private void CreateArrayDeclarationIfNew(AstType elementAstType)
             {
                 var elementType = _typeConverter.ConvertAstType(elementAstType, _context);
@@ -79,7 +70,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 _arrayDeclarations[typeName] = new ArrayType
                 {
                     ElementType = elementType,
-                    Name = typeName
+                    Name = typeName,
                 };
             }
         }

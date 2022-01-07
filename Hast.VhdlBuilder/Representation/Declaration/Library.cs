@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
@@ -8,8 +8,15 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Library : INamedElement
     {
         public string Name { get; set; }
-        public List<string> Uses { get; set; } = new List<string>();
+        public IList<string> Uses { get; } = new List<string>();
 
+        public Library() { }
+
+        public Library(string name, List<string> uses)
+        {
+            Name = name;
+            Uses = uses;
+        }
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {

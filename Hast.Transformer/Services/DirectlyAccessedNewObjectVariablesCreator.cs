@@ -1,19 +1,37 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Layer;
+using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Services
 {
-    public class DirectlyAccessedNewObjectVariablesCreator : IDirectlyAccessedNewObjectVariablesCreator
+    /// <summary>
+    /// If a newly created object's members are accessed directly instead of assigning the object to a variable for
+    /// example, then this service will add an intermediary variable for easier later processing.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// var size = new BitMask(Size).Size;
+    ///
+    /// ...will be converted into the following form:
+    /// var bitMask = new BitMask(Size);
+    /// var size = bitMask.Size;
+    /// </code>
+    /// </example>
+    public class DirectlyAccessedNewObjectVariablesCreator : IConverter
     {
-        public void CreateVariablesForDirectlyAccessedNewObjects(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new DirectlyAccessedNewObjectVariableCreatingVisitor());
-        }
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(ConditionalExpressionsToIfElsesConverter) };
 
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new DirectlyAccessedNewObjectVariableCreatingVisitor());
 
         private class DirectlyAccessedNewObjectVariableCreatingVisitor : DepthFirstAstVisitor
         {
@@ -28,12 +46,11 @@ namespace Hast.Transformer.Services
             {
                 base.VisitDefaultValueExpression(defaultValueExpression);
 
-                // Handling cases like the one below, where Fix64 is a struct without a parameterless ctor:
-                // public static Fix64 Zero() => new Fix64();
+                //// Handling cases like the one below, where Fix64 is a struct without a parameterless ctor:
+                //// public static Fix64 Zero() => new Fix64();
 
                 HandleExpression(defaultValueExpression, defaultValueExpression.Type);
             }
-
 
             private static void HandleExpression(Expression expression, AstType astType)
             {
@@ -46,7 +63,6 @@ namespace Hast.Transformer.Services
                 {
                     return;
                 }
-
 
                 var variableIdentifier = VariableHelper.DeclareAndReferenceVariable("object", expression, astType);
                 var assignment = new AssignmentExpression(variableIdentifier, expression.Clone())

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ICSharpCode.Decompiler.CSharp.Syntax;
 using Hast.Common.Interfaces;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services
 {
@@ -13,6 +8,9 @@ namespace Hast.Transformer.Services
     /// </summary>
     public interface ISimpleMemoryUsageVerifier : IDependency
     {
+        /// <summary>
+        /// Verifies the syntax tree so every usage of SimpleMemory is OK.
+        /// </summary>
         void VerifySimpleMemoryUsage(SyntaxTree syntaxTree);
     }
 }

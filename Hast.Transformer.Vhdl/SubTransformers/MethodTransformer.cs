@@ -1,4 +1,4 @@
-﻿using Hast.Common.Configuration;
+using Hast.Common.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
@@ -18,7 +18,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IStatementTransformer _statementTransformer;
         private readonly IDeclarableTypeCreator _declarableTypeCreator;
 
-
         public MethodTransformer(
             IMemberStateMachineFactory memberStateMachineFactory,
             IStatementTransformer statementTransformer,
@@ -29,58 +28,53 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             _declarableTypeCreator = declarableTypeCreator;
         }
 
-
-        public Task<IMemberTransformerResult> Transform(MethodDeclaration method, IVhdlTransformationContext context)
-        {
-            return Task.Run(async () =>
+        public Task<IMemberTransformerResult> TransformAsync(MethodDeclaration method, IVhdlTransformationContext context) =>
+            Task.Run(async () =>
+            {
+                if (method.Modifiers.HasFlag(Modifiers.Extern))
                 {
-                    if (method.Modifiers.HasFlag(Modifiers.Extern))
+                    throw new InvalidOperationException(
+                        $"The {nameof(method)} {method.GetFullName()} can't be transformed because it's extern. Only " +
+                        $"managed code can be transformed.");
+                }
+
+                var stateMachineCount = context
+                    .GetTransformerConfiguration()
+                    .GetMaxInvocationInstanceCountConfigurationForMember(method).MaxInvocationInstanceCount;
+                var stateMachineResults = new IArchitectureComponentResult[stateMachineCount];
+
+                // Not much use to parallelize computation unless there are a lot of state machines to create or the
+                // method is very complex. We'll need to examine when to parallelize here and determine it in runtime.
+                if (stateMachineCount > 50)
+                {
+                    var stateMachineComputingTasks = new List<Task<IArchitectureComponentResult>>();
+
+                    for (int i = 0; i < stateMachineCount; i++)
                     {
-                        throw new InvalidOperationException(
-                            "The method " + method.GetFullName() +
-                            " can't be transformed because it's extern. Only managed code can be transformed.");
+                        var task = new Task<IArchitectureComponentResult>(
+                            index => BuildStateMachineFromMethod(method, context, (int)index),
+                            i);
+                        task.Start();
+                        stateMachineComputingTasks.Add(task);
                     }
 
-                    var stateMachineCount = context
-                        .GetTransformerConfiguration()
-                        .GetMaxInvocationInstanceCountConfigurationForMember(method).MaxInvocationInstanceCount;
-                    var stateMachineResults = new IArchitectureComponentResult[stateMachineCount];
-
-                    // Not much use to parallelize computation unless there are a lot of state machines to create or
-                    // the method is very complex. We'll need to examine when to parallelize here and determine it in
-                    // runtime.
-                    if (stateMachineCount > 50)
+                    stateMachineResults = await Task.WhenAll(stateMachineComputingTasks);
+                }
+                else
+                {
+                    for (int i = 0; i < stateMachineCount; i++)
                     {
-                        var stateMachineComputingTasks = new List<Task<IArchitectureComponentResult>>();
-
-                        for (int i = 0; i < stateMachineCount; i++)
-                        {
-                            var task = new Task<IArchitectureComponentResult>(
-                                index => BuildStateMachineFromMethod(method, context, (int)index),
-                                i);
-                            task.Start();
-                            stateMachineComputingTasks.Add(task);
-                        }
-
-                        stateMachineResults = await Task.WhenAll(stateMachineComputingTasks);
+                        stateMachineResults[i] = BuildStateMachineFromMethod(method, context, i);
                     }
-                    else
-                    {
-                        for (int i = 0; i < stateMachineCount; i++)
-                        {
-                            stateMachineResults[i] = BuildStateMachineFromMethod(method, context, i);
-                        }
-                    }
+                }
 
-                    return (IMemberTransformerResult)new MemberTransformerResult
-                    {
-                        Member = method,
-                        IsHardwareEntryPointMember = method.IsHardwareEntryPointMember(),
-                        ArchitectureComponentResults = stateMachineResults
-                    };
-                });
-        }
-
+                return (IMemberTransformerResult)new MemberTransformerResult
+                {
+                    Member = method,
+                    IsHardwareEntryPointMember = method.IsHardwareEntryPointMember(),
+                    ArchitectureComponentResults = stateMachineResults,
+                };
+            });
 
         private IArchitectureComponentResult BuildStateMachineFromMethod(
             MethodDeclaration method,
@@ -94,7 +88,6 @@ namespace Hast.Transformer.Vhdl.SubTransformers
             // Adding the opening state's block.
             var openingBlock = new InlineBlock();
 
-
             // Handling the return type.
             var returnType = _declarableTypeCreator.CreateDeclarableType(method, method.ReturnType, context);
             // If the return type is a Task then that means it's one of the supported simple TPL scenarios,
@@ -106,7 +99,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 stateMachine.InternallyDrivenSignals.Add(new Signal
                 {
                     Name = stateMachine.CreateReturnSignalReference().Name,
-                    DataType = returnType
+                    DataType = returnType,
                 });
             }
 
@@ -127,57 +120,55 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                     methodFullName,
                     parameter.Name,
                     0,
-                    true)
+                    isOwn: true)
                 {
                     DataType = parameterDataType,
-                    Name = parameterSignalReference.Name
+                    Name = parameterSignalReference.Name,
                 });
 
                 stateMachine.LocalVariables.Add(new Variable
                 {
                     DataType = parameterDataType,
-                    Name = parameterLocalVariableReference.Name
+                    Name = parameterLocalVariableReference.Name,
                 });
 
                 openingBlock.Add(new Assignment
                 {
                     AssignTo = parameterLocalVariableReference,
-                    Expression = parameterSignalReference
+                    Expression = parameterSignalReference,
                 });
 
-                // If the parameter can be modified inside and those changes should be passed back then we need to
-                // write the local variables back to parameters.
-                if (parameter.IsOutFlowing())
+                // If the parameter can be modified inside and those changes should be passed back then we need to write
+                // the local variables back to parameters.
+                if (!parameter.IsOutFlowing()) continue;
+
+                if (isFirstOutFlowingParameter)
                 {
-                    if (isFirstOutFlowingParameter)
-                    {
-                        isFirstOutFlowingParameter = false;
+                    isFirstOutFlowingParameter = false;
 
-                        stateMachine.States[1].Body.Add(new LineComment(
-                            "Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too."));
-                    }
-
-                    var outParameterSignalReference = stateMachine
-                        .CreateParameterSignalReference(parameter.Name, ParameterFlowDirection.Out);
-
-                    stateMachine.InternallyDrivenSignals.Add(new ParameterSignal(
-                        methodFullName,
-                        parameter.Name,
-                        0,
-                        true)
-                    {
-                        DataType = parameterDataType,
-                        Name = outParameterSignalReference.Name
-                    });
-
-                    stateMachine.States[1].Body.Add(new Assignment
-                    {
-                        AssignTo = outParameterSignalReference,
-                        Expression = parameterLocalVariableReference
-                    });
+                    stateMachine.States[1].Body.Add(new LineComment(
+                        "Writing back out-flowing parameters so any changes made in this state machine will be reflected in the invoking one too."));
                 }
-            }
 
+                var outParameterSignalReference = stateMachine
+                    .CreateParameterSignalReference(parameter.Name, ParameterFlowDirection.Out);
+
+                stateMachine.InternallyDrivenSignals.Add(new ParameterSignal(
+                    methodFullName,
+                    parameter.Name,
+                    0,
+                    isOwn: true)
+                {
+                    DataType = parameterDataType,
+                    Name = outParameterSignalReference.Name,
+                });
+
+                stateMachine.States[1].Body.Add(new Assignment
+                {
+                    AssignTo = outParameterSignalReference,
+                    Expression = parameterLocalVariableReference,
+                });
+            }
 
             // Processing method body.
             var bodyContext = new SubTransformerContext
@@ -187,8 +178,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 {
                     Method = method,
                     StateMachine = stateMachine,
-                    CurrentBlock = new CurrentBlock(stateMachine, openingBlock, stateMachine.AddState(openingBlock))
-                }
+                    CurrentBlock = new CurrentBlock(stateMachine, openingBlock, stateMachine.AddState(openingBlock)),
+                },
             };
 
             var labels = method.Body.FindAllChildrenOfType<LabelStatement>();
@@ -212,16 +203,10 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 bodyContext.Scope.CurrentBlock.Add(stateMachine.ChangeToFinalState());
             }
 
-
             // We need to return the declarations and body here too so their computation can be parallelized too.
             // Otherwise we'd add them directly to context.Module.Architecture but that would need that collection to
             // be thread-safe.
-            var result = new ArchitectureComponentResult
-            {
-                ArchitectureComponent = stateMachine,
-                Declarations = stateMachine.BuildDeclarations(),
-                Body = stateMachine.BuildBody()
-            };
+            var result = new ArchitectureComponentResult(stateMachine);
 
             // Warnings would be repeated for each instance of the state machine otherwise.
             if (stateMachineIndex == 0)

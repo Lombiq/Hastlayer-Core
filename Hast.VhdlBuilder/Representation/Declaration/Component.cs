@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Hast.VhdlBuilder.Extensions;
 
@@ -8,8 +8,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration
     public class Component : INamedElement
     {
         public string Name { get; set; }
-        public List<Port> Ports { get; set; } = new List<Port>();
-
+        public IList<Port> Ports { get; } = new List<Port>();
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
@@ -23,7 +22,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
                             .IndentLinesIfShouldFormat(vhdlGenerationOptions) +
                     Terminated.Terminate(")", vhdlGenerationOptions) +
 
-                "end " + name, vhdlGenerationOptions);
+                "end " + name,
+                vhdlGenerationOptions);
         }
     }
 }

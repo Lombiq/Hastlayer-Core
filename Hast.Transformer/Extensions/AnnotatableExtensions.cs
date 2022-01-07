@@ -1,4 +1,4 @@
-﻿namespace ICSharpCode.Decompiler.CSharp.Syntax
+namespace ICSharpCode.Decompiler.CSharp.Syntax
 {
     public static class AnnotatableExtensions
     {
@@ -10,7 +10,8 @@
             }
         }
 
-        public static T WithAnnotation<T>(this T node, object annotation) where T : IAnnotatable
+        public static T WithAnnotation<T>(this T node, object annotation)
+            where T : IAnnotatable
         {
             node.AddAnnotation(annotation);
             return node;

@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
@@ -10,17 +10,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
     {
         private readonly Enum _statesEnum;
         private readonly Variable _stateVariable;
-        private readonly Signal _startedSignal;
-        private readonly Signal _finishedSignal;
 
-        private List<IMemberStateMachineState> _states;
-        public IReadOnlyList<IMemberStateMachineState> States
-        {
-            get { return _states; }
-        }
+        private readonly List<IMemberStateMachineState> _states;
+        public IReadOnlyList<IMemberStateMachineState> States => _states;
 
-
-        public MemberStateMachine(string name) : base(name)
+        public MemberStateMachine(string name)
+            : base(name)
         {
             _statesEnum = new Enum { Name = this.CreatePrefixedObjectName("_States") };
 
@@ -28,26 +23,25 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             {
                 DataType = _statesEnum,
                 Name = this.CreateStateVariableName(),
-                InitialValue = this.CreateStateName(0).ToVhdlIdValue()
+                InitialValue = this.CreateStateName(0).ToVhdlIdValue(),
             };
             LocalVariables.Add(_stateVariable);
 
-            _startedSignal = new Signal
+            var startedSignal = new Signal
             {
                 DataType = KnownDataTypes.Boolean,
                 Name = this.CreateStartedSignalName(),
-                InitialValue = Value.False
+                InitialValue = Value.False,
             };
-            ExternallyDrivenSignals.Add(_startedSignal);
+            ExternallyDrivenSignals.Add(startedSignal);
 
-            _finishedSignal = new Signal
+            var finishedSignal = new Signal
             {
                 DataType = KnownDataTypes.Boolean,
                 Name = this.CreateFinishedSignalName(),
-                InitialValue = Value.False
+                InitialValue = Value.False,
             };
-            InternallyDrivenSignals.Add(_finishedSignal);
-
+            InternallyDrivenSignals.Add(finishedSignal);
 
             var startStateBlock = new InlineBlock(
                 new LineComment("Start state"),
@@ -56,11 +50,11 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 {
                     Condition = new Binary
                     {
-                        Left = _startedSignal.Name.ToVhdlSignalReference(),
+                        Left = startedSignal.Name.ToVhdlSignalReference(),
                         Operator = BinaryOperator.Equality,
-                        Right = Value.True
+                        Right = Value.True,
                     },
-                    True = this.CreateStateChange(2)
+                    True = this.CreateStateChange(2),
                 });
 
             var finalStateBlock = new InlineBlock(
@@ -70,23 +64,22 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 {
                     Condition = new Binary
                     {
-                        Left = _startedSignal.Name.ToVhdlSignalReference(),
+                        Left = startedSignal.Name.ToVhdlSignalReference(),
                         Operator = BinaryOperator.Equality,
-                        Right = Value.True
+                        Right = Value.True,
                     },
-                    True = new Assignment { AssignTo = _finishedSignal, Expression = Value.True },
+                    True = new Assignment { AssignTo = finishedSignal, Expression = Value.True },
                     Else = new InlineBlock(
-                        new Assignment { AssignTo = _finishedSignal, Expression = Value.False },
-                        this.ChangeToStartState())
+                        new Assignment { AssignTo = finishedSignal, Expression = Value.False },
+                        this.ChangeToStartState()),
                 });
 
             _states = new List<IMemberStateMachineState>
             {
                 new MemberStateMachineState { Body = startStateBlock },
-                new MemberStateMachineState { Body = finalStateBlock }
+                new MemberStateMachineState { Body = finalStateBlock },
             };
         }
-
 
         public int AddState(IBlockElement state)
         {
@@ -94,14 +87,12 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
             return _states.Count - 1;
         }
 
-        public void RecordMultiCycleOperation(IDataObject operationResultReference, int requiredClockCyclesCeiling)
-        {
+        public void RecordMultiCycleOperation(IDataObject operationResultReference, int requiredClockCyclesCeiling) =>
             _multiCycleOperations.Add(new MultiCycleOperation
             {
                 OperationResultReference = operationResultReference,
-                RequiredClockCyclesCeiling = requiredClockCyclesCeiling
+                RequiredClockCyclesCeiling = requiredClockCyclesCeiling,
             });
-        }
 
         public override IVhdlElement BuildDeclarations()
         {
@@ -140,7 +131,6 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents
                 process,
                 new LineComment(Name + " state machine end"));
         }
-
 
         public class MemberStateMachineState : IMemberStateMachineState
         {

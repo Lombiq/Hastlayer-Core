@@ -10,14 +10,13 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
             {
                 return ((PrimitiveType)astType).Keyword == ((PrimitiveType)other).Keyword;
             }
-            else if (astType is ComposedType && other is ComposedType)
+
+            if (astType is ComposedType && other is ComposedType)
             {
                 return ((ComposedType)astType).BaseType.AstTypeEquals(((ComposedType)other).BaseType, lookupDeclaration);
             }
-            else
-            {
-                return lookupDeclaration(astType) == lookupDeclaration(other);
-            }
+
+            return lookupDeclaration(astType) == lookupDeclaration(other);
         }
 
         public static bool IsArray(this AstType type) =>

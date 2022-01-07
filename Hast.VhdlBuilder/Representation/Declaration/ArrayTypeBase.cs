@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
@@ -19,15 +19,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
 
                 return _defaultValue;
             }
-            set { _defaultValue = value; }
+            set => _defaultValue = value;
         }
 
-
-        public ArrayTypeBase()
-        {
-            TypeCategory = DataTypeCategory.Array;
-        }
-
+        protected ArrayTypeBase() => TypeCategory = DataTypeCategory.Array;
 
         public static Value CreateDefaultInitialization(DataType arrayInstantiationType, DataType elementType) =>
             ("others => " + elementType.DefaultValue.ToVhdl()).ToVhdlValue(arrayInstantiationType);

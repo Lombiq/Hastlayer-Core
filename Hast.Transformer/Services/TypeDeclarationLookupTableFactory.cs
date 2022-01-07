@@ -1,18 +1,11 @@
-﻿using Hast.Transformer.Models;
-using ICSharpCode.Decompiler.CSharp.Syntax;
-using ICSharpCode.Decompiler.TypeSystem;
-using Hast.Common.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using Hast.Transformer.Models;
+using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.TypeSystem;
 
 namespace Hast.Transformer.Services
 {
-    public interface ITypeDeclarationLookupTableFactory : IDependency
-    {
-        ITypeDeclarationLookupTable Create(SyntaxTree syntaxTree);
-    }
-
-
     public class TypeDeclarationLookupTableFactory : ITypeDeclarationLookupTableFactory
     {
         public ITypeDeclarationLookupTable Create(SyntaxTree syntaxTree)
@@ -27,17 +20,11 @@ namespace Hast.Transformer.Services
             return new TypeDeclarationLookupTable(typeDeclarations);
         }
 
-
         private class TypeDeclarationLookupTable : ITypeDeclarationLookupTable
         {
             private readonly Dictionary<string, TypeDeclaration> _typeDeclarations;
 
-
-            public TypeDeclarationLookupTable(Dictionary<string, TypeDeclaration> typeDeclarations)
-            {
-                _typeDeclarations = typeDeclarations;
-            }
-
+            public TypeDeclarationLookupTable(Dictionary<string, TypeDeclaration> typeDeclarations) => _typeDeclarations = typeDeclarations;
 
             public TypeDeclaration Lookup(string fullName)
             {

@@ -1,6 +1,6 @@
-﻿
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation
@@ -12,28 +12,28 @@ namespace Hast.VhdlBuilder.Representation
     public class Raw : IVhdlElement
     {
         public string Source { get; set; }
-        public List<IVhdlElement> Parameters { get; set; } = new List<IVhdlElement>();
-
+        public IList<IVhdlElement> Parameters { get; } = new List<IVhdlElement>();
 
         public Raw()
         {
         }
 
         /// <summary>
-        /// The raw VHDL source code to add to the syntax tree. Can contain lazily evaluated parameters with the 
-        /// <c>string.Format()</c> syntax.
+        /// Initializes a new instance of the <see cref="Raw"/> class. The raw VHDL source code to add to the syntax
+        /// tree. Can contain lazily evaluated parameters with the <c>string.Format()</c> syntax.
         /// </summary>
-        /// <param name="source"></param>
         public Raw(string source, params IVhdlElement[] parameters)
         {
             Source = source;
             Parameters = parameters.ToList();
         }
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-            Parameters == null || !Parameters.Any() ? 
-                Source : 
-                string.Format(Source, Parameters.Select(element => element.ToVhdl(vhdlGenerationOptions)).ToArray());
+            Parameters == null || !Parameters.Any()
+                ? Source
+                : string.Format(
+                    CultureInfo.InvariantCulture,
+                    Source,
+                    Parameters.Select(element => (object)element.ToVhdl(vhdlGenerationOptions)).ToArray());
     }
 }

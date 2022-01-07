@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -13,25 +13,22 @@ namespace Hast.Transformer.Vhdl.SubTransformers
         private readonly IRecordComposer _recordComposer;
         private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
 
-
         public PocoTransformer(IRecordComposer recordComposer, IDisplayClassFieldTransformer displayClassFieldTransformer)
         {
             _recordComposer = recordComposer;
             _displayClassFieldTransformer = displayClassFieldTransformer;
         }
 
+        public bool IsSupported(AstNode node) =>
+            _recordComposer.IsSupported(node) ||
+            (node is FieldDeclaration declaration && !_displayClassFieldTransformer.IsDisplayClassField(declaration));
 
-        public bool IsSupportedMember(AstNode node) =>
-            _recordComposer.IsSupportedRecordMember(node) ||
-            (node is FieldDeclaration && !_displayClassFieldTransformer.IsDisplayClassField((FieldDeclaration)node));
-
-        public Task<IMemberTransformerResult> Transform(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
-        {
-            return Task.Run<IMemberTransformerResult>(() =>
+        public Task<IMemberTransformerResult> TransformAsync(TypeDeclaration typeDeclaration, IVhdlTransformationContext context) =>
+            Task.Run<IMemberTransformerResult>(() =>
             {
                 var result = new MemberTransformerResult
                 {
-                    Member = typeDeclaration
+                    Member = typeDeclaration,
                 };
 
                 var record = _recordComposer.CreateRecordFromType(typeDeclaration, context);
@@ -43,7 +40,7 @@ namespace Hast.Transformer.Vhdl.SubTransformers
 
                     foreach (var field in record.Fields)
                     {
-                        if (field.DataType is ArrayTypeBase || field.DataType is Record)
+                        if (field.DataType is ArrayTypeBase or Record)
                         {
                             component.DependentTypesTable.AddDependency(record, field.DataType.Name);
                             hasDependency = true;
@@ -54,19 +51,11 @@ namespace Hast.Transformer.Vhdl.SubTransformers
                 }
 
                 result.ArchitectureComponentResults = new List<IArchitectureComponentResult>
-                    {
-                        {
-                            new ArchitectureComponentResult
-                            {
-                                ArchitectureComponent = component,
-                                Declarations = component.BuildDeclarations(),
-                                Body = component.BuildBody()
-                            }
-                        }
-                    };
+                {
+                    new ArchitectureComponentResult(component),
+                };
 
                 return result;
             });
-        }
     }
 }

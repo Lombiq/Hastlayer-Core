@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+using System;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration
 {
@@ -8,12 +9,13 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         public int RangeMin { get; set; }
         public int RangeMax { get; set; }
 
-
-        public RangedDataType(DataType baseType) : base(baseType)
+        public RangedDataType(DataType baseType)
+            : base(baseType)
         {
         }
 
-        public RangedDataType(RangedDataType previous) : base(previous)
+        public RangedDataType(RangedDataType previous)
+            : base(previous)
         {
             RangeMin = previous.RangeMin;
             RangeMax = previous.RangeMax;
@@ -23,11 +25,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration
         {
         }
 
-
         public override DataType ToReference() => this;
 
         public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-            Name + " range " + RangeMin + " to " + RangeMax;
+            FormattableString.Invariant($"{Name} range {RangeMin} to {RangeMax}");
 
         public override bool Equals(object obj)
         {
@@ -36,6 +37,8 @@ namespace Hast.VhdlBuilder.Representation.Declaration
             return base.Equals(obj) && RangeMin == otherType.RangeMin && RangeMin == otherType.RangeMax;
         }
 
-        public override int GetHashCode() => (Name + TypeCategory.ToString() + RangeMin + RangeMax).GetHashCode();
+        public override int GetHashCode() =>
+            FormattableString.Invariant($"{Name}{TypeCategory}{RangeMin}{RangeMax}")
+                .GetHashCode(StringComparison.InvariantCulture);
     }
 }

@@ -1,16 +1,23 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
+using Hast.Common.Interfaces;
 using Hast.Transformer.Vhdl.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Hast.Common.Interfaces;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {
     /// <summary>
-    /// Transformer for processing fields of compiler-generated DisplayClasses.
+    /// Transformer for processing fields in compiler-generated DisplayClasses.
     /// </summary>
     public interface IDisplayClassFieldTransformer : IDependency
     {
+        /// <summary>
+        /// Determines if the <paramref name="field"/> belongs to a DisplayClasses.
+        /// </summary>
         bool IsDisplayClassField(FieldDeclaration field);
-        Task<IMemberTransformerResult> Transform(FieldDeclaration field, IVhdlTransformationContext context);
+
+        /// <summary>
+        /// Transforms the field declaration into relevant VHDL code.
+        /// </summary>
+        Task<IMemberTransformerResult> TransformAsync(FieldDeclaration field, IVhdlTransformationContext context);
     }
 }

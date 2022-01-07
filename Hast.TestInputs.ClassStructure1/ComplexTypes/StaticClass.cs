@@ -1,4 +1,4 @@
-﻿namespace Hast.TestInputs.ClassStructure1.ComplexTypes
+namespace Hast.TestInputs.ClassStructure1.ComplexTypes
 {
     /// <summary>
     /// Demonstrates a static class in a separate assembly that should be usable from transformed methods.

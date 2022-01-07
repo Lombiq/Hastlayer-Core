@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -7,12 +7,12 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
 {
     public abstract class IntegrationTestFixtureBase : IDisposable
     {
-        private bool _disposed = false;
-        protected HastlayerConfiguration _hostConfiguration = new HastlayerConfiguration();
-
         private readonly Lazy<Hastlayer> _host;
-        protected Hastlayer Host => _host.Value;
 
+        private bool _disposed;
+        protected HastlayerConfiguration _hostConfiguration = new();
+
+        protected Hastlayer Host => _host.Value;
 
         protected IntegrationTestFixtureBase()
         {
@@ -20,10 +20,9 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
             _host = new Lazy<Hastlayer>(() => (Hastlayer)Hastlayer.Create(_hostConfiguration));
         }
 
-
         public void Dispose()
         {
-            Dispose(true);
+            Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
 
@@ -35,11 +34,6 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices
             if (disposing) Host.Dispose();
 
             _disposed = true;
-        }
-
-        ~IntegrationTestFixtureBase()
-        {
-            Dispose(false);
         }
     }
 }

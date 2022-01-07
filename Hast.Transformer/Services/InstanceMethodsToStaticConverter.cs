@@ -1,31 +1,57 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Layer;
+using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class InstanceMethodsToStaticConverter : IInstanceMethodsToStaticConverter
+    /// <summary>
+    /// Converts instance-level class methods to static methods with an explicit object reference passed in. This is
+    /// needed so instance methods are easier to transform.
+    /// </summary>
+    /// <remarks>
+    /// <para>The conversion is as following:
+    ///
+    /// Original method for example:
+    /// <c>
+    /// public uint IncreaseNumber(uint increaseBy)
+    /// {
+    ///     return (this.Number += increaseBy);
+    /// }
+    /// </c>
+    ///
+    /// Will be converted into:
+    ///
+    /// <c>
+    /// public static uint IncreaseNumber(MyClass this, uint increaseBy)
+    /// {
+    ///     return (this.Number += increaseBy);
+    /// }
+    /// </c>
+    ///
+    /// Consumer code will also be altered accordingly.</para>
+    /// </remarks>
+    public class InstanceMethodsToStaticConverter : IConverter
     {
-        public void ConvertInstanceMethodsToStatic(SyntaxTree syntaxTree)
-        {
-            syntaxTree.AcceptVisitor(new InstanceMethodsToStaticConvertingVisitor(syntaxTree));
-        }
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(CustomPropertiesToMethodsConverter) };
 
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable) =>
+            syntaxTree.AcceptVisitor(new InstanceMethodsToStaticConvertingVisitor(syntaxTree));
 
         private class InstanceMethodsToStaticConvertingVisitor : DepthFirstAstVisitor
         {
             private readonly SyntaxTree _syntaxTree;
 
-
-            public InstanceMethodsToStaticConvertingVisitor(SyntaxTree syntaxTree)
-            {
-                _syntaxTree = syntaxTree;
-            }
-
+            public InstanceMethodsToStaticConvertingVisitor(SyntaxTree syntaxTree) => _syntaxTree = syntaxTree;
 
             public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
             {
@@ -73,7 +99,6 @@ namespace Hast.Transformer.Services
                     methodDeclaration.GetFullName()));
             }
 
-
             private class ThisReferenceChangingVisitor : DepthFirstAstVisitor
             {
                 public override void VisitThisReferenceExpression(ThisReferenceExpression thisReferenceExpression)
@@ -93,7 +118,6 @@ namespace Hast.Transformer.Services
                 private readonly string _methodParentFullName;
                 private readonly string _methodFullName;
 
-
                 public MethodCallChangingVisitor(AstType parentAstType, string methodParentFullName, string methodFullName)
                 {
                     _parentAstType = parentAstType;
@@ -101,20 +125,17 @@ namespace Hast.Transformer.Services
                     _methodFullName = methodFullName;
                 }
 
-
                 public override void VisitInvocationExpression(InvocationExpression invocationExpression)
                 {
                     base.VisitInvocationExpression(invocationExpression);
 
-                    var targetMemberReference = invocationExpression.Target as MemberReferenceExpression;
-
-                    if (targetMemberReference == null) return;
+                    if (invocationExpression.Target is not MemberReferenceExpression targetMemberReference) return;
 
                     var targetType = targetMemberReference.Target.GetActualType();
                     var isAffectedMethodCall =
                         (targetMemberReference.Target is ThisReferenceExpression ||
-                            targetType != null &&
-                            targetType.GetFullName() == _methodParentFullName)
+                            (targetType != null &&
+                            targetType.GetFullName() == _methodParentFullName))
                         &&
                         targetMemberReference.GetMemberFullName() == _methodFullName;
 

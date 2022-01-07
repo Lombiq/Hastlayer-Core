@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,26 +10,23 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
     {
         private readonly ConstantValuesSubstitutingAstProcessor _constantValuesSubstitutingAstProcessor;
 
-
-        public ObjectHoldersToSubstitutedConstructorsMappingVisitor(ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor)
-        {
+        public ObjectHoldersToSubstitutedConstructorsMappingVisitor(
+            ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor) =>
             _constantValuesSubstitutingAstProcessor = constantValuesSubstitutingAstProcessor;
-        }
-
 
         public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
         {
             base.VisitObjectCreateExpression(objectCreateExpression);
 
-            // Substituting everything in the matching constructor (in its copy) and mapping that the object creation. 
-            // So if the ctor sets some read-only members in a static way then the resulting object's members can get 
-            // those substituted, without substituting them globally for all instances. This is important for 
+            // Substituting everything in the matching constructor (in its copy) and mapping that the object creation.
+            // So if the ctor sets some read-only members in a static way then the resulting object's members can get
+            // those substituted, without substituting them globally for all instances. This is important for
             // bootstrapping substitution if there is a circular dependency between members and constructors (e.g.
             // a field's value set in the ctor depends on a ctor argument, which in turn depends on the same field of
             // another instance).
 
-            if (objectCreateExpression.Parent.Is(assignment =>
-                assignment.Left.GetActualType()?.GetFullName() == objectCreateExpression.Type.GetFullName(),
+            if (objectCreateExpression.Parent.Is(
+                assignment => assignment.Left.GetActualType()?.GetFullName() == objectCreateExpression.Type.GetFullName(),
                 out AssignmentExpression parentAssignment))
             {
                 var constructorDeclaration = objectCreateExpression
@@ -58,12 +55,12 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution
                     new Dictionary<string, ConstructorReference>(_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings),
                     _constantValuesSubstitutingAstProcessor.AstExpressionEvaluator,
                     _constantValuesSubstitutingAstProcessor.KnownTypeLookupTable)
-                .SubstituteConstantValuesInSubTree(constructorDeclarationClone, true);
+                .SubstituteConstantValuesInSubTree(constructorDeclarationClone, reUseOriginalConstantValuesTable: true);
 
                 var constructorReference = new ConstructorReference
                 {
                     Constructor = constructorDeclarationClone,
-                    OriginalAssignmentTarget = parentAssignment.Left
+                    OriginalAssignmentTarget = parentAssignment.Left,
                 };
 
                 _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parentAssignment.Left.GetFullName()] =

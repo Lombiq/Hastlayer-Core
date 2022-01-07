@@ -12,7 +12,6 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
         public const string ReadsDone = "ReadsDone";
         public const string WritesDone = "WritesDone";
 
-
         public static IEnumerable<string> GetNames()
         {
             yield return DataIn;

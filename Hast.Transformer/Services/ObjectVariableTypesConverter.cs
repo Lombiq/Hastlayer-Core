@@ -1,19 +1,56 @@
-﻿using Hast.Transformer.Helpers;
+﻿using Hast.Layer;
+using Hast.Transformer.Helpers;
+using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hast.Transformer.Services
 {
-    public class ObjectVariableTypesConverter : IObjectVariableTypesConverter
+    /// <summary>
+    /// Converts the type of variables of type <c>object</c> to the actual type they'll contain if this can be
+    /// determined.
+    /// </summary>
+    /// <example>
+    /// <para>Currently the following kind of constructs are supported:</para>
+    ///
+    /// <code>
+    /// // The numberObject variable will be converted to uint since apparently it is one.
+    /// internal bool &lt;ParallelizedArePrimeNumbers&gt;b__9_0 (object numberObject)
+    /// {
+    ///     uint num;
+    ///     num = (uint)numberObject;
+    ///     // ...
+    /// }
+    /// </code>
+    ///
+    /// <para>
+    /// Furthermore, casts to the object type corresponding to these variables when in Task starts are also removed,
+    /// like the one for num4 here:
+    /// </para>
+    /// <code>
+    /// Task.Factory.StartNew ((Func&lt;object, bool&gt;)this.&lt;ParallelizedArePrimeNumbers&gt;b__9_0, (object)num4);
+    /// </code>
+    /// </example>
+    /// <remarks>
+    /// <para>This is necessary because unlike an object-typed variable in .NET that due to dynamic memory allocations can
+    /// hold any data in hardware the variable size should be statically determined (like fixed 32b). So compatibility
+    /// with .NET object variables is not complete, thus attempting to close the loop here.</para>
+    /// </remarks>
+    public class ObjectVariableTypesConverter : IConverter
     {
-        public void ConvertObjectVariableTypes(SyntaxTree syntaxTree)
+        public IEnumerable<string> Dependencies { get; } = new[] { nameof(GeneratedTaskArraysInliner) };
+
+        public void Convert(
+            SyntaxTree syntaxTree,
+            IHardwareGenerationConfiguration configuration,
+            IKnownTypeLookupTable knownTypeLookupTable)
         {
             syntaxTree.AcceptVisitor(new MethodObjectParametersTypeConvertingVisitor());
             syntaxTree.AcceptVisitor(new UnnecessaryObjectCastsRemovingVisitor());
         }
-
 
         private class MethodObjectParametersTypeConvertingVisitor : DepthFirstAstVisitor
         {
@@ -33,8 +70,8 @@ namespace Hast.Transformer.Services
                     // added to the lambda's calling method:
                     // Task.Factory.StartNew ((Func<object, bool>)this.<ParallelizedArePrimeNumbers>b__9_0, num4)
                     // This will remain, despite the Func's type now correctly being e.g. Func<uint, bool>.
-                    // Note that the method's full name will contain the original object parameter since the 
-                    // MemberResolveResult will still the have original parameters. This will be an aesthetic issue 
+                    // Note that the method's full name will contain the original object parameter since the
+                    // MemberResolveResult will still the have original parameters. This will be an aesthetic issue
                     // only though: Nothing else depends on the parameters being correct here. If we'd change these
                     // then the whole MemberResolveResult would need to be recreated (since parameter types, as well as
                     // the list of parameters is read-only), not just here but in all the references to this method too.
@@ -60,19 +97,13 @@ namespace Hast.Transformer.Services
                 }
             }
 
-
             private class ParameterCastExpressionFindingVisitor : DepthFirstAstVisitor
             {
                 private readonly string _parameterName;
 
                 public CastExpression Expression { get; private set; }
 
-
-                public ParameterCastExpressionFindingVisitor(string parameterName)
-                {
-                    _parameterName = parameterName;
-                }
-
+                public ParameterCastExpressionFindingVisitor(string parameterName) => _parameterName = parameterName;
 
                 public override void VisitCastExpression(CastExpression castExpression)
                 {
@@ -82,14 +113,7 @@ namespace Hast.Transformer.Services
                     {
                         // If there are multiple casts for the given parameter then we'll deal with it as an object unless
                         // all casts are for the same type.
-                        if (Expression == null || Expression.Type == castExpression.Type)
-                        {
-                            Expression = castExpression;
-                        }
-                        else
-                        {
-                            Expression = null;
-                        }
+                        Expression = Expression == null || Expression.Type == castExpression.Type ? castExpression : null;
                     }
                 }
             }
@@ -99,13 +123,11 @@ namespace Hast.Transformer.Services
                 private readonly string _parameterName;
                 private readonly ILVariableResolveResult _resolveResult;
 
-
                 public ParameterReferencesTypeChangingVisitor(string parameterName, ILVariableResolveResult resolveResult)
                 {
                     _parameterName = parameterName;
                     _resolveResult = resolveResult;
                 }
-
 
                 public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
                 {

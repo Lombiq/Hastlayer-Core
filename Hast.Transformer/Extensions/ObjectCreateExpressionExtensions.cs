@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
@@ -25,7 +25,7 @@ namespace ICSharpCode.Decompiler.CSharp.Syntax
 
             if (constructorType == null) ExceptionHelper.ThrowDeclarationNotFoundException(createdTypeName, objectCreateExpression);
 
-            return constructorType
+            return constructorType!
                 .Members
                 .SingleOrDefault(member => member.GetFullName() == constructorName);
         }

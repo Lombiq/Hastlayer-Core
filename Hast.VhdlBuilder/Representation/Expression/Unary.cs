@@ -8,7 +8,6 @@ namespace Hast.VhdlBuilder.Representation.Expression
         public IVhdlElement Expression { get; set; }
         public UnaryOperator Operator { get; set; }
 
-
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
             Operator.ToVhdl(vhdlGenerationOptions) + Expression.ToVhdl(vhdlGenerationOptions);
     }
