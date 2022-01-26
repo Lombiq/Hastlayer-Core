@@ -15,6 +15,7 @@
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
+    <ProjectReference Include="..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj" />
     <ProjectReference Include="..\Hast.Xilinx\Hast.Xilinx.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -22,7 +23,7 @@
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="TimingReports\*.csv" />
-    <EmbeddedResource Include="TimingReports\*.csv" />
+    <None Remove="TimingReports\*.tsv" />
+    <EmbeddedResource Include="TimingReports\*.tsv" />
   </ItemGroup>
 </Project>

@@ -65,6 +65,8 @@ namespace Hast.Transformer.Services
             // Adding the device name to ensure different a cached program for a different hardware doesn't get used.
             transformationIdComponents.Add(configuration.DeviceName);
 
+            if (!string.IsNullOrWhiteSpace(configuration.Label)) transformationIdComponents.Add(configuration.Label);
+
             foreach (var transformationIdComponent in transformationIdComponents)
             {
                 _logger.LogTrace(

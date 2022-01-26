@@ -1,6 +1,6 @@
 using Hast.Common.Services;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Abstractions;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Helpers;
@@ -12,46 +12,52 @@ using Hast.Transformer.Vhdl.Verifiers;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
-using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Attribute = Hast.VhdlBuilder.Representation.Declaration.Attribute;
 using Module = Hast.VhdlBuilder.Representation.Declaration.Module;
 
 namespace Hast.Transformer.Vhdl.Services
 {
     public class TransformedVhdlManifestBuilder : ITransformedVhdlManifestBuilder
     {
-        private readonly IEnumerable<IVerifyer> _verifyers;
+        private readonly IEnumerable<IVerifyer> _verifiers;
         private readonly IClock _clock;
         private readonly IInvocationProxyBuilder _invocationProxyBuilder;
         private readonly Lazy<ISimpleMemoryComponentBuilder> _simpleMemoryComponentBuilderLazy;
         private readonly IRemainderOperatorExpressionsExpander _remainderOperatorExpressionsExpander;
         private readonly IMemberTransformer _memberTransformer;
         private readonly ITypesCreator _typesCreator;
+        private readonly IEnumerable<IXdcFileBuilder> _xdcFileBuilders;
 
+        [SuppressMessage(
+            "Major Code Smell",
+            "S107:Methods should not have too many parameters",
+            Justification = "All of these are necessary for VHDL manifest building.")]
         public TransformedVhdlManifestBuilder(
-            IEnumerable<IVerifyer> verifyers,
+            IEnumerable<IVerifyer> verifiers,
             IClock clock,
             IInvocationProxyBuilder invocationProxyBuilder,
             Lazy<ISimpleMemoryComponentBuilder> simpleMemoryComponentBuilderLazy,
             IRemainderOperatorExpressionsExpander remainderOperatorExpressionsExpander,
             IMemberTransformer memberTransformer,
-            ITypesCreator typesCreator)
+            ITypesCreator typesCreator,
+            IEnumerable<IXdcFileBuilder> xdcFileBuilders)
         {
-            _verifyers = verifyers;
+            _verifiers = verifiers;
             _clock = clock;
             _invocationProxyBuilder = invocationProxyBuilder;
             _simpleMemoryComponentBuilderLazy = simpleMemoryComponentBuilderLazy;
             _remainderOperatorExpressionsExpander = remainderOperatorExpressionsExpander;
             _memberTransformer = memberTransformer;
             _typesCreator = typesCreator;
+            _xdcFileBuilders = xdcFileBuilders;
         }
 
         public async Task<TransformedVhdlManifest> BuildManifestAsync(ITransformationContext transformationContext)
@@ -59,7 +65,7 @@ namespace Hast.Transformer.Vhdl.Services
             var syntaxTree = transformationContext.SyntaxTree;
 
             // Running verifications.
-            foreach (var verifyer in _verifyers) verifyer.Verify(syntaxTree, transformationContext);
+            foreach (var verifier in _verifiers) verifier.Verify(syntaxTree, transformationContext);
 
             // Running AST changes.
             _remainderOperatorExpressionsExpander.ExpandRemainderOperatorExpressions(syntaxTree);
@@ -122,15 +128,14 @@ namespace Hast.Transformer.Vhdl.Services
                 }
             }
 
-            XdcFile xdcFile = null;
-            if (transformationContext.DeviceDriver.DeviceManifest.ToolChainName == CommonToolChainNames.QuartusPrime)
-            {
-                BuildManifestQuartusPrime(architectureComponentResults, hastIpArchitecture);
-            }
-            else if (transformationContext.DeviceDriver.DeviceManifest.UsesVivadoInToolChain())
-            {
-                xdcFile = BuildManifestVivado(architectureComponentResults, hastIpArchitecture);
-            }
+            var deviceManifest = transformationContext.DeviceDriver.DeviceManifest;
+            var xdcFileBuilders = _xdcFileBuilders
+                .Where(builder => builder.IsTargetType(deviceManifest))
+                .ToList();
+            xdcFileBuilders.Sort();
+            var xdcFile = xdcFileBuilders.LastOrDefault() is { } deepestXdcProvider
+                ? await deepestXdcProvider.BuildManifestAsync(architectureComponentResults, hastIpArchitecture)
+                : null;
 
             // Processing inter-dependent types. In VHDL if a type depends another type (e.g. an array stores elements
             // of a record type) than the type depending on the other one should come after the other one in the code
@@ -232,85 +237,6 @@ namespace Hast.Transformer.Vhdl.Services
                 Warnings = warnings,
                 XdcFile = xdcFile,
             };
-        }
-
-        private static XdcFile BuildManifestVivado(
-            IEnumerable<IArchitectureComponentResult> architectureComponentResults,
-            Architecture hastIpArchitecture)
-        {
-            // Adding multi-cycle path constraints for Vivado.
-
-            var xdcFile = new XdcFile();
-
-            var anyMultiCycleOperations = false;
-
-            foreach (var architectureComponentResult in architectureComponentResults)
-            {
-                foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
-                {
-                    xdcFile.AddPath(operation.OperationResultReference, operation.RequiredClockCyclesCeiling, isHierarchical: true);
-                    anyMultiCycleOperations = true;
-                }
-            }
-
-            if (anyMultiCycleOperations)
-            {
-                hastIpArchitecture.Declarations.Add(new LogicalBlock(
-                    new LineComment(
-                        "When put on variables and signals this attribute instructs Vivado not to merge them, thus " +
-                        "allowing us to define multi-cycle paths properly."),
-                    KnownDataTypes.DontTouchAttribute));
-            }
-
-            return xdcFile;
-        }
-
-        private static void BuildManifestQuartusPrime(
-            IEnumerable<IArchitectureComponentResult> architectureComponentResults,
-            Architecture hastIpArchitecture)
-        {
-            // Adding multi-cycle path constraints for Quartus.
-
-            var anyMultiCycleOperations = false;
-            var sdcExpression = new MultiCycleSdcStatementsAttributeExpression();
-
-            foreach (var architectureComponentResult in architectureComponentResults)
-            {
-                foreach (var operation in architectureComponentResult.ArchitectureComponent.MultiCycleOperations)
-                {
-                    // If the path is through a global signal (i.e. that doesn't have a parent process) then the parent
-                    // should be empty.
-                    sdcExpression.AddPath(
-                        operation.OperationResultReference.DataObjectKind == DataObjectKind.Variable ?
-                            ProcessUtility.FindProcesses(new[] { architectureComponentResult.Body }).Single().Name :
-                            string.Empty,
-                        operation.OperationResultReference,
-                        operation.RequiredClockCyclesCeiling);
-
-                    anyMultiCycleOperations = true;
-                }
-            }
-
-            if (anyMultiCycleOperations)
-            {
-                var alteraAttribute = new Attribute
-                {
-                    Name = "altera_attribute",
-                    ValueType = KnownDataTypes.UnrangedString,
-                };
-
-                hastIpArchitecture.Declarations.Add(new LogicalBlock(
-                    new LineComment("Adding multi-cycle path constraints for Quartus Prime. See: " +
-                    "https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/solutions/rd05162013_635.html"),
-                    alteraAttribute,
-                    new AttributeSpecification
-                    {
-                        Attribute = alteraAttribute,
-                        Of = hastIpArchitecture.ToReference(),
-                        ItemClass = "architecture",
-                        Expression = sdcExpression,
-                    }));
-            }
         }
 
         private static void ReadAndAddEmbedLibrary(

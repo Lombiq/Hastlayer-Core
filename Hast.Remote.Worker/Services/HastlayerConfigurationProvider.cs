@@ -1,4 +1,5 @@
 using Hast.Catapult;
+using Hast.Common.Enums;
 using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
