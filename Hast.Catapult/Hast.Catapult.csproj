@@ -23,7 +23,7 @@
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="TimingReports\*.csv" />
-    <EmbeddedResource Include="TimingReports\*.csv" />
+    <None Remove="TimingReports\*.tsv" />
+    <EmbeddedResource Include="TimingReports\*.tsv" />
   </ItemGroup>
 </Project>
