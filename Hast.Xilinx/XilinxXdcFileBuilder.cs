@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Xilinx
 {
-    public class XilinxXdcFileBuilder : XdcFileBuilder<XilinxDeviceManifest>
+    public class XilinxXdcFileBuilder : XdcFileBuilderBase<XilinxDeviceManifest>
     {
         public override Task<XdcFile> BuildManifestAsync(
             IEnumerable<IArchitectureComponentResult> architectureComponentResults,

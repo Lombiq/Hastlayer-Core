@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Catapult
 {
-    public class CatapultXdcFileBuilder : XdcFileBuilder<CatapultDeviceManifest>
+    public class CatapultXdcFileBuilder : XdcFileBuilderBase<CatapultDeviceManifest>
     {
         public override Task<XdcFile> BuildManifestAsync(
             IEnumerable<IArchitectureComponentResult> architectureComponentResults,

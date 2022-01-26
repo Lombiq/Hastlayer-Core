@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Transformer.Abstractions
 {
-    public abstract class XdcFileBuilder<T> : IXdcFileBuilder
+    public abstract class XdcFileBuilderBase<T> : IXdcFileBuilder
         where T : IDeviceManifest
     {
         public Type ManifestType => typeof(T);
@@ -24,24 +24,24 @@ namespace Hast.Transformer.Abstractions
             if (ManifestType.IsAssignableFrom(other.ManifestType)) return -1; // The other manifest is a derived type.
             if (other.ManifestType.IsAssignableFrom(ManifestType)) return 1; // The other manifest is an ancestor type.
 
-            // When they aren't matched, they should be at least sorted by name. Though this should not happen if it did
-            // That's not really a cause for panic.
+            // When they aren't matched, they should be at least sorted by name. Though this should not happen, if it
+            // did that's not really a cause for panic.
             return string.Compare(ManifestType.FullName, other.ManifestType.FullName, StringComparison.Ordinal);
         }
 
-        public override bool Equals(object obj) => obj is XdcFileBuilder<T>;
+        public override bool Equals(object obj) => obj is XdcFileBuilderBase<T>;
 
         public override int GetHashCode() => typeof(T).GetHashCode();
 
-        public static bool operator ==(XdcFileBuilder<T> left, IXdcFileBuilder right) =>
+        public static bool operator ==(XdcFileBuilderBase<T> left, IXdcFileBuilder right) =>
             left?.ManifestType == right?.ManifestType;
 
-        public static bool operator !=(XdcFileBuilder<T> left, IXdcFileBuilder right) =>
+        public static bool operator !=(XdcFileBuilderBase<T> left, IXdcFileBuilder right) =>
             left?.ManifestType != right?.ManifestType;
 
-        public static bool operator <(XdcFileBuilder<T> left, IXdcFileBuilder right) => left.CompareTo(right) < 0;
-        public static bool operator <=(XdcFileBuilder<T> left, IXdcFileBuilder right) => left.CompareTo(right) <= 0;
-        public static bool operator >(XdcFileBuilder<T> left, IXdcFileBuilder right) => left.CompareTo(right) > 0;
-        public static bool operator >=(XdcFileBuilder<T> left, IXdcFileBuilder right) => left.CompareTo(right) >= 0;
+        public static bool operator <(XdcFileBuilderBase<T> left, IXdcFileBuilder right) => left.CompareTo(right) < 0;
+        public static bool operator <=(XdcFileBuilderBase<T> left, IXdcFileBuilder right) => left.CompareTo(right) <= 0;
+        public static bool operator >(XdcFileBuilderBase<T> left, IXdcFileBuilder right) => left.CompareTo(right) > 0;
+        public static bool operator >=(XdcFileBuilderBase<T> left, IXdcFileBuilder right) => left.CompareTo(right) >= 0;
     }
 }
