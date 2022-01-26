@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Hast.Transformer.Abstractions
 {
     /// <summary>
-    /// Creates the device specific <see cref="XdcFile"/> for the <see cref="TransformedVhdlManifest"/>.
+    /// Creates the device-specific <see cref="XdcFile"/> for the <see cref="TransformedVhdlManifest"/>.
     /// </summary>
     public interface IXdcFileBuilder : IDependency, IComparable<IXdcFileBuilder>
     {
@@ -25,7 +25,7 @@ namespace Hast.Transformer.Abstractions
         bool IsTargetType(IDeviceManifest manifest);
 
         /// <summary>
-        /// Performs device specific steps to create the <see cref="XdcFile"/>.
+        /// Performs device-specific steps to create the <see cref="XdcFile"/>.
         /// </summary>
         Task<XdcFile> BuildManifestAsync(
             IEnumerable<IArchitectureComponentResult> architectureComponentResults,
