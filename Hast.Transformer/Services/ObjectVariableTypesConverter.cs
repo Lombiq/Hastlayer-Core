@@ -28,7 +28,7 @@ namespace Hast.Transformer.Services;
 /// the one for num4 here:
 /// </para>
 /// <code>
-///Task.Factory.StartNew ((Func&lt;object, bool&gt;)this.&lt;ParallelizedArePrimeNumbers&gt;b__9_0, (object)num4);
+/// Task.Factory.StartNew ((Func&lt;object, bool&gt;)this.&lt;ParallelizedArePrimeNumbers&gt;b__9_0, (object)num4);
 /// </code>
 /// </example>
 /// <remarks>

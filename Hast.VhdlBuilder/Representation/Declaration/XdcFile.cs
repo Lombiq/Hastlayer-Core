@@ -44,8 +44,8 @@ public class XdcFile : IVhdlElement
     /// <summary>
     /// <para>Represents a path constraint declarations like:</para>
     /// <code>
-    ///set_multicycle_path 8 -setup -to [get_cells -hierarchical
-    ///{*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]
+    /// set_multicycle_path 8 -setup -to [get_cells -hierarchical
+    /// {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]
     /// </code>
     /// </summary>
     private sealed class XdcPath : IVhdlElement
