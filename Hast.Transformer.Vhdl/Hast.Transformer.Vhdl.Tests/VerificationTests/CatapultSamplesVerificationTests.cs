@@ -50,7 +50,7 @@ public class CatapultSamplesVerificationTests : SamplesVerificationTestsBase
     public async Task Fix64SamplesMatchesApproved() =>
         (await CreateVhdlForFix64SamplesAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 
-    [Fact(Skip = "Disabled until we update to .NET 6 due to F# compiler changes.")]
+    [Fact]
     public async Task FSharpSamplesMatchesApproved() =>
         (await CreateVhdlForFSharpSamplesAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 }
