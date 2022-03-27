@@ -31,11 +31,14 @@ public class EventLogger : IEventLogger
         Logger.LogInformation("{0}: {1}", DisplayName, statusText);
         if (_eventLog == null) return;
 
+        // Platform compatibility is already validated by _eventLog not being null at this point.
+#pragma warning disable CA1416 // Validate platform compatibility
         if (!EventLog.Exists(_eventLog.Log))
         {
             EventLog.CreateEventSource(new EventSourceCreationData(_eventLog.Source, _eventLog.Log));
         }
 
         _eventLog.WriteEntry($"{DisplayName} {statusText}.");
+#pragma warning restore CA1416 // Validate platform compatibility
     }
 }
