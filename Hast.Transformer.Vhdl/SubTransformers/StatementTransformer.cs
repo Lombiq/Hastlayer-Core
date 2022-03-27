@@ -180,8 +180,13 @@ public class StatementTransformer : IStatementTransformer
             // It can happen that the type of the expression is not the same as the return type of the method. Thus a
             // cast may be necessary.
             var expressionType = returnStatement.Expression.GetActualType();
+
+            // This is a checked cast.
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
             var expressionVhdlType = (returnExpression as Value)?.DataType ??
                 (expressionType != null ? _typeConverter.ConvertType(expressionType, context.TransformationContext) : null);
+#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
+
             if (expressionVhdlType != null)
             {
                 returnExpression = _typeConversionTransformer
