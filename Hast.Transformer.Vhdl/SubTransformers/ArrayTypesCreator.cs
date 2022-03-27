@@ -18,8 +18,8 @@ public class ArrayTypesCreator : IArrayTypesCreator
         var arrayDeclarations = new Dictionary<string, ArrayType>();
 
         // This will also find such arrays in DisplayClasses, added for parallel code by the C# compiler:
-        /// [Nullable (new byte[] { 0, 2 })]
-        /// public Func<object, bool> <>9__0;
+        //// [Nullable (new byte[] { 0, 2 })]
+        //// public Func<object, bool> <>9__0;
         // While having such unnecessary array declarations in VHDL is not nice, it really doesn't matter enough to add
         // an error-prone heuristic to try to filter them out.
 
