@@ -17,7 +17,7 @@ public abstract class IntegrationTestFixtureBase : IDisposable
     protected IntegrationTestFixtureBase()
     {
         _hostConfiguration.Extensions = new List<Assembly>();
-        _host = new Lazy<Hastlayer>(() => (Hastlayer)Hastlayer.Create(_hostConfiguration));
+        _host = new Lazy<Hastlayer>(() => Hastlayer.Create(_hostConfiguration));
     }
 
     public void Dispose()

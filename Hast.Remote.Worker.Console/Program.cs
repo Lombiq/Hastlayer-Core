@@ -19,7 +19,7 @@ internal static class Program
         var configuration = TransformationWorkerConfiguration.Create();
 
         var hastlayerConfiguration = await new HastlayerConfigurationProvider().GetConfigurationAsync(configuration);
-        using var host = (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
+        using var host = Hastlayer.Create(hastlayerConfiguration);
 
 #if DEBUG
         var logger = host.GetLogger<Hastlayer>(); // It can't be Program becuase that's static.

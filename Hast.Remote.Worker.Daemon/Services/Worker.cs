@@ -132,7 +132,7 @@ public class Worker : BackgroundService
 
             var hastlayerConfiguration = await new HastlayerConfigurationProvider()
                 .GetConfigurationAsync(configuration, cancellationToken);
-            return (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
+            return Hastlayer.Create(hastlayerConfiguration);
         }
         catch (Exception exception)
         {
