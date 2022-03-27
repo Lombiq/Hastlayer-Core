@@ -70,7 +70,7 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
             }
         }
 
-        if (!(assignmentExpression.Right is PrimitiveExpression) &&
+        if (assignmentExpression.Right is not PrimitiveExpression &&
             !assignmentExpression.Right.Is<BinaryOperatorExpression>(binary =>
                 (binary.Left.GetFullName() == assignmentExpression.Left.GetFullName() &&
                     binary.Right is PrimitiveExpression) ||
@@ -260,7 +260,7 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
         var resolveResult = node.GetResolveResult();
         if (resolveResult?.IsCompileTimeConstant == true &&
             resolveResult.ConstantValue != null &&
-            !(node is PrimitiveExpression))
+            node is not PrimitiveExpression)
         {
             var type = node.GetActualType();
 
@@ -273,7 +273,7 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
 
         // Attributes can slip in here but we don't care about those. Also, due to eliminating branches nodes can be
         // removed on the fly.
-        if (!(node is Attribute) && !node.IsMarkedAsRemoved())
+        if (node is not Attribute && !node.IsMarkedAsRemoved())
         {
             base.VisitChildren(node);
         }

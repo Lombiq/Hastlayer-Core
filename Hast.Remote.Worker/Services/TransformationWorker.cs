@@ -337,7 +337,7 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
                 SerializedHardwareDescription = Encoding.UTF8.GetString(memoryStream.ToArray()),
             };
         }
-        catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
+        catch (Exception ex) when (!ex.IsFatal() && ex is not OperationCanceledException)
         {
             // We don't want to show the stack trace to the user, just exception message, so building one by iterating
             // all the nested exceptions.

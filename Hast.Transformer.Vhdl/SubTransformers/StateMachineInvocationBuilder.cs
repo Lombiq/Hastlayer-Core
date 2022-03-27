@@ -295,7 +295,7 @@ public class StateMachineInvocationBuilder : IStateMachineInvocationBuilder
         }
 
         // In this case the parameter is e.g. a primitive value, no need to assign to it.
-        if (flowDirection == ParameterFlowDirection.In && !(parameterReference is IDataObject))
+        if (flowDirection == ParameterFlowDirection.In && parameterReference is not IDataObject)
         {
             return null;
         }

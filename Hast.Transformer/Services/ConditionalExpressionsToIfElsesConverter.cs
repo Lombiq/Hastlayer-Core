@@ -38,8 +38,8 @@ public class ConditionalExpressionsToIfElsesConverter : IConverter
             // Simple "variable = condition ? value1 : value2" expressions are easily handled but ones not in this form
             // need some further work.
             if (conditionalExpression.Parent is not AssignmentExpression assignment ||
-                !(assignment.Left is IdentifierExpression) ||
-                !(assignment.Parent is ExpressionStatement))
+                assignment.Left is not IdentifierExpression ||
+                assignment.Parent is not ExpressionStatement)
             {
                 var variableName = "conditional" + Sha256Helper.ComputeHash(conditionalExpression.GetFullName());
 
