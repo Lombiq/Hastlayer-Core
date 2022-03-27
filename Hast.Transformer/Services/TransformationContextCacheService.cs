@@ -1,7 +1,7 @@
-using Hast.Common.Helpers;
 using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Transformer.Models;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
@@ -86,8 +86,8 @@ namespace Hast.Transformer.Services
             foreach (var path in assemblyPaths)
             {
                 using var stream = File.OpenRead(path);
-                using var sha = new SHA256Managed();
-                fileHashes.Append(BitConverter.ToString(sha.ComputeHash(stream)).Replace("-", string.Empty));
+                using var sha256 = SHA256.Create();
+                fileHashes.Append(BitConverter.ToString(sha256.ComputeHash(stream)).Replace("-", string.Empty));
             }
 
             var hashCode = transformationId.GetHashCode(StringComparison.InvariantCulture);

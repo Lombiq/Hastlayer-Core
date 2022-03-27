@@ -1,10 +1,10 @@
-using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 

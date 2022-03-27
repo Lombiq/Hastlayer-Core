@@ -1,6 +1,6 @@
-using Hast.Common.Helpers;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 
 namespace Hast.Transformer.Vhdl.SubTransformers
 {

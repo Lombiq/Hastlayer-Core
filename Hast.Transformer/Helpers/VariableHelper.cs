@@ -1,8 +1,8 @@
-﻿using Hast.Common.Helpers;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
 using ICSharpCode.Decompiler.TypeSystem;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System.Linq;
 
 namespace Hast.Transformer.Helpers
