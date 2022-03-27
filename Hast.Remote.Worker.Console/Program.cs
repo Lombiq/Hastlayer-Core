@@ -26,7 +26,7 @@ internal static class Program
         for (int i = 0; i < (int)LogLevel.None; i++)
         {
             var logLevel = (LogLevel)i;
-            logger.Log(logLevel, "{0} testing", logLevel.ToString());
+            logger.Log(logLevel, "{LogLevel} testing", logLevel.ToString());
         }
 #endif
 

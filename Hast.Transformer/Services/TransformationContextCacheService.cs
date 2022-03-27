@@ -70,7 +70,7 @@ public class TransformationContextCacheService : ITransformationContextCacheServ
         foreach (var transformationIdComponent in transformationIdComponents)
         {
             _logger.LogTrace(
-                "Transformation ID component: {0}",
+                "Transformation ID component: {Component}",
                 transformationIdComponent.StartsWithOrdinal("source code: ")
                     ? "[whole source code]"
                     : transformationIdComponent);

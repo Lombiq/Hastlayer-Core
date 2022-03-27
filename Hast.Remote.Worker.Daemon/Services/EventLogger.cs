@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static Hast.Remote.Worker.Daemon.Constants.ServiceProperties;
@@ -28,7 +28,7 @@ public class EventLogger : IEventLogger
 
     public void UpdateStatus(string statusText)
     {
-        Logger.LogInformation("{0}: {1}", DisplayName, statusText);
+        Logger.LogInformation("{DisplayName}: {StatusText}", DisplayName, statusText);
         if (_eventLog == null) return;
 
         // Platform compatibility is already validated by _eventLog not being null at this point.

@@ -38,7 +38,7 @@ public class Worker : BackgroundService
         }
         catch (Exception exception) when (exception is not OperationCanceledException)
         {
-            _logger.LogError(exception, "Failed to start {0}", Name);
+            _logger.LogError(exception, "Failed to start {ServiceName}", Name);
             await StopAsync(cancellationToken);
         }
     }
@@ -53,7 +53,7 @@ public class Worker : BackgroundService
         }
         catch (Exception exception) when (exception is not OperationCanceledException)
         {
-            _logger.LogError(exception, "Failed to stop {0}", Name);
+            _logger.LogError(exception, "Failed to stop {ServiceName}", Name);
         }
     }
 
@@ -112,7 +112,7 @@ public class Worker : BackgroundService
                 {
                     logger.LogCritical(
                         exception,
-                        "{0} crashed with unhandled exceptions {1} times and it won't be restarted again",
+                        "{ServiceDisplayName} crashed with unhandled exceptions {MaxTries} times and it won't be restarted again",
                         DisplayName,
                         MaxTries);
                 }

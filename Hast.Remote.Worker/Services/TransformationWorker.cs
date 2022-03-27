@@ -144,7 +144,7 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
         }
         catch (OperationCanceledException)
         {
-            _logger.LogInformation("Cancelling {0} tasks.", _transformationTasks.Count);
+            _logger.LogInformation("Cancelling {TaskCount} tasks.", _transformationTasks.Count);
             await Task.WhenAll(_transformationTasks.Values);
             Dispose();
         }
@@ -166,8 +166,8 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
             {
                 _logger.LogCritical(
                     ex,
-                    nameof(TransformationWorker) + " crashed with an unhandled exception and was restarted {0} " +
-                    "times and it won't be restarted again",
+                    nameof(TransformationWorker) + " crashed with an unhandled exception, was restarted " +
+                    "{RestartCount} times and won't be restarted again.",
                     _restartCount);
                 _telemetryClient.Flush();
             }
@@ -223,7 +223,7 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
         }
         catch (Exception ex) when (!ex.IsFatal())
         {
-            _logger.LogError(ex, "Processing the job blob {0} failed.", blob.Name);
+            _logger.LogError(ex, "Processing the job blob {BlobName} failed.", blob.Name);
         }
 
         telemetry.FinishTimeUtc = _clock.UtcNow;
