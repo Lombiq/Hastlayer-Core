@@ -294,7 +294,7 @@ public class ImmutableArraysToStandardArraysConverter : IConverter
             type?.GetFullName().StartsWithOrdinal("System.Collections.Immutable.ImmutableArray") == true;
 
         private static ArrayType CreateArrayType(IType elementType, ICompilationProvider compilationProvider = null) =>
-            new(compilationProvider?.Compilation ?? ((ICompilationProvider)elementType).Compilation, elementType, 1);
+            new(compilationProvider?.Compilation ?? ((ICompilationProvider)elementType).Compilation, elementType);
 
         private static AstType GetClonedElementTypeFromImmutableArrayAstType(AstType astType) =>
             ((SimpleType)astType).TypeArguments.Single().Clone();
