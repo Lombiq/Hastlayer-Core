@@ -281,7 +281,7 @@ public class ExpressionTransformer : IExpressionTransformer
 
         // If a constant value of type real doesn't contain a decimal separator then it will be detected as integer and
         // a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
-        if (vhdlType == KnownDataTypes.Real && !valueString.Contains("."))
+        if (vhdlType == KnownDataTypes.Real && !valueString.Contains('.'))
         {
             valueString += ".0";
         }

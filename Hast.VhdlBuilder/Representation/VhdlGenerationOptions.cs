@@ -91,7 +91,7 @@ public class VhdlGenerationOptions : IVhdlGenerationOptions
         }
 
         // Shortening parameter type names to just their type name.
-        if (shortName?.Contains("(") == true && shortName.Contains(")"))
+        if (shortName?.Contains('(') == true && shortName.Contains(')'))
         {
             var (before, _, temporary) = shortName.Partition("(");
             var (arguments, _, after) = temporary.Partition(")");
