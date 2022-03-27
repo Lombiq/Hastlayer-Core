@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq.Expressions;
 using Hast.VhdlBuilder.Representation;
+using System;
+using System.Linq.Expressions;
 
 namespace Hast.VhdlBuilder.Testing;
 

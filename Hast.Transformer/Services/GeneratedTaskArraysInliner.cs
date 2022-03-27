@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
@@ -12,10 +12,9 @@ namespace Hast.Transformer.Services;
 /// </summary>
 /// <example>
 /// <para>
-/// If <see cref="System.Threading.Tasks.Task"/> objects are saved to an array sometimes the compiler generates
-/// another array variable without any apparent use. This makes transforming needlessly more complicated. E.g.
+/// If <see cref="System.Threading.Tasks.Task"/> objects are saved to an array sometimes the compiler generates another
+/// array variable without any apparent use. This makes transforming needlessly more complicated. E.g.
 /// </para>
-///
 /// <code>
 /// Task&lt;bool&gt;[] array;
 /// Task&lt;bool&gt;[] arg_95_0;
@@ -28,10 +27,9 @@ namespace Hast.Transformer.Services;
 /// }
 /// Task.WhenAll&lt;bool&gt;(array).Wait();
 /// </code>
-///
 /// <para>
-/// Note that while there was the variable named <c>array</c> the compiler created <c>arg_95_0</c> and used it
-/// instead, but just inside the loop.
+/// Note that while there was the variable named <c>array</c> the compiler created <c>arg_95_0</c> and used it instead,
+/// but just inside the loop.
 /// </para>
 /// </example>
 public class GeneratedTaskArraysInliner : IConverter

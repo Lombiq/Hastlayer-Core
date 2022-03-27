@@ -9,8 +9,8 @@ public static class EntityDeclarationExtensions
     /// Finds the method in an interface that the declaration implements a method of, if any.
     /// </summary>
     /// <returns>
-    /// The <see cref="TypeDeclaration"/> of the interface's method that the declaration implements a method of,
-    /// or <see langword="null"/> if the declaration is not an implementation of any method of any interface.
+    /// The <see cref="TypeDeclaration"/> of the interface's method that the declaration implements a method of, or <see
+    /// langword="null"/> if the declaration is not an implementation of any method of any interface.
     /// </returns>
     public static T FindImplementedInterfaceMethod<T>(this T member, Func<AstType, TypeDeclaration> lookupDeclaration)
         where T : EntityDeclaration

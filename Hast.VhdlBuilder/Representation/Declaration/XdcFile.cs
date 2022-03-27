@@ -10,7 +10,9 @@ namespace Hast.VhdlBuilder.Representation.Declaration;
 /// Represents a Xilinx XDC constraints file.
 /// </summary>
 /// <remarks>
-/// <para>See <c>Expression.MultiCycleSdcStatementsAttributeExpression</c> for something similar for Quartus Prime.</para>
+/// <para>
+/// See <c>Expression.MultiCycleSdcStatementsAttributeExpression</c> for something similar for Quartus Prime.
+/// </para>
 /// </remarks>
 [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
 public class XdcFile : IVhdlElement
@@ -41,8 +43,10 @@ public class XdcFile : IVhdlElement
 
     /// <summary>
     /// <para>Represents a path constraint declarations like:</para>
-    /// <code>set_multicycle_path 8 -setup -to [get_cells -hierarchical
-    /// {*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]</code>
+    /// <code>
+    ///set_multicycle_path 8 -setup -to [get_cells -hierarchical
+    ///{*PrimeCalculator::IsPrimeNumber(SimpleMemory).0.binaryOperationResult.2*}]
+    /// </code>
     /// </summary>
     private sealed class XdcPath : IVhdlElement
     {
@@ -55,8 +59,8 @@ public class XdcFile : IVhdlElement
         {
             var hierarchical = IsHierarchical ? "-hierarchical " : string.Empty;
 
-            // The config should contain the path's name without backslashes even if the original name is an
-            // extended identifier. Spaces need to be escaped with a slash.
+            // The config should contain the path's name without backslashes even if the original name is an extended
+            // identifier. Spaces need to be escaped with a slash.
             var vhdl = PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ");
 
             return FormattableString.Invariant(

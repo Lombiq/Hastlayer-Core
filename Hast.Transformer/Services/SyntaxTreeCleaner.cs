@@ -1,4 +1,4 @@
-﻿using Hast.Common.Extensions;
+using Hast.Common.Extensions;
 using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -36,8 +36,8 @@ public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
             !configuration.HardwareEntryPointMemberNamePrefixes.Any();
         var referencedNodesFlaggingVisitor = new ReferencedNodesFlaggingVisitor(typeDeclarationLookupTable, configuration);
 
-        // Starting with hardware entry point members we walk through the references to see which declarations are
-        // used (e.g. which methods are called at least once).
+        // Starting with hardware entry point members we walk through the references to see which declarations are used
+        // (e.g. which methods are called at least once).
         foreach (var member in syntaxTree.GetAllTypeDeclarations().SelectMany(type => type.Members))
         {
             var fullName = member.GetFullName();
@@ -183,8 +183,8 @@ public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
 
             if (member == null || member.WasVisited()) return;
 
-            // Using the reference expression as the "from", since e.g. two calls to the same method should be
-            // counted twice, even if from the same method.
+            // Using the reference expression as the "from", since e.g. two calls to the same method should be counted
+            // twice, even if from the same method.
             member.AddReference(memberReferenceExpression);
 
             // Referencing the member's parent as well.
@@ -204,8 +204,8 @@ public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
 
             member.SetVisited();
 
-            // Since when e.g. another method is referenced that is above the level of this expression in the
-            // syntax tree, thus it won't be visited unless we start a visitor there too.
+            // Since when e.g. another method is referenced that is above the level of this expression in the syntax
+            // tree, thus it won't be visited unless we start a visitor there too.
             member.AcceptVisitor(this);
         }
     }
@@ -242,8 +242,8 @@ public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
 
             var unreferencedMembers = typeDeclaration.Members.Where(member => !member.IsReferenced());
 
-            // Removing the type if it's empty but leaving if it was referenced as a type (which is with an
-            // object create expression or a default value expression).
+            // Removing the type if it's empty but leaving if it was referenced as a type (which is with an object
+            // create expression or a default value expression).
             if (typeDeclaration.Members.Count == unreferencedMembers.Count() && !typeDeclaration.IsReferenced())
             {
                 typeDeclaration.Remove();

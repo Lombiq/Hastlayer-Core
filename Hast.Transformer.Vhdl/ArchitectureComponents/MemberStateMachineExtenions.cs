@@ -25,8 +25,8 @@ public static class MemberStateMachineExtenions
     };
 
     /// <summary>
-    /// Adds a state change to the current block if the current block wouldn't fit into one clock cycle with the
-    /// given operation.
+    /// Adds a state change to the current block if the current block wouldn't fit into one clock cycle with the given
+    /// operation.
     /// </summary>
     public static int AddNewStateAndChangeCurrentBlockIfOverOneClockCycle(
         this IMemberStateMachine stateMachine,
@@ -69,8 +69,8 @@ public static class MemberStateMachineExtenions
     /// <param name="index">The index of the state.</param>
     /// <returns>The name of the state.</returns>
     public static string CreateStateName(this IMemberStateMachine stateMachine, int index) =>
-        // This doesn't need a static helper method because we deliberately don't want to generate state names for
-        // other state machines, since we don't want to directly set other state machines' states.
+        // This doesn't need a static helper method because we deliberately don't want to generate state names for other
+        // state machines, since we don't want to directly set other state machines' states.
         ArchitectureComponentNameHelper.CreatePrefixedObjectName(
             stateMachine.Name,
             "_State_" + index.ToTechnicalString());

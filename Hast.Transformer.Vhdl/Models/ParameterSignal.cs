@@ -9,8 +9,8 @@ public class ParameterSignal : Signal
     public int Index { get; private set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the parameter is the own (in or out) parameter of the component (as opposed to being
-    /// a parameter passed to invoked components).
+    /// Gets or sets a value indicating whether the parameter is the own (in or out) parameter of the component (as
+    /// opposed to being a parameter passed to invoked components).
     /// </summary>
     public bool IsOwn { get; set; }
 

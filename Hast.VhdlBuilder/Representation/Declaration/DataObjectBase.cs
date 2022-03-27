@@ -6,5 +6,6 @@ public abstract class DataObjectBase : IDataObject
     public virtual string Name { get; set; }
 
     public abstract IDataObject ToReference();
+
     public abstract string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions);
 }

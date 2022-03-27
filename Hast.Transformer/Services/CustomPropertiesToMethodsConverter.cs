@@ -12,8 +12,8 @@ using System.Linq;
 namespace Hast.Transformer.Services;
 
 /// <summary>
-/// Converts custom implemented properties' setters and getters into equivalent methods so it's easier to
-/// transform them.
+/// Converts custom implemented properties' setters and getters into equivalent methods so it's easier to transform
+/// them.
 /// </summary>
 /// <example>
 /// <code>
@@ -56,9 +56,9 @@ public class CustomPropertiesToMethodsConverter : IConverter
         {
             base.VisitPropertyDeclaration(propertyDeclaration);
 
-            // We only care about properties with custom implemented getters and/or setters. If the getter and
-            // the setter is empty then it's an auto-property. If the getter is compiler-generated then it's also
-            // an auto-property (a read-only one).
+            // We only care about properties with custom implemented getters and/or setters. If the getter and the
+            // setter is empty then it's an auto-property. If the getter is compiler-generated then it's also an
+            // auto-property (a read-only one).
             if ((!propertyDeclaration.Getter.Body.Any() && !propertyDeclaration.Setter.Body.Any()) ||
                 (propertyDeclaration.GetMemberResolveResult().Member as IProperty).Getter.IsCompilerGenerated())
             {

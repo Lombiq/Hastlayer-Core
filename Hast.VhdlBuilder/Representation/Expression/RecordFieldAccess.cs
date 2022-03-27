@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
 using Hast.VhdlBuilder.Representation.Declaration;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
@@ -10,6 +10,7 @@ namespace Hast.VhdlBuilder.Representation.Expression;
 public class RecordFieldAccess : DataObjectBase
 {
     private IDataObject _instance;
+
     public IDataObject Instance
     {
         get => _instance;

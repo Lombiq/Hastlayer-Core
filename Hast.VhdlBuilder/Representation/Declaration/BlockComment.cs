@@ -16,14 +16,14 @@ public class BlockComment : IVhdlElement
     public IList<string> Lines { get; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether the comment won't be omitted even if this is configured in
-    /// <see cref="IVhdlGenerationOptions"/>.
+    /// Gets or sets a value indicating whether the comment won't be omitted even if this is configured in <see
+    /// cref="IVhdlGenerationOptions"/>.
     /// </summary>
     public bool CantBeOmitted { get; set; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="BlockComment"/> class. Initialized with a string that contains
-    /// a newline character-delimited block of text, corresponding to lines of the block comment.
+    /// Initializes a new instance of the <see cref="BlockComment"/> class. Initialized with a string that contains a
+    /// newline character-delimited block of text, corresponding to lines of the block comment.
     /// </summary>
     public BlockComment(string textBlock)
         : this(textBlock.Split(new[] { Environment.NewLine }, StringSplitOptions.None))

@@ -21,8 +21,10 @@ public abstract class ArchitectureComponentBase : IArchitectureComponent
     public IList<Signal> InternallyDrivenSignals { get; private set; } = new List<Signal>();
     public IList<Signal> ExternallyDrivenSignals { get; private set; } = new List<Signal>();
     public IList<AttributeSpecification> GlobalAttributeSpecifications { get; } = new List<AttributeSpecification>();
+
     public IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; private set; } =
         new Dictionary<EntityDeclaration, int>();
+
     public DependentTypesTable DependentTypesTable { get; private set; } = new DependentTypesTable();
 
     protected readonly IList<IMultiCycleOperation> _multiCycleOperations = new List<IMultiCycleOperation>();

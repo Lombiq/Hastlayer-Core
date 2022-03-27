@@ -29,8 +29,8 @@ public class ConstantsUsingCases
             v = 10;
         }
 
-        // Since w only has constant values the condition can be evaluated compile-time and due to it being false
-        // the whole if can be removed.
+        // Since w only has constant values the condition can be evaluated compile-time and due to it being false the
+        // whole if can be removed.
         var w = z + 5;
         if (w == 10)
         {

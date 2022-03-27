@@ -22,8 +22,8 @@ namespace Hast.Transformer;
 
 public class DefaultTransformer : ITransformer
 {
-    // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging
-    // any syntax tree-modifying logic and also to check what an assembly was decompiled into.
+    // Set this to true to save the unprocessed and processed syntax tree to files. This is useful for debugging any
+    // syntax tree-modifying logic and also to check what an assembly was decompiled into.
     private const bool SaveSyntaxTree =
 #if DEBUG
     true;
@@ -47,9 +47,9 @@ public class DefaultTransformer : ITransformer
         ForStatement = false,
         IntroduceReadonlyAndInModifiers = true,
         IntroduceRefModifiersOnStructs = true,
-        // Turn off shorthand form of increment assignments. With this true e.g. x = x * 2 would be x *= 2.
-        // The former is easier to transform. Works in conjunction with the disabling of
-        // ReplaceMethodCallsWithOperators, see below.
+        // Turn off shorthand form of increment assignments. With this true e.g. x = x * 2 would be x *= 2. The former
+        // is easier to transform. Works in conjunction with the disabling of ReplaceMethodCallsWithOperators, see
+        // below.
         IntroduceIncrementAndDecrement = false,
         LocalFunctions = false,
         NamedArguments = false,
@@ -103,9 +103,9 @@ public class DefaultTransformer : ITransformer
     {
         var transformerConfiguration = configuration.TransformerConfiguration();
 
-        // Need to use assembly names instead of paths for the ID, because paths can change (as in the random ones
-        // with Remote Worker). Just file names wouldn't be enough because two assemblies can have the same simple
-        // name while their full names being different.
+        // Need to use assembly names instead of paths for the ID, because paths can change (as in the random ones with
+        // Remote Worker). Just file names wouldn't be enough because two assemblies can have the same simple name while
+        // their full names being different.
         var transformationIdComponents = new List<string>();
 
         var decompilers = new List<CSharpDecompiler>();
@@ -124,8 +124,8 @@ public class DefaultTransformer : ITransformer
 
             // When executed as a Windows service not all Hastlayer assemblies references' from transformed assemblies
             // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. Also, if a remote
-            // transformation needs multiple assemblies those will need to be loaded like this too.
-            // So helping the decompiler find them here.
+            // transformation needs multiple assemblies those will need to be loaded like this too. So helping the
+            // decompiler find them here.
             resolver.AddSearchDirectory(Path.GetDirectoryName(GetType().Assembly.Location));
             var dependenciesFolderPath = _appDataFolder.MapPath("Dependencies");
             if (dependenciesFolderPath != null) resolver.AddSearchDirectory(dependenciesFolderPath);
@@ -140,8 +140,8 @@ public class DefaultTransformer : ITransformer
 
             // We don't want to run all transforms since they would also transform some low-level constructs that are
             // useful to have as simple as possible (e.g. it's OK if we only have while statements in the AST, not for
-            // statements mixed in). So we need to remove the problematic transforms.
-            // Must revisit after an ILSpy update.
+            // statements mixed in). So we need to remove the problematic transforms. Must revisit after an ILSpy
+            // update.
 
             decompiler.ILTransforms
                 //// InlineReturnTransform might need to be removed: it creates returns with ternary operators and
@@ -169,8 +169,8 @@ public class DefaultTransformer : ITransformer
                 .Remove("TransformDisplayClassUsage");
 
             decompiler.AstTransforms
-                // Replaces op_* methods with operators but these methods are simpler to transform. Works in
-                // conjunction with IntroduceIncrementAndDecrement = false, see above.
+                // Replaces op_* methods with operators but these methods are simpler to transform. Works in conjunction
+                // with IntroduceIncrementAndDecrement = false, see above.
                 .Remove<ReplaceMethodCallsWithOperators>()
 
                 // Converts e.g. num6 = num6 + 1; to num6 += 1.
@@ -186,8 +186,8 @@ public class DefaultTransformer : ITransformer
                 // Adds using declarations that aren't needed for transformation.
                 .Remove<IntroduceUsingDeclarations>()
 
-                // Converts ExtensionsClass.ExtensionMethod(this) calls to this.ExtensionMethod(). This would make
-                // the future transformation of extension methods difficult, since this makes them look like instance
+                // Converts ExtensionsClass.ExtensionMethod(this) calls to this.ExtensionMethod(). This would make the
+                // future transformation of extension methods difficult, since this makes them look like instance
                 // methods (however those instance methods don't exist).
                 .Remove<IntroduceExtensionMethods>()
 
@@ -198,8 +198,8 @@ public class DefaultTransformer : ITransformer
             decompilers.Add(decompiler);
         }
 
-        // Decompiling and adding the syntax tree ensures that a change of code means a change of hash even if there
-        // was no version change in the assembly.
+        // Decompiling and adding the syntax tree ensures that a change of code means a change of hash even if there was
+        // no version change in the assembly.
         var syntaxTree = await DecompileTogetherAsync(decompilers);
         await WriteSyntaxTreeAsync(syntaxTree, "UnprocessedSyntaxTree.cs");
         transformationIdComponents.Add($"source code: {syntaxTree}");
@@ -287,8 +287,8 @@ public class DefaultTransformer : ITransformer
         var decompilerTasks = await Task.WhenAll(decompilers
             .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile(sortTypes: true))));
 
-        // Unlike with the ILSpy v2 libraries multiple unrelated assemblies can't be decompiled into a single AST
-        // so we need to decompile them separately and merge them like this.
+        // Unlike with the ILSpy v2 libraries multiple unrelated assemblies can't be decompiled into a single AST so we
+        // need to decompile them separately and merge them like this.
         var syntaxTree = decompilerTasks[0];
         for (int i = 1; i < decompilerTasks.Length; i++)
         {

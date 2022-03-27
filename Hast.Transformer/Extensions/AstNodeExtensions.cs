@@ -236,9 +236,11 @@ public static class AstNodeExtensions
     /// Remove the node from the syntax tree and mark it as such so later it can be determined that it was removed.
     /// </summary>
     /// <remarks>
-    /// <para>While a node being orphaned in the syntax tree can be determined by checking whether its Parent,
-    /// PrevSibling, and NextSibling are all null but that's only useful if such dangling nodes can't normally be
-    /// created otherwise (like it is the case during const substitution).</para>
+    /// <para>
+    /// While a node being orphaned in the syntax tree can be determined by checking whether its Parent, PrevSibling,
+    /// and NextSibling are all null but that's only useful if such dangling nodes can't normally be created otherwise
+    /// (like it is the case during const substitution).
+    /// </para>
     /// </remarks>
     public static void RemoveAndMark(this AstNode node)
     {
@@ -265,9 +267,9 @@ public static class AstNodeExtensions
             !property.Setter.IsCompilerGenerated();
 
         // For certain members only their parent invocation will contain usable ResolveResult (see:
-        // https://github.com/icsharpcode/ILSpy/issues/1407). For properties this is the case every time since from
-        // the IMember of the property we can't see whether the getter or setter is invoked, only from the parent
-        // invocation (this is only true for custom properties, not for auto-properties).
+        // https://github.com/icsharpcode/ILSpy/issues/1407). For properties this is the case every time since from the
+        // IMember of the property we can't see whether the getter or setter is invoked, only from the parent invocation
+        // (this is only true for custom properties, not for auto-properties).
         if (node.Parent is InvocationExpression invocationExpression &&
             (memberResolveResult == null || isCustomProperty))
         {

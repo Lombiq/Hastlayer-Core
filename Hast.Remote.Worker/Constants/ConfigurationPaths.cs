@@ -1,12 +1,12 @@
-﻿using Hast.Remote.Worker.Services;
+using Hast.Remote.Worker.Services;
 
 namespace Hast.Remote.Worker.Constants;
 
 public static class ConfigurationPaths
 {
     /// <summary>
-    /// Configuration key for the Azure Blob Storage connection string where jobs for the Worker are saved and where
-    /// the Worker uploads results.
+    /// Configuration key for the Azure Blob Storage connection string where jobs for the Worker are saved and where the
+    /// Worker uploads results.
     /// </summary>
     public const string StorageConnectionString = "Hast:Remote_Worker:Storage_ConnectionString";
 

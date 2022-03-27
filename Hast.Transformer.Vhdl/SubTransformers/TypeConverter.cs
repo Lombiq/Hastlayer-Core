@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Helpers;
+using Hast.Transformer.Helpers;
 using Hast.Transformer.Vhdl.Helpers;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Extensions;
@@ -109,8 +109,8 @@ public class TypeConverter : ITypeConverter
             return CreateArrayType(ConvertAstType(type.BaseType, context));
         }
 
-        // If the type is used in an array initialization and is a non-primitive type then the actual type will be
-        // the only child.
+        // If the type is used in an array initialization and is a non-primitive type then the actual type will be the
+        // only child.
         if (type.Children.SingleOrDefault() is SimpleType simpleType)
         {
             return ConvertSimple(simpleType, context);

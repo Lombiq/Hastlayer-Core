@@ -24,7 +24,7 @@ public interface IMultiCycleOperation
 }
 
 /// <summary>
-/// Represents a VHDL component <see href="https://www.ics.uci.edu/~jmoorkan/vhdlref/compinst.html" />.
+/// Represents a VHDL component <see href="https://www.ics.uci.edu/~jmoorkan/vhdlref/compinst.html"/>.
 /// </summary>
 public interface IArchitectureComponent
 {
@@ -69,10 +69,10 @@ public interface IArchitectureComponent
     IList<AttributeSpecification> GlobalAttributeSpecifications { get; }
 
     /// <summary>
-    /// Gets the track which other members are called from this component and in how many instances at a given time. I.e.
-    /// if this FSM starts another FSM (which was originally e.g. a method call) then it will be visible here. If
-    /// parallelization happens then the call instance count will be greater than 1 (i.e. the other member is called
-    /// in more than one instance at a given time).
+    /// Gets the track which other members are called from this component and in how many instances at a given time.
+    /// I.e. if this FSM starts another FSM (which was originally e.g. a method call) then it will be visible here. If
+    /// parallelization happens then the call instance count will be greater than 1 (i.e. the other member is called in
+    /// more than one instance at a given time).
     /// </summary>
     IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; }
 
@@ -82,8 +82,8 @@ public interface IArchitectureComponent
     DependentTypesTable DependentTypesTable { get; }
 
     /// <summary>
-    /// Gets the operations that take multiple clock cycles and are thus awaited in their own state. This is to be used when
-    /// multi-cycle paths need to be defined in the hardware design tool.
+    /// Gets the operations that take multiple clock cycles and are thus awaited in their own state. This is to be used
+    /// when multi-cycle paths need to be defined in the hardware design tool.
     /// </summary>
     IEnumerable<IMultiCycleOperation> MultiCycleOperations { get; }
 

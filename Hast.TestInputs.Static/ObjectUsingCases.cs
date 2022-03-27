@@ -37,8 +37,8 @@ public class ObjectUsingCases
 
     private void VoidMethod(MyClass myClass)
     {
-        // A nested if statement is needed for the return to remain in the syntax tree and not be optimized away
-        // by the compiler.
+        // A nested if statement is needed for the return to remain in the syntax tree and not be optimized away by the
+        // compiler.
         if (myClass.MyProperty < 10)
         {
             myClass.MyProperty *= 10;

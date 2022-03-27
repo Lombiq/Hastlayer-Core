@@ -1,5 +1,6 @@
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Diagnostics.CodeAnalysis;
+
 // ReSharper disable RedundantCast
 
 namespace Hast.TestInputs.Dynamic;
@@ -9,8 +10,9 @@ namespace Hast.TestInputs.Dynamic;
 /// conversions are implemented.
 /// </summary>
 /// <remarks>
-/// <para>Note that all the cases for u/long won't fit on the Nexys A7 so we need to split them. Ideally all the cases
-/// would fit into a single design though. Hardware resource usage for each of these tests is as following:
+/// <para>
+/// Note that all the cases for u/long won't fit on the Nexys A7 so we need to split them. Ideally all the cases would
+/// fit into a single design though. Hardware resource usage for each of these tests is as following:
 /// - ByteBinaryOperatorExpressionVariations: 52%
 /// - SbyteBinaryOperatorExpressionVariations: 64%
 /// - ShortBinaryOperatorExpressionVariations: 64%
@@ -23,9 +25,10 @@ namespace Hast.TestInputs.Dynamic;
 /// - UlongBinaryOperatorExpressionVariationsHigh: 33%
 /// - AllUnaryOperatorExpressionVariations: 33%
 ///
-/// While using the 8-number SaveResult() method actually slightly increases resource usage synthesis time is
-/// greatly reduced (as opposed to calling the single-number SaveResult() for every number).
-/// <see cref="BinaryAndUnaryOperatorExpressionCasesGenerator"/> can be used to generate these cases.</para>
+/// While using the 8-number SaveResult() method actually slightly increases resource usage synthesis time is greatly
+/// reduced (as opposed to calling the single-number SaveResult() for every number). <see
+/// cref="BinaryAndUnaryOperatorExpressionCasesGenerator"/> can be used to generate these cases.
+/// </para>
 /// </remarks>
 public class BinaryAndUnaryOperatorExpressionCases : DynamicTestInputBase
 {

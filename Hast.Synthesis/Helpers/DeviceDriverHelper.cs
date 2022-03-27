@@ -1,7 +1,7 @@
-using System;
 using Hast.Layer;
 using Hast.Synthesis.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
 
 namespace Hast.Synthesis.Helpers;
 
@@ -49,8 +49,8 @@ public static class DeviceDriverHelper
     {
         var latencyClockCycles = latencyNs * deviceManifest.ClockFrequencyHz * 0.000000001M;
 
-        // If there is no latency then let's try with a basic default (unless the operation is "instant" there should
-        // be latency data).
+        // If there is no latency then let's try with a basic default (unless the operation is "instant" there should be
+        // latency data).
         if (latencyClockCycles < 0) return 0.1M;
 
         return latencyClockCycles;

@@ -137,9 +137,8 @@ public class TransformedVhdlManifestBuilder : ITransformedVhdlManifestBuilder
             ? await deepestXdcProvider.BuildManifestAsync(architectureComponentResults, hastIpArchitecture)
             : null;
 
-        // Processing inter-dependent types. In VHDL if a type depends another type (e.g. an array stores elements
-        // of a record type) than the type depending on the other one should come after the other one in the code
-        // file.
+        // Processing inter-dependent types. In VHDL if a type depends another type (e.g. an array stores elements of a
+        // record type) than the type depending on the other one should come after the other one in the code file.
         var allDependentTypes = dependentTypesTables
             .SelectMany(table => table.Types)
             .GroupBy(type => type.Name) // A dependency relation can be present multiple times, so need to group first.

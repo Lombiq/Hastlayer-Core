@@ -1,7 +1,7 @@
+using Hast.VhdlBuilder.Representation.Declaration;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
@@ -9,6 +9,7 @@ namespace Hast.VhdlBuilder.Representation.Expression;
 public class ConditionalSignalAssignment : IVhdlElement
 {
     private IDataObject _assignTo;
+
     public IDataObject AssignTo
     {
         get => _assignTo;

@@ -94,8 +94,8 @@ internal class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
         }
         else if (primitiveExpressionParent is UnaryOperatorExpression unaryOperatorExpression)
         {
-            // This is a unary expression where the target expression was already substituted with a const value.
-            // So we can also substitute the whole expression.
+            // This is a unary expression where the target expression was already substituted with a const value. So we
+            // can also substitute the whole expression.
             var newExpression = new PrimitiveExpression(
                 _astExpressionEvaluator.EvaluateUnaryOperatorExpression(unaryOperatorExpression))
                 .WithAnnotation(primitiveExpressionParent.CreateResolveResultFromActualType());
@@ -258,8 +258,8 @@ internal class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
                 (Expression)node,
                 _typeDeclarationLookupTable);
 
-            // There will be no parameter if the affected node is the invoked member itself. Also, the parameter
-            // can be null for special invocations like Task.WhenAll().
+            // There will be no parameter if the affected node is the invoked member itself. Also, the parameter can be
+            // null for special invocations like Task.WhenAll().
             if (parameter == null)
             {
                 ProcessParent(node.Parent, actions);
@@ -277,8 +277,8 @@ internal class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
                     (Expression)node,
                     _typeDeclarationLookupTable);
 
-            // The parameter will be null for a Task body's delegate invocation, e.g.:
-            // new Func<object, int[]> (<>c__DisplayClass6_.<ParallelizedCalculateIntegerSumUpToNumber>b__0)
+            // The parameter will be null for a Task body's delegate invocation, e.g.: new Func<object, int[]>
+            // (<>c__DisplayClass6_.<ParallelizedCalculateIntegerSumUpToNumber>b__0)
             if (parameter == null)
             {
                 return;

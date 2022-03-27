@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -10,8 +10,8 @@ using System.Linq;
 namespace Hast.Transformer.Services;
 
 // Maybe this would be better suitable in Hast.Transformer.Vhdl since it might not be interesting for every hardware
-// description language. But then we'd need to run IInstanceMethodsToStaticConverter again to make constructor
-// methods static too.
+// description language. But then we'd need to run IInstanceMethodsToStaticConverter again to make constructor methods
+// static too.
 
 /// <summary>
 /// Converts constructors to normal method declarations so they're easier to process later.
@@ -48,8 +48,8 @@ public class ConstructorsToMethodsConverter : IConverter
                 body: constructorDeclaration.Body,
                 returnType: new PrimitiveType("void"));
 
-            // If the type has no base type then remove the automatically added base.ctor() call from the
-            // constructor as it won't reference anything transformable.
+            // If the type has no base type then remove the automatically added base.ctor() call from the constructor as
+            // it won't reference anything transformable.
             if (!constructorDeclaration.FindFirstParentTypeDeclaration().BaseTypes.Any())
             {
                 method.Body

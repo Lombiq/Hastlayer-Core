@@ -9,9 +9,10 @@ namespace Hast.VhdlBuilder.Representation.Expression;
 [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
 public class Value : IVhdlElement
 {
-    // These below need to be Lazy, because otherwise there would be a circular dependency between the static
-    // ctors with KnownDataTypes (since it uses ToVhdlValue() and thus this class a lot for default values).
+    // These below need to be Lazy, because otherwise there would be a circular dependency between the static ctors with
+    // KnownDataTypes (since it uses ToVhdlValue() and thus this class a lot for default values).
     private static readonly Lazy<Value> _trueLazy = new(() => new Value { DataType = KnownDataTypes.Boolean, Content = "true" });
+
     public static Value True => _trueLazy.Value;
     private static readonly Lazy<Value> _falseLazy = new(() => new Value { DataType = KnownDataTypes.Boolean, Content = "false" });
     public static Value False => _falseLazy.Value;
@@ -33,8 +34,8 @@ public class Value : IVhdlElement
         // Handling signed and unsigned types specially.
         if (KnownDataTypes.Integers.Contains(DataType))
         {
-            // Using ToVhdlValue() on content would cause a stack overflow, since this would be called again. So
-            // this needs to be the root of the Value callchain.
+            // Using ToVhdlValue() on content would cause a stack overflow, since this would be called again. So this
+            // needs to be the root of the Value callchain.
             var value = new Raw(content);
             var size = ((SizedDataType)DataType).SizeNumber;
 

@@ -9,8 +9,8 @@ public enum DataObjectKind
 }
 
 /// <summary>
-/// Represents a <see href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-types-of-data-object/">
-/// VHDL data object</see>.
+/// Represents a <see href="https://surf-vhdl.com/vhdl-syntax-web-course-surf-vhdl/vhdl-types-of-data-object/"> VHDL
+/// data object</see>.
 /// </summary>
 public interface IDataObject : INamedElement, IReferenceableDeclaration<IDataObject>
 {

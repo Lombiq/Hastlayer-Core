@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
 using Hast.Common.Interfaces;
 using Hast.Common.Models;
 using Hast.Common.Services;
+using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.Services;
 

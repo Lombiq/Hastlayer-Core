@@ -19,7 +19,7 @@ public interface IXdcFileBuilder : IDependency, IComparable<IXdcFileBuilder>
     Type ManifestType { get; }
 
     /// <summary>
-    /// Returns <see langword="true" /> if manifest is of the target type. Use the <see  cref="XdcFileBuilderBase{T}"/>
+    /// Returns <see langword="true"/> if manifest is of the target type. Use the <see cref="XdcFileBuilderBase{T}"/>
     /// generic base class and don't implement this yourself.
     /// </summary>
     bool IsTargetType(IDeviceManifest manifest);

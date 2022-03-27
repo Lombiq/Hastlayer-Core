@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Expression;
 using System.Diagnostics;
 
@@ -8,6 +8,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration;
 public class StdLogicVector : SizedDataType
 {
     private Value _defaultValue;
+
     public override Value DefaultValue
     {
         get => _defaultValue ?? "others => '0'".ToVhdlValue(this);

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Hast.Transformer.Vhdl.ArchitectureComponents;
 
 /// <summary>
-/// The current state of the <see cref="IMemberStateMachine" />.
+/// The current state of the <see cref="IMemberStateMachine"/>.
 /// </summary>
 public interface IMemberStateMachineState
 {
@@ -25,8 +25,8 @@ public interface IMemberStateMachineState
 public interface IMemberStateMachine : IArchitectureComponent
 {
     /// <summary>
-    /// Gets the states of the state machine. The state with the index 0 is the start state, the one with the index 1 is the
-    /// final state.
+    /// Gets the states of the state machine. The state with the index 0 is the start state, the one with the index 1 is
+    /// the final state.
     /// </summary>
     IReadOnlyList<IMemberStateMachineState> States { get; }
 

@@ -17,8 +17,8 @@ public class RemainderOperatorExpressionsExpander : IRemainderOperatorExpression
 
             if (binaryOperatorExpression.Operator != BinaryOperatorType.Modulus) return;
 
-            // Changing a % b to a – a / b * b.
-            // At this point the operands should have the same type, so it's safe just clone around.
+            // Changing a % b to a – a / b * b. At this point the operands should have the same type, so it's safe just
+            // clone around.
 
             if (binaryOperatorExpression.GetActualType() == null)
             {
@@ -26,21 +26,20 @@ public class RemainderOperatorExpressionsExpander : IRemainderOperatorExpression
                     .AddAnnotation(binaryOperatorExpression.Left.CreateResolveResultFromActualType());
             }
 
-            // First assigning the operands to new variables so if method calls, casts or anything are in there
-            // those are not duplicated.
+            // First assigning the operands to new variables so if method calls, casts or anything are in there those
+            // are not duplicated.
 
             void CreateVariableForOperand(Expression operand)
             {
-                // Don't create a variable if it's not necessary.
-                // Primitive values should be left out because operations with primitive operands can be faster on
-                // hardware.
+                // Don't create a variable if it's not necessary. Primitive values should be left out because operations
+                // with primitive operands can be faster on hardware.
                 if (operand is PrimitiveExpression or IdentifierExpression)
                 {
                     return;
                 }
 
-                // Need to add ILRange because there can be multiple remainder operations for the same variable
-                // so somehow we need to distinguish between them.
+                // Need to add ILRange because there can be multiple remainder operations for the same variable so
+                // somehow we need to distinguish between them.
                 var ilRangeName = operand.GetILRangeName();
                 if (string.IsNullOrEmpty(ilRangeName))
                 {

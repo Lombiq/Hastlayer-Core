@@ -12,8 +12,8 @@ namespace Hast.VhdlBuilder.Representation;
 public delegate string NameShortener(string originalName);
 
 /// <summary>
-/// Provides some configuration options for generating VHDL code. Note that readable code should be only produced
-/// if the result should be handled manually; otherwise for machine processing code shouldn't be formatted.
+/// Provides some configuration options for generating VHDL code. Note that readable code should be only produced if the
+/// result should be handled manually; otherwise for machine processing code shouldn't be formatted.
 /// </summary>
 public interface IVhdlGenerationOptions
 {
@@ -37,8 +37,8 @@ public class VhdlGenerationOptions : IVhdlGenerationOptions
 {
     /// <summary>
     /// A simple name shortener function. Keep in mind that shortening names with this, while produces more readable
-    /// code for debugging, does not guarantee unique names. Be aware that using this can add significant overhead
-    /// to VHDL generation (making it take 10 or even more times longer!).
+    /// code for debugging, does not guarantee unique names. Be aware that using this can add significant overhead to
+    /// VHDL generation (making it take 10 or even more times longer!).
     /// </summary>
     public static readonly NameShortener SimpleNameShortener = originalName =>
     {
@@ -75,8 +75,8 @@ public class VhdlGenerationOptions : IVhdlGenerationOptions
         var shortName = originalMatch;
         var isOperator = shortName.Contains("::op_");
 
-        // Cutting off return type name, but not for operators (operators, unlike normal methods /properties can
-        // have the same name, like op_Explicit, with a different return type).
+        // Cutting off return type name, but not for operators (operators, unlike normal methods /properties can have
+        // the same name, like op_Explicit, with a different return type).
         if (!isOperator && shortName.Partition(" ") is (_, " ", var afterSpace)) shortName = afterSpace;
 
         // Cutting off namespace name, type name can be enough.

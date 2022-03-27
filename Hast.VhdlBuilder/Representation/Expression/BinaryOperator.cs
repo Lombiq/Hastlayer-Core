@@ -1,7 +1,7 @@
-using System;
-using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 

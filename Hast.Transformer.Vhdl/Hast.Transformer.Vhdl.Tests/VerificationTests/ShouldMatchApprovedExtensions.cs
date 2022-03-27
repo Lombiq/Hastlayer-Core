@@ -50,8 +50,10 @@ public static class ShouldMatchApprovedExtensions
     /// Match the input VHDL source against an existing approved source file. This quickly tells if something changed.
     /// </summary>
     /// <remarks>
-    /// <para>Note that the two methods here can't be DRY because even with UseCallerLocation() Shouldly would loose
-    /// track of where the verification file is.</para>
+    /// <para>
+    /// Note that the two methods here can't be DRY because even with UseCallerLocation() Shouldly would loose track of
+    /// where the verification file is.
+    /// </para>
     /// </remarks>
     public static void ShouldMatchApprovedWithVhdlConfiguration(this string vhdlSource) =>
         vhdlSource.ShouldMatchApproved(configurationBuilder =>

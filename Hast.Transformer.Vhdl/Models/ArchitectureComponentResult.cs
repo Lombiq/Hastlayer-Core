@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
 using Hast.Layer;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Representation;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.Models;
 

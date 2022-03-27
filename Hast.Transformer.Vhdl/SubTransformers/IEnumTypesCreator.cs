@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using Hast.Common.Interfaces;
 using Hast.VhdlBuilder.Representation;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.SubTransformers;
 

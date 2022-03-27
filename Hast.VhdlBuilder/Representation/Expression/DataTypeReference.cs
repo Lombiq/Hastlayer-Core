@@ -1,6 +1,6 @@
-﻿using System;
-using System.Diagnostics;
 using Hast.VhdlBuilder.Representation.Declaration;
+using System;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 

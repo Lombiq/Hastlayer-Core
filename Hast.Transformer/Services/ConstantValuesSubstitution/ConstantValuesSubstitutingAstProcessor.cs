@@ -32,8 +32,8 @@ internal class ConstantValuesSubstitutingAstProcessor
 
     public void SubstituteConstantValuesInSubTree(AstNode rootNode, bool reUseOriginalConstantValuesTable)
     {
-        // Gradually propagating the constant values through the syntax tree so this needs multiple passes. So
-        // running them until nothing changes.
+        // Gradually propagating the constant values through the syntax tree so this needs multiple passes. So running
+        // them until nothing changes.
 
         ConstantValuesTable originalConstantValuesTable = null;
         if (reUseOriginalConstantValuesTable) originalConstantValuesTable = ConstantValuesTable.Clone();

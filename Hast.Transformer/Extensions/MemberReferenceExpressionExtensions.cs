@@ -15,9 +15,9 @@ public static class MemberReferenceExpressionExtensions
     /// The <see cref="ITypeDeclarationLookupTable"/> instance corresponding to the current scope.
     /// </param>
     /// <param name="findLeftmostMemberIfRecursive">
-    /// If the member reference references another member (like <c>this.Property1.Property2.Property3</c>) then if
-    /// set to <see langword="true"/> the member corresponding to the leftmost member (<c>this.Property1</c> in this case) will
-    /// be looked up.
+    /// If the member reference references another member (like <c>this.Property1.Property2.Property3</c>) then if set
+    /// to <see langword="true"/> the member corresponding to the leftmost member ( <c>this.Property1</c> in this case)
+    /// will be looked up.
     /// </param>
     public static EntityDeclaration FindMemberDeclaration(
         this MemberReferenceExpression memberReferenceExpression,
@@ -79,7 +79,8 @@ public static class MemberReferenceExpressionExtensions
 
         if (target is BaseReferenceExpression)
         {
-            // The member is in the base class (because of single class inheritance in C#, there can be only one base class).
+            // The member is in the base class (because of single class inheritance in C#, there can be only one base
+            // class).
             return memberReferenceExpression.FindFirstParentTypeDeclaration().BaseTypes
                 .Select(type => typeDeclarationLookupTable.Lookup(type))
                 .SingleOrDefault(typeDeclaration => typeDeclaration != null && typeDeclaration.ClassType == ClassType.Class);

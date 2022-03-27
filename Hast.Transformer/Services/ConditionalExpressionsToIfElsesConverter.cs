@@ -14,12 +14,10 @@ namespace Hast.Transformer.Services;
 /// Converts a conditional expression, i.e. an expression with a ternary operator into an if-else statement.
 /// </summary>
 /// <example>
-/// The following expression:
-/// numberOfStepsInIteration = testMode ? 1 : KpzKernels.GridWidth * KpzKernels.GridHeight;
+/// The following expression: numberOfStepsInIteration = testMode ? 1 : KpzKernels.GridWidth * KpzKernels.GridHeight;
 ///
-/// ...will be converted into the below form:
-/// if (testMode) numberOfStepsInIteration = 1;
-/// else numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;.
+/// ...will be converted into the below form: if (testMode) numberOfStepsInIteration = 1; else numberOfStepsInIteration
+/// = KpzKernels.GridWidth * KpzKernels.GridHeight;.
 /// </example>
 public class ConditionalExpressionsToIfElsesConverter : IConverter
 {
@@ -37,8 +35,8 @@ public class ConditionalExpressionsToIfElsesConverter : IConverter
         {
             base.VisitConditionalExpression(conditionalExpression);
 
-            // Simple "variable = condition ? value1 : value2" expressions are easily handled but ones not in this
-            // form need some further work.
+            // Simple "variable = condition ? value1 : value2" expressions are easily handled but ones not in this form
+            // need some further work.
             if (conditionalExpression.Parent is not AssignmentExpression assignment ||
                 !(assignment.Left is IdentifierExpression) ||
                 !(assignment.Parent is ExpressionStatement))
@@ -75,8 +73,8 @@ public class ConditionalExpressionsToIfElsesConverter : IConverter
                 conditionalExpression = newConditionalExpression;
             }
 
-            // Enclosing the assignments into BlockStatements because this is also what normal if-else statements
-            // are decompiled into. This is also necessary to establish a variable scope.
+            // Enclosing the assignments into BlockStatements because this is also what normal if-else statements are
+            // decompiled into. This is also necessary to establish a variable scope.
             var trueAssignment = assignment.Clone<AssignmentExpression>();
             trueAssignment.Right = conditionalExpression.TrueExpression.Clone();
             var trueBlock = new BlockStatement();

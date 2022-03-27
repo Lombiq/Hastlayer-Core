@@ -1,7 +1,7 @@
-﻿using Hast.TestInputs.Dynamic;
+using Hast.TestInputs.Dynamic;
 using Hast.Transformer.Abstractions;
-using Xunit;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests;
 

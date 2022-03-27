@@ -87,8 +87,8 @@ public class MemberTransformer : IMemberTransformer
                         "Class inheritance is not supported. Affected class: " + node.GetFullName() + ".");
                 }
 
-                // Records need to be created only for those types that are neither display classes, nor hardware
-                // entry point types or static types
+                // Records need to be created only for those types that are neither display classes, nor hardware entry
+                // point types or static types
                 if (!typeDeclaration.GetFullName().IsDisplayOrClosureClassName() &&
                     !typeDeclaration.Members.Any(member => member.IsHardwareEntryPointMember()) &&
                     !typeDeclaration.Modifiers.HasFlag(Modifiers.Static))

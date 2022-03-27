@@ -13,8 +13,8 @@ using Attribute = ICSharpCode.Decompiler.CSharp.Syntax.Attribute;
 namespace Hast.Transformer.Services;
 
 /// <summary>
-/// Replaces <see langword="static"/> <see langword="readonly"/> fields with literal value substitution. Only
-/// applies to fields that have the <see cref="ReplaceableAttribute"/>.
+/// Replaces <see langword="static"/><see langword="readonly"/> fields with literal value substitution. Only applies to
+/// fields that have the <see cref="ReplaceableAttribute"/>.
 /// </summary>
 /// <example>
 /// <para>If you have this code:</para>
@@ -43,12 +43,12 @@ public class ReadonlyToConstConverter : IConverter
     public IEnumerable<string> Dependencies { get; } = new[] { nameof(SyntaxTreeCleaner) };
 
     /// <summary>
-    /// Finds and replaces any <see langword="public"/> <see langword="static"/> <see langword="readonly"/> fields
-    /// in <paramref name="syntaxTree"/> that have <see cref="ReplaceableAttribute"/> with their assigned literal
-    /// value. If <see cref="IHardwareGenerationConfiguration.CustomConfiguration"/> in
-    /// <paramref name="configuration"/> has a <c>ReplaceableDynamicConstants</c> of type <c>IDictionary&lt;string, string&gt;</c>
-    /// with the matching value identified by the attribute, then it is used instead of the assigned value. Read
-    /// "Using dynamic constants" in <c>Docs/DevelopingHastlayer.md</c> for usage information.
+    /// Finds and replaces any <see langword="public"/><see langword="static"/><see langword="readonly"/> fields in
+    /// <paramref name="syntaxTree"/> that have <see cref="ReplaceableAttribute"/> with their assigned literal value. If
+    /// <see cref="IHardwareGenerationConfiguration.CustomConfiguration"/> in <paramref name="configuration"/> has a
+    /// <c>ReplaceableDynamicConstants</c> of type <c>IDictionary&lt;string, string&gt;</c> with the matching value
+    /// identified by the attribute, then it is used instead of the assigned value. Read "Using dynamic constants" in
+    /// <c>Docs/DevelopingHastlayer.md</c> for usage information.
     /// </summary>
     /// <param name="syntaxTree">The code to transform.</param>
     /// <param name="configuration">The holder of the custom configuration.</param>
@@ -79,8 +79,8 @@ public class ReadonlyToConstConverter : IConverter
                 return;
             }
 
-            // We only work with field declarations that are also assignments and the value is of a primitive type,
-            // like int or string.
+            // We only work with field declarations that are also assignments and the value is of a primitive type, like
+            // int or string.
             var initializer = fieldDeclaration
                 .FindFirstChildOfType<VariableInitializer>();
             var value = initializer?.FindFirstChildOfType<PrimitiveExpression>();

@@ -11,6 +11,7 @@ public class AlveoU250Driver : AlveoU250ManifestProvider, IDeviceDriver
     private readonly object _timingReportParserLock = new();
 
     private ITimingReport _timingReport;
+
     public ITimingReport TimingReport
     {
         get

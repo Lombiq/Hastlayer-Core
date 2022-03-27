@@ -7,9 +7,9 @@ using System.Linq;
 namespace Hast.Transformer.Services;
 
 /// <summary>
-/// Removes those variables from the syntax tree which are just aliases to another variable and thus unneeded. Due
-/// to reference behavior such alias variables make hardware generation much more complicated so it's better to get
-/// rid of them.
+/// Removes those variables from the syntax tree which are just aliases to another variable and thus unneeded. Due to
+/// reference behavior such alias variables make hardware generation much more complicated so it's better to get rid of
+/// them.
 /// </summary>
 /// <example>
 /// <code>
@@ -29,8 +29,8 @@ namespace Hast.Transformer.Services;
 /// </example>
 public class UnneededReferenceVariablesRemover : IConverter
 {
-    // Many other dependencies are just leftovers from the previous linear execution order. However in this case
-    // we know explicitly that RefLocalVariablesRemover must come before UnneededReferenceVariablesRemover.
+    // Many other dependencies are just leftovers from the previous linear execution order. However in this case we know
+    // explicitly that RefLocalVariablesRemover must come before UnneededReferenceVariablesRemover.
     public virtual IEnumerable<string> Dependencies { get; } = new[] { nameof(RefLocalVariablesRemover) };
 
     public void Convert(
@@ -48,9 +48,9 @@ public class UnneededReferenceVariablesRemover : IConverter
             var left = assignmentExpression.Left;
             var right = assignmentExpression.Right;
 
-            // Let's check whether the assignment is for a reference type and whether it's between two variables or
-            // a variable and a field/property/array item access (properties at these stage are only
-            // auto-properties, custom properties are already converted to methods).
+            // Let's check whether the assignment is for a reference type and whether it's between two variables or a
+            // variable and a field/property/array item access (properties at these stage are only auto-properties,
+            // custom properties are already converted to methods).
             if (assignmentExpression.IsPotentialAliasAssignment())
             {
                 var parentEntity = assignmentExpression.FindFirstParentEntityDeclaration();

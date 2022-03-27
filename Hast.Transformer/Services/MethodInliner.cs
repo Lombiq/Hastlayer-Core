@@ -56,8 +56,8 @@ public class MethodInliner : IConverter
             }
         }
 
-        // Gradually inlining methods in multiple passes through the whole syntax tree. Doing this in iterations
-        // because an inlined method can call another inlined method and so forth, requiring recursive inlining.
+        // Gradually inlining methods in multiple passes through the whole syntax tree. Doing this in iterations because
+        // an inlined method can call another inlined method and so forth, requiring recursive inlining.
 
         string codeOutput;
         var passCount = 0;
@@ -109,22 +109,21 @@ public class MethodInliner : IConverter
 
             if (invocationParentStatement.PrevSibling == null)
             {
-                // The statement is in the first node of the subtree, i.e. the first statement in the block. To
-                // make it work well we need to insert a new statement before it just for the comment (otherwise
-                // either the comment would get lost if the parent is inlined too and these statements, and only
-                // statements are fetched, or it would be inserted mid-statement).
-                // We need to use a statement built into ILSpy otherwise it won't show up in the output. An
-                // EmptyStatement is hackish but it's a noop and it works.
+                // The statement is in the first node of the subtree, i.e. the first statement in the block. To make it
+                // work well we need to insert a new statement before it just for the comment (otherwise either the
+                // comment would get lost if the parent is inlined too and these statements, and only statements are
+                // fetched, or it would be inserted mid-statement). We need to use a statement built into ILSpy
+                // otherwise it won't show up in the output. An EmptyStatement is hackish but it's a noop and it works.
                 AstInsertionHelper.InsertStatementBefore(invocationParentStatement, new EmptyStatement());
             }
 
             invocationParentStatement.PrevSibling.AddChild(
                 new Comment($" Starting inlined block of the method {methodFullName}."), Roles.Comment);
 
-            // Creating a suffix to make all identifiers (e.g. variable names) inside the method unique once
-            // inlined. Since the same method can be inlined multiple times in another method we also need to
-            // distinguish per invocation. Furthermore, such inlined invocations can themselves be inlined too, so
-            // identifiers need to be continued to suffixed on every level.
+            // Creating a suffix to make all identifiers (e.g. variable names) inside the method unique once inlined.
+            // Since the same method can be inlined multiple times in another method we also need to distinguish per
+            // invocation. Furthermore, such inlined invocations can themselves be inlined too, so identifiers need to
+            // be continued to suffixed on every level.
             var methodIdentifierNameSuffix = Sha256Helper.ComputeHash(methodFullName + invocationExpression.GetFullName());
 
             // Assigning all invocation arguments to newly created local variables which then will be used in the
@@ -171,8 +170,7 @@ public class MethodInliner : IConverter
             }
             else
             {
-                // If the last statement is not a return statement then there should be multiple returns in the
-                // method.
+                // If the last statement is not a return statement then there should be multiple returns in the method.
                 inlinedBody.Add(exitLabel);
             }
 

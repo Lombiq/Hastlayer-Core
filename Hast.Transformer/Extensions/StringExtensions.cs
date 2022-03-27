@@ -25,15 +25,13 @@ public static class StringExtensions
     /// <summary>
     /// Checks whether the string looks like the name of a compiler-generated class generated from an F# closure.
     /// </summary>
-    /// <example>
-    /// Such a name is like following: <c>Run@28</c>.
-    /// </example>
+    /// <example>Such a name is like following: <c>Run@28</c>.</example>
     // // A class name containing "@" would be invalid in standard C#, so this is a fairly safe bet.
     public static bool IsClosureClassName(this string name) => name.RegexIsMatch(@".+\@\d+", RegexOptions.Compiled);
 
     /// <summary>
-    /// Checks whether the string looks like the name of a compiler-generated DisplayClass from C# or one
-    /// generated from an F# closure.
+    /// Checks whether the string looks like the name of a compiler-generated DisplayClass from C# or one generated from
+    /// an F# closure.
     /// </summary>
     /// <example>
     /// <para>Such a name is like following.</para>
@@ -84,13 +82,10 @@ public static class StringExtensions
     public static bool IsBackingFieldName(this string name) => name.RegexIsMatch("<(.*)>.*BackingField");
 
     /// <summary>
-    /// Converts the full name of a property-backing auto-generated field's name to the corresponding property's
-    /// name.
+    /// Converts the full name of a property-backing auto-generated field's name to the corresponding property's name.
     /// </summary>
     /// <remarks>
-    /// <para>
-    /// Such a field's name looks like.
-    /// </para>
+    /// <para>Such a field's name looks like.</para>
     /// <code>"System.UInt32 Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder1::&lt;ArrayLength&gt;k__BackingField".</code>
     /// <para>
     /// It will contain the name of the property. This needs to be converted into the corresponding full property name.
@@ -101,14 +96,14 @@ public static class StringExtensions
          name.ConvertSimpleBackingFieldNameToPropertyName() + "()";
 
     /// <summary>
-    /// Converts the simple name of a property-backing auto-generated field's name to the corresponding property's
-    /// name.
+    /// Converts the simple name of a property-backing auto-generated field's name to the corresponding property's name.
     /// </summary>
     /// <remarks>
-    /// <para>Such a field's name looks like
-    /// "&lt;Number&gt;k__BackingField".
-    /// It will contain the name of the property. This needs to be converted into the corresponding simple property
-    /// name: "Number".</para>
+    /// <para>
+    /// Such a field's name looks like "&lt;Number&gt;k__BackingField". It will contain the name of the property. This
+    /// needs to be converted into the corresponding simple property
+    /// name: "Number".
+    /// </para>
     /// </remarks>
     public static string ConvertSimpleBackingFieldNameToPropertyName(this string name) =>
          name.RegexReplace("<(.*)>.*BackingField", match => match.Groups[1].Value);

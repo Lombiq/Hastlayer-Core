@@ -11,6 +11,7 @@ public class AzureAlveoU250Driver : AzureAlveoU250ManifestProvider, IDeviceDrive
     private readonly object _timingReportParserLock = new();
 
     private ITimingReport _timingReport;
+
     public ITimingReport TimingReport
     {
         get

@@ -10,13 +10,13 @@ using System.Linq;
 namespace Hast.Transformer.Services;
 
 /// <summary>
-/// Processes binary and unary operator expressions and if the operands or the result lacks necessary explicit
-/// casts, adds them.
+/// Processes binary and unary operator expressions and if the operands or the result lacks necessary explicit casts,
+/// adds them.
 ///
 /// Arithmetic binary operations in .NET should have set operand and result types, but these are not alway reflected
-/// with explicit casts in the AST. The rules for determining the type of operands are similar to that in C/C++
-/// (<see href="https://docs.microsoft.com/en-us/cpp/c-language/usual-arithmetic-conversions"/>) and are called
-/// "numeric promotions" <see href="https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions"/>).
+/// with explicit casts in the AST. The rules for determining the type of operands are similar to that in C/C++ ( <see
+/// href="https://docs.microsoft.com/en-us/cpp/c-language/usual-arithmetic-conversions"/>) and are called "numeric
+/// promotions" <see href="https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions"/>).
 /// But the AST won't always contain all casts due to implicit casting. Take the following code for example:
 ///
 /// byte a = ...;
@@ -46,8 +46,8 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
     private class BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor : DepthFirstAstVisitor
     {
         // Note that while shifts are missing from the list under
-        // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions they still get
-        // kind of a numeric promotion. See the page about bitwise and shift operators
+        // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions they still get kind
+        // of a numeric promotion. See the page about bitwise and shift operators
         // (https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators)
         // mentions that "When operands are of different integral types, their values are converted to the closest
         // containing integral type."
@@ -129,8 +129,8 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
             _knownTypeLookupTable = knownTypeLookupTable;
 
         // Adding implicit casts as explained here:
-        // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions
-        // Also handling shifts where the left operand needs to be u/int or u/long, see:
+        // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions Also handling shifts
+        // where the left operand needs to be u/int or u/long, see:
         // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators
 
         public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
@@ -177,16 +177,16 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
                 if (resultTypeReferenceIsSet) return;
                 resultTypeReferenceIsSet = true;
 
-                // Changing the result type to align it with the operands' type (it will be always the same, but
-                // only for operations with numeric results, like +, -, but not for e.g. <=).
+                // Changing the result type to align it with the operands' type (it will be always the same, but only
+                // for operations with numeric results, like +, -, but not for e.g. <=).
                 if (!_binaryOperatorsProducingNumericResults.Contains(binaryOperatorExpression.Operator))
                 {
                     return;
                 }
 
-                // We should also put a cast around it if necessary so it produces the same type as before. But only
-                // if this binary operator expression is not also in another binary operator expression, when it
-                // will be cast again.
+                // We should also put a cast around it if necessary so it produces the same type as before. But only if
+                // this binary operator expression is not also in another binary operator expression, when it will be
+                // cast again.
                 var firstNonParenthesizedExpressionParent = binaryOperatorExpression.FindFirstNonParenthesizedExpressionParent();
                 if (firstNonParenthesizedExpressionParent is not CastExpression and not BinaryOperatorExpression)
                 {
@@ -238,8 +238,8 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
             else if (unaryOperatorExpression.Operator == UnaryOperatorType.Minus &&
                 ((unaryOperatorExpression.Expression as CastExpression)?.Type as PrimitiveType)?.KnownTypeCode == KnownTypeCode.UInt32)
             {
-                // For an int value the AST can contain -(uint)value if the original code was (uint)-value.
-                // Fixing that here.
+                // For an int value the AST can contain -(uint)value if the original code was (uint)-value. Fixing that
+                // here.
                 unaryOperatorExpression.Expression.ReplaceWith(((CastExpression)unaryOperatorExpression.Expression).Expression);
             }
         }
@@ -258,8 +258,8 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
             var uintFullName = typeof(uint).FullName;
             var typesConvertedToLongForUint = new[] { typeof(sbyte).FullName, typeof(short).FullName, intFullName };
 
-            // First handling shifts which are different from other affected binary operators because only the
-            // left operand is promoted, and only everything below int to int.
+            // First handling shifts which are different from other affected binary operators because only the left
+            // operand is promoted, and only everything below int to int.
             if (binaryOperatorExpression.Operator is BinaryOperatorType.ShiftLeft or BinaryOperatorType.ShiftRight)
             {
                 if (!new[] { longFullName, ulongFullName, intFullName, uintFullName }.Contains(leftTypeFullName))
@@ -291,9 +291,9 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
                 castConditional(leftTypeFullName == uintFullName);
             }
 
-            // While not specified under the numeric promotions language reference section, this condition cares
-            // about types that define all operators in questions. E.g. an equality check between two uints
-            // shouldn't force an int cast.
+            // While not specified under the numeric promotions language reference section, this condition cares about
+            // types that define all operators in questions. E.g. an equality check between two uints shouldn't force an
+            // int cast.
             else if (leftTypeFullName != rightTypeFullName ||
                      !_numericTypesSupportingNumericPromotionOperations.Contains(leftTypeFullName))
             {

@@ -59,8 +59,8 @@ public class TypeConversionTransformer : ITypeConversionTransformer
             expressionType?.Equals(rightType) == true
                 // Is the result type of the expression equal to one of the operands? Then convert the other operand.
                 ? expressionType.Equals(leftType)
-                // If the result type of the expression is something else (e.g. if the operation is inequality then
-                // for two integer operands the result type will be boolean) then convert in a way that's lossless.
+                // If the result type of the expression is something else (e.g. if the operation is inequality then for
+                // two integer operands the result type will be boolean) then convert in a way that's lossless.
                 : ImplementTypeConversion(leftVhdlType, rightVhdlType, Empty.Instance).IsLossy;
 
         var fromType = convertToLeftType ? rightVhdlType : leftVhdlType;
@@ -180,8 +180,8 @@ public class TypeConversionTransformer : ITypeConversionTransformer
         {
             result.IsResized = true;
 
-            // There needs to be some decision logic on size in SmartResize() because sometimes the sizes in VHDL
-            // won't be the same as in .NET due to type handling.
+            // There needs to be some decision logic on size in SmartResize() because sometimes the sizes in VHDL won't
+            // be the same as in .NET due to type handling.
             return ResizeHelper.SmartResize(parameter, toSize);
         }
 
@@ -230,8 +230,8 @@ public class TypeConversionTransformer : ITypeConversionTransformer
 
                 var expression = fromExpression;
 
-                // Resizing needs to happen before signed() otherwise casting an unsigned to signed can result in
-                // data loss due to the range change.
+                // Resizing needs to happen before signed() otherwise casting an unsigned to signed can result in data
+                // loss due to the range change.
                 if (fromSize != toSize)
                 {
                     expression = CreateResizeExpression(fromExpression);

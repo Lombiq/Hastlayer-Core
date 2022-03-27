@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
@@ -10,12 +10,10 @@ using System.Linq;
 namespace Hast.Transformer.Services;
 
 /// <summary>
-/// Converts the type of variables of type <c>object</c> to the actual type they'll contain if this can be
-/// determined.
+/// Converts the type of variables of type <c>object</c> to the actual type they'll contain if this can be determined.
 /// </summary>
 /// <example>
 /// <para>Currently the following kind of constructs are supported:</para>
-///
 /// <code>
 /// // The numberObject variable will be converted to uint since apparently it is one.
 /// internal bool &lt;ParallelizedArePrimeNumbers&gt;b__9_0 (object numberObject)
@@ -25,19 +23,20 @@ namespace Hast.Transformer.Services;
 ///     // ...
 /// }
 /// </code>
-///
 /// <para>
-/// Furthermore, casts to the object type corresponding to these variables when in Task starts are also removed,
-/// like the one for num4 here:
+/// Furthermore, casts to the object type corresponding to these variables when in Task starts are also removed, like
+/// the one for num4 here:
 /// </para>
 /// <code>
-/// Task.Factory.StartNew ((Func&lt;object, bool&gt;)this.&lt;ParallelizedArePrimeNumbers&gt;b__9_0, (object)num4);
+///Task.Factory.StartNew ((Func&lt;object, bool&gt;)this.&lt;ParallelizedArePrimeNumbers&gt;b__9_0, (object)num4);
 /// </code>
 /// </example>
 /// <remarks>
-/// <para>This is necessary because unlike an object-typed variable in .NET that due to dynamic memory allocations can
-/// hold any data in hardware the variable size should be statically determined (like fixed 32b). So compatibility
-/// with .NET object variables is not complete, thus attempting to close the loop here.</para>
+/// <para>
+/// This is necessary because unlike an object-typed variable in .NET that due to dynamic memory allocations can hold
+/// any data in hardware the variable size should be statically determined (like fixed 32b). So compatibility with .NET
+/// object variables is not complete, thus attempting to close the loop here.
+/// </para>
 /// </remarks>
 public class ObjectVariableTypesConverter : IConverter
 {
@@ -65,16 +64,16 @@ public class ObjectVariableTypesConverter : IConverter
                 var castExpressionFindingVisitor = new ParameterCastExpressionFindingVisitor(objectParameter.Name);
                 methodDeclaration.Body.AcceptVisitor(castExpressionFindingVisitor);
 
-                // Simply changing the parameter's type and removing the cast. Note that this will leave
-                // corresponding compiler-generated Funcs intact and thus wrong. E.g. there will be similar lines
-                // added to the lambda's calling method:
-                // Task.Factory.StartNew ((Func<object, bool>)this.<ParallelizedArePrimeNumbers>b__9_0, num4)
-                // This will remain, despite the Func's type now correctly being e.g. Func<uint, bool>.
-                // Note that the method's full name will contain the original object parameter since the
-                // MemberResolveResult will still the have original parameters. This will be an aesthetic issue
-                // only though: Nothing else depends on the parameters being correct here. If we'd change these
-                // then the whole MemberResolveResult would need to be recreated (since parameter types, as well as
-                // the list of parameters is read-only), not just here but in all the references to this method too.
+                // Simply changing the parameter's type and removing the cast. Note that this will leave corresponding
+                // compiler-generated Funcs intact and thus wrong. E.g. there will be similar lines added to the
+                // lambda's calling method: Task.Factory.StartNew ((Func<object,
+                // bool>)this.<ParallelizedArePrimeNumbers>b__9_0, num4) This will remain, despite the Func's type now
+                // correctly being e.g. Func<uint, bool>. Note that the method's full name will contain the original
+                // object parameter since the MemberResolveResult will still the have original parameters. This will be
+                // an aesthetic issue only though: Nothing else depends on the parameters being correct here. If we'd
+                // change these then the whole MemberResolveResult would need to be recreated (since parameter types, as
+                // well as the list of parameters is read-only), not just here but in all the references to this method
+                // too.
 
                 var castExpression = castExpressionFindingVisitor.Expression;
                 if (castExpression != null)

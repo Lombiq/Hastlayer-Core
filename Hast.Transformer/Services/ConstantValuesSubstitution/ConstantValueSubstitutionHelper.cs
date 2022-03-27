@@ -46,8 +46,8 @@ internal static class ConstantValueSubstitutionHelper
             passedExpression,
             typeDeclarationLookupTable);
 
-    // This could be optimized not to look up everything every time when called from VisitObjectCreateExpression()
-    // and VisitInvocationExpression().
+    // This could be optimized not to look up everything every time when called from VisitObjectCreateExpression() and
+    // VisitInvocationExpression().
     private static ParameterDeclaration FindParameterForExpressionPassedToCall(
         Expression callExpression,
         AstNodeCollection<Expression> invocationArguments,
@@ -76,8 +76,8 @@ internal static class ConstantValueSubstitutionHelper
 
         if (argumentIndex == -1) return null;
 
-        // Depending on whether a @this parameter was added to the method or used during invocation we need to
-        // adjust the argument's index if there is a mismatch between the invocation and the method.
+        // Depending on whether a @this parameter was added to the method or used during invocation we need to adjust
+        // the argument's index if there is a mismatch between the invocation and the method.
         if (parameters.Count < arguments.Count) argumentIndex--;
         else if (parameters.Count > arguments.Count) argumentIndex++;
 

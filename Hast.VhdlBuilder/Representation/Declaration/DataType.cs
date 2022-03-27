@@ -41,9 +41,11 @@ public class DataType : INamedElement, IReferenceableDeclaration<DataType>
     /// Generates VHDL code that can be used when the data type is referenced e.g. in a variable declaration.
     /// </summary>
     /// <remarks>
-    /// <para>This is necessary because enums are declared and used in variables differently. Note that this is a different
-    /// concept from <see cref="DataObjectReference"/> which is about referencing data objects (e.g. signals), not
-    /// data types.</para>
+    /// <para>
+    /// This is necessary because enums are declared and used in variables differently. Note that this is a different
+    /// concept from <see cref="DataObjectReference"/> which is about referencing data objects (e.g. signals), not data
+    /// types.
+    /// </para>
     /// </remarks>
     public virtual DataType ToReference() =>
         new DataTypeReference(this, vhdlGenerationOptions => vhdlGenerationOptions.NameShortener(Name));
@@ -52,8 +54,8 @@ public class DataType : INamedElement, IReferenceableDeclaration<DataType>
         vhdlGenerationOptions.NameShortener(Name);
 
     /// <summary>
-    /// Indicated whether this data type is among the types that can be assigned to an array as a literal inside
-    /// double quotes.
+    /// Indicated whether this data type is among the types that can be assigned to an array as a literal inside double
+    /// quotes.
     /// </summary>
     public virtual bool IsLiteralArrayType() =>
         this == KnownDataTypes.UnrangedInt || Name == "bit_vector" || Name == "std_logic_vector" || Name == "string";
@@ -72,8 +74,8 @@ public class DataType : INamedElement, IReferenceableDeclaration<DataType>
     [SuppressMessage("Blocker Code Smell", "S3875:\"operator==\" should not be overloaded on reference types", Justification = "Why?")]
     public static bool operator ==(DataType a, DataType b)
     {
-        // If both are null, or both are the same instance, return true (ReferenceEquals() returns true if both
-        // object are null).
+        // If both are null, or both are the same instance, return true (ReferenceEquals() returns true if both object
+        // are null).
         if (ReferenceEquals(a, b))
         {
             return true;

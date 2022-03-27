@@ -22,8 +22,8 @@ public static class InvocationInstanceCountTransformerConfigurationExtensions
             return configuration.GetMaxInvocationInstanceCountConfigurationForMember(simpleName);
         }
 
-        // If this is a DisplayClass member then it was generated from a lambda expression. So need to handle it
-        // with the special "MemberNamePrefix.LambdaExpression.[Index]" pattern.
+        // If this is a DisplayClass member then it was generated from a lambda expression. So need to handle it with
+        // the special "MemberNamePrefix.LambdaExpression.[Index]" pattern.
 
         var indexedNameHolder = entity.Annotation<LambdaExpressionIndexedNameHolder>();
 
@@ -58,8 +58,7 @@ public static class InvocationInstanceCountTransformerConfigurationExtensions
 
             indexedNameHolder = entity.Annotation<LambdaExpressionIndexedNameHolder>();
 
-            // If it's still null then the member wasn't generated from a lambda expression and thus normal rules
-            // apply.
+            // If it's still null then the member wasn't generated from a lambda expression and thus normal rules apply.
             if (indexedNameHolder == null)
             {
                 return configuration.GetMaxInvocationInstanceCountConfigurationForMember(simpleName);

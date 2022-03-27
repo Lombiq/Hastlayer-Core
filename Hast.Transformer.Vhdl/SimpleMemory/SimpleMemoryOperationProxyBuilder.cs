@@ -67,8 +67,8 @@ public class SimpleMemoryOperationProxyBuilder : ISimpleMemoryOperationProxyBuil
         {
             IVhdlElement value = component.CreateSimpleMemorySignalName(portName).ToVhdlIdValue();
 
-            // Since CellIndex is an integer but all ints are handled as unsigned types internally we need to do a
-            // type conversion.
+            // Since CellIndex is an integer but all ints are handled as unsigned types internally we need to do a type
+            // conversion.
             if (portName == SimpleMemoryPortNames.CellIndex)
             {
                 value = Invocation.ToInteger(value);

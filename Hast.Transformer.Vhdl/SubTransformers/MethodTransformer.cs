@@ -43,8 +43,8 @@ public class MethodTransformer : IMethodTransformer
                 .GetMaxInvocationInstanceCountConfigurationForMember(method).MaxInvocationInstanceCount;
             var stateMachineResults = new IArchitectureComponentResult[stateMachineCount];
 
-            // Not much use to parallelize computation unless there are a lot of state machines to create or the
-            // method is very complex. We'll need to examine when to parallelize here and determine it in runtime.
+            // Not much use to parallelize computation unless there are a lot of state machines to create or the method
+            // is very complex. We'll need to examine when to parallelize here and determine it in runtime.
             if (stateMachineCount > 50)
             {
                 var stateMachineComputingTasks = new List<Task<IArchitectureComponentResult>>();
@@ -90,8 +90,8 @@ public class MethodTransformer : IMethodTransformer
 
         // Handling the return type.
         var returnType = _declarableTypeCreator.CreateDeclarableType(method, method.ReturnType, context);
-        // If the return type is a Task then that means it's one of the supported simple TPL scenarios,
-        // corresponding to void in VHDL.
+        // If the return type is a Task then that means it's one of the supported simple TPL scenarios, corresponding to
+        // void in VHDL.
         if (returnType == SpecialTypes.Task) returnType = KnownDataTypes.Void;
         var isVoid = returnType.Name == "void";
         if (!isVoid)
@@ -107,8 +107,8 @@ public class MethodTransformer : IMethodTransformer
         var isFirstOutFlowingParameter = true;
         foreach (var parameter in method.GetNonSimpleMemoryParameters())
         {
-            // Since input parameters are assigned to from the outside but they could be attempted to be also
-            // assigned to from the inside (since in .NET a method argument can also be assigned to from inside the
+            // Since input parameters are assigned to from the outside but they could be attempted to be also assigned
+            // to from the inside (since in .NET a method argument can also be assigned to from inside the
             // method) we need to have intermediary input variables, then copy their values to local variables.
 
             var parameterDataType = _declarableTypeCreator.CreateDeclarableType(parameter, parameter.Type, context);
@@ -138,8 +138,8 @@ public class MethodTransformer : IMethodTransformer
                 Expression = parameterSignalReference,
             });
 
-            // If the parameter can be modified inside and those changes should be passed back then we need to write
-            // the local variables back to parameters.
+            // If the parameter can be modified inside and those changes should be passed back then we need to write the
+            // local variables back to parameters.
             if (!parameter.IsOutFlowing()) continue;
 
             if (isFirstOutFlowingParameter)
@@ -196,16 +196,14 @@ public class MethodTransformer : IMethodTransformer
             lastStatementIsReturn = statement is ReturnStatement;
         }
 
-        // If the last statement was a return statement then there is already a state change to the final state
-        // added.
+        // If the last statement was a return statement then there is already a state change to the final state added.
         if (!lastStatementIsReturn)
         {
             bodyContext.Scope.CurrentBlock.Add(stateMachine.ChangeToFinalState());
         }
 
-        // We need to return the declarations and body here too so their computation can be parallelized too.
-        // Otherwise we'd add them directly to context.Module.Architecture but that would need that collection to
-        // be thread-safe.
+        // We need to return the declarations and body here too so their computation can be parallelized too. Otherwise
+        // we'd add them directly to context.Module.Architecture but that would need that collection to be thread-safe.
         var result = new ArchitectureComponentResult(stateMachine);
 
         // Warnings would be repeated for each instance of the state machine otherwise.

@@ -74,8 +74,8 @@ public class ExpressionTransformer : IExpressionTransformer
             },
             ObjectCreateExpression objectCreateExpression => TransformObjectCreate(objectCreateExpression, context),
             DefaultValueExpression defaultValueExpression => TransformDefaultValue(defaultValueExpression, context),
-            // DirectionExpressions like ref and out modifiers on method invocation arguments don't need to be
-            // handled specially: these are just out-flowing parameters.
+            // DirectionExpressions like ref and out modifiers on method invocation arguments don't need to be handled
+            // specially: these are just out-flowing parameters.
             DirectionExpression directionExpression => Transform(directionExpression.Expression, context),
             _ => throw new NotSupportedException(
                 $"Expressions of type {expression.GetType()} are not supported. The {nameof(expression)} was: " +
@@ -131,9 +131,8 @@ public class ExpressionTransformer : IExpressionTransformer
                 .GetMaxInvocationInstanceCountConfigurationForMember(entity)
                 .MaxDegreeOfParallelism;
 
-        // If the right side of an assignment is also an assignment that means that it's a single-line assignment
-        // to multiple variables, so e.g. int a, b, c = 2; We flatten out such expression to individual simple
-        // assignments.
+        // If the right side of an assignment is also an assignment that means that it's a single-line assignment to
+        // multiple variables, so e.g. int a, b, c = 2; We flatten out such expression to individual simple assignments.
         if (assignment.Right is AssignmentExpression)
         {
             // Finding the rightmost expression that is the actual value assignment.
@@ -232,8 +231,8 @@ public class ExpressionTransformer : IExpressionTransformer
                 .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
                 .As<MethodDeclaration>();
 
-        // We only need to care about the invocation here. Since this is a Task start there will be
-        // some form of await later.
+        // We only need to care about the invocation here. Since this is a Task start there will be some form of await
+        // later.
         _stateMachineInvocationBuilder.BuildInvocation(
             targetMethod,
             rightInvocationExpression.Arguments.Skip(1).Select(argument =>
@@ -280,16 +279,16 @@ public class ExpressionTransformer : IExpressionTransformer
         // Replacing decimal comma to decimal dot.
         if (vhdlType.TypeCategory == DataTypeCategory.Scalar) valueString = valueString.Replace(',', '.');
 
-        // If a constant value of type real doesn't contain a decimal separator then it will be detected as integer
-        // and a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
+        // If a constant value of type real doesn't contain a decimal separator then it will be detected as integer and
+        // a type conversion would be needed. Thus we add a .0 to the end to indicate it's a real.
         if (vhdlType == KnownDataTypes.Real && !valueString.Contains("."))
         {
             valueString += ".0";
         }
 
         // The to_signed() and to_unsigned() functions expect signed integer arguments (range: -2147483648 to
-        // +2147483647). Thus if the literal is larger than an integer we need to use the binary notation without
-        // these functions.
+        // +2147483647). Thus if the literal is larger than an integer we need to use the binary notation without these
+        // functions.
         if (vhdlType.Name != KnownDataTypes.Int8.Name && vhdlType.Name != KnownDataTypes.UInt8.Name)
         {
             return valueString.ToVhdlValue(vhdlType);
@@ -395,8 +394,7 @@ public class ExpressionTransformer : IExpressionTransformer
         // Handling array.Length with the VHDL length attribute.
         if (memberReference.IsArrayLengthAccess())
         {
-            // The length will always be a 32b int, but since everything else is signed or unsigned, we need to
-            // convert.
+            // The length will always be a 32b int, but since everything else is signed or unsigned, we need to convert.
             return Invocation.ToSigned(new Raw("{0}'length", Transform(memberReference.Target, context)), 32);
         }
 
@@ -411,8 +409,8 @@ public class ExpressionTransformer : IExpressionTransformer
         // Field reference expressions in DisplayClasses are supported.
         if (memberReference.Target is ThisReferenceExpression && memberFullName.IsDisplayOrClosureClassMemberName())
         {
-            // These fields are global and correspond to the DisplayClass class so they shouldn't be prefixed
-            // with the state machine's name.
+            // These fields are global and correspond to the DisplayClass class so they shouldn't be prefixed with the
+            // state machine's name.
             return memberFullName.ToExtendedVhdlId().ToVhdlVariableReference();
         }
 
@@ -446,8 +444,8 @@ public class ExpressionTransformer : IExpressionTransformer
             targetType.GetFullName().StartsWithOrdinal("System.Threading.Tasks.Task") &&
             memberReference.MemberName == "Result")
         {
-            // If this is not an array then it doesn't need to be explicitly awaited, just access to its
-            // Result property should await it. So doing it here.
+            // If this is not an array then it doesn't need to be explicitly awaited, just access to its Result property
+            // should await it. So doing it here.
             if (memberReference.Target is IdentifierExpression targetIdentifierExpression && !targetType.IsArray())
             {
                 var targetMethod = scope
@@ -456,8 +454,8 @@ public class ExpressionTransformer : IExpressionTransformer
                     .BuildSingleInvocationWait(targetMethod, 0, context);
             }
 
-            // We know that we've already handled the target so it stores the result objects, so just need
-            // to use them directly.
+            // We know that we've already handled the target so it stores the result objects, so just need to use them
+            // directly.
             return Transform(memberReference.Target, context);
         }
 
@@ -477,8 +475,8 @@ public class ExpressionTransformer : IExpressionTransformer
         //// Increment/decrement unary operators that are in their own statements are compiled into binary operators
         //// (e.g. i++ will be i = i + 1) so we don't have to care about those.
 
-        // Since unary operations can also take significant time (but they can't be multi-cycle) to complete
-        // they're also assigned to result variables as with binary operator expressions.
+        // Since unary operations can also take significant time (but they can't be multi-cycle) to complete they're
+        // also assigned to result variables as with binary operator expressions.
 
         var expressionType = _typeConverter
             .ConvertType(unary.Expression.GetActualType(), context.TransformationContext);
@@ -539,8 +537,8 @@ public class ExpressionTransformer : IExpressionTransformer
 
         var innerExpressionResult = Transform(castExpression.Expression, context);
 
-        // To avoid double-casting of binary expression results BinaryOperatorExpressionTransformer also checks
-        // if the parent is a cast. So then no need to cast again.
+        // To avoid double-casting of binary expression results BinaryOperatorExpressionTransformer also checks if the
+        // parent is a cast. So then no need to cast again.
         if (castExpression.Expression is BinaryOperatorExpression ||
             castExpression.Expression.Is<ParenthesizedExpression>(parenthesized =>
                 parenthesized.Expression is BinaryOperatorExpression))
@@ -617,16 +615,16 @@ public class ExpressionTransformer : IExpressionTransformer
                 new MemberReferenceExpression(
                     new TypeReferenceExpression(objectCreateExpression.Type.Clone()),
                     constructor.Name),
-                // Passing ctor parameters, and an object reference as the first one (since all methods were
-                // converted to static with the first parameter being @this).
+                // Passing ctor parameters, and an object reference as the first one (since all methods were converted
+                // to static with the first parameter being @this).
                 new[] { initiailizationResult.RecordInstanceIdentifier.Clone() }
                     .Union(objectCreateExpression.Arguments.Select(argument => argument.Clone())));
 
             objectCreateExpression.CopyAnnotationsTo(constructorInvocation);
 
             // Creating a clone of the expression's sub-tree where object creation is replaced to make the fake
-            // InvocationExpression realistic. A clone is needed not to cause concurrency issues if the same
-            // expression is processed on multiple threads for multiple hardware copies.
+            // InvocationExpression realistic. A clone is needed not to cause concurrency issues if the same expression
+            // is processed on multiple threads for multiple hardware copies.
             var expressionName = objectCreateExpression.GetFullName();
 
             var subTreeClone = objectCreateExpression.FindFirstParentEntityDeclaration().Clone();
@@ -644,8 +642,8 @@ public class ExpressionTransformer : IExpressionTransformer
 
     private IVhdlElement TransformDefaultValue(DefaultValueExpression defaultValueExpression, SubTransformerContext context)
     {
-        // The only case when a default() will remain in the syntax tree is for composed types. For primitives
-        // a constant will be substituted. E.g. instead of default(int) a 0 will be in the AST.
+        // The only case when a default() will remain in the syntax tree is for composed types. For primitives a
+        // constant will be substituted. E.g. instead of default(int) a 0 will be in the AST.
         var initiailizationResult = InitializeRecord(defaultValueExpression, defaultValueExpression.Type, context);
 
         ArrayHelper.ThrowArraysCantBeNullIfArray(defaultValueExpression);
@@ -692,9 +690,9 @@ public class ExpressionTransformer : IExpressionTransformer
         if (left is IdentifierExpression &&
             stateMachine.LocalAliases.Any(alias => alias.Name == leftDataObject.Name))
         {
-            // The left variable was previously swapped for an alias to allow reference-like behavior so changes
-            // made to record fields are propagated. However such aliases can't be assigned to as that would also
-            // overwrite the original variable.
+            // The left variable was previously swapped for an alias to allow reference-like behavior so changes made to
+            // record fields are propagated. However such aliases can't be assigned to as that would also overwrite the
+            // original variable.
             throw new NotSupportedException(
                 $"The {nameof(assignment)} {expression} is not supported. You can't at the moment assign to a " +
                 $"variable that you previously assigned to using a reference type-holding variable."
@@ -708,10 +706,9 @@ public class ExpressionTransformer : IExpressionTransformer
         if (assignment.IsPotentialAliasAssignment())
         {
             // This is an assignment which is possibly just an alias. Since there are no references in VHDL the best
-            // option is to use aliases (instead of assigning back variables after every change). This is not
-            // perfect though since if the now alias variable is assigned to then that won't work, see the exception
-            // above.
-            // This might not be needed because of UnneededReferenceVariablesRemover.
+            // option is to use aliases (instead of assigning back variables after every change). This is not perfect
+            // though since if the now alias variable is assigned to then that won't work, see the exception above. This
+            // might not be needed because of UnneededReferenceVariablesRemover.
 
             // Switching the left variable out with an alias so it'll have reference-like behavior.
 
@@ -753,9 +750,9 @@ public class ExpressionTransformer : IExpressionTransformer
 
     private RecordInitializationResult InitializeRecord(Expression expression, AstType recordAstType, SubTransformerContext context)
     {
-        // Objects are mimicked with records and those don't need instantiation. However, it's useful to initialize
-        // all record fields to their default or initial values (otherwise if e.g. a class is instantiated in a
-        // loop in the second run the old values could be accessed in VHDL).
+        // Objects are mimicked with records and those don't need instantiation. However, it's useful to initialize all
+        // record fields to their default or initial values (otherwise if e.g. a class is instantiated in a loop in the
+        // second run the old values could be accessed in VHDL).
 
         var typeDeclaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(recordAstType);
 
@@ -771,8 +768,8 @@ public class ExpressionTransformer : IExpressionTransformer
         var parentAssignment = expression
             .FindFirstParentOfType<AssignmentExpression>(assignment => assignment.Right == expression);
 
-        // This will only work if the newly created object is assigned to a variable or something else. It won't
-        // work if the newly created object is directly passed to a method for example. However,
+        // This will only work if the newly created object is assigned to a variable or something else. It won't work if
+        // the newly created object is directly passed to a method for example. However,
         // DirectlyAccessedNewObjectVariablesCreator takes care of that.
         var recordInstanceAssignmentTarget = parentAssignment.Left;
         result.RecordInstanceIdentifier =
@@ -813,8 +810,8 @@ public class ExpressionTransformer : IExpressionTransformer
 
             IVhdlElement initializerExpression = initializationValue;
 
-            // In C# the default value can be e.g. an integer literal for an ushort field. So we need to take care
-            // of that.
+            // In C# the default value can be e.g. an integer literal for an ushort field. So we need to take care of
+            // that.
             if (field.DataType != initializationValue.DataType)
             {
                 initializerExpression = _typeConversionTransformer.ImplementTypeConversion(

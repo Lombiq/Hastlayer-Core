@@ -58,8 +58,8 @@ public class CompilerGeneratedClassesVerifier : IVerifyer
         if (field == null) return;
 
         // Is the field assigned to? Because we don't support that currently, since with it being converted to a
-        // parameter we'd need to return its value and assign it to the caller's variable. Maybe we'll allow this
-        // with static field support, but not for lambdas used in parallelized expressions (since that would require
+        // parameter we'd need to return its value and assign it to the caller's variable. Maybe we'll allow this with
+        // static field support, but not for lambdas used in parallelized expressions (since that would require
         // concurrent access too).
         var isAssignedTo =
             // The field is directly assigned to.

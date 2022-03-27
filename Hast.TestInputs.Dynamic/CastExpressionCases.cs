@@ -6,8 +6,8 @@ public class CastExpressionCases : DynamicTestInputBase
 {
     public virtual void AllNumberCastingVariations(SimpleMemory memory)
     {
-        // Separate input for int so it doesn't need to be downcast from the long one which can potentially be
-        // wrong too.
+        // Separate input for int so it doesn't need to be downcast from the long one which can potentially be wrong
+        // too.
         var intInput = memory.ReadInt32(1);
         long longInput = ((long)memory.ReadInt32(0) << 32) | (uint)memory.ReadInt32(1);
 
@@ -115,8 +115,8 @@ public class CastExpressionCases : DynamicTestInputBase
         memory.WriteInt32(64, (int)ulongResult);
         memory.WriteInt32(65, byteResult);
         memory.WriteUInt32(66, byteResult);
-        // Without these assignments, just passing byteResult directly to WriteInt32 and WriteUInt32 would lack any
-        // cast in .NET.
+        // Without these assignments, just passing byteResult directly to WriteInt32 and WriteUInt32 would lack any cast
+        // in .NET.
         shortResult = byteResult;
         memory.WriteInt32(67, shortResult);
         ushortResult = byteResult;

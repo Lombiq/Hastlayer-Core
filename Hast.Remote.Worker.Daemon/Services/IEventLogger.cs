@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Remote.Worker.Daemon.Constants;
 using Microsoft.Extensions.Logging;
 
@@ -16,8 +16,8 @@ public interface IEventLogger
     ILogger Logger { get; set; }
 
     /// <summary>
-    /// Creates a system event with the text containing <see cref="ServiceProperties.DisplayName"/> and
-    /// <paramref name="statusText"/>.
+    /// Creates a system event with the text containing <see cref="ServiceProperties.DisplayName"/> and <paramref
+    /// name="statusText"/>.
     /// </summary>
     /// <param name="statusText">The new state of the service.</param>
     void UpdateStatus(string statusText);

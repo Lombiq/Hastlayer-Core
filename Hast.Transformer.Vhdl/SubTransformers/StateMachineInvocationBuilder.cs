@@ -159,9 +159,9 @@ public class StateMachineInvocationBuilder : IStateMachineInvocationBuilder
 
         var indexedStateMachineName = ArchitectureComponentNameHelper.CreateIndexedComponentName(targetMethodName, index);
 
-        // Due to the time needed for the invocation proxy to register that the invoked state machine is not started
-        // any more the same state machine can be restarted in the second state counted from the await state at
-        // earliest. Thus adding a new state and also a wait state if necessary.
+        // Due to the time needed for the invocation proxy to register that the invoked state machine is not started any
+        // more the same state machine can be restarted in the second state counted from the await state at earliest.
+        // Thus adding a new state and also a wait state if necessary.
         var finishedInvokedComponentsForStates = scope.FinishedInvokedStateMachinesForStates;
 
         // Would the invocation be restarted in the same state? We need to add a state just to wait, then a new state
@@ -274,13 +274,13 @@ public class StateMachineInvocationBuilder : IStateMachineInvocationBuilder
             Name = parameterSignalName,
         });
 
-        // Assign local variables to/from the intermediary parameter signal.
-        // If the parameter is of direction In then the parameter element should contain an IDataObject.
+        // Assign local variables to/from the intermediary parameter signal. If the parameter is of direction In then
+        // the parameter element should contain an IDataObject.
         var assignTo = flowDirection == ParameterFlowDirection.Out ? parameterSignalReference : (IDataObject)parameterReference;
         var assignmentExpression = flowDirection == ParameterFlowDirection.Out ? parameterReference : parameterSignalReference;
 
-        // We need to do type conversion if there is a type mismatch. This can also occur with Values (i.e.
-        // transformed PrimitiveExpressions) since in .NET there can be an implicit downcast not visible in the AST.
+        // We need to do type conversion if there is a type mismatch. This can also occur with Values (i.e. transformed
+        // PrimitiveExpressions) since in .NET there can be an implicit downcast not visible in the AST.
         if (parameter.DataType != parameterSignalType)
         {
             IAssignmentTypeConversionResult conversionResult;

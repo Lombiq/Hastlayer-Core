@@ -25,12 +25,12 @@ public class ImmutableArraysToStandardArraysConverter : IConverter
         SyntaxTree syntaxTree,
         IHardwareGenerationConfiguration configuration,
         IKnownTypeLookupTable knownTypeLookupTable) =>
-        // Note that ImmutableArrays can only be single-dimensional in themselves so the whole code here is built
-        // around that assumption (though it's possible to create ImmutableArrays of ImmutableArrays, but this is
-        // not supported yet).
+        // Note that ImmutableArrays can only be single-dimensional in themselves so the whole code here is built around
+        // that assumption (though it's possible to create ImmutableArrays of ImmutableArrays, but this is not supported
+        // yet).
 
-        // This implementation is partial, to the extent needed for unum and posit support. More value holders,
-        // like fields, could also be handled for example.
+        // This implementation is partial, to the extent needed for unum and posit support. More value holders, like
+        // fields, could also be handled for example.
 
         syntaxTree.AcceptVisitor(new ImmutableArraysToStandardArraysConvertingVisitor(knownTypeLookupTable));
 
@@ -118,8 +118,8 @@ public class ImmutableArraysToStandardArraysConverter : IConverter
             {
                 if (memberReference.MemberName == "CreateRange")
                 {
-                    // ImmutableArray.CreateRange() can be substituted with an array assignment. Since the array
-                    // won't be changed (because it's immutable in .NET) this is not dangerous.
+                    // ImmutableArray.CreateRange() can be substituted with an array assignment. Since the array won't
+                    // be changed (because it's immutable in .NET) this is not dangerous.
                     if (invocationExpression.Arguments.Count > 1)
                     {
                         throw new NotSupportedException(
@@ -131,8 +131,8 @@ public class ImmutableArraysToStandardArraysConverter : IConverter
                 }
                 else if (memberReference.MemberName == "SetItem")
                 {
-                    // SetItem can be converted into a simple array element assignment to a newly created copy of
-                    // the array.
+                    // SetItem can be converted into a simple array element assignment to a newly created copy of the
+                    // array.
 
                     var elementType = invocationType.TypeArguments.Single();
                     var elementAstType = TypeHelper.CreateAstType(elementType);

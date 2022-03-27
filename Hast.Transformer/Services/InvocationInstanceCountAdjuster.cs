@@ -103,9 +103,9 @@ public class InvocationInstanceCountAdjuster : IInvocationInstanceCountAdjuster
             {
                 referenced.MaxDegreeOfParallelism = invoking.MaxDegreeOfParallelism;
 
-                // Was the referenced member invoked both from a parallelized member and from a non-parallelized
-                // one? Then let's increase MaxDegreeOfParallelism so there is no large multiplexing logic needed,
-                // instances of the referenced and invoking members can be paired.
+                // Was the referenced member invoked both from a parallelized member and from a non-parallelized one?
+                // Then let's increase MaxDegreeOfParallelism so there is no large multiplexing logic needed, instances
+                // of the referenced and invoking members can be paired.
                 if (_membersInvokedFromNonParallel.Contains(referencedMember))
                 {
                     referenced.MaxDegreeOfParallelism++;

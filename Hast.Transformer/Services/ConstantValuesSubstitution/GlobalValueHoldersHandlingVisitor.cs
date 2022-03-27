@@ -6,9 +6,9 @@ using System.Linq;
 namespace Hast.Transformer.Services.ConstantValuesSubstitution;
 
 /// <summary>
-/// The value of parameters of an object creation or method invocation, a member (in this case: field or property)
-/// or what's returned from a method can only be substituted if they have a globally unique value, since these are
-/// used not just from a single method (in contrast to variables). Thus these need special care, handling them here.
+/// The value of parameters of an object creation or method invocation, a member (in this case: field or property) or
+/// what's returned from a method can only be substituted if they have a globally unique value, since these are used not
+/// just from a single method (in contrast to variables). Thus these need special care, handling them here.
 /// </summary>
 internal class GlobalValueHoldersHandlingVisitor : DepthFirstAstVisitor
 {
@@ -89,8 +89,8 @@ internal class GlobalValueHoldersHandlingVisitor : DepthFirstAstVisitor
 
         var memberEntity = memberReferenceExpression.FindMemberDeclaration(_typeDeclarationLookupTable);
 
-        // If a primitive value is assigned then re-mark it so if there are multiple different such assignments
-        // then the member will be unmarked.
+        // If a primitive value is assigned then re-mark it so if there are multiple different such assignments then the
+        // member will be unmarked.
         if (parentAssignment.Right is PrimitiveExpression expression)
         {
             _constantValuesTable
@@ -106,8 +106,8 @@ internal class GlobalValueHoldersHandlingVisitor : DepthFirstAstVisitor
     {
         base.VisitReturnStatement(returnStatement);
 
-        // Method substitution is only valid if there is only one return statement in the method (or multiple
-        // ones but returning the same constant value).
+        // Method substitution is only valid if there is only one return statement in the method (or multiple ones but
+        // returning the same constant value).
         if (returnStatement.Expression is PrimitiveExpression primitiveExpression)
         {
             _constantValuesTable.MarkAsPotentiallyConstant(
@@ -122,13 +122,13 @@ internal class GlobalValueHoldersHandlingVisitor : DepthFirstAstVisitor
         }
     }
 
-    // Since fields and properties can be read even without initializing them they can be only substituted if
-    // they are read-only (or just have their data type defaults assigned to them). This is possible with
-    // readonly fields and auto-properties having only getters.
-    // So to prevent anything else from being substituted marking those as non-constant (this could be improved
-    // to still substitute the .NET default value if nothing else is assigned, but this should be extremely rare).
-    // With the scope-using substitution this restriction seems to be safe to remove, however since with read-
-    // only members potentially constant values are also enforced in .NET it's safer to leave it like this.
+    // Since fields and properties can be read even without initializing them they can be only substituted if they are
+    // read-only (or just have their data type defaults assigned to them). This is possible with readonly fields and
+    // auto-properties having only getters. So to prevent anything else from being substituted marking those as
+    // non-constant (this could be improved to still substitute the .NET default value if nothing else is assigned, but
+    // this should be extremely rare). With the scope-using substitution this restriction seems to be safe to remove,
+    // however since with read- only members potentially constant values are also enforced in .NET it's safer to leave
+    // it like this.
 
     public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
     {

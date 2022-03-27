@@ -58,8 +58,8 @@ public class TransformationContextCacheService : ITransformationContextCacheServ
         transformationIdComponents.AddRange(configuration.HardwareEntryPointMemberNamePrefixes);
         transformationIdComponents.Add(_jsonConverter.Serialize(configuration.CustomConfiguration));
 
-        // Adding the assembly name so the Hastlayer version is included too, to prevent stale caches after a
-        // Hastlayer update.
+        // Adding the assembly name so the Hastlayer version is included too, to prevent stale caches after a Hastlayer
+        // update.
         transformationIdComponents.Add(GetType().Assembly.FullName);
 
         // Adding the device name to ensure different a cached program for a different hardware doesn't get used.

@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 namespace Hast.Transformer.Services;
 
 /// <summary>
-/// Configures the invocation instance count for the body delegates of <see cref="Task"/>s, i.e. determines how
-/// many hardware copies a Task's body needs. Sets the <see cref="MemberInvocationInstanceCountConfiguration"/>
+/// Configures the invocation instance count for the body delegates of <see cref="Task"/> s, i.e. determines how many
+/// hardware copies a Task's body needs. Sets the <see cref="MemberInvocationInstanceCountConfiguration"/>
 /// automatically.
 /// </summary>
 /// <example>
 /// <para>For example in this case:</para>
-///
 /// <code>
 /// for (uint i = 0; i &lt; 10; i++)
 /// {
@@ -27,13 +26,12 @@ namespace Hast.Transformer.Services;
 ///         i);
 /// }
 /// </code>
-///
 /// <para>...this service will be able to determine that the level of parallelism is 10.</para>
 /// </example>
 public class TaskBodyInvocationInstanceCountsSetter : IConverter
 {
-    // Many other dependencies are just leftovers from the previous linear execution order. However in this case
-    // we know explicitly that ConstantValuesSubstitutor must come before TaskBodyInvocationInstanceCountsSetter.
+    // Many other dependencies are just leftovers from the previous linear execution order. However in this case we know
+    // explicitly that ConstantValuesSubstitutor must come before TaskBodyInvocationInstanceCountsSetter.
     public IEnumerable<string> Dependencies { get; } = new[] { nameof(ConstantValuesSubstitutor) };
 
     public void Convert(
@@ -68,8 +66,8 @@ public class TaskBodyInvocationInstanceCountsSetter : IConverter
             // Only do something if there's no invocation instance count configured.
             if (invokingMemberMaxInvocationConfiguration.MaxInvocationInstanceCount != 1) return;
 
-            // Searching for a parent while statement that has a condition with a variable and a primitive
-            // expression, i.e. something like num < 10.
+            // Searching for a parent while statement that has a condition with a variable and a primitive expression,
+            // i.e. something like num < 10.
 
             var parentWhile = memberReferenceExpression.FindFirstParentOfType<WhileStatement>();
 
@@ -92,8 +90,8 @@ public class TaskBodyInvocationInstanceCountsSetter : IConverter
 
                 if (condition.Right.Is<BinaryOperatorExpression>(out var innerCondition))
                 {
-                    // In code decopmiled from F# it can happen that the expression will be decompiled into
-                    // "1 + actual number"... Taking care of that here.
+                    // In code decopmiled from F# it can happen that the expression will be decompiled into "1 + actual
+                    // number"... Taking care of that here.
                     primitiveExpression = innerCondition.Right as PrimitiveExpression ??
                         innerCondition.Right.FindFirstChildOfType<PrimitiveExpression>();
                 }

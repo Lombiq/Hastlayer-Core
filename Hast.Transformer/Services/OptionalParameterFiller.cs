@@ -16,9 +16,7 @@ namespace Hast.Transformer.Services;
 /// </para>
 /// </remarks>
 /// <example>
-/// <para>
-/// The constructor's signature being:
-/// </para>
+/// <para>The constructor's signature being:</para>
 /// <code>
 /// public BitMask(ushort size, bool allOne = false)
 /// </code>

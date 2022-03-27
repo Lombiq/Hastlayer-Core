@@ -18,12 +18,11 @@ internal class ObjectHoldersToSubstitutedConstructorsMappingVisitor : DepthFirst
     {
         base.VisitObjectCreateExpression(objectCreateExpression);
 
-        // Substituting everything in the matching constructor (in its copy) and mapping that the object creation.
-        // So if the ctor sets some read-only members in a static way then the resulting object's members can get
-        // those substituted, without substituting them globally for all instances. This is important for
-        // bootstrapping substitution if there is a circular dependency between members and constructors (e.g.
-        // a field's value set in the ctor depends on a ctor argument, which in turn depends on the same field of
-        // another instance).
+        // Substituting everything in the matching constructor (in its copy) and mapping that the object creation. So if
+        // the ctor sets some read-only members in a static way then the resulting object's members can get those
+        // substituted, without substituting them globally for all instances. This is important for bootstrapping
+        // substitution if there is a circular dependency between members and constructors (e.g. a field's value set in
+        // the ctor depends on a ctor argument, which in turn depends on the same field of another instance).
 
         if (objectCreateExpression.Parent.Is(
             assignment => assignment.Left.GetActualType()?.GetFullName() == objectCreateExpression.Type.GetFullName(),

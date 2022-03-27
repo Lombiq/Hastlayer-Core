@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Services;
 
@@ -12,8 +12,8 @@ public class TypeDeclarationLookupTableFactory : ITypeDeclarationLookupTableFact
     {
         var typeDeclarations = syntaxTree
             .GetAllTypeDeclarations()
-            // Attributes can be copied into multiple assemblies having the exact same name and everything so
-            // excluding them here.
+            // Attributes can be copied into multiple assemblies having the exact same name and everything so excluding
+            // them here.
             .Where(declaration => !declaration.GetActualType().IsAttribute())
             .ToDictionary(d => d.GetActualTypeFullName());
 

@@ -11,6 +11,7 @@ public abstract class NexysDriverBase : NexysManifestProviderBase, IDeviceDriver
     private readonly object _timingReportParserLock = new();
 
     private ITimingReport _timingReport;
+
     public ITimingReport TimingReport
     {
         get

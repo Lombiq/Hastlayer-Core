@@ -8,8 +8,10 @@ namespace Hast.TestInputs.Dynamic;
 /// Test cases for inlined methods.
 /// </summary>
 /// <remarks>
-/// <para>While inlined methods with multiple returns utilize goto statements gotos will never be produced by ILSpy
-/// during decompilation. So we can't test goto handling with source including gotos originally.</para>
+/// <para>
+/// While inlined methods with multiple returns utilize goto statements gotos will never be produced by ILSpy during
+/// decompilation. So we can't test goto handling with source including gotos originally.
+/// </para>
 /// </remarks>
 public class InlinedCases : DynamicTestInputBase
 {

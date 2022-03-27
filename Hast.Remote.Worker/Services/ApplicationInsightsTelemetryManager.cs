@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Remote.Worker.Exceptions;
 using Hast.Remote.Worker.Models;
@@ -75,8 +75,8 @@ public class ApplicationInsightsTelemetryManager : IApplicationInsightsTelemetry
         }
         catch (MissingInstrumentationKeyException ex)
         {
-            // It's not guaranteed that we'd actually use it at this point and a lack of telemetry is not the kind
-            // of issue that warrants crashing the application.
+            // It's not guaranteed that we'd actually use it at this point and a lack of telemetry is not the kind of
+            // issue that warrants crashing the application.
             services.LogDeferred(LogLevel.Warning, ex.Message);
         }
 

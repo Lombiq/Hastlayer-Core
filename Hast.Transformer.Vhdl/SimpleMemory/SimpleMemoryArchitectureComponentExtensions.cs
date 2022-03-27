@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Extensions;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
@@ -7,9 +7,9 @@ using System.Linq;
 namespace Hast.Transformer.Vhdl.SimpleMemory;
 
 /// <summary>
-/// Handles intermediary signals for using SimpleMemory ports. Such signals are only needed for Out or InOut ports,
-/// In ports can be simply read from multiple places; so intermediary signals are only needed for the CellIndex,
-/// DataOut, ReadEnable and WriteEnable ports.
+/// Handles intermediary signals for using SimpleMemory ports. Such signals are only needed for Out or InOut ports, In
+/// ports can be simply read from multiple places; so intermediary signals are only needed for the CellIndex, DataOut,
+/// ReadEnable and WriteEnable ports.
 /// </summary>
 public static class SimpleMemoryArchitectureComponentExtensions
 {

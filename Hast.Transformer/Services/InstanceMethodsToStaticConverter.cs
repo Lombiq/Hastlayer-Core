@@ -12,11 +12,12 @@ using System.Linq;
 namespace Hast.Transformer.Services;
 
 /// <summary>
-/// Converts instance-level class methods to static methods with an explicit object reference passed in. This is
-/// needed so instance methods are easier to transform.
+/// Converts instance-level class methods to static methods with an explicit object reference passed in. This is needed
+/// so instance methods are easier to transform.
 /// </summary>
 /// <remarks>
-/// <para>The conversion is as following:
+/// <para>
+/// The conversion is as following:
 ///
 /// Original method for example:
 /// <c>
@@ -35,7 +36,8 @@ namespace Hast.Transformer.Services;
 /// }
 /// </c>
 ///
-/// Consumer code will also be altered accordingly.</para>
+/// Consumer code will also be altered accordingly.
+/// </para>
 /// </remarks>
 public class InstanceMethodsToStaticConverter : IConverter
 {

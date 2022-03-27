@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.Models;
 
@@ -8,8 +8,8 @@ namespace Hast.Transformer.Vhdl.Models;
 /// </summary>
 /// <remarks>
 /// <para>
-/// Declarations and Body wouldn't be needed, since they can be generated from the state
-/// machine. However by requiring transformers to build them the process can be parallelized better.
+/// Declarations and Body wouldn't be needed, since they can be generated from the state machine. However by requiring
+/// transformers to build them the process can be parallelized better.
 /// </para>
 /// </remarks>
 public interface IMemberTransformerResult
@@ -20,8 +20,8 @@ public interface IMemberTransformerResult
     EntityDeclaration Member { get; }
 
     /// <summary>
-    /// Gets a value indicating whether this member is an entry point or one invoked directly or
-    /// indirectly by the entry point.
+    /// Gets a value indicating whether this member is an entry point or one invoked directly or indirectly by the entry
+    /// point.
     /// </summary>
     bool IsHardwareEntryPointMember { get; }
 

@@ -105,8 +105,8 @@ public class FSharpIdiosyncrasiesAdjuster : IConverter
                     invocationExpression.Arguments
                         .AddRange(((ObjectCreateExpression)invocationMemberReference.Target).Arguments.Select(argument => argument.Clone()));
 
-                    // Now that the parameters are added we need to add corresponding parameters to the Invoke()
-                    // method as well by taking them from the ctor of the compiler-generated class.
+                    // Now that the parameters are added we need to add corresponding parameters to the Invoke() method
+                    // as well by taking them from the ctor of the compiler-generated class.
 
                     var invokeMethod = (MethodDeclaration)invocationMemberReference.FindMemberDeclaration(_typeDeclarationLookupTable);
                     var ctor = (ConstructorDeclaration)invokeMethod

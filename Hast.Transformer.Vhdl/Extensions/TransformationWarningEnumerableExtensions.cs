@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
 using Hast.Common.Models;
 using Hast.Layer;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.Models;
 

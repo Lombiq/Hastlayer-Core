@@ -10,7 +10,9 @@ public interface ITypeDeclarationLookupTable
     /// <summary>
     /// Retrieves the type declaration, given the type's full name.
     /// </summary>
-    /// <param name="fullName">The type's full name (including the namespace) to look up the type declaration for.</param>
+    /// <param name="fullName">
+    /// The type's full name (including the namespace) to look up the type declaration for.
+    /// </param>
     /// <returns>The retrieved <see cref="TypeDeclaration"/> if found or <see langword="null"/> otherwise.</returns>
     TypeDeclaration Lookup(string fullName);
 }

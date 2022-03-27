@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
+using System;
+using System.Linq;
 
 namespace Hast.VhdlBuilder.Extensions;
 
@@ -57,9 +57,8 @@ public static class StringExtensions
         };
 
     public static string IndentLinesIfShouldFormat(this string vhdl, IVhdlGenerationOptions vhdlGenerationOptions) =>
-        // Empty new lines won't be indented as they can contain different blocks.
-        // A space will be added if no formatting is uses so the code remains syntactically correct even if being
-        // just one line.
+        // Empty new lines won't be indented as they can contain different blocks. A space will be added if no
+        // formatting is uses so the code remains syntactically correct even if being just one line.
         string.Join(vhdlGenerationOptions.NewLineIfShouldFormat(), vhdl
             .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
             .Select(line => (!string.IsNullOrEmpty(line) ? vhdlGenerationOptions.IndentIfShouldFormat() : string.Empty) + line)) +

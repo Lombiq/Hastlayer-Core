@@ -42,8 +42,8 @@ public class TimingReportParser : ITimingReportParser
                 continue;
             }
 
-            // Instead of the shift_left/right* versions we use dotnet_shift_left/right, which also takes a
-            // surrounding SmartResize() call into account.
+            // Instead of the shift_left/right* versions we use dotnet_shift_left/right, which also takes a surrounding
+            // SmartResize() call into account.
             if (operatorString.StartsWithOrdinal("shift_left") ||
                 operatorString.StartsWithOrdinal("shift_right"))
             {
@@ -58,9 +58,9 @@ public class TimingReportParser : ITimingReportParser
                 continue;
             }
 
-            // Operators can be simple ones (like and and add) or ones that can also take a constant operand
-            // (like div). This is so that if one operand is a const that's a power of two we have a different
-            // timing value, addressing specific VHDL compiler optimizations (like with div_by_4).
+            // Operators can be simple ones (like and and add) or ones that can also take a constant operand (like div).
+            // This is so that if one operand is a const that's a power of two we have a different timing value,
+            // addressing specific VHDL compiler optimizations (like with div_by_4).
 
             var constantOperand = operatorString.Partition("_by_") is (_, "_by_", var constantOperandString)
                 ? constantOperandString
@@ -85,8 +85,8 @@ public class TimingReportParser : ITimingReportParser
                 ref isSignAgnosticBinaryOperatorType,
                 ref isSignAgnosticUnaryOperatorType);
 
-            // For more info on DPD and TWDFR see the docs of Hastlayer Timing Tester.
-            // Data Path Delay, i.e. the propagation of signals through the operation and the nets around it.
+            // For more info on DPD and TWDFR see the docs of Hastlayer Timing Tester. Data Path Delay, i.e. the
+            // propagation of signals through the operation and the nets around it.
             var dpd = decimal.Parse(
                 dpdString.Replace(',', '.'), // Taking care of decimal commas.
                 NumberStyles.Any,
@@ -152,8 +152,8 @@ public class TimingReportParser : ITimingReportParser
             "gt" => BinaryOperatorType.GreaterThan,
             "le" => BinaryOperatorType.LessThanOrEqual,
             "lt" => BinaryOperatorType.LessThan,
-            // BinaryOperatorType.Modulus is actually the remainder operator and corresponds to the VHDL operator
-            // rem, see below.
+            // BinaryOperatorType.Modulus is actually the remainder operator and corresponds to the VHDL operator rem,
+            // see below.
             "mod" => Union.Neither<BinaryOperatorType?, UnaryOperatorType?>(),
             var op when op.StartsWithOrdinal("mul") => BinaryOperatorType.Multiply,
             "neq" => BinaryOperatorType.InEquality,
@@ -191,8 +191,8 @@ public class TimingReportParser : ITimingReportParser
             timingReport.SetLatencyNs(binaryOperator.Value, operandSizeBits, !isSigned, constantOperand, dpd);
         }
 
-        // Bitwise and/or are defined for bools too, so need to handle that above, then handling
-        // their conditional pairs here. (Unary bit not is only defined for arithmetic types.)
+        // Bitwise and/or are defined for bools too, so need to handle that above, then handling their conditional pairs
+        // here. (Unary bit not is only defined for arithmetic types.)
         if (operandSizeBits == 1 &&
             (binaryOperator == BinaryOperatorType.BitwiseOr || binaryOperator == BinaryOperatorType.BitwiseAnd))
         {
@@ -258,10 +258,9 @@ public class TimingReportParser : ITimingReportParser
             _timings[GetKey(operatorType, operandSizeBits, isSigned, constantOperand)] = dpd;
 
             // If the operand size is 1 that means that the operation also works with single-bit non-composite types
-            // where the latter may not have an explicit size. E.g. and std_logic_vector1 would be the same as
-            // std_logic but the latter is not a sized data type (and thus it's apparent size will be 0, despite it
-            // being stored on at least one bit).
-            // Therefore, saving a 0 bit version here too.
+            // where the latter may not have an explicit size. E.g. and std_logic_vector1 would be the same as std_logic
+            // but the latter is not a sized data type (and thus it's apparent size will be 0, despite it being stored
+            // on at least one bit). Therefore, saving a 0 bit version here too.
             if (operandSizeBits == 1)
             {
                 SetLatencyNs(operatorType, 0, isSigned, constantOperand, dpd);

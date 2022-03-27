@@ -16,8 +16,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests;
 
 /// <summary>
 /// Base for tests that cover the samples. Needs to be done in such a way, test methods can't be in the base class
-/// (NUnit limitation), nor can Shouldly matching happen here (since it needs to be configured from the actual
-/// caller).
+/// (NUnit limitation), nor can Shouldly matching happen here (since it needs to be configured from the actual caller).
 /// </summary>
 public abstract class SamplesVerificationTestsBase : VerificationTestFixtureBase
 {
@@ -40,8 +39,8 @@ public abstract class SamplesVerificationTestsBase : VerificationTestFixtureBase
                                       nameof(MonteCarloPiEstimator.MaxDegreeOfParallelism);
                 configuration.GetOrAddReplacements()[replacementName] = 123;
 
-                // Not configuring MaxDegreeOfParallelism for ImageContrastModifier to also test the logic that
-                // can figure it out.
+                // Not configuring MaxDegreeOfParallelism for ImageContrastModifier to also test the logic that can
+                // figure it out.
                 configuration.AddHardwareEntryPointType<ImageContrastModifier>();
 
                 configuration.AddHardwareEntryPointType<Loopback>();

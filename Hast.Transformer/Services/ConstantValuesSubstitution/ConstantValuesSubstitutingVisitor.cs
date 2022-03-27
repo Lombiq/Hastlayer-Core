@@ -32,13 +32,13 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
         base.VisitAssignmentExpression(assignmentExpression);
 
         // Assignments should be handled here because those should only take effect "after this line" ("after this"
-        // works because the visitor visits nodes in topological order and thus possible substitutions will come
-        // after this method).
+        // works because the visitor visits nodes in topological order and thus possible substitutions will come after
+        // this method).
 
         var parentBlock = assignmentExpression.FindFirstParentBlockStatement();
 
-        // Indexed assignments with a constant index could also be handled eventually, but not really needed
-        // now. There won't be a parent block for attributes for example.
+        // Indexed assignments with a constant index could also be handled eventually, but not really needed now. There
+        // won't be a parent block for attributes for example.
         if (assignmentExpression.Right is PrimitiveExpression expression &&
             assignmentExpression.Left is not IndexerExpression &&
             parentBlock != null)
@@ -49,16 +49,17 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
                 parentBlock);
         }
 
-        // If this is assignment is in a while or an if-else then every assignment to it shouldn't affect anything
-        // in the outer scope after this. Neither if this is assigning a non-constant value. Note that the
-        // expression can be both in a while or if (in which case it can't affect the parent scopes) or have a non-
-        // constant assignment (and thus can't have a const value for the current scope).
+        // If this is assignment is in a while or an if-else then every assignment to it shouldn't affect anything in
+        // the outer scope after this. Neither if this is assigning a non-constant value. Note that the expression can
+        // be both in a while or if (in which case it can't affect the parent scopes) or have a non- constant assignment
+        // (and thus can't have a const value for the current scope).
 
         if (assignmentExpression.Left is not IdentifierExpression) return;
 
         if (ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))
         {
-            // Finding all outer scopes. The current parentBlock block will be the if-else or the while statement itself.
+            // Finding all outer scopes. The current parentBlock block will be the if-else or the while statement
+            // itself.
 
             var currentParentBlock = parentBlock.FindFirstParentBlockStatement();
 
@@ -97,8 +98,8 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
     {
         base.VisitMemberReferenceExpression(memberReferenceExpression);
 
-        // Method invocations that have a constant value are substituted in VisitInvocationExpression(), not to
-        // mess up the AST upwards.
+        // Method invocations that have a constant value are substituted in VisitInvocationExpression(), not to mess up
+        // the AST upwards.
         if (ConstantValueSubstitutionHelper.IsMethodInvocation(memberReferenceExpression)) return;
 
         // Is the target an array or some other indexer? We don't handle those.
@@ -234,9 +235,8 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
 
     protected override void VisitChildren(AstNode node)
     {
-        // Deactivating constructor mappings for the identifier after this line if it's again assigned to, e.g.:
-        // var x = new MyClass(); // OK
-        // x = GetValue(); // Starting with this line no more ctor mapping.
+        // Deactivating constructor mappings for the identifier after this line if it's again assigned to, e.g.: var x =
+        // new MyClass(); // OK x = GetValue(); // Starting with this line no more ctor mapping.
 
         if ((node is IdentifierExpression || node is MemberReferenceExpression) &&
             node.GetActualType()?.IsArray() == false)
@@ -271,8 +271,8 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
             }
         }
 
-        // Attributes can slip in here but we don't care about those. Also, due to eliminating branches nodes can
-        // be removed on the fly.
+        // Attributes can slip in here but we don't care about those. Also, due to eliminating branches nodes can be
+        // removed on the fly.
         if (!(node is Attribute) && !node.IsMarkedAsRemoved())
         {
             base.VisitChildren(node);
@@ -297,17 +297,17 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
             return false;
         }
 
-        // If the expression is in a while statement then most of the time it can't be safely substituted (due to
-        // e.g. loop variables). Code with goto is hard to follow so we're not trying to do const substitution for
-        // those yet (except for constants that are handled separately in VisitChildren()) most of the time either.
+        // If the expression is in a while statement then most of the time it can't be safely substituted (due to e.g.
+        // loop variables). Code with goto is hard to follow so we're not trying to do const substitution for those yet
+        // (except for constants that are handled separately in VisitChildren()) most of the time either.
         var isHardToFollow =
             ConstantValueSubstitutionHelper.IsInWhile(expression) ||
             expression.FindFirstParentOfType<MethodDeclaration>()?.FindFirstChildOfType<GotoStatement>() != null;
 
         PrimitiveExpression valueExpression = null;
 
-        // First checking if there is a substitution for the expression; if not then if it's a member reference
-        // then check whether there is a global substitution for the member.
+        // First checking if there is a substitution for the expression; if not then if it's a member reference then
+        // check whether there is a global substitution for the member.
         if ((!isHardToFollow && _constantValuesTable.RetrieveAndDeleteConstantValue(expression, out valueExpression)) ||
             expression.Is<MemberReferenceExpression>(memberReferenceExpression =>
                 CheckIfGlobalSubstitution(memberReferenceExpression, isHardToFollow, ref valueExpression)))
@@ -356,8 +356,8 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
 
         if (member.IsReadOnlyMember())
         {
-            // If this is a nested member reference (e.g. _member.Property1.Property2) then let's find the first
-            // member that has a corresponding ctor.
+            // If this is a nested member reference (e.g. _member.Property1.Property2) then let's find the first member
+            // that has a corresponding ctor.
             var currentMemberReference = memberReferenceExpression;
             ConstructorReference constructorReference;
 
@@ -381,11 +381,11 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
 
             if (memberReferenceExpressionInConstructor == null) return false;
 
-            // Using the substitution also used in the constructor. This should be safe to do even if in the ctor
-            // there are multiple assignments because an retrieved constant will only remain in the
-            // ConstantValuesTable if there are no more substitutions needed in the ctor.
-            // But for this we need to rebuild a ConstantValuesTable just for this ctor. At this point the ctor
-            // should be fully substituted so we only need to care about primitive expressions.
+            // Using the substitution also used in the constructor. This should be safe to do even if in the ctor there
+            // are multiple assignments because an retrieved constant will only remain in the ConstantValuesTable if
+            // there are no more substitutions needed in the ctor. But for this we need to rebuild a ConstantValuesTable
+            // just for this ctor. At this point the ctor should be fully substituted so we only need to care about
+            // primitive expressions.
 
             var constructorConstantValuesTableBuildingVisitor =
                 new ConstructorConstantValuesTableBuildingVisitor(constructor);
@@ -412,8 +412,8 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
             base.VisitAssignmentExpression(assignmentExpression);
 
             // We need to keep track of the last assignment in the root scope of the method. If after that there is
-            // another assignment with a non-constant value or in an if-else or while then that makes the value
-            // holder's constant value unusable.
+            // another assignment with a non-constant value or in an if-else or while then that makes the value holder's
+            // constant value unusable.
 
             if (assignmentExpression.Right is not PrimitiveExpression right ||
                 ConstantValueSubstitutionHelper.IsInWhileOrIfElse(assignmentExpression))

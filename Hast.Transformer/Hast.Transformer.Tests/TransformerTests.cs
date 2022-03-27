@@ -55,8 +55,8 @@ public class TransformerTests
             .Setup(engine => engine.TransformAsync(It.IsAny<ITransformationContext>()))
             .Returns<ITransformationContext>(context =>
                 {
-                    // Sending out the context through a field is not a nice solutions but there doesn't seem to be
-                    // a better one.
+                    // Sending out the context through a field is not a nice solutions but there doesn't seem to be a
+                    // better one.
                     _producedContext = context;
                     return Task.FromResult<IHardwareDescription>(null);
                 })

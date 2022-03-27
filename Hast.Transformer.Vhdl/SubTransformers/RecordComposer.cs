@@ -14,6 +14,7 @@ public class RecordComposer : IRecordComposer
 {
     // Needs Lazy because unfortunately TypeConverter and RecordComposer depend on each other.
     private readonly Lazy<IDeclarableTypeCreator> _declarableTypeCreatorLazy;
+
     private readonly IMemoryCache _memoryCache;
 
     public RecordComposer(IMemoryCache memoryCache, Lazy<IDeclarableTypeCreator> declarableTypeCreatorLazy)
@@ -26,8 +27,8 @@ public class RecordComposer : IRecordComposer
 
     public NullableRecord CreateRecordFromType(TypeDeclaration typeDeclaration, IVhdlTransformationContext context)
     {
-        // Using transient caching because when processing an assembly all references to a class or struct will
-        // result in the record being composed.
+        // Using transient caching because when processing an assembly all references to a class or struct will result
+        // in the record being composed.
         var typeFullName = typeDeclaration.GetFullName();
 
         return _memoryCache.GetOrCreate("ComposedRecord." + typeFullName, _ =>
@@ -51,11 +52,10 @@ public class RecordComposer : IRecordComposer
                         name = variable.Name;
                     }
 
-                    // If the field stores an instance of this type then we shouldn't declare that, otherwise we'd
-                    // get a stack overflow. Since it's not valid in VHDL ("[Synth 8-4702] element type of the
-                    // record element is same as the parent record type" in Vivado) we shouldn't even allow it.
-                    // This won't help against having a type that contains this type, so indirect circular type
-                    // dependency.
+                    // If the field stores an instance of this type then we shouldn't declare that, otherwise we'd get a
+                    // stack overflow. Since it's not valid in VHDL ("[Synth 8-4702] element type of the record element
+                    // is same as the parent record type" in Vivado) we shouldn't even allow it. This won't help against
+                    // having a type that contains this type, so indirect circular type dependency.
                     var fieldDataType = member.ReturnType.GetFullName() == typeFullName
                         ? throw new NotSupportedException(
                             "A type referencing itself in its properties or fields (like in a linked list " +

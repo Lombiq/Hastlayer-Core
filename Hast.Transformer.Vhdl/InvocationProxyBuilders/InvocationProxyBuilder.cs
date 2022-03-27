@@ -18,8 +18,8 @@ namespace Hast.Transformer.Vhdl.InvocationProxyBuilders;
 
 public class InvocationProxyBuilder : IInvocationProxyBuilder
 {
-    // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would
-    // look from a generated state machine.
+    // So it's not cut off wrongly if names are shortened we need to use a name for this signal as it would look from a
+    // generated state machine.
     private const string NamePrefix = "System.Void Hast::InternalInvocationProxy().";
 
     private readonly Value _waitingForStartedStateValue = "WaitingForStarted".ToVhdlIdValue();
@@ -42,9 +42,9 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
         {
             var memberFullName = invokedMember.Key.GetFullName();
 
-            // Is this a recursive member? If yes then remove the last component (i.e. the one with the highest
-            // index, the deepest one in the call stack) from the list of invoking ones, because that won't invoke
-            // anything else.
+            // Is this a recursive member? If yes then remove the last component (i.e. the one with the highest index,
+            // the deepest one in the call stack) from the list of invoking ones, because that won't invoke anything
+            // else.
             var maxIndexComponent = invokedMember.Value
                 .Where(component => component.Key.StartsWithOrdinal(memberFullName))
                 .OrderByDescending(component => component.Key)
@@ -76,17 +76,16 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
             var targetMemberName = targetMember.GetFullName();
             var proxyComponentName = NamePrefix + targetMemberName;
 
-            // How many instances does this member have in form of components, e.g. how many state machines are
-            // there for this member? This is not necessarily the same as the invocation instance count.
+            // How many instances does this member have in form of components, e.g. how many state machines are there
+            // for this member? This is not necessarily the same as the invocation instance count.
             var targetComponentCount = transformationContext
                 .GetTransformerConfiguration()
                 .GetMaxInvocationInstanceCountConfigurationForMember(targetMember)
                 .MaxInvocationInstanceCount;
 
-            // Is this member's component only invoked from a single other component? Because then we don't need a
-            // full invocation proxy: local Start and Finished signals can be directly connected to the target
-            // component's signals.
-            // (Every member at this point is invoked at least once.)
+            // Is this member's component only invoked from a single other component? Because then we don't need a full
+            // invocation proxy: local Start and Finished signals can be directly connected to the target component's
+            // signals. (Every member at this point is invoked at least once.)
             var invokedFromSingleComponent = invokedFromComponents.Take(2).Count() == 1;
 
             // Is this member's component invoked from multiple components, but just once from each of them and there
@@ -133,8 +132,8 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
         // from a generated state machine.
         var proxyComponent = new ConfigurableComponent("System.Void Hast::ExternalInvocationProxy()");
 
-        // Since the Finished port is an out port, it can't be read. Adding an internal proxy signal so we can also
-        // read it.
+        // Since the Finished port is an out port, it can't be read. Adding an internal proxy signal so we can also read
+        // it.
         var finishedSignal = new Signal
         {
             Name = "FinishedInternal".ToExtendedVhdlId(),
@@ -256,9 +255,9 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
         var proxyComponentName = NamePrefix + targetMemberName;
         var booleanArrayType = GetBooleanArrayType();
 
-        // Note that the below implementation does not work perfectly. As the number of components increases
-        // it becomes unstable. For example the CalculateFibonacchiSeries sample without debug memory writes
-        // won't finish while the CalculateFactorial with them will work properly.
+        // Note that the below implementation does not work perfectly. As the number of components increases it becomes
+        // unstable. For example the CalculateFibonacchiSeries sample without debug memory writes won't finish while the
+        // CalculateFactorial with them will work properly.
         var proxyComponent = new ConfigurableComponent(proxyComponentName);
         proxyComponents.Add(proxyComponent);
 
@@ -271,12 +270,11 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
 
         if (targetComponentCount > 1)
         {
-            // Creating a boolean vector where each of the elements will indicate whether the target
-            // component with that index is available and can be started. I.e. targetAvailableIndicator(0)
-            // being true tells that the target component with index 0 can be started.
-            // All this is necessary to avoid ifs with large conditions which would cause timing errors
-            // with more than cca. 20 components. This implementation can be better implemented with
-            // parallel paths.
+            // Creating a boolean vector where each of the elements will indicate whether the target component with that
+            // index is available and can be started. I.e. targetAvailableIndicator(0) being true tells that the target
+            // component with index 0 can be started. All this is necessary to avoid ifs with large conditions which
+            // would cause timing errors with more than cca. 20 components. This implementation can be better
+            // implemented with parallel paths.
             targetAvailableIndicatorVariableReference = proxyComponent
                 .CreatePrefixedSegmentedObjectName("targetAvailableIndicator")
                 .ToVhdlVariableReference();
@@ -323,8 +321,8 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
                     });
                 }
 
-                // Assignments to the boolean array where each element will indicate whether the
-                // component with the given index can be started.
+                // Assignments to the boolean array where each element will indicate whether the component with the
+                // given index can be started.
                 bodyBlock.Add(
                     new Assignment
                     {
@@ -589,10 +587,10 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
 
         if (context.TargetComponentCount == 1)
         {
-            // If there is only a single target component then the implementation can be simpler.
-            // Also having a case targetAvailableIndicator is (true) when =>... isn't syntactically
-            // correct, single-element arrays can't be matched like this. "[Synth 8-2778] type
-            // error near true ; expected type internalinvocationproxy_boolean_array".
+            // If there is only a single target component then the implementation can be simpler. Also having a case
+            // targetAvailableIndicator is (true) when =>... isn't syntactically correct, single-element arrays can't be
+            // matched like this. "[Synth 8-2778] type error near true ; expected type
+            // internalinvocationproxy_boolean_array".
 
             waitingForStartedInnnerBlock.Add(CreateComponentAvailableBody(0));
         }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 namespace Hast.Remote.Worker.Services;
 
 /// <summary>
-/// Provides <see cref="IHastlayerConfiguration"/> for the <see cref="TransformationWorker"/>. This is used outside
-/// of <see cref="Hastlayer"/>'s root dependency injection scope in case it's constructed with the help of an outer
-/// service provider.
+/// Provides <see cref="IHastlayerConfiguration"/> for the <see cref="TransformationWorker"/>. This is used outside of
+/// <see cref="Hastlayer"/>'s root dependency injection scope in case it's constructed with the help of an outer service
+/// provider.
 /// </summary>
 public interface IHastlayerConfigurationProvider
 {

@@ -18,8 +18,8 @@ using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 
-// SimpleMemory and member invocation transformation are factored out into two methods so the class has some
-// structure, not to have one giant TransformInvocationExpression method.
+// SimpleMemory and member invocation transformation are factored out into two methods so the class has some structure,
+// not to have one giant TransformInvocationExpression method.
 public class InvocationExpressionTransformer : IInvocationExpressionTransformer
 {
     private static readonly IEnumerable<string> _arrayCopyToMethodNames = typeof(Array)
@@ -278,8 +278,7 @@ public class InvocationExpressionTransformer : IInvocationExpressionTransformer
                 else if (operationDataTypeName == "Char") operationDataType = KnownDataTypes.Character;
 
                 var invocationDataType = invocationParameters[1].DataType;
-                // The two data types should be the case almost all the time but sometimes a type conversion is
-                // needed.
+                // The two data types should be the case almost all the time but sometimes a type conversion is needed.
                 if (invocationDataType != operationDataType)
                 {
                     var conversionResult = _typeConversionTransformer
@@ -353,8 +352,8 @@ public class InvocationExpressionTransformer : IInvocationExpressionTransformer
 
         EntityDeclaration targetDeclaration = null;
 
-        // Is this a reference to a member of the parent class from a compiler-generated DisplayClass?
-        // These look like following: this.<>4__this.IsPrimeNumberInternal()
+        // Is this a reference to a member of the parent class from a compiler-generated DisplayClass? These look like
+        // following: this.<>4__this.IsPrimeNumberInternal()
         if (targetMemberReference.Target is MemberReferenceExpression referenceExpression)
         {
             var targetTargetFullName = referenceExpression.GetFullName();
@@ -398,8 +397,7 @@ public class InvocationExpressionTransformer : IInvocationExpressionTransformer
         var empty = (HasResult: false, ResultBlock: (InlineBlock)null);
         if (targetMethodName != "System.Void System.Threading.Tasks.Task::Wait()") return empty;
 
-        // Tasks aren't awaited where they're started so we only need to await the already started state
-        // machines here.
+        // Tasks aren't awaited where they're started so we only need to await the already started state machines here.
         var waitTarget = ((MemberReferenceExpression)expression.Target).Target;
 
         // Is it a Task.Something().Wait() call?
@@ -423,8 +421,8 @@ public class InvocationExpressionTransformer : IInvocationExpressionTransformer
         var taskArrayIdentifier =
             ((IdentifierExpression)((InvocationExpression)waitTarget).Arguments.Single()).Identifier;
 
-        // This array originally stored the Task<T> objects but now is just for the results, so we have
-        // to move the results to its elements.
+        // This array originally stored the Task<T> objects but now is just for the results, so we have to move the
+        // results to its elements.
         if (!context.Scope.TaskVariableNameToDisplayClassMethodMappings.TryGetValue(taskArrayIdentifier, out var targetMethod))
         {
             throw new InvalidOperationException(

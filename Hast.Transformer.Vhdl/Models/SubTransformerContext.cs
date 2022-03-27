@@ -51,8 +51,8 @@ public class SubTransformerScope
     public IDictionary<int, ISet<string>> FinishedInvokedStateMachinesForStates { get; } = new Dictionary<int, ISet<string>>();
 
     /// <summary>
-    /// Gets the label statements to state machine state indices. This is necessary because each label should have
-    /// its own state (so it's possible to jump to it).
+    /// Gets the label statements to state machine state indices. This is necessary because each label should have its
+    /// own state (so it's possible to jump to it).
     /// </summary>
     public IDictionary<string, int> LabelsToStateIndicesMappings { get; } = new Dictionary<string, int>();
 

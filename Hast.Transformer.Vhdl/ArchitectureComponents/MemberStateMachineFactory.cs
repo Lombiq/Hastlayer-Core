@@ -11,8 +11,8 @@ public interface IMemberStateMachineFactory : IDependency
     /// Creates a new <see cref="IMemberStateMachine"/> object.
     /// </summary>
     /// <param name="name">
-    /// The name of the state machine, i.e. the name of the member to create the state machine for. Use the real
-    /// name, not an extended VHDL ID.
+    /// The name of the state machine, i.e. the name of the member to create the state machine for. Use the real name,
+    /// not an extended VHDL ID.
     /// </param>
     IMemberStateMachine CreateStateMachine(string name);
 }

@@ -8,6 +8,7 @@ public abstract class ArrayTypeBase : DataType
     public DataType ElementType { get; set; }
 
     private Value _defaultValue;
+
     public override Value DefaultValue
     {
         get

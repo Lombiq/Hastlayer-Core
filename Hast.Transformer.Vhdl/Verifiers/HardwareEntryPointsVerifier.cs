@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.Verifiers;
 

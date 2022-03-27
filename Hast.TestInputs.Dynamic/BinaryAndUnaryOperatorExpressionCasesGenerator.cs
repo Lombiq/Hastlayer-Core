@@ -135,9 +135,8 @@ public static class BinaryAndUnaryOperatorExpressionCasesGenerator
     {
         var originalMemoryIndex = memoryIndex;
         memoryIndex += 16;
-        // The long cast will be unnecessary most of the time but determining when it's needed is complex so
-        // good enough.
-        // Awkward indentation is so the generated code can be properly formatted.
+        // The long cast will be unnecessary most of the time but determining when it's needed is complex so good
+        // enough. Awkward indentation is so the generated code can be properly formatted.
         return FormattableString.Invariant($@"SaveResult(
                 memory,
                 {originalMemoryIndex},
@@ -180,8 +179,8 @@ public static class BinaryAndUnaryOperatorExpressionCasesGenerator
     {
         var originalMemoryIndex = memoryIndex;
         memoryIndex += 2;
-        // The long cast will be unnecessary most of the time but determining when it's needed is complex so
-        // good enough.
+        // The long cast will be unnecessary most of the time but determining when it's needed is complex so good
+        // enough.
         if (addLongCast) code = $"(long)({code})";
         return FormattableString.Invariant($@"SaveResult(memory, {originalMemoryIndex}, {code});");
     }

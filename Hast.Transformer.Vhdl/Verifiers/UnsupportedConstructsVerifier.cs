@@ -1,7 +1,7 @@
 using Hast.Transformer.Models;
-using System;
 using Hast.Transformer.Vhdl.SubTransformers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System;
 
 namespace Hast.Transformer.Vhdl.Verifiers;
 

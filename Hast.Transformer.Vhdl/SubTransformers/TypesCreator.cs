@@ -24,9 +24,9 @@ public class TypesCreator : ITypesCreator
         ICollection<DependentTypesTable> dependentTypesTables,
         Architecture hastIpArchitecture)
     {
-        // Adding array types for any arrays created in code.
-        // This is necessary in a separate step because in VHDL the array types themselves should be created too
-        // (like in C# we'd need to first define what an int[] is before being able to create one).
+        // Adding array types for any arrays created in code. This is necessary in a separate step because in VHDL the
+        // array types themselves should be created too (like in C# we'd need to first define what an int[] is before
+        // being able to create one).
         var arrayTypeDependentTypes = new DependentTypesTable();
         foreach (var arrayDeclaration in _arrayTypesCreator.CreateArrayTypes(syntaxTree, vhdlTransformationContext))
         {

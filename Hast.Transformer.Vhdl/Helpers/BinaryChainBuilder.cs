@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Expression;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Vhdl.Helpers;
 

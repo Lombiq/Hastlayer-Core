@@ -12,8 +12,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers;
 public interface ITypesCreator : IDependency
 {
     /// <summary>
-    /// Retrieves missing dependent types in <paramref name="syntaxTree"/> and adds them to the
-    /// <paramref name="dependentTypesTables"/> and <paramref name="hastIpArchitecture"/>.
+    /// Retrieves missing dependent types in <paramref name="syntaxTree"/> and adds them to the <paramref
+    /// name="dependentTypesTables"/> and <paramref name="hastIpArchitecture"/>.
     /// </summary>
     void CreateTypes(
         SyntaxTree syntaxTree,

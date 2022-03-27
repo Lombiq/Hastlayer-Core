@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -60,8 +60,8 @@ public class MultiCycleSdcStatementsAttributeExpression : IVhdlElement
 
         public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
         {
-            // The config should contain the path's name without backslashes even if the original name is an
-            // extended identifier. Spaces need to be escaped with a slash.
+            // The config should contain the path's name without backslashes even if the original name is an extended
+            // identifier. Spaces need to be escaped with a slash.
             var name =
                 string.IsNullOrEmpty(ParentName)
                     ? string.Empty

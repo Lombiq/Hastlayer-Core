@@ -55,8 +55,8 @@ public interface ITypeConversionTransformer : IDependency
         SubTransformerContext context);
 
     /// <summary>
-    /// Makes sure the value assignment has the correct matching type and in case of arrays the lengths must be
-    /// matching too.
+    /// Makes sure the value assignment has the correct matching type and in case of arrays the lengths must be matching
+    /// too.
     /// </summary>
     IAssignmentTypeConversionResult ImplementTypeConversionForAssignment(
         DataType fromType,

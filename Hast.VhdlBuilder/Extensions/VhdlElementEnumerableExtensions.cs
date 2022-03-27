@@ -1,6 +1,6 @@
+using Hast.VhdlBuilder.Representation;
 using System.Linq;
 using System.Text;
-using Hast.VhdlBuilder.Representation;
 
 namespace System.Collections.Generic;
 
@@ -20,9 +20,8 @@ public static class VhdlElementEnumerableExtensions
     {
         if (elements == null) return string.Empty;
 
-        // It's efficient to run this parallelized implementation even with a low number of items (or even one)
-        // because the overhead of checking whether there are more than a few elements is bigger than the below
-        // ceremony.
+        // It's efficient to run this parallelized implementation even with a low number of items (or even one) because
+        // the overhead of checking whether there are more than a few elements is bigger than the below ceremony.
         var elementsList = elements.AsList();
         if (!elementsList.Any()) return string.Empty;
 

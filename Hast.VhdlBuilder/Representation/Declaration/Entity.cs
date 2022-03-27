@@ -1,9 +1,9 @@
+using Hast.VhdlBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
@@ -15,8 +15,8 @@ public class Entity : INamedElement, IDeclarableElement
     private string _name;
 
     /// <summary>
-    /// Gets or sets the name of the VHDL Entity. Keep in mind that Entity names can't be extended identifiers thus
-    /// they can only contain alphanumerical characters.
+    /// Gets or sets the name of the VHDL Entity. Keep in mind that Entity names can't be extended identifiers thus they
+    /// can only contain alphanumerical characters.
     /// </summary>
     public string Name
     {

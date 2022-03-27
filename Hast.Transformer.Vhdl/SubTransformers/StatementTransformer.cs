@@ -55,8 +55,8 @@ public class StatementTransformer : IStatementTransformer
             case ExpressionStatement expressionStatement:
                 var expressionElement = _expressionTransformer.Transform(expressionStatement.Expression, context);
 
-                // If the element is just a DataObjectReference (so e.g. a variable reference) alone then it needs to
-                // be discarded. This can happen e.g. with calls to non-void methods where the return value is not
+                // If the element is just a DataObjectReference (so e.g. a variable reference) alone then it needs to be
+                // discarded. This can happen e.g. with calls to non-void methods where the return value is not
                 // assigned: That causes the return value's reference to be orphaned.
                 if (expressionElement is not DataObjectReference)
                 {
@@ -141,8 +141,8 @@ public class StatementTransformer : IStatementTransformer
         // shouldn't be transformed.
         var omitStatement =
             // DisplayClass objects that generated for lambda expressions are put into variables like:
-            // PrimeCalculator.<>c__DisplayClass9_0 <>c__DisplayClass9_; They are being kept track of when
-            // processing the corresponding ObjectCreateExpressions.
+            // PrimeCalculator.<>c__DisplayClass9_0 <>c__DisplayClass9_; They are being kept track of when processing
+            // the corresponding ObjectCreateExpressions.
             variableType.GetFullName().IsDisplayOrClosureClassName() ||
             (variableType is SimpleType variableSimpleType &&
              (
@@ -177,8 +177,8 @@ public class StatementTransformer : IStatementTransformer
             IDataObject returnReference = stateMachine.CreateReturnSignalReference();
             var returnExpression = _expressionTransformer.Transform(returnStatement.Expression, context);
 
-            // It can happen that the type of the expression is not the same as the return type of the method. Thus
-            // a cast may be necessary.
+            // It can happen that the type of the expression is not the same as the return type of the method. Thus a
+            // cast may be necessary.
             var expressionType = returnStatement.Expression.GetActualType();
             var expressionVhdlType = (returnExpression as Value)?.DataType ??
                 (expressionType != null ? _typeConverter.ConvertType(expressionType, context.TransformationContext) : null);
@@ -217,8 +217,8 @@ public class StatementTransformer : IStatementTransformer
         Func<int, IVhdlGenerationOptions, string> stateNameGenerator)
     {
         // If-elses are always split up into multiple states, i.e. the true and false statements branch off into
-        // separate states. This makes it simpler to track how many clock cycles something requires, since the
-        // latency of the two branches should be tracked separately.
+        // separate states. This makes it simpler to track how many clock cycles something requires, since the latency
+        // of the two branches should be tracked separately.
 
         var ifElseElement = new IfElse { Condition = _expressionTransformer.Transform(ifElse.Condition, context) };
         var ifElseCommentsBlock = new LogicalBlock();
@@ -371,8 +371,8 @@ public class StatementTransformer : IStatementTransformer
         };
         currentBlock.Add(caseStatement);
 
-        // Case statements, much like if-else statements need a state added in advance where all branches
-        // will finally return to. All branches have their own states too.
+        // Case statements, much like if-else statements need a state added in advance where all branches will finally
+        // return to. All branches have their own states too.
         var caseStartStateIndex = currentBlock.StateMachineStateIndex;
 
         var afterCaseStateBlock = new InlineBlock(
@@ -426,8 +426,8 @@ public class StatementTransformer : IStatementTransformer
             currentBlock.Add(CreateConditionalStateChangeToAfterCaseState());
         }
 
-        // If the AST doesn't contain cases for all possible values of the type the statement switches on
-        // then the VHDL will be incorrect. By including an "others" case every time this is solved.
+        // If the AST doesn't contain cases for all possible values of the type the statement switches on then the VHDL
+        // will be incorrect. By including an "others" case every time this is solved.
         caseStatement.Whens.Add(CaseWhen.CreateOthers());
 
         currentBlock.ChangeBlockToDifferentState(afterCaseStateBlock, aftercaseStateIndex);

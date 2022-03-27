@@ -1,4 +1,4 @@
-﻿namespace Hast.TestInputs.Invalid;
+namespace Hast.TestInputs.Invalid;
 
 public class InvalidObjectUsingCases
 {
@@ -8,8 +8,8 @@ public class InvalidObjectUsingCases
         var customObject2 = customObject1;
         customObject1.MyProperty += 1;
         customObject2.MyProperty += 1;
-        // This is not allowed, since to achieve reference-like behavior we need to use VHDL aliases, but this
-        // would also overwrite the original variable's value.
+        // This is not allowed, since to achieve reference-like behavior we need to use VHDL aliases, but this would
+        // also overwrite the original variable's value.
         customObject2 = new MyClass1();
         customObject2.MyProperty += 1;
     }

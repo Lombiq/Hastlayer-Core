@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using Hast.Common.Interfaces;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.SubTransformers;
 
@@ -13,8 +13,8 @@ namespace Hast.Transformer.Vhdl.SubTransformers;
 public interface IStateMachineInvocationBuilder : IDependency
 {
     /// <summary>
-    /// Uses the <paramref name="context"/>'s <see cref="SubTransformerContext.Scope"/> to insert an invocation
-    /// into the <see cref="CurrentBlock"/>.
+    /// Uses the <paramref name="context"/>'s <see cref="SubTransformerContext.Scope"/> to insert an invocation into the
+    /// <see cref="CurrentBlock"/>.
     /// </summary>
     IBuildInvocationResult BuildInvocation(
         MethodDeclaration targetDeclaration,
@@ -23,8 +23,8 @@ public interface IStateMachineInvocationBuilder : IDependency
         SubTransformerContext context);
 
     /// <summary>
-    /// Creates VHDL elements for each of the method's invocations and inserts them into the
-    /// <paramref name="context"/>'s <see cref="CurrentBlock"/>.
+    /// Creates VHDL elements for each of the method's invocations and inserts them into the <paramref
+    /// name="context"/>'s <see cref="CurrentBlock"/>.
     /// </summary>
     IEnumerable<IVhdlElement> BuildMultiInvocationWait(
         MethodDeclaration targetDeclaration,
@@ -47,7 +47,7 @@ public interface IStateMachineInvocationBuilder : IDependency
 public interface IBuildInvocationResult
 {
     /// <summary>
-    /// Gets the collection of assignments that result from outflowing (<see langword="out"/>) parameters.
+    /// Gets the collection of assignments that result from outflowing ( <see langword="out"/>) parameters.
     /// </summary>
     IEnumerable<Assignment> OutParameterBackAssignments { get; }
 }

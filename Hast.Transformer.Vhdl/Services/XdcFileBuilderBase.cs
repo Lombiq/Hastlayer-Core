@@ -24,8 +24,8 @@ public abstract class XdcFileBuilderBase<T> : IXdcFileBuilder
         if (ManifestType.IsAssignableFrom(other.ManifestType)) return -1; // The other manifest is a derived type.
         if (other.ManifestType.IsAssignableFrom(ManifestType)) return 1; // The other manifest is an ancestor type.
 
-        // When they aren't matched, they should be at least sorted by name. Though this should not happen, if it
-        // did that's not really a cause for panic.
+        // When they aren't matched, they should be at least sorted by name. Though this should not happen, if it did
+        // that's not really a cause for panic.
         return string.Compare(ManifestType.FullName, other.ManifestType.FullName, StringComparison.Ordinal);
     }
 
@@ -40,7 +40,10 @@ public abstract class XdcFileBuilderBase<T> : IXdcFileBuilder
         left?.ManifestType != right?.ManifestType;
 
     public static bool operator <(XdcFileBuilderBase<T> left, IXdcFileBuilder right) => left.CompareTo(right) < 0;
+
     public static bool operator <=(XdcFileBuilderBase<T> left, IXdcFileBuilder right) => left.CompareTo(right) <= 0;
+
     public static bool operator >(XdcFileBuilderBase<T> left, IXdcFileBuilder right) => left.CompareTo(right) > 0;
+
     public static bool operator >=(XdcFileBuilderBase<T> left, IXdcFileBuilder right) => left.CompareTo(right) >= 0;
 }

@@ -136,8 +136,8 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-                // Waiting a bit between cycles not to have excessive Blob Storage usage due to polling (otherwise
-                // it's not an issue, this loop barely uses any CPU).
+                // Waiting a bit between cycles not to have excessive Blob Storage usage due to polling (otherwise it's
+                // not an issue, this loop barely uses any CPU).
                 await Task.Delay(1000, cancellationToken);
                 _restartCount = 0;
             }
@@ -191,8 +191,8 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
             AccessCondition accessCondition;
             try
             {
-                // If in the short time between the blob listing and this line some other Task
-                // started to work then nothing to do.
+                // If in the short time between the blob listing and this line some other Task started to work then
+                // nothing to do.
                 if (blob.Properties.LeaseStatus != LeaseStatus.Unlocked) return;
 
                 var leaseId = await blob.AcquireLeaseAsync(leaseTimeSpan, proposedLeaseId: null, cancellationToken);
@@ -200,8 +200,8 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
             }
             catch (StorageException ex)
             {
-                // If the lease was already acquired or some other Task deleted even finished it
-                // then we get these exceptions, nothing to do.
+                // If the lease was already acquired or some other Task deleted even finished it then we get these
+                // exceptions, nothing to do.
                 if (HasHttpStatus(ex, HttpStatusCode.Conflict) ||
                     HasHttpStatus(ex, HttpStatusCode.NotFound))
                 {
@@ -216,8 +216,8 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
 
             await RenewLeaseUntilCompleteAsync(processingTask, blob, accessCondition, leaseTimeSpan, cancellationToken);
 
-            // This is so if there was an exception in the Task that will be thrown with its original
-            // stack trace. Otherwise Task.WhenAny() isn't throwing exceptions from its arguments.
+            // This is so if there was an exception in the Task that will be thrown with its original stack trace.
+            // Otherwise Task.WhenAny() isn't throwing exceptions from its arguments.
             await processingTask;
             telemetry.IsSuccess = true;
         }
@@ -339,8 +339,8 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
         }
         catch (Exception ex) when (!ex.IsFatal() && !(ex is OperationCanceledException))
         {
-            // We don't want to show the stack trace to the user, just exception
-            // message, so building one by iterating all the nested exceptions.
+            // We don't want to show the stack trace to the user, just exception message, so building one by iterating
+            // all the nested exceptions.
 
             var currentException = ex;
             var message = new StringBuilder();
@@ -412,8 +412,7 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
                 throw;
             }
 
-            // Task.Delay() waits for 1 second less so the lease is renewed for sure before it
-            // expires.
+            // Task.Delay() waits for 1 second less so the lease is renewed for sure before it expires.
             await Task.WhenAny(
                 processingTask.Task,
                 Task.Delay(leaseTimeSpan - TimeSpan.FromSeconds(1), cancellationToken));
