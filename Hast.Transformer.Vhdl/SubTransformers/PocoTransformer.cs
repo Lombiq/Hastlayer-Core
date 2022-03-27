@@ -38,13 +38,10 @@ public class PocoTransformer : IPocoTransformer
             {
                 var hasDependency = false;
 
-                foreach (var field in record.Fields)
+                foreach (var dataType in record.Fields.Select(field => field.DataType).Where(dataType => dataType is ArrayTypeBase or Record))
                 {
-                    if (field.DataType is ArrayTypeBase or Record)
-                    {
-                        component.DependentTypesTable.AddDependency(record, field.DataType.Name);
-                        hasDependency = true;
-                    }
+                    component.DependentTypesTable.AddDependency(record, dataType.Name);
+                    hasDependency = true;
                 }
 
                 if (!hasDependency) component.DependentTypesTable.AddBaseType(record);

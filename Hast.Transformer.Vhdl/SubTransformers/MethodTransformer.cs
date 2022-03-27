@@ -8,6 +8,7 @@ using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hast.Transformer.Vhdl.SubTransformers;
@@ -183,10 +184,10 @@ public class MethodTransformer : IMethodTransformer
         };
 
         var labels = method.Body.FindAllChildrenOfType<LabelStatement>();
-        foreach (var label in labels)
+        foreach (var label in labels.Select(label => label.Label))
         {
-            bodyContext.Scope.LabelsToStateIndicesMappings[label.Label] = stateMachine
-                .AddState(new InlineBlock(new LineComment($"State for the label {label.Label}.")));
+            bodyContext.Scope.LabelsToStateIndicesMappings[label] = stateMachine
+                .AddState(new InlineBlock(new LineComment($"State for the label {label}.")));
         }
 
         var lastStatementIsReturn = false;

@@ -24,13 +24,13 @@ public class CompilerGeneratedClassesVerifier : IVerifyer
             .GetAllTypeDeclarations()
             .Where(type => type.GetFullName().IsDisplayOrClosureClassName());
 
-        foreach (var compilerGeneratedClass in compilerGeneratedClasses)
+        foreach (var members in compilerGeneratedClasses.Select(compilerGeneratedClass => compilerGeneratedClass.Members))
         {
-            var fields = compilerGeneratedClass.Members.OfType<FieldDeclaration>()
+            var fields = members.OfType<FieldDeclaration>()
                 .OrderBy(field => field.Variables.Single().Name)
                 .ToDictionary(field => field.Variables.Single().Name);
 
-            foreach (var method in compilerGeneratedClass.Members.OfType<MethodDeclaration>())
+            foreach (var method in members.OfType<MethodDeclaration>())
             {
                 // Adding parameters for every field that the method used, in alphabetical order, and changing field
                 // references to parameter references.

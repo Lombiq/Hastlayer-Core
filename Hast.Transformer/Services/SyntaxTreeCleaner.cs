@@ -70,11 +70,11 @@ public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
         syntaxTree.AcceptVisitor(new UnreferencedNodesRemovingVisitor());
 
         // Removing orphaned base types.
-        foreach (var type in syntaxTree.GetAllTypeDeclarations())
+        foreach (var baseTypes in syntaxTree.GetAllTypeDeclarations().Select(type => type.BaseTypes))
         {
-            foreach (var baseType in type.BaseTypes.Where(baseType => !typeDeclarationLookupTable.Lookup(baseType).IsReferenced()))
+            foreach (var baseType in baseTypes.Where(baseType => !typeDeclarationLookupTable.Lookup(baseType).IsReferenced()))
             {
-                type.BaseTypes.Remove(baseType);
+                baseTypes.Remove(baseType);
             }
         }
 

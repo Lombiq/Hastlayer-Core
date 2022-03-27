@@ -150,11 +150,11 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
 
         var memberSelectingCase = new Case { Expression = CommonPortNames.MemberId.ToVhdlIdValue() };
 
-        foreach (var hardwareEntryPointMemberResult in hardwareEntryPointMemberResults)
+        foreach (var member in hardwareEntryPointMemberResults.Select(result => result.Member))
         {
-            var memberName = hardwareEntryPointMemberResult.Member.GetFullName();
+            var memberName = member.GetFullName();
             var memberId = memberIdTable.LookupMemberId(memberName);
-            proxyComponent.OtherMemberMaxInvocationInstanceCounts[hardwareEntryPointMemberResult.Member] = 1;
+            proxyComponent.OtherMemberMaxInvocationInstanceCounts[member] = 1;
             var when = new CaseWhen
             {
                 Expression = memberId.ToVhdlValue(KnownDataTypes.UnrangedInt),

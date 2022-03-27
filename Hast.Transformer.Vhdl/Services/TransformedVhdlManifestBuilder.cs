@@ -120,14 +120,10 @@ public class TransformedVhdlManifestBuilder : ITransformedVhdlManifestBuilder
         var architectureComponentResults = transformerResults
             .SelectMany(transformerResult => transformerResult.ArchitectureComponentResults)
             .ToList();
-        foreach (var architectureComponentResult in architectureComponentResults)
-        {
-            if (architectureComponentResult.ArchitectureComponent.DependentTypesTable.Types.Any())
-            {
-                dependentTypesTables.Add(architectureComponentResult.ArchitectureComponent.DependentTypesTable);
-            }
-        }
-
+        var architectureComponentResultsWithDependentTypes = architectureComponentResults
+            .Where(architectureComponentResult => architectureComponentResult.ArchitectureComponent.DependentTypesTable.Types.Any())
+            .Select(architectureComponentResult => architectureComponentResult.ArchitectureComponent.DependentTypesTable);
+        dependentTypesTables.AddRange(architectureComponentResultsWithDependentTypes);
         var deviceManifest = transformationContext.DeviceDriver.DeviceManifest;
         var xdcFileBuilders = _xdcFileBuilders
             .Where(builder => builder.IsTargetType(deviceManifest))
