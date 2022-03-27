@@ -1,10 +1,9 @@
-﻿namespace Hast.Remote.Worker.Daemon.Constants
+﻿namespace Hast.Remote.Worker.Daemon.Constants;
+
+public enum ExitCode
 {
-    public enum ExitCode
-    {
-        Success,
-        StartupException,
-        FailedToInitializeHastlayer,
-        ServiceControlError,
-    }
+    Success,
+    StartupException,
+    FailedToInitializeHastlayer,
+    ServiceControlError,
 }

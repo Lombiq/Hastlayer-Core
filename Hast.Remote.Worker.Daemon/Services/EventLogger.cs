@@ -3,40 +3,39 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static Hast.Remote.Worker.Daemon.Constants.ServiceProperties;
 
-namespace Hast.Remote.Worker.Daemon.Services
+namespace Hast.Remote.Worker.Daemon.Services;
+
+public class EventLogger : IEventLogger
 {
-    public class EventLogger : IEventLogger
+    public ILogger Logger { get; set; }
+
+    private readonly EventLog _eventLog;
+
+    public EventLogger(ILogger<EventLogger> logger)
     {
-        public ILogger Logger { get; set; }
+        Logger = logger;
 
-        private readonly EventLog _eventLog;
-
-        public EventLogger(ILogger<EventLogger> logger)
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            Logger = logger;
-
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            _eventLog = new()
             {
-                _eventLog = new()
-                {
-                    Log = DisplayName,
-                    // The EventLog source can't contain dots like the service's technical name.
-                    Source = Name.Replace(".", string.Empty),
-                };
-            }
+                Log = DisplayName,
+                // The EventLog source can't contain dots like the service's technical name.
+                Source = Name.Replace(".", string.Empty),
+            };
+        }
+    }
+
+    public void UpdateStatus(string statusText)
+    {
+        Logger.LogInformation("{0}: {1}", DisplayName, statusText);
+        if (_eventLog == null) return;
+
+        if (!EventLog.Exists(_eventLog.Log))
+        {
+            EventLog.CreateEventSource(new EventSourceCreationData(_eventLog.Source, _eventLog.Log));
         }
 
-        public void UpdateStatus(string statusText)
-        {
-            Logger.LogInformation("{0}: {1}", DisplayName, statusText);
-            if (_eventLog == null) return;
-
-            if (!EventLog.Exists(_eventLog.Log))
-            {
-                EventLog.CreateEventSource(new EventSourceCreationData(_eventLog.Source, _eventLog.Log));
-            }
-
-            _eventLog.WriteEntry($"{DisplayName} {statusText}.");
-        }
+        _eventLog.WriteEntry($"{DisplayName} {statusText}.");
     }
 }

@@ -17,62 +17,61 @@ using System.Threading;
 using System.Threading.Tasks;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
-namespace Hast.Remote.Worker.Services
+namespace Hast.Remote.Worker.Services;
+
+public class HastlayerConfigurationProvider : IHastlayerConfigurationProvider
 {
-    public class HastlayerConfigurationProvider : IHastlayerConfigurationProvider
+    private IHastlayerConfiguration _configuration;
+
+    public async Task<IHastlayerConfiguration> GetConfigurationAsync(
+        ITransformationWorkerConfiguration configuration,
+        CancellationToken cancellationToken = default)
     {
-        private IHastlayerConfiguration _configuration;
+        if (_configuration != null) return _configuration;
 
-        public async Task<IHastlayerConfiguration> GetConfigurationAsync(
-            ITransformationWorkerConfiguration configuration,
-            CancellationToken cancellationToken = default)
+        var container = CloudStorageAccount
+            .Parse(configuration.StorageConnectionString)
+            .CreateCloudBlobClient()
+            .GetContainerReference("transformation");
+        if (!await container.ExistsAsync(cancellationToken))
         {
-            if (_configuration != null) return _configuration;
-
-            var container = CloudStorageAccount
-                .Parse(configuration.StorageConnectionString)
-                .CreateCloudBlobClient()
-                .GetContainerReference("transformation");
-            if (!await container.ExistsAsync(cancellationToken))
-            {
-                await container.CreateAsync(
-                    BlobContainerPublicAccessType.Off,
-                    options: null,
-                    operationContext: null,
-                    cancellationToken);
-            }
-
-            _configuration = new HastlayerConfiguration
-            {
-                Flavor = HastlayerFlavor.Developer,
-                // These extensions need to be added explicitly because when deployed as a flat folder of binaries they
-                // won't be automatically found under the Hast.Core and Hast.Abstractions folders.
-                Extensions = new[]
-                {
-                    typeof(DefaultTransformer).Assembly,
-                    typeof(DefaultJsonConverter).Assembly,
-                    typeof(VhdlTransformingEngine).Assembly,
-                    typeof(NexysA7Driver).Assembly,
-                    typeof(TimingReportParser).Assembly,
-                    typeof(CatapultDriver).Assembly,
-                    typeof(ApplicationInsightsTelemetryManager).Assembly,
-                },
-                ConfigureLogging = ConfigureLogging,
-                OnServiceRegistration = (_, services) =>
-                {
-                    services.AddSingleton(configuration);
-                    services.AddSingleton(container);
-                    services.AddSingleton<ITransformationWorker, TransformationWorker>();
-                },
-            };
-
-            return _configuration;
+            await container.CreateAsync(
+                BlobContainerPublicAccessType.Off,
+                options: null,
+                operationContext: null,
+                cancellationToken);
         }
 
-        public static void ConfigureLogging(ILoggingBuilder builder) =>
-            builder
-                .AddFilter<ApplicationInsightsLoggerProvider>(string.Empty, LogLevel.Trace)
-                .AddApplicationInsights(ApplicationInsightsTelemetryManager.GetInstrumentationKey())
-                .AddNLog("NLog.config");
+        _configuration = new HastlayerConfiguration
+        {
+            Flavor = HastlayerFlavor.Developer,
+            // These extensions need to be added explicitly because when deployed as a flat folder of binaries they
+            // won't be automatically found under the Hast.Core and Hast.Abstractions folders.
+            Extensions = new[]
+            {
+                typeof(DefaultTransformer).Assembly,
+                typeof(DefaultJsonConverter).Assembly,
+                typeof(VhdlTransformingEngine).Assembly,
+                typeof(NexysA7Driver).Assembly,
+                typeof(TimingReportParser).Assembly,
+                typeof(CatapultDriver).Assembly,
+                typeof(ApplicationInsightsTelemetryManager).Assembly,
+            },
+            ConfigureLogging = ConfigureLogging,
+            OnServiceRegistration = (_, services) =>
+            {
+                services.AddSingleton(configuration);
+                services.AddSingleton(container);
+                services.AddSingleton<ITransformationWorker, TransformationWorker>();
+            },
+        };
+
+        return _configuration;
     }
+
+    public static void ConfigureLogging(ILoggingBuilder builder) =>
+        builder
+            .AddFilter<ApplicationInsightsLoggerProvider>(string.Empty, LogLevel.Trace)
+            .AddApplicationInsights(ApplicationInsightsTelemetryManager.GetInstrumentationKey())
+            .AddNLog("NLog.config");
 }

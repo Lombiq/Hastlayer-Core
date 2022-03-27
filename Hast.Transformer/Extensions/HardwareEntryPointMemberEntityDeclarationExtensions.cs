@@ -1,31 +1,30 @@
 using Hast.Transformer.Models;
 
-namespace ICSharpCode.Decompiler.CSharp.Syntax
+namespace ICSharpCode.Decompiler.CSharp.Syntax;
+
+public static class HardwareEntryPointMemberEntityDeclarationExtensions
 {
-    public static class HardwareEntryPointMemberEntityDeclarationExtensions
+    /// <summary>
+    /// Indicates whether the member is a hardware entry point, i.e. should be executable from the host computer.
+    /// </summary>
+    public static bool IsHardwareEntryPointMember(this EntityDeclaration member) =>
+        member.GetHardwareEntryPointMemberMetadata() != null &&
+        member.GetHardwareEntryPointMemberMetadata().IsHardwareEntryPointMember;
+
+    internal static void SetHardwareEntryPointMember(this EntityDeclaration member)
     {
-        /// <summary>
-        /// Indicates whether the member is a hardware entry point, i.e. should be executable from the host computer.
-        /// </summary>
-        public static bool IsHardwareEntryPointMember(this EntityDeclaration member) =>
-            member.GetHardwareEntryPointMemberMetadata() != null &&
-            member.GetHardwareEntryPointMemberMetadata().IsHardwareEntryPointMember;
+        var metadata = member.GetHardwareEntryPointMemberMetadata();
 
-        internal static void SetHardwareEntryPointMember(this EntityDeclaration member)
+        if (metadata == null)
         {
-            var metadata = member.GetHardwareEntryPointMemberMetadata();
-
-            if (metadata == null)
-            {
-                metadata = new HardwareEntryPointMemberMetadata();
-                member.AddAnnotation(metadata);
-            }
-
-            metadata.IsHardwareEntryPointMember = true;
+            metadata = new HardwareEntryPointMemberMetadata();
+            member.AddAnnotation(metadata);
         }
 
-        internal static HardwareEntryPointMemberMetadata GetHardwareEntryPointMemberMetadata(
-            this EntityDeclaration member) =>
-            member.Annotation<HardwareEntryPointMemberMetadata>();
+        metadata.IsHardwareEntryPointMember = true;
     }
+
+    internal static HardwareEntryPointMemberMetadata GetHardwareEntryPointMemberMetadata(
+        this EntityDeclaration member) =>
+        member.Annotation<HardwareEntryPointMemberMetadata>();
 }

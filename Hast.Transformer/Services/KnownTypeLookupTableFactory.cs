@@ -1,19 +1,18 @@
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.TypeSystem;
 
-namespace Hast.Transformer.Services
+namespace Hast.Transformer.Services;
+
+public class KnownTypeLookupTableFactory : IKnownTypeLookupTableFactory
 {
-    public class KnownTypeLookupTableFactory : IKnownTypeLookupTableFactory
+    public IKnownTypeLookupTable Create(ICompilation compilation) => new KnownTypeLookupTable(compilation);
+
+    private class KnownTypeLookupTable : IKnownTypeLookupTable
     {
-        public IKnownTypeLookupTable Create(ICompilation compilation) => new KnownTypeLookupTable(compilation);
+        private readonly ICompilation _compilation;
 
-        private class KnownTypeLookupTable : IKnownTypeLookupTable
-        {
-            private readonly ICompilation _compilation;
+        public KnownTypeLookupTable(ICompilation compilation) => _compilation = compilation;
 
-            public KnownTypeLookupTable(ICompilation compilation) => _compilation = compilation;
-
-            public IType Lookup(KnownTypeCode typeCode) => _compilation.FindType(typeCode);
-        }
+        public IType Lookup(KnownTypeCode typeCode) => _compilation.FindType(typeCode);
     }
 }

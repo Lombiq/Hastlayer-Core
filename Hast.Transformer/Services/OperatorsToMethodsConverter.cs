@@ -4,39 +4,38 @@ using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;
 
-namespace Hast.Transformer.Services
+namespace Hast.Transformer.Services;
+
+/// <summary>
+/// Converts operator overloads into standard methods.
+/// </summary>
+public class OperatorsToMethodsConverter : IConverter
 {
-    /// <summary>
-    /// Converts operator overloads into standard methods.
-    /// </summary>
-    public class OperatorsToMethodsConverter : IConverter
+    public IEnumerable<string> Dependencies { get; } = new[] { nameof(ConstructorsToMethodsConverter) };
+
+    public void Convert(
+        SyntaxTree syntaxTree,
+        IHardwareGenerationConfiguration configuration,
+        IKnownTypeLookupTable knownTypeLookupTable) =>
+        syntaxTree.AcceptVisitor(new OperatorConvertingVisitor());
+
+    private class OperatorConvertingVisitor : DepthFirstAstVisitor
     {
-        public IEnumerable<string> Dependencies { get; } = new[] { nameof(ConstructorsToMethodsConverter) };
-
-        public void Convert(
-            SyntaxTree syntaxTree,
-            IHardwareGenerationConfiguration configuration,
-            IKnownTypeLookupTable knownTypeLookupTable) =>
-            syntaxTree.AcceptVisitor(new OperatorConvertingVisitor());
-
-        private class OperatorConvertingVisitor : DepthFirstAstVisitor
+        public override void VisitOperatorDeclaration(OperatorDeclaration operatorDeclaration)
         {
-            public override void VisitOperatorDeclaration(OperatorDeclaration operatorDeclaration)
-            {
-                base.VisitOperatorDeclaration(operatorDeclaration);
+            base.VisitOperatorDeclaration(operatorDeclaration);
 
-                var method = MethodDeclarationFactory.CreateMethod(
-                    name: operatorDeclaration.Name,
-                    annotations: operatorDeclaration.Annotations,
-                    attributes: operatorDeclaration.Attributes,
-                    parameters: operatorDeclaration.Parameters,
-                    body: operatorDeclaration.Body,
-                    returnType: operatorDeclaration.ReturnType);
+            var method = MethodDeclarationFactory.CreateMethod(
+                name: operatorDeclaration.Name,
+                annotations: operatorDeclaration.Annotations,
+                attributes: operatorDeclaration.Attributes,
+                parameters: operatorDeclaration.Parameters,
+                body: operatorDeclaration.Body,
+                returnType: operatorDeclaration.ReturnType);
 
-                method.Modifiers = operatorDeclaration.Modifiers;
+            method.Modifiers = operatorDeclaration.Modifiers;
 
-                operatorDeclaration.ReplaceWith(method);
-            }
+            operatorDeclaration.ReplaceWith(method);
         }
     }
 }

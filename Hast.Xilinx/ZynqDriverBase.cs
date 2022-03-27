@@ -3,27 +3,26 @@ using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Xilinx.Abstractions.ManifestProviders;
 
-namespace Hast.Xilinx
+namespace Hast.Xilinx;
+
+public abstract class ZynqDriverBase : ZynqManifestProviderBase, IDeviceDriver
 {
-    public abstract class ZynqDriverBase : ZynqManifestProviderBase, IDeviceDriver
+    private readonly ITimingReportParser _timingReportParser;
+    private readonly object _timingReportParserLock = new();
+
+    private ITimingReport _timingReport;
+    public ITimingReport TimingReport
     {
-        private readonly ITimingReportParser _timingReportParser;
-        private readonly object _timingReportParserLock = new();
-
-        private ITimingReport _timingReport;
-        public ITimingReport TimingReport
+        get
         {
-            get
+            lock (_timingReportParserLock)
             {
-                lock (_timingReportParserLock)
-                {
-                    _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(ZynqDriverBase)));
+                _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(ZynqDriverBase)));
 
-                    return _timingReport;
-                }
+                return _timingReport;
             }
         }
-
-        protected ZynqDriverBase(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
     }
+
+    protected ZynqDriverBase(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
 }

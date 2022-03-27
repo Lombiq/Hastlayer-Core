@@ -10,137 +10,136 @@ using System.Threading;
 using System.Threading.Tasks;
 using static Hast.Remote.Worker.Daemon.Constants.ServiceProperties;
 
-namespace Hast.Remote.Worker.Daemon.Services
+namespace Hast.Remote.Worker.Daemon.Services;
+
+public class Worker : BackgroundService
 {
-    public class Worker : BackgroundService
+    private const int MaxTries = 10;
+
+    private readonly IHost _host;
+    private readonly IEventLogger _eventLogger;
+    private ILogger _logger;
+    private DisposableContainer<ITransformationWorker> _disposableContainer;
+    private Hastlayer _hastlayer;
+
+    public Worker(IHost host, IEventLogger eventLogger, ILogger<Worker> logger)
     {
-        private const int MaxTries = 10;
+        _host = host;
+        _eventLogger = eventLogger;
+        _logger = logger;
+    }
 
-        private readonly IHost _host;
-        private readonly IEventLogger _eventLogger;
-        private ILogger _logger;
-        private DisposableContainer<ITransformationWorker> _disposableContainer;
-        private Hastlayer _hastlayer;
-
-        public Worker(IHost host, IEventLogger eventLogger, ILogger<Worker> logger)
+    public override async Task StartAsync(CancellationToken cancellationToken)
+    {
+        try
         {
-            _host = host;
-            _eventLogger = eventLogger;
-            _logger = logger;
+            await base.StartAsync(cancellationToken);
+            _eventLogger.UpdateStatus("started");
+        }
+        catch (Exception exception) when (exception is not OperationCanceledException)
+        {
+            _logger.LogError(exception, "Failed to start {0}", Name);
+            await StopAsync(cancellationToken);
+        }
+    }
+
+    public override async Task StopAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            await base.StopAsync(cancellationToken);
+
+            _eventLogger.UpdateStatus("stopped");
+        }
+        catch (Exception exception) when (exception is not OperationCanceledException)
+        {
+            _logger.LogError(exception, "Failed to stop {0}", Name);
+        }
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+        _disposableContainer?.Dispose();
+        _hastlayer?.Dispose();
+        GC.SuppressFinalize(this);
+    }
+
+    protected override Task ExecuteAsync(CancellationToken stoppingToken) =>
+        ExecuteInnerAsync(MaxTries - 1, stoppingToken);
+
+    private async Task ExecuteInnerAsync(int tries, CancellationToken cancellationToken)
+    {
+        _hastlayer = await CreateHostAsync(cancellationToken);
+        if (_hastlayer == null)
+        {
+            await StopAsync(cancellationToken);
+            await _host.StopAsync(cancellationToken);
+            Dispose();
+            return;
         }
 
-        public override async Task StartAsync(CancellationToken cancellationToken)
+        var isStartupCrash = false;
+
+        try
         {
             try
             {
-                await base.StartAsync(cancellationToken);
-                _eventLogger.UpdateStatus("started");
+                _disposableContainer = _hastlayer.GetService<ITransformationWorker>();
             }
-            catch (Exception exception) when (exception is not OperationCanceledException)
+            catch
             {
-                _logger.LogError(exception, "Failed to start {0}", Name);
-                await StopAsync(cancellationToken);
+                isStartupCrash = true;
+                throw;
             }
+
+            // Overwrite these loggers with the Application Insights enabled versions from inside the Hastlayer DI.
+            _logger = _hastlayer.GetLogger<Worker>();
+            _eventLogger.Logger = _hastlayer.GetLogger<EventLogger>();
+
+            var workerTask = _disposableContainer.Value.WorkAsync(cancellationToken);
+            // Wait until the task completes or the stop token triggers. Same as in base.StopAsync().
+            await Task.WhenAny(workerTask, Task.Delay(Timeout.Infinite, cancellationToken)).ConfigureAwait(false);
+            return;
         }
-
-        public override async Task StopAsync(CancellationToken cancellationToken)
+        catch (Exception exception) when (isStartupCrash && !exception.IsFatal())
         {
-            try
+            await _hastlayer.RunAsync<ILogger<Worker>>(logger =>
             {
-                await base.StopAsync(cancellationToken);
+                logger.LogError(exception, DisplayName + " crashed with an unhandled exception. Restarting...");
 
-                _eventLogger.UpdateStatus("stopped");
-            }
-            catch (Exception exception) when (exception is not OperationCanceledException)
-            {
-                _logger.LogError(exception, "Failed to stop {0}", Name);
-            }
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-            _disposableContainer?.Dispose();
-            _hastlayer?.Dispose();
-            GC.SuppressFinalize(this);
-        }
-
-        protected override Task ExecuteAsync(CancellationToken stoppingToken) =>
-            ExecuteInnerAsync(MaxTries - 1, stoppingToken);
-
-        private async Task ExecuteInnerAsync(int tries, CancellationToken cancellationToken)
-        {
-            _hastlayer = await CreateHostAsync(cancellationToken);
-            if (_hastlayer == null)
-            {
-                await StopAsync(cancellationToken);
-                await _host.StopAsync(cancellationToken);
-                Dispose();
-                return;
-            }
-
-            var isStartupCrash = false;
-
-            try
-            {
-                try
+                if (tries == 0)
                 {
-                    _disposableContainer = _hastlayer.GetService<ITransformationWorker>();
+                    logger.LogCritical(
+                        exception,
+                        "{0} crashed with unhandled exceptions {1} times and it won't be restarted again",
+                        DisplayName,
+                        MaxTries);
                 }
-                catch
-                {
-                    isStartupCrash = true;
-                    throw;
-                }
 
-                // Overwrite these loggers with the Application Insights enabled versions from inside the Hastlayer DI.
-                _logger = _hastlayer.GetLogger<Worker>();
-                _eventLogger.Logger = _hastlayer.GetLogger<EventLogger>();
-
-                var workerTask = _disposableContainer.Value.WorkAsync(cancellationToken);
-                // Wait until the task completes or the stop token triggers. Same as in base.StopAsync().
-                await Task.WhenAny(workerTask, Task.Delay(Timeout.Infinite, cancellationToken)).ConfigureAwait(false);
-                return;
-            }
-            catch (Exception exception) when (isStartupCrash && !exception.IsFatal())
-            {
-                await _hastlayer.RunAsync<ILogger<Worker>>(logger =>
-                {
-                    logger.LogError(exception, DisplayName + " crashed with an unhandled exception. Restarting...");
-
-                    if (tries == 0)
-                    {
-                        logger.LogCritical(
-                            exception,
-                            "{0} crashed with unhandled exceptions {1} times and it won't be restarted again",
-                            DisplayName,
-                            MaxTries);
-                    }
-
-                    return Task.CompletedTask;
-                });
-            }
-
-            if (tries > 0) await ExecuteInnerAsync(tries - 1, cancellationToken);
+                return Task.CompletedTask;
+            });
         }
 
-        private async Task<Hastlayer> CreateHostAsync(CancellationToken cancellationToken)
+        if (tries > 0) await ExecuteInnerAsync(tries - 1, cancellationToken);
+    }
+
+    private async Task<Hastlayer> CreateHostAsync(CancellationToken cancellationToken)
+    {
+        try
         {
-            try
-            {
-                var configuration = TransformationWorkerConfiguration.Create();
+            var configuration = TransformationWorkerConfiguration.Create();
 
-                var hastlayerConfiguration = await new HastlayerConfigurationProvider()
-                    .GetConfigurationAsync(configuration, cancellationToken);
-                return (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
-            }
-            catch (Exception exception)
-            {
-                _logger.LogCritical(exception, "failed to initialize Hastlayer");
-                Program.ExitCode = ExitCode.FailedToInitializeHastlayer;
+            var hastlayerConfiguration = await new HastlayerConfigurationProvider()
+                .GetConfigurationAsync(configuration, cancellationToken);
+            return (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
+        }
+        catch (Exception exception)
+        {
+            _logger.LogCritical(exception, "failed to initialize Hastlayer");
+            Program.ExitCode = ExitCode.FailedToInitializeHastlayer;
 
-                return null;
-            }
+            return null;
         }
     }
 }

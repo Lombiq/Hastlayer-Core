@@ -4,144 +4,143 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using System.Collections.Generic;
 
-namespace Hast.Transformer.Vhdl.ArchitectureComponents
+namespace Hast.Transformer.Vhdl.ArchitectureComponents;
+
+internal class MemberStateMachine : ArchitectureComponentBase, IMemberStateMachine
 {
-    internal class MemberStateMachine : ArchitectureComponentBase, IMemberStateMachine
+    private readonly Enum _statesEnum;
+    private readonly Variable _stateVariable;
+
+    private readonly List<IMemberStateMachineState> _states;
+    public IReadOnlyList<IMemberStateMachineState> States => _states;
+
+    public MemberStateMachine(string name)
+        : base(name)
     {
-        private readonly Enum _statesEnum;
-        private readonly Variable _stateVariable;
+        _statesEnum = new Enum { Name = this.CreatePrefixedObjectName("_States") };
 
-        private readonly List<IMemberStateMachineState> _states;
-        public IReadOnlyList<IMemberStateMachineState> States => _states;
-
-        public MemberStateMachine(string name)
-            : base(name)
+        _stateVariable = new Variable
         {
-            _statesEnum = new Enum { Name = this.CreatePrefixedObjectName("_States") };
+            DataType = _statesEnum,
+            Name = this.CreateStateVariableName(),
+            InitialValue = this.CreateStateName(0).ToVhdlIdValue(),
+        };
+        LocalVariables.Add(_stateVariable);
 
-            _stateVariable = new Variable
-            {
-                DataType = _statesEnum,
-                Name = this.CreateStateVariableName(),
-                InitialValue = this.CreateStateName(0).ToVhdlIdValue(),
-            };
-            LocalVariables.Add(_stateVariable);
-
-            var startedSignal = new Signal
-            {
-                DataType = KnownDataTypes.Boolean,
-                Name = this.CreateStartedSignalName(),
-                InitialValue = Value.False,
-            };
-            ExternallyDrivenSignals.Add(startedSignal);
-
-            var finishedSignal = new Signal
-            {
-                DataType = KnownDataTypes.Boolean,
-                Name = this.CreateFinishedSignalName(),
-                InitialValue = Value.False,
-            };
-            InternallyDrivenSignals.Add(finishedSignal);
-
-            var startStateBlock = new InlineBlock(
-                new LineComment("Start state"),
-                new LineComment("Waiting for the start signal."),
-                new IfElse
-                {
-                    Condition = new Binary
-                    {
-                        Left = startedSignal.Name.ToVhdlSignalReference(),
-                        Operator = BinaryOperator.Equality,
-                        Right = Value.True,
-                    },
-                    True = this.CreateStateChange(2),
-                });
-
-            var finalStateBlock = new InlineBlock(
-                new LineComment("Final state"),
-                new LineComment("Signaling finished until Started is pulled back to false, then returning to the start state."),
-                new IfElse
-                {
-                    Condition = new Binary
-                    {
-                        Left = startedSignal.Name.ToVhdlSignalReference(),
-                        Operator = BinaryOperator.Equality,
-                        Right = Value.True,
-                    },
-                    True = new Assignment { AssignTo = finishedSignal, Expression = Value.True },
-                    Else = new InlineBlock(
-                        new Assignment { AssignTo = finishedSignal, Expression = Value.False },
-                        this.ChangeToStartState()),
-                });
-
-            _states = new List<IMemberStateMachineState>
-            {
-                new MemberStateMachineState { Body = startStateBlock },
-                new MemberStateMachineState { Body = finalStateBlock },
-            };
-        }
-
-        public int AddState(IBlockElement state)
+        var startedSignal = new Signal
         {
-            _states.Add(new MemberStateMachineState { Body = state });
-            return _states.Count - 1;
-        }
+            DataType = KnownDataTypes.Boolean,
+            Name = this.CreateStartedSignalName(),
+            InitialValue = Value.False,
+        };
+        ExternallyDrivenSignals.Add(startedSignal);
 
-        public void RecordMultiCycleOperation(IDataObject operationResultReference, int requiredClockCyclesCeiling) =>
-            _multiCycleOperations.Add(new MultiCycleOperation
+        var finishedSignal = new Signal
+        {
+            DataType = KnownDataTypes.Boolean,
+            Name = this.CreateFinishedSignalName(),
+            InitialValue = Value.False,
+        };
+        InternallyDrivenSignals.Add(finishedSignal);
+
+        var startStateBlock = new InlineBlock(
+            new LineComment("Start state"),
+            new LineComment("Waiting for the start signal."),
+            new IfElse
             {
-                OperationResultReference = operationResultReference,
-                RequiredClockCyclesCeiling = requiredClockCyclesCeiling,
+                Condition = new Binary
+                {
+                    Left = startedSignal.Name.ToVhdlSignalReference(),
+                    Operator = BinaryOperator.Equality,
+                    Right = Value.True,
+                },
+                True = this.CreateStateChange(2),
             });
 
-        public override IVhdlElement BuildDeclarations()
-        {
-            for (int i = 0; i < _states.Count; i++)
+        var finalStateBlock = new InlineBlock(
+            new LineComment("Final state"),
+            new LineComment("Signaling finished until Started is pulled back to false, then returning to the start state."),
+            new IfElse
             {
-                _statesEnum.Values.Add(this.CreateStateName(i).ToVhdlIdValue());
-            }
+                Condition = new Binary
+                {
+                    Left = startedSignal.Name.ToVhdlSignalReference(),
+                    Operator = BinaryOperator.Equality,
+                    Right = Value.True,
+                },
+                True = new Assignment { AssignTo = finishedSignal, Expression = Value.True },
+                Else = new InlineBlock(
+                    new Assignment { AssignTo = finishedSignal, Expression = Value.False },
+                    this.ChangeToStartState()),
+            });
 
-            return BuildDeclarationsBlock(new InlineBlock(
-                new LineComment("State machine states:"),
-                _statesEnum));
-        }
-
-        public override IVhdlElement BuildBody()
+        _states = new List<IMemberStateMachineState>
         {
-            var stateCase = new Case { Expression = _stateVariable.Name.ToVhdlIdValue() };
+            new MemberStateMachineState { Body = startStateBlock },
+            new MemberStateMachineState { Body = finalStateBlock },
+        };
+    }
 
-            for (int i = 0; i < _states.Count; i++)
-            {
-                var stateWhen = new CaseWhen { Expression = this.CreateStateName(i).ToVhdlIdValue() };
-                stateWhen.Add(_states[i].Body);
-                stateWhen.Add(new LineComment(
-                    "Clock cycles needed to complete this state (approximation): " +
-                    // The G29 format specifier will cut trailing zeros apart from x.0. See:
-                    // https://msdn.microsoft.com/en-us/library/dwhawy9k(v=VS.90).aspx
-                    _states[i].RequiredClockCycles.ToString("G29", System.Globalization.CultureInfo.InvariantCulture)));
-                stateCase.Whens.Add(stateWhen);
-            }
+    public int AddState(IBlockElement state)
+    {
+        _states.Add(new MemberStateMachineState { Body = state });
+        return _states.Count - 1;
+    }
 
-            var process = BuildProcess(stateCase);
-
-            process.Name = this.CreatePrefixedObjectName("_StateMachine");
-
-            return new LogicalBlock(
-                new LineComment(Name + " state machine start"),
-                process,
-                new LineComment(Name + " state machine end"));
-        }
-
-        public class MemberStateMachineState : IMemberStateMachineState
+    public void RecordMultiCycleOperation(IDataObject operationResultReference, int requiredClockCyclesCeiling) =>
+        _multiCycleOperations.Add(new MultiCycleOperation
         {
-            public IBlockElement Body { get; set; }
-            public decimal RequiredClockCycles { get; set; }
+            OperationResultReference = operationResultReference,
+            RequiredClockCyclesCeiling = requiredClockCyclesCeiling,
+        });
+
+    public override IVhdlElement BuildDeclarations()
+    {
+        for (int i = 0; i < _states.Count; i++)
+        {
+            _statesEnum.Values.Add(this.CreateStateName(i).ToVhdlIdValue());
         }
 
-        private class MultiCycleOperation : IMultiCycleOperation
+        return BuildDeclarationsBlock(new InlineBlock(
+            new LineComment("State machine states:"),
+            _statesEnum));
+    }
+
+    public override IVhdlElement BuildBody()
+    {
+        var stateCase = new Case { Expression = _stateVariable.Name.ToVhdlIdValue() };
+
+        for (int i = 0; i < _states.Count; i++)
         {
-            public IDataObject OperationResultReference { get; set; }
-            public int RequiredClockCyclesCeiling { get; set; }
+            var stateWhen = new CaseWhen { Expression = this.CreateStateName(i).ToVhdlIdValue() };
+            stateWhen.Add(_states[i].Body);
+            stateWhen.Add(new LineComment(
+                "Clock cycles needed to complete this state (approximation): " +
+                // The G29 format specifier will cut trailing zeros apart from x.0. See:
+                // https://msdn.microsoft.com/en-us/library/dwhawy9k(v=VS.90).aspx
+                _states[i].RequiredClockCycles.ToString("G29", System.Globalization.CultureInfo.InvariantCulture)));
+            stateCase.Whens.Add(stateWhen);
         }
+
+        var process = BuildProcess(stateCase);
+
+        process.Name = this.CreatePrefixedObjectName("_StateMachine");
+
+        return new LogicalBlock(
+            new LineComment(Name + " state machine start"),
+            process,
+            new LineComment(Name + " state machine end"));
+    }
+
+    public class MemberStateMachineState : IMemberStateMachineState
+    {
+        public IBlockElement Body { get; set; }
+        public decimal RequiredClockCycles { get; set; }
+    }
+
+    private class MultiCycleOperation : IMultiCycleOperation
+    {
+        public IDataObject OperationResultReference { get; set; }
+        public int RequiredClockCyclesCeiling { get; set; }
     }
 }

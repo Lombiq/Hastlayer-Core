@@ -6,29 +6,28 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Hast.Transformer.Abstractions
+namespace Hast.Transformer.Abstractions;
+
+/// <summary>
+/// Creates the device-specific <see cref="XdcFile"/> for the <see cref="TransformedVhdlManifest"/>.
+/// </summary>
+public interface IXdcFileBuilder : IDependency, IComparable<IXdcFileBuilder>
 {
     /// <summary>
-    /// Creates the device-specific <see cref="XdcFile"/> for the <see cref="TransformedVhdlManifest"/>.
+    /// Gets the supported manifest's type.
     /// </summary>
-    public interface IXdcFileBuilder : IDependency, IComparable<IXdcFileBuilder>
-    {
-        /// <summary>
-        /// Gets the supported manifest's type.
-        /// </summary>
-        Type ManifestType { get; }
+    Type ManifestType { get; }
 
-        /// <summary>
-        /// Returns <see langword="true" /> if manifest is of the target type. Use the <see  cref="XdcFileBuilderBase{T}"/>
-        /// generic base class and don't implement this yourself.
-        /// </summary>
-        bool IsTargetType(IDeviceManifest manifest);
+    /// <summary>
+    /// Returns <see langword="true" /> if manifest is of the target type. Use the <see  cref="XdcFileBuilderBase{T}"/>
+    /// generic base class and don't implement this yourself.
+    /// </summary>
+    bool IsTargetType(IDeviceManifest manifest);
 
-        /// <summary>
-        /// Performs device-specific steps to create the <see cref="XdcFile"/>.
-        /// </summary>
-        Task<XdcFile> BuildManifestAsync(
-            IEnumerable<IArchitectureComponentResult> architectureComponentResults,
-            Architecture hastIpArchitecture);
-    }
+    /// <summary>
+    /// Performs device-specific steps to create the <see cref="XdcFile"/>.
+    /// </summary>
+    Task<XdcFile> BuildManifestAsync(
+        IEnumerable<IArchitectureComponentResult> architectureComponentResults,
+        Architecture hastIpArchitecture);
 }

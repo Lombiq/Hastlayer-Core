@@ -1,13 +1,12 @@
 ﻿using Hast.VhdlBuilder.Representation.Declaration;
 
-namespace Hast.VhdlBuilder.Representation.Expression
+namespace Hast.VhdlBuilder.Representation.Expression;
+
+public class Character : Value
 {
-    public class Character : Value
+    public Character(char character)
     {
-        public Character(char character)
-        {
-            DataType = KnownDataTypes.Character;
-            Content = character.ToString();
-        }
+        DataType = KnownDataTypes.Character;
+        Content = character.ToString();
     }
 }

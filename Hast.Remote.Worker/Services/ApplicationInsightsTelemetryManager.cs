@@ -15,93 +15,92 @@ using System;
 using System.Linq;
 using static Hast.Remote.Worker.Constants.ConfigurationPaths;
 
-namespace Hast.Remote.Worker.Services
+namespace Hast.Remote.Worker.Services;
+
+[DependencyInitializer(nameof(InitializeService))]
+public class ApplicationInsightsTelemetryManager : IApplicationInsightsTelemetryManager
 {
-    [DependencyInitializer(nameof(InitializeService))]
-    public class ApplicationInsightsTelemetryManager : IApplicationInsightsTelemetryManager
+    private readonly TelemetryClient _telemetryClient;
+
+    public ApplicationInsightsTelemetryManager(
+        TelemetryConfiguration telemetryConfiguration,
+        TelemetryClient telemetryClient)
     {
-        private readonly TelemetryClient _telemetryClient;
+        var builder = telemetryConfiguration.DefaultTelemetrySink.TelemetryProcessorChainBuilder;
+        builder.UseAdaptiveSampling(maxTelemetryItemsPerSecond: 5, excludedTypes: "Event");
+        builder.Build();
 
-        public ApplicationInsightsTelemetryManager(
-            TelemetryConfiguration telemetryConfiguration,
-            TelemetryClient telemetryClient)
+        _telemetryClient = telemetryClient;
+    }
+
+    public void TrackTransformation(TransformationTelemetry telemetry)
+    {
+        var requestTelemetry = new RequestTelemetry
         {
-            var builder = telemetryConfiguration.DefaultTelemetrySink.TelemetryProcessorChainBuilder;
-            builder.UseAdaptiveSampling(maxTelemetryItemsPerSecond: 5, excludedTypes: "Event");
-            builder.Build();
+            Name = "transformation",
+            Duration = telemetry.FinishTimeUtc - telemetry.StartTimeUtc,
+            Timestamp = telemetry.StartTimeUtc,
+            Success = telemetry.IsSuccess,
+            Url = new Uri(telemetry.JobName, UriKind.Relative),
+        };
 
-            _telemetryClient = telemetryClient;
+        requestTelemetry.Context.User.AccountId = telemetry.AppId.ToTechnicalString();
+
+        _telemetryClient.TrackRequest(requestTelemetry);
+    }
+
+    public static string GetInstrumentationKey()
+    {
+        var configuration = Hastlayer.BuildConfiguration();
+        var key = configuration.GetSection(ApplicationInsightsInstrumentationKey).Value;
+        if (key.StartsWithOrdinalIgnoreCase("Insert your instrumentation key")) key = null;
+        key ??= configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY").Value;
+
+        if (string.IsNullOrEmpty(key))
+        {
+            throw new MissingInstrumentationKeyException(
+                "Please set up the instrumentation key via appsettings.json or environment variable, see " +
+                "APPINSIGHTS_INSTRUMENTATIONKEY part here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core");
         }
 
-        public void TrackTransformation(TransformationTelemetry telemetry)
+        return key;
+    }
+
+    public static void InitializeService(IServiceCollection services)
+    {
+        string key = null;
+        try
         {
-            var requestTelemetry = new RequestTelemetry
-            {
-                Name = "transformation",
-                Duration = telemetry.FinishTimeUtc - telemetry.StartTimeUtc,
-                Timestamp = telemetry.StartTimeUtc,
-                Success = telemetry.IsSuccess,
-                Url = new Uri(telemetry.JobName, UriKind.Relative),
-            };
-
-            requestTelemetry.Context.User.AccountId = telemetry.AppId.ToTechnicalString();
-
-            _telemetryClient.TrackRequest(requestTelemetry);
+            key = GetInstrumentationKey();
+        }
+        catch (MissingInstrumentationKeyException ex)
+        {
+            // It's not guaranteed that we'd actually use it at this point and a lack of telemetry is not the kind
+            // of issue that warrants crashing the application.
+            services.LogDeferred(LogLevel.Warning, ex.Message);
         }
 
-        public static string GetInstrumentationKey()
+        if (key == null) return;
+
+        var options = new ApplicationInsightsServiceOptions
         {
-            var configuration = Hastlayer.BuildConfiguration();
-            var key = configuration.GetSection(ApplicationInsightsInstrumentationKey).Value;
-            if (key.StartsWithOrdinalIgnoreCase("Insert your instrumentation key")) key = null;
-            key ??= configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY").Value;
+            EnableAdaptiveSampling = false,
+            InstrumentationKey = key,
+            EnableDebugLogger = true,
+        };
 
-            if (string.IsNullOrEmpty(key))
-            {
-                throw new MissingInstrumentationKeyException(
-                    "Please set up the instrumentation key via appsettings.json or environment variable, see " +
-                    "APPINSIGHTS_INSTRUMENTATIONKEY part here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core");
-            }
+        services.AddApplicationInsightsTelemetryWorkerService(options);
 
-            return key;
-        }
+        services.AddSingleton<ITelemetryInitializer, HttpDependenciesParsingTelemetryInitializer>();
+        services.AddApplicationInsightsTelemetryProcessor<QuickPulseTelemetryProcessor>();
+        services.AddApplicationInsightsTelemetryProcessor<AutocollectedMetricsExtractor>();
+        services.AddApplicationInsightsTelemetryProcessor<AdaptiveSamplingTelemetryProcessor>();
+        services.ConfigureTelemetryModule<QuickPulseTelemetryModule>((_, _) => { });
 
-        public static void InitializeService(IServiceCollection services)
-        {
-            string key = null;
-            try
-            {
-                key = GetInstrumentationKey();
-            }
-            catch (MissingInstrumentationKeyException ex)
-            {
-                // It's not guaranteed that we'd actually use it at this point and a lack of telemetry is not the kind
-                // of issue that warrants crashing the application.
-                services.LogDeferred(LogLevel.Warning, ex.Message);
-            }
-
-            if (key == null) return;
-
-            var options = new ApplicationInsightsServiceOptions
-            {
-                EnableAdaptiveSampling = false,
-                InstrumentationKey = key,
-                EnableDebugLogger = true,
-            };
-
-            services.AddApplicationInsightsTelemetryWorkerService(options);
-
-            services.AddSingleton<ITelemetryInitializer, HttpDependenciesParsingTelemetryInitializer>();
-            services.AddApplicationInsightsTelemetryProcessor<QuickPulseTelemetryProcessor>();
-            services.AddApplicationInsightsTelemetryProcessor<AutocollectedMetricsExtractor>();
-            services.AddApplicationInsightsTelemetryProcessor<AdaptiveSamplingTelemetryProcessor>();
-            services.ConfigureTelemetryModule<QuickPulseTelemetryModule>((_, _) => { });
-
-            // Dependency tracking is disabled as it's not useful (only records blob storage operations) but causes
-            // excessive AI usage.
-            var dependencyTrackingTelemetryModule = services
-                .FirstOrDefault(t => t.ImplementationType == typeof(DependencyTrackingTelemetryModule));
-            if (dependencyTrackingTelemetryModule != null) services.Remove(dependencyTrackingTelemetryModule);
-        }
+        // Dependency tracking is disabled as it's not useful (only records blob storage operations) but causes
+        // excessive AI usage.
+        var dependencyTrackingTelemetryModule = services
+            .FirstOrDefault(t => t.ImplementationType == typeof(DependencyTrackingTelemetryModule));
+        if (dependencyTrackingTelemetryModule != null) services.Remove(dependencyTrackingTelemetryModule);
     }
 }
