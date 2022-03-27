@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -53,7 +54,9 @@ public static class BinaryAndUnaryOperatorExpressionCasesGenerator
             var isUlong = type == ULong;
             var variableName = type + "Operand";
 
-            codeBuilder.AppendLine($@"
+            codeBuilder.AppendLine(
+                CultureInfo.InvariantCulture,
+                $@"
                     var {variableName} = {(type != Long ? $"({type})" : string.Empty)}input;");
 
             codeBuilder.AppendLine(AddSaveResult(memoryIndex, "~" + variableName, isUlong));
@@ -84,7 +87,9 @@ public static class BinaryAndUnaryOperatorExpressionCasesGenerator
                 ? $"({rightType})"
                 : string.Empty;
 
-        codeBuilder.AppendLine($@"
+        codeBuilder.AppendLine(
+            CultureInfo.InvariantCulture,
+            $@"
                 var {right} = {rightValue}input;");
 
         var shiftRightOperandCast = _needsShiftCastTypes.Contains(rightType) ? "(int)" : string.Empty;
@@ -154,23 +159,31 @@ public static class BinaryAndUnaryOperatorExpressionCasesGenerator
     {
         var namePrefix = leftType.ToUpperInvariant()[0] + leftType[1..];
         var left = leftType + "Left";
-        codeBuilder.AppendLine($@"
+        codeBuilder.AppendLine(
+            CultureInfo.InvariantCulture,
+            $@"
                 public virtual void {namePrefix}BinaryOperatorExpressionVariations{nameSuffix}(SimpleMemory memory)
                 {{");
 
         if (leftType is Long or ULong)
         {
-            codeBuilder.AppendLine($@"{leftType} input = (({leftType})memory.ReadInt32(0) << 32) | (uint)memory.ReadInt32(1);
+            codeBuilder.AppendLine(
+                CultureInfo.InvariantCulture,
+                $@"{leftType} input = (({leftType})memory.ReadInt32(0) << 32) | (uint)memory.ReadInt32(1);
                         var {left} = input;");
         }
         else if (leftType == UInt)
         {
-            codeBuilder.AppendLine($@"var input = memory.ReadUInt32(0);
+            codeBuilder.AppendLine(
+                CultureInfo.InvariantCulture,
+                $@"var input = memory.ReadUInt32(0);
                         var {left} = input;");
         }
         else
         {
-            codeBuilder.AppendLine($@"var input = memory.ReadInt32(0);
+            codeBuilder.AppendLine(
+                CultureInfo.InvariantCulture,
+                $@"var input = memory.ReadInt32(0);
                         var {left} = {(leftType != "int" ? $"({leftType})" : string.Empty)}input;");
         }
     }
