@@ -398,7 +398,7 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
         return false;
     }
 
-    private class ConstructorConstantValuesTableBuildingVisitor : DepthFirstAstVisitor
+    private sealed class ConstructorConstantValuesTableBuildingVisitor : DepthFirstAstVisitor
     {
         public ConstantValuesTable ConstantValuesTable { get; } = new();
 

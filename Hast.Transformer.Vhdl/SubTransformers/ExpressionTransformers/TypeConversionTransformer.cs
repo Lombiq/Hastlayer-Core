@@ -332,7 +332,7 @@ public class TypeConversionTransformer : ITypeConversionTransformer
         public bool IsResized { get; set; }
     }
 
-    private class AssignmentTypeConversionResult : TypeConversionResult, IAssignmentTypeConversionResult
+    private sealed class AssignmentTypeConversionResult : TypeConversionResult, IAssignmentTypeConversionResult
     {
         public IDataObject ConvertedToDataObject { get; set; }
     }

@@ -45,7 +45,7 @@ public class OptionalParameterFiller : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new OptionalParamtersFillingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
 
-    private class OptionalParamtersFillingVisitor : DepthFirstAstVisitor
+    private sealed class OptionalParamtersFillingVisitor : DepthFirstAstVisitor
     {
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
 

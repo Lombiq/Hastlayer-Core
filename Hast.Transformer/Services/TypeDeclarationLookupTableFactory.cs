@@ -20,7 +20,7 @@ public class TypeDeclarationLookupTableFactory : ITypeDeclarationLookupTableFact
         return new TypeDeclarationLookupTable(typeDeclarations);
     }
 
-    private class TypeDeclarationLookupTable : ITypeDeclarationLookupTable
+    private sealed class TypeDeclarationLookupTable : ITypeDeclarationLookupTable
     {
         private readonly Dictionary<string, TypeDeclaration> _typeDeclarations;
 

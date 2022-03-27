@@ -34,7 +34,7 @@ public class ImmutableArraysToStandardArraysConverter : IConverter
 
         syntaxTree.AcceptVisitor(new ImmutableArraysToStandardArraysConvertingVisitor(knownTypeLookupTable));
 
-    private class ImmutableArraysToStandardArraysConvertingVisitor : DepthFirstAstVisitor
+    private sealed class ImmutableArraysToStandardArraysConvertingVisitor : DepthFirstAstVisitor
     {
         private readonly IKnownTypeLookupTable _knownTypeLookupTable;
 

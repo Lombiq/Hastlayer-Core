@@ -78,7 +78,7 @@ public class CompilerGeneratedClassesVerifier : IVerifyer
         }
     }
 
-    private class MemberReferenceExpressionVisitingVisitor : DepthFirstAstVisitor
+    private sealed class MemberReferenceExpressionVisitingVisitor : DepthFirstAstVisitor
     {
         private readonly Action<MemberReferenceExpression> _expressionProcessor;
 

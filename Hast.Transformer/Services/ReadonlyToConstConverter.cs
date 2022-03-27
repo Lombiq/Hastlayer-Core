@@ -58,7 +58,7 @@ public class ReadonlyToConstConverter : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new ReadonlyToConstVisitor(configuration, syntaxTree));
 
-    private class ReadonlyToConstVisitor : DepthFirstAstVisitor
+    private sealed class ReadonlyToConstVisitor : DepthFirstAstVisitor
     {
         private readonly IDictionary<string, object> _replacements;
         private readonly SyntaxTree _syntaxTree;
@@ -124,7 +124,7 @@ public class ReadonlyToConstConverter : IConverter
         }
     }
 
-    private class ReplaceReadonlyVisitor : DepthFirstAstVisitor
+    private sealed class ReplaceReadonlyVisitor : DepthFirstAstVisitor
     {
         private readonly string _name;
         private readonly object _value;

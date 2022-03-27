@@ -23,7 +23,7 @@ public class InvocationInstanceCountAdjuster : IInvocationInstanceCountAdjuster
             _typeDeclarationLookupTableFactory.Create(syntaxTree),
             configuration));
 
-    private class InvocationInstanceCountAdjustingVisitor : DepthFirstAstVisitor
+    private sealed class InvocationInstanceCountAdjustingVisitor : DepthFirstAstVisitor
     {
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
         private readonly TransformerConfiguration _transformerConfiguration;

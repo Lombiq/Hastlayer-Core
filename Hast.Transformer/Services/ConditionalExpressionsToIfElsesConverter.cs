@@ -29,7 +29,7 @@ public class ConditionalExpressionsToIfElsesConverter : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new ConditionalExpressionsConvertingVisitor());
 
-    private class ConditionalExpressionsConvertingVisitor : DepthFirstAstVisitor
+    private sealed class ConditionalExpressionsConvertingVisitor : DepthFirstAstVisitor
     {
         public override void VisitConditionalExpression(ConditionalExpression conditionalExpression)
         {

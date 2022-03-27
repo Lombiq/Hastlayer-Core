@@ -228,7 +228,7 @@ public class TimingReportParser : ITimingReportParser
         }
     }
 
-    private class OperatorInfo
+    private sealed class OperatorInfo
     {
         public ushort OperandSizeBits { get; set; }
         public bool IsSigned { get; set; }
@@ -244,7 +244,7 @@ public class TimingReportParser : ITimingReportParser
         }
     }
 
-    private class TimingReport : ITimingReport
+    private sealed class TimingReport : ITimingReport
     {
         private readonly Dictionary<string, decimal> _timings = new();
 

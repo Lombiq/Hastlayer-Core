@@ -138,7 +138,7 @@ internal class MemberStateMachine : ArchitectureComponentBase, IMemberStateMachi
         public decimal RequiredClockCycles { get; set; }
     }
 
-    private class MultiCycleOperation : IMultiCycleOperation
+    private sealed class MultiCycleOperation : IMultiCycleOperation
     {
         public IDataObject OperationResultReference { get; set; }
         public int RequiredClockCyclesCeiling { get; set; }

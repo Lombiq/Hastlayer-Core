@@ -9,7 +9,7 @@ public class RemainderOperatorExpressionsExpander : IRemainderOperatorExpression
     public void ExpandRemainderOperatorExpressions(SyntaxTree syntaxTree) =>
         syntaxTree.AcceptVisitor(new RemainderOperatorExpressionsExpanderVisitor());
 
-    private class RemainderOperatorExpressionsExpanderVisitor : DepthFirstAstVisitor
+    private sealed class RemainderOperatorExpressionsExpanderVisitor : DepthFirstAstVisitor
     {
         public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
         {

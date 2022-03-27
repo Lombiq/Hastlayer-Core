@@ -88,7 +88,7 @@ public class MethodInliner : IConverter
             : identifier + suffix;
     }
 
-    private class MethodCallChangingVisitor : DepthFirstAstVisitor
+    private sealed class MethodCallChangingVisitor : DepthFirstAstVisitor
     {
         private readonly Dictionary<string, MethodDeclaration> _inlinableMethods;
 
@@ -189,7 +189,7 @@ public class MethodInliner : IConverter
         }
     }
 
-    private class MethodBodyAdaptingVisitor : DepthFirstAstVisitor
+    private sealed class MethodBodyAdaptingVisitor : DepthFirstAstVisitor
     {
         private readonly string _methodIdentifierNameSuffix;
         private readonly IdentifierExpression _returnVariableReference;

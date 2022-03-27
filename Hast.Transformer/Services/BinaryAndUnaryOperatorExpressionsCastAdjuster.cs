@@ -43,7 +43,7 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor(knownTypeLookupTable));
 
-    private class BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor : DepthFirstAstVisitor
+    private sealed class BinaryAndUnaryOperatorExpressionsCastAdjusterVisitor : DepthFirstAstVisitor
     {
         // Note that while shifts are missing from the list under
         // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#numeric-promotions they still get kind

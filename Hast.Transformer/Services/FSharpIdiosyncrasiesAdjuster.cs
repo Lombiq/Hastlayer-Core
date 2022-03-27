@@ -25,7 +25,7 @@ public class FSharpIdiosyncrasiesAdjuster : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new FSharpIdiosyncrasiesAdjustingVisitor(_typeDeclarationLookupTableFactory.Create(syntaxTree)));
 
-    private class FSharpIdiosyncrasiesAdjustingVisitor : DepthFirstAstVisitor
+    private sealed class FSharpIdiosyncrasiesAdjustingVisitor : DepthFirstAstVisitor
     {
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
 
@@ -125,7 +125,7 @@ public class FSharpIdiosyncrasiesAdjuster : IConverter
             }
         }
 
-        private class ClosureClassMethodFieldReferencesChangingVisitor : DepthFirstAstVisitor
+        private sealed class ClosureClassMethodFieldReferencesChangingVisitor : DepthFirstAstVisitor
         {
             public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
             {

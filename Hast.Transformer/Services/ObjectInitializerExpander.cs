@@ -41,7 +41,7 @@ public class ObjectInitializerExpander : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new ObjectInitializerExpanderVisitor());
 
-    private class ObjectInitializerExpanderVisitor : DepthFirstAstVisitor
+    private sealed class ObjectInitializerExpanderVisitor : DepthFirstAstVisitor
     {
         public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
         {

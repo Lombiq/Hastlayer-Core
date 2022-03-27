@@ -851,7 +851,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
                 .ToExtendedVhdlId(),
         };
 
-    private class WaitContext
+    private sealed class WaitContext
     {
         public DataObjectReference RunningStateVariableReference { get; set; }
         public DataObjectReference RunningIndexVariableReference { get; set; }

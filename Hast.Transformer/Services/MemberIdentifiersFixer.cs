@@ -24,7 +24,7 @@ public class MemberIdentifiersFixer : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new MemberIdentifiersFixingVisitor());
 
-    private class MemberIdentifiersFixingVisitor : DepthFirstAstVisitor
+    private sealed class MemberIdentifiersFixingVisitor : DepthFirstAstVisitor
     {
         public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
         {

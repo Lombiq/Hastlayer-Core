@@ -834,7 +834,7 @@ public class ExpressionTransformer : IExpressionTransformer
         return result;
     }
 
-    private class RecordInitializationResult
+    private sealed class RecordInitializationResult
     {
         public NullableRecord Record { get; set; }
         public IDataObject RecordInstanceReference { get; set; }

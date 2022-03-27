@@ -106,7 +106,7 @@ public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
         child.AddReference(syntaxTree);
     }
 
-    private class ReferencedNodesFlaggingVisitor : DepthFirstAstVisitor
+    private sealed class ReferencedNodesFlaggingVisitor : DepthFirstAstVisitor
     {
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
         private readonly IHardwareGenerationConfiguration _configuration;
@@ -210,7 +210,7 @@ public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
         }
     }
 
-    private class UnreferencedNodesRemovingVisitor : DepthFirstAstVisitor
+    private sealed class UnreferencedNodesRemovingVisitor : DepthFirstAstVisitor
     {
         public override void VisitCustomEventDeclaration(CustomEventDeclaration eventDeclaration)
         {
@@ -261,7 +261,7 @@ public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
         }
     }
 
-    private class ReferenceMetadataCleanUpVisitor : DepthFirstAstVisitor
+    private sealed class ReferenceMetadataCleanUpVisitor : DepthFirstAstVisitor
     {
         protected override void VisitChildren(AstNode node)
         {

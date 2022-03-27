@@ -28,7 +28,7 @@ public class ArrayTypesCreator : IArrayTypesCreator
         return arrayDeclarations.Values;
     }
 
-    private class ArrayCreationCheckingVisitor : DepthFirstAstVisitor
+    private sealed class ArrayCreationCheckingVisitor : DepthFirstAstVisitor
     {
         private readonly ITypeConverter _typeConverter;
         private readonly Dictionary<string, ArrayType> _arrayDeclarations;

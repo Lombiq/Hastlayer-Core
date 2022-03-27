@@ -19,7 +19,7 @@ public class OperatorsToMethodsConverter : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new OperatorConvertingVisitor());
 
-    private class OperatorConvertingVisitor : DepthFirstAstVisitor
+    private sealed class OperatorConvertingVisitor : DepthFirstAstVisitor
     {
         public override void VisitOperatorDeclaration(OperatorDeclaration operatorDeclaration)
         {

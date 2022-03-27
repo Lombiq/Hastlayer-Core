@@ -305,7 +305,7 @@ internal class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
         }
     }
 
-    private class ProcessParentActions
+    private sealed class ProcessParentActions
     {
         public Action<AssignmentExpression> AssignmentHandler { get; set; }
         public Action<MemberReferenceExpression> MemberReferenceHandler { get; set; }

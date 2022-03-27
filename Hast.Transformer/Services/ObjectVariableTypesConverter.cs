@@ -51,7 +51,7 @@ public class ObjectVariableTypesConverter : IConverter
         syntaxTree.AcceptVisitor(new UnnecessaryObjectCastsRemovingVisitor());
     }
 
-    private class MethodObjectParametersTypeConvertingVisitor : DepthFirstAstVisitor
+    private sealed class MethodObjectParametersTypeConvertingVisitor : DepthFirstAstVisitor
     {
         public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
         {
@@ -96,7 +96,7 @@ public class ObjectVariableTypesConverter : IConverter
             }
         }
 
-        private class ParameterCastExpressionFindingVisitor : DepthFirstAstVisitor
+        private sealed class ParameterCastExpressionFindingVisitor : DepthFirstAstVisitor
         {
             private readonly string _parameterName;
 
@@ -117,7 +117,7 @@ public class ObjectVariableTypesConverter : IConverter
             }
         }
 
-        private class ParameterReferencesTypeChangingVisitor : DepthFirstAstVisitor
+        private sealed class ParameterReferencesTypeChangingVisitor : DepthFirstAstVisitor
         {
             private readonly string _parameterName;
             private readonly ILVariableResolveResult _resolveResult;
@@ -139,7 +139,7 @@ public class ObjectVariableTypesConverter : IConverter
         }
     }
 
-    private class UnnecessaryObjectCastsRemovingVisitor : DepthFirstAstVisitor
+    private sealed class UnnecessaryObjectCastsRemovingVisitor : DepthFirstAstVisitor
     {
         public override void VisitCastExpression(CastExpression castExpression)
         {

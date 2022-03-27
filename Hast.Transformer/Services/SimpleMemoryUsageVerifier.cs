@@ -36,7 +36,7 @@ public class SimpleMemoryUsageVerifier : ISimpleMemoryUsageVerifier
         syntaxTree.AcceptVisitor(new SimpleMemoryAssignmentVerifyingVisitor());
     }
 
-    private class SimpleMemoryAssignmentVerifyingVisitor : DepthFirstAstVisitor
+    private sealed class SimpleMemoryAssignmentVerifyingVisitor : DepthFirstAstVisitor
     {
         public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
         {

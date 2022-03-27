@@ -413,7 +413,7 @@ public class StateMachineInvocationBuilder : IStateMachineInvocationBuilder
         public IEnumerable<Assignment> OutParameterBackAssignments { get; set; }
     }
 
-    private class BuildInvocationBlockResult : BuildInvocationResult
+    private sealed class BuildInvocationBlockResult : BuildInvocationResult
     {
         public IVhdlElement InvocationBlock { get; set; }
     }

@@ -46,7 +46,7 @@ public class CustomPropertiesToMethodsConverter : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new CustomPropertiesConvertingVisitor(syntaxTree));
 
-    private class CustomPropertiesConvertingVisitor : DepthFirstAstVisitor
+    private sealed class CustomPropertiesConvertingVisitor : DepthFirstAstVisitor
     {
         private readonly SyntaxTree _syntaxTree;
 
@@ -103,7 +103,7 @@ public class CustomPropertiesToMethodsConverter : IConverter
             propertyDeclaration.Remove();
         }
 
-        private class PropertyAccessChangingVisitor : DepthFirstAstVisitor
+        private sealed class PropertyAccessChangingVisitor : DepthFirstAstVisitor
         {
             private readonly string _getterName;
             private readonly string _setterName;

@@ -49,7 +49,7 @@ public class InstanceMethodsToStaticConverter : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new InstanceMethodsToStaticConvertingVisitor(syntaxTree));
 
-    private class InstanceMethodsToStaticConvertingVisitor : DepthFirstAstVisitor
+    private sealed class InstanceMethodsToStaticConvertingVisitor : DepthFirstAstVisitor
     {
         private readonly SyntaxTree _syntaxTree;
 
@@ -101,7 +101,7 @@ public class InstanceMethodsToStaticConverter : IConverter
                 methodDeclaration.GetFullName()));
         }
 
-        private class ThisReferenceChangingVisitor : DepthFirstAstVisitor
+        private sealed class ThisReferenceChangingVisitor : DepthFirstAstVisitor
         {
             public override void VisitThisReferenceExpression(ThisReferenceExpression thisReferenceExpression)
             {
@@ -114,7 +114,7 @@ public class InstanceMethodsToStaticConverter : IConverter
             }
         }
 
-        private class MethodCallChangingVisitor : DepthFirstAstVisitor
+        private sealed class MethodCallChangingVisitor : DepthFirstAstVisitor
         {
             private readonly AstType _parentAstType;
             private readonly string _methodParentFullName;

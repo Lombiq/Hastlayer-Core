@@ -7,7 +7,7 @@ public class KnownTypeLookupTableFactory : IKnownTypeLookupTableFactory
 {
     public IKnownTypeLookupTable Create(ICompilation compilation) => new KnownTypeLookupTable(compilation);
 
-    private class KnownTypeLookupTable : IKnownTypeLookupTable
+    private sealed class KnownTypeLookupTable : IKnownTypeLookupTable
     {
         private readonly ICompilation _compilation;
 

@@ -20,12 +20,12 @@ public class InvalidObjectUsingCases
         var customObject2 = new MyClass2 { SelfReference = customObject1 };
     }
 
-    private class MyClass1
+    private sealed class MyClass1
     {
         public int MyProperty { get; set; }
     }
 
-    private class MyClass2
+    private sealed class MyClass2
     {
         public MyClass2 SelfReference { get; set; }
     }

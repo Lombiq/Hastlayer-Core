@@ -51,7 +51,7 @@ public class GeneratedTaskArraysInliner : IConverter
     private static bool IsTask(Expression expression) =>
         expression.GetActualTypeFullName().StartsWithOrdinal(TaskStart);
 
-    private class InlinableTaskArraysFindingVisitor : DepthFirstAstVisitor
+    private sealed class InlinableTaskArraysFindingVisitor : DepthFirstAstVisitor
     {
         public Dictionary<string, string> InlinableVariableMapping { get; set; } = new Dictionary<string, string>();
 
@@ -75,7 +75,7 @@ public class GeneratedTaskArraysInliner : IConverter
         }
     }
 
-    private class InlinableTaskArraysInliningVisitor : DepthFirstAstVisitor
+    private sealed class InlinableTaskArraysInliningVisitor : DepthFirstAstVisitor
     {
         private readonly Dictionary<string, string> _inlinableVariableMappings;
 

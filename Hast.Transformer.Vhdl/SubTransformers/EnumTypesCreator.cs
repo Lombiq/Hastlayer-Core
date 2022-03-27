@@ -18,7 +18,7 @@ public class EnumTypesCreator : IEnumTypesCreator
         return enumDeclarations;
     }
 
-    private class EnumCheckingVisitor : DepthFirstAstVisitor
+    private sealed class EnumCheckingVisitor : DepthFirstAstVisitor
     {
         private readonly List<IVhdlElement> _enumDeclarations;
 

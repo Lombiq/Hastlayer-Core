@@ -33,7 +33,7 @@ public class DirectlyAccessedNewObjectVariablesCreator : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new DirectlyAccessedNewObjectVariableCreatingVisitor());
 
-    private class DirectlyAccessedNewObjectVariableCreatingVisitor : DepthFirstAstVisitor
+    private sealed class DirectlyAccessedNewObjectVariableCreatingVisitor : DepthFirstAstVisitor
     {
         public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
         {

@@ -345,7 +345,7 @@ public static class AstNodeExtensions
         return node.CreateNameForUnnamedNode();
     }
 
-    private class WasRemoved
+    private sealed class WasRemoved
     {
     }
 }

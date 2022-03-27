@@ -26,7 +26,7 @@ public class ConstructorsToMethodsConverter : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new ConstructorConvertingVisitor());
 
-    private class ConstructorConvertingVisitor : DepthFirstAstVisitor
+    private sealed class ConstructorConvertingVisitor : DepthFirstAstVisitor
     {
         public override void VisitConstructorDeclaration(ConstructorDeclaration constructorDeclaration)
         {

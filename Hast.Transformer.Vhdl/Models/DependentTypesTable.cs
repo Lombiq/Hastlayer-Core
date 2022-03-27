@@ -55,7 +55,7 @@ public class DependentTypesTable
         if (_dependencies.Count > 0) tables.Add(this);
     }
 
-    private class DataTypeEqualityComparer : IEqualityComparer<DataType>
+    private sealed class DataTypeEqualityComparer : IEqualityComparer<DataType>
     {
         public bool Equals(DataType x, DataType y) => x.Name == y.Name;
 

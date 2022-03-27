@@ -56,7 +56,7 @@ public abstract class VhdlTransformingTestFixtureBase : IntegrationTestFixtureBa
         return (VhdlHardwareDescription)await transformer.TransformAsync(assemblies, configuration);
     }
 
-    private class StubMemberSuitabilityChecker : IMemberSuitabilityChecker
+    private sealed class StubMemberSuitabilityChecker : IMemberSuitabilityChecker
     {
         public bool IsSuitableHardwareEntryPointMember(
             EntityDeclaration member,

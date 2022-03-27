@@ -40,7 +40,7 @@ public class TaskBodyInvocationInstanceCountsSetter : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new TaskBodyInvocationInstanceCountsSetterVisitor(configuration.TransformerConfiguration()));
 
-    private class TaskBodyInvocationInstanceCountsSetterVisitor : DepthFirstAstVisitor
+    private sealed class TaskBodyInvocationInstanceCountsSetterVisitor : DepthFirstAstVisitor
     {
         private readonly Dictionary<string, int> _taskStartsCountInMembers = new();
         private readonly TransformerConfiguration _configuration;

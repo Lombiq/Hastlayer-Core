@@ -542,7 +542,7 @@ public class BinaryOperatorExpressionTransformer : IBinaryOperatorExpressionTran
         }
     }
 
-    private class VhdlTypeInfo
+    private sealed class VhdlTypeInfo
     {
         public IType Type { get; set; }
         public int Size { get; set; }

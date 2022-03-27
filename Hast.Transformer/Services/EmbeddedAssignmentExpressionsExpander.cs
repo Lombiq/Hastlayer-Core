@@ -42,7 +42,7 @@ public class EmbeddedAssignmentExpressionsExpander : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new EmbeddedAssignmentExpressionsExpandingVisitor());
 
-    private class EmbeddedAssignmentExpressionsExpandingVisitor : DepthFirstAstVisitor
+    private sealed class EmbeddedAssignmentExpressionsExpandingVisitor : DepthFirstAstVisitor
     {
         public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
         {

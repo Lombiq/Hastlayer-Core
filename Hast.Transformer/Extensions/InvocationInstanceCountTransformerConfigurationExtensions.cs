@@ -68,12 +68,12 @@ public static class InvocationInstanceCountTransformerConfigurationExtensions
         return configuration.GetMaxInvocationInstanceCountConfigurationForMember(indexedNameHolder.IndexedName);
     }
 
-    private class LambdaExpressionIndexedNameHolder
+    private sealed class LambdaExpressionIndexedNameHolder
     {
         public string IndexedName { get; set; }
     }
 
-    private class IndexedNameHolderSettingVisitor : DepthFirstAstVisitor
+    private sealed class IndexedNameHolderSettingVisitor : DepthFirstAstVisitor
     {
         private readonly Dictionary<string, EntityDeclaration> _compilerGeneratedMembers;
         private readonly Dictionary<EntityDeclaration, int> _lambdaCounts = new();

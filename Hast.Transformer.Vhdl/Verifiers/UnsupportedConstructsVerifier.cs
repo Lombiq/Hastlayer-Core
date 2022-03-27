@@ -19,7 +19,7 @@ public class UnsupportedConstructsVerifier : IVerifyer
     public void Verify(SyntaxTree syntaxTree, ITransformationContext transformationContext) =>
         syntaxTree.AcceptVisitor(new UnsupportedConstructsFindingVisitor(_displayClassFieldTransformer));
 
-    private class UnsupportedConstructsFindingVisitor : DepthFirstAstVisitor
+    private sealed class UnsupportedConstructsFindingVisitor : DepthFirstAstVisitor
     {
         private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
 

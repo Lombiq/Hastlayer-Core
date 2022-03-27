@@ -74,7 +74,7 @@ public class DisplayClassFieldTransformer : IDisplayClassFieldTransformer
             };
         });
 
-    private class ArrayCreationDataTypeRetrievingVisitor : DepthFirstAstVisitor
+    private sealed class ArrayCreationDataTypeRetrievingVisitor : DepthFirstAstVisitor
     {
         private readonly string _fieldFullName;
         private readonly IArrayCreateExpressionTransformer _arrayCreateExpressionTransformer;

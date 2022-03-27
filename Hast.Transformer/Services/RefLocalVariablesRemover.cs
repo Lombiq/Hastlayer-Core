@@ -28,7 +28,7 @@ public class RefLocalVariablesRemover : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new InitializersChangingVisitor());
 
-    private class InitializersChangingVisitor : DepthFirstAstVisitor
+    private sealed class InitializersChangingVisitor : DepthFirstAstVisitor
     {
         private readonly Dictionary<string, Expression> _substitutes = new();
 

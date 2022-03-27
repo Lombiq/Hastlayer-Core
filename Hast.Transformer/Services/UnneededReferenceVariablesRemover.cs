@@ -39,7 +39,7 @@ public class UnneededReferenceVariablesRemover : IConverter
         IKnownTypeLookupTable knownTypeLookupTable) =>
         syntaxTree.AcceptVisitor(new AssignmentsDiscoveringVisitor());
 
-    private class AssignmentsDiscoveringVisitor : DepthFirstAstVisitor
+    private sealed class AssignmentsDiscoveringVisitor : DepthFirstAstVisitor
     {
         public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
         {
@@ -76,7 +76,7 @@ public class UnneededReferenceVariablesRemover : IConverter
         }
     }
 
-    private class AssignmentsCheckingVisitor : DepthFirstAstVisitor
+    private sealed class AssignmentsCheckingVisitor : DepthFirstAstVisitor
     {
         private readonly string _identifier;
 
@@ -96,7 +96,7 @@ public class UnneededReferenceVariablesRemover : IConverter
         }
     }
 
-    private class IdentifiersChangingVisitor : DepthFirstAstVisitor
+    private sealed class IdentifiersChangingVisitor : DepthFirstAstVisitor
     {
         private readonly string _oldIdentifier;
         private readonly Expression _newExpression;
