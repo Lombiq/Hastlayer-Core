@@ -1,7 +1,6 @@
-namespace Hast.Transformer.Models
+namespace Hast.Transformer.Models;
+
+public class HardwareEntryPointMemberMetadata
 {
-    public class HardwareEntryPointMemberMetadata
-    {
-        public bool IsHardwareEntryPointMember { get; internal set; }
-    }
+    public bool IsHardwareEntryPointMember { get; internal set; }
 }

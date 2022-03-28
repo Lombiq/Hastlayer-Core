@@ -1,46 +1,44 @@
+using Hast.VhdlBuilder.Representation;
 using System.Linq;
 using System.Text;
-using Hast.VhdlBuilder.Representation;
 
-namespace System.Collections.Generic
+namespace System.Collections.Generic;
+
+public static class VhdlElementEnumerableExtensions
 {
-    public static class VhdlElementEnumerableExtensions
+    public static string ToVhdl<T>(
+        this IEnumerable<T> elements,
+        IVhdlGenerationOptions vhdlGenerationOptions)
+        where T : IVhdlElement => elements.ToVhdl(vhdlGenerationOptions, string.Empty);
+
+    public static string ToVhdl<T>(
+        this IEnumerable<T> elements,
+        IVhdlGenerationOptions vhdlGenerationOptions,
+        string elementTerminator,
+        string lastElementTerminator = null)
+        where T : IVhdlElement
     {
-        public static string ToVhdl<T>(
-            this IEnumerable<T> elements,
-            IVhdlGenerationOptions vhdlGenerationOptions)
-            where T : IVhdlElement => elements.ToVhdl(vhdlGenerationOptions, string.Empty);
+        if (elements == null) return string.Empty;
 
-        public static string ToVhdl<T>(
-            this IEnumerable<T> elements,
-            IVhdlGenerationOptions vhdlGenerationOptions,
-            string elementTerminator,
-            string lastElementTerminator = null)
-            where T : IVhdlElement
+        // It's efficient to run this parallelized implementation even with a low number of items (or even one) because
+        // the overhead of checking whether there are more than a few elements is bigger than the below ceremony.
+        var elementsList = elements.AsList();
+        if (!elementsList.Any()) return string.Empty;
+
+        var lastElement = elementsList[^1];
+        var resultArray = new string[elementsList.Count];
+
+        Threading.Tasks.Parallel.For(0, elementsList.Count - 1, i =>
         {
-            if (elements == null) return string.Empty;
+            resultArray[i] = elementsList[i].ToVhdl(vhdlGenerationOptions) + elementTerminator;
+        });
 
-            // It's efficient to run this parallelized implementation even with a low number of items (or even one)
-            // because the overhead of checking whether there are more than a few elements is bigger than the below
-            // ceremony.
-            var elementsList = elements.AsList();
-            if (!elementsList.Any()) return string.Empty;
+        var stringBuilder = new StringBuilder();
+        stringBuilder.AppendJoin(string.Empty, resultArray);
 
-            var lastElement = elementsList[^1];
-            var resultArray = new string[elementsList.Count];
+        lastElementTerminator ??= elementTerminator;
+        stringBuilder.Append(lastElement.ToVhdl(vhdlGenerationOptions) + lastElementTerminator);
 
-            Threading.Tasks.Parallel.For(0, elementsList.Count - 1, i =>
-            {
-                resultArray[i] = elementsList[i].ToVhdl(vhdlGenerationOptions) + elementTerminator;
-            });
-
-            var stringBuilder = new StringBuilder();
-            stringBuilder.AppendJoin(string.Empty, resultArray);
-
-            lastElementTerminator ??= elementTerminator;
-            stringBuilder.Append(lastElement.ToVhdl(vhdlGenerationOptions) + lastElementTerminator);
-
-            return stringBuilder.ToString();
-        }
+        return stringBuilder.ToString();
     }
 }

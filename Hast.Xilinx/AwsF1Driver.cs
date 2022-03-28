@@ -3,28 +3,28 @@ using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Xilinx.Abstractions.ManifestProviders;
 
-namespace Hast.Xilinx
+namespace Hast.Xilinx;
+
+public class AwsF1Driver : AwsF1ManifestProvider, IDeviceDriver
 {
-    public class AwsF1Driver : AwsF1ManifestProvider, IDeviceDriver
+    private readonly ITimingReportParser _timingReportParser;
+
+    private readonly object _timingReportParserLock = new();
+
+    private ITimingReport _timingReport;
+
+    public ITimingReport TimingReport
     {
-        private readonly ITimingReportParser _timingReportParser;
-
-        private readonly object _timingReportParserLock = new();
-
-        private ITimingReport _timingReport;
-        public ITimingReport TimingReport
+        get
         {
-            get
+            lock (_timingReportParserLock)
             {
-                lock (_timingReportParserLock)
-                {
-                    _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(AwsF1Driver)));
+                _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(AwsF1Driver)));
 
-                    return _timingReport;
-                }
+                return _timingReport;
             }
         }
-
-        public AwsF1Driver(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
     }
+
+    public AwsF1Driver(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
 }

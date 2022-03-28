@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 
-namespace ICSharpCode.Decompiler.CSharp.Syntax
+namespace ICSharpCode.Decompiler.CSharp.Syntax;
+
+public static class AstTypeExtensions
 {
-    public static class AstTypeExtensions
-    {
-        public static AstType GetStoredTypeOfTaskResultArray(this AstType type) => ((SimpleType)type).TypeArguments.Single();
-    }
+    public static AstType GetStoredTypeOfTaskResultArray(this AstType type) => ((SimpleType)type).TypeArguments.Single();
 }

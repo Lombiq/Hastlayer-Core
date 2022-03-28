@@ -1,13 +1,12 @@
-﻿namespace Hast.TestInputs.ClassStructure1
+﻿namespace Hast.TestInputs.ClassStructure1;
+
+/// <summary>
+/// A class in the root namespace.
+/// </summary>
+public class RootClass
 {
-    /// <summary>
-    /// A class in the root namespace.
-    /// </summary>
-    public class RootClass
+    public virtual void VirtualMethod(int input)
     {
-        public virtual void VirtualMethod(int input)
-        {
-            var x = 1;
-        }
+        var x = 1;
     }
 }

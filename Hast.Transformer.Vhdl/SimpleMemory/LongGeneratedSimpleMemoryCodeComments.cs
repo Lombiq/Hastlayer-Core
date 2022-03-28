@@ -1,16 +1,16 @@
-namespace Hast.Transformer.Vhdl.SimpleMemory
-{
-    /// <summary>
-    /// Stores long comments that are inserted into the generated VHDL code to help understand it.
-    /// </summary>
-    internal static class LongGeneratedSimpleMemoryCodeComments
-    {
-        // The strange formatting is so the output will be well formatted and e.g. have appropriate indentations.
+namespace Hast.Transformer.Vhdl.SimpleMemory;
 
-        /// <summary>
-        /// Comment describing how the SimpleMemory ports of the generated hardware component behave.
-        /// </summary>
-        public const string Ports = Constants.LongGeneratedCodeComments.Ports +
+/// <summary>
+/// Stores long comments that are inserted into the generated VHDL code to help understand it.
+/// </summary>
+internal static class LongGeneratedSimpleMemoryCodeComments
+{
+    // The strange formatting is so the output will be well formatted and e.g. have appropriate indentations.
+
+    /// <summary>
+    /// Comment describing how the SimpleMemory ports of the generated hardware component behave.
+    /// </summary>
+    public const string Ports = Constants.LongGeneratedCodeComments.Ports +
 @"
 * DataIn: Data read out from the memory (usually on-board DDR RAM, but depends on the framework) should be assigned to
           this port by the framework. The width of this port is always 32b, independent of the hardware platform (if the
@@ -34,5 +34,4 @@ namespace Hast.Transformer.Vhdl.SimpleMemory
     3. Once WritesDone is TRUE, WriteEnable is set to FALSE.
 * ReadsDone: Indicates whether a memory read operation is completed.
 * WritesDone: Indicates whether a memory write operation is completed.";
-    }
 }

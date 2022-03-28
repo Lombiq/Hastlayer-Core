@@ -1,31 +1,30 @@
-namespace Hast.TestInputs.Static
+namespace Hast.TestInputs.Static;
+
+public class ArrayUsingCases
 {
-    public class ArrayUsingCases
+    public void PassArrayToConstructor()
     {
-        public void PassArrayToConstructor()
-        {
-            var array = new int[5];
-            var arrayHolder = new ArrayHolder(array);
-            var arrayLength = arrayHolder.Array.Length;
-        }
+        var array = new int[5];
+        var arrayHolder = new ArrayHolder(array);
+        var arrayLength = arrayHolder.Array.Length;
+    }
 
-        public void PassArrayFromMethod()
-        {
-            var array = ArrayProducingMethod(5);
-        }
+    public void PassArrayFromMethod()
+    {
+        var array = ArrayProducingMethod(5);
+    }
 
-        private int[] ArrayProducingMethod(int arrayLength)
-        {
-            var array = new int[arrayLength];
-            array[3] = 10;
-            return array;
-        }
+    private int[] ArrayProducingMethod(int arrayLength)
+    {
+        var array = new int[arrayLength];
+        array[3] = 10;
+        return array;
+    }
 
-        private sealed class ArrayHolder
-        {
-            public int[] Array { get; }
+    private sealed class ArrayHolder
+    {
+        public int[] Array { get; }
 
-            public ArrayHolder(int[] array) => Array = array;
-        }
+        public ArrayHolder(int[] array) => Array = array;
     }
 }

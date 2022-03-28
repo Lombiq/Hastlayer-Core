@@ -6,56 +6,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hast.Transformer.Vhdl.SubTransformers
+namespace Hast.Transformer.Vhdl.SubTransformers;
+
+public class PocoTransformer : IPocoTransformer
 {
-    public class PocoTransformer : IPocoTransformer
+    private readonly IRecordComposer _recordComposer;
+    private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
+
+    public PocoTransformer(IRecordComposer recordComposer, IDisplayClassFieldTransformer displayClassFieldTransformer)
     {
-        private readonly IRecordComposer _recordComposer;
-        private readonly IDisplayClassFieldTransformer _displayClassFieldTransformer;
+        _recordComposer = recordComposer;
+        _displayClassFieldTransformer = displayClassFieldTransformer;
+    }
 
-        public PocoTransformer(IRecordComposer recordComposer, IDisplayClassFieldTransformer displayClassFieldTransformer)
+    public bool IsSupported(AstNode node) =>
+        _recordComposer.IsSupported(node) ||
+        (node is FieldDeclaration declaration && !_displayClassFieldTransformer.IsDisplayClassField(declaration));
+
+    public Task<IMemberTransformerResult> TransformAsync(TypeDeclaration typeDeclaration, IVhdlTransformationContext context) =>
+        Task.Run<IMemberTransformerResult>(() =>
         {
-            _recordComposer = recordComposer;
-            _displayClassFieldTransformer = displayClassFieldTransformer;
-        }
-
-        public bool IsSupported(AstNode node) =>
-            _recordComposer.IsSupported(node) ||
-            (node is FieldDeclaration declaration && !_displayClassFieldTransformer.IsDisplayClassField(declaration));
-
-        public Task<IMemberTransformerResult> TransformAsync(TypeDeclaration typeDeclaration, IVhdlTransformationContext context) =>
-            Task.Run<IMemberTransformerResult>(() =>
+            var result = new MemberTransformerResult
             {
-                var result = new MemberTransformerResult
+                Member = typeDeclaration,
+            };
+
+            var record = _recordComposer.CreateRecordFromType(typeDeclaration, context);
+            var component = new BasicComponent(record.Name);
+
+            if (record.Fields.Any())
+            {
+                var hasDependency = false;
+
+                foreach (var dataType in record.Fields.Select(field => field.DataType).Where(dataType => dataType is ArrayTypeBase or Record))
                 {
-                    Member = typeDeclaration,
-                };
-
-                var record = _recordComposer.CreateRecordFromType(typeDeclaration, context);
-                var component = new BasicComponent(record.Name);
-
-                if (record.Fields.Any())
-                {
-                    var hasDependency = false;
-
-                    foreach (var field in record.Fields)
-                    {
-                        if (field.DataType is ArrayTypeBase or Record)
-                        {
-                            component.DependentTypesTable.AddDependency(record, field.DataType.Name);
-                            hasDependency = true;
-                        }
-                    }
-
-                    if (!hasDependency) component.DependentTypesTable.AddBaseType(record);
+                    component.DependentTypesTable.AddDependency(record, dataType.Name);
+                    hasDependency = true;
                 }
 
-                result.ArchitectureComponentResults = new List<IArchitectureComponentResult>
-                {
-                    new ArchitectureComponentResult(component),
-                };
+                if (!hasDependency) component.DependentTypesTable.AddBaseType(record);
+            }
 
-                return result;
-            });
-    }
+            result.ArchitectureComponentResults = new List<IArchitectureComponentResult>
+            {
+                new ArchitectureComponentResult(component),
+            };
+
+            return result;
+        });
 }

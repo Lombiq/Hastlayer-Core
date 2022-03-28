@@ -194,6 +194,7 @@ architecture Imp of Hast_IP is
 
     -- Custom inter-dependent type declarations start
     type \unsigned32_Array\ is array (integer range <>) of unsigned(31 downto 0);
+    type \unsigned8_Array\ is array (integer range <>) of unsigned(7 downto 0);
     type \boolean_Array\ is array (integer range <>) of boolean;
     type \Hast.Algorithms.Random.RandomMwc64X\ is record 
         \IsNull\: boolean;
@@ -7766,6 +7767,7 @@ architecture Imp of Hast_IP is
 
     -- Custom inter-dependent type declarations start
     type \unsigned32_Array\ is array (integer range <>) of unsigned(31 downto 0);
+    type \unsigned8_Array\ is array (integer range <>) of unsigned(7 downto 0);
     type \boolean_Array\ is array (integer range <>) of boolean;
     type \Hast.Algorithms.Random.RandomMwc64X\ is record 
         \IsNull\: boolean;

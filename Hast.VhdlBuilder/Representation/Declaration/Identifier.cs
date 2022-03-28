@@ -1,9 +1,8 @@
-﻿namespace Hast.VhdlBuilder.Representation.Declaration
-{
-    public class Identifier : DataType
-    {
-        public Identifier() => TypeCategory = DataTypeCategory.Identifier;
+﻿namespace Hast.VhdlBuilder.Representation.Declaration;
 
-        public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => string.Empty;
-    }
+public class Identifier : DataType
+{
+    public Identifier() => TypeCategory = DataTypeCategory.Identifier;
+
+    public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => string.Empty;
 }

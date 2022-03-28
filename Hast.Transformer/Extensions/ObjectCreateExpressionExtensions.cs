@@ -4,30 +4,29 @@ using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System.Linq;
 
-namespace ICSharpCode.Decompiler.CSharp.Syntax
+namespace ICSharpCode.Decompiler.CSharp.Syntax;
+
+public static class ObjectCreateExpressionExtensions
 {
-    public static class ObjectCreateExpressionExtensions
+    public static string GetConstructorFullName(this ObjectCreateExpression objectCreateExpression) =>
+        objectCreateExpression.GetResolveResult<InvocationResolveResult>()?.Member.GetFullName();
+
+    public static EntityDeclaration FindConstructorDeclaration(
+        this ObjectCreateExpression objectCreateExpression,
+        ITypeDeclarationLookupTable typeDeclarationLookupTable)
     {
-        public static string GetConstructorFullName(this ObjectCreateExpression objectCreateExpression) =>
-            objectCreateExpression.GetResolveResult<InvocationResolveResult>()?.Member.GetFullName();
+        var constructorName = objectCreateExpression.GetConstructorFullName();
 
-        public static EntityDeclaration FindConstructorDeclaration(
-            this ObjectCreateExpression objectCreateExpression,
-            ITypeDeclarationLookupTable typeDeclarationLookupTable)
-        {
-            var constructorName = objectCreateExpression.GetConstructorFullName();
+        if (string.IsNullOrEmpty(constructorName)) return null;
 
-            if (string.IsNullOrEmpty(constructorName)) return null;
+        var createdTypeName = objectCreateExpression.Type.GetFullName();
 
-            var createdTypeName = objectCreateExpression.Type.GetFullName();
+        var constructorType = typeDeclarationLookupTable.Lookup(createdTypeName);
 
-            var constructorType = typeDeclarationLookupTable.Lookup(createdTypeName);
+        if (constructorType == null) ExceptionHelper.ThrowDeclarationNotFoundException(createdTypeName, objectCreateExpression);
 
-            if (constructorType == null) ExceptionHelper.ThrowDeclarationNotFoundException(createdTypeName, objectCreateExpression);
-
-            return constructorType!
-                .Members
-                .SingleOrDefault(member => member.GetFullName() == constructorName);
-        }
+        return constructorType!
+            .Members
+            .SingleOrDefault(member => member.GetFullName() == constructorName);
     }
 }

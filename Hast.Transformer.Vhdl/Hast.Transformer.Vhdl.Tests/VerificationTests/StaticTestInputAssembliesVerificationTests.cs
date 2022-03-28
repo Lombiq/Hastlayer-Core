@@ -7,52 +7,51 @@ using Hast.Transformer.Abstractions.Configuration;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Hast.Transformer.Vhdl.Tests.VerificationTests
+namespace Hast.Transformer.Vhdl.Tests.VerificationTests;
+
+public class StaticTestInputAssembliesVerificationTests : VerificationTestFixtureBase
 {
-    public class StaticTestInputAssembliesVerificationTests : VerificationTestFixtureBase
-    {
-        [Fact]
-        public Task ClassStructureAssembliesMatchApproved() =>
-            Host.RunAsync<ITransformer>(async transformer =>
-            {
-                var hardwareDescription = await TransformAssembliesToVhdlAsync(
-                    transformer,
-                    new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
-                    configuration => configuration.TransformerConfiguration().UseSimpleMemory = false);
+    [Fact]
+    public Task ClassStructureAssembliesMatchApproved() =>
+        Host.RunAsync<ITransformer>(async transformer =>
+        {
+            var hardwareDescription = await TransformAssembliesToVhdlAsync(
+                transformer,
+                new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
+                configuration => configuration.TransformerConfiguration().UseSimpleMemory = false);
 
-                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
-            });
+            hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+        });
 
-        [Fact]
-        public Task StaticTestInputAssemblyMatchesApproved() =>
-            Host.RunAsync<ITransformer>(async transformer =>
-            {
-                var hardwareDescription = await TransformAssembliesToVhdlAsync(
-                    transformer,
-                    new[] { typeof(ArrayUsingCases).Assembly },
-                    configuration =>
-                    {
-                        configuration.TransformerConfiguration().UseSimpleMemory = false;
+    [Fact]
+    public Task StaticTestInputAssemblyMatchesApproved() =>
+        Host.RunAsync<ITransformer>(async transformer =>
+        {
+            var hardwareDescription = await TransformAssembliesToVhdlAsync(
+                transformer,
+                new[] { typeof(ArrayUsingCases).Assembly },
+                configuration =>
+                {
+                    configuration.TransformerConfiguration().UseSimpleMemory = false;
 
-                        configuration
-                            .TransformerConfiguration()
-                            .AddMemberInvocationInstanceCountConfiguration(
-                                new MemberInvocationInstanceCountConfigurationForMethod<ParallelCases>(
-                                    p => p.WhenAllWhenAnyAwaitedTasks(0), 0)
-                                {
-                                    MaxDegreeOfParallelism = 3,
-                                });
-                        configuration
-                            .TransformerConfiguration()
-                            .AddMemberInvocationInstanceCountConfiguration(
+                    configuration
+                        .TransformerConfiguration()
+                        .AddMemberInvocationInstanceCountConfiguration(
                             new MemberInvocationInstanceCountConfigurationForMethod<ParallelCases>(
-                                p => p.ObjectUsingTasks(0), 0)
+                                p => p.WhenAllWhenAnyAwaitedTasks(0), 0)
                             {
                                 MaxDegreeOfParallelism = 3,
                             });
-                    });
+                    configuration
+                        .TransformerConfiguration()
+                        .AddMemberInvocationInstanceCountConfiguration(
+                        new MemberInvocationInstanceCountConfigurationForMethod<ParallelCases>(
+                            p => p.ObjectUsingTasks(0), 0)
+                        {
+                            MaxDegreeOfParallelism = 3,
+                        });
+                });
 
-                hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
-            });
-    }
+            hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
+        });
 }

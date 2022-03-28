@@ -4,77 +4,75 @@ using System.Collections.Generic;
 using System.Linq;
 using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValuesSubstitutingAstProcessor;
 
-namespace Hast.Transformer.Services.ConstantValuesSubstitution
+namespace Hast.Transformer.Services.ConstantValuesSubstitution;
+
+internal class ObjectHoldersToSubstitutedConstructorsMappingVisitor : DepthFirstAstVisitor
 {
-    internal class ObjectHoldersToSubstitutedConstructorsMappingVisitor : DepthFirstAstVisitor
+    private readonly ConstantValuesSubstitutingAstProcessor _constantValuesSubstitutingAstProcessor;
+
+    public ObjectHoldersToSubstitutedConstructorsMappingVisitor(
+        ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor) =>
+        _constantValuesSubstitutingAstProcessor = constantValuesSubstitutingAstProcessor;
+
+    public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
     {
-        private readonly ConstantValuesSubstitutingAstProcessor _constantValuesSubstitutingAstProcessor;
+        base.VisitObjectCreateExpression(objectCreateExpression);
 
-        public ObjectHoldersToSubstitutedConstructorsMappingVisitor(
-            ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor) =>
-            _constantValuesSubstitutingAstProcessor = constantValuesSubstitutingAstProcessor;
+        // Substituting everything in the matching constructor (in its copy) and mapping that the object creation. So if
+        // the ctor sets some read-only members in a static way then the resulting object's members can get those
+        // substituted, without substituting them globally for all instances. This is important for bootstrapping
+        // substitution if there is a circular dependency between members and constructors (e.g. a field's value set in
+        // the ctor depends on a ctor argument, which in turn depends on the same field of another instance).
 
-        public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
+        if (objectCreateExpression.Parent.Is(
+            assignment => assignment.Left.GetActualType()?.GetFullName() == objectCreateExpression.Type.GetFullName(),
+            out AssignmentExpression parentAssignment))
         {
-            base.VisitObjectCreateExpression(objectCreateExpression);
+            var constructorDeclaration = objectCreateExpression
+                .FindConstructorDeclaration(_constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable);
 
-            // Substituting everything in the matching constructor (in its copy) and mapping that the object creation.
-            // So if the ctor sets some read-only members in a static way then the resulting object's members can get
-            // those substituted, without substituting them globally for all instances. This is important for
-            // bootstrapping substitution if there is a circular dependency between members and constructors (e.g.
-            // a field's value set in the ctor depends on a ctor argument, which in turn depends on the same field of
-            // another instance).
+            if (constructorDeclaration == null) return;
 
-            if (objectCreateExpression.Parent.Is(
-                assignment => assignment.Left.GetActualType()?.GetFullName() == objectCreateExpression.Type.GetFullName(),
-                out AssignmentExpression parentAssignment))
+            var constructorDeclarationClone = constructorDeclaration.Clone<MethodDeclaration>();
+
+            var subConstantValuesTable = _constantValuesSubstitutingAstProcessor.ConstantValuesTable.Clone();
+
+            foreach (var argument in objectCreateExpression.Arguments.Where(argument => argument is PrimitiveExpression))
             {
-                var constructorDeclaration = objectCreateExpression
-                    .FindConstructorDeclaration(_constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable);
+                var parameter = ConstantValueSubstitutionHelper.FindConstructorParameterForPassedExpression(
+                    objectCreateExpression,
+                    argument,
+                    _constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable);
 
-                if (constructorDeclaration == null) return;
+                subConstantValuesTable.MarkAsPotentiallyConstant(parameter, (PrimitiveExpression)argument, constructorDeclarationClone);
+            }
 
-                var constructorDeclarationClone = constructorDeclaration.Clone<MethodDeclaration>();
+            new ConstantValuesSubstitutingAstProcessor(
+                subConstantValuesTable,
+                _constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable,
+                _constantValuesSubstitutingAstProcessor.ArraySizeHolder.Clone(),
+                new Dictionary<string, ConstructorReference>(_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings),
+                _constantValuesSubstitutingAstProcessor.AstExpressionEvaluator,
+                _constantValuesSubstitutingAstProcessor.KnownTypeLookupTable)
+            .SubstituteConstantValuesInSubTree(constructorDeclarationClone, reUseOriginalConstantValuesTable: true);
 
-                var subConstantValuesTable = _constantValuesSubstitutingAstProcessor.ConstantValuesTable.Clone();
+            var constructorReference = new ConstructorReference
+            {
+                Constructor = constructorDeclarationClone,
+                OriginalAssignmentTarget = parentAssignment.Left,
+            };
 
-                foreach (var argument in objectCreateExpression.Arguments.Where(argument => argument is PrimitiveExpression))
-                {
-                    var parameter = ConstantValueSubstitutionHelper.FindConstructorParameterForPassedExpression(
-                        objectCreateExpression,
-                        argument,
-                        _constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable);
+            _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parentAssignment.Left.GetFullName()] =
+                constructorReference;
 
-                    subConstantValuesTable.MarkAsPotentiallyConstant(parameter, (PrimitiveExpression)argument, constructorDeclarationClone);
-                }
-
-                new ConstantValuesSubstitutingAstProcessor(
-                    subConstantValuesTable,
-                    _constantValuesSubstitutingAstProcessor.TypeDeclarationLookupTable,
-                    _constantValuesSubstitutingAstProcessor.ArraySizeHolder.Clone(),
-                    new Dictionary<string, ConstructorReference>(_constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings),
-                    _constantValuesSubstitutingAstProcessor.AstExpressionEvaluator,
-                    _constantValuesSubstitutingAstProcessor.KnownTypeLookupTable)
-                .SubstituteConstantValuesInSubTree(constructorDeclarationClone, reUseOriginalConstantValuesTable: true);
-
-                var constructorReference = new ConstructorReference
-                {
-                    Constructor = constructorDeclarationClone,
-                    OriginalAssignmentTarget = parentAssignment.Left,
-                };
-
-                _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parentAssignment.Left.GetFullName()] =
+            // Also pass the object initialization data to the "this" reference. So if methods are called from the
+            // constructor (or other objects created) then there the scope of the ctor will be accessible too.
+            var thisReference = constructorDeclaration
+                .FindFirstChildOfType<IdentifierExpression>(identifier => identifier.Identifier == "this");
+            if (thisReference != null)
+            {
+                _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[thisReference.GetFullName()] =
                     constructorReference;
-
-                // Also pass the object initialization data to the "this" reference. So if methods are called from the
-                // constructor (or other objects created) then there the scope of the ctor will be accessible too.
-                var thisReference = constructorDeclaration
-                    .FindFirstChildOfType<IdentifierExpression>(identifier => identifier.Identifier == "this");
-                if (thisReference != null)
-                {
-                    _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[thisReference.GetFullName()] =
-                        constructorReference;
-                }
             }
         }
     }

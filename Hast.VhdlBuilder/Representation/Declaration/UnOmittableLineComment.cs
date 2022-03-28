@@ -1,11 +1,10 @@
 ﻿using System.Diagnostics;
 
-namespace Hast.VhdlBuilder.Representation.Declaration
+namespace Hast.VhdlBuilder.Representation.Declaration;
+
+[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+public class UnOmittableLineComment : LineComment
 {
-    [DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-    public class UnOmittableLineComment : LineComment
-    {
-        public UnOmittableLineComment(string text)
-            : base(text) => CantBeOmitted = true;
-    }
+    public UnOmittableLineComment(string text)
+        : base(text) => CantBeOmitted = true;
 }
