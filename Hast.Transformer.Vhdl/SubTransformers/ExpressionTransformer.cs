@@ -214,22 +214,20 @@ public class ExpressionTransformer : IExpressionTransformer
         var firstArgument = rightInvocationExpression.Arguments.First();
 
         // Is this the first type of Task starts?
-        var targetMethod = firstArgument is BinaryOperatorExpression binaryOperatorExpression
+        var methodExpression = firstArgument is BinaryOperatorExpression binaryOperatorExpression
             ? binaryOperatorExpression
                 .Right
                 .As<ParenthesizedExpression>()
                 .Expression
                 .As<AssignmentExpression>()
                 .Right
-                .As<MemberReferenceExpression>()
-                .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
-                .As<MethodDeclaration>()
             : firstArgument
                 .As<CastExpression>()
-                .Expression
-                .As<MemberReferenceExpression>()
-                .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
-                .As<MethodDeclaration>();
+                .Expression;
+        var targetMethod = methodExpression
+            .As<MemberReferenceExpression>()
+            .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
+            .As<MethodDeclaration>();
 
         // We only need to care about the invocation here. Since this is a Task start there will be some form of await
         // later.
