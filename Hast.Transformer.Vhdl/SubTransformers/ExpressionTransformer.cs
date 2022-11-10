@@ -214,20 +214,7 @@ public class ExpressionTransformer : IExpressionTransformer
         var firstArgument = rightInvocationExpression.Arguments.First();
 
         // Is this the first type of Task starts?
-        var methodExpression = firstArgument is BinaryOperatorExpression binaryOperatorExpression
-            ? binaryOperatorExpression
-                .Right
-                .As<ParenthesizedExpression>()
-                .Expression
-                .As<AssignmentExpression>()
-                .Right
-            : firstArgument
-                .As<CastExpression>()
-                .Expression;
-        var targetMethod = methodExpression
-            .As<MemberReferenceExpression>()
-            .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
-            .As<MethodDeclaration>();
+        var targetMethod = GetTargetMethod(firstArgument, context.TransformationContext.TypeDeclarationLookupTable);
 
         // We only need to care about the invocation here. Since this is a Task start there will be some form of await
         // later.
@@ -830,6 +817,32 @@ public class ExpressionTransformer : IExpressionTransformer
         }
 
         return result;
+    }
+
+    private static MethodDeclaration GetTargetMethod(Expression firstArgument, ITypeDeclarationLookupTable typeDeclarationLookupTable)
+    {
+        var methodExpression = firstArgument is BinaryOperatorExpression binaryOperatorExpression
+            ? binaryOperatorExpression
+                .Right
+                .As<ParenthesizedExpression>()
+                .Expression
+                .As<AssignmentExpression>()
+                .Right
+            : firstArgument
+                .As<CastExpression>()
+                .Expression;
+        var targetMethod = methodExpression switch
+        {
+            MemberReferenceExpression memberReferenceExpression => memberReferenceExpression
+                .FindMemberDeclaration(typeDeclarationLookupTable),
+            IdentifierExpression identifierExpression => typeDeclarationLookupTable
+                .Lookup(identifierExpression.GetFullName()),
+            _ => throw new InvalidOperationException(
+                $"Unknown node type for method expression \"{methodExpression.GetType().FullName}\"."),
+        };
+
+        return targetMethod?.As<MethodDeclaration>() ??
+               throw new InvalidOperationException($"Failed to resolve target method for \"{methodExpression}\".");
     }
 
     private sealed class RecordInitializationResult
