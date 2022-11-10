@@ -582,7 +582,7 @@ public class ExpressionTransformer : IExpressionTransformer
 
     private IVhdlElement TransformObjectCreate(ObjectCreateExpression objectCreateExpression, SubTransformerContext context)
     {
-        var initiailizationResult = InitializeRecord(objectCreateExpression, objectCreateExpression.Type, context);
+        var initializationResult = InitializeRecord(objectCreateExpression, objectCreateExpression.Type, context);
 
         // Running the constructor, which needs to be done before initializers.
         var constructorFullName = objectCreateExpression.GetConstructorFullName();
@@ -602,7 +602,7 @@ public class ExpressionTransformer : IExpressionTransformer
                     constructor.Name),
                 // Passing ctor parameters, and an object reference as the first one (since all methods were converted
                 // to static with the first parameter being @this).
-                new[] { initiailizationResult.RecordInstanceIdentifier.Clone() }
+                new[] { initializationResult.RecordInstanceIdentifier.Clone() }
                     .Union(objectCreateExpression.Arguments.Select(argument => argument.Clone())));
 
             objectCreateExpression.CopyAnnotationsTo(constructorInvocation);
@@ -768,7 +768,7 @@ public class ExpressionTransformer : IExpressionTransformer
             var initializationValue = field.DataType.DefaultValue;
 
             // Initializing fields with their explicit defaults.
-            var fieldDeclaration = typeDeclaration
+            var fieldDeclaration = typeDeclaration?
                 .Members
                 .SingleOrDefault(member =>
                     member.Is<FieldDeclaration>(f =>
@@ -781,7 +781,7 @@ public class ExpressionTransformer : IExpressionTransformer
 
             // Initializing properties with their explicit defaults.
             else if (
-                typeDeclaration
+                typeDeclaration?
                     .Members
                     .SingleOrDefault(member =>
                         member.Is<PropertyDeclaration>(p =>
