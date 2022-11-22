@@ -214,22 +214,7 @@ public class ExpressionTransformer : IExpressionTransformer
         var firstArgument = rightInvocationExpression.Arguments.First();
 
         // Is this the first type of Task starts?
-        var targetMethod = firstArgument is BinaryOperatorExpression binaryOperatorExpression
-            ? binaryOperatorExpression
-                .Right
-                .As<ParenthesizedExpression>()
-                .Expression
-                .As<AssignmentExpression>()
-                .Right
-                .As<MemberReferenceExpression>()
-                .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
-                .As<MethodDeclaration>()
-            : firstArgument
-                .As<CastExpression>()
-                .Expression
-                .As<MemberReferenceExpression>()
-                .FindMemberDeclaration(context.TransformationContext.TypeDeclarationLookupTable)
-                .As<MethodDeclaration>();
+        var targetMethod = GetTargetMethod(firstArgument, context.TransformationContext.TypeDeclarationLookupTable);
 
         // We only need to care about the invocation here. Since this is a Task start there will be some form of await
         // later.
@@ -597,7 +582,7 @@ public class ExpressionTransformer : IExpressionTransformer
 
     private IVhdlElement TransformObjectCreate(ObjectCreateExpression objectCreateExpression, SubTransformerContext context)
     {
-        var initiailizationResult = InitializeRecord(objectCreateExpression, objectCreateExpression.Type, context);
+        var initializationResult = InitializeRecord(objectCreateExpression, objectCreateExpression.Type, context);
 
         // Running the constructor, which needs to be done before initializers.
         var constructorFullName = objectCreateExpression.GetConstructorFullName();
@@ -617,7 +602,7 @@ public class ExpressionTransformer : IExpressionTransformer
                     constructor.Name),
                 // Passing ctor parameters, and an object reference as the first one (since all methods were converted
                 // to static with the first parameter being @this).
-                new[] { initiailizationResult.RecordInstanceIdentifier.Clone() }
+                new[] { initializationResult.RecordInstanceIdentifier.Clone() }
                     .Union(objectCreateExpression.Arguments.Select(argument => argument.Clone())));
 
             objectCreateExpression.CopyAnnotationsTo(constructorInvocation);
@@ -783,7 +768,7 @@ public class ExpressionTransformer : IExpressionTransformer
             var initializationValue = field.DataType.DefaultValue;
 
             // Initializing fields with their explicit defaults.
-            var fieldDeclaration = typeDeclaration
+            var fieldDeclaration = typeDeclaration?
                 .Members
                 .SingleOrDefault(member =>
                     member.Is<FieldDeclaration>(f =>
@@ -796,7 +781,7 @@ public class ExpressionTransformer : IExpressionTransformer
 
             // Initializing properties with their explicit defaults.
             else if (
-                typeDeclaration
+                typeDeclaration?
                     .Members
                     .SingleOrDefault(member =>
                         member.Is<PropertyDeclaration>(p =>
@@ -832,6 +817,32 @@ public class ExpressionTransformer : IExpressionTransformer
         }
 
         return result;
+    }
+
+    private static MethodDeclaration GetTargetMethod(Expression firstArgument, ITypeDeclarationLookupTable typeDeclarationLookupTable)
+    {
+        var methodExpression = firstArgument is BinaryOperatorExpression binaryOperatorExpression
+            ? binaryOperatorExpression
+                .Right
+                .As<ParenthesizedExpression>()
+                .Expression
+                .As<AssignmentExpression>()
+                .Right
+            : firstArgument
+                .As<CastExpression>()
+                .Expression;
+        var targetMethod = methodExpression switch
+        {
+            MemberReferenceExpression memberReferenceExpression => memberReferenceExpression
+                .FindMemberDeclaration(typeDeclarationLookupTable),
+            IdentifierExpression => throw new NotSupportedException(
+                "Please pass a lambda to Task.Factory.StartNew() instead of a method identifier."),
+            _ => throw new InvalidOperationException(
+                $"Unknown node type for method expression \"{methodExpression.GetType().FullName}\"."),
+        };
+
+        return targetMethod?.As<MethodDeclaration>() ??
+               throw new InvalidOperationException($"Failed to resolve target method for \"{methodExpression}\".");
     }
 
     private sealed class RecordInitializationResult
