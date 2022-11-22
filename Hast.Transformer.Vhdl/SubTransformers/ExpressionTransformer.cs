@@ -835,8 +835,8 @@ public class ExpressionTransformer : IExpressionTransformer
         {
             MemberReferenceExpression memberReferenceExpression => memberReferenceExpression
                 .FindMemberDeclaration(typeDeclarationLookupTable),
-            IdentifierExpression identifierExpression => typeDeclarationLookupTable
-                .Lookup(identifierExpression.GetFullName()),
+            IdentifierExpression => throw new NotSupportedException(
+                "Please pass a lambda to Task.Factory.StartNew() instead of a method identifier."),
             _ => throw new InvalidOperationException(
                 $"Unknown node type for method expression \"{methodExpression.GetType().FullName}\"."),
         };
