@@ -78,6 +78,13 @@ public abstract class SamplesVerificationTestsBase : VerificationTestFixtureBase
                         MaxRecursionDepth = 3,
                     });
 
+                configuration.AddHardwareEntryPointType<HastlayerAcceleratedImageSharp>();
+                transformerConfiguration.AddMemberInvocationInstanceCountConfiguration(
+                    new MemberInvocationInstanceCountConfigurationForMethod<HastlayerAcceleratedImageSharp>(p => p.CreateMatrix(null), 0)
+                    {
+                        MaxRecursionDepth = 3,
+                    });
+
                 configuration.AddHardwareEntryPointType<SimdCalculator>();
             }));
 

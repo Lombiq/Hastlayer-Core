@@ -7,4 +7,4 @@ jobs:
   call-verify-workflow:
     uses: Lombiq/GitHub-Actions/.github/workflows/verify-submodule-pull-request.yml@dev
     with:
-      repo: "Lombiq/Hastlayer-SDK"
+      repository: "Lombiq/Hastlayer-SDK"
