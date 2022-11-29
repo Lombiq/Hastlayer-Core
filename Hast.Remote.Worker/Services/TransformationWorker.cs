@@ -22,7 +22,7 @@ using Timer = System.Timers.Timer;
 
 namespace Hast.Remote.Worker.Services;
 
-public sealed class TransformationWorker : ITransformationWorker, IDisposable
+public sealed class TransformationWorker : ITransformationWorker, System.IAsyncDisposable
 {
     private readonly IJsonConverter _jsonConverter;
     private readonly IAppDataFolder _appDataFolder;
@@ -146,7 +146,7 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
         {
             _logger.LogInformation("Cancelling {TaskCount} tasks.", _transformationTasks.Count);
             await Task.WhenAll(_transformationTasks.Values);
-            Dispose();
+            await DisposeAsync();
         }
         catch (Exception ex) when (!ex.IsFatal())
         {
@@ -154,7 +154,7 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
             {
                 _logger.LogError(ex, "Transformation Worker crashed with an unhandled exception. Restarting...");
 
-                Dispose();
+                await DisposeAsync();
                 _restartCount++;
 
                 // Waiting a bit for transient errors to go away.
@@ -360,7 +360,11 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
         return result;
     }
 
-    public void Dispose()
+    [SuppressMessage(
+        "AsyncUsage",
+        "AsyncFixer01:Unnecessary async/await usage",
+        Justification = "Necessary for Task.Delay(), since it doesn't return ValueTask.")]
+    public async ValueTask DisposeAsync()
     {
         if (_oldResultBlobsCleanerTimer != null)
         {
@@ -371,7 +375,8 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
         }
 
         _telemetryClient.Flush();
-        Task.Delay(10000).Wait();
+
+        await Task.Delay(10000);
     }
 
     private static async Task<List<IListBlobItem>> GetBlobsAsync(CloudBlobContainer container, string prefix)
