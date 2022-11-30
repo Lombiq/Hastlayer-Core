@@ -72,6 +72,11 @@ public sealed class TransformationWorker : ITransformationWorker, System.IAsyncD
             try
             {
                 timerIsBusy = true;
+
+                // The violation is only surfaced in CI builds.
+#pragma warning disable IDE0079 // Remove unnecessary suppression
+                // Since the Windows server where this is executed from doesn't have a UI, this isn't an issue.
+#pragma warning disable VSTHRD002 // Synchronously waiting on tasks or awaiters may cause deadlocks. Use await or JoinableTaskFactory.Run instead.
                 Task.Run(async () =>
                 {
                     // Removing those result blobs that weren't deleted somehow (like the client exited while waiting
@@ -85,6 +90,8 @@ public sealed class TransformationWorker : ITransformationWorker, System.IAsyncD
                         await blob.DeleteAsync();
                     }
                 }).Wait();
+#pragma warning restore VSTHRD002 // Synchronously waiting on tasks or awaiters may cause deadlocks. Use await or JoinableTaskFactory.Run instead.
+#pragma warning restore IDE0079 // Remove unnecessary suppression
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
