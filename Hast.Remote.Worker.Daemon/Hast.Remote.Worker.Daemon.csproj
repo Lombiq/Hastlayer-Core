@@ -15,9 +15,9 @@
     or assembly 'Microsoft.CodeAnalysis, Version=4.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system
     cannot find the file specified..
     [C:\a\Hastlayer-SDK\Hastlayer-SDK\Hast.Core\Hast.Remote.Worker.Daemon\Hast.Remote.Worker.Daemon.csproj]" This
-    warning is not an issue though, so downgrading it to a warning when using -warnaserror.-->
+    warning is not an issue though, so not displaying a warning for it.-->
     <PublishSingleFile>true</PublishSingleFile>
-    <WarningsNotAsErrors>CS8032</WarningsNotAsErrors>
+    <NoWarn>$(NoWarn);CS8032</NoWarn>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
