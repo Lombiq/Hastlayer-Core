@@ -84,11 +84,8 @@ public static class ShouldMatchConfigurationBuilderExtensions
 
         // Alter the FileNameGenerator to strip out invalid path characters. Prevents weird file names like this:
         // StaticTestInputAssembliesVerificationTests.<ClassStructureAssembliesMatchApproved.received.vhdl
-        builder = builder
-            .WithFilenameGenerator((testMethodInfo, discriminator, type, extension) =>
-                string.Concat(
-                    defaultFileNameGenerator(testMethodInfo, discriminator, type, extension)
-                        .Split(Path.GetInvalidFileNameChars())));
+        builder = builder.WithFilenameGenerator((testMethodInfo, discriminator, type, extension) =>
+            defaultFileNameGenerator(testMethodInfo, discriminator, type, extension).MakeFileSystemFriendly());
 
         return builder;
     }
