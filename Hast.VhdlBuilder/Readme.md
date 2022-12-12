@@ -1,6 +1,4 @@
-﻿# Hastlayer - VHDL Builder
-
-
+# Hastlayer - VHDL Builder
 
 A .NET VHDL code builder, i.e. you can build syntactically valid VHDL code with .NET constructs.
 
