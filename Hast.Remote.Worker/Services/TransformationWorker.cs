@@ -367,11 +367,7 @@ public sealed class TransformationWorker : ITransformationWorker, System.IAsyncD
         return result;
     }
 
-    [SuppressMessage(
-        "AsyncUsage",
-        "AsyncFixer01:Unnecessary async/await usage",
-        Justification = "Necessary for Task.Delay(), since it doesn't return ValueTask.")]
-    public async ValueTask DisposeAsync()
+    public ValueTask DisposeAsync()
     {
         if (_oldResultBlobsCleanerTimer != null)
         {
@@ -383,7 +379,7 @@ public sealed class TransformationWorker : ITransformationWorker, System.IAsyncD
 
         _telemetryClient.Flush();
 
-        await Task.Delay(10000);
+        return new ValueTask(Task.Delay(10000));
     }
 
     private static async Task<List<IListBlobItem>> GetBlobsAsync(CloudBlobContainer container, string prefix)
