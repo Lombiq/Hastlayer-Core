@@ -10,11 +10,12 @@ public abstract class IntegrationTestFixtureBase : IDisposable
 {
     private readonly Lazy<Hastlayer> _host;
 
-    private bool _disposed;
-    protected HastlayerConfiguration _hostConfiguration = new()
+    protected readonly HastlayerConfiguration _hostConfiguration = new()
     {
         Flavor = HastlayerFlavor.Developer,
     };
+
+    private bool _disposed;
 
     protected Hastlayer Host => _host.Value;
 
