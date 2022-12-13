@@ -1,16 +1,12 @@
 # Hastlayer - VHDL
 
-
-
 Component containing implementations for transforming .NET assemblies into VHDL hardware description.
 
 Note that when editing the VHDL libraries the changes should also be added to the Timing Tester too.
 
-
 ## Hierarchy of transformers
 
 Note that transformers, each responsible for transforming a small part of input code, compose the output by utilizing each other. On the highest level is `IMethodTransformer` which then uses (among others) `IStatementTransformer`, which in turn uses `IExpressionTransformer` (which also uses some other lower-level transformers).
-
 
 ## Simple memory access
 

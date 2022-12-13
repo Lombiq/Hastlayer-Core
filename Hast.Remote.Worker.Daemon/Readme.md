@@ -1,8 +1,6 @@
 # Hastlayer - Remote Worker Daemon
 
-
 Service to run the Hastlayer Worker.
-
 
 ## Server Setup
 
@@ -25,7 +23,6 @@ To use environment variables first you have to delete the _appsettings.json_ fil
 Note that you don't need the entire Application Insights connection string, just the GUID in the _InstrumentationKey_ field.
 For further documentation take a look at the `ConfigurationPaths` class.
 
-
 ### Installation
 
 If you're upgrading from an existing version, do the following. On Windows you can copy the _HastlayerRemoteWorkerDaemonInstallHelper.bat_ script to the installation folder (i.e. the root folder where you want the Daemon's folder to be created, e.g. *C:\\*) and run it to quickly swap to a newer directory without following the rest of the Installation section, just the instructions provided by the scrip (no prior steps needed). Then, you can skip the below steps.
@@ -43,7 +40,6 @@ Now that you have a clean slate:
 5. Check the logs for any issues.
 
 You can install, uninstall, start and stop the service by typing `Hast.Remote.Worker.Daemon.exe cli [command]`. The install and uninstall also starts and stops the service respectively.
-
 
 ### Docker Installation
 
