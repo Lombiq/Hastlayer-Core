@@ -70,6 +70,7 @@ public class ComplexTypeHierarchy : /*BaseClass,*/ IInterface1, IInterface2
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = ThatsThePoint)]
     [SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = ThatsThePoint)]
     [SuppressMessage("Minor Code Smell", "S1481:Unused local variables should be removed", Justification = ThatsThePoint)]
+    [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = ThatsThePoint)]
     private void UnusedMethod()
     {
         var x = 1;
