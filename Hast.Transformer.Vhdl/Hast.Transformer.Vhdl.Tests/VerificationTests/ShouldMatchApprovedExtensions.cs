@@ -63,9 +63,7 @@ public static class ShouldMatchApprovedExtensions
                 configurationBuilder.WithVhdlConfiguration().UseCallerLocation());
 
     public static string EnforceLineEndings(this string source) =>
-        !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-            ? source.RegexReplace("\r?\n", Environment.NewLine)
-            : source;
+        source.RegexReplace("\r", string.Empty);
 }
 
 public static class ShouldMatchConfigurationBuilderExtensions
@@ -94,7 +92,8 @@ public static class ShouldMatchConfigurationBuilderExtensions
         // StaticTestInputAssembliesVerificationTests.<ClassStructureAssembliesMatchApproved.received.vhdl
         builder = builder.WithFilenameGenerator((testMethodInfo, discriminator, type, extension) =>
             defaultFileNameGenerator(testMethodInfo, discriminator, type, extension)
-                .MakeFileSystemFriendly(noSpaceOrDot: false));
+                .MakeFileSystemFriendly(noSpaceOrDot: false)
+                .Replace("_", string.Empty));
 
         return builder;
     }
