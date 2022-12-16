@@ -1,7 +1,9 @@
 using Hast.Layer;
 using Hast.Remote.Worker.Configuration;
 using Hast.Remote.Worker.Services;
+#if DEBUG
 using Microsoft.Extensions.Logging;
+#endif
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;

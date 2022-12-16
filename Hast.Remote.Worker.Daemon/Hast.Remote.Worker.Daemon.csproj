@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+<Project Sdk="Microsoft.NET.Sdk.Worker">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -9,7 +9,15 @@
 
   <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
     <OutputType>exe</OutputType>
+    <!-- This causes the following warning when built with the Release configuration: "CSC : error CS8032: An instance
+    of analyzer ILLink.RoslynAnalyzer.COMAnalyzer cannot be created from
+    C:\Program Files\dotnet\sdk\7.0.100\Sdks\Microsoft.NET.Sdk\analyzers\ILLink.RoslynAnalyzer.dll : Could not load file
+    or assembly 'Microsoft.CodeAnalysis, Version=4.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. The system
+    cannot find the file specified..
+    [C:\a\Hastlayer-SDK\Hastlayer-SDK\Hast.Core\Hast.Remote.Worker.Daemon\Hast.Remote.Worker.Daemon.csproj]" This
+    warning is not an issue though, so not displaying it.-->
     <PublishSingleFile>true</PublishSingleFile>
+    <NoWarn>$(NoWarn);CS8032</NoWarn>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>

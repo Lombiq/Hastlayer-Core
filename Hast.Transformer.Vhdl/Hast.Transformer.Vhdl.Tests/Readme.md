@@ -1,6 +1,4 @@
-﻿# Hastlayer - VHDL Tests
-
-
+# Hastlayer - VHDL Tests
 
 This project contains various automated tests for `Hast.Transformer.Vhdl`.
 

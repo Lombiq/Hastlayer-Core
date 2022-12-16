@@ -22,7 +22,7 @@ using Timer = System.Timers.Timer;
 
 namespace Hast.Remote.Worker.Services;
 
-public sealed class TransformationWorker : ITransformationWorker, IDisposable
+public sealed class TransformationWorker : ITransformationWorker, System.IAsyncDisposable
 {
     private readonly IJsonConverter _jsonConverter;
     private readonly IAppDataFolder _appDataFolder;
@@ -72,6 +72,11 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
             try
             {
                 timerIsBusy = true;
+
+                // The violation is only surfaced in CI builds.
+#pragma warning disable IDE0079 // Remove unnecessary suppression
+                // Since the Windows server where this is executed from doesn't have a UI, this isn't an issue.
+#pragma warning disable VSTHRD002 // Synchronously waiting on tasks or awaiters may cause deadlocks. Use await or JoinableTaskFactory.Run instead.
                 Task.Run(async () =>
                 {
                     // Removing those result blobs that weren't deleted somehow (like the client exited while waiting
@@ -85,6 +90,8 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
                         await blob.DeleteAsync();
                     }
                 }).Wait();
+#pragma warning restore VSTHRD002 // Synchronously waiting on tasks or awaiters may cause deadlocks. Use await or JoinableTaskFactory.Run instead.
+#pragma warning restore IDE0079 // Remove unnecessary suppression
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
@@ -146,7 +153,7 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
         {
             _logger.LogInformation("Cancelling {TaskCount} tasks.", _transformationTasks.Count);
             await Task.WhenAll(_transformationTasks.Values);
-            Dispose();
+            await DisposeAsync();
         }
         catch (Exception ex) when (!ex.IsFatal())
         {
@@ -154,7 +161,7 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
             {
                 _logger.LogError(ex, "Transformation Worker crashed with an unhandled exception. Restarting...");
 
-                Dispose();
+                await DisposeAsync();
                 _restartCount++;
 
                 // Waiting a bit for transient errors to go away.
@@ -360,7 +367,7 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
         return result;
     }
 
-    public void Dispose()
+    public ValueTask DisposeAsync()
     {
         if (_oldResultBlobsCleanerTimer != null)
         {
@@ -371,7 +378,8 @@ public sealed class TransformationWorker : ITransformationWorker, IDisposable
         }
 
         _telemetryClient.Flush();
-        Task.Delay(10000).Wait();
+
+        return new ValueTask(Task.Delay(10000));
     }
 
     private static async Task<List<IListBlobItem>> GetBlobsAsync(CloudBlobContainer container, string prefix)
