@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests;
 
@@ -55,9 +56,16 @@ public static class ShouldMatchApprovedExtensions
     /// where the verification file is.
     /// </para>
     /// </remarks>
-    public static void ShouldMatchApprovedWithVhdlConfiguration(this string vhdlSource) =>
+    public static void ShouldMatchApprovedWithVhdlConfiguration(this string vhdlSource)
+    {
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            vhdlSource.RegexReplace("\r?\n", Environment.NewLine);
+        }
+
         vhdlSource.ShouldMatchApproved(configurationBuilder =>
             configurationBuilder.WithVhdlConfiguration().UseCallerLocation());
+    }
 }
 
 public static class ShouldMatchConfigurationBuilderExtensions
