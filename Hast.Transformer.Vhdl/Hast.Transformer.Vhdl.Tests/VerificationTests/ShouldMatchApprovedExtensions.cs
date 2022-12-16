@@ -57,12 +57,9 @@ public static class ShouldMatchApprovedExtensions
     /// </remarks>
     public static void ShouldMatchApprovedWithVhdlConfiguration(this string vhdlSource) =>
         vhdlSource
-            .EnforceLineEndings()
+            .RegexReplace(@"\r", string.Empty)
             .ShouldMatchApproved(configurationBuilder =>
                 configurationBuilder.WithVhdlConfiguration().UseCallerLocation());
-
-    public static string EnforceLineEndings(this string source) =>
-        source.RegexReplace("\r", string.Empty);
 }
 
 public static class ShouldMatchConfigurationBuilderExtensions
@@ -80,7 +77,7 @@ public static class ShouldMatchConfigurationBuilderExtensions
                 source = source.RegexReplace(@"-- Date and time:([0-9\-\s\:]*UTC)", "-- (Date and time removed for approval testing.)");
                 source = source.RegexReplace(@"-- Hast_IP ID: ([0-9a-z]*)", "-- (Hast_IP ID removed for approval testing.)");
 
-                return source.EnforceLineEndings();
+                return source;
             });
 
         // This is what the builder sets with no explicit WithFilenameGenerator. We decorate it using the
