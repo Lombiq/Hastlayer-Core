@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Hast.Transformer.Vhdl.Tests.VerificationTests;
 
@@ -56,8 +57,15 @@ public static class ShouldMatchApprovedExtensions
     /// </para>
     /// </remarks>
     public static void ShouldMatchApprovedWithVhdlConfiguration(this string vhdlSource) =>
-        vhdlSource.ShouldMatchApproved(configurationBuilder =>
-            configurationBuilder.WithVhdlConfiguration().UseCallerLocation());
+        vhdlSource
+            .EnforceLineEndings()
+            .ShouldMatchApproved(configurationBuilder =>
+                configurationBuilder.WithVhdlConfiguration().UseCallerLocation());
+
+    public static string EnforceLineEndings(this string source) =>
+        !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            ? source.RegexReplace("\r?\n", Environment.NewLine)
+            : source;
 }
 
 public static class ShouldMatchConfigurationBuilderExtensions
@@ -75,7 +83,7 @@ public static class ShouldMatchConfigurationBuilderExtensions
                 source = source.RegexReplace(@"-- Date and time:([0-9\-\s\:]*UTC)", "-- (Date and time removed for approval testing.)");
                 source = source.RegexReplace(@"-- Hast_IP ID: ([0-9a-z]*)", "-- (Hast_IP ID removed for approval testing.)");
 
-                return source;
+                return source.EnforceLineEndings();
             });
 
         // This is what the builder sets with no explicit WithFilenameGenerator. We decorate it using the
