@@ -57,7 +57,7 @@ public static class ShouldMatchApprovedExtensions
     /// </remarks>
     public static void ShouldMatchApprovedWithVhdlConfiguration(this string vhdlSource) =>
         vhdlSource
-            .RegexReplace(@"\r", string.Empty)
+            .Replace("\r\n", "\n")
             .ShouldMatchApproved(configurationBuilder =>
                 configurationBuilder.WithVhdlConfiguration().UseCallerLocation());
 }
