@@ -4653,7 +4653,7 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b\: \Hast.Algorithms.Random.RandomMwc64X\;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -5030,11 +5030,11 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- while (num4 < 8) {
                             -- 	num3 = num3 + 1;
-                            -- 	RandomMwc64X objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b;
-                            -- 	objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b = new RandomMwc64X { };
-                            -- 	objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b.State = memory.ReadUInt32 (1 + num3);
+                            -- 	RandomMwc64X object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3;
+                            -- 	object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3 = new RandomMwc64X { };
+                            -- 	object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3.State = memory.ReadUInt32 (1 + num3);
                             -- 	array [num4] = new KpzKernelsTaskState { };
-                            -- 	array [num4].Random1 = objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b;
+                            -- 	array [num4].Random1 = object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3;
                             -- 	array [num4].BramDy = new bool[64];
                             -- 	array [num4].BramDx = new bool[64];
                             -- 	num3 = num3 + 1;
@@ -5061,11 +5061,11 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num3 = num3 + 1;
-                            -- 	RandomMwc64X objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b;
-                            -- 	objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b = new RandomMwc64X { };
-                            -- 	objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b.State = memory.ReadUInt32 (1 + num3);
+                            -- 	RandomMwc64X object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3;
+                            -- 	object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3 = new RandomMwc64X { };
+                            -- 	object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3.State = memory.ReadUInt32 (1 + num3);
                             -- 	array [num4] = new KpzKernelsTaskState { };
-                            -- 	array [num4].Random1 = objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b;
+                            -- 	array [num4].Random1 = object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3;
                             -- 	array [num4].BramDy = new bool[64];
                             -- 	array [num4].BramDx = new bool[64];
                             -- 	num3 = num3 + 1;
@@ -5086,16 +5086,16 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num3\ + to_signed(1, 32);
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num3\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- RandomMwc64X objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b;
+                            -- RandomMwc64X object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b = new RandomMwc64X { };
+                            -- object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3 = new RandomMwc64X { };
                             -- 
                             -- Initializing record fields to their defaults.
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b\.\IsNull\ := false;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b\.\State\ := to_unsigned(51966, 64);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3\.\IsNull\ := false;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3\.\State\ := to_unsigned(51966, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b.State = memory.ReadUInt32 (1 + num3);
+                            -- object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3.State = memory.ReadUInt32 (1 + num3);
                             -- 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\ := to_signed(1, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- Begin SimpleMemory read.
@@ -5128,7 +5128,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\), 64);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\), 64);
                             -- The following section was transformed from the .NET statement below:
                             -- array [num4] = new KpzKernelsTaskState { };
                             -- 
@@ -5137,9 +5137,9 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\BramDx\ := (others => false);
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\BramDy\ := (others => false);
                             -- The following section was transformed from the .NET statement below:
-                            -- array [num4].Random1 = objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b;
+                            -- array [num4].Random1 = object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3;
                             -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\Random1\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\Random1\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3\;
                             -- The following section was transformed from the .NET statement below:
                             -- array [num4].BramDy = new bool[64];
                             -- 
@@ -12475,7 +12475,7 @@ begin
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b\: \Hast.Algorithms.Random.RandomMwc64X\;
+        Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3\: \Hast.Algorithms.Random.RandomMwc64X\;
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -12863,11 +12863,11 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- while (num4 < 8) {
                             -- 	num3 = num3 + 1;
-                            -- 	RandomMwc64X objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b;
-                            -- 	objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b = new RandomMwc64X { };
-                            -- 	objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b.State = memory.ReadUInt32 (1 + num3);
+                            -- 	RandomMwc64X object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3;
+                            -- 	object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3 = new RandomMwc64X { };
+                            -- 	object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3.State = memory.ReadUInt32 (1 + num3);
                             -- 	array [num4] = new KpzKernelsTaskState { };
-                            -- 	array [num4].Random1 = objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b;
+                            -- 	array [num4].Random1 = object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3;
                             -- 	array [num4].BramDy = new bool[64];
                             -- 	array [num4].BramDx = new bool[64];
                             -- 	num3 = num3 + 1;
@@ -12894,11 +12894,11 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	num3 = num3 + 1;
-                            -- 	RandomMwc64X objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b;
-                            -- 	objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b = new RandomMwc64X { };
-                            -- 	objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b.State = memory.ReadUInt32 (1 + num3);
+                            -- 	RandomMwc64X object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3;
+                            -- 	object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3 = new RandomMwc64X { };
+                            -- 	object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3.State = memory.ReadUInt32 (1 + num3);
                             -- 	array [num4] = new KpzKernelsTaskState { };
-                            -- 	array [num4].Random1 = objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b;
+                            -- 	array [num4].Random1 = object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3;
                             -- 	array [num4].BramDy = new bool[64];
                             -- 	array [num4].BramDx = new bool[64];
                             -- 	num3 = num3 + 1;
@@ -12919,16 +12919,16 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num3\ + to_signed(1, 32);
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num3\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- RandomMwc64X objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b;
+                            -- RandomMwc64X object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b = new RandomMwc64X { };
+                            -- object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3 = new RandomMwc64X { };
                             -- 
                             -- Initializing record fields to their defaults.
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b\.\IsNull\ := false;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b\.\State\ := to_unsigned(51966, 64);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3\.\IsNull\ := false;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3\.\State\ := to_unsigned(51966, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b.State = memory.ReadUInt32 (1 + num3);
+                            -- object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3.State = memory.ReadUInt32 (1 + num3);
                             -- 
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.binaryOperationResult.3\ := to_signed(1, 32) + \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num3\;
                             -- Begin SimpleMemory read.
@@ -12961,7 +12961,7 @@ begin
                             -- SimpleMemory read finished.
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\ := \DataIn\;
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\), 64);
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3\.\State\ := SmartResize(ConvertStdLogicVectorToUInt32(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.dataIn.1\), 64);
                             -- The following section was transformed from the .NET statement below:
                             -- array [num4] = new KpzKernelsTaskState { };
                             -- 
@@ -12970,9 +12970,9 @@ begin
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\BramDx\ := (others => false);
                             \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\BramDy\ := (others => false);
                             -- The following section was transformed from the .NET statement below:
-                            -- array [num4].Random1 = objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b;
+                            -- array [num4].Random1 = object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3;
                             -- 
-                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\Random1\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.objectd94297428ab8df79ff6fcfec13dd6f6c9ed356bc8a962a6119b6de5ecede811b\;
+                            \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.array\(to_integer(\KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.num4\)).\Random1\ := \KpzKernelsParallelizedInterface::ScheduleIterations(SimpleMemory).0.object11eb7d02fdf20d20f66cc464a4d76ba7aac93a81cb203ac36ea29823237ed0a3\;
                             -- The following section was transformed from the .NET statement below:
                             -- array [num4].BramDy = new bool[64];
                             -- 
