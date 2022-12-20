@@ -25,12 +25,18 @@ public static class VariableHelper
     public static IdentifierExpression DeclareAndReferenceVariable(
         string variableNamePrefix,
         Expression valueHolder,
-        AstType astType) =>
-        DeclareAndReferenceVariable(
-            variableNamePrefix + Sha256Helper.ComputeHash(valueHolder.GetFullName()),
+        AstType astType)
+    {
+        // Eliminate OS-specific differences caused by CRLF vs LF line endings, so we get the same hash on Windows and
+        // Unix-like operating systems.
+        var value = valueHolder.GetFullName().Replace("\r\n", "\n");
+
+        return DeclareAndReferenceVariable(
+            variableNamePrefix + Sha256Helper.ComputeHash(value),
             valueHolder.GetActualType(),
             astType,
             valueHolder.FindFirstParentStatement());
+    }
 
     public static IdentifierExpression DeclareAndReferenceVariable(
         string variableName,
